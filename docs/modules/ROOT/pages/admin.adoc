@@ -74,7 +74,7 @@ NOTE: The Safe contract requires all its proposals to be executed in order. If y
 
 The Gnosis MultisigWallet requires each admin to submit a new transaction with their approval, so there is no need for a separate service to coordinate.
 
-In addition to the vanilla MultisigWallet, Defender Admin also supports a https://gist.github.com/spalladino/1e853ce79254b9aea70c8b49fd7d9ab3#file-partiallydelayedmultisig-sol[PartiallyDelayedMultisig variant] developed by dydx. In this wallet, once a proposal has been approved, it is required to wait for a timelock period before it can be executed. Defender Admin will load this information from the contract and display it on the interface.
+In addition to the vanilla MultisigWallet, Defender Admin also supports a https://gist.github.com/spalladino/1e853ce79254b9aea70c8b49fd7d9ab3#file-partiallydelayedmultisig-sol[PartiallyDelayedMultisig variant] developed by dYdX. In this wallet, once a proposal has been approved, it is required to wait for a timelock period before it can be executed. Defender Admin will load this information from the contract and display it on the interface.
 
 [[managing-your-multi-sig-from-defender-admin]]
 === Managing your multi-sig from Defender Admin
