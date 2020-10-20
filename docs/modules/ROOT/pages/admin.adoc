@@ -18,11 +18,11 @@ Use Defender Admin whenever you need secure management of your smart contracts o
 
 To begin managing one of your *Contracts* in Defender Admin, the first step is to register it. This is a one-time process where you specify network and address and assign a name to your contract. The contract's ABI will be automatically pulled in from https://etherscan.io/[etherscan] or https://github.com/ethereum/sourcify[sourcify] if it has been verified, but you will need to manually enter it otherwise.
 
-image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-39.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-39.png]
+image::defender-admin-edit-contract.png[Defender Admin Edit Contract]
 
 NOTE: Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible or a legacy zOS proxy] (and load the implementation's ABI in that case) and whether it's managed by a https://github.com/OpenZeppelin/openzeppelin-upgrades#what-is-a-proxy-admin[ProxyAdmin] contract.
 
-image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-59.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-59.png]
+image::defender-admin-withdraw.png[Defender Admin Withdraw]
 
 Once the contract has been added, you can create new *Proposals* for it. Each proposal is an action you will want to execute on the contract, which is executed via a multisig contract, and requires a quorum of admins to be in agreement. Once created, other admins can review and approve the proposal until it reaches the approval threshold and is executed.
 
@@ -83,7 +83,7 @@ While Defender Admin does not yet provide a specialized interface for management
 
 By adding your multi-sig contract to Defender Admin, you can invoke management functions such as `addOwner` or `changeThreshold` easily, specifying the multisig itself as the multisig to send these calls through.
 
-image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_18-30-50.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_18-30-50.png]
+image::defender-admin-add-owner.png[Defender Admin Add Owner]
 
 [[wallets]]
 == Wallets
@@ -97,7 +97,7 @@ All members of your team share an address book where you can define user-friendl
 
 Defender will also automatically create address book entries for you when you import a new contract into Admin.
 
-image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-10-07_16-29-07.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-10-07_16-29-07.png]
+image::defender-admin-edit-address.png[Defender Admin Edit Address]
 
 [[security-considerations]]
 == Security considerations

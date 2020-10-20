@@ -17,15 +17,15 @@ Each security best practice in Defender Advisor is rated for criticality and eff
 
 The best practice articles in Defender Advisor are categorized by Development, Monitoring, Testing and Operations. Each article is also rated for the importance of the best practice either Critical, High or Normal. And each article is identified for the expected effort to implement which can be Large, Medium or Small. Using the controls on the column headers you can filter and sort the list of articles.
 
-image:Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Docs_2.png[Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Docs_2.png]
-
-image:Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Search.png[Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Search.png]
+image::defender-advisor-filters.png[Defender Advisor Filters]
 
 Use the search bar at the top of the page to search for articles containing specific phrases. Note that selected filters will still apply when using the search bar.
 
+image::defender-advisor-search.png[Defender Advisor Search]
+
 Once you have found an article you are interested in, click on the article to read the details. Each article includes a description and one or more examples to help you understand the suggested and the best practice implementation. If you were searching for a specific phrase, that phrase will be highlighted so you can easily see it in the article text.
 
-image:Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Example.png[Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Example.png]
+image::defender-advisor-example.png[Defender Advisor Example]
 
 [[applicability]]
 == Applicability
