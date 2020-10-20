@@ -22,16 +22,16 @@ Each Defender Relayer is an Ethereum account assigned exclusively to your team. 
 
 You can think of each Relayer as a queue for sending transactions, where all transactions sent through the same Relayer will be sent in order and from the same Ethereum account, controlled exclusively by your team. Skip ahead to the https://www.notion.so/openzeppelin/Relay-844895993928476ea65f5c3fa6cb7129#6d9329df1b4f4644bccc4e67f96d12fd[_Under the hood_] section if you want more info on how Relayers work behind the scenes!
 
-💰 Keep in mind that you'll need to fund each Relayer individually with ETH to ensure they have enough funds to pay for the gas of the transactions you send. Defender will send you an email notification if a Relayer's funds drop below 0.1 ETH.
+IMPORTANT: Keep in mind that you'll need to fund each Relayer individually with ETH to ensure they have enough funds to pay for the gas of the transactions you send. Defender will send you an email notification if a Relayer's funds drop below 0.1 ETH.
 
-ℹ️ Defender Relayers are implemented as Externally Owned Accounts. We are working to implement Smart Accounts in the future as well, to support batched transactions, gas tokens, and cold keys for on-chain management.
+NOTE: Defender Relayers are implemented as Externally Owned Accounts. We are working to implement Smart Accounts in the future as well, to support batched transactions, gas tokens, and cold keys for on-chain management.
 
 [[api-keys]]
 === API Keys
 
 Each Relayer has one or more *API keys* associated with it. In order to send a transaction through a Relayer, you will need to authenticate the request with one an API key/secret pair. You can create or delete API keys as you see fit, and this will not change the sending address or Relayer balance.
 
-⚠️ When creating a new API key, keep in mind that the API secret is only visible once during the creation — if you don't write it down, it's lost forever. Luckily, creating a new API key is as easy as clicking a button.
+WARNING: When creating a new API key, keep in mind that the API secret is only visible once during the creation — if you don't write it down, it's lost forever. Luckily, creating a new API key is as easy as clicking a button.
 
 [[sending-transactions]]
 == Sending transactions
@@ -71,14 +71,14 @@ const tx = await erc20.functions.transfer(beneficiary, 1e18.toString());
 const mined = await tx.wait();
 ----
 
-ℹ️ Due to a limitation, you will need to provide not just the API key/secret but also the Relayer Ethereum address when initializing the `DefenderRelaySigner` object. We are working to remove this requirement.
+NOTE: Due to a limitation, you will need to provide not just the API key/secret but also the Relayer Ethereum address when initializing the `DefenderRelaySigner` object. We are working to remove this requirement.
 
 [[speed]]
 === Speed
 
 Instead of the usual `gasPrice`, the Relayer accepts a `[speed](https://www.npmjs.com/package/defender-relay-client#speed)` parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
 
-ℹ️ Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to link:etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
+NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to link:etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
 
 [[transaction-ids]]
 === Transaction IDs
@@ -128,7 +128,7 @@ You can pause a Relayer from the Defender website, to quickly respond to an emer
 
 Defender Relayers are general-purpose relayers, in the sense that you can use them to send any transaction you want to your contracts. In particular, they can also be used for relaying meta-transactions on behalf of your users. A simple setup for this requires setting up a server-side function that decides whether or not to relay a given meta-transaction, and then calls the Defender Relayer for effectively sending it.
 
-ℹ️ If you would like to use Autotasks to host the server-side function to decide whether to pay for a meta-transaction request, let us know! We are working on a webhooks integration that can be used for this purpose.
+NOTE: If you would like to use Autotasks to host the server-side function to decide whether to pay for a meta-transaction request, let us know! We are working on a webhooks integration that can be used for this purpose.
 
 [[eip2771-gsnv2-compatible-meta-transactions]]
 ==== EIP2771 GSNv2-compatible meta-transactions
@@ -137,14 +137,14 @@ We have created a demo application for Defender-powered meta-txs https://defende
 
 This setup is compatible with https://docs.opengsn.org/[GSNv2], meaning that you can use a Defender Relayer for sending your meta-transactions, and at any point in the future, you can switch to the decentralized network of GSN relayers _without any changes to your contracts._
 
-ℹ️ You can explore the key parts of the code for the application https://gist.github.com/spalladino/7fb3533e36e9b9a833f8e5c568c86815[here].
+NOTE: You can explore the key parts of the code for the application https://gist.github.com/spalladino/7fb3533e36e9b9a833f8e5c568c86815[here].
 
 [[more-meta-transaction-patterns]]
 ==== More meta-transaction patterns
 
 The pattern described above is just one variant among several meta-transaction flavors available. Given that Defender Relayers are general-purpose, you can also use them for any other type of meta-transactions, such as relaying gasless ERC20 transfers using https://eips.ethereum.org/EIPS/eip-2612[EIP2612] or https://eips.ethereum.org/EIPS/eip-3009[EIP3009].
 
-ℹ️ We are also working on adding support for sidechains and L2s, starting with xDai. This way, you can offer a full gasless experience to your users in other networks. Let us know if you have any preferred network you'd like to see in Defender!
+NOTE: We are also working on adding support for sidechains and L2s, starting with xDai. This way, you can offer a full gasless experience to your users in other networks. Let us know if you have any preferred network you'd like to see in Defender!
 
 [[under-the-hood]]
 == Under the hood

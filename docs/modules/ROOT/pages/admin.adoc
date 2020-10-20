@@ -20,7 +20,7 @@ To begin managing one of your *Contracts* in Defender Admin, the first step is t
 
 image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-39.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-39.png]
 
-ℹ️ Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible or a legacy zOS proxy] (and load the implementation's ABI in that case) and whether it's managed by a https://github.com/OpenZeppelin/openzeppelin-upgrades#what-is-a-proxy-admin[ProxyAdmin] contract.
+NOTE: Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible or a legacy zOS proxy] (and load the implementation's ABI in that case) and whether it's managed by a https://github.com/OpenZeppelin/openzeppelin-upgrades#what-is-a-proxy-admin[ProxyAdmin] contract.
 
 image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-59.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-59.png]
 
@@ -28,7 +28,7 @@ Once the contract has been added, you can create new *Proposals* for it. Each pr
 
 Alternatively, you can also choose to execute an action directly on a Contract using Admin, if the function is not restricted to be called via a multisig.
 
-ℹ️ When creating a new proposal, Defender Admin will first simulate it and will refuse to create it if the action reverts, showing the revert reason returned by the contract.
+NOTE: When creating a new proposal, Defender Admin will first simulate it and will refuse to create it if the action reverts, showing the revert reason returned by the contract.
 
 [[proposal-types]]
 == Proposal types
@@ -40,7 +40,7 @@ Defender Admin supports two kinds of proposals today: upgrades and custom action
 
 An _upgrade action_ can only be executed on EIP1967-compatible or legacy zOS upgradeable proxies that expose an `upgradeTo(address)` function. Defender Admin will handle proxies directly owned by a multi-signature wallet or proxies managed by a ProxyAdmin that is in turn owned by the wallet. The upgrade action only requires you to choose the new implementation address, and Defender Admin takes care of the rest.
 
-⚠️ Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the `[prepareUpgrade](https://github.com/OpenZeppelin/openzeppelin-upgrades#managing-ownership)` function from the `openzeppelin-upgrades` library, via https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-truffle/README.md#prepareupgrade[truffle] or https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-buidler/README.md#prepareupgrade[buidler], to deploy the target implementation.
+WARNING: Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the `[prepareUpgrade](https://github.com/OpenZeppelin/openzeppelin-upgrades#managing-ownership)` function from the `openzeppelin-upgrades` library, via https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-truffle/README.md#prepareupgrade[truffle] or https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-buidler/README.md#prepareupgrade[buidler], to deploy the target implementation.
 
 [[custom-actions]]
 === Custom actions
@@ -51,7 +51,7 @@ If no multi-signature wallet is specified, Defender will send the transaction di
 
 Custom actions can also be _repeated_, which will present you to a pre-filled form, so you can review and tweak the action before approving it.
 
-⚠️ Certain ABI types, such as nested structs, are not yet supported. Contact us if you need to call a function that is currently unsupported!
+WARNING: Certain ABI types, such as nested structs, are not yet supported. Contact us if you need to call a function that is currently unsupported!
 
 [[multi-signature-wallets]]
 == Multi-signature wallets
@@ -63,11 +63,11 @@ Defender Admin supports two kinds of multi-signature wallets: https://gnosis-saf
 
 The Gnosis Safe wallet gathers offline signatures of each admin and then submits a single transaction with all signatures to execute the action. To share signatures, it relies on the https://safe-transaction.gnosis.io/[Safe Transaction Service] hosted by Gnosis.
 
-ℹ️ The Safe Transaction Service is only available on Rinkeby and Mainnet. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
+NOTE: The Safe Transaction Service is only available on Rinkeby and Mainnet. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
 
 When using a Gnosis Safe, Defender Admin will synchronize all signatures to and from the Safe Transaction Service. This way, any admins on your team using the https://gnosis-safe.io/app[Safe UI] will still be able to sign the Defender Admin proposals.
 
-ℹ️ The Safe contract requires all its proposals to be executed in order. If you have gathered all signatures for a proposal and still cannot execute it, make sure there are no prior proposals pending execution.
+NOTE: The Safe contract requires all its proposals to be executed in order. If you have gathered all signatures for a proposal and still cannot execute it, make sure there are no prior proposals pending execution.
 
 [[gnosis-multisigwallet]]
 === Gnosis MultisigWallet
