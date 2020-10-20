@@ -1,0 +1,38 @@
+[[advisor]]
+= Advisor
+
+_The Defender Advisor service contains a knowledgebase of security best practices curated by the OpenZeppelin team. The best practices cover development, testing, monitoring and operations. Defender Advisor can be used as a checklist to prioritize efforts in implementing project security._
+
+[[use-cases]]
+= Use cases
+
+Each security best practice in Defender Advisor is rated for criticality and effort, and contains examples for implementation. Use Defender Advisor to:
+
+* *Evaluate your security* versus established best practices
+* *Prioritize* additional best practices that you can implement
+* Improve *security training and awareness* within your development and operations teams
+
+[[security-best-practices]]
+= Security Best Practices
+
+The best practice articles in Defender Advisor are categorized by Development, Monitoring, Testing and Operations. Each article is also rated for the importance of the best practice either Critical, High or Normal. And each article is identified for the expected effort to implement which can be Large, Medium or Small. Using the controls on the column headers you can filter and sort the list of articles.
+
+image:Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Docs_2.png[Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Docs_2.png]
+
+image:Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Search.png[Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Search.png]
+
+Use the search bar at the top of the page to search for articles containing specific phrases. Note that selected filters will still apply when using the search bar.
+
+Once you have found an article you are interested in, click on the article to read the details. Each article includes a description and one or more examples to help you understand the suggested and the best practice implementation. If you were searching for a specific phrase, that phrase will be highlighted so you can easily see it in the article text.
+
+image:Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Example.png[Advisor%20f2303d6f4d5344a2bc8cee949f098f56/Advisor_Example.png]
+
+[[applicability]]
+= Applicability
+
+Not all the security best practices in Defender Advisor are relevant for all projects. Use discretion in determining which best practices are relevant according to your project details.
+
+[[coming-up...]]
+= Coming up...
+
+We will soon add the ability for you to track your usage of individual security best practices and to use that tracking information to assess your overall security risk and compare your project to the overall population of Defender users. Also, we intend to allow Defender users to customize the knowledgebase with their own additional security best practices. Finally, we will continue to enhance the knowledgebase quarterly as new best practices are discovered and defined. As always, please let us know if you have any other requests!

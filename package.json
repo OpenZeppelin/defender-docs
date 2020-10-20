@@ -1,0 +1,29 @@
+{
+  "name": "defender-docs",
+  "version": "0.0.0",
+  "description": "OpenZeppelin Defender documentation",
+  "scripts": {
+    "docs": "oz-docs",
+    "docs:watch": "oz-docs watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenZeppelin/defender-docs.git"
+  },
+  "keywords": [
+    "defender",
+    "openzeppelin",
+    "ethereum",
+    "smart",
+    "contracts",
+    "security"
+  ],
+  "author": "OpenZeppelin <contact@openzeppelin.com>",
+  "bugs": {
+    "url": "https://github.com/OpenZeppelin/defender-docs/issues"
+  },
+  "homepage": "https://openzeppelin.com/defender/",
+  "devDependencies": {
+    "@openzeppelin/docs-utils": "^0.1.0"
+  }
+}

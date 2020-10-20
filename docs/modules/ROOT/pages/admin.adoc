@@ -1,0 +1,112 @@
+[[admin]]
+= Admin
+
+_The Defender Admin service acts as an interface to manage your smart contract project through one or more secure multi-signature contracts. Defender Admin holds no control at all over your system, which is fully controlled by the keys of the signers._
+
+[[use-cases]]
+= Use cases
+
+Use Defender Admin whenever you need secure management of your smart contracts on-chain. Any administrative operation should not be unilaterally controlled by a single owner. Instead, set up a multi-signature wallet and rely on Defender Admin to run any of the following actions through it:
+
+* *Upgrading a contract* to a new implementation
+* *Tweaking a numerical parameter* in your protocol that affects its behavior
+* Managing an *access control list* for restricted operations
+* *Pausing* your contract in the event of an emergency
+
+[[contracts-and-proposals]]
+= Contracts and Proposals
+
+To begin managing one of your *Contracts* in Defender Admin, the first step is to register it. This is a one-time process where you specify network and address and assign a name to your contract. The contract's ABI will be automatically pulled in from https://etherscan.io/[etherscan] or https://github.com/ethereum/sourcify[sourcify] if it has been verified, but you will need to manually enter it otherwise.
+
+image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-39.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-39.png]
+
+ℹ️ Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible or a legacy zOS proxy] (and load the implementation's ABI in that case) and whether it's managed by a https://github.com/OpenZeppelin/openzeppelin-upgrades#what-is-a-proxy-admin[ProxyAdmin] contract.
+
+image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-59.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_17-14-59.png]
+
+Once the contract has been added, you can create new *Proposals* for it. Each proposal is an action you will want to execute on the contract, which is executed via a multisig contract, and requires a quorum of admins to be in agreement. Once created, other admins can review and approve the proposal until it reaches the approval threshold and is executed.
+
+Alternatively, you can also choose to execute an action directly on a Contract using Admin, if the function is not restricted to be called via a multisig.
+
+ℹ️ When creating a new proposal, Defender Admin will first simulate it and will refuse to create it if the action reverts, showing the revert reason returned by the contract.
+
+[[proposal-types]]
+= Proposal types
+
+Defender Admin supports two kinds of proposals today: upgrades and custom actions. More proposal types will be added down the road.
+
+[[upgrades]]
+== Upgrades
+
+An _upgrade action_ can only be executed on EIP1967-compatible or legacy zOS upgradeable proxies that expose an `upgradeTo(address)` function. Defender Admin will handle proxies directly owned by a multi-signature wallet or proxies managed by a ProxyAdmin that is in turn owned by the wallet. The upgrade action only requires you to choose the new implementation address, and Defender Admin takes care of the rest.
+
+⚠️ Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the `[prepareUpgrade](https://github.com/OpenZeppelin/openzeppelin-upgrades#managing-ownership)` function from the `openzeppelin-upgrades` library, via https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-truffle/README.md#prepareupgrade[truffle] or https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-buidler/README.md#prepareupgrade[buidler], to deploy the target implementation.
+
+[[custom-actions]]
+== Custom actions
+
+A _custom action_ is a call to any function in the managed contract. Defender Admin will handle the encoding of the transaction data and submit it as a new proposal via the chosen multi-signature wallet.
+
+If no multi-signature wallet is specified, Defender will send the transaction directly to the contract.
+
+Custom actions can also be _repeated_, which will present you to a pre-filled form, so you can review and tweak the action before approving it.
+
+⚠️ Certain ABI types, such as nested structs, are not yet supported. Contact us if you need to call a function that is currently unsupported!
+
+[[multi-signature-wallets]]
+= Multi-signature wallets
+
+Defender Admin supports two kinds of multi-signature wallets: https://gnosis-safe.io/[Gnosis Safe] and https://github.com/gnosis/MultiSigWallet[Gnosis MultisigWallet]. If you are using a multi-signature implementation that is not supported, let us know!
+
+[[gnosis-safe]]
+== Gnosis Safe
+
+The Gnosis Safe wallet gathers offline signatures of each admin and then submits a single transaction with all signatures to execute the action. To share signatures, it relies on the https://safe-transaction.gnosis.io/[Safe Transaction Service] hosted by Gnosis.
+
+ℹ️ The Safe Transaction Service is only available on Rinkeby and Mainnet. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
+
+When using a Gnosis Safe, Defender Admin will synchronize all signatures to and from the Safe Transaction Service. This way, any admins on your team using the https://gnosis-safe.io/app[Safe UI] will still be able to sign the Defender Admin proposals.
+
+ℹ️ The Safe contract requires all its proposals to be executed in order. If you have gathered all signatures for a proposal and still cannot execute it, make sure there are no prior proposals pending execution.
+
+[[gnosis-multisigwallet]]
+== Gnosis MultisigWallet
+
+The Gnosis MultisigWallet requires each admin to submit a new transaction with their approval, so there is no need for a separate service to coordinate.
+
+In addition to the vanilla MultisigWallet, Defender Admin also supports a https://gist.github.com/spalladino/1e853ce79254b9aea70c8b49fd7d9ab3#file-partiallydelayedmultisig-sol[PartiallyDelayedMultisig variant] developed by dydx. In this wallet, once a proposal has been approved, it is required to wait for a timelock period before it can be executed. Defender Admin will load this information from the contract and display it on the interface.
+
+[[managing-your-multi-sig-from-defender-admin]]
+== Managing your multi-sig from Defender Admin
+
+While Defender Admin does not yet provide a specialized interface for management of the multi-signature wallet contract, you can still manage it through _custom action_ proposals.
+
+By adding your multi-sig contract to Defender Admin, you can invoke management functions such as `addOwner` or `changeThreshold` easily, specifying the multisig itself as the multisig to send these calls through.
+
+image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_18-30-50.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-08-26_18-30-50.png]
+
+[[wallets]]
+= Wallets
+
+All approvals in Defender Admin today are handled via Metamask. Defender Admin also supports https://metamask.zendesk.com/hc/en-us/articles/360020394612-How-to-connect-a-Trezor-or-Ledger-Hardware-Wallet[hardware wallets through Metamask]. We have so far tested support with https://www.ledger.com/[Ledger Nano]. Please contact us if you want to use a different wallet (software or hardware) with Defender.
+
+[[address-book]]
+= Address book
+
+All members of your team share an address book where you can define user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the corresponding section in the top-right user menu.
+
+Defender will also automatically create address book entries for you when you import a new contract into Admin.
+
+image:Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-10-07_16-29-07.png[Admin%20180c78070c9e4abba60c1b098b10a15c/Screenshot_from_2020-10-07_16-29-07.png]
+
+[[security-considerations]]
+= Security considerations
+
+Defender Admin acts exclusively as an interface to your contracts and multi-signature wallets. This means that you do not grant Defender any rights over your contracts by using Admin to manage them. All proposal approvals are signed client-side using the admin user private key through Metamask. The Defender Admin backend is only involved in storing proposal metadata and sharing the approval signatures when these are not stored on-chain. Ultimately, the multi-signature wallet contracts are the ones that verify these approvals and execute the proposed actions.
+
+Defender Admin's main contribution to security is then related to usability. First, it automates the process of crafting the transaction for a proposal to avoid manual errors. Second, it provides a clear interface for reviewing a proposal without having to manually decode the proposal hex data.
+
+[[coming-up...]]
+= Coming up...
+
+We are working on support for the xDai network in Admin, so you can manage your contracts on this popular sidechain as well. We are also working on public views for contracts, so you can optionally share with your community what change proposals are coming. Stay tuned, and let us know if you have any requests!

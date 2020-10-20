@@ -1,0 +1,32 @@
+[[defender-docs]]
+= Defender Docs
+
+_Welcome to the OpenZeppelin Defender documentation! Here you'll find all the info you need about Defender. This documentation will be evolving rapidly along with the product, so make sure to keep an eye out for our https://www.notion.so/Defender-Trial-Updates-17cfdade9a8445868d967a72904831d5[updates]! You can find this page at https://docs.defender.openzeppelin.com/[docs.defender.openzeppelin.com]._
+
+https://www.notion.so/Defender-Trial-Updates-17cfdade9a8445868d967a72904831d5[Defender Trial Updates]
+
+[[components]]
+= Components
+
+link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Admin%20180c78070c9e4abba60c1b098b10a15c.md[Admin]
+
+link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Relay%20844895993928476ea65f5c3fa6cb7129.md[Relay]
+
+link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/AutoTasks%203713f348105241fc880316cb2307a9ad.md[AutoTasks]
+
+link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Advisor%20f2303d6f4d5344a2bc8cee949f098f56.md[Advisor]
+
+[[shared-access]]
+= Shared access
+
+Access to all resources in Defender is shared across all users in your organization. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
+
+[[user-management]]
+= User management
+
+You can review your team members under the Collaborators section, accessible from the top-right user menu. You can also invite new users to your team from there.
+
+[[feedback]]
+= Feedback
+
+We are super interested in your feedback! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your thoughts. Feel free to shoot us a line whenever anything comes to mind, either via Slack, Telegram, or at contact@openzeppelin.com.
