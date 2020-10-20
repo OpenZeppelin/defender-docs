@@ -12,7 +12,7 @@ link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Admin%20180c78070c9e4abb
 
 link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Relay%20844895993928476ea65f5c3fa6cb7129.md[Relay]
 
-link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/AutoTasks%203713f348105241fc880316cb2307a9ad.md[AutoTasks]
+link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Autotasks%203713f348105241fc880316cb2307a9ad.md[Autotasks]
 
 link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Advisor%20f2303d6f4d5344a2bc8cee949f098f56.md[Advisor]
 

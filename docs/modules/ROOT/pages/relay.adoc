@@ -103,15 +103,15 @@ const signResponse = await relayer.sign({ message });
 ----
 
 [[autotasks-integration]]
-=== AutoTasks integration
+=== Autotasks integration
 
-A Relayer can be attached to an link:AutoTasks%203713f348105241fc880316cb2307a9ad.md[Autotask]. When doing so, the Autotask code will have direct access to the attached Relayer methods _without requiring you to specify an API key_. Instead, Defender will inject short-lived credentials for your Relayer in your AutoTask `handler` function.
+A Relayer can be attached to an link:Autotasks%203713f348105241fc880316cb2307a9ad.md[Autotask]. When doing so, the Autotask code will have direct access to the attached Relayer methods _without requiring you to specify an API key_. Instead, Defender will inject short-lived credentials for your Relayer in your Autotask `handler` function.
 
 [source,jsx]
 ----
 const { Relayer } = require('defender-relay-client');
 
-// The credentials object is injected by the Defender AutoTasks engine 
+// The credentials object is injected by the Defender Autotasks engine 
 exports.handler = async function(credentials) {
   const relayer = new Relayer(credentials);
   // ... use relayer as usual
@@ -121,7 +121,7 @@ exports.handler = async function(credentials) {
 [[pausing]]
 === Pausing
 
-You can pause a Relayer from the Defender website, to quickly respond to an emergency. This will cause the Relayer to reject any incoming requests to send a transaction, whether it is from an AutoTask or via the API. However, keep in mind that any transactions already sent will not be cancelled. When you are ready to resume operations, just hit the Unpause button and your Relayer will go back to normal.
+You can pause a Relayer from the Defender website, to quickly respond to an emergency. This will cause the Relayer to reject any incoming requests to send a transaction, whether it is from an Autotask or via the API. However, keep in mind that any transactions already sent will not be cancelled. When you are ready to resume operations, just hit the Unpause button and your Relayer will go back to normal.
 
 [[meta-transactions]]
 === Meta-transactions

@@ -1,12 +1,12 @@
 [[autotasks]]
-= AutoTasks
+= Autotasks
 
 _The Defender Autotasks service allows you to run small code snippets on a regular basis that can make calls to the Ethereum network or to external APIs. Thanks to tight integration to link:Relay%20844895993928476ea65f5c3fa6cb7129.md[Relay], you can use Autotasks to automate regular actions on your contracts._
 
 [[use-cases]]
 == Use cases
 
-Use AutoTasks whenever you have a recurrent action you need to run on your Contracts. Since you can run arbitrary code snippets, you can trigger any transactions you need, checking whatever conditions you want, and gathering info from any external APIs you may need.
+Use Autotasks whenever you have a recurrent action you need to run on your Contracts. Since you can run arbitrary code snippets, you can trigger any transactions you need, checking whatever conditions you want, and gathering info from any external APIs you may need.
 
 * Check your balance in contracts and *sweep funds to a wallet* upon reaching a threshold
 * Update an *on-chain oracle* with information from an external API
@@ -70,7 +70,7 @@ NOTE: If you need to use any dependency not listed above, you can either use a j
 
 To reproduce exactly the same Autotask environment in your development setup, you can use the following lockfile to install the same set of dependencies via `yarn install --frozen-lockfile`.
 
-link:AutoTasks%203713f348105241fc880316cb2307a9ad/yarn.lock[yarn.lock]
+link:Autotasks%203713f348105241fc880316cb2307a9ad/yarn.lock[yarn.lock]
 
 You can also use the following template for local development, which will run your Autotask code when invoked locally using `node`. It will load the Relayer credentials from environment variables when run locally, or use the injected credentials when run in Defender.
 
@@ -127,7 +127,7 @@ if (require.main === module) {
 }
 ----
 
-NOTE: Note that we are not waiting for the transaction to be mined. The Defender Relayer will take care of monitoring the transaction and resubmitting if needed. The AutoTask should just send the request to the Relayer and exit.
+NOTE: Note that we are not waiting for the transaction to be mined. The Defender Relayer will take care of monitoring the transaction and resubmitting if needed. The Autotask should just send the request to the Relayer and exit.
 
 [[security-considerations]]
 == Security considerations
