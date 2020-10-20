@@ -8,13 +8,13 @@ https://www.notion.so/Defender-Trial-Updates-17cfdade9a8445868d967a72904831d5[De
 [[components]]
 == Components
 
-link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Admin%20180c78070c9e4abba60c1b098b10a15c.md[Admin]
+xref:admin.adoc[Admin]
 
-link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Relay%20844895993928476ea65f5c3fa6cb7129.md[Relay]
+xref:relay.adoc[Relay]
 
-link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Autotasks%203713f348105241fc880316cb2307a9ad.md[Autotasks]
+xref:autotasks.adoc[Autotasks]
 
-link:Defender%20Docs%20f3c1b455389a4d88af7f2e6623f6e1ba/Advisor%20f2303d6f4d5344a2bc8cee949f098f56.md[Advisor]
+xref:advisor.adoc[Advisor]
 
 [[shared-access]]
 == Shared access

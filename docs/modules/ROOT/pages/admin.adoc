@@ -20,7 +20,7 @@ To begin managing one of your *Contracts* in Defender Admin, the first step is t
 
 image::defender-admin-edit-contract.png[Defender Admin Edit Contract]
 
-NOTE: Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible or a legacy zOS proxy] (and load the implementation's ABI in that case) and whether it's managed by a https://github.com/OpenZeppelin/openzeppelin-upgrades#what-is-a-proxy-admin[ProxyAdmin] contract.
+NOTE: Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible] or a legacy zOS proxy (and load the implementation's ABI in that case) and whether it's managed by a xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] contract.
 
 image::defender-admin-withdraw.png[Defender Admin Withdraw]
 
@@ -40,7 +40,7 @@ Defender Admin supports two kinds of proposals today: upgrades and custom action
 
 An _upgrade action_ can only be executed on EIP1967-compatible or legacy zOS upgradeable proxies that expose an `upgradeTo(address)` function. Defender Admin will handle proxies directly owned by a multi-signature wallet or proxies managed by a ProxyAdmin that is in turn owned by the wallet. The upgrade action only requires you to choose the new implementation address, and Defender Admin takes care of the rest.
 
-WARNING: Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the `[prepareUpgrade](https://github.com/OpenZeppelin/openzeppelin-upgrades#managing-ownership)` function from the `openzeppelin-upgrades` library, via https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-truffle/README.md#prepareupgrade[truffle] or https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/packages/plugin-buidler/README.md#prepareupgrade[buidler], to deploy the target implementation.
+WARNING: Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the xref:upgrades-plugins::index.adoc#managing-ownership[`prepareUpgrade`] function from the `openzeppelin-upgrades` library, via xref:upgrades-plugins::api-truffle-upgrades.adoc#prepare-upgrade[truffle] or xref:upgrades-plugins::api-buidler-upgrades.adoc#prepare-upgrade[buidler], to deploy the target implementation.
 
 [[custom-actions]]
 === Custom actions
