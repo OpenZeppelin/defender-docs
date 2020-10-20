@@ -27,4 +27,4 @@ You can review your team members under the Collaborators section, accessible fro
 [[feedback]]
 == Feedback
 
-We are super interested in your feedback! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your thoughts. Feel free to shoot us a line whenever anything comes to mind, either via Slack, Telegram, or at contact@openzeppelin.com.
+We are super interested in your feedback! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your thoughts. Feel free to shoot us a line whenever anything comes to mind, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at contact@openzeppelin.com.
