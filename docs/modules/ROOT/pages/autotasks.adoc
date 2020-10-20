@@ -4,7 +4,7 @@
 _The Defender Autotasks service allows you to run small code snippets on a regular basis that can make calls to the Ethereum network or to external APIs. Thanks to tight integration to link:Relay%20844895993928476ea65f5c3fa6cb7129.md[Relay], you can use Autotasks to automate regular actions on your contracts._
 
 [[use-cases]]
-= Use cases
+== Use cases
 
 Use AutoTasks whenever you have a recurrent action you need to run on your Contracts. Since you can run arbitrary code snippets, you can trigger any transactions you need, checking whatever conditions you want, and gathering info from any external APIs you may need.
 
@@ -14,7 +14,7 @@ Use AutoTasks whenever you have a recurrent action you need to run on your Contr
 * Poke your contracts to have them *transition to a new state* once a set of conditions is met
 
 [[whats-in-an-autotask]]
-= What's in an Autotask?
+== What's in an Autotask?
 
 In a nutshell, an Autotask is a snippet of javascript code invoked at a regular interval, similar to a serverless function. And as a matter of fact, they are implemented with https://aws.amazon.com/lambda/[AWS Lambda functions].
 
@@ -25,7 +25,7 @@ When you create an Autotask, you provide a javascript snippet, choose a frequenc
 Autotasks can also be manually executed from the UI for quick testing. The last 30 Autotask runs will be shown in the Autotask view, allowing you to access the run logs (generated via `console.log`).
 
 [[handler-function]]
-== Handler function
+=== Handler function
 
 The code snippet must export a `handler` async function that will be invoked on each execution of the Autotask. Given that each Autotask is powered by an AWS Lambda behind the scenes, keep in mind that the same rules apply when https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html[dealing with global variables].
 
@@ -37,7 +37,7 @@ exports.handler = async function() {
 ----
 
 [[relayer-integration]]
-== Relayer integration
+=== Relayer integration
 
 If you connect your Autotask to a Relayer, then Defender will automatically inject temporary credentials to access your Relayer from your Autotask. Simply pass the event object to the relayer client in place of the credentials:
 
@@ -52,7 +52,7 @@ exports.handler = async function(event) {
 ----
 
 [[environment]]
-== Environment
+=== Environment
 
 Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 12 runtime] with 256mb RAM and a 5-minute timeout. Code snippets are restricted to be smaller than 50mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
 
@@ -66,7 +66,7 @@ Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 
 ℹ️ If you need to use any dependency not listed above, you can either use a javascript module bundler such as webpack to include it in your code or just contact us to add it to the set of common dependencies.
 
 [[local-development]]
-== Local development
+=== Local development
 
 To reproduce exactly the same Autotask environment in your development setup, you can use the following lockfile to install the same set of dependencies via `yarn install --frozen-lockfile`.
 
@@ -130,13 +130,13 @@ if (require.main === module) {
 ℹ️ Note that we are not waiting for the transaction to be mined. The Defender Relayer will take care of monitoring the transaction and resubmitting if needed. The AutoTask should just send the request to the Relayer and exit.
 
 [[security-considerations]]
-= Security considerations
+== Security considerations
 
 Each Autotask is implemented as a separate AWS Lambda, ensuring strong separation among each individual Autotask and across Defender tenants.
 
 Autotasks are restricted via Identity and Access Management to have zero access to the Defender internal infrastructure. The only exception is that an Autotask may access its linked Relayer, which is negotiated via temporary credentials injected by the Defender Autotask service upon each execution. Still, the Autotask can only call the Relayer exposed methods and has no direct access to the backing private key.
 
 [[coming-up...]]
-= Coming up...
+== Coming up...
 
 We want to simplify uploading code to an Autotask, so we are experimenting with console-based approaches that can be called from a development environment or hooked into a CD pipeline to ensure your Autotasks are always up to date. Let us know if you have anything in mind!

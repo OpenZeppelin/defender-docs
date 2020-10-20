@@ -4,7 +4,7 @@
 _The Defender Relay service allows you to send transactions via a regular HTTP API, and takes care of private key secure storage, transaction signing, nonce management, gas price estimation, and resubmissions. This way you don't need to worry about securing your private keys in your backend scripts, or by monitoring your transactions to ensure they get mined._
 
 [[use-cases]]
-= Use cases
+== Use cases
 
 Use a Defender Relayer every time you find yourself using a hot wallet in your code. Whenever you need to send a transaction from a script or your backend, you can connect to a Relayer instead to simplify key management and transaction submissions.
 
@@ -16,7 +16,7 @@ Use a Defender Relayer every time you find yourself using a hot wallet in your c
 * *Building bots* for interacting with smart contract protocols
 
 [[whats-in-a-relayer]]
-= What's in a Relayer?
+== What's in a Relayer?
 
 Each Defender Relayer is an Ethereum account assigned exclusively to your team. Every time you create a new Relayer, Defender will create a new private key in a secure vault. Whenever you request Defender to send a transaction through that Relayer, the corresponding private key will be used for signing.
 
@@ -27,14 +27,14 @@ You can think of each Relayer as a queue for sending transactions, where all tra
 ℹ️ Defender Relayers are implemented as Externally Owned Accounts. We are working to implement Smart Accounts in the future as well, to support batched transactions, gas tokens, and cold keys for on-chain management.
 
 [[api-keys]]
-== API Keys
+=== API Keys
 
 Each Relayer has one or more *API keys* associated with it. In order to send a transaction through a Relayer, you will need to authenticate the request with one an API key/secret pair. You can create or delete API keys as you see fit, and this will not change the sending address or Relayer balance.
 
 ⚠️ When creating a new API key, keep in mind that the API secret is only visible once during the creation — if you don't write it down, it's lost forever. Luckily, creating a new API key is as easy as clicking a button.
 
 [[sending-transactions]]
-= Sending transactions
+== Sending transactions
 
 The easiest way to send a transaction via a Relayer is using the `[defender-relay-client](https://www.npmjs.com/package/defender-relay-client)` npm package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
 
@@ -51,7 +51,7 @@ const tx = await relayer.sendTransaction({
 Note that you don't need to enter a private key when initializing a Relayer client, since the private key is kept secure in the Defender vault.
 
 [[using-ethers.js]]
-== Using ethers.js
+=== Using ethers.js
 
 To avoid rewriting existing scripts, the Relayer client also integrates with https://docs.ethers.io/v5/[ethers.js] via a custom https://docs.ethers.io/v5/api/signer/[signer]. This allows you to switch to Defender Relayer for sending transactions with minimal changes in your codebase.
 
@@ -74,14 +74,14 @@ const mined = await tx.wait();
 ℹ️ Due to a limitation, you will need to provide not just the API key/secret but also the Relayer Ethereum address when initializing the `DefenderRelaySigner` object. We are working to remove this requirement.
 
 [[speed]]
-== Speed
+=== Speed
 
 Instead of the usual `gasPrice`, the Relayer accepts a `[speed](https://www.npmjs.com/package/defender-relay-client#speed)` parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
 
 ℹ️ Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to link:etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
 
 [[transaction-ids]]
-== Transaction IDs
+=== Transaction IDs
 
 Since the Relayer may resubmit a transaction with an updated gas price if it does not get mined in the expected timeframe, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/defender-relay-client#querying[query] it.
 
@@ -93,7 +93,7 @@ const latestTx = await relayer.query(tx.transactionId);
 Note that the `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every few minutes.
 
 [[signing]]
-== Signing
+=== Signing
 
 In addition to sending transactions, the Relayer can also sign arbitrary messages using its private key. You can access this feature via the `sign` method of the client or the equivalent ethers.js method.
 
@@ -103,7 +103,7 @@ const signResponse = await relayer.sign({ message });
 ----
 
 [[autotasks-integration]]
-== AutoTasks integration
+=== AutoTasks integration
 
 A Relayer can be attached to an link:AutoTasks%203713f348105241fc880316cb2307a9ad.md[Autotask]. When doing so, the Autotask code will have direct access to the attached Relayer methods _without requiring you to specify an API key_. Instead, Defender will inject short-lived credentials for your Relayer in your AutoTask `handler` function.
 
@@ -119,19 +119,19 @@ exports.handler = async function(credentials) {
 ----
 
 [[pausing]]
-== Pausing
+=== Pausing
 
 You can pause a Relayer from the Defender website, to quickly respond to an emergency. This will cause the Relayer to reject any incoming requests to send a transaction, whether it is from an AutoTask or via the API. However, keep in mind that any transactions already sent will not be cancelled. When you are ready to resume operations, just hit the Unpause button and your Relayer will go back to normal.
 
 [[meta-transactions]]
-== Meta-transactions
+=== Meta-transactions
 
 Defender Relayers are general-purpose relayers, in the sense that you can use them to send any transaction you want to your contracts. In particular, they can also be used for relaying meta-transactions on behalf of your users. A simple setup for this requires setting up a server-side function that decides whether or not to relay a given meta-transaction, and then calls the Defender Relayer for effectively sending it.
 
 ℹ️ If you would like to use Autotasks to host the server-side function to decide whether to pay for a meta-transaction request, let us know! We are working on a webhooks integration that can be used for this purpose.
 
 [[eip2771-gsnv2-compatible-meta-transactions]]
-=== EIP2771 GSNv2-compatible meta-transactions
+==== EIP2771 GSNv2-compatible meta-transactions
 
 We have created a demo application for Defender-powered meta-txs https://defender-example-metatx-relay.netlify.app/[here]. This application relies on an https://eips.ethereum.org/EIPS/eip-2771[EIP-2771 `Forwarder` contract]. This contract's sole responsibility is to receive a signed meta-tx request, verify its signature, and forward the request to a recipient contract by appending the signer address to the call.
 
@@ -140,27 +140,27 @@ This setup is compatible with https://docs.opengsn.org/[GSNv2], meaning that you
 ℹ️ You can explore the key parts of the code for the application https://gist.github.com/spalladino/7fb3533e36e9b9a833f8e5c568c86815[here].
 
 [[more-meta-transaction-patterns]]
-=== More meta-transaction patterns
+==== More meta-transaction patterns
 
 The pattern described above is just one variant among several meta-transaction flavors available. Given that Defender Relayers are general-purpose, you can also use them for any other type of meta-transactions, such as relaying gasless ERC20 transfers using https://eips.ethereum.org/EIPS/eip-2612[EIP2612] or https://eips.ethereum.org/EIPS/eip-3009[EIP3009].
 
 ℹ️ We are also working on adding support for sidechains and L2s, starting with xDai. This way, you can offer a full gasless experience to your users in other networks. Let us know if you have any preferred network you'd like to see in Defender!
 
 [[under-the-hood]]
-= Under the hood
+== Under the hood
 
 Each Relayer is associated to a private key. When a request to send a transaction is received, the Relayer validates the request, atomically assigns it a nonce, reserves balance for paying for its gas fees, resolves its speed to a gas price, signs it with its private key, and enqueues it for submission to the blockchain. The response is sent back to the client only after this process has finished. Then, the transaction is broadcasted through both Infura and Alchemy for redundancy and retried up to three times in case both APIs are down.
 
 Every five minutes, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their gas price (or the latest gas price for their speed, if it's greater), which could be up to a *150% of the reported gas price for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
 
 [[security-considerations]]
-= Security considerations
+== Security considerations
 
 All private keys are stored in the AWS Key Management Service. Keys are generated within the KMS and never leave it, i.e., all sign operations are executed within the KMS. Furthermore, we rely on dynamically generated AWS Identity and Access Management policies to isolate access to the private keys among tenants.
 
 As for API secrets, these are only kept in memory during creation when they are sent to the client. After that, they are hashed and stored securely in AWS Cognito, which is used behind the scenes for authenticating Relayer requests. This makes API keys easy to rotate while preserving the same private key on the KMS.
 
 [[coming-up...]]
-= Coming up...
+== Coming up...
 
 We are working on new features, such as automatic top-ups of testnet Relayers, xDai support, and Relayer policies to restrict maximum expenditure. Stay tuned, and let us know if you have any requests!
