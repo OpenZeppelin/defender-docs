@@ -106,7 +106,7 @@ Defender Admin acts exclusively as an interface to your contracts and multi-sign
 
 Defender Admin's main contribution to security is then related to usability. First, it automates the process of crafting the transaction for a proposal to avoid manual errors. Second, it provides a clear interface for reviewing a proposal without having to manually decode the proposal hex data.
 
-[[coming-up...]]
+[[coming-up]]
 == Coming up...
 
 We are working on support for the xDai network in Admin, so you can manage your contracts on this popular sidechain as well. We are also working on public views for contracts, so you can optionally share with your community what change proposals are coming. Stay tuned, and let us know if you have any requests!

@@ -136,7 +136,7 @@ Each Autotask is implemented as a separate AWS Lambda, ensuring strong separatio
 
 Autotasks are restricted via Identity and Access Management to have zero access to the Defender internal infrastructure. The only exception is that an Autotask may access its linked Relayer, which is negotiated via temporary credentials injected by the Defender Autotask service upon each execution. Still, the Autotask can only call the Relayer exposed methods and has no direct access to the backing private key.
 
-[[coming-up...]]
+[[coming-up]]
 == Coming up...
 
 We want to simplify uploading code to an Autotask, so we are experimenting with console-based approaches that can be called from a development environment or hooked into a CD pipeline to ensure your Autotasks are always up to date. Let us know if you have anything in mind!
