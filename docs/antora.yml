@@ -1,0 +1,5 @@
+name: defender
+title: Defender
+version: 1.x
+nav:
+  - modules/ROOT/nav.adoc

@@ -1,0 +1,30 @@
+[[defender-docs]]
+= Defender Docs
+
+_Welcome to the OpenZeppelin Defender documentation! Here you'll find all the info you need about Defender._
+
+[[components]]
+== Components
+
+xref:admin.adoc[Admin]
+
+xref:relay.adoc[Relay]
+
+xref:autotasks.adoc[Autotasks]
+
+xref:advisor.adoc[Advisor]
+
+[[shared-access]]
+== Shared access
+
+Access to all resources in Defender is shared across all users in your organization. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
+
+[[user-management]]
+== User management
+
+You can review your team members under the Collaborators section, accessible from the top-right user menu. You can also invite new users to your team from there.
+
+[[feedback]]
+== Feedback
+
+We are super interested in your feedback! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your thoughts. Feel free to shoot us a line whenever anything comes to mind, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at contact@openzeppelin.com.
