@@ -70,7 +70,7 @@ NOTE: If you need to use any dependency not listed above, you can either use a j
 
 To reproduce exactly the same Autotask environment in your development setup, you can use the following lockfile to install the same set of dependencies via `yarn install --frozen-lockfile`.
 
-link:Autotasks%203713f348105241fc880316cb2307a9ad/yarn.lock[yarn.lock]
+📎 link:{attachmentsdir}/yarn.lock[yarn.lock]
 
 You can also use the following template for local development, which will run your Autotask code when invoked locally using `node`. It will load the Relayer credentials from environment variables when run locally, or use the injected credentials when run in Defender.
 
