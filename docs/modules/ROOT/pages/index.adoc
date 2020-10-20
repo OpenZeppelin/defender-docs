@@ -1,9 +1,7 @@
 [[defender-docs]]
 = Defender Docs
 
-_Welcome to the OpenZeppelin Defender documentation! Here you'll find all the info you need about Defender. This documentation will be evolving rapidly along with the product, so make sure to keep an eye out for our https://www.notion.so/Defender-Trial-Updates-17cfdade9a8445868d967a72904831d5[updates]! You can find this page at https://docs.defender.openzeppelin.com/[docs.defender.openzeppelin.com]._
-
-https://www.notion.so/Defender-Trial-Updates-17cfdade9a8445868d967a72904831d5[Defender Trial Updates]
+_Welcome to the OpenZeppelin Defender documentation! Here you'll find all the info you need about Defender._
 
 [[components]]
 == Components
