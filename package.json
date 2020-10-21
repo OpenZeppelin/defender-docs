@@ -4,8 +4,8 @@
   "description": "OpenZeppelin Defender documentation",
   "private": true,
   "scripts": {
-    "docs": "oz-docs",
-    "docs:watch": "oz-docs watch"
+    "docs": "oz-docs -c docs -c landing/home -c landing/learn",
+    "docs:watch": "npm run docs watch"
   },
   "repository": {
     "type": "git",
