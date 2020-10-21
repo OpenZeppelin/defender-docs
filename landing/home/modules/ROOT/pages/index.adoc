@@ -45,6 +45,13 @@ https://github.com/OpenZeppelin/solidity-docgen[[.card-title]#Solidity Docgen# [
 xref:test-environment::index.adoc[[.card-title]#Test Environment# [.card-body]#A JavaScript library for creating a testing environment for contracts+++,+++ which plays nice with Mocha+++,+++ Ava+++,+++ and Jest.#]
 --
 
+== Our Products
+
+[.card.card-secondary.card-solidity-docgen]
+--
+xref:defender::index.adoc[[.card-title]#Defender# [.card-body]#Security Management to Protect the Open Economy.#]
+--
+
 == More from OpenZeppelin
 
 === Audits
