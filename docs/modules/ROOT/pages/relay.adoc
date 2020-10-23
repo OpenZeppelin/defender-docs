@@ -22,7 +22,7 @@ Each Defender Relayer is an Ethereum account assigned exclusively to your team. 
 
 You can think of each Relayer as a queue for sending transactions, where all transactions sent through the same Relayer will be sent in order and from the same Ethereum account, controlled exclusively by your team. Skip ahead to the <<under-the-hood,Under the hood>> section if you want more info on how Relayers work behind the scenes!
 
-IMPORTANT: Keep in mind that you'll need to fund each Relayer individually with ETH to ensure they have enough funds to pay for the gas of the transactions you send. Defender will send you an email notification if a Relayer's funds drop below 0.1 ETH.
+IMPORTANT: Relayers on the _Goerli_ and _Rinkeby_ networks will be **automatically funded** with test ETH upon creation, and will be topped up when they run low on funds. On other networks, you'll need to fund each Relayer individually with ETH to ensure they have enough funds to pay for the gas of the transactions you send. In these cases, Defender will send you an email notification if a Relayer's funds drop below 0.1 ETH.
 
 NOTE: Defender Relayers are implemented as Externally Owned Accounts. We are working to implement Smart Accounts in the future as well, to support batched transactions, gas tokens, and cold keys for on-chain management.
 

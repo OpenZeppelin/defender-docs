@@ -22,7 +22,7 @@ When you create an Autotask, you provide a javascript snippet, choose a frequenc
 
 NOTE: The specified interval is between two consecutive execution starts, _not_ between the end of an Autotask and the beginning of the next one.
 
-Autotasks can also be manually executed from the UI for quick testing. The last 30 Autotask runs will be shown in the Autotask view, allowing you to access the run logs (generated via `console.log`).
+Autotasks can also be manually executed from the UI for quick testing. The last 30 Autotask runs will be shown in the Autotask view, allowing you to access the run logs (generated via `console.log`) for troubleshooting. Additionally, when an Autotask fails, Defender will send you a notification email.
 
 [[handler-function]]
 === Handler function
