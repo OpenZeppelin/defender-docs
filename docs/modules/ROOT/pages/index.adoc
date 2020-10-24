@@ -1,5 +1,4 @@
-[[defender-docs]]
-= Defender Docs
+= Defender
 
 _Welcome to the OpenZeppelin Defender documentation! Here you'll find all the info you need about Defender._
 
