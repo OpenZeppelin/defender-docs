@@ -3,16 +3,29 @@
 
 _Welcome to the OpenZeppelin Defender documentation! Here you'll find all the info you need about Defender._
 
+[.card-section-2col]
 [[components]]
 == Components
 
-xref:admin.adoc[Admin]
+[.card.card-learn]
+--
+xref:admin.adoc[[.card-title]#Admin# [.card-body]#pass:q[Seamlessly manage your smart contract administration including access controls, multi-sig, upgrades, and whitelisting.]#]
+--
 
-xref:relay.adoc[Relay]
+[.card.card-learn]
+--
+xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Quickly implement private relayers with support for testnets, mainnet, layer 2 and sidechains. Increase user security with embedded key vaults, API key management, and meta-transactions.]#]
+--
 
-xref:autotasks.adoc[Autotasks]
+[.card.card-learn]
+--
+xref:autotasks.adoc[[.card-title]#Autotasks# [.card-body]#pass:q[Easily create and run scripts in a serverless environment that call your smart contracts and other web services, automating your operations and lowering attack risk.]#]
+--
 
-xref:advisor.adoc[Advisor]
+[.card.card-learn]
+--
+xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Stay up to date with the latest security best practices. Use step-by-step guides to implement them across development, testing, monitoring and operations.]#]
+--
 
 [[shared-access]]
 == Shared access
