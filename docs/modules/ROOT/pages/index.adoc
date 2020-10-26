@@ -2,10 +2,8 @@
 
 OpenZeppelin Defender is a platform to automate Ethereum operations. Here you’ll find all the info you need about Defender, including specifics on its four components.
 
-++++
-<div class="card-section-2col">
-<div class="sectionbody">
-++++
+[.card-section-2col]
+== Components
 
 [.card.card-learn]
 --
@@ -26,11 +24,6 @@ xref:autotasks.adoc[[.card-title]#Autotasks# [.card-body]#pass:q[Serverless func
 --
 xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Actionable security best practices.]#]
 --
-
-++++
-</div>
-</div>
-++++
 
 [[sign-up]]
 == Signing up
