@@ -1,6 +1,14 @@
 = Defender
 
-_Welcome to the OpenZeppelin Defender documentation! Here you'll find all the info you need about Defender._
+OpenZeppelin Defender is a platform to automate Ethereum operations. Here you’ll find all the info you need about Defender, including specifics on the four main features: 
+
+Admin: automated smart contract administration
+Relay: secure, private relayers with gas optimization
+Autotasks: serverless functions to securely call smart contracts
+Advisor: actionable security best practices 
+
+If you need an account, you can https://openzeppelin.com/defender/[sign up for free]. 
+
 
 [.card-section-2col]
 [[components]]
@@ -29,7 +37,7 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Stay up to date wit
 [[sign-up]]
 == Signing up
 
-Signing up to Defender is free! Just head over to [defender.openzeppelin.com](https://defender.openzeppelin.com/), hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
+Signing up to Defender is free! Just head over to https://defender.openzeppelin.com/[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
 
 [[user-management]]
 == User management and shared access
@@ -38,16 +46,16 @@ Access to all resources in Defender is shared across all users in your team. Thi
 
 You can review your team members under the Collaborators section, accessible from the top-right user menu. You can also invite new users to your team from there. A user can only belong to a single team in Defender (for now).
 
-WARNING: If you want to add a user to your team, make sure to invite them from the Collaborators section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at [defender@openzeppelin.com](mailto:defender@openzeppelin.com) and we'll help.
+WARNING: If you want to add a user to your team, make sure to invite them from the Collaborators section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com] and we'll help.
 
 [[tiers]]
 === Tiers and quotas
 
 The Defender free plan is restricted for testnet access only. In addition, you may only create up to five Relayers and Autotasks, import up to five Contracts into Admin, and have up to five Users in your team. The total number of transactions sent from Relayers cannot exceed 30 per hour, and the same limit applies for Autotask runs.
 
-If you want access to mainnet or to increase any of the quota limits from the free plan, please apply via [this form](https://openzeppelin.com/apply/) and we'll reach out to you.
+If you want access to mainnet or to increase any of the quota limits from the free plan, please apply via https://openzeppelin.com/apply/[this form] and we'll reach out to you.
 
 [[feedback]]
 == Feedback
 
-We are super interested in your feedback! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your thoughts. Feel free to shoot us a line whenever anything comes to mind, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at [defender@openzeppelin.com](mailto:defender@openzeppelin.com).
+We are super interested in your feedback! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your thoughts. Feel free to shoot us a line whenever anything comes to mind, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
