@@ -17,12 +17,12 @@ xref:advisor.adoc[Advisor]
 [[sign-up]]
 == Signing up
 
-Sign up to Defender is free! Just head over to [defender.openzeppelin.com](https://defender.openzeppelin.com/), hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
+Signing up to Defender is free! Just head over to [defender.openzeppelin.com](https://defender.openzeppelin.com/), hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
 
 [[user-management]]
 == User management and shared access
 
-Access to all resources in Defender is shared across all users in your organization. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
+Access to all resources in Defender is shared across all users in your team. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
 
 You can review your team members under the Collaborators section, accessible from the top-right user menu. You can also invite new users to your team from there. A user can only belong to a single team in Defender (for now).
 
