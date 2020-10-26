@@ -860,10 +860,10 @@ decompress-response@^3.2.0, decompress-response@^3.3.0:
   dependencies:
     mimic-response "^1.0.0"
 
-defender-relay-client@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-0.2.4.tgz#8e93dee73326a1a8a5c8b062ae9dbfe5b24273eb"
-  integrity sha512-qRv7bHQ1z0UMCF0mB/fv4C8VbGuDnz7IphUJlbSzGPjWbZ5hC+3SPG4nEaT5Zi8zuDa/pYNqXqAtdkXoQ2cCcw==
+defender-relay-client@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-0.2.7.tgz#3d4f44434289ab29f1760fc69506a862437b3fcd"
+  integrity sha512-fnN1C4k9Wk6Bh5RQ4d16JUub5vJYJ6e9hNcodPG8S/Ra597CstSuhsvxwBbxirrk50PqE9hoPZ5L+zM2SrRLCQ==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
     axios "^0.19.2"
