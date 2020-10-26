@@ -1,38 +1,36 @@
 = Defender
 
-OpenZeppelin Defender is a platform to automate Ethereum operations. Here you’ll find all the info you need about Defender, including specifics on the four main features: 
+OpenZeppelin Defender is a platform to automate Ethereum operations. Here you’ll find all the info you need about Defender, including specifics on its four components.
 
-Admin: automated smart contract administration
-Relay: secure, private relayers with gas optimization
-Autotasks: serverless functions to securely call smart contracts
-Advisor: actionable security best practices 
-
-If you need an account, you can https://openzeppelin.com/defender/[sign up for free]. 
-
-
-[.card-section-2col]
-[[components]]
-== Components
+++++
+<div class="card-section-2col">
+<div class="sectionbody">
+++++
 
 [.card.card-learn]
 --
-xref:admin.adoc[[.card-title]#Admin# [.card-body]#pass:q[Seamlessly manage your smart contract administration including access controls, multi-sig, upgrades, and whitelisting.]#]
+xref:admin.adoc[[.card-title]#Admin# [.card-body]#pass:q[Automated smart contract administration.]#]
 --
 
 [.card.card-learn]
 --
-xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Quickly implement private relayers with support for testnets, mainnet, layer 2 and sidechains. Increase user security with embedded key vaults, API key management, and meta-transactions.]#]
+xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Secure, private relayers with gas optimization.]#]
 --
 
 [.card.card-learn]
 --
-xref:autotasks.adoc[[.card-title]#Autotasks# [.card-body]#pass:q[Easily create and run scripts in a serverless environment that call your smart contracts and other web services, automating your operations and lowering attack risk.]#]
+xref:autotasks.adoc[[.card-title]#Autotasks# [.card-body]#pass:q[Serverless functions to securely call smart contracts.]#]
 --
 
 [.card.card-learn]
 --
-xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Stay up to date with the latest security best practices. Use step-by-step guides to implement them across development, testing, monitoring and operations.]#]
+xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Actionable security best practices.]#]
 --
+
+++++
+</div>
+</div>
+++++
 
 [[sign-up]]
 == Signing up
