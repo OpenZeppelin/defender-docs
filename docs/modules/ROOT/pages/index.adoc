@@ -46,6 +46,11 @@ The Defender free plan is restricted for testnet access only. In addition, you m
 
 If you want access to mainnet or to increase any of the quota limits from the free plan, please apply via https://openzeppelin.com/apply/[this form] and we'll reach out to you.
 
+== Two factor authentication (2FA)
+
+We strongly suggest that you enable 2FA to improve your Defender account security. As a second authentication factor, Defender relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP)]. To enable 2FA on Defender, you need a TOTP compliant application, such as https://authy.com/[Authy] or Google Authenticator. You can enable 2FA under the Account settings section, accessible from the top-right user menu. Defender will guide you through the necessary steps.
+
+
 [[feedback]]
 == Feedback
 
