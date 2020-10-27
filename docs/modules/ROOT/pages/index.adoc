@@ -1,34 +1,34 @@
 = Defender
 
-OpenZeppelin Defender is a platform to automate Ethereum operations. Here you’ll find all the info you need about Defender, including specifics on its four components.
+OpenZeppelin Defender provides a security operations (SecOps) platform for Ethereum with built-in best practices. Development teams implement Defender to ship faster and minimize security risks.
+
+[[get-started]]
+== Get started
+
+Signing up to Defender is free! Just head over to https://defender.openzeppelin.com/[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
 
 [.card-section-2col]
 == Components
 
 [.card.card-learn]
 --
-xref:admin.adoc[[.card-title]#Admin# [.card-body]#pass:q[Automated smart contract administration.]#]
+xref:admin.adoc[[.card-title]#Admin# [.card-body]#pass:q[Automate and secure all your smart contract administration.]#]
 --
 
 [.card.card-learn]
 --
-xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Secure, private relayers with gas optimization.]#]
+xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Build with private and secure transaction infrastructure.]#]
 --
 
 [.card.card-learn]
 --
-xref:autotasks.adoc[[.card-title]#Autotasks# [.card-body]#pass:q[Serverless functions to securely call smart contracts.]#]
+xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated scripts to call your smart contracts.]#]
 --
 
 [.card.card-learn]
 --
-xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Actionable security best practices.]#]
+xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Quickly implement security best practices.]#]
 --
-
-[[sign-up]]
-== Signing up
-
-Signing up to Defender is free! Just head over to https://defender.openzeppelin.com/[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
 
 [[user-management]]
 == User management and shared access
@@ -46,6 +46,7 @@ The Defender free plan is restricted for testnet access only. In addition, you m
 
 If you want access to mainnet or to increase any of the quota limits from the free plan, please apply via https://openzeppelin.com/apply/[this form] and we'll reach out to you.
 
+[[two-factor-authentication]]
 == Two factor authentication (2FA)
 
 We strongly suggest that you enable 2FA to improve your Defender account security. As a second authentication factor, Defender relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP)]. To enable 2FA on Defender, you need a TOTP compliant application, such as https://authy.com/[Authy] or Google Authenticator. You can enable 2FA under the Account settings section, accessible from the top-right user menu. Defender will guide you through the necessary steps.
@@ -54,4 +55,4 @@ We strongly suggest that you enable 2FA to improve your Defender account securit
 [[feedback]]
 == Feedback
 
-We are super interested in your feedback! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your thoughts. Feel free to shoot us a line whenever anything comes to mind, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
+As a Defender user, your feedback is important! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your input. Feel free to reach out with questions, feature requests, or issues, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at defender@openzeppelin.com.
