@@ -10,6 +10,8 @@ Signing up to Defender is free! Just head over to https://defender.openzeppelin.
 [.card-section-2col]
 == Components
 
+Automate your Ethereum operations to deliver high-quality products faster with lower risk to users. Learn more about each component by clicking on its card.
+
 [.card.card-learn]
 --
 xref:admin.adoc[[.card-title]#Admin# [.card-body]#pass:q[Automate and secure all your smart contract administration.]#]
