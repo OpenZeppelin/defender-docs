@@ -2,7 +2,7 @@
 
 OpenZeppelin Defender is a platform to automate Ethereum operations. Here you’ll find all the info you need about Defender, including specifics on its four components.
 
-[.card-section-2col]
+[.card-section.card-section-2col]
 == Components
 
 [.card.card-learn]
