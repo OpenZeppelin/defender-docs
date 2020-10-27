@@ -1,5 +1,14 @@
-# [OpenZeppelin Defender Documentation](https://docs.openzeppelin.com/defender)
+Sources for OpenZeppelin Defender documentation.
+
+> Ship faster with the security of OpenZeppelin Defender.
+>
+> Automate your Ethereum operations to deliver high-quality products faster with lower risk to users.
+
+- [Learn more](https://openzeppelin.com/defender)
+- [Read the docs](https://docs.openzeppelin.com/defender)
+
+#### Authoring content
 
 To preview locally run `npm run docs:watch`.
 
-See [AsciiDoc Syntax Quick Reference](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/) for formatting details.
+Documents are written in AsciiDoc. Consult the [Syntax Quick Reference](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/) if needed.
