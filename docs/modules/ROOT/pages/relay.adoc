@@ -164,7 +164,7 @@ As for API secrets, these are only kept in memory during creation when they are 
 == Relay API Reference
 The Relay API exposes two endpoints `txs` and `sign`. The `txs` endpoint allows to send transactions to Ethereum blockchain and query their status. The `sign` endpoint allows to sign arbitrary data with relayer's private key.
 
-=== Getting JWT Token
+=== Authentication
 A JWT Token is requred to make requests to Relay API. For security reasons authentication uses https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol[SRP protocol] and it is not possbile to retrive a JWT Token via one HTTP request. What is why it is advised to use the https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-integrate-apps.html[Amazon Cognito User Pool SDK] to retreive a JWT token.
 
 Here is an example of getting a JWT Token in nodejs using `amazon-cognito-identity-js`. The Username/Password pair is your ApiKey/ApiSecret pair. PoolId and PoolClientId are always the same.
