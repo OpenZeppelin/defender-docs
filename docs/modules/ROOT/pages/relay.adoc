@@ -206,6 +206,19 @@ export async function authenticate(authenticationData: UserPass): Promise<string
 }
 ```
 
+For a python users it is possible to retrive a JWT token using https://github.com/capless/warrant#cognito-srp-utility[warrant] library.
+
+Here is an example:
+```python
+import boto3
+from warrant.aws_srp import AWSSRP
+
+client = boto3.client('cognito-idp')
+aws = AWSSRP(username='API_KEY', password='API_SECRET', pool_id='us-west-2_iLmIggsiy', client_id='1bpd19lcr33qvg5cr3oi79rdap', client=client)
+tokens = aws.authenticate_user()
+print('Access Token', tokens['AuthenticationResult']['AccessToken'])
+```
+
 === Making Requests
 
 Once you get a JWT Token you can make requests to Defender API. A request requires ApiKey, JWT Token, optionally a payload, and API URL. Set $KEY, $TOKEN to the values of API Key and JWT Token accuired before. $END_POINT can be either `txs` or `sign`.
@@ -316,7 +329,7 @@ You would receive a `TransactionResponse` object, e.g.:
 ```
 
 === Sign Endpoint
-To sign an arbitrary data with Relay API make a POST request with a payload contain hex string. Payload format:
+To sign an arbitrary data with Relay API make a POST request with a payload contain a hex string. Payload format:
 
 ```TypeScript
 export interface SignMessagePayload {
