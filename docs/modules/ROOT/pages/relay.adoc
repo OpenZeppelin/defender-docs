@@ -293,7 +293,7 @@ export interface TransactionResponse {
 }
 ```
 ==== Query Transaction
-To retrive a transaction status and data make a GET request to the `txs` endpoint with the Defender transaction id.
+To retrive a transaction status and data make a GET request to the `txs` endpoint with the Defender `transactionId`, *not* with the transaction hash.
 
 An example of the request:
 
