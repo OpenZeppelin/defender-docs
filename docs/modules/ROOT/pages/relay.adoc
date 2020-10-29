@@ -219,6 +219,9 @@ tokens = aws.authenticate_user()
 print('Access Token', tokens['AuthenticationResult']['AccessToken'])
 ```
 
+=== Refreshing JWT Token
+JWT token will expire in 60 minutes. If you code requires session longer than 60 minutes consider recreating a JWT token or using a refresh token.
+
 === Making Requests
 
 Once you get a JWT Token you can make requests to Defender API. A request requires ApiKey, JWT Token, optionally a payload, and API URL. Set $KEY, $TOKEN to the values of API Key and JWT Token accuired before. $END_POINT can be either `txs` or `sign`.
@@ -258,6 +261,7 @@ An example of the request:
 ```bash
 DATA='{ "to": "0x179810822f56b0e79469189741a3fa5f2f9a7631", "value": "1", "speed": "fast", "gasLimit": "21000" }'
 
+
 curl \
   -X POST \
   -H 'Accept: application/json' \
@@ -265,7 +269,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d "$DATA" \
-    "$API_URL/txs"
+    "$API_URL/txs" # http://api.defender.openzeppelin.com/txs
 ```
 
 You would receive a response in the following format:
@@ -305,7 +309,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "$API_URL/txs/$ID"
+    "$API_URL/txs/$ID" # http://api.defender.openzeppelin.com/txs/affba150-e563-441e-ae49-04bd6050979a
 
 ```
 
@@ -329,7 +333,7 @@ You would receive a `TransactionResponse` object, e.g.:
 ```
 
 === Sign Endpoint
-To sign an arbitrary data with Relay API make a POST request with a payload contain a hex string. Payload format:
+To sign an arbitrary data with Relay API make a POST request with a payload containing the hex string to sign. The payload format is:
 
 ```TypeScript
 export interface SignMessagePayload {
@@ -349,8 +353,9 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d "$DATA" \
-    "$API_URL/sign"
+    "$API_URL/sign" # http://api.defender.openzeppelin.com/sign
 ```
+
 You would receive a response in the following format:
 
 ```TypeScript
@@ -376,24 +381,6 @@ An example of the response:
 === Refreshing JWT Token
 The JWT token will expire in 60 minutes. If you code requires sessions longer than 60 minutes consider recreating a JWT token or using refresh token.
 
-An example of how it can be done in nodejs:
-
-```Javascript
-async wrapApiCall(fn) {
-  try {
-    return await fn();
-  } catch (error) {
-    // this means ID token has expired so we'll recreate JWT token and try again.
-    if (error.response.status === 401 && error.response.statusText === 'Unauthorized') {
-      // getToken will retrive a fresh JWT token.
-      await getToken();
-      return await fn();
-    }
-    throw error;
-  }
-}
-```
-Where `fn` is a function making an API call.
 
 [[coming-up]]
 == Coming up...
