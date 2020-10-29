@@ -161,7 +161,7 @@ All private keys are stored in the AWS Key Management Service. Keys are generate
 As for API secrets, these are only kept in memory during creation when they are sent to the client. After that, they are hashed and stored securely in AWS Cognito, which is used behind the scenes for authenticating Relayer requests. This makes API keys easy to rotate while preserving the same private key on the KMS.
 
 [[relay-api]]
-== Relay API
+== Relay API Reference
 The Relay API exposes two endpoints `txs` and `sign`. The `txs` endpoint allows to send transactions to Ethereum blockchain and query their status. The `sign` endpoint allows to sign arbitrary data with relayer's private key.
 
 === Getting JWT Token
