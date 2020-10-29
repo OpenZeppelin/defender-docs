@@ -237,7 +237,7 @@ curl \
 === Txs Endpoint
 
 ==== Send Transaction
-To send a transaction to Ethereum blockchain submit a POST request with a desired payload. Payload format:
+To send a transaction to Ethereum blockchain submit a POST request with the desired payload. The payload format is the following:
 
 ```TypeScript
 export type Address = string;
