@@ -168,7 +168,7 @@ The Relay API exposes two endpoints `txs` and `sign`. The `txs` endpoint allows 
 A JWT Token is requred to make requests to Relay API. For security reasons authentication uses https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol[SRP protocol] and it is not possbile to retrive a JWT Token via one HTTP request. What is why it is advised to use the https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-integrate-apps.html[Amazon Cognito User Pool SDK] to retreive a JWT token.
 
 
-For python users there is no official AWS SDK, but it is possible to retrive a JWT token using the https://github.com/capless/warrant#cognito-srp-utility[warrant] library.
+The official https://aws.amazon.com/sdk-for-python/[AWS SDK] for python doesn't support SRP authentication, but it is possible to retrive a JWT token using the https://github.com/capless/warrant#cognito-srp-utility[warrant] library.
 
 Here is the example:
 ```python
@@ -339,10 +339,6 @@ An example of the response:
    "sig":"0x819b2645a0b73494724dac355e6ecfc983d94597b533d34fe3ecd0277046a1eb3b73c695b47dd275d17246d86bbfe35f112a7bdb5bf4a5a1a8e22fe37dfd005a2c"
 }
 ```
-
-=== Refreshing JWT Token
-The JWT token will expire in 60 minutes. If you code requires sessions longer than 60 minutes consider recreating a JWT token or using refresh token.
-
 
 [[coming-up]]
 == Coming up...
