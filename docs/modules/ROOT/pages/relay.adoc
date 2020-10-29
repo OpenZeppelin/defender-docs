@@ -374,7 +374,7 @@ An example of the response:
 ```
 
 === Refreshing JWT Token
-JWT token will expire in 60 minutes. If you code requires session longer than 60 minutes consider recreating a JWT token or using refresh token.
+The JWT token will expire in 60 minutes. If you code requires sessions longer than 60 minutes consider recreating a JWT token or using refresh token.
 
 An example of how it can be done in nodejs:
 
