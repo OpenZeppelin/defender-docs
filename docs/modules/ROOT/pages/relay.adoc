@@ -182,7 +182,7 @@ print('Access Token', tokens['AuthenticationResult']['AccessToken'])
 ```
 
 === Refreshing JWT Token
-JWT token will expire in 60 minutes. If you code requires session longer than 60 minutes consider recreating a JWT token or using a https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html[refresh token].
+JWT token will expire in 60 minutes. If you code requires sessions longer than 60 minutes consider recreating a JWT token or using a https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html[refresh token].
 
 === Making Requests
 
