@@ -3,3 +3,6 @@
 * xref:relay.adoc[Relay]
 * xref:autotasks.adoc[Autotasks]
 * xref:advisor.adoc[Advisor]
+
+* Guides
+** xref:guide-keep3r.adoc[Setting up a Keep3r]
