@@ -1,4 +1,4 @@
-# Setting up a keep3r
+# Running a Keep3r Network keeper
 
 This guide will walk you through the process of running a Keeper in the https://keep3r.network/[Keep3r Network] by leveraging Defender xref:relay.adoc[Relay] and xref:autotasks.adoc[Autotasks].
 
@@ -23,13 +23,17 @@ To get started, you'll need the following:
 
 . *ETH to pay for transactions gas*. Keeper transactions require gas for execution, so make sure to have some ETH available to fund your Relay.
 
-. *An Alchemy, Etherscan, and/or Infura key (optional)*. Running a Keeper requires querying which jobs are available, and https://dashboard.alchemyapi.io/signup?referral=53fcee38-b894-4d5f-bd65-885d241f8d29[Alchemy] (includes referral code), https://infura.io/[Infura], and https://etherscan.io/apis[Etherscan] provide free and paid access to the network for executing these queries. You can do without an API key, but you may get throttled during your Keepers execution. Read more about this https://docs.ethers.io/v5/api-keys/[here].
+// . *An Alchemy, Etherscan, and/or Infura key (optional)*. Running a Keeper requires querying which jobs are available, and https://dashboard.alchemyapi.io/signup?referral=53fcee38-b894-4d5f-bd65-885d241f8d29[Alchemy] (includes referral code), https://infura.io/[Infura], and https://etherscan.io/apis[Etherscan] provide free and paid access to the network for executing these queries. You can do without an API key, but you may get throttled during your Keepers execution. Read more about this https://docs.ethers.io/v5/api-keys/[here].
 
 ## Creating a Relayer
 
 The first step will be to create a Defender Relayer to act as your Keeper. This Relayer will be the Ethereum account you will be executing jobs from. 
 
-To create a Relayer, simple head over to the xref:relay.adoc[Relay] section in Defender, and create a new relayer on the Mainnet network.
+NOTE: You *do not* need to register as a Keeper manually in https://keep3r.network/[keep3r.network], doing so will register your wallet as a Keeper, not your Relayer.
+
+To create a Relayer, simple head over to the xref:relay.adoc[Relay] section in Defender, and create a new relayer on the Mainnet network. Once created, take note of the Relayer address; you will not need the generated API key and secret for this guide.
+
+image::guide-keep3r-create-relayer.png[Creating a new Relayer in mainnet]
 
 WARNING: If the option to create the relayer in mainnet is locked, it means your Defender account does not have mainnet access yet. Make sure to https://openzeppelin.com/apply/[apply for mainnet access first] and wait for our response.
 
@@ -37,102 +41,133 @@ WARNING: If the option to create the relayer in mainnet is locked, it means your
 
 Next step is to send ETH to your Relayer, so it has funds to execute the jobs. Copy the Ethereum address of your new Relayer, and use your favorite wallet to send ETH to it. You can send whatever amount you want, but you want at least around 0.2 ETH to be able to send a handful of transactions before running out.
 
+After the transaction is confirmed, you should see the the funds you have transferred in the Relayer's balance.
+
+image::guide-keep3r-relayer-balance.png[Checking the balance of your Relayer]
+
 NOTE: Defender will send you an email when your Relay's funds drop below 0.1 ETH to remind you to refill it.
 
 ## Create an Autotask
 
 Now that you have your Relay ready to send transactions, let's set up the Defender Autotask that will instruct the Relay to send them. An Autotask is a snippet of code that runs at regular intervals, in this case, we'll use it to automate the process of bonding, activating, searching for jobs, and executing them.
 
-Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every few minutes, and connecting it to the Relay you had created previously.
+Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every one minute, and connecting it to the Relayer you had created previously.
 
-As for the code, paste the following snippet, replacing the `0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA` value with your Relay address in the first line, and replacing `NONE` with the Alchemy, Infura, or Etherscan tokens respectively if you have any.
+As for the code, paste the following snippet. Once you hit save, Defender will start executing the Autotask every minute, taking your Relayer through the bonding and activation process, and then executing available jobs.
 
 [source,jsx]
 ----
-// Replace with the Relay address
-const from = '0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
-
-// Insert your Infura, Etherscan, or Alchemy tokens, if you have them
-const alchemyToken = 'NONE';
-const infuraToken = 'NONE';
-const etherscanToken = 'NONE';
-
-// Keeper registry address
-const registryAddr = '0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44';
-
-// Workable address
-const workableAddr = '0xe7F4ab593aeC81EcA754Da1B3B7cE0C42a13Ec0C';
-
-// We bond 0 KPR tokens for registration
-const collateralAddr = '0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44';
-const collateralAmount = '0x00';
-
-const registryAbi = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"keeper","type":"address"},{"indexed":false,"internalType":"uint256","name":"block","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"activated","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"bond","type":"uint256"}],"name":"KeeperBonded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"keeper","type":"address"},{"indexed":false,"internalType":"uint256","name":"block","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"active","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"bond","type":"uint256"}],"name":"KeeperBonding","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"keeper","type":"address"},{"indexed":false,"internalType":"uint256","name":"block","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"deactive","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"bond","type":"uint256"}],"name":"KeeperUnbonding","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"keeper","type":"address"},{"indexed":false,"internalType":"uint256","name":"block","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"deactivated","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"bond","type":"uint256"}],"name":"KeeperUnbound","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"credit","type":"address"},{"indexed":true,"internalType":"address","name":"job","type":"address"},{"indexed":true,"internalType":"address","name":"keeper","type":"address"},{"indexed":false,"internalType":"uint256","name":"block","type":"uint256"}],"name":"KeeperWorked","type":"event"},{"inputs":[],"name":"BOND","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"LIQUIDITYBOND","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"UNBOND","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"}],"name":"activate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"blacklist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"bond","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"bondings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"bonds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"firstSeen","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getKeepers","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"keeper","type":"address"}],"name":"isKeeper","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"keeperList","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"keepers","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"lastJob","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"partialUnbonding","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"pendingbonds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalBonded","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"unbond","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"unbondings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"votes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}];
-const workableAbi = [{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"worker","type":"address"}],"name":"Worked","type":"event"},{"inputs":[],"name":"requestWork","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"work","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"workable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}];
-
 const { ethers } = require("ethers");
 const { DefenderRelaySigner } = require('defender-relay-client/lib/ethers');
 
-async function workIfNeeded(contract) {
-  if (await contract.workable()) {
-    const tx = await contract.work();
-    console.log(`Worked ${contract.address}:`, tx.hash);
-  } else {
-    console.log(`No work needed for ${contract.address}`);
+// ABIs for jobs and registry (contain only the methods needed, not the full ABIs of the contracts)
+const ABIs = {
+  UniswapOracleV2: [{"inputs":[],"name":"updateable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"work","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+  HegicPoolKeep3r: [{"inputs":[],"name":"workable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"claimRewards","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+  YearnV1EarnKeep3r: [{"inputs":[],"name":"work","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"workable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}],
+  Registry: [{"inputs":[{"internalType":"address","name":"keeper","type":"address"}],"name":"isKeeper","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"bond","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"bondings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"}],"name":"activate","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+}
+
+// Definition for all jobs to execute
+const Jobs = [
+  { name: 'UniswapOracleV2',   address: '0x127a2975c4E1c75f1ed4757a861bbd42523DB035', workableFn: 'updateable', workFn: 'work' },
+  { name: 'HegicPoolKeep3r',   address: '0x5DDe926b0A31346f2485900C5e64c2577F43F774', workableFn: 'workable',   workFn: 'claimRewards' },
+  { name: 'YearnV1EarnKeep3r', address: '0xe7F4ab593aeC81EcA754Da1B3B7cE0C42a13Ec0C', workableFn: 'workable',   workFn: 'work' },
+];
+
+// Address for the Keeper registry
+const RegistryAddress = '0x08829D79f73e0a152a9AB5ee0fa955091055d46F';
+
+// Work on jobs if it's needed using a Defender relay signer
+async function workIfNeeded(signer, jobs) {
+  for (const job of jobs) {
+    const contract = new ethers.Contract(job.address, ABIs[job.name], signer);
+    if (await contract[job.workableFn]()) {
+      console.log(`${job.name} is workable`);
+      const tx = await contract[job.workFn]();
+      console.log(`${job.name} worked: ${tx.hash}`);
+    } else {
+      console.log(`${job.name} is not workable`);
+    }
   }
 }
 
-function getProvider() {
-  return ethers.getDefaultProvider('homestead', {
-    etherscan: etherscanToken === 'NONE' ? null : etherscanToken,
-    infura: infuraToken === 'NONE' ? null : infuraToken,
-    alchemy: alchemyToken === 'NONE' ? null : alchemyToken,
-  })
+// Register the Defender relay as a keep3r
+async function registerKeeper(signer, registry) {
+  const keeperAddress = await signer.getAddress();
+  const collateralAddress = registry.address;
+  const bonding = await registry.bondings(keeperAddress, collateralAddress);
+
+  if (bonding.isZero()) {
+    // Bond with zero KPR tokens
+    const collateralAmount = '0x00';
+    const tx = await registry.bond(collateralAddress, collateralAmount);
+    console.log(`Bonded relayer: ${tx.hash}`);
+  } else if (bonding.lt(parseInt(Date.now() / 1000))) {
+    // Activate if 3-day waiting period has finished
+    const tx = await registry.activate(collateralAddress);
+    console.log(`Activated relayer: ${tx.hash}`);
+  } else {
+    // Wait until can activate
+    const waitInSeconds = bonding.sub(parseInt(Date.now() / 1000)).toString();
+    console.log(`Waiting ${waitInSeconds} seconds until activation is available`);
+  }
+}
+
+// Main function
+async function main(signer, jobs, registryAddress) {
+  const keeperAddress = await signer.getAddress();
+  const registry = new ethers.Contract(registryAddress, ABIs.Registry, signer);
+  
+  // Work if this is a registered keeper, or register it otherwise
+  if (await registry.isKeeper(keeperAddress)) {
+    await workIfNeeded(signer, jobs);
+  } else {
+    await registerKeeper(signer, registry);
+  }
 }
 
 // Entrypoint for the Autotask
 exports.handler = async function(credentials) {
-  const provider = getProvider();
-  const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fastest', from });
-  const registry = new ethers.Contract(registryAddr, registryAbi, signer);
-  const contract = new ethers.Contract(workableAddr, workableAbi, signer);
-
-  // Work if is a registered keeper
-  if (await registry.isKeeper(from)) {
-    return await workIfNeeded(contract);
-  }
-
-  // Otherwise run through bonding and activation process
-  const bonding = await registry.bondings(from, collateralAddr).then(b => b.toNumber());
-  if (bonding === 0) {
-    const tx = await registry.bond(collateralAddr, collateralAmount);
-    console.log(`Bonded relayer: ${tx.hash}`);
-  } else if (bonding < Date.now() / 1000) {
-    const tx = await registry.activate(collateralAddr);
-    console.log(`Activated relayer: ${tx.hash}`);
-    await workIfNeeded(contract);
-  } else {
-    console.log(`Waiting ${bonding - parseInt(Date.now() / 1000)} seconds until activation is available`);
-  }
+  const provider = ethers.getDefaultProvider('rinkeby');
+  const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fastest' });
+  return await main(signer, Jobs, RegistryAddress);
 }
 
 // To run locally (this code will not be executed in Autotasks)
 if (require.main === module) {
+  require('dotenv').config();
   const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
   exports.handler({ apiKey, apiSecret })
     .then(() => process.exit(0))
     .catch(error => { console.error(error); process.exit(1); });
 }
+
 ----
 
 ## Wait for Keeper activation
 
-The script above will take care of *bonding* your Relay to the keep3r network using zero KPR tokens as collateral. After bonding, there is a three-day delay enforced by the network before you can start using your Keeper. Once that time has passed, the script above will take care of *activating* your Relay as a Keeper.
+The script above will take care of *bonding* your Relayer to the keep3r network using zero KPR tokens as collateral. This is the equivalent of choosing to `Bond` in the https://keep3r.network/[keep3r.network] interface, only that the script is doing it automatically.
 
-Once your Keeper is activated, it will query the `YearnV1EarnKeep3r` job to see if there is work to do by calling `workable`, and if so, will send a transaction to execute the `work`. You can check out your Autotask logs to see what your Keeper has done on each run.
+NOTE: Most jobs in the network do not require any bonded tokens to be executed, but you can modify the script by changing `collateralAmount` to bond some tokens if you want. If you do so, remember to transfer the tokens to be bonded to the Relayer address, or the Autotask will fail.
+
+After bonding, there is a three-day delay enforced by the network before you can start using your Keeper. You can check your Autotask runs logs to see how much time is remaining. Once that time has passed, the script will take care of *activating* your Relayer as a Keeper.
+
+NOTE: Once your Relayer is activated, there is no need for it to go through the same bonding and activation process again if you modify the Autotask that executes the jobs, or add another Autotask connected to it.
+
+## Executing Jobs
+
+Right after your Keeper is activated, it will start executing available jobs. The script is set up to look for available jobs in the `YearnV1EarnKeep3r`, `HegicPoolKeep3r`, and `UniswapOracleV2` contracts. You can check out your Autotask logs to see what your Keeper has done on each run.
 
 WARNING: Keep in mind that sending the transaction does not automatically mean you will get rewarded for it: other Keepers may also be monitoring the job for work, and if their transaction gets mined before yours, you will not get the reward!
 
 ## Coming soon...
 
-We are working on additional features in Defender to make this process easier. This involves being able to send Relayer transactions from the Defender site, so you can bond the Relay with the collateral you want and easily transfer your KPR rewards out of the Relay to your wallet without having to write code for it; adding a custom Defender provider, so you don't need to request an Alchemy, Infura, or Etherscan token yourself; creating a registry of Autotask scripts, so you don't need to copy-paste code from this document; showing Keeper information in the Relayer page, so you know whether your Relayer has been activated and the rewards earned so far; and more. We will be updating this document as we progress with these features. Stay tuned!
+We are working on additional features in Defender to make this process easier, such as: 
+
+* Being able to send Relayer transactions from the Defender site, so you can bond the Relay with the collateral you want and easily transfer your KPR rewards out of the Relay to your wallet without having to write code for it.
+* Adding a custom Defender provider, so you don't need to request an Alchemy, Infura, or Etherscan to prevent getting throttled when querying for jobs.
+* Creating a registry of Autotask scripts, so you don't need to copy-paste code from this document.
+* Showing Keeper information in the Relayer page, so you know whether your Relayer has been activated and the rewards earned so far.
+
+We will be updating this document as we progress with these features. Stay tuned!

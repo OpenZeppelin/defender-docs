@@ -5,4 +5,4 @@
 * xref:advisor.adoc[Advisor]
 
 * Guides
-** xref:guide-keep3r.adoc[Setting up a Keep3r]
+** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]
