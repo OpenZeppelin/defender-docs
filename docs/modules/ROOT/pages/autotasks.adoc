@@ -96,7 +96,7 @@ if (require.main === module) {
 [[a-complete-example]]
 == A complete example
 
-The following example uses ethers.js and the Autotask Relayer integration to call `myFunction` on a given contract. Note that you would need to replace `RELAYER_ADDRESS`, `ADDRESS`, and `ABI` in the following code by their corresponding values.
+The following example uses ethers.js and the Autotask Relayer integration to call `myFunction` on a given contract. Note that you would need to replace `ADDRESS` and `ABI` in the following code by their corresponding values.
 
 [source,jsx]
 ----
@@ -107,12 +107,9 @@ const { DefenderRelaySigner } = require('defender-relay-client/lib/ethers');
 exports.handler = async function(credentials) {
   // Initialize default provider and defender relayer signer
   const provider = ethers.getDefaultProvider('rinkeby');
-  const signer = new DefenderRelaySigner(credentials, provider, { 
-    speed: 'fast', 
-    from: RELAYER_ADDRESS,
-  });
+  const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
 
-    // Create contract instance from the signer and use it to send a tx
+  // Create contract instance from the signer and use it to send a tx
   const contract = new ethers.Contract(ADDRESS, ABI, signer);
   await contract.myFunction();
   console.log(`Called myFunction at ${ADDRESS}`);
