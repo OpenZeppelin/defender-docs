@@ -1,13 +1,17 @@
-Sources for OpenZeppelin Defender documentation.
+# OpenZeppelin Defender Documentation
 
-> Ship faster with the security of OpenZeppelin Defender.
->
-> Automate your Ethereum operations to deliver high-quality products faster with lower risk to users.
+Sources for OpenZeppelin Defender documentation. Hosted at [docs.defender.openzeppelin.com](docs.defender.openzeppelin.com).
+
+## About Defender
+
+Ship faster with the security of OpenZeppelin Defender.
+
+Automate your Ethereum operations to deliver high-quality products faster with lower risk to users.
 
 - [Learn more](https://openzeppelin.com/defender)
 - [Read the docs](https://docs.openzeppelin.com/defender)
 
-#### Authoring content
+## Authoring content
 
 To preview locally run `npm run docs:watch`.
 
