@@ -1,6 +1,6 @@
 # OpenZeppelin Defender Documentation
 
-Sources for OpenZeppelin Defender documentation. Hosted at [docs.defender.openzeppelin.com](docs.defender.openzeppelin.com).
+Sources for OpenZeppelin Defender documentation. Hosted at [docs.defender.openzeppelin.com](https://docs.defender.openzeppelin.com/).
 
 ## About Defender
 
