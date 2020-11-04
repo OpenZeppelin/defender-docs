@@ -129,7 +129,7 @@ async function main(signer, jobs, registryAddress) {
 
 // Entrypoint for the Autotask
 exports.handler = async function(credentials) {
-  const provider = ethers.getDefaultProvider('rinkeby');
+  const provider = ethers.getDefaultProvider();
   const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fastest' });
   return await main(signer, Jobs, RegistryAddress);
 }
@@ -142,7 +142,6 @@ if (require.main === module) {
     .then(() => process.exit(0))
     .catch(error => { console.error(error); process.exit(1); });
 }
-
 ----
 
 ## Wait for Keeper activation
