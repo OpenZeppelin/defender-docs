@@ -1,0 +1,172 @@
+# Running a Keep3r Network keeper
+
+This guide will walk you through the process of running a Keeper in the https://keep3r.network/[Keep3r Network] by leveraging Defender xref:relay.adoc[Relay] and xref:autotasks.adoc[Autotasks].
+
+WARNING: The Keep3r Network project is in beta. Use at your own risk.
+
+[[what-is-a-keeper]]
+## What is a Keeper?
+
+In the context of the Keep3r Network, Keepers are participants who execute available jobs in exchange for a reward. A contract may register a job to be executed, and once it's available, a registered Keeper can send a transaction to execute it.
+
+[quote, 'https://docs.keep3r.network/#keepers[keep3r.network documentation]']
+____
+A Keeper is the term used to refer to an external person and/or team that executes a job. This can be as simplistic as calling a transaction, or as complex as requiring extensive off-chain logic. The scope of Keep3r network is not to manage these jobs themselves, but to allow contracts to register as jobs for keepers, and keepers to register themselves as available to perform jobs. It is up to the individual keeper to set up their devops and infrastructure and create their own rules based on what transactions they deem profitable.
+____
+
+[[prerequsites]]
+## Prerequisites
+
+To get started, you'll need the following:
+
+. *A Defender mainnet account*. Head over to https://defender.openzeppelin.com/[Defender] to sign up for a new account, and then https://openzeppelin.com/apply/[apply for mainnet access] indicating that you are interested in running a Keeper. We'll contact you shortly to activate your account for mainnet access. Note that mainnet accounts are free for now, but will be paid starting end of year.
+
+. *ETH to pay for transactions gas*. Keeper transactions require gas for execution, so make sure to have some ETH available to fund your Relay.
+
+// . *An Alchemy, Etherscan, and/or Infura key (optional)*. Running a Keeper requires querying which jobs are available, and https://dashboard.alchemyapi.io/signup?referral=53fcee38-b894-4d5f-bd65-885d241f8d29[Alchemy] (includes referral code), https://infura.io/[Infura], and https://etherscan.io/apis[Etherscan] provide free and paid access to the network for executing these queries. You can do without an API key, but you may get throttled during your Keepers execution. Read more about this https://docs.ethers.io/v5/api-keys/[here].
+
+## Creating a Relayer
+
+The first step will be to create a Defender Relayer to act as your Keeper. This Relayer will be the Ethereum account you will be executing jobs from. 
+
+NOTE: You *do not* need to register as a Keeper manually in https://keep3r.network/[keep3r.network], doing so will register your wallet as a Keeper, not your Relayer.
+
+To create a Relayer, simple head over to the xref:relay.adoc[Relay] section in Defender, and create a new relayer on the Mainnet network. Once created, take note of the Relayer address; you will not need the generated API key and secret for this guide.
+
+image::guide-keep3r-create-relayer.png[Creating a new Relayer in mainnet]
+
+WARNING: If the option to create the relayer in mainnet is locked, it means your Defender account does not have mainnet access yet. Make sure to https://openzeppelin.com/apply/[apply for mainnet access first] and wait for our response.
+
+## Fund your Relayer
+
+Next step is to send ETH to your Relayer, so it has funds to execute the jobs. Copy the Ethereum address of your new Relayer, and use your favorite wallet to send ETH to it. You can send whatever amount you want, but you want at least around 0.2 ETH to be able to send a handful of transactions before running out.
+
+After the transaction is confirmed, you should see the the funds you have transferred in the Relayer's balance.
+
+image::guide-keep3r-relayer-balance.png[Checking the balance of your Relayer]
+
+NOTE: Defender will send you an email when your Relay's funds drop below 0.1 ETH to remind you to refill it.
+
+## Create an Autotask
+
+Now that you have your Relay ready to send transactions, let's set up the Defender Autotask that will instruct the Relay to send them. An Autotask is a snippet of code that runs at regular intervals, in this case, we'll use it to automate the process of bonding, activating, searching for jobs, and executing them.
+
+Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every one minute, and connecting it to the Relayer you had created previously.
+
+As for the code, paste the following snippet. Once you hit save, Defender will start executing the Autotask every minute, taking your Relayer through the bonding and activation process, and then executing available jobs.
+
+[source,jsx]
+----
+const { ethers } = require("ethers");
+const { DefenderRelaySigner } = require('defender-relay-client/lib/ethers');
+
+// ABIs for jobs and registry (contain only the methods needed, not the full ABIs of the contracts)
+const ABIs = {
+  UniswapOracleV2: [{"inputs":[],"name":"updateable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"work","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+  HegicPoolKeep3r: [{"inputs":[],"name":"workable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"claimRewards","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+  YearnV1EarnKeep3r: [{"inputs":[],"name":"work","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"workable","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}],
+  Registry: [{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"keepers","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"bond","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"bondings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"bonding","type":"address"}],"name":"activate","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+}
+
+// Definition for all jobs to execute
+const Jobs = [
+  { name: 'UniswapOracleV2',   address: '0x127a2975c4E1c75f1ed4757a861bbd42523DB035', workableFn: 'updateable', workFn: 'work' },
+  { name: 'HegicPoolKeep3r',   address: '0x5DDe926b0A31346f2485900C5e64c2577F43F774', workableFn: 'workable',   workFn: 'claimRewards' },
+  { name: 'YearnV1EarnKeep3r', address: '0xe7F4ab593aeC81EcA754Da1B3B7cE0C42a13Ec0C', workableFn: 'workable',   workFn: 'work' },
+];
+
+// Address for the Keeper registry
+const RegistryAddress = '0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44';
+
+// Work on jobs if it's needed using a Defender relay signer
+async function workIfNeeded(signer, jobs) {
+  for (const job of jobs) {
+    const contract = new ethers.Contract(job.address, ABIs[job.name], signer);
+    if (await contract[job.workableFn]()) {
+      console.log(`${job.name} is workable`);
+      const tx = await contract[job.workFn]();
+      console.log(`${job.name} worked: ${tx.hash}`);
+    } else {
+      console.log(`${job.name} is not workable`);
+    }
+  }
+}
+
+// Register the Defender relay as a keep3r
+async function registerKeeper(signer, registry) {
+  const keeperAddress = await signer.getAddress();
+  const collateralAddress = registry.address;
+  const bonding = await registry.bondings(keeperAddress, collateralAddress);
+
+  if (bonding.isZero()) {
+    // Bond with zero KPR tokens
+    const collateralAmount = '0x00';
+    const tx = await registry.bond(collateralAddress, collateralAmount);
+    console.log(`Bonded relayer: ${tx.hash}`);
+  } else if (bonding.lt(parseInt(Date.now() / 1000))) {
+    // Activate if 3-day waiting period has finished
+    const tx = await registry.activate(collateralAddress);
+    console.log(`Activated relayer: ${tx.hash}`);
+  } else {
+    // Wait until can activate
+    const waitInSeconds = bonding.sub(parseInt(Date.now() / 1000)).toString();
+    console.log(`Waiting ${waitInSeconds} seconds until activation is available`);
+  }
+}
+
+// Main function
+async function main(signer, jobs, registryAddress) {
+  const keeperAddress = await signer.getAddress();
+  const registry = new ethers.Contract(registryAddress, ABIs.Registry, signer);
+  
+  // Work if this is a registered keeper, or register it otherwise
+  if (await registry.keepers(keeperAddress)) {
+    await workIfNeeded(signer, jobs);
+  } else {
+    await registerKeeper(signer, registry);
+  }
+}
+
+// Entrypoint for the Autotask
+exports.handler = async function(credentials) {
+  const provider = ethers.getDefaultProvider();
+  const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fastest' });
+  return await main(signer, Jobs, RegistryAddress);
+}
+
+// To run locally (this code will not be executed in Autotasks)
+if (require.main === module) {
+  require('dotenv').config();
+  const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
+  exports.handler({ apiKey, apiSecret })
+    .then(() => process.exit(0))
+    .catch(error => { console.error(error); process.exit(1); });
+}
+----
+
+## Wait for Keeper activation
+
+The script above will take care of *bonding* your Relayer to the keep3r network using zero KPR tokens as collateral. This is the equivalent of choosing to `Bond` in the https://keep3r.network/[keep3r.network] interface, only that the script is doing it automatically.
+
+NOTE: Most jobs in the network do not require any bonded tokens to be executed, but you can modify the script by changing `collateralAmount` to bond some tokens if you want. If you do so, remember to transfer the tokens to be bonded to the Relayer address, or the Autotask will fail.
+
+After bonding, there is a three-day delay enforced by the network before you can start using your Keeper. You can check your Autotask runs logs to see how much time is remaining. Once that time has passed, the script will take care of *activating* your Relayer as a Keeper.
+
+NOTE: Once your Relayer is activated, there is no need for it to go through the same bonding and activation process again if you modify the Autotask that executes the jobs, or add another Autotask connected to it.
+
+## Executing Jobs
+
+Right after your Keeper is activated, it will start executing available jobs. The script is set up to look for available jobs in the `YearnV1EarnKeep3r`, `HegicPoolKeep3r`, and `UniswapOracleV2` contracts. You can check out your Autotask logs to see what your Keeper has done on each run.
+
+WARNING: Keep in mind that sending the transaction does not automatically mean you will get rewarded for it: other Keepers may also be monitoring the job for work, and if their transaction gets mined before yours, you will not get the reward!
+
+## Coming soon...
+
+We are working on additional features in Defender to make this process easier, such as: 
+
+* Being able to send Relayer transactions from the Defender site, so you can bond the Relay with the collateral you want and easily transfer your KPR rewards out of the Relay to your wallet without having to write code for it.
+* Adding a custom Defender provider, so you don't need to request an Alchemy, Infura, or Etherscan to prevent getting throttled when querying for jobs.
+* Creating a registry of Autotask scripts, so you don't need to copy-paste code from this document.
+* Showing Keeper information in the Relayer page, so you know whether your Relayer has been activated and the rewards earned so far.
+
+We will be updating this document as we progress with these features. Stay tuned!

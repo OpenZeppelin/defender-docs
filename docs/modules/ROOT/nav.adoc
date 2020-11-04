@@ -1,5 +1,10 @@
 * xref:index.adoc[Overview]
-* xref:admin.adoc[Admin]
-* xref:relay.adoc[Relay]
-* xref:autotasks.adoc[Autotasks]
-* xref:advisor.adoc[Advisor]
+
+* Components
+** xref:admin.adoc[Admin]
+** xref:relay.adoc[Relay]
+** xref:autotasks.adoc[Autotasks]
+** xref:advisor.adoc[Advisor]
+
+* Guides
+** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]
