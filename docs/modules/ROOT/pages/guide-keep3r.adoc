@@ -76,7 +76,7 @@ const Jobs = [
 ];
 
 // Address for the Keeper registry
-const RegistryAddress = '0x08829D79f73e0a152a9AB5ee0fa955091055d46F';
+const RegistryAddress = '0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44';
 
 // Work on jobs if it's needed using a Defender relay signer
 async function workIfNeeded(signer, jobs) {
