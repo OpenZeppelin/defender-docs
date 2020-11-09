@@ -65,7 +65,7 @@ const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
 const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
 
 const erc20 = new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
-const tx = await erc20.functions.transfer(beneficiary, 1e18.toString());
+const tx = await erc20.transfer(beneficiary, 1e18.toString());
 const mined = await tx.wait();
 ----
 
@@ -96,6 +96,16 @@ In addition to sending transactions, the Relayer can also sign arbitrary message
 [source,jsx]
 ----
 const signResponse = await relayer.sign({ message });
+----
+
+[[relayer-info]]
+=== Relayer Info
+
+A relayer's address can be retrieved using the `getAddress` method. Checkout the `getRelayer` method of the client to get more info about a relayer.
+
+[source,jsx]
+----
+const addr = await relayer.getAddress();
 ----
 
 [[autotasks-integration]]
@@ -160,9 +170,11 @@ As for API secrets, these are only kept in memory during creation when they are 
 == Relay API Reference
 The Relay API exposes two endpoints `txs` and `sign`. The `txs` endpoint allows to send transactions to Ethereum blockchain and query their status. The `sign` endpoint allows to sign arbitrary data with relayer's private key.
 
+[[authentication]]
 === Authentication
 A JWT Token is required to make requests to the Relay API. For security reasons authentication uses https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol[SRP protocol] and it is not possible to retrieve a JWT Token via one HTTP request. Which is why it is advised to use the https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-integrate-apps.html[Amazon Cognito User Pool SDK] to retrieve a JWT token.
 
+[[python-authentication]]
 === Python Authentication
 The official https://aws.amazon.com/sdk-for-python/[AWS SDK] for python doesn't support SRP authentication, but it is possible to retrieve a JWT token using the https://github.com/capless/warrant#cognito-srp-utility[warrant] library.
 
@@ -177,9 +189,11 @@ tokens = aws.authenticate_user()
 print('Access Token', tokens['AuthenticationResult']['AccessToken'])
 ```
 
+[[refreshing-jwt-token]]
 === Refreshing JWT Token
 A JWT token will expire in 60 minutes. If your code requires sessions longer than 60 minutes consider recreating a JWT token or using a https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html[refresh token].
 
+[[making-requests]]
 === Making Requests
 
 Once you get a JWT Token you can make requests to the Defender API. A request requires an API key, a JWT Token, optionally a payload, and an API URL. Set `$KEY`, `$TOKEN` to the values of API key and JWT Token acquired before. `$END_POINT` can be either `txs` or `sign`.
@@ -195,8 +209,11 @@ curl \
     "$API_URL/$END_POINT"
 ```
 
+
+[[txs-endpoint]]
 === Txs Endpoint
 
+[[send-transaction]]
 ==== Send Transaction
 To send a transaction to the Ethereum blockchain submit a `POST` request with the desired payload. The payload format is as follows:
 
@@ -254,6 +271,8 @@ export interface TransactionResponse {
   chainId: number;
 }
 ```
+
+[[query-transaction]]
 ==== Query Transaction
 To retrieve a transaction status and data make a `GET` request to the `txs` endpoint with the Defender `transactionId`, *not* with the transaction hash.
 
@@ -290,6 +309,7 @@ You would receive a `TransactionResponse` object, e.g.:
 }
 ```
 
+[[sign-endpoint]]
 === Sign Endpoint
 To sign arbitrary data with the Relay API make a `POST` request with a payload containing the hex string to sign. The payload format is:
 
@@ -333,6 +353,50 @@ An example of the response:
    "s":"0x3b73c695b47dd275d17246d86bbfe35f112a7bdb5bf4a5a1a8e22fe37dfd005a",
    "v":44,
    "sig":"0x819b2645a0b73494724dac355e6ecfc983d94597b533d34fe3ecd0277046a1eb3b73c695b47dd275d17246d86bbfe35f112a7bdb5bf4a5a1a8e22fe37dfd005a2c"
+}
+```
+
+[[relayer-endpoint]]
+=== Relayer Endpoint
+To retrieve a relayer's data with the Relay API make a `GET` request to the `relayer` endpoint.
+
+An example of the request:
+
+```bash
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "$API_URL/relayer" # http://api.defender.openzeppelin.com/relayer
+```
+
+You would receive a response in the following format:
+
+```TypeScript
+export interface RelayerModel {
+  relayerId: string;
+  name: string;
+  address: string;
+  network: string;
+  paused: boolean;
+  createdAt: string;
+  pendingTxCost: string;
+}
+```
+
+An example of the response:
+
+```JSON
+{
+   "relayerId":"d5484fb1-df83-4659-9903-16d57d41f188",
+   "name":"Rinkeby",
+   "address":"0x71764d6450c2b710fc3e4ee5b7a038d1e7e4fc29",
+   "network":"rinkeby",
+   "createdAt":"2020-11-02T18:00:00.212Z",
+   "paused":false,
+   "pendingTxCost":"0"
 }
 ```
 
