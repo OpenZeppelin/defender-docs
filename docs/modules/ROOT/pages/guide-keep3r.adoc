@@ -53,7 +53,7 @@ Now that you have your Relay ready to send transactions, let's set up the Defend
 
 Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every one minute, and connecting it to the Relayer you had created previously.
 
-As for the code, paste [this code snippet](https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/autoregister-keeper.js) from the `defender-autotask-examples` repository. Once you hit save, Defender will start executing the Autotask every minute, taking your Relayer through the bonding and activation process, and then executing available jobs.
+As for the code, paste https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/autoregister-keeper.js[this code snippet] from the `defender-autotask-examples` repository. Once you hit save, Defender will start executing the Autotask every minute, taking your Relayer through the bonding and activation process, and then executing available jobs.
 
 ## Wait for Keeper activation
 
