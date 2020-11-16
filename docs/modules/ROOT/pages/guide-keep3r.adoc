@@ -23,6 +23,8 @@ To get started, you'll need the following:
 
 . *ETH to pay for transactions gas*. Keeper transactions require gas for execution, so make sure to have some ETH available to fund your Relay.
 
+. *KP3R tokens to bond (optional)*. When you register your Keeper, you may choose to https://docs.keep3r.network/keepers#becoming-a-keeper[*bond*] a certain amount of KP3R tokens. This https://forum.openzeppelin.com/t/what-benefit-is-there-for-adding-collateral-bonded-kp3r-vs-not-bonding/4502[affects the rewards] you get when working Jobs. Note that you can still run a Keeper without bonding any tokens.
+
 // . *An Alchemy, Etherscan, and/or Infura key (optional)*. Running a Keeper requires querying which jobs are available, and https://dashboard.alchemyapi.io/signup?referral=53fcee38-b894-4d5f-bd65-885d241f8d29[Alchemy] (includes referral code), https://infura.io/[Infura], and https://etherscan.io/apis[Etherscan] provide free and paid access to the network for executing these queries. You can do without an API key, but you may get throttled during your Keepers execution. Read more about this https://docs.ethers.io/v5/api-keys/[here].
 
 ## Creating a Relayer
@@ -47,37 +49,54 @@ image::guide-keep3r-relayer-balance.png[Checking the balance of your Relayer]
 
 NOTE: Defender will send you an email when your Relay's funds drop below 0.1 ETH to remind you to refill it.
 
+If you want to *bond* any KP3R tokens to your Relayer, you will need to transfer the tokens to the Relayer address as well. Make sure to send the tokens to the Relayer address and not to the KP3R token contract!
+
+## Bond your Relayer
+
+To get your Relayer registered as a Keeper, the first step is to https://docs.keep3r.network/keepers#becoming-a-keeper[bond it]. Click on the gear icon in your Relayer settings page, and choose to _Bond to Keep3r Network_.
+
+If you want to bond KP3R tokens, now is the time to choose how many you want to bond. Note that you can work with zero bonded KP3R tokens, and you can bond more tokens later if you want to do so.
+
+image::guide-keep3r-relayer-bond.png[Bonding your Relayer]
+
+After the transaction to bond your Relayer is sent, your Relayer will now enter *a 3-day waiting period* before it can be activated as a Relayer. You can access your Relayer page at any time to check how much time is remaining.
+
+image::guide-keep3r-pending-activation.png[Waiting period for activating the Relayer as a Keeper]
+
+NOTE: You can at any time choose to _Bond to Keep3r Network_ again. This will allow you to bond additional KP3R tokens, but will reset the waiting period back to 3 days.
+
+## Activate your Relayer
+
+After the 3-day waiting period is over, you will have the option to _Activate as keep3r_. Doing so will send a transaction to activate your Relayer as a Keeper in the network.
+
+image::guide-keep3r-activated.png[Relayer is now a Keeper]
+
 ## Create an Autotask
 
-Now that you have your Relay ready to send transactions, let's set up the Defender Autotask that will instruct the Relay to send them. An Autotask is a snippet of code that runs at regular intervals, in this case, we'll use it to automate the process of bonding, activating, searching for jobs, and executing them.
+Now that you have your Relayer active as a Keeper, let's set up the Defender Autotask that will instruct the Relay to send them. An Autotask is a snippet of code that runs at regular intervals, in this case, we'll use it to automate the process of bonding, activating, searching for jobs, and executing them.
 
 Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every one minute, and connecting it to the Relayer you had created previously.
 
-As for the code, paste https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/autoregister-keeper.js[this code snippet] from the `defender-autotask-examples` repository. Once you hit save, Defender will start executing the Autotask every minute, taking your Relayer through the bonding and activation process, and then executing available jobs.
-
-## Wait for Keeper activation
-
-The script above will take care of *bonding* your Relayer to the keep3r network using zero KPR tokens as collateral. This is the equivalent of choosing to `Bond` in the https://keep3r.network/[keep3r.network] interface, only that the script is doing it automatically.
-
-NOTE: Most jobs in the network do not require any bonded tokens to be executed, but you can modify the script by changing `collateralAmount` to bond some tokens if you want. If you do so, remember to transfer the tokens to be bonded to the Relayer address, or the Autotask will fail.
-
-After bonding, there is a three-day delay enforced by the network before you can start using your Keeper. You can check your Autotask runs logs to see how much time is remaining. Once that time has passed, the script will take care of *activating* your Relayer as a Keeper.
-
-NOTE: Once your Relayer is activated, there is no need for it to go through the same bonding and activation process again if you modify the Autotask that executes the jobs, or add another Autotask connected to it.
+As for the code, paste https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/multiple-jobs-keeper.js[this code snippet] from the `defender-autotask-examples` repository. Once you hit save, Defender will start executing the Autotask every minute, taking your Relayer through the bonding and activation process, and then executing available jobs.
 
 ## Executing Jobs
 
-Right after your Keeper is activated, it will start executing available jobs. The script is set up to look for available jobs in the `YearnV1EarnKeep3r`, `HegicPoolKeep3r`, and `UniswapV2SlidingOracle` contracts. You can check out your Autotask logs to see what your Keeper has done on each run.
+The autotask you have set up will automatically start looking for available jobs in the `YearnV1EarnKeep3r`, `HegicPoolKeep3r`, and `UniswapV2SlidingOracle` contracts. You can check out your Autotask logs to see what your Keeper has done on each run, and monitor your rewards on the Relayer page.
 
 WARNING: Keep in mind that sending the transaction does not automatically mean you will get rewarded for it: other Keepers may also be monitoring the job for work, and if their transaction gets mined before yours, you will not get the reward!
 
-## Coming soon...
+## Collecting your Rewards
 
-We are working on additional features in Defender to make this process easier, such as: 
+After working some jobs, you can send your earned KP3R tokens from your Relayer back to your wallet. To do so, go to your Relayer page and choose to _Withdraw funds_. Enter your wallet address, choose KPR as currency, and input the amount of tokens you want to withdraw. Make sure you enter your wallet address correctly, or you may irretrievable lose your tokens!
 
-* Being able to send Relayer transactions from the Defender site, so you can bond the Relay with the collateral you want and easily transfer your KPR rewards out of the Relay to your wallet without having to write code for it.
-* Adding a custom Defender provider, so you don't need to request an Alchemy, Infura, or Etherscan to prevent getting throttled when querying for jobs.
-* Creating a registry of Autotask scripts, so you don't need to copy-paste code from this document.
-* Showing Keeper information in the Relayer page, so you know whether your Relayer has been activated and the rewards earned so far.
+image::guide-keep3r-transfer-funds.png[Withdrawing your tokens from the Relayer]
 
-We will be updating this document as we progress with these features. Stay tuned!
+NOTE: You can also use the _Withdraw funds_ option to send ETH from your Relayer back to your wallet at any time.
+
+## Troubleshooting
+
+These are some common issues you may see along the way. If you have any questions, don't hesitate to ask on the https://forum.openzeppelin.com/c/support/defender/36[forum]!
+
+### Autotask fails with error "failed to meet quorum"
+
+This error is related to the ethers.js provider being throttled by Alchemy, Infura, or Etherscan due to making too many queries to the network. You can read more about this in the https://docs.ethers.io/v5/api-keys/[ethers.js documentation]. To fix this now, you can apply for an API token as described on the ethers.js docs, and modify the Autotask snippet to use it instead of creating a new `ethers.getDefaultProvider()`. Meanwhile, we are working on adding a custom Defender provider, so you don't need to go through this on your end!
