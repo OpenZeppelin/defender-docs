@@ -170,6 +170,34 @@ The pattern described above is just one variant among several meta-transaction f
 
 NOTE: We are also working on adding support for sidechains and L2s, starting with xDai. This way, you can offer a full gasless experience to your users in other networks. Let us know if you have any preferred network you'd like to see in Defender!
 
+[[through-the-ui]]
+=== Through the UI
+You can also send transactions via a Relayer through the UI. To do so, go to the Relayer page, open the cog menu, and click on *Send transaction*:
+
+image::defender-relayer-cog-menu.png[Defender Relay Cog Menu]
+
+At the *Send transaction* screen, enter the address of the contract you want to interact with, select a function to execute, and enter its arguments.
+
+NOTE: At the time of writing, Defender only supports sending transactions to source verified contracts, so make sure the target contract has been verified either on Etherscan or Sourcify.
+
+image::defender-relayer-send-tx.png[Defender Relay Send Transaction]
+
+When you click on *Confirm transaction*, the transaction will be sent through the relayer. We suggest that you wait for the transaction to be confirmed before leaving this screen, or to monitor it on your block explorer of choice, to ensure that it is confirmed and there is no further action required from you.
+
+NOTE: Defender sets speed to Fast for relayer transactions created through the UI.
+
+[[withdrawing-funds]]
+== Withdrawing funds
+
+You can withdraw funds from a relayer by clicking on *Withdraw funds* in the Relayer page.
+
+image::defender-relayer-withdraw-funds.png[Defender Relay Withdraw Funds]
+
+At the *Withdraw funds* screen, you can choose to send funds in ETH or pick from a built-in list of ERC20 tokens.
+
+image::defender-relayer-withdraw-funds-screen.png[Defender Relay Withdraw Funds Screen]
+
+
 [[under-the-hood]]
 == Under the hood
 
