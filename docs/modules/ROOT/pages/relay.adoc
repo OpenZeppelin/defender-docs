@@ -105,7 +105,7 @@ A relayer's address can be retrieved using the `getAddress` method of the `Defen
 
 [source,jsx]
 ----
-const addr = await relayer.getAddress();
+const addr = await signer.getAddress();
 ----
 
 If you need more info about a relayer then checkout the `getRelayer` method of the client. It returns the following data:
