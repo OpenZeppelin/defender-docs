@@ -77,7 +77,9 @@ Now that you have your Relayer active as a Keeper, let's set up the Defender Aut
 
 Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every one minute, and connecting it to the Relayer you had created previously.
 
-As for the code, paste https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/multiple-jobs-keeper.js[this code snippet] from the `defender-autotask-examples` repository. Once you hit save, Defender will start executing the Autotask every minute, taking your Relayer through the bonding and activation process, and then executing available jobs.
+As for the code, paste https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/multiple-jobs-keeper.js[this code snippet] from the `defender-autotask-examples` repository, which will attempt to work the `YearnV1EarnKeep3r`, `HegicPoolKeep3r`, and `UniswapV2SlidingOracle` contracts. Once you hit save, Defender will start executing the Autotask every minute.
+
+NOTE: If you are familiar with javascript, you can edit your Autotask code at any time to add new jobs as they are published. To do this, add the ABI of the contract you want to work to the `ABIs` object in the snippet, and add an entry to `Jobs` with the contract name and address, as well as the names of the `workable` and `work` functions.
 
 ## Executing Jobs
 
@@ -85,6 +87,7 @@ The autotask you have set up will automatically start looking for available jobs
 
 WARNING: Keep in mind that sending the transaction does not automatically mean you will get rewarded for it: other Keepers may also be monitoring the job for work, and if their transaction gets mined before yours, you will not get the reward!
 
+[[withdrawing-rewards]]
 ## Collecting your Rewards
 
 After working some jobs, you can send your earned KP3R tokens from your Relayer back to your wallet. To do so, go to your Relayer page and choose to _Withdraw funds_. Enter your wallet address, choose KPR as currency, and input the amount of tokens you want to withdraw. Make sure you enter your wallet address correctly, or you may irretrievably lose your tokens!
@@ -92,6 +95,16 @@ After working some jobs, you can send your earned KP3R tokens from your Relayer 
 image::guide-keep3r-transfer-funds.png[Withdrawing your tokens from the Relayer]
 
 NOTE: You can also use the _Withdraw funds_ option to send ETH from your Relayer back to your wallet at any time.
+
+## Leaving the Keeper network
+
+In the event that you no longer wish to participate as a Keeper, you can just stop your Autotask to stop executing Jobs, and withdraw your KP3R and ETH from your Relayer. If you hadn't bonded any tokens during the registration phase, this is enough.
+
+If you did bond tokens during registration, and you want to retrieve, you will need to https://docs.keep3r.network/keepers#removing-a-keeper[unregister as a Keeper]. To do this, start by choosing to _Send a transaction_ in your Relayer page, enter the Keeper contract address https://etherscan.io/address/0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44[`0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44`], and choose the `unbond` function. The `bonding` parameter corresponds to the address of the token you had bonded (again https://etherscan.io/address/0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44[`0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44`] for KP3R), and `amount` is the number of tokens you want to unbond (including the extra decimals as zeros, so 100 KP3R should be entered as `100000000000000000000`).
+
+image::guide-keep3r-unbond.png[Unbonding your Relayer from the Keep3r Network]
+
+After this transaction is sent, you will have to wait a 14-day unbonding period. Once passed, you will need to send another transaction from your Relayer, this time calling the `withdraw` function instead, with the same `bonding` parameter as before. This will effectively remove your Relayer as a Keeper, and send your bonded tokens back to your Relayer address, from where you can <<withdrawing-rewards,_Withdraw_>> them to your wallet.
 
 ## Troubleshooting
 
