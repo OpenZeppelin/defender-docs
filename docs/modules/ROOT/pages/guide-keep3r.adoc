@@ -73,7 +73,7 @@ image::guide-keep3r-activated.png[Relayer is now a Keeper]
 
 ## Create an Autotask
 
-Now that you have your Relayer active as a Keeper, let's set up the Defender Autotask that will instruct the Relay to send them. An Autotask is a snippet of code that runs at regular intervals, in this case, we'll use it to automate the process of bonding, activating, searching for jobs, and executing them.
+Now that you have your Relayer active as a Keeper, let's set up the Defender Autotask that will instruct your Relayer to send them. An Autotask is a snippet of code that runs at regular intervals, in this case, we'll use it to automate the process of bonding, activating, searching for jobs, and executing them.
 
 Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every one minute, and connecting it to the Relayer you had created previously.
 
@@ -87,7 +87,7 @@ WARNING: Keep in mind that sending the transaction does not automatically mean y
 
 ## Collecting your Rewards
 
-After working some jobs, you can send your earned KP3R tokens from your Relayer back to your wallet. To do so, go to your Relayer page and choose to _Withdraw funds_. Enter your wallet address, choose KPR as currency, and input the amount of tokens you want to withdraw. Make sure you enter your wallet address correctly, or you may irretrievable lose your tokens!
+After working some jobs, you can send your earned KP3R tokens from your Relayer back to your wallet. To do so, go to your Relayer page and choose to _Withdraw funds_. Enter your wallet address, choose KPR as currency, and input the amount of tokens you want to withdraw. Make sure you enter your wallet address correctly, or you may irretrievably lose your tokens!
 
 image::guide-keep3r-transfer-funds.png[Withdrawing your tokens from the Relayer]
 
