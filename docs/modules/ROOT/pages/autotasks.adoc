@@ -51,6 +51,8 @@ exports.handler = async function(event) {
 }
 ----
 
+This allows you to send transactions using your Relayer from your Autotasks without having to set up any API keys or secrets. Furthermore, you can also use the Relayer JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
+
 [[environment]]
 === Environment
 
@@ -96,23 +98,25 @@ if (require.main === module) {
 [[a-complete-example]]
 == A complete example
 
-The following example uses ethers.js and the Autotask Relayer integration to call `myFunction` on a given contract. Note that you would need to replace `ADDRESS` and `ABI` in the following code by their corresponding values.
+The following example uses ethers.js and the Autotask Relayer integration to send a transaction calling `execute` on a given contract, prior checking a `canExecute` view function. Note that you would need to replace `ADDRESS` and `ABI` in the following code by their corresponding values.
 
 [source,jsx]
 ----
 const { ethers } = require("ethers");
-const { DefenderRelaySigner } = require('defender-relay-client/lib/ethers');
+const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
 
 // Entrypoint for the Autotask
 exports.handler = async function(credentials) {
-  // Initialize default provider and defender relayer signer
-  const provider = ethers.getDefaultProvider('rinkeby');
+  // Initialize defender relayer provider and signer
+  const provider = new DefenderRelayProvider(credentials);
   const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
 
   // Create contract instance from the signer and use it to send a tx
   const contract = new ethers.Contract(ADDRESS, ABI, signer);
-  await contract.myFunction();
-  console.log(`Called myFunction at ${ADDRESS}`);
+  if (await contract.canExecute()) {
+    await contract.execute();
+  }
+  console.log(`Called execute at ${ADDRESS}`);
 }
 
 // To run locally (this code will not be executed in Autotasks)

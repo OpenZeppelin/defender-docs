@@ -111,4 +111,4 @@ Defender Admin's main contribution to security is then related to usability. Fir
 [[coming-up]]
 == Coming up...
 
-We are working on support for the xDai network in Admin, so you can manage your contracts on this popular sidechain as well. We are also working on public views for contracts, so you can optionally share with your community what change proposals are coming. Stay tuned, and let us know if you have any requests!
+We are working on providing better contextual information on the contract you are working with when creating a proposal. We are also working on public views for contracts, so you can optionally share with your community what change proposals are coming. Stay tuned, and let us know if you have any requests!

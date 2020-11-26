@@ -188,7 +188,7 @@ NOTE: You can explore the key parts of the code for the application https://gist
 
 The pattern described above is just one variant among several meta-transaction flavors available. Given that Defender Relayers are general-purpose, you can also use them for any other type of meta-transactions, such as relaying gasless ERC20 transfers using https://eips.ethereum.org/EIPS/eip-2612[EIP2612] or https://eips.ethereum.org/EIPS/eip-3009[EIP3009].
 
-NOTE: We are also working on adding support for sidechains and L2s, starting with xDai. This way, you can offer a full gasless experience to your users in other networks. Let us know if you have any preferred network you'd like to see in Defender!
+In particular, you can leverage Defender xDai Relayers for sending transactions on behalf of your users in xDai, given the low cost of transactions in that sidechain. This way, you can offer a full gasless experience in your dapp. Let us know if you have any other network you'd like to see supported in Defender.
 
 [[through-the-ui]]
 == Manual operation
