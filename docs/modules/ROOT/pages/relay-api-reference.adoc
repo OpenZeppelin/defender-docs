@@ -3,9 +3,10 @@
 
 The Relay API exposes the following endpoints: 
 
-- `txs`: send transactions to Ethereum blockchain and query their status 
+- `txs`: send transactions to the Ethereum blockchain and query their status 
 - `sign`: sign arbitrary data with relayer's private key
 - `relayer`: retrieve information from the relayer
+- `jsonrpc`: make json-rpc calls to the Ethereum network
 
 [[authentication]]
 == Authentication
@@ -235,5 +236,34 @@ An example of the response:
    "createdAt":"2020-11-02T18:00:00.212Z",
    "paused":false,
    "pendingTxCost":"0"
+}
+```
+
+[[jsonrpc-endpoint]]
+== JSON RPC Endpoint
+To make a JSON RPC call to the network of your Relay, make a `POST` request to the `/relayer/jsonrpc` endpoint with the method name and parameters. Note that event filter methods and websocket subscriptions are not supported.
+
+An example of the request:
+
+```bash
+DATA='{ "jsonrpc":"2.0","method":"eth_getBalance","params":["0x407d73d8a49eeb85d32cf465507dd71d507100c1","latest"],"id":1 }'
+
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "$API_URL/relayer/jsonrpc" # http://api.defender.openzeppelin.com/relayer/jsonrpc
+```
+
+An example of the response:
+
+```JSON
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": "0x0234c8a3397aab58"
 }
 ```
