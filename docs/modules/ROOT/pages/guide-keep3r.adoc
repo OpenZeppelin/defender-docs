@@ -55,19 +55,30 @@ If you want to *bond* any KP3R tokens to your Relayer, you will need to transfer
 
 To get your Relayer registered as a Keeper, the first step is to https://docs.keep3r.network/keepers#becoming-a-keeper[bond it]. Click on the gear icon in your Relayer settings page, and choose to _Bond to Keep3r Network_.
 
-If you want to bond KP3R tokens, now is the time to choose how many you want to bond. Note that you can work with zero bonded KP3R tokens, and you can bond more tokens later if you want to do so.
+If you want to bond KP3R tokens, now is the time to choose how many you want to bond. 
+
+NOTE: You can work with zero bonded KP3R tokens, and you can bond more tokens later if you want to do so.
 
 image::guide-keep3r-relayer-bond.png[Bonding your Relayer]
 
-After the transaction to bond your Relayer is sent, your Relayer will now enter *a 3-day waiting period* before it can be activated as a Relayer. You can access your Relayer page at any time to check how much time is remaining.
+After the transaction to bond your Relayer is sent, your Relayer will now enter *a 3-day waiting period* before it can be manually <<activate-your-relayer,activated>> as a Keeper. You can access your Relayer page at any time to check how much time is remaining.
 
 image::guide-keep3r-pending-activation.png[Waiting period for activating the Relayer as a Keeper]
 
+Once the waiting period is over, you can then manually <<activate-your-relayer,activate your Relayer>>.
+
+image::guide-keep3r-bonding-delay-finished.png[Finished waiting period for activating the Relayer as a Keeper]
+
 NOTE: You can at any time choose to _Bond to Keep3r Network_ again. This will allow you to bond additional KP3R tokens, but will reset the waiting period back to 3 days.
 
+[[activate-your-relayer]]
 ## Activate your Relayer
 
-After the 3-day waiting period is over, you will have the option to _Activate as keep3r_. Doing so will send a transaction to activate your Relayer as a Keeper in the network.
+After the 3-day waiting period is over, you will have the option to manually _Activate as keep3r_. 
+
+image::guide-keep3r-activate.png[Activate your Relayer as a Keeper, 400]
+
+Doing so will send a transaction to activate your Relayer as a Keeper in the network and the status will change to Active.
 
 image::guide-keep3r-activated.png[Relayer is now a Keeper]
 
