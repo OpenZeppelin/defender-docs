@@ -63,7 +63,7 @@ Defender Admin supports two kinds of multi-signature wallets: https://gnosis-saf
 
 The Gnosis Safe wallet gathers offline signatures of each admin and then submits a single transaction with all signatures to execute the action. To share signatures, it relies on the https://safe-transaction.gnosis.io/[Safe Transaction Service] hosted by Gnosis.
 
-NOTE: The Safe Transaction Service is only available on Rinkeby and Mainnet. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
+NOTE: The Safe Transaction Service is only available on Mainnet, xDai, and Rinkeby. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
 
 When using a Gnosis Safe, Defender Admin will synchronize all signatures to and from the Safe Transaction Service. This way, any admins on your team using the https://gnosis-safe.io/app[Safe UI] will still be able to sign the Defender Admin proposals.
 
@@ -93,11 +93,13 @@ All approvals in Defender Admin today are handled via Metamask. Defender Admin a
 [[address-book]]
 == Address book
 
-All members of your team share an address book where you can define user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the corresponding section in the top-right user menu.
-
-Defender will also automatically create address book entries for you when you import a new contract into Admin.
+All members of your team share an address book where you can define user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the corresponding section in the top-right user menu. Defender will also automatically create address book entries for you when you import a new contract into Admin.
 
 image::defender-admin-edit-address.png[Defender Admin Edit Address]
+
+Defender will also source information from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book for creating new proposals or sending transactions.
+
+image::defender-admin-address-dropdown.png[Defender Admin Address Input]
 
 [[security-considerations]]
 == Security considerations

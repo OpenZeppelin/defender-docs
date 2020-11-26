@@ -2,9 +2,10 @@
 
 * Components
 ** xref:admin.adoc[Admin]
-** xref:relay.adoc[Relay]
-** xref:autotasks.adoc[Autotasks]
 ** xref:advisor.adoc[Advisor]
+** xref:autotasks.adoc[Autotasks]
+** xref:relay.adoc[Relay]
+*** xref:relay-api-reference.adoc[API reference]
 
 * Guides
 ** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]

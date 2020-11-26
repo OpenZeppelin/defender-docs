@@ -33,6 +33,11 @@ Each Relayer has one or more *API keys* associated with it. In order to send a t
 
 WARNING: When creating a new API key, keep in mind that the API secret is only visible once during the creation — if you don't write it down, it's lost forever. Luckily, creating a new API key is as easy as clicking a button.
 
+[[pausing]]
+=== Pausing
+
+You can pause a Relayer from the Defender website, to quickly respond to an emergency. This will cause the Relayer to reject any incoming requests to send a transaction, whether it is from an Autotask or via the API. However, keep in mind that any transactions already sent will not be cancelled. When you are ready to resume operations, just hit the Unpause button and your Relayer will go back to normal.
+
 [[sending-transactions]]
 == Sending transactions
 
@@ -53,21 +58,23 @@ NOTE: You don't need to enter a private key when initializing a Relayer client, 
 [[using-ethers.js]]
 === Using ethers.js
 
-To avoid rewriting existing scripts, the Relayer client also integrates with https://docs.ethers.io/v5/[ethers.js] via a custom https://docs.ethers.io/v5/api/signer/[signer]. This allows you to switch to Defender Relayer for sending transactions with minimal changes in your codebase.
+The Relayer client also integrates with https://docs.ethers.io/v5/[ethers.js] via a custom https://docs.ethers.io/v5/api/signer/[signer]. This allows you to switch to Defender Relayer for sending transactions with minimal changes in your codebase.
 
 [source,jsx]
 ----
-const { DefenderRelaySigner } = require('defender-relay-client/lib/ethers');
+const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
 const { ethers } = require('ethers');
  
-const provider = ethers.getDefaultProvider(NETWORK);
 const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
+const provider = new DefenderRelayProvider(credentials);
 const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
 
 const erc20 = new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
 const tx = await erc20.transfer(beneficiary, 1e18.toString());
 const mined = await tx.wait();
 ----
+
+In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The Defender signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender as a network provider as well.
 
 [[speed]]
 === Speed
@@ -89,7 +96,7 @@ const latestTx = await relayer.query(tx.transactionId);
 NOTE: The `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every few minutes.
 
 [[signing]]
-=== Signing
+== Signing
 
 In addition to sending transactions, the Relayer can also sign arbitrary messages using its private key. You can access this feature via the `sign` method of the client or the equivalent ethers.js method.
 
@@ -99,13 +106,13 @@ const signResponse = await relayer.sign({ message });
 ----
 
 [[relayer-info]]
-=== Relayer Info
+== Relayer Info
 
 A relayer's address can be retrieved using the `getAddress` method of the `DefenderRelaySigner` class.
 
 [source,jsx]
 ----
-const addr = await signer.getAddress();
+const address = await signer.getAddress();
 ----
 
 If you need more info about a relayer then checkout the `getRelayer` method of the client. It returns the following data:
@@ -126,8 +133,26 @@ export interface RelayerModel {
 }
 ----
 
+[[network-calls]]
+== Network calls
+
+Defender also provides an easy way to make arbitrary JSON RPC calls to the network. You can use the low-level `relayer.call` method to send any JSON RPC HTTP request:
+
+[source,jsx]
+----
+const balance = await relayer.call('eth_getBalance', ['0x6b175474e89094c44da98b954eedeac495271d0f', 'latest']);
+----
+
+If you are using ethers.js, this is supported via a custom `DefenderRelayProvider` https://docs.ethers.io/v5/api/providers/provider/[provider] object:
+
+[source,jsx]
+----
+const provider = new DefenderRelayProvider(credentials);
+const balance = await provider.getBalance('0x6b175474e89094c44da98b954eedeac495271d0f');
+----
+
 [[autotasks-integration]]
-=== Autotasks integration
+== Autotasks integration
 
 A Relayer can be attached to an xref:autotask.adoc[Autotask]. When doing so, the Autotask code will have direct access to the attached Relayer methods _without requiring you to specify an API key_. Instead, Defender will inject short-lived credentials for your Relayer in your Autotask `handler` function.
 
@@ -142,20 +167,15 @@ exports.handler = async function(credentials) {
 }
 ----
 
-[[pausing]]
-=== Pausing
-
-You can pause a Relayer from the Defender website, to quickly respond to an emergency. This will cause the Relayer to reject any incoming requests to send a transaction, whether it is from an Autotask or via the API. However, keep in mind that any transactions already sent will not be cancelled. When you are ready to resume operations, just hit the Unpause button and your Relayer will go back to normal.
-
 [[meta-transactions]]
-=== Meta-transactions
+== Meta-transactions
 
 Defender Relayers are general-purpose relayers, in the sense that you can use them to send any transaction you want to your contracts. In particular, they can also be used for relaying meta-transactions on behalf of your users. A simple setup for this requires setting up a server-side function that decides whether or not to relay a given meta-transaction, and then calls the Defender Relayer for effectively sending it.
 
 NOTE: If you would like to use Autotasks to host the server-side function to decide whether to pay for a meta-transaction request, let us know! We are working on a webhooks integration that can be used for this purpose.
 
 [[eip2771-gsnv2-compatible-meta-transactions]]
-==== EIP2771 GSNv2-compatible meta-transactions
+=== EIP2771 GSNv2-compatible meta-transactions
 
 We have created a demo application for Defender-powered meta-txs https://defender-example-metatx-relay.netlify.app/[here]. This application relies on an https://eips.ethereum.org/EIPS/eip-2771[EIP-2771 `Forwarder` contract]. This contract's sole responsibility is to receive a signed meta-tx request, verify its signature, and forward the request to a recipient contract by appending the signer address to the call.
 
@@ -164,15 +184,19 @@ This setup is compatible with https://docs.opengsn.org/[GSNv2], meaning that you
 NOTE: You can explore the key parts of the code for the application https://gist.github.com/spalladino/7fb3533e36e9b9a833f8e5c568c86815[here].
 
 [[more-meta-transaction-patterns]]
-==== More meta-transaction patterns
+=== More meta-transaction patterns
 
 The pattern described above is just one variant among several meta-transaction flavors available. Given that Defender Relayers are general-purpose, you can also use them for any other type of meta-transactions, such as relaying gasless ERC20 transfers using https://eips.ethereum.org/EIPS/eip-2612[EIP2612] or https://eips.ethereum.org/EIPS/eip-3009[EIP3009].
 
 NOTE: We are also working on adding support for sidechains and L2s, starting with xDai. This way, you can offer a full gasless experience to your users in other networks. Let us know if you have any preferred network you'd like to see in Defender!
 
 [[through-the-ui]]
-=== Through the UI
-You can also send transactions via a Relayer through the UI. To do so, go to the Relayer page, open the cog menu, and click on *Send transaction*:
+== Manual operation
+You can also manually send transactions through a Relayer or withdraw funds from it directly from the Defender site. To do so, go to the Relayer page, open the cog menu, and choose the option you want.
+
+[[sending-txs-through-ui]]
+=== Sending transactions
+You can manually send a transaction to a contract from your Relayer by choosing *Send transaction* in your relay cog menu:
 
 image::defender-relayer-cog-menu.png[Defender Relay Cog Menu]
 
@@ -187,7 +211,7 @@ When you click on *Confirm transaction*, the transaction will be sent through th
 NOTE: Defender sets speed to Fast for relayer transactions created through the UI.
 
 [[withdrawing-funds]]
-== Withdrawing funds
+=== Withdrawing funds
 
 You can withdraw funds from a relayer by clicking on *Withdraw funds* in the Relayer page.
 
@@ -196,7 +220,6 @@ image::defender-relayer-withdraw-funds.png[Defender Relay Withdraw Funds]
 At the *Withdraw funds* screen, you can choose to send funds in ETH or pick from a built-in list of ERC20 tokens.
 
 image::defender-relayer-withdraw-funds-screen.png[Defender Relay Withdraw Funds Screen]
-
 
 [[under-the-hood]]
 == Under the hood
@@ -212,241 +235,7 @@ All private keys are stored in the AWS Key Management Service. Keys are generate
 
 As for API secrets, these are only kept in memory during creation when they are sent to the client. After that, they are hashed and stored securely in AWS Cognito, which is used behind the scenes for authenticating Relayer requests. This makes API keys easy to rotate while preserving the same private key on the KMS.
 
-[[relay-api]]
-== Relay API Reference
-The Relay API exposes two endpoints `txs` and `sign`. The `txs` endpoint allows to send transactions to Ethereum blockchain and query their status. The `sign` endpoint allows to sign arbitrary data with relayer's private key.
-
-[[authentication]]
-=== Authentication
-A JWT Token is required to make requests to the Relay API. For security reasons authentication uses https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol[SRP protocol] and it is not possible to retrieve a JWT Token via one HTTP request. Which is why it is advised to use the https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-integrate-apps.html[Amazon Cognito User Pool SDK] to retrieve a JWT token.
-
-[[python-authentication]]
-=== Python Authentication
-The official https://aws.amazon.com/sdk-for-python/[AWS SDK] for python doesn't support SRP authentication, but it is possible to retrieve a JWT token using the https://github.com/capless/warrant#cognito-srp-utility[warrant] library.
-
-Here is an example:
-```python
-import boto3
-from warrant.aws_srp import AWSSRP
-
-client = boto3.client('cognito-idp')
-aws = AWSSRP(username='API_KEY', password='API_SECRET', pool_id='us-west-2_iLmIggsiy', client_id='1bpd19lcr33qvg5cr3oi79rdap', client=client)
-tokens = aws.authenticate_user()
-print('Access Token', tokens['AuthenticationResult']['AccessToken'])
-```
-
-[[refreshing-jwt-token]]
-=== Refreshing JWT Token
-A JWT token will expire in 60 minutes. If your code requires sessions longer than 60 minutes consider recreating a JWT token or using a https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html[refresh token].
-
-[[making-requests]]
-=== Making Requests
-
-Once you get a JWT Token you can make requests to the Defender API. A request requires an API key, a JWT Token, optionally a payload, and an API URL. Set `$KEY`, `$TOKEN` to the values of API key and JWT Token acquired before. `$END_POINT` can be either `txs` or `sign`.
-
-```bash
-API_URL='http://api.defender.openzeppelin.com/'
-
-curl \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H "X-Api-Key: $KEY" \
-  -H "Authorization: Bearer $TOKEN" \
-    "$API_URL/$END_POINT"
-```
-
-
-[[txs-endpoint]]
-=== Txs Endpoint
-
-[[send-transaction]]
-==== Send Transaction
-To send a transaction to the Ethereum blockchain submit a `POST` request with the desired payload. The payload format is as follows:
-
-```TypeScript
-export type Address = string;
-export type BigUInt = string | number;
-export type Hex = string;
-export type Speed = 'safeLow' | 'average' | 'fast' | 'fastest';
-
-export interface SendTransactionRequest {
-  to: Address;
-  value?: BigUInt; // optional
-  data?: Hex; // optional 
-  speed?: Speed; // optional
-  gasLimit: BigUInt;
-}
-```
-An example of the request:
-
-```bash
-DATA='{ "to": "0x179810822f56b0e79469189741a3fa5f2f9a7631", "value": "1", "speed": "fast", "gasLimit": "21000" }'
-
-
-curl \
-  -X POST \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H "X-Api-Key: $KEY" \
-  -H "Authorization: Bearer $TOKEN" \
-  -d "$DATA" \
-    "$API_URL/txs" # http://api.defender.openzeppelin.com/txs
-```
-
-You would receive a response in the following format:
-
-```TypeScript
-export type Address = string;
-export type BigUInt = string | number;
-export type Hex = string;
-export type Speed = 'safeLow' | 'average' | 'fast' | 'fastest';
-export type Status = 'pending' | 'sent' | 'submitted' | 'inmempool' | 'mined' | 'confirmed';
-
-export interface TransactionResponse {
-  transactionId: string; // Defender tx id
-  hash: string; // Ethereum hash
-  to: Address;
-  from: Address;
-  value: string;
-  data: string;
-  speed: Speed;
-  gasPrice: number;
-  gasLimit: number;
-  nonce: number;
-  status: Status;
-  chainId: number;
-}
-```
-
-[[query-transaction]]
-==== Query Transaction
-To retrieve a transaction status and data make a `GET` request to the `txs` endpoint with the Defender `transactionId`, *not* with the transaction hash.
-
-An example of the request:
-
-```bash
-
-curl \
-  -X GET \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H "X-Api-Key: $KEY" \
-  -H "Authorization: Bearer $TOKEN" \
-    "$API_URL/txs/$ID" # http://api.defender.openzeppelin.com/txs/affba150-e563-441e-ae49-04bd6050979a
-
-```
-
-You would receive a `TransactionResponse` object, e.g.:
-
-```JSON
-{
-   "chainId":4,
-   "hash":"0xcef95469a9f02757f0968ec8c11449ae5e7486073075381dcd62bacec9e5d627",
-   "transactionId":"affba150-e563-441e-ae49-04bd6050979a",
-   "value":"0x1",
-   "gasPrice":1000000000,
-   "gasLimit":21000,
-   "to":"0x179810822f56b0e79469189741a3fa5f2f9a7631",
-   "from":"0xbce0b5b71668e42d908e387b68dba91789c932b8",
-   "data":"0x",
-   "nonce":160,
-   "status":"mined",
-   "speed":"fast"
-}
-```
-
-[[sign-endpoint]]
-=== Sign Endpoint
-To sign arbitrary data with the Relay API make a `POST` request with a payload containing the hex string to sign. The payload format is:
-
-```TypeScript
-export interface SignMessagePayload {
-  message: Hex;
-}
-```
-
-An example of the request:
-
-```bash
-DATA='{ "message": "0x0123456789abcdef" }'
-
-curl \
-  -X POST \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H "X-Api-Key: $KEY" \
-  -H "Authorization: Bearer $TOKEN" \
-  -d "$DATA" \
-    "$API_URL/sign" # http://api.defender.openzeppelin.com/sign
-```
-
-You would receive a response in the following format:
-
-```TypeScript
-export interface SignedMessagePayload {
-  sig: Hex;
-  r: Hex;
-  s: Hex;
-  v: number;
-}
-```
-
-An example of the response:
-
-```JSON
-{
-   "r":"0x819b2645a0b73494724dac355e6ecfc983d94597b533d34fe3ecd0277046a1eb",
-   "s":"0x3b73c695b47dd275d17246d86bbfe35f112a7bdb5bf4a5a1a8e22fe37dfd005a",
-   "v":44,
-   "sig":"0x819b2645a0b73494724dac355e6ecfc983d94597b533d34fe3ecd0277046a1eb3b73c695b47dd275d17246d86bbfe35f112a7bdb5bf4a5a1a8e22fe37dfd005a2c"
-}
-```
-
-[[relayer-endpoint]]
-=== Relayer Endpoint
-To retrieve a relayer's data with the Relay API make a `GET` request to the `relayer` endpoint.
-
-An example of the request:
-
-```bash
-curl \
-  -X GET \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H "X-Api-Key: $KEY" \
-  -H "Authorization: Bearer $TOKEN" \
-    "$API_URL/relayer" # http://api.defender.openzeppelin.com/relayer
-```
-
-You would receive a response in the following format:
-
-```TypeScript
-export interface RelayerModel {
-  relayerId: string;
-  name: string;
-  address: string;
-  network: string;
-  paused: boolean;
-  createdAt: string;
-  pendingTxCost: string;
-}
-```
-
-An example of the response:
-
-```JSON
-{
-   "relayerId":"d5484fb1-df83-4659-9903-16d57d41f188",
-   "name":"Rinkeby",
-   "address":"0x71764d6450c2b710fc3e4ee5b7a038d1e7e4fc29",
-   "network":"rinkeby",
-   "createdAt":"2020-11-02T18:00:00.212Z",
-   "paused":false,
-   "pendingTxCost":"0"
-}
-```
-
 [[coming-up]]
 == Coming up...
 
-We are working on new features, such as automatic top-ups of testnet Relayers, xDai support, and Relayer policies to restrict maximum expenditure. Stay tuned, and let us know if you have any requests!
+We are working on new features, such as fixed gas prices, time-to-live for transactions, and policies to restrict maximum expenditure. Stay tuned, and let us know if you have any requests!
