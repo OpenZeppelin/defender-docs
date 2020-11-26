@@ -32,8 +32,22 @@ xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated
 xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Quickly implement security best practices.]#]
 --
 
+[[networks]]
+== Available networks
+
+All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the *xDai* sidechain. Support for Sokol is coming soon. Note that some networks may be unavailable depending on your <<tiers,plan>>.
+
+If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
+
+[[tiers]]
+== Tiers and quotas
+
+The Defender free plan is restricted for testnet access only. In addition, you may only create up to five Relayers and Autotasks, import up to five Contracts into Admin, and have up to five Users in your team. The total number of transactions sent from Relayers cannot exceed 30 per hour, and the same limit applies for Autotask runs.
+
+If you want access to Mainnet or xDai, or to increase any of the quota limits from the free plan, please apply via https://openzeppelin.com/apply/[this form] and we'll reach out to you.
+
 [[user-management]]
-== User management and shared access
+== User management
 
 Access to all resources in Defender is shared across all users in your team. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
 
@@ -41,18 +55,11 @@ You can review your team members under the Collaborators section, accessible fro
 
 WARNING: If you want to add a user to your team, make sure to invite them from the Collaborators section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com] and we'll help.
 
-[[tiers]]
-=== Tiers and quotas
-
-The Defender free plan is restricted for testnet access only. In addition, you may only create up to five Relayers and Autotasks, import up to five Contracts into Admin, and have up to five Users in your team. The total number of transactions sent from Relayers cannot exceed 30 per hour, and the same limit applies for Autotask runs.
-
-If you want access to mainnet or to increase any of the quota limits from the free plan, please apply via https://openzeppelin.com/apply/[this form] and we'll reach out to you.
 
 [[two-factor-authentication]]
 == Two factor authentication (2FA)
 
 We strongly suggest that you enable 2FA to improve your Defender account security. As a second authentication factor, Defender relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP)]. To enable 2FA on Defender, you need a TOTP compliant application, such as https://authy.com/[Authy] or Google Authenticator. You can enable 2FA under the Account settings section, accessible from the top-right user menu. Defender will guide you through the necessary steps.
-
 
 [[feedback]]
 == Feedback

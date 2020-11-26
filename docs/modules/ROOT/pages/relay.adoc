@@ -449,4 +449,4 @@ An example of the response:
 [[coming-up]]
 == Coming up...
 
-We are working on new features, such as automatic top-ups of testnet Relayers, xDai support, and Relayer policies to restrict maximum expenditure. Stay tuned, and let us know if you have any requests!
+We are working on new features, such as fixed gas prices, time-to-live for transactions, and policies to restrict maximum expenditure. Stay tuned, and let us know if you have any requests!
