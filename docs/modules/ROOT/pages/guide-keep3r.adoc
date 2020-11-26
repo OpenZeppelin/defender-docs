@@ -88,7 +88,7 @@ Now that you have your Relayer active as a Keeper, let's set up the Defender Aut
 
 Create a new Autotask in the xref:autotasks.adoc[Autotasks] section of Defender, choosing to run every one minute, and connecting it to the Relayer you had created previously.
 
-As for the code, paste https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/multiple-jobs-keeper.js[this code snippet] from the `defender-autotask-examples` repository, which will attempt to work the `YearnV1EarnKeep3r`, `HegicPoolKeep3r`, and `UniswapV2SlidingOracle` contracts. Once you hit save, Defender will start executing the Autotask every minute.
+As for the code, paste https://github.com/OpenZeppelin/defender-autotask-examples/blob/master/keep3rs/src/frequent-keeper.js[this code snippet] from the `defender-autotask-examples` repository, which will attempt to work the `YearnV1EarnKeep3r`, `HegicPoolKeep3r`, and `UniswapV2SlidingOracle` contracts. Once you hit save, Defender will start executing the Autotask every minute.
 
 NOTE: If you are familiar with javascript, you can edit your Autotask code at any time to add new jobs as they are published. To do this, add the ABI of the contract you want to work to the `ABIs` object in the snippet, and add an entry to `Jobs` with the contract name and address, as well as the names of the `workable` and `work` functions.
 
@@ -117,10 +117,6 @@ image::guide-keep3r-unbond.png[Unbonding your Relayer from the Keep3r Network]
 
 After this transaction is sent, you will have to wait a 14-day unbonding period. Once passed, you will need to send another transaction from your Relayer, this time calling the `withdraw` function instead, with the same `bonding` parameter as before. This will effectively remove your Relayer as a Keeper, and send your bonded tokens back to your Relayer address, from where you can <<withdrawing-rewards,_Withdraw_>> them to your wallet.
 
-## Troubleshooting
+## Questions
 
-These are some common issues you may see along the way. If you have any questions, don't hesitate to ask on the https://forum.openzeppelin.com/c/support/defender/36[forum]!
-
-### Autotask fails with error "failed to meet quorum"
-
-This error is related to the ethers.js provider being throttled by Alchemy, Infura, or Etherscan due to making too many queries to the network. You can read more about this in the https://docs.ethers.io/v5/api-keys/[ethers.js documentation]. To fix this now, you can apply for an API token as described on the ethers.js docs, and modify the Autotask snippet to use it instead of creating a new `ethers.getDefaultProvider()`. Meanwhile, we are working on adding a custom Defender provider, so you don't need to go through this on your end!
+If you have any questions or comments, don't hesitate to ask on the https://forum.openzeppelin.com/c/support/defender/36[forum]!
