@@ -18,11 +18,11 @@ Use Autotasks whenever you have a recurrent action you need to run on your Contr
 
 In a nutshell, an Autotask is a snippet of javascript code invoked at a regular interval, similar to a serverless function. And as a matter of fact, they are implemented with https://aws.amazon.com/lambda/[AWS Lambda functions].
 
-When you create an Autotask, you provide a javascript snippet, choose a frequency for it to run, and optionally link it to a Relayer. Defender will then make sure to invoke your function at the specified interval and provide access to the specified Relayer.
-
-NOTE: The specified interval is between two consecutive execution starts, _not_ between the end of an Autotask and the beginning of the next one.
+When you create an Autotask, you provide a javascript snippet, choose a frequency for it to run, and optionally link it to a Relayer. Defender will then make sure to invoke your function at the specified interval and provide access to the specified Relayer. Note that the specified interval is between two consecutive execution starts, _not_ between the end of an Autotask and the beginning of the next one.
 
 Autotasks can also be manually executed from the UI for quick testing. The last 30 Autotask runs will be shown in the Autotask view, allowing you to access the run logs (generated via `console.log`) for troubleshooting. Additionally, when an Autotask fails, Defender will send you a notification email.
+
+NOTE: Head over to the https://github.com/OpenZeppelin/defender-autotask-examples/[OpenZeppelin/defender-autotask-examples] repository for a quick start with an out-of-the-box Autotask example!
 
 [[handler-function]]
 === Handler function
@@ -60,12 +60,13 @@ Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 
 
 [source,jsx]
 ----
-"defender-relay-client": "^0.2.4",
+"defender-relay-client": "1.1.0",
+"axios": "0.19.2",
 "ethers": "5.0.3",
 "web3": "1.2.9"
 ----
 
-NOTE: If you need to use any dependency not listed above, you can either use a javascript module bundler such as webpack to include it in your code or just contact us to add it to the set of common dependencies.
+NOTE: If you need to use any dependency not listed above, you can either use a javascript module bundler such as rollup or webpack to include it in your code or just contact us to add it to the set of common dependencies. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project] for more info.
 
 [[local-development]]
 === Local development
