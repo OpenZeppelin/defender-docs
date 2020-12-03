@@ -64,4 +64,4 @@ We strongly suggest that you enable 2FA to improve your Defender account securit
 [[feedback]]
 == Feedback
 
-As a Defender user, your feedback is important! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your input. Feel free to reach out with questions, feature requests, or issues, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at defender@openzeppelin.com.
+As a Defender user, your feedback is important! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your input. Feel free to reach out with questions, feature requests, or issues, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at mailto:defender@openzeppelin.com[defender@openzeppelin.com].

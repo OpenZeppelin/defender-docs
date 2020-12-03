@@ -1,7 +1,7 @@
 [[autotasks]]
 = Autotasks
 
-_The Defender Autotasks service allows you to run small code snippets on a regular basis that can make calls to the Ethereum network or to external APIs. Thanks to tight integration to xref:relay.adoc[Relay], you can use Autotasks to automate regular actions on your contracts._
+_The Defender Autotasks service allows you to run small code snippets on a regular basis or via webhooks that can make calls to the Ethereum network or to external APIs. Thanks to tight integration to xref:relay.adoc[Relay], you can use Autotasks to automate regular actions on your contracts._
 
 [[use-cases]]
 == Use cases
@@ -12,13 +12,19 @@ Use Autotasks whenever you have a recurrent action you need to run on your Contr
 * Update an *on-chain oracle* with information from an external API
 * *Monitor your contracts* to verify their state or check that an off-chain data source is in-sync
 * Poke your contracts to have them *transition to a new state* once a set of conditions is met
+* Integrate with external *third party services* via webhooks
+* Provide *gasless transactions* for your dapp users via meta-transactions
 
 [[whats-in-an-autotask]]
 == What's in an Autotask?
 
-In a nutshell, an Autotask is a snippet of javascript code invoked at a regular interval, similar to a serverless function. And as a matter of fact, they are implemented with https://aws.amazon.com/lambda/[AWS Lambda functions].
+In a nutshell, an Autotask is a snippet of javascript code invoked at a regular interval, similar to a serverless function. And as a matter of fact, they are implemented with https://aws.amazon.com/lambda/[Lambda functions].
 
-When you create an Autotask, you provide a javascript snippet, choose a frequency for it to run, and optionally link it to a Relayer. Defender will then make sure to invoke your function at the specified interval and provide access to the specified Relayer. Note that the specified interval is between two consecutive execution starts, _not_ between the end of an Autotask and the beginning of the next one.
+When you create an Autotask, you provide a javascript snippet, choose a trigger for it to run, and optionally <<relayer-integration,link it to a Relayer>>. Defender currently supports two types of triggers:
+
+* *Schedule*: Choose a frequency to execute your Autotask, and Defender will make sure to invoke your function at the specified interval. Note that the specified interval is between two consecutive execution starts, _not_ between the end of an Autotask and the beginning of the next one.
+
+* *Webhook*: Defender will create a secret URL for your Autotask, and invoke it whenever an HTTP request is POSTed to that endpoint. You can regenerate this URL at any time. Defender will inject the HTTP request information into your Autotask, and return the Autotask run info along with any data you return from your code.
 
 Autotasks can also be manually executed from the UI for quick testing. The last 30 Autotask runs will be shown in the Autotask view, allowing you to access the run logs (generated via `console.log`) for troubleshooting. Additionally, when an Autotask fails, Defender will send you a notification email.
 
@@ -47,11 +53,33 @@ const { Relayer } = require('defender-relay-client');
  
 exports.handler = async function(event) {
   const relayer = new Relayer(event);
-  // Use relayer as usual
+  // Use relayer for sending txs or querying the network
 }
 ----
 
 This allows you to send transactions using your Relayer from your Autotasks without having to set up any API keys or secrets. Furthermore, you can also use the Relayer JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
+
+[[webhook-handler]]
+=== Webhook invocations
+
+When your Autotask is invoked via a webhook, you can access the HTTP request info as part of the `event` parameter injected in your handler. Likewise, your return value will be included in the `result` field of the HTTP response payload.
+
+[source,jsx]
+----
+exports.handler = async function(event) {
+  const { 
+    body,    // Object with JSON-parsed POST body
+    headers, // Object with key-values from HTTP headers
+    queryParameters, // Object with key-values from query parameters
+  } = event.request;
+
+  return {
+    hello: 'world' // JSON-serialized and included in the `result` field of the response
+  };
+}
+----
+
+At the moment only JSON payloads are supported, and only non-standard headers with the `X-` prefix are provided to the Autotask. If any of these limitations is an issue for your use case, please mailto:defender@openzeppelin.com[reach out to us].
 
 [[environment]]
 === Environment
@@ -83,7 +111,7 @@ const { Relayer } = require('defender-relay-client');
 
 // Entrypoint for the Autotask
 exports.handler = async function(credentials) {
-  const relayer = new Relayer(event);
+  const relayer = new Relayer(credentials);
   // Use relayer for sending txs
 }
 
