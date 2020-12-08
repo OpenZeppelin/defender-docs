@@ -96,7 +96,7 @@ Keep in mind that you have to provide either `speed` or `gasPrice` but not both 
 
 Every transaction in Defender Relay is valid for submission to the Ethereum network until <<relay-api-reference.adoc#send-transaction,validUntil>> time. After `validUntil` time the transaction is replaced by a NOOP transaction in order to prevent relayer from getting stuck at the transaction's nonce. A NOOP transaction does nothing except advancing the relayer's nonce.
 
-`validUntils` defaults to 8 hours after a transaction creation. Note that you can combine validUntil with a fixed gas price to achieve extremely fast mining times and beating other transactions on gasPrice.
+`validUntil` defaults to 8 hours after the transaction creation. Note that you can combine validUntil with a fixed gas price to achieve extremely fast mining times and beating other transactions on `gasPrice`.
 
 [[transaction-ids]]
 === Transaction IDs
