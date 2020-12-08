@@ -79,9 +79,18 @@ In the example above, we are also using a `DefenderRelayProvider` for making cal
 [[speed]]
 === Speed
 
-Instead of the usual `gasPrice`, the Relayer accepts a https://www.npmjs.com/package/defender-relay-client#speed[`speed`] parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
+Instead of the usual `gasPrice`, the Relayer accepts a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
+
+If have to use a **fixed gas price** for a transaction to send, it can be set using a <<relay-api-reference.adoc#send-transaction,gasPrice>> paramter. Defender Relay will never change a fixed gas price and transaction either will be mined with a provider `gasPrice` or replaced by NOOP tx if it is not mined before <<valid-until, validUntil>> time.
+
+Keep in mind that you have to provide either `speed` or `gasPrice` but not both in a send transaction request.
 
 NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to https://etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
+
+[[valid-until]]
+=== Valid Until
+Every transaction in Defender Relay is valid for submission to the Ethereum network until <<relay-api-reference.adoc#send-transaction,validUntil>> time. After `validUntil` time the transaction is replaced by a NOOP transaction in order to prevent Relayer from being stuck on the transaction's nonce. A NOOP transaction does nothing except advancing relayer's nonce.
+A default `validUntil` value of a transaction equals to time of creation plus **8 hours**; meaning the transaction have 8 hours to be mined. You can set this parameter manually to be more aggresive on how fast your transaction can be mined. This can be useful combined with a fixed gas price to archive extremely fast minnig time and beating other txs on `gasPrice`.
 
 [[transaction-ids]]
 === Transaction IDs

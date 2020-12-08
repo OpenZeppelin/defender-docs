@@ -70,6 +70,8 @@ export interface SendTransactionRequest {
   value?: BigUInt; // optional
   data?: Hex; // optional 
   speed?: Speed; // optional
+  gasPrice?: BigUInt; // optional
+  validUntil?: string; // optional
   gasLimit: BigUInt;
 }
 ```
@@ -110,6 +112,7 @@ export interface TransactionResponse {
   nonce: number;
   status: Status;
   chainId: number;
+  validUntil: string;
 }
 ```
 
