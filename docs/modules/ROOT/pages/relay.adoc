@@ -86,7 +86,7 @@ NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgass
 [[gas-price]]
 === Gas Price
 
-Alternatively, you may specify a **fixed gas price** for a transaction, by setting the <<relay-api-reference.adoc#send-transaction,gasPrice>> parameter. Defender Relay will never change a fixed gas price and transaction either will be mined with a provided `gasPrice` or replaced by a NOOP tx if it is not mined before <<valid-until, validUntil>> time.
+Alternatively, you may specify a **fixed gas price** for a transaction, by setting the <<relay-api-reference.adoc#send-transaction,gasPrice>> parameter. Transactions with a fixed gas price are either mined with the specified `gasPrice` or replaced with a NOOP transaction if they couldn't be mined before <<valid-until, validUntil>> time.
 
 Keep in mind that you have to provide either `speed` or `gasPrice` but not both in a send transaction request.
 
