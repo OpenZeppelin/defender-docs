@@ -81,11 +81,14 @@ In the example above, we are also using a `DefenderRelayProvider` for making cal
 
 Instead of the usual `gasPrice`, the Relayer accepts a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
 
+NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to https://etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
+
+[[gas-price]]
+=== Gas Price
 If have to use a **fixed gas price** for a transaction to send, it can be set using a <<relay-api-reference.adoc#send-transaction,gasPrice>> paramter. Defender Relay will never change a fixed gas price and transaction either will be mined with a provided `gasPrice` or replaced by a NOOP tx if it is not mined before <<valid-until, validUntil>> time.
 
 Keep in mind that you have to provide either `speed` or `gasPrice` but not both in a send transaction request.
 
-NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to https://etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
 
 [[valid-until]]
 === Valid Until
