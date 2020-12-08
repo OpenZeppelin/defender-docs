@@ -85,15 +85,18 @@ NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgass
 
 [[gas-price]]
 === Gas Price
-If have to use a **fixed gas price** for a transaction to send, it can be set using a <<relay-api-reference.adoc#send-transaction,gasPrice>> paramter. Defender Relay will never change a fixed gas price and transaction either will be mined with a provided `gasPrice` or replaced by a NOOP tx if it is not mined before <<valid-until, validUntil>> time.
+
+Alternatively, you may specify a **fixed gas price** for a transaction, by setting the <<relay-api-reference.adoc#send-transaction,gasPrice>> parameter. Defender Relay will never change a fixed gas price and transaction either will be mined with a provided `gasPrice` or replaced by a NOOP tx if it is not mined before <<valid-until, validUntil>> time.
 
 Keep in mind that you have to provide either `speed` or `gasPrice` but not both in a send transaction request.
 
 
 [[valid-until]]
 === Valid Until
-Every transaction in Defender Relay is valid for submission to the Ethereum network until <<relay-api-reference.adoc#send-transaction,validUntil>> time. After `validUntil` time the transaction is replaced by a NOOP transaction in order to prevent Relayer from being stuck on the transaction's nonce. A NOOP transaction does nothing except advancing relayer's nonce.
-A default `validUntil` value of a transaction equals to time of creation plus **8 hours**; meaning the transaction have 8 hours to be mined. You can set this parameter manually to be more aggresive on how fast your transaction can be mined. This can be useful combined with a fixed gas price to archive extremely fast minnig time and beating other txs on `gasPrice`.
+
+Every transaction in Defender Relay is valid for submission to the Ethereum network until <<relay-api-reference.adoc#send-transaction,validUntil>> time. After `validUntil` time the transaction is replaced by a NOOP transaction in order to prevent relayer from getting stuck at the transaction's nonce. A NOOP transaction does nothing except advancing the relayer's nonce.
+
+`validUntils` defaults to 8 hours after a transaction creation. Note that you can combine validUntil with a fixed gas price to achieve extremely fast mining times and beating other transactions on gasPrice.
 
 [[transaction-ids]]
 === Transaction IDs
