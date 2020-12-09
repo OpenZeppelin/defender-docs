@@ -106,7 +106,7 @@ const signer = new DefenderRelaySigner(credentials, provider, { validForSeconds:
 ----
 
 
-NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone not a local one.
+NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a local one.
 
 [[transaction-ids]]
 === Transaction IDs
