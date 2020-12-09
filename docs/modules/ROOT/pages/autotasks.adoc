@@ -26,6 +26,8 @@ When you create an Autotask, you provide a javascript snippet, choose a trigger 
 
 * *Webhook*: Defender will create a secret URL for your Autotask, and invoke it whenever an HTTP request is POSTed to that endpoint. You can regenerate this URL at any time. Defender will inject the HTTP request information into your Autotask, and return the Autotask run info along with any data you return from your code.
 
+NOTE: If you get a `{"message":"Missing Authentication Token"}` as the response to a Webhook HTTP request, double check that your request was actually a POST. You will typically see a `{"message":"Missing Authentication Token"}` response when issuing a GET.
+
 Autotasks can also be manually executed from the UI for quick testing. The last 30 Autotask runs will be shown in the Autotask view, allowing you to access the run logs (generated via `console.log`) for troubleshooting. Additionally, when an Autotask fails, Defender will send you a notification email.
 
 NOTE: Head over to the https://github.com/OpenZeppelin/defender-autotask-examples/[OpenZeppelin/defender-autotask-examples] repository for a quick start with an out-of-the-box Autotask example!
