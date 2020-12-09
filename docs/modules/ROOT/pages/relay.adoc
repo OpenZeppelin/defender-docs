@@ -98,7 +98,7 @@ Every transaction in Defender Relay is valid for submission to the Ethereum netw
 
 `validUntil` defaults to 8 hours after the transaction creation. Note that you can combine validUntil with a fixed gas price to achieve extremely fast mining times and beating other transactions on `gasPrice`.
 
-In order to use `validUntil` with `ethers.js` provide an option `validForSeconds` for `DefenderRelaySigner` there `validForSecods` stands for how many seconds the transaction would be valid after its creation.
+If you're using `ethers.js`, you may set a `validForSeconds` option instead of `validUntil`. In the example below, we configure a `DefenderRelaySigner` to issue a transaction which will be valid for 120 seconds after its creation.
 
 [source,jsx]
 ----
