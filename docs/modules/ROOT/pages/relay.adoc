@@ -79,9 +79,34 @@ In the example above, we are also using a `DefenderRelayProvider` for making cal
 [[speed]]
 === Speed
 
-Instead of the usual `gasPrice`, the Relayer accepts a https://www.npmjs.com/package/defender-relay-client#speed[`speed`] parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
+Instead of the usual `gasPrice`, the Relayer accepts a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
 
 NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to https://etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
+
+[[gas-price]]
+=== Gas Price
+
+Alternatively, you may specify a **fixed gas price** for a transaction, by setting the <<relay-api-reference.adoc#send-transaction,gasPrice>> parameter. Transactions with a fixed gas price are either mined with the specified `gasPrice` or replaced with a NOOP transaction if they couldn't be mined before <<valid-until, validUntil>> time.
+
+Keep in mind that you have to provide either `speed` or `gasPrice` but not both in a send transaction request.
+
+
+[[valid-until]]
+=== Valid Until
+
+Every transaction in Defender Relay is valid for submission to the Ethereum network until <<relay-api-reference.adoc#send-transaction,validUntil>> time. After `validUntil` time the transaction is replaced by a NOOP transaction in order to prevent relayer from getting stuck at the transaction's nonce. A NOOP transaction does nothing except advancing the relayer's nonce.
+
+`validUntil` defaults to 8 hours after the transaction creation. Note that you can combine validUntil with a fixed gas price to achieve extremely fast mining times and beating other transactions on `gasPrice`.
+
+If you're using `ethers.js`, you may set a `validForSeconds` option instead of `validUntil`. In the example below, we configure a `DefenderRelaySigner` to issue a transaction which will be valid for 120 seconds after its creation.
+
+[source,jsx]
+----
+const signer = new DefenderRelaySigner(credentials, provider, { validForSeconds: 120 });
+----
+
+
+NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a local one.
 
 [[transaction-ids]]
 === Transaction IDs
