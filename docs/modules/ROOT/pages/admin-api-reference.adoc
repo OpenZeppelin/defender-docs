@@ -1,0 +1,76 @@
+[[admin-api]]
+= Admin API Reference
+
+The Admin API allows you to programmatically create new Admin proposals.
+
+Requests need to be authenticated with a bearer token, which is negotiated from the Team API Key with the corresponding capability. Refer to the xref:api-auth.adoc[authentication section] for info on how to negotiate it.
+
+NOTE: We recommend you use the https://www.npmjs.com/package/defender-admin-client[defender-admin-client] npm package for simplifying interactions with the Admin API.
+
+[[proposals-endpoint]]
+== Proposals Endpoint
+
+The `/proposals` endpoint is used for creating new Admin action proposals via a `POST` request. Any actions created this way will have no approvals initially. If the recipient contract of the proposal does not exist, it will be created with the parameters provided.
+
+```TypeScript
+type Network = 'mainnet' | 'ropsten' | 'rinkeby' | 'kovan' | 'goerli' | 'xdai' | 'sokol';
+type Address = string;
+type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];
+
+type ProposalFunctionInputType = {
+  name?: string;
+  type: string;
+  internalType?: string;
+  components?: ProposalFunctionInputType[];
+}
+
+interface CreateProposalRequest {
+  contract: {
+    network: Network;
+    address: Address;
+    name?: string;
+    abi?: string;
+  };
+  title: string;
+  description: string;
+  type: 'upgrade' | 'custom';
+  metadata?: {
+    newImplementationAddress: Address
+  };
+  via?: Address;
+  viaType?: 'Gnosis Safe' | 'Gnosis Multisig';
+  functionInterface?: {
+    name?: string;
+    inputs?: ProposalFunctionInputType[];
+  };
+  functionInputs?: ProposalFunctionInputs;
+}
+```
+
+Note that the fields `via` (address of the multisig via which the request is sent), `viaType` (type of the multisig), `functionInterface` (ABI definition of the function to call), and `functionInputs` are required for `custom` proposals. On the other hand, only `metadata.newImplementationAddress` is required for `upgrade` type proposals, since Defender will automatically calculate the remaining fields for you.
+
+An example of an upgrade request:
+
+```bash
+DATA='{ 
+  "contract": {
+    "address": "0x179810822f56b0e79469189741a3fa5f2f9a7631",
+    "network": "rinkeby"
+  },
+  "title": "Upgrade to v2",
+  "description": "Upgrading contract to version 2.0",
+  "type": "upgrade",
+  "metadata": { "newImplementation": "0x3E5e9111Ae8eB78Fe1CC3bb8915d5D461F3Ef9A9" }
+}'
+
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://defender-api.openzeppelin.com/proposals"
+```
+
+WARNING: The Defender API will not validate that the proposal can actually be executed. This means you can create proposals for calling a non-existing function on a contract, or trying to upgrade a non-upgradeable contract. However, you will not be able to approve them afterwards.

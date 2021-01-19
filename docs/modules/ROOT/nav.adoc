@@ -5,7 +5,11 @@
 ** xref:advisor.adoc[Advisor]
 ** xref:autotasks.adoc[Autotasks]
 ** xref:relay.adoc[Relay]
-*** xref:relay-api-reference.adoc[API reference]
+
+* API Reference
+** xref:api-auth.adoc[Authentication]
+** xref:admin-api-reference.adoc[Admin]
+** xref:relay-api-reference.adoc[Relay]
 
 * Guides
 ** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]
