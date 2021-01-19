@@ -5,7 +5,7 @@ OpenZeppelin Defender provides a security operations (SecOps) platform for Ether
 [[get-started]]
 == Get started
 
-Signing up to Defender is free! Just head over to https://defender.openzeppelin.com/[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
+Signing up to Defender is free! Just head over to https://hubs.li/H0F1_Q50[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
 
 [.card-section.card-section-2col]
 == Components
