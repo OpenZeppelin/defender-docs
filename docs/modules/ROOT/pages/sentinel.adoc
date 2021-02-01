@@ -65,7 +65,7 @@ IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
 Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.
 
-NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions
+NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions.
 
 General Syntax
 
@@ -177,7 +177,11 @@ IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhauste
 
 If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
 
-== Alert Threshold
+== Controlling Rate of Notifications
+
+Once you have specified your conditions as desired, there are two ways to limit the number of notifications
+
+=== Alert Threshold
 
 To be alerted when matching transactions exceed a threshold, use an alert threshold.  
 
@@ -191,11 +195,15 @@ Example:
 
 *At least 5 times within an hour* should specify an Amount of 5 and a Window of 3600 seconds.
 
-== Timeout
+=== Timeout
 
-If you do not wish to receive a notification more than a certain rate, consider using a Timeout.  This will effectively prevent notifications for a certain duration after a notification is sent.
+If you do not wish to receive a notification more than a certain rate, consider using a Timeout.  This will effectively prevent notifications for a certain duration after a notification is sent.  
 
 * *Timeout* is the number of seconds to wait between notifications 
+
+Example:
+
+*Avoid notifying more than once per hour* should specify a Timeout of 3600
 
 [[pausing]]
 == Pausing
