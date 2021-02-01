@@ -12,6 +12,7 @@ Use a Sentinel whenever you need to know about or respond to transactions involv
 * *Alert* when transactions are failing against your smart contract
 * *Respond* to transactions by executing *Autotask* logic when key events happen 
 * *Integrate* with your *existing tools* through slack, email or custom *Autotask* integration
+* *Know* when an unexpected volume of transactions occur
 
 [[whats-in-an-sentinel]]
 == What's in an Sentinel?
@@ -21,7 +22,7 @@ A Sentinel watches transactions for a given address, filters those transactions 
 IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
 [[specify-address]]
-== Specifying an Address
+=== Specifying an Address
 
 * *Address*: Choose the address of either a Smart Contract or a normal key-pair address to monitor.
 
@@ -30,7 +31,7 @@ IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 * *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level.   If you want to be notified as soon as possible and are tolerant to re-orgs, then choose *Latest* 
 
 [[matching-rules]]
-== Matching Rules
+=== Matching Rules
 
 For a Transaction to trigger a notification, it must satisfy *ALL* of the following:
 
@@ -49,7 +50,7 @@ For a Transaction to trigger a notification, it must satisfy *ALL* of the follow
     ** The Transaction *MUST* invoke a selected Function and match its *Function Condition* (if any)
 
 [[choose-events-and-functions]]
-== Choose Events and Functions
+=== Events and Functions
 
 Select any Events and Function calls that you wish to monitor. Selecting Events and Functions acts as an OR clause, in that if a transaction matches ANY of the selected Events or Functions, it will trigger notification.
 
@@ -78,9 +79,11 @@ General Syntax
 
 * Includes basic math operators: *+*, *-*, ***, */*, *^*
 
-== Transaction Conditions
+=== Transaction Conditions
 
 IMPORTANT: If a transaction condition is specified, then a transaction MUST meet this condition in order to trigger a notification.
+
+NOTE: To accomodate comparisons for checksum and non-checksum addresses, expressions are case-insensitive.
 
 Transaction Conditions can refer to the following properties
 
@@ -98,24 +101,103 @@ Transaction Conditions can refer to the following properties
 
 * *status* is a derived value and can be compared with *"success"* or *"failed"*
 
-Examples:
+==== Example Conditions
 
-[cols="s,^m",options="header,nowrap"]
-|==========================
-|Scenario                           | Expression
-|All failed transactions            | status == "failed" 
-|From a specific address         | from == "0xd5180d374b...bf26d696fda4cad"
-|Not from a specific address | from != "0xd5180d374b...bf26d696fda4cad"
-|Both gasUsed and gasPrice are high | gasPrice > 0xabc123 and gasUsed > 0xabc321
-|==========================
+Transactions that are reverted
 
-== Event and Function Conditions
+[source,jsx]
+----
+status == "failed"
+----
 
-Event and Function conditions further narrow the set of transactions that trigger notification.  These can refer to arguments in the signature either by name (if argument is named) or by index (e.g., $0, $1...)
+Transactions excluding those from 0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad
 
+[source,jsx]
+----
+from != "0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad"
+----
 
+Transactions that have BOTH a gasPrice higher than 50 gwei AND a gasUsed higher than 20000
+
+[source,jsx]
+----
+gasPrice > 50000000000 and gasUsed > 20000
+----
+
+=== Event and Function Conditions
+
+Event and Function conditions further narrow the set of transactions that trigger notification.  These can refer to arguments in the signature either by name (if argument is named) or by index (e.g., $0, $1...).  The variables that are available to you are indicated in the user interface as you specify these functions.
+
+==== Example Conditions
+
+Transactions that emit a Transfer(...) event with a value between 1 and 100 ETH (in hex)
+
+[source,jsx]
+----
+// Event Signature: Transfer(address to, address from, uint256 value)
+value > 0xde0b6b3a7640000 and value < 0x56bc75e2d63100000 
+----
+
+Transactions that emit a ValsEvent(...) event with an array with a first element equal to 5
+
+[source,jsx]
+----
+// Event Signature: ValsEvent(uint256[3] vals)
+vals[0] == 5
+----
+
+Transactions that invoke a greet(...) function with an unnamed string of "hello"
+
+[source,jsx]
+----
+// Function Signature: greet(address, string)
+$1 == "hello"
+----
+
+[[notifications]]
+== Notifications
+
+When triggered, a Sentinel can notify one or more slack webhooks, email lists, or execute an autotask.
+
+=== Slack Configuration
+
+* *Name* is the name for this slack configuration.  For instance, you might name it the name of the channel.
+
+* *Webhook URL* is the URL from your slack management console to use for notification. 
+
+=== Email Configuration
+
+* *Name* is the name for this email list.  (e.g., Developers)
+
+* *Emails* is the list of emails you wish to notify.  These can be comma or semicolon-delimited.
+
+=== Autotask
+
+IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at  defender@openzeppelin.com with a description of your use case.
+
+If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
+
+== Alert Threshold
+
+To be alerted when matching transactions exceed a threshold, use an alert threshold.  
+
+NOTE: This threshold is evaluated for each transaction.  Once a threshold is exceeded then notifications will continue to fire until the amount falls below the threshold in the time window immediately prior to _the current_ transaction.  Consider using a Timeout value to prevent subsequent notifications.
+
+* *Amount* is the number of times this sentinel must trigger before firing a notification.
+
+* *Window* is the number of seconds that is considered
+
+Example:
+
+*At least 5 times within an hour* should specify an Amount of 5 and a Window of 3600 seconds.
+
+== Timeout
+
+If you do not wish to receive a notification more than a certain rate, consider using a Timeout.  This will effectively prevent notifications for a certain duration after a notification is sent.
+
+* *Timeout* is the number of seconds to wait between notifications 
 
 [[pausing]]
-=== Pausing
+== Pausing
 
-You can pause a Sentinel, and it will pause the monitoring of your address.
+Pausing a Sentinel will pause the monitoring of your address.
