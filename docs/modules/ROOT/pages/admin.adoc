@@ -33,7 +33,7 @@ NOTE: When creating a new proposal, Defender Admin will first simulate it and wi
 [[proposal-types]]
 == Proposal types
 
-Defender Admin supports two kinds of proposals today: upgrades and custom actions. More proposal types will be added down the road.
+Defender Admin supports three kinds of proposals today: upgrades, pause and custom actions. More proposal types will be added down the road.
 
 [[upgrades]]
 === Upgrades
@@ -41,6 +41,14 @@ Defender Admin supports two kinds of proposals today: upgrades and custom action
 An _upgrade action_ can only be executed on EIP1967-compatible or legacy zOS upgradeable proxies that expose an `upgradeTo(address)` function. Defender Admin will handle proxies directly owned by a multi-signature wallet or proxies managed by a ProxyAdmin that is in turn owned by the wallet. The upgrade action only requires you to choose the new implementation address, and Defender Admin takes care of the rest.
 
 WARNING: Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the xref:upgrades-plugins::index.adoc#managing-ownership[`prepareUpgrade`] function from the `openzeppelin-upgrades` library, via xref:upgrades-plugins::api-truffle-upgrades.adoc#prepare-upgrade[truffle] or xref:upgrades-plugins::api-buidler-upgrades.adoc#prepare-upgrade[buidler], to deploy the target implementation.
+
+=== Pause/Unpause
+
+A _pause action_ can be executed on contracts whose ABI exposes a `pause()` function. If the ABI also exposes an `unpause()` function, Defender Admin will also let you execute unpause actions. Both the pause and the unpause actions only require you to specify which Admin account they should be executed through. 
+
+If, additionally, your contract ABI exposes a `paused()` or `isPaused()` function returning a boolean result, Defender will query it and show you its status in the contract's dashboard page, as seen in the image below.
+
+image::defender-admin-pause.png[Defender Admin Paused Contract]
 
 [[custom-actions]]
 === Custom actions
