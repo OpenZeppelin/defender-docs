@@ -1,0 +1,121 @@
+[[sentinel]]
+= Sentinel
+
+_The Defender Sentinel service allows you to monitor transactions for Addresses by specfying Events, Functions, and Transaction conditions and notifying via email, slack, and autotasks (more to come)._
+
+[[use-cases]]
+== Use cases
+
+Use a Sentinel whenever you need to know about or respond to transactions involving your smart contract.  Your Sentinel will watch every transaction send the transactions you care about to your notification methods of choice.
+
+* *Monitor* your *sensitive functions* like transferOwnership, pause
+* *Alert* when transactions are failing against your smart contract
+* *Respond* to transactions by executing *Autotask* logic when key events happen 
+* *Integrate* with your *existing tools* through slack, email or custom *Autotask* integration
+
+[[whats-in-an-sentinel]]
+== What's in an Sentinel?
+
+A Sentinel watches transactions for a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
+
+IMPORTANT: At this time, Sentinels do not monitor internal function calls.
+
+[[specify-address]]
+== Specifying an Address
+
+* *Address*: Choose the address of either a Smart Contract or a normal key-pair address to monitor.
+
+* *ABI*: Specify the ABI for your contract.  We will attempt auto-discovery of the ABI if it is verified.
+
+* *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level.   If you want to be notified as soon as possible and are tolerant to re-orgs, then choose *Latest* 
+
+[[matching-rules]]
+== Matching Rules
+
+For a Transaction to trigger a notification, it must satisfy *ALL* of the following:
+
+* Transaction *MUST* have a To, From, or Address (from log) that matches the configured address
+
+* If a *Transaction Condition* is specified
+
+    ** The Transaction *MUST* match the *Transaction Condition*.
+
+* If *Events* are selected
+
+    ** The Transaction *MUST* emit a selected Event and match its *Event Condition* (if any)
+
+* If *Functions* are selected
+
+    ** The Transaction *MUST* invoke a selected Function and match its *Function Condition* (if any)
+
+[[choose-events-and-functions]]
+== Choose Events and Functions
+
+Select any Events and Function calls that you wish to monitor. Selecting Events and Functions acts as an OR clause, in that if a transaction matches ANY of the selected Events or Functions, it will trigger notification.
+
+NOTE: An ABI is required to configure Events and Function detection
+
+NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address including those that do not involve functions or events (e.g., sending ether to your contract's address).  If Events or Functions are selected, then ONLY those that are selected are monitored.
+
+IMPORTANT: At this time, Sentinels do not monitor internal function calls.
+
+[[specify-conditions]]
+== What are Conditions?
+
+Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.
+
+NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions
+
+General Syntax
+
+* Conditions can use *AND*, *OR*, *NOT* and *()*
+
+* Conditions can use *==*, *&lt;*, *&gt;*, *&gt;=*, *&lt;=* to compare
+
+* Number values can be referred to by Hex (0xabc123) or Decimal (10000000000)
+
+* String values can only be compared via *==*
+
+* Includes basic math operators: *+*, *-*, ***, */*, *^*
+
+== Transaction Conditions
+
+IMPORTANT: If a transaction condition is specified, then a transaction MUST meet this condition in order to trigger a notification.
+
+Transaction Conditions can refer to the following properties
+
+* *to* is the _to_ address for the transaction
+
+* *from* is the _from_ address for the transaction
+
+* *gasPrice* is the price of gas sent in the transaction
+
+* *gasUsed* is the amount of gas used in the transaction
+
+* *value* is the value sent in the transaction
+
+* *nonce* is the nonce for the specific transaction
+
+* *status* is a derived value and can be compared with *"success"* or *"failed"*
+
+Examples:
+
+[cols="s,^m",options="header,nowrap"]
+|==========================
+|Scenario                           | Expression
+|All failed transactions            | status == "failed" 
+|From a specific address         | from == "0xd5180d374b...bf26d696fda4cad"
+|Not from a specific address | from != "0xd5180d374b...bf26d696fda4cad"
+|Both gasUsed and gasPrice are high | gasPrice > 0xabc123 and gasUsed > 0xabc321
+|==========================
+
+== Event and Function Conditions
+
+Event and Function conditions further narrow the set of transactions that trigger notification.  These can refer to arguments in the signature either by name (if argument is named) or by index (e.g., $0, $1...)
+
+
+
+[[pausing]]
+=== Pausing
+
+You can pause a Sentinel, and it will pause the monitoring of your address.

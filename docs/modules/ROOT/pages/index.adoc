@@ -24,6 +24,11 @@ xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Build with private and 
 
 [.card.card-learn]
 --
+xref:sentinel.adoc[[.card-title]#Sentinel# [.card-body]#pass:q[Monitor transactions for your smart contracts.]#]
+--
+
+[.card.card-learn]
+--
 xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated scripts to call your smart contracts.]#]
 --
 
