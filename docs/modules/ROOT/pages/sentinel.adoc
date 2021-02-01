@@ -177,9 +177,9 @@ IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhauste
 
 If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
 
-== Controlling Rate of Notifications
+== Control Notify Rate
 
-Once you have specified your conditions as desired, there are two ways to limit the number of notifications
+Once you have specified your conditions as desired, there are two ways to limit the number of notifications: Alert and Timeout.  These are meant to be used together to achieve a wide range of alerting behaviors.
 
 === Alert Threshold
 
