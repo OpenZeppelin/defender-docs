@@ -56,7 +56,7 @@ Select any Events and Function calls that you wish to monitor. Selecting Events 
 
 NOTE: An ABI is required to configure Events and Function detection
 
-NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address including those that do not involve functions or events (e.g., sending ether to your contract's address).  If Events or Functions are selected, then ONLY those that are selected are monitored.
+NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address.
 
 IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
