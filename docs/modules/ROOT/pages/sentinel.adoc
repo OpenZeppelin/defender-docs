@@ -125,7 +125,7 @@ gasPrice > 50000000000 and gasUsed > 20000
 
 === Event and Function Conditions
 
-Event and Function conditions further narrow the set of transactions that trigger notification.  These can refer to arguments in the signature either by name (if argument is named) or by index (e.g., $0, $1...).  The variables that are available to you are indicated in the user interface as you specify these functions.
+Event and Function conditions further narrow the set of transactions that trigger notification.  These can refer to arguments in the signature either by name (if the argument is named) or by index (e.g. $0, $1...).  The variables that are available to you are indicated in the user interface as you specify these functions.
 
 ==== Example Conditions
 
