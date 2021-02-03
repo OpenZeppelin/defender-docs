@@ -8,7 +8,7 @@ _The Defender Sentinel service allows you to monitor transactions for Addresses 
 
 Use a Sentinel whenever you need to know about or respond to transactions involving your smart contract.  Your Sentinel will watch every transaction send the transactions you care about to your notification methods of choice.
 
-* *Monitor* your *sensitive functions* like transferOwnership, pause
+* *Monitor* your *sensitive functions* like transferOwnership, pause, or upgrade
 * *Alert* when transactions are failing against your smart contract
 * *Respond* to transactions by executing *Autotask* logic when key events happen 
 * *Integrate* with your *existing tools* through slack, email or custom *Autotask* integration
