@@ -47,7 +47,7 @@ For a Transaction to trigger a notification, it must satisfy *ALL* of the follow
 
 * If *Functions* are selected
 
-    ** The Transaction *MUST* invoke a selected Function and match its *Function Condition* (if any)
+    ** The Transaction *MUST* directly invoke any of the selected Functions (contract calls are not detected at the moment) and match the *Function Condition* (if any)
 
 [[choose-events-and-functions]]
 === Events and Functions
