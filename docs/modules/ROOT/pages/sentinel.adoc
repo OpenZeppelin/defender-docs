@@ -17,7 +17,7 @@ Use a Sentinel whenever you need to know about or respond to transactions involv
 [[whats-in-an-sentinel]]
 == What's in an Sentinel?
 
-A Sentinel watches transactions for a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
+A Sentinel watches transactions that affect a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
 
 IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
