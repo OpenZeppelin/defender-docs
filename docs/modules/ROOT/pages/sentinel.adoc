@@ -138,7 +138,7 @@ Transactions that emit a `Transfer(...)` event with a value between 1 and 100 ET
 value > 0xde0b6b3a7640000 and value < 0x56bc75e2d63100000 
 ----
 
-Transactions that emit a ValsEvent(...) event with an array with a first element equal to 5
+Transactions that emit a `ValsEvent(...)` event with an array with a first element equal to 5
 
 [source,jsx]
 ----
