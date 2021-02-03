@@ -43,7 +43,7 @@ For a Transaction to trigger a notification, it must satisfy *ALL* of the follow
 
 * If *Events* are selected
 
-    ** The Transaction *MUST* emit a selected Event and match its *Event Condition* (if any)
+    ** The Transaction *MUST* emit any of the selected Events and match the *Event Condition* (if any)
 
 * If *Functions* are selected
 
