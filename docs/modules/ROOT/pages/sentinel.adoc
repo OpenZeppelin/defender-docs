@@ -146,7 +146,7 @@ Transactions that emit a `ValsEvent(...)` event with an array with a first eleme
 vals[0] == 5
 ----
 
-Transactions that invoke a greet(...) function with an unnamed string of "hello"
+Transactions that invoke a `greet(...)` function with an unnamed string of "hello"
 
 [source,jsx]
 ----
