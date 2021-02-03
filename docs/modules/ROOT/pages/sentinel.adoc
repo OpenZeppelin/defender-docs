@@ -130,7 +130,7 @@ Event and Function conditions further narrow the set of transactions that trigge
 
 ==== Example Conditions
 
-Transactions that emit a Transfer(...) event with a value between 1 and 100 ETH (in hex)
+Transactions that emit a `Transfer(...)` event with a value between 1 and 100 ETH (in hex)
 
 [source,jsx]
 ----
