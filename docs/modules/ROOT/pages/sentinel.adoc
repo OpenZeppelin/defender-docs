@@ -21,6 +21,11 @@ A Sentinel watches transactions that affect a given address, filters those trans
 
 IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
+[[creating-a-sentinel]]
+== Creating a Sentinel
+
+Creating a sentinel involves specifying the address to monitor, defining matching rules, and choosing the notification channels.
+
 [[specify-address]]
 === Specifying an Address
 
@@ -35,19 +40,19 @@ IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
 For a Transaction to trigger a notification, it must satisfy *ALL* of the following:
 
-* Transaction *MUST* have a To, From, or Address (from log) that matches the configured address
+* Transaction has a To, From, or an Event that matches the configured address
 
 * If a *Transaction Condition* is specified
 
-    ** The Transaction *MUST* match the *Transaction Condition*.
+    ** The Transaction matches the *Transaction Condition*.
 
 * If *Events* are selected
 
-    ** The Transaction *MUST* emit a selected Event and match its *Event Condition* (if any)
+    ** The Transaction emits a selected Event and match its *Event Condition* (if any)
 
 * If *Functions* are selected
 
-    ** The Transaction *MUST* invoke a selected Function and match its *Function Condition* (if any)
+    ** The Transaction invokes a selected Function and match its *Function Condition* (if any)
 
 [[choose-events-and-functions]]
 === Events and Functions
