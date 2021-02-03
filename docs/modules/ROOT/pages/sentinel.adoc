@@ -21,17 +21,12 @@ A Sentinel watches transactions that affect a given address, filters those trans
 
 IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
-[[creating-a-sentinel]]
-== Creating a Sentinel
-
-Creating a sentinel involves specifying the address to monitor, defining matching rules, and choosing the notification channels.
-
 [[specify-address]]
 === Specifying an Address
 
 * *Address*: Choose either a smart contract or an externally owned account to monitor.
 
-* *ABI*: Specify the ABI for your contract.  We will attempt auto-discovery of the ABI if it is verified.
+* *ABI*: Specify the ABI for your contract. Defender will automatically load the ABI if the source code is verified.
 
 * *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level.   If you want to be notified as soon as possible and are tolerant to re-orgs, then choose *Latest* 
 
@@ -40,19 +35,19 @@ Creating a sentinel involves specifying the address to monitor, defining matchin
 
 For a Transaction to trigger a notification, it must satisfy *ALL* of the following:
 
-* Transaction has a To, From, or an Event that matches the configured address
+* Transaction *MUST* have a To, From, or Address (from log) that matches the configured address
 
 * If a *Transaction Condition* is specified
 
-    ** The Transaction matches the *Transaction Condition*.
+    ** The Transaction *MUST* match the *Transaction Condition*.
 
 * If *Events* are selected
 
-    ** The Transaction emits a selected Event and match its *Event Condition* (if any)
+    ** The Transaction *MUST* emit any of the selected Events and match the *Event Condition* (if any)
 
 * If *Functions* are selected
 
-    ** The Transaction invokes a selected Function and match its *Function Condition* (if any)
+    ** The Transaction *MUST* directly invoke any of the selected Functions (contract calls are not detected at the moment) and match the *Function Condition* (if any)
 
 [[choose-events-and-functions]]
 === Events and Functions
@@ -61,7 +56,7 @@ Select any Events and Function calls that you wish to monitor. Selecting Events 
 
 NOTE: An ABI is required to configure Events and Function detection
 
-NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address including those that do not involve functions or events (e.g., sending ether to your contract's address).  If Events or Functions are selected, then ONLY those that are selected are monitored.
+NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address.
 
 IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
@@ -72,7 +67,6 @@ Conditions act as filters that allow you to narrow the transactions even further
 
 NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions.
 
-General Syntax
 
 * Conditions can use *AND*, *OR*, *NOT* and *()*
 
