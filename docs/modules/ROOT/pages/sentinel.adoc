@@ -63,10 +63,9 @@ IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 [[specify-conditions]]
 == What are Conditions?
 
-Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.
+Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.  To accomodate comparisons for checksum and non-checksum addresses, comparisons are case-insensitive.
 
 NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions.
-
 
 * Conditions can use *AND*, *OR*, *NOT* and *()*
 
@@ -81,8 +80,6 @@ NOTE: If you want to receive ALL transactions that involve your selected events/
 === Transaction Conditions
 
 IMPORTANT: If a transaction condition is specified, then a transaction MUST meet this condition in order to trigger a notification.
-
-NOTE: To accomodate comparisons for checksum and non-checksum addresses, expressions are case-insensitive.
 
 Transaction Conditions can refer to the following properties
 
