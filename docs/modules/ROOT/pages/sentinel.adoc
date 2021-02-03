@@ -26,7 +26,7 @@ IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
 * *Address*: Choose either a smart contract or an externally owned account to monitor.
 
-* *ABI*: Specify the ABI for your contract.  We will attempt auto-discovery of the ABI if it is verified.
+* *ABI*: Specify the ABI for your contract. Defender will automatically load the ABI if the source code is verified.
 
 * *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level.   If you want to be notified as soon as possible and are tolerant to re-orgs, then choose *Latest* 
 
