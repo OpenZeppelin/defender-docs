@@ -24,7 +24,7 @@ IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 [[specify-address]]
 === Specifying an Address
 
-* *Address*: Choose the address of either a Smart Contract or a normal key-pair address to monitor.
+* *Address*: Choose either a smart contract or an externally owned account to monitor.
 
 * *ABI*: Specify the ABI for your contract.  We will attempt auto-discovery of the ABI if it is verified.
 
