@@ -161,7 +161,7 @@ When triggered, a Sentinel can notify one or more slack webhooks, email lists, o
 
 === Slack Configuration
 
-* *Name* is the name for this slack configuration.  For instance, you might name it the name of the channel.
+* *Name* is the name for this slack configuration.  For instance, you might name it after the name of the channel.
 
 * *Webhook URL* is the URL from your slack management console to use for notification. 
 
