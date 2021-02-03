@@ -177,7 +177,54 @@ IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhauste
 
 If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
 
-== Control Notify Rate
+== Autotask Events
+
+The sentinel will pass information about the transaction to your autotask.
+
+=== Example Autotask
+
+[source,jsx]
+----
+exports.handler = async function(params) {
+  
+  const payload = params.request.body;
+  const transaction  = payload.transaction;
+  const matchReasons = payload.matchReasons;
+  const sentinel = payload.sentinel;
+  const abi = sentinel.abi;
+
+  // custom logic...
+}
+----
+
+=== Event Schema
+[source,jsx]
+----
+{
+  "transaction": {              // eth_getTransactionReceipt response body
+    ...                         // see https://eips.ethereum.org/EIPS/eip-1474
+  },
+  "blockHash": "0xab..123",     // block hash from where this transaction was seen
+  "matchReasons": [             // the reasons why sentinel triggered
+    {
+      "type": "event",          // event, function, or transaction
+      "signature": "...",       // signature of your event/function
+      "condition": "..."        // condition (if any)
+    }
+  ],
+  "sentinel": {
+    "id": "44a7d5...31df5",     // internal ID of your sentinel
+    "name": "Sentinel Name",    // name of your sentinel
+    "abi": [...],               // abi of your address (or undefined)
+    "address": "0x000..000",    // address your sentinel is watching
+    "confirmBlocks": 0,         // number of blocks sentinel waits
+    "network": "rinkeby"        // network of your address
+  }
+}
+----
+
+
+== Controlling the Notify Rate
 
 Once you have specified your conditions as desired, there are two ways to limit the number of notifications: Alert and Timeout.  These are meant to be used together to achieve a wide range of alerting behaviors.
 
