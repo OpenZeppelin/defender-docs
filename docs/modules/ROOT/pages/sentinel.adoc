@@ -67,7 +67,6 @@ Conditions act as filters that allow you to narrow the transactions even further
 
 NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions.
 
-General Syntax
 
 * Conditions can use *AND*, *OR*, *NOT* and *()*
 
