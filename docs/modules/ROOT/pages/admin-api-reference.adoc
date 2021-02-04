@@ -73,4 +73,29 @@ curl \
     "https://defender-api.openzeppelin.com/proposals"
 ```
 
-WARNING: The Defender API will not validate that the proposal can actually be executed. This means you can create proposals for calling a non-existing function on a contract, or trying to upgrade a non-upgradeable contract. However, you will not be able to approve them afterwards.
+WARNING: The Defender API will only validate that the function inputs are valid with regards to the signature, but it will not validate that the proposal can actually be executed. This means you can create proposals for calling a non-existing function on a contract, or trying to upgrade a non-upgradeable contract. However, you will not be able to approve them afterwards.
+
+[[contracts-endpoint]]
+== Contracts Endpoint
+
+The `/contracts` endpoint can be used to manage the contracts imported into the Defender Admin dashboard. By issuing a `PUT` to the endpoint you can create or update a contract given its network and address:
+
+```bash
+DATA='{ 
+  "address": "0x179810822f56b0e79469189741a3fa5f2f9a7631",
+  "network": "rinkeby",
+  "name": "My Contract",
+  "abi": "..."
+}'
+
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://defender-api.openzeppelin.com/contracts"
+```
+
+You can also issue a `GET` request to the same endpoint to retrieve a list of all contracts imported.

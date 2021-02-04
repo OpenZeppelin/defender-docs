@@ -30,6 +30,11 @@ Alternatively, you can also choose to execute an action directly on a Contract u
 
 NOTE: When creating a new proposal, Defender Admin will first simulate it and will refuse to create it if the action reverts, showing the revert reason returned by the contract.
 
+[[api-access]]
+== API Access
+
+You can programmatically add contracts to your Admin dashboard and create new proposals via the xref:admin-api-reference.adoc[Defender Admin API]. Check out the https://www.npmjs.com/package/defender-admin-client[defender-admin-client] npm package for more info.
+
 [[proposal-types]]
 == Proposal types
 
