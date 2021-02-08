@@ -10,7 +10,7 @@ NOTE: We recommend you use the https://www.npmjs.com/package/defender-autotask-c
 [[code-endpoint]]
 == Update Code Endpoint
 
-The `/autotasks/{id}/code` endpoint is used for uploading new Autotask code via a `PUT` request. The endpoint accepts a JSON object with an `encodedZippedCode` property, which corresponds to the base64-encoded zip file with the code bundle.
+The `autotasks/{id}/code` endpoint is used for uploading new Autotask code via a `PUT` request. The endpoint accepts a JSON object with an `encodedZippedCode` property, which corresponds to the base64-encoded zip file with the code bundle.
 
 ```bash
 zip -r code.zip index.js
@@ -22,7 +22,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d "{ \"encodedZippedCode\": \"$(cat code.zip | base64 -w0)\" }" \
-    "https://defender-api.openzeppelin.com/autotasks/${AUTOTASKID}/code"
+    "https://defender-api.openzeppelin.com/autotask/autotasks/${AUTOTASKID}/code"
 ```
 
 NOTE: You can include multiple files in the bundle, as long as the bundle does not exceed 50MB in size, and you include an `index.js` at the root of the zip file to act as entrypoint.
