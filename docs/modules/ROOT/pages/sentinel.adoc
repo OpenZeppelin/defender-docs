@@ -159,19 +159,69 @@ When triggered, a Sentinel can notify one or more slack webhooks, email lists, o
 
 Please see https://api.slack.com/messaging/webhooks to configure a Slack webhook.  Once Slack is configured, enter the webhook URL in Defender.
 
-* *Name* is the name for this slack configuration.  For instance, you might name it after the name of the channel.
+* *Alias* is the name for this slack configuration.  For instance, you might name it after the name of the channel.
 
 * *Webhook URL* is the URL from your slack management console to use for notification. 
 
 === Email Configuration
 
-* *Name* is the name for this email list.  (e.g., Developers)
+* *Alias* is the name for this email list.  (e.g., Developers)
 
 * *Emails* is the list of emails you wish to notify.  These can be comma or semicolon-delimited.
 
+=== Discord Configuration
+
+Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks to configure a webhook for your Discord channel.
+
+* *Alias* is the name for this discord configuration.
+
+* *Webhook URL* is the URL from your discord channel to use for notification. 
+
+=== Telegram Configuration
+
+Please see https://core.telegram.org/bots#6-botfather to configure a Telegram Bot using the BotFather
+
+NOTE: The Telegram Bot must be added to your channel and have the rights to post messages.
+
+To find the Chat ID of the channel, execute the following curl (with your bot token value) and extract the `id` value of the chat.  If you do not receive any entries in the response, send a test message to your chat first.
+
+[source,shell]
+----
+$ curl https://api.telegram.org/bot$BOT_TOKEN/getUpdates
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 98xxxx98,
+      "channel_post": {
+        "message_id": 26,
+        "sender_chat": {
+          "id": -100xxxxxx5976, 
+          "title": "Defender Sentinel Test",
+          "type": "channel"
+        },
+        "chat": {
+          "id": -100xxxxxx5976, // <--- This is your chat ID
+          "title": "Defender Sentinel Test",
+          "type": "channel"
+        },
+        "date": 1612809138,
+        "text": "test"
+      }
+    }
+  ]
+}
+----
+
+* *Alias* is the name for this Telegram configuration.
+
+* *Chat ID* is the ID of the Telegram Chat. 
+
+* *Bot Token* is the token you receive from the BotFather when creating the Telegram Bot.
+
 === Autotask
 
-IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at  defender@openzeppelin.com with a description of your use case.
+IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at defender@openzeppelin.com with a description of your use case.
 
 If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
 
