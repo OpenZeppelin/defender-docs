@@ -126,6 +126,20 @@ if (require.main === module) {
 }
 ----
 
+[[updating-code]]
+=== Updating code
+
+You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file.
+
+```js
+const { AutotaskClient } = require('defender-autotask-client');
+const client = new AutotaskClient({apiKey: API_KEY, apiSecret: API_SECRET});
+
+await client.updateCodeFromFolder(autotaskId, './path/to/code');
+```
+
+NOTE: The code bundle must not exceed 50MB in size, and you must always include an `index.js` at the root of the zip file to act as entrypoint.
+
 [[a-complete-example]]
 == A complete example
 
@@ -171,4 +185,4 @@ Autotasks are restricted via Identity and Access Management to have zero access 
 [[coming-up]]
 == Coming up...
 
-We want to simplify uploading code to an Autotask, so we are experimenting with console-based approaches that can be called from a development environment or hooked into a CD pipeline to ensure your Autotasks are always up to date. Let us know if you have anything in mind!
+We are working on a secrets management solution so you can secure any keys you need for securely accessing external authenticated resources from the Autotask code, and we are also working on simplifying sending notifications from Autotasks. Stay tuned!
