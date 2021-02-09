@@ -177,6 +177,23 @@ Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webh
 
 * *Webhook URL* is the URL from your discord channel to use for notification. 
 
+=== Datadog Configuration
+
+Datadog configurations let Defender forward custom metrics to your Datadog account.  We use the API integration to forward these to Datadog.  For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/
+
+Key Notes:
+- The metric we send is a COUNT metric, which represents the number of transactions that triggered the sentinel.  
+- We do not send zeros, so a lack of data should be expected if the sentinel does not trigger.
+- With each metric, we send two tags:  `network` & `sentinel`
+
+NOTE: It can take several minutes for a new custom metric to show up in the Datadog console
+
+* *Alias* is the name for this Datadog configuration.
+
+* *Api Key* is the API key from your Datadog management.
+
+* *Metric Prefix* will precede all metric names.  For instance, with a prefix of `defender.`, sentinels will send a metric called `defender.sentinel`.
+
 === Telegram Configuration
 
 Please see https://core.telegram.org/bots#6-botfather to configure a Telegram Bot using the BotFather
