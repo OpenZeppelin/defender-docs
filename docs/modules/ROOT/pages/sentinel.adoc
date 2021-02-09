@@ -181,10 +181,7 @@ Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webh
 
 Datadog configurations let Defender forward custom metrics to your Datadog account.  For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/
 
-Key Notes:
-- The metric we send is a COUNT metric, which represents the number of transactions that triggered the sentinel.  
-- We do not send zeros, so a lack of data should be expected if the sentinel does not trigger.
-- With each metric, we send two tags:  `network` & `sentinel`
+The metric we send is a COUNT metric, which represents the number of transactions that triggered the sentinel.  We do not send zeros, so a lack of data should be expected if the sentinel does not trigger.  With each metric, we send two tags:  `network` (rinkeby, mainnet,...) & `sentinel` (name of sentinel)
 
 NOTE: It can take several minutes for a new custom metric to show up in the Datadog console
 
