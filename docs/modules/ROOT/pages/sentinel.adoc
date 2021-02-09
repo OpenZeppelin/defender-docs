@@ -179,7 +179,7 @@ Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webh
 
 === Datadog Configuration
 
-Datadog configurations let Defender forward custom metrics to your Datadog account.  We use the API integration to forward these to Datadog.  For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/
+Datadog configurations let Defender forward custom metrics to your Datadog account.  For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/
 
 Key Notes:
 - The metric we send is a COUNT metric, which represents the number of transactions that triggered the sentinel.  
