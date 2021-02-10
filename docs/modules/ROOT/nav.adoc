@@ -12,4 +12,5 @@
 ** xref:relay-api-reference.adoc[Relay]
 
 * Guides
+** xref:guide-upgrades.adoc[Upgrading a contract]
 ** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]
