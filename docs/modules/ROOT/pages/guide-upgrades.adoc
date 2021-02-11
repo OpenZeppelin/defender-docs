@@ -14,9 +14,9 @@ This allows us to change the contract code, while preserving the state, balance,
 [[process-of-upgrading]]
 == Process of upgrading
 
-The upgrade admin account (the owner of the xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] contract) is the account with the power to xref:learn::upgrading-smart-contracts.adoc[upgrade] the upgradeable contracts in your project. The default owner is the externally owned account used to deploy the contracts. Whilst this may be good enough for a local or testnet deployment, in production you need to better secure your contracts. An attacker who gets hold of your upgrade admin account can change any upgradeable contract in your project!
+The upgrade admin account (the owner of the xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] contract) is the account with the power to xref:learn::upgrading-smart-contracts.adoc[upgrade] the upgradeable contracts in your project. The default owner is the externally owned account used to deploy the contracts. Whilst this may be good enough for a local or testnet deployment, in production you need to better secure your contracts. An attacker who gets hold of your upgrade admin account can change any upgradeable contract in your project!
 
-It is recommended to *change the ownership of the ProxyAdmin* after deployment to a multisig, requiring multiple owners to approve a proposal to upgrade.
+It is recommended to *change the ownership of the ProxyAdmin* after deployment to a multisig, requiring multiple owners to approve a proposal to upgrade.
 
 The process of creating an upgradeable contract and later upgrading is as follows:
 
@@ -32,7 +32,7 @@ The process of creating an upgradeable contract and later upgrading is as follow
 
 To get started, you’ll need the following: 
 
-1. *A Defender account*. Head over to https://defender.openzeppelin.com[Defender] to sign up for a new account. 
+1. *A Defender account*. Head over to https://defender.openzeppelin.com[Defender] to sign up for a new account. 
 2. *ETH to pay for transactions gas*. Transactions require gas for execution, so make sure to have some ETH available. For this guide we will use Rinkeby ETH.
 3.  *Multi Sig*. A multisig contract to control our upgradeable contract. In this guide we will use a Gnosis Safe but you could also use any supported multisig such as a legacy Gnosis multisig. https://help.gnosis-safe.io/en/articles/3876461-create-a-safe-multisig[Create a Gnosis Safe] multisig on the Rinkeby network, with M > N/2 and M >1. This should be at least 2 of 3. (See xref:advisor.adoc[Advisor] for guidance on multisig best practices).
 4.  *Hardhat project*. A xref:learn::developing-smart-contracts.adoc#setting-up-a-solidity-project[Hardhat project] with xref:upgrades-plugins::hardhat-upgrades.adoc[Hardhat Upgrades plugin], Hardhat Defender and ethers.js installed. 
@@ -77,11 +77,11 @@ contract Box {
 [[deploy-upgradeable-contract]]
 == Deploy upgradeable contract
 
-To deploy our contract we will use a script. The xref:upgrades-plugins::hardhat-upgrades.adoc[Hardhat Upgrades plugin] provides a `deployProxy` function to deploy our upgradeable contract. This deploys our implementation contract, a xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] (the admin for our projects proxies) and the proxy, along with calling any initialization.
+To deploy our contract we will use a script. The xref:upgrades-plugins::hardhat-upgrades.adoc[Hardhat Upgrades plugin] provides a `deployProxy` function to deploy our upgradeable contract. This deploys our implementation contract, a xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] (the admin for our projects proxies) and the proxy, along with calling any initialization.
 
-Create a `scripts` directory in our project root and then create the following `deploy.js` script in the `scripts` directory.
+Create a `scripts` directory in our project root and then create the following `deploy.js` script in the `scripts` directory.
 
-In this guide we don’t have an `initialize` function so we will initialize state using the `store` function.
+In this guide we don’t have an `initialize` function so we will initialize state using the `store` function.
 
 [source,js]
 ----
@@ -103,11 +103,11 @@ main()
 
 We would normally test and then deploy to a local test network and manually interact with it. For the purposes of the guide we will skip ahead to deploying to a public test network.
 
-In this guide we will deploy to Rinkeby as Gnosis Safe supports Rinkeby testnet. If you need assistance with configuration, see xref:learn::connecting-to-public-test-networks.adoc[Connecting to public test networks] and https://hardhat.org/tutorial/deploying-to-a-live-network.html[Hardhat: Deploying to a live network]. 
+In this guide we will deploy to Rinkeby as Gnosis Safe supports Rinkeby testnet. If you need assistance with configuration, see xref:learn::connecting-to-public-test-networks.adoc[Connecting to public test networks] and https://hardhat.org/tutorial/deploying-to-a-live-network.html[Hardhat: Deploying to a live network]. 
 
 WARNING: Any secrets such as mnemonics or API keys should not be committed to version control.
 
-We will use the following `hardhat.config.js` for deploying to Rinkeby. 
+We will use the following `hardhat.config.js` for deploying to Rinkeby. 
 
 NOTE: In this guide we will use Alchemy, though you can use Infura, or another public node provider of your choice to connect to the network.
 
@@ -135,7 +135,7 @@ module.exports = {
 };
 ----
 
-Run our `deploy.js` and deploy to the Rinkeby network. Our implementation contract, a xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] and the proxy will be deployed.
+Run our `deploy.js` and deploy to the Rinkeby network. Our implementation contract, a xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] and the proxy will be deployed.
 
 NOTE: We need to keep track of our proxy address, we will need it later.
 
@@ -157,7 +157,7 @@ The admin (who can perform upgrades) for our proxy is a ProxyAdmin contract. Onl
 
 WARNING: Ensure to only transfer ownership of the xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] to an address we control.
 
-Create `transfer-ownership.js` in the `scripts` directory with the following JavaScript. Change the value of `gnosisSafe` to your Gnosis Safe address.
+Create `transfer-ownership.js` in the `scripts` directory with the following JavaScript. Change the value of `gnosisSafe` to your Gnosis Safe address.
 
 [source,js]
 ----
@@ -191,11 +191,11 @@ Transferred ownership of ProxyAdmin to: 0xFb2C6465654024c03DC564d237713F620d1E94
 [[create-a-new-version-of-our-implementation]]
 == Create a new version of our implementation
 
-After a period of time, we decide that we want to add functionality to our contract. In this guide we will add an `increment` function to our Box contract.
+After a period of time, we decide that we want to add functionality to our contract. In this guide we will add an `increment` function to our Box contract.
 
-NOTE: We cannot change the storage layout of our implementation contract, see xref:learn::upgrading-smart-contracts.adoc#upgrading[Upgrading] for more details on the technical limitations.
+NOTE: We cannot change the storage layout of our implementation contract, see xref:learn::upgrading-smart-contracts.adoc#upgrading[Upgrading] for more details on the technical limitations.
 
-Create the new implementation, `BoxV2.sol` in your `contracts` directory with the following Solidity code.
+Create the new implementation, `BoxV2.sol` in your `contracts` directory with the following Solidity code.
 
 [source,solidity]
 ----
@@ -338,4 +338,4 @@ image::guide-upgrades-defender-proposals.png[Defender Proposals]
 [[questions]]
 == Questions
 
-If you have any questions or comments, don’t hesitate to ask on the https://forum.openzeppelin.com/c/support/defender/36[forum]!
+If you have any questions or comments, don’t hesitate to ask on the https://forum.openzeppelin.com/c/support/defender/36[forum]!
