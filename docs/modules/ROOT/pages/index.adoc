@@ -24,7 +24,7 @@ xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Build with private and 
 
 [.card.card-learn]
 --
-xref:sentinel.adoc[[.card-title]#Sentinel# [.card-body]#pass:q[Monitor your smart contracts.]#]
+xref:sentinel.adoc[[.card-title]#Sentinel# [.card-body]#pass:q[Monitor smart contracts and send notifications.]#]
 --
 
 [.card.card-learn]
@@ -34,7 +34,7 @@ xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated
 
 [.card.card-learn]
 --
-xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Quickly implement security best practices.]#]
+xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement security best practices.]#]
 --
 
 [[networks]]

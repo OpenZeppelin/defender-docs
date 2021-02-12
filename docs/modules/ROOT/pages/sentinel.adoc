@@ -1,17 +1,17 @@
 [[sentinel]]
 = Sentinel
 
-_The Defender Sentinel service allows you to monitor transactions by defining conditions on events, functions, and transaction parameters, and notifying via email, slack, and autotasks (more to come)._
+_The Defender Sentinel service allows you to monitor transactions by defining conditions on events, functions, and transaction parameters, and notifying via email, slack, telegram, discord, autotasks and more._
 
 [[use-cases]]
 == Use cases
 
-Use a Sentinel whenever you need to know about or respond to transactions involving your smart contract.  Your Sentinel will watch every transaction send the transactions you care about to your notification methods of choice.
+Use a Sentinel whenever you need to know about or respond to transactions involving your smart contracts or other smart contracts you need to monitor.  Your Sentinel will watch every transaction and send the transactions you care about to your notification methods of choice.
 
 * *Monitor* your *sensitive functions* like transferOwnership, pause, or upgrade
-* *Alert* when transactions are failing against your smart contract
+* *Alert* when transactions are failing against smart contracts
 * *Respond* to transactions by executing *Autotask* logic when key events happen 
-* *Integrate* with your *existing tools* through slack, email or custom *Autotask* integration
+* *Integrate* with your *existing tools* through slack, telegram, discord, email or custom *Autotask* integration
 * *Know* when an unexpected volume of transactions occur
 
 [[whats-in-an-sentinel]]
@@ -26,7 +26,7 @@ IMPORTANT: At this time, Sentinels do not monitor internal function calls.
 
 * *Address*: Choose either a smart contract or an externally owned account to monitor.
 
-* *ABI*: Specify the ABI for your contract. Defender will automatically load the ABI if the source code is verified.
+* *ABI*: Specify the ABI for the contract. Defender will automatically load the ABI if the source code is verified.
 
 * *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level.   If you want to be notified as soon as possible and are tolerant to re-orgs, then choose *Latest* 
 
@@ -284,7 +284,6 @@ exports.handler = async function(params) {
   }
 }
 ----
-
 
 == Controlling the Notify Rate
 
