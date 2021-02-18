@@ -34,7 +34,9 @@ To get started, you’ll need the following:
 
 1. *A Defender account*. Head over to https://defender.openzeppelin.com[Defender] to sign up for a new account. 
 2. *ETH to pay for transactions gas*. Transactions require gas for execution, so make sure to have some ETH available. For this guide we will use Rinkeby ETH.
-3.  *Multi Sig*. A multisig contract to control our upgradeable contract. In this guide we will use a Gnosis Safe but you could also use any supported multisig such as a legacy Gnosis multisig. https://help.gnosis-safe.io/en/articles/3876461-create-a-safe-multisig[Create a Gnosis Safe] multisig on the Rinkeby network, with M > N/2 and M >1. This should be at least 2 of 3. (See xref:advisor.adoc[Advisor] for guidance on multisig best practices).
+3.  *Multi Sig*. A multisig contract to control our upgradeable contract. In this guide we will use a [Gnosis Safe](https://safe.gnosis.io/) but you could also use any supported multisig such as a legacy [Gnosis MultiSigWallet](https://github.com/gnosis/MultiSigWallet). 
+
+https://help.gnosis-safe.io/en/articles/3876461-create-a-safe-multisig[Create a Gnosis Safe] multisig on the Rinkeby network, with M > N/2 and M >1. This should be at least 2 of 3. (See xref:advisor.adoc[Advisor] for guidance on multisig best practices).
 4.  *Hardhat project*. A xref:learn::developing-smart-contracts.adoc#setting-up-a-solidity-project[Hardhat project] with xref:upgrades-plugins::hardhat-upgrades.adoc[Hardhat Upgrades plugin], Hardhat Defender, ethers.js and dotenv installed. 
 [source,console]
 ----
@@ -161,7 +163,7 @@ Box deployed to: 0x5C1e1732274630Ac9E9cCaF05dB09da64bE190B5
 [[transfer-control-of-upgrades-to-a-multisig]]
 == Transfer control of upgrades to a multisig
 
-We will use a multisig to control upgrades of our contract. Defender Admin supports Gnosis Safe and legacy Gnosis multisig.
+We will use a multisig to control upgrades of our contract. Defender Admin supports [Gnosis Safe](https://safe.gnosis.io/) and the legacy [Gnosis MultiSigWallet](https://github.com/gnosis/MultiSigWallet).
 
 The admin (who can perform upgrades) for our proxy is a ProxyAdmin contract. Only the owner of the ProxyAdmin can upgrade our proxy. 
 
