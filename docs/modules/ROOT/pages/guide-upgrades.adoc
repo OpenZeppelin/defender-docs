@@ -35,12 +35,12 @@ To get started, you’ll need the following:
 1. *A Defender account*. Head over to https://defender.openzeppelin.com[Defender] to sign up for a new account. 
 2. *ETH to pay for transactions gas*. Transactions require gas for execution, so make sure to have some ETH available. For this guide we will use Rinkeby ETH.
 3.  *Multi Sig*. A multisig contract to control our upgradeable contract. In this guide we will use a Gnosis Safe but you could also use any supported multisig such as a legacy Gnosis multisig. https://help.gnosis-safe.io/en/articles/3876461-create-a-safe-multisig[Create a Gnosis Safe] multisig on the Rinkeby network, with M > N/2 and M >1. This should be at least 2 of 3. (See xref:advisor.adoc[Advisor] for guidance on multisig best practices).
-4.  *Hardhat project*. A xref:learn::developing-smart-contracts.adoc#setting-up-a-solidity-project[Hardhat project] with xref:upgrades-plugins::hardhat-upgrades.adoc[Hardhat Upgrades plugin], Hardhat Defender and ethers.js installed. 
+4.  *Hardhat project*. A xref:learn::developing-smart-contracts.adoc#setting-up-a-solidity-project[Hardhat project] with xref:upgrades-plugins::hardhat-upgrades.adoc[Hardhat Upgrades plugin], Hardhat Defender, ethers.js and dotenv installed. 
 [source,console]
 ----
-$ npm install –save-dev @openzeppelin/hardhat-upgrades @openzeppelin/hardhat-defender @nomiclabs/hardhat-ethers ethers
+$ npm install --save-dev @openzeppelin/hardhat-upgrades @openzeppelin/hardhat
+-defender @nomiclabs/hardhat-ethers ethers dotenv
 ----
-
 
 [[create-upgradeable-contract]]
 == Create upgradeable contract
@@ -104,6 +104,16 @@ main()
 We would normally test and then deploy to a local test network and manually interact with it. For the purposes of the guide we will skip ahead to deploying to a public test network.
 
 In this guide we will deploy to Rinkeby as Gnosis Safe supports Rinkeby testnet. If you need assistance with configuration, see xref:learn::connecting-to-public-test-networks.adoc[Connecting to public test networks] and https://hardhat.org/tutorial/deploying-to-a-live-network.html[Hardhat: Deploying to a live network]. 
+
+We can create a `.env` file to store our mnemonic and provider API key.  You should add `.env` to your `.gitignore`.
+
+[source,text]
+----
+MNEMONIC="Enter your seed phrase"
+ALCHEMY_API_KEY="Enter your Alchemy API Key"
+DEFENDER_TEAM_API_KEY="Enter your Defender Team API Key"
+DEFENDER_TEAM_API_SECRET_KEY="Enter your Defender Team API Secret"
+----
 
 WARNING: Any secrets such as mnemonics or API keys should not be committed to version control.
 
