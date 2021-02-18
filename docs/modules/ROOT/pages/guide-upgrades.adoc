@@ -245,7 +245,7 @@ NOTE: We won’t be able to retrieve our Secret Key from Defender again. Instead
 
 Once we transferred control of upgrades (ownership of the ProxyAdmin) to our multisig, we can no longer simply upgrade our contract. Instead we need to first propose an upgrade that the owners of the multisig can review and once reviewed approve and execute the proposal to upgrade the contract.
 
-To propose the upgrade we use OpenZeppelin Hardhat Defender Upgrades.
+To propose the upgrade we use the https://www.npmjs.com/package/@openzeppelin/hardhat-defender[Defender plugin for Hardhat].
 
 We need to register the Hardhat Defender plugin in our `hardhat.config.js`
 
