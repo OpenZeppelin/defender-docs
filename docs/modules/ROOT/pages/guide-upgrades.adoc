@@ -352,6 +352,18 @@ We can see the executed upgraded proposal in our list of proposals in Defender A
 
 image::guide-upgrades-defender-proposals.png[Defender Proposals]
 
+[[wrapping-up]]
+== Wrapping Up
+
+Let's recap the steps we've just gone through:
+
+* Wrote and deployed an upgradeable contract
+* Transferred upgrade rights for our upgradeable contract to a multisig wallet
+* Validated, deployed, and proposed a new implementation
+* Executed the upgrade proposal through the multisig in Defender Admin
+
+Controlling upgrade rights with a multisig better secures our upgradeable contracts.  Along with using Defender Admin to better manage the upgrade process.
+
 [[questions]]
 == Questions
 
