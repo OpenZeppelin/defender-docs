@@ -1,4 +1,4 @@
-# Upgrading a contract
+# Upgrading a contract via a multisig
 
 This guide will walk you through the process of upgrading a smart contract in production secured by a multisig wallet, using xref:admin.adoc[Defender Admin] as an interface, and Hardhat scripts behind the scenes. Specifically, we will:
 
