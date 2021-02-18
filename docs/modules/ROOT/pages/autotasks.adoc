@@ -86,7 +86,7 @@ At the moment only JSON payloads are supported, and only non-standard headers wi
 [[environment]]
 === Environment
 
-Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 12 runtime] with 256mb RAM and a 5-minute timeout. Code snippets are restricted to be smaller than 50mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
+Autotasks are executed in a https://nodejs.org/dist/latest-v14.x/docs/api/[node 14 runtime] with 256mb RAM and a 5-minute timeout. Code snippets are restricted to be smaller than 50mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
 
 [source,jsx]
 ----
