@@ -1,6 +1,11 @@
 # Upgrading a contract
 
-This guide will walk you through the process of managing an upgrade using a Hardhat script to propose an upgrade for a contract and then approve the proposal in xref:admin.adoc[Admin].
+This guide will walk you through the process of upgrading a smart contract in production secured by a multisig wallet, using xref:admin.adoc[Defender Admin] as an interface, and Hardhat scripts behind the scenes. Specifically, we will:
+
+* Write and deploy an upgradeable contract using the Upgrades Plugin for Hardhat
+* Transfer upgrade rights to a multisig wallet for additional security
+* Validate, deploy, and propose a new implementation using Hardhat
+* Execute the upgrade through the multisig in Defender Admin
 
 [[what-is-an-upgrade]]
 == What is an Upgrade?
