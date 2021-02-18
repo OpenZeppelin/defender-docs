@@ -205,7 +205,7 @@ Transferred ownership of ProxyAdmin to: 0xFb2C6465654024c03DC564d237713F620d1E94
 
 After a period of time, we decide that we want to add functionality to our contract. In this guide we will add an `increment` function to our Box contract.
 
-NOTE: We cannot change the storage layout of our implementation contract, see xref:learn::upgrading-smart-contracts.adoc#upgrading[Upgrading] for more details on the technical limitations.
+NOTE: We cannot make arbitrary changes to our contract, see xref:learn::upgrading-smart-contracts.adoc#upgrading[Upgrading] for more details on what modifications are valid.
 
 Create the new implementation, `BoxV2.sol` in your `contracts` directory with the following Solidity code.
 
