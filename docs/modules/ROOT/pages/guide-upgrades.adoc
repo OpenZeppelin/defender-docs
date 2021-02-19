@@ -352,7 +352,7 @@ We can see the executed upgraded proposal in our list of proposals in Defender A
 image::guide-upgrades-defender-proposals.png[Defender Proposals]
 
 [[wrapping-up]]
-== Wrapping Up
+== Wrapping up
 
 Let's recap the steps we've just gone through:
 
