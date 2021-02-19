@@ -39,7 +39,7 @@ The code snippet must export a `handler` async function that will be invoked on 
 
 [source,jsx]
 ----
-exports.handler = async function() {
+exports.handler = async function(event) {
   // Your code here
 }
 ----
@@ -83,8 +83,28 @@ exports.handler = async function(event) {
 
 At the moment only JSON payloads are supported, and only non-standard headers with the `X-` prefix are provided to the Autotask. If any of these limitations is an issue for your use case, please mailto:defender@openzeppelin.com[reach out to us].
 
+[[secrets]]
+=== Secrets
+
+Autotask secrets are key-value case-sensitive pairs of strings, that can be accessed from any autotask in the `event.secrets` object. You can define as many secrets as you need to be used by your autotasks. Secrets are shared across all your autotasks, and not specific to a single one.
+
+[source,jsx]
+----
+exports.handler = async function(event) {
+  const { mySecret, anApiKey } = event.secrets;
+}
+----
+
+Secrets are encrypted and stored in a secure vault, only decrypted for injection in your autotasks runs. Once written, a secret can only be deleted or overwritten from the user interface, but not read. However, an autotask may still log the value of a secret, accidentally leaking it.
+
+image::defender-autotasks-secrets.png[Defender Autotask Secrets]
+
+You can use secrets for storing secure keys to access external APIs, or any other secret value that you do not want to expose in the Autotask code.
+
+NOTE: While you can also use autotask secrets to store private keys for singing messages or transactions, we recommend you use a xref:relay.adoc[Relayer] for that. Signing operations for relayers are executed within a secure vault, providing an extra level of security than loading the private key in an autotask run and signing there.
+
 [[environment]]
-=== Environment
+== Environment
 
 Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 12 runtime] with 256mb RAM and a 5-minute timeout. Code snippets are restricted to be smaller than 50mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
 
@@ -112,8 +132,8 @@ You can also use the following template for local development, which will run yo
 const { Relayer } = require('defender-relay-client');
 
 // Entrypoint for the Autotask
-exports.handler = async function(credentials) {
-  const relayer = new Relayer(credentials);
+exports.handler = async function(event) {
+  const relayer = new Relayer(event);
   // Use relayer for sending txs
 }
 
@@ -126,10 +146,45 @@ if (require.main === module) {
 }
 ----
 
+[[typescript]]
+=== Typescript support
+
+We love https://www.typescriptlang.org/[typescript] in the Defender development team, and we hope you do too! If you want to write your Autotasks in typescript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting javascript code. Unfortunately, we don't support coding directly in typescript in the Defender web interface.
+
+All `defender-client` packages are coded in typescript and are packaged with their type declarations. You can use the following type definition for your Autotasks handler function:
+
+[source,ts]
+----
+// Autotasks receive AutotaskRelayerParams when they are invoked by Defender,
+// but we suggest you use the ApiRelayerParams when developing locally.
+type ApiRelayerParams = { apiKey: string; apiSecret: string };
+type AutotaskRelayerParams = { credentials: string; relayerARN: string };
+type RelayerParams = ApiRelayerParams | AutotaskRelayerParams;
+
+// Webhook HTTP POST request
+type WebhookRequest = { 
+  body?: object;
+  queryParameters?: { [name: string]: string };
+  headers?: { [name: string]: string };
+}
+
+// Secret key/value pairs
+type Secrets = {
+  [name: string]: string
+}
+
+type AutotaskEvent = RelayerParams & {
+  secrets?: Secrets;
+  request?: WebhookRequest;
+}
+
+type Handler = (event: AutotaskEvent) => Promise<object | undefined>;
+----
+
 [[a-complete-example]]
 == A complete example
 
-The following example uses ethers.js and the Autotask Relayer integration to send a transaction calling `execute` on a given contract, prior checking a `canExecute` view function. Note that you would need to replace `ADDRESS` and `ABI` in the following code by their corresponding values.
+The following example uses ethers.js and the Autotask-Relayer integration to send a transaction calling `execute` on a given contract. Before sending the transaction, it checks a `canExecute` view function using a Defender provider, and validates if a parameter received via a webhook matches a local secret. If the transaction is sent, it returns the hash in the response, which is sent back to the webhook caller.
 
 [source,jsx]
 ----
@@ -137,17 +192,24 @@ const { ethers } = require("ethers");
 const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
 
 // Entrypoint for the Autotask
-exports.handler = async function(credentials) {
+exports.handler = async function(event) {
+  // Load value provided in the webhook payload (not available in schedule or sentinel invocations)
+  const { value } = event.request.body;
+
+  // Compare it with a local secret
+  if (value !== event.secrets.expectedValue) return;
+
   // Initialize defender relayer provider and signer
-  const provider = new DefenderRelayProvider(credentials);
-  const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
+  const provider = new DefenderRelayProvider(event);
+  const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' });
 
   // Create contract instance from the signer and use it to send a tx
   const contract = new ethers.Contract(ADDRESS, ABI, signer);
   if (await contract.canExecute()) {
-    await contract.execute();
+    const tx = await contract.execute();
+    console.log(`Called execute in ${tx.hash}`);
+    return { tx: tx.hash };
   }
-  console.log(`Called execute at ${ADDRESS}`);
 }
 
 // To run locally (this code will not be executed in Autotasks)
@@ -159,7 +221,7 @@ if (require.main === module) {
 }
 ----
 
-NOTE: Note that we are not waiting for the transaction to be mined. The Defender Relayer will take care of monitoring the transaction and resubmitting if needed. The Autotask should just send the request to the Relayer and exit.
+NOTE: We are not waiting for the transaction to be mined. The Defender Relayer will take care of monitoring the transaction and resubmitting if needed. The Autotask should just send the request to the Relayer and exit.
 
 [[security-considerations]]
 == Security considerations
@@ -171,4 +233,4 @@ Autotasks are restricted via Identity and Access Management to have zero access 
 [[coming-up]]
 == Coming up...
 
-We want to simplify uploading code to an Autotask, so we are experimenting with console-based approaches that can be called from a development environment or hooked into a CD pipeline to ensure your Autotasks are always up to date. Let us know if you have anything in mind!
+We are working to better connect Autotasks with other parts of the system, such as the Notification channels used from Sentinels so you can send emails or messages easily, or the Address Book used in Admin so you can rely on it as a registry. Let us know if you have anything in mind!
