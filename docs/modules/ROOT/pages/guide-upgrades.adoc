@@ -264,8 +264,8 @@ We also need to add our Defender _Team API key_ to the exported configuration in
 ----
 module.exports = {
   defender: {
-    apiKey: defenderApiKey,
-    apiSecret: defenderApiSecret,
+    apiKey: process.env.DEFENDER_TEAM_API_KEY,
+    apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY,
   }
 }
 ----
