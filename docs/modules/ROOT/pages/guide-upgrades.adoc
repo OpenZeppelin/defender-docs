@@ -8,7 +8,7 @@ This guide will walk you through the process of upgrading a smart contract in pr
 * Execute the upgrade through the multisig in Defender Admin
 
 [[what-is-an-upgrade]]
-== What is an Upgrade?
+== What is an upgrade?
 
 Smart contracts in Ethereum are immutable by default. Once you create them there is no way to alter them, effectively acting as an unbreakable contract among participants.
 
