@@ -45,8 +45,7 @@ https://help.gnosis-safe.io/en/articles/3876461-create-a-safe-multisig[Create a 
 
 [source,console]
 ----
-$ npm install --save-dev @openzeppelin/hardhat-upgrades @openzeppelin/hardhat
--defender @nomiclabs/hardhat-ethers ethers dotenv
+$ npm install --save-dev @openzeppelin/hardhat-upgrades @openzeppelin/hardhat-defender @nomiclabs/hardhat-ethers ethers dotenv
 ----
 
 [[create-upgradeable-contract]]
