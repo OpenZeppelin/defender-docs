@@ -9,6 +9,7 @@
 * API Reference
 ** xref:api-auth.adoc[Authentication]
 ** xref:admin-api-reference.adoc[Admin]
+** xref:autotasks-api-reference.adoc[Autotasks]
 ** xref:relay-api-reference.adoc[Relay]
 
 * Guides
