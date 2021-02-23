@@ -70,7 +70,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d "$DATA" \
-    "https://defender-api.openzeppelin.com/proposals"
+    "https://defender-api.openzeppelin.com/admin/proposals"
 ```
 
 WARNING: The Defender API will only validate that the function inputs are valid with regards to the signature, but it will not validate that the proposal can actually be executed. This means you can create proposals for calling a non-existing function on a contract, or trying to upgrade a non-upgradeable contract. However, you will not be able to approve them afterwards.
@@ -95,7 +95,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d "$DATA" \
-    "https://defender-api.openzeppelin.com/contracts"
+    "https://defender-api.openzeppelin.com/admin/contracts"
 ```
 
 You can also issue a `GET` request to the same endpoint to retrieve a list of all contracts imported.

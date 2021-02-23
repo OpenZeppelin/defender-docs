@@ -181,6 +181,20 @@ type AutotaskEvent = RelayerParams & {
 type Handler = (event: AutotaskEvent) => Promise<object | undefined>;
 ----
 
+[[updating-code]]
+=== Updating code
+
+You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file.
+
+```js
+const { AutotaskClient } = require('defender-autotask-client');
+const client = new AutotaskClient({apiKey: API_KEY, apiSecret: API_SECRET});
+
+await client.updateCodeFromFolder(autotaskId, './path/to/code');
+```
+
+NOTE: The code bundle must not exceed 50MB in size, and you must always include an `index.js` at the root of the zip file to act as the entrypoint.
+
 [[a-complete-example]]
 == A complete example
 
