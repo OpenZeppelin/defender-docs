@@ -86,7 +86,7 @@ At the moment only JSON payloads are supported, and only non-standard headers wi
 [[secrets]]
 === Secrets
 
-Autotask secrets are key-value case-sensitive pairs of strings, that can be accessed from any autotask in the `event.secrets` object. You can define as many secrets as you need to be used by your autotasks. Secrets are shared across all your autotasks, and not specific to a single one.
+Autotask secrets are key-value case-sensitive pairs of strings, that can be accessed from any Autotask using the `event.secrets` object. You can define as many secrets as you need to be used by your Autotasks. Secrets are shared across all your Autotasks, and not specific to a single one.
 
 [source,jsx]
 ----
@@ -95,13 +95,15 @@ exports.handler = async function(event) {
 }
 ----
 
-Secrets are encrypted and stored in a secure vault, only decrypted for injection in your autotasks runs. Once written, a secret can only be deleted or overwritten from the user interface, but not read. However, an autotask may still log the value of a secret, accidentally leaking it.
+Secrets are encrypted and stored in a secure vault, only decrypted for injection in your autotasks runs. Once written, a secret can only be deleted or overwritten from the user interface, but not read. 
+
+WARNING: An autotask may log the value of a secret, accidentally leaking it.
 
 image::defender-autotasks-secrets.png[Defender Autotask Secrets]
 
 You can use secrets for storing secure keys to access external APIs, or any other secret value that you do not want to expose in the Autotask code.
 
-NOTE: While you can also use autotask secrets to store private keys for singing messages or transactions, we recommend you use a xref:relay.adoc[Relayer] for that. Signing operations for relayers are executed within a secure vault, providing an extra level of security than loading the private key in an autotask run and signing there.
+NOTE: While you can also use autotask secrets to store private keys for signing messages or transactions, we recommend you use a xref:relay.adoc[Relayer] instead. Signing operations for relayers are executed within a secure vault, providing an extra level of security than loading the private key in an autotask run and signing there.
 
 [[environment]]
 == Environment
@@ -247,4 +249,4 @@ Autotasks are restricted via Identity and Access Management to have zero access 
 [[coming-up]]
 == Coming up...
 
-We are working to better connect Autotasks with other parts of the system, such as the Notification channels used from Sentinels so you can send emails or messages easily, or the Address Book used in Admin so you can rely on it as a registry. Let us know if you have anything in mind!
+We are working to better connect Autotasks with other parts of the system, such as the Notification channels used from Sentinels so you can send email or messages easily, or the xref:admin.adoc#address-book[Address Book] used in Admin so you can rely on it as a registry. Let us know if you have anything in mind!
