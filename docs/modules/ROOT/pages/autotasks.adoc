@@ -138,7 +138,7 @@ const client = new AutotaskClient({apiKey: API_KEY, apiSecret: API_SECRET});
 await client.updateCodeFromFolder(autotaskId, './path/to/code');
 ```
 
-NOTE: The code bundle must not exceed 50MB in size, and you must always include an `index.js` at the root of the zip file to act as entrypoint.
+NOTE: The code bundle must not exceed 50MB in size, and you must always include an `index.js` at the root of the zip file to act as the entrypoint.
 
 [[a-complete-example]]
 == A complete example
@@ -185,4 +185,4 @@ Autotasks are restricted via Identity and Access Management to have zero access 
 [[coming-up]]
 == Coming up...
 
-We are working on a secrets management solution so you can secure any keys you need for securely accessing external authenticated resources from the Autotask code, and we are also working on simplifying sending notifications from Autotasks. Stay tuned!
+We are working on simplifying sending notifications from Autotasks. Stay tuned!
