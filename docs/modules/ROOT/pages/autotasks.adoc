@@ -83,6 +83,22 @@ exports.handler = async function(event) {
 
 At the moment only JSON payloads are supported, and only non-standard headers with the `X-` prefix are provided to the Autotask. If any of these limitations is an issue for your use case, please mailto:defender@openzeppelin.com[reach out to us].
 
+A sample response from the webhook endpoint looks like the following, where `status` is one of `success` or `error`, `encodedLogs` has the base64-encoded logs from the run, and `result` has the JSON-encoded value returned from the execution.
+
+[source,json]
+----
+{
+  "autotaskRunId": "37a91eba-9a6a-4404-95e4-38d178ba69ed",
+  "autotaskId": "19ef0257-bba4-4723-a18f-67d96726213e",
+  "trigger": "webhook",
+  "status": "success",
+  "createdAt": "2021-02-23T18:49:14.812Z",
+  "encodedLogs": "U1RBU...cwkK",
+  "result": "{\"hello\":\"world\"}",
+  "requestId": "e7979150-44d3-4021-926c-9d9679788eb8"
+}
+----
+
 [[secrets]]
 === Secrets
 
