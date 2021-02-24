@@ -153,7 +153,7 @@ $1 == "hello"
 [[notifications]]
 == Notifications
 
-When triggered, a Sentinel can notify one or more slack webhooks, email lists, or execute an autotask.
+When triggered, a Sentinel can notify one or more slack webhooks, telegram bots, discord webhooks, email lists, datadog metrics, or execute an autotask.
 
 === Slack Configuration
 
