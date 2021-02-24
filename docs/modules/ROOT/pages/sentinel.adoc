@@ -1,0 +1,319 @@
+[[sentinel]]
+= Sentinel
+
+_The Defender Sentinel service allows you to monitor transactions by defining conditions on events, functions, and transaction parameters, and notifying via email, slack, telegram, discord, autotasks and more._
+
+[[use-cases]]
+== Use cases
+
+Use a Sentinel whenever you need to know about or respond to transactions involving your smart contracts or other smart contracts you need to monitor.  Your Sentinel will watch every transaction and send the transactions you care about to your notification methods of choice.
+
+* *Monitor* your *sensitive functions* like transferOwnership, pause, or upgrade
+* *Alert* when transactions are failing against smart contracts
+* *Respond* to transactions by executing *Autotask* logic when key events happen 
+* *Integrate* with your *existing tools* through slack, telegram, discord, email or custom *Autotask* integration
+* *Know* when an unexpected volume of transactions occur
+
+[[whats-in-an-sentinel]]
+== What's in an Sentinel?
+
+A Sentinel watches transactions that affect a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
+
+IMPORTANT: At this time, Sentinels do not monitor internal function calls.
+
+[[specify-address]]
+=== Specifying an Address
+
+* *Address*: Choose either a smart contract or an externally owned account to monitor.
+
+* *ABI*: Specify the ABI for the contract. Defender will automatically load the ABI if the source code is verified.
+
+* *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level.   If you want to be notified as soon as possible and are tolerant to re-orgs, then choose *Latest* 
+
+[[matching-rules]]
+=== Matching Rules
+
+For a Transaction to trigger a notification, it must satisfy *ALL* of the following:
+
+* Transaction *MUST* have a To, From, or Address (from log) that matches the configured address
+
+* If a *Transaction Condition* is specified
+
+    ** The Transaction *MUST* match the *Transaction Condition*.
+
+* If *Events* are selected
+
+    ** The Transaction *MUST* emit any of the selected Events and match the *Event Condition* (if any)
+
+* If *Functions* are selected
+
+    ** The Transaction *MUST* directly invoke any of the selected Functions (contract calls are not detected at the moment) and match the *Function Condition* (if any)
+
+[[choose-events-and-functions]]
+=== Events and Functions
+
+Select any Events and Function calls that you wish to monitor. Selecting Events and Functions acts as an OR clause, in that if a transaction matches ANY of the selected Events or Functions, it will trigger notification.
+
+NOTE: An ABI is required to configure Events and Function detection
+
+NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address.
+
+IMPORTANT: At this time, Sentinels do not monitor internal function calls.
+
+[[specify-conditions]]
+== What are Conditions?
+
+Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.  To accomodate comparisons for checksum and non-checksum addresses, comparisons are case-insensitive.
+
+NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions.
+
+* Conditions can use *AND*, *OR*, *NOT* and *()*
+
+* Conditions can use *==*, *&lt;*, *&gt;*, *&gt;=*, *&lt;=* to compare
+
+* Number values can be referred to by Hex (0xabc123) or Decimal (10000000000)
+
+* String values can only be compared via *==*
+
+* Includes basic math operators: *+*, *-*, ***, */*, *^*
+
+=== Transaction Conditions
+
+IMPORTANT: If a transaction condition is specified, then a transaction MUST meet this condition in order to trigger a notification.
+
+Transaction Conditions can refer to the following properties
+
+* *to* is the _to_ address for the transaction
+
+* *from* is the _from_ address for the transaction
+
+* *gasPrice* is the price of gas sent in the transaction
+
+* *gasUsed* is the amount of gas used in the transaction
+
+* *value* is the value sent in the transaction
+
+* *nonce* is the nonce for the specific transaction
+
+* *status* is a derived value and can be compared with *"success"* or *"failed"*
+
+==== Example Conditions
+
+Transactions that are reverted
+
+[source,jsx]
+----
+status == "failed"
+----
+
+Transactions excluding those from 0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad
+
+[source,jsx]
+----
+from != "0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad"
+----
+
+Transactions that have BOTH a gasPrice higher than 50 gwei AND a gasUsed higher than 20000
+
+[source,jsx]
+----
+gasPrice > 50000000000 and gasUsed > 20000
+----
+
+=== Event and Function Conditions
+
+Event and Function conditions further narrow the set of transactions that trigger notification.  These can refer to arguments in the signature either by name (if the argument is named) or by index (e.g. $0, $1...).  The variables that are available to you are indicated in the user interface as you specify these functions.
+
+==== Example Conditions
+
+Transactions that emit a `Transfer(...)` event with a value between 1 and 100 ETH (in hex)
+
+[source,jsx]
+----
+// Event Signature: Transfer(address to, address from, uint256 value)
+value > 0xde0b6b3a7640000 and value < 0x56bc75e2d63100000 
+----
+
+Transactions that emit a `ValsEvent(...)` event with an array with a first element equal to 5
+
+[source,jsx]
+----
+// Event Signature: ValsEvent(uint256[3] vals)
+vals[0] == 5
+----
+
+Transactions that invoke a `greet(...)` function with an unnamed string of "hello"
+
+[source,jsx]
+----
+// Function Signature: greet(address, string)
+$1 == "hello"
+----
+
+[[notifications]]
+== Notifications
+
+When triggered, a Sentinel can notify one or more slack webhooks, telegram bots, discord webhooks, email lists, datadog metrics, or execute an autotask.
+
+=== Slack Configuration
+
+Please see https://api.slack.com/messaging/webhooks to configure a Slack webhook.  Once Slack is configured, enter the webhook URL in Defender.
+
+* *Alias* is the name for this slack configuration.  For instance, you might name it after the name of the channel.
+
+* *Webhook URL* is the URL from your slack management console to use for notification. 
+
+=== Email Configuration
+
+* *Alias* is the name for this email list.  (e.g., Developers)
+
+* *Emails* is the list of emails you wish to notify.  These can be comma or semicolon-delimited.
+
+=== Discord Configuration
+
+Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks to configure a webhook for your Discord channel.
+
+* *Alias* is the name for this discord configuration.
+
+* *Webhook URL* is the URL from your discord channel to use for notification. 
+
+=== Datadog Configuration
+
+Datadog configurations let Defender forward custom metrics to your Datadog account.  For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/
+
+The metric we send is a COUNT metric, which represents the number of transactions that triggered the sentinel.  We do not send zeros, so a lack of data should be expected if the sentinel does not trigger.  With each metric, we send two tags:  `network` (rinkeby, mainnet,...) & `sentinel` (name of sentinel)
+
+NOTE: It can take several minutes for a new custom metric to show up in the Datadog console
+
+* *Alias* is the name for this Datadog configuration.
+
+* *Api Key* is the API key from your Datadog management.
+
+* *Metric Prefix* will precede all metric names.  For instance, with a prefix of `defender.`, sentinels will send a metric called `defender.sentinel`.
+
+=== Telegram Configuration
+
+Please see https://core.telegram.org/bots#6-botfather to configure a Telegram Bot using the BotFather
+
+NOTE: The Telegram Bot must be added to your channel and have the rights to post messages.
+
+To find the Chat ID of the channel, execute the following curl (with your bot token value) and extract the `id` value of the chat.  If you do not receive any entries in the response, send a test message to your chat first.
+
+[source,shell]
+----
+$ curl https://api.telegram.org/bot$BOT_TOKEN/getUpdates
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 98xxxx98,
+      "channel_post": {
+        "message_id": 26,
+        "sender_chat": {
+          "id": -100xxxxxx5976, 
+          "title": "Defender Sentinel Test",
+          "type": "channel"
+        },
+        "chat": {
+          "id": -100xxxxxx5976, // <--- This is your chat ID
+          "title": "Defender Sentinel Test",
+          "type": "channel"
+        },
+        "date": 1612809138,
+        "text": "test"
+      }
+    }
+  ]
+}
+----
+
+* *Alias* is the name for this Telegram configuration.
+
+* *Chat ID* is the ID of the Telegram Chat. 
+
+* *Bot Token* is the token you receive from the BotFather when creating the Telegram Bot.
+
+=== Autotask
+
+IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at defender@openzeppelin.com with a description of your use case.
+
+If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
+
+== Autotask Events
+
+The sentinel will pass information about the transaction to your autotask.
+
+=== Example Autotask
+
+[source,jsx]
+----
+exports.handler = async function(params) {
+  
+  const payload = params.request.body;
+  const transaction  = payload.transaction;
+  const matchReasons = payload.matchReasons;
+  const sentinel = payload.sentinel;
+  const abi = sentinel.abi;
+
+  // custom logic...
+}
+----
+
+=== Event Schema
+[source,jsx]
+----
+{
+  "transaction": {              // eth_getTransactionReceipt response body
+    ...                         // see https://eips.ethereum.org/EIPS/eip-1474
+  },
+  "blockHash": "0xab..123",     // block hash from where this transaction was seen
+  "matchReasons": [             // the reasons why sentinel triggered
+    {
+      "type": "event",          // event, function, or transaction
+      "signature": "...",       // signature of your event/function
+      "condition": "value > 5"  // condition expression (if any)
+    }
+  ],
+  "sentinel": {
+    "id": "44a7d5...31df5",     // internal ID of your sentinel
+    "name": "Sentinel Name",    // name of your sentinel
+    "abi": [...],               // abi of your address (or undefined)
+    "address": "0x000..000",    // address your sentinel is watching
+    "confirmBlocks": 0,         // number of blocks sentinel waits
+    "network": "rinkeby"        // network of your address
+  }
+}
+----
+
+== Controlling the Notify Rate
+
+Once you have specified your conditions as desired, there are two ways to limit the number of notifications: Alert and Timeout.  These are meant to be used together to achieve a wide range of alerting behaviors.
+
+=== Alert Threshold
+
+To be alerted when matching transactions exceed a threshold, use an alert threshold.  
+
+NOTE: This threshold is evaluated for each transaction.  Once a threshold is exceeded then notifications will continue to fire until the amount falls below the threshold in the time window immediately prior to _the current_ transaction.  Consider using a Timeout value to prevent subsequent notifications.
+
+* *Amount* is the number of times this sentinel must trigger before firing a notification.
+
+* *Window* is the number of seconds that is considered
+
+Example:
+
+*At least 5 times within an hour* should specify an Amount of 5 and a Window of 3600 seconds.
+
+=== Timeout
+
+If you do not wish to receive a notification more than a certain rate, consider using a Timeout.  This will effectively prevent notifications for a certain duration after a notification is sent.  
+
+* *Timeout* is the number of seconds to wait between notifications 
+
+Example:
+
+*Avoid notifying more than once per hour* should specify a Timeout of 3600
+
+[[pausing]]
+== Pausing
+
+Pausing a Sentinel will pause the monitoring of your address.
