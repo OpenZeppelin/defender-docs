@@ -81,7 +81,7 @@ In the example above, we are also using a `DefenderRelayProvider` for making cal
 
 Instead of the usual `gasPrice`, the Relayer accepts a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
 
-NOTE: Today, mainnet gas prices for each speed are obtained from https://ethgasstation.info/[ethgasstation], falling back to https://etherchain.org/tools/gasPriceOracle[etherchain] if the former is not available. We are experimenting with other gas price oracles in the meantime. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
+NOTE: Mainnet gas prices are calculated based on the values reported by https://ethgasstation.info/[EthGasStation], https://etherchain.org/tools/gasPriceOracle[EtherChain], https://www.gasnow.org/[GasNow], https://docs.blocknative.com/gas-platform[BlockNative], and https://etherscan.io/gastracker[Etherscan]. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
 
 [[gas-price]]
 === Gas Price
