@@ -58,7 +58,7 @@ NOTE: You don't need to enter a private key when initializing a Relayer client, 
 [[using-ethers.js]]
 === Using ethers.js
 
-The Relayer client also integrates with https://docs.ethers.io/v5/[ethers.js] via a custom https://docs.ethers.io/v5/api/signer/[signer]. This allows you to switch to Defender Relayer for sending transactions with minimal changes in your codebase.
+The Relayer client integrates with https://docs.ethers.io/v5/[ethers.js] via a custom https://docs.ethers.io/v5/api/signer/[signer]. This allows you to switch to Defender Relayer for sending transactions with minimal changes in your codebase.
 
 [source,jsx]
 ----
@@ -74,7 +74,32 @@ const tx = await erc20.transfer(beneficiary, 1e18.toString());
 const mined = await tx.wait();
 ----
 
-In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The Defender signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender as a network provider as well.
+In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The Defender signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender as a network provider as well. 
+
+You can read more about the ethers integration https://www.npmjs.com/package/defender-relay-client#user-content-ethersjs[here].
+
+[[using-web3.js]]
+=== Using web3.js
+
+The Relayer client integrates with https://web3js.readthedocs.io/[web3.js] as well via a custom https://web3js.readthedocs.io/en/v1.3.4/web3-eth.html#providers[provider]. This allows you to use Defender Relayer for sending transactions and querying the network using the familiar web3 interface.
+
+[source,jsx]
+----
+const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const Web3 = require('web3');
+ 
+const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
+const provider = new DefenderRelayProvider(credentials, { speed: 'fast' });
+const web3 = new Web3(provider);
+
+const [from] = await web3.eth.getAccounts();
+const erc20 = new web3.eth.Contract(ERC20_ABI, ERC20_ADDRESS, { from });
+const tx = await erc20.methods.transfer(beneficiary, (1e18).toString()).send();
+----
+
+In the example above, the `transfer` transaction is signed and broadcasted by the Defender Relayer, and any additional JSON RPC calls are routed via the Defender private endpoint.
+
+You can read more about the web3 integration https://www.npmjs.com/package/defender-relay-client#user-content-web3js[here].
 
 [[speed]]
 === Speed
