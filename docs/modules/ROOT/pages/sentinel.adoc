@@ -58,7 +58,7 @@ NOTE: An ABI is required to configure Events and Function detection
 
 NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address.
 
-IMPORTANT: At this time, Sentinels do not monitor internal function calls.
+IMPORTANT: At this time, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan.  If the internal call emits an event, consider monitoring for that event instead.  Events emitted from internal calls are detected on all networks.
 
 [[specify-conditions]]
 == What are Conditions?
