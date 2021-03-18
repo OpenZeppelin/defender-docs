@@ -76,7 +76,7 @@ Defender Admin supports two kinds of multi-signature wallets: https://gnosis-saf
 
 The Gnosis Safe wallet gathers offline signatures of each admin and then submits a single transaction with all signatures to execute the action. To share signatures, it relies on the https://safe-transaction.gnosis.io/[Safe Transaction Service] hosted by Gnosis.
 
-NOTE: The Safe Transaction Service is only available on Mainnet, xDai, and Rinkeby. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
+NOTE: The Safe Transaction Service is only available on Mainnet, xDai, BSC, and Rinkeby. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
 
 When using a Gnosis Safe, Defender Admin will synchronize all signatures to and from the Safe Transaction Service. This way, any admins on your team using the https://gnosis-safe.io/app[Safe UI] will still be able to sign the Defender Admin proposals.
 
