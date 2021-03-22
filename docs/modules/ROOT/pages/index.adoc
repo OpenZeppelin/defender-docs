@@ -40,7 +40,7 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 [[networks]]
 == Available networks
 
-All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://fuse.io/[*Fuse*], https://docs.binance.org/smart-chain/guides/bsc-intro.html[Binance Smart Chain], https://fantom.foundation/what-is-fantom-opera/[Fantom], and https://docs.moonbeam.network/networks/testnet/[Moonbase] chains, along with their respective testnets where applicable. Note that some networks may be unavailable depending on your <<tiers,plan>>.
+All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://fuse.io/[*Fuse*], https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*], https://fantom.foundation/what-is-fantom-opera/[*Fantom*], and https://docs.moonbeam.network/networks/testnet/[*Moonbase*] chains, along with their respective testnets where applicable. Note that some networks may be unavailable depending on your <<tiers,plan>>.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
