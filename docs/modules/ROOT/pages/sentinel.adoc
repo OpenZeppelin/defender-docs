@@ -284,8 +284,8 @@ exports.handler = async function(params) {
       "type": "event",            // event, function, or transaction
       "signature": "...",         // signature of your event/function
       "condition": "value > 5",   // condition expression (if any)
-      "args": ["5"],              // parameters by index (unamed are present)
-      "params": { "value": "5" }  // parameters by name (unamed are not present)
+      "args": ["5"],              // parameters by index (unnamed are present)
+      "params": { "value": "5" }  // parameters by name (unnamed are not present)
     }
   ],
   "sentinel": {
