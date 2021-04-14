@@ -28,7 +28,9 @@ type Network =
   | 'fantomtest'
   | 'moonbase'
   | 'matic'
-  | 'mumbai';
+  | 'mumbai'
+  | 'avalanche'
+  | 'fuji';
 type Address = string;
 type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];
 
