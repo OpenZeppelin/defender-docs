@@ -51,21 +51,6 @@ The Defender free plan is restricted for testnet access only. In addition, you m
 
 If you want access to Mainnet, xDai, BSC, Fantom, Fuse, or Matic, or to increase any of the quota limits from the free plan, you can upgrade your plan to Team or Individual in the Account Plan menu in the top-right menu in Defender.
 
-[[user-management]]
-== User management
-
-Access to all resources in Defender is shared across all users in your team. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
-
-You can review your team members under the Collaborators section, accessible from the top-right user menu. You can also invite new users to your team from there. A user can only belong to a single team in Defender (for now).
-
-WARNING: If you want to add a user to your team, make sure to invite them from the Collaborators section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com] and we'll help.
-
-
-[[two-factor-authentication]]
-== Two factor authentication (2FA)
-
-We strongly suggest that you enable 2FA to improve your Defender account security. As a second authentication factor, Defender relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP)]. To enable 2FA on Defender, you need a TOTP compliant application, such as https://authy.com/[Authy] or Google Authenticator. You can enable 2FA under the Account settings section, accessible from the top-right user menu. Defender will guide you through the necessary steps.
-
 [[feedback]]
 == Feedback
 

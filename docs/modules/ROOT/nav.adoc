@@ -13,6 +13,8 @@
 ** xref:autotasks-api-reference.adoc[Autotasks]
 ** xref:relay-api-reference.adoc[Relay]
 
+* xref:account-management.adoc[Account Management]
+
 * Guides
 ** xref:guide-upgrades.adoc[Upgrading via a multisig]
 ** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]
