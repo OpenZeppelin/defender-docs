@@ -255,7 +255,6 @@ Options
 
 The search uses the conditions that are in the form at the current moment.  
 
-
 [[notifications]]
 == Notifications
 
