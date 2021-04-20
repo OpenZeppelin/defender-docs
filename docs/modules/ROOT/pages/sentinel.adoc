@@ -235,7 +235,7 @@ exports.handler = async function(payload) {
         "id": "customId",
         "timestamp": new Date().getTime(),
         "numberVal": 5,
-        "nested": { "example": { "here": true} }
+        "nested": { "example": { "here": true } }
        }
     });
   }
