@@ -97,7 +97,7 @@ You will be required to enter an admin address (who will be able to withdraw fun
 
 image::guides-chainlink-register-page.png[Enter details for registration]
 
-Once the registration is submitted, you'll have a waiting period no longer than a few days, after which your Upkeep will be registered as a valid Upkeep and assigned a numeric identifier in the Registry. Defender will reflect this on the Cahinlink Keeper Network of your contract's page. See below how your contract page looks after the registration was submitted, but its approval is pending. 
+Once the registration is submitted, you'll have a waiting period no longer than a few days, after which your Upkeep will be registered as a valid Upkeep and assigned a numeric identifier in the Registry. Defender will reflect this on the Chainlink Keeper Network of your contract's page. See below how your contract page looks after the registration was submitted, but its approval is pending. 
 
 image::guides-chainlink-wait.png[Registration is pending approval]
 
