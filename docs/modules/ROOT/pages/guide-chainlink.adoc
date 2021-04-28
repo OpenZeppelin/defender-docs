@@ -1,6 +1,6 @@
 # Registering an Upkeep on the Chainlink Keeper network
 
-This guide you will guide you through the process of registering your contracts as an *Upkeep* on the Chainlink Keeper Network, a https://andrecronje.medium.com/scaling-keep3r-with-chainlink-2832bbc76506[revamp] of the https://keep3r.network/[Keep3r Network], using Defender Admin, as well as leveraging Relayers, Autotasks, and Sentinels for monitoring and operations.
+This article will guide you through the process of registering your contract as an *Upkeep* on the Chainlink Keeper Network, a https://andrecronje.medium.com/scaling-keep3r-with-chainlink-2832bbc76506[revamp] of the https://keep3r.network/[Keep3r Network], using Defender Admin, as well as leveraging Relayers, Autotasks, and Sentinels for monitoring and operations.
 
 ## What is the Chainlink Keeper network?
 
@@ -85,15 +85,26 @@ After you have implemented these methods, you can compile and deploy your contra
 
 ## Registering on the network
 
-Once deployed, you can now register your contract as an Upkeep on the Keeper Network. To do this using Defender, start by adding your contract in Admin. Defender will automatically check if your contract properly implements the Upkeep interface.
+Once deployed, you can register your contract as an Upkeep on the Keeper Network. To do this using Defender, start by adding your contract in Admin. Defender will automatically check if your contract properly implements the Upkeep interface.
 
-// TODO: Screenshot of Add new contract with upkeep feature detection
+image::guides-chainlink-add-contract.png[Add new contract with upkeep interface]
 
-From your contract's page, you can now start the _Upkeep registration in Chainlink Keeper_ by selecting that option in the settings menu. You will be required to enter an admin address (who will be able to withdraw funds), email (for notification purposes from Chainlink), and gas limit for keeper calls (between 2300 and 2500000).
+From your contract's page, you can now start the _Upkeep registration in Chainlink Keeper_ by clicking on _Register_ in the Chainlink Keeper Network section. 
 
-// TODO: Screenshot of registration
+image::guides-chainlink-register.png[Register from Chainlink Keeper Network section]
 
-Once the registration is submitted, you'll have a waiting period no longer than a few days, after which your Upkeep will be registered as a valid Upkeep and assigned a numeric identifier in the Registry. Keep in mind that, in order for your contract to be serviced by the network, you will also need to fund it with LINK tokens. Defender will show you your Upkeep balance, as well as the latest executions by the network's keepers.
+You will be required to enter an admin address (who will be able to withdraw funds), email (for notification purposes from Chainlink), and gas limit for keeper calls (between 2300 and 2500000). The registration process requires you to provide an initial fund of 1 LINK for your contract, so make sure the account you use to request the registration has at least that amount of LINK in it.
+
+image::guides-chainlink-register-page.png[Enter details for registration]
+
+Once the registration is submitted, you'll have a waiting period no longer than a few days, after which your Upkeep will be registered as a valid Upkeep and assigned a numeric identifier in the Registry. Defender will reflect this on the Cahinlink Keeper Network of your contract's page. See below how your contract page looks after the registration was submitted, but its approval is pending. 
+
+image::guides-chainlink-wait.png[Registration is pending approval]
+
+When your registration is approved, Defender will show you your Upkeep balance, as well as the latest executions by the network's keepers. Keep in mind that, in order for your contract to be serviced by the network, you will also need to fund it with LINK tokens. You can also do this from Defender, by clicking on _Deposit LINK_.
+
+image::guides-chainlink-active.png[Registration is complete]
+
 
 // TODO: Screenshot of registered contract
 
