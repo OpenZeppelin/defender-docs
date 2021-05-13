@@ -141,11 +141,11 @@ exports.handler =  async function(event) {
 }
 ----
 
-The key-value store allows you to get, put, and delete keys. All keys and values are strings, keys are limited to 1kb and values to 300kb. You can store up to 1000, 3000, or 10000 key-value pairs in total, depending if you are on the free, individual, or paid plan.
+The key-value store allows you to get, put, and delete key-value pairs.  Keys and values must be strings.  Keys are limited to 1 KB and values to 300 KB. You can store up to 1000, 3000, or 10000 key-value pairs in total, depending if you are on the free, individual, or paid plan.
 
 Keep in mind that the data store is shared across all autotasks. To isolate the records managed by each Autotask, consider prefixing the keys with a namespace unique to each Autotask.
 
-WARNING: All items expire 90 days after their last update. If you need a long-lived data store, consider setting up an external database and use Autotask secrets to store the credentials for connecting to it.
+WARNING: Each item expires 90 days after its last update. If you need a long-lived data store, consider setting up an external database and use Autotask secrets to store the credentials for connecting to it.
 
 [[environment]]
 == Environment
