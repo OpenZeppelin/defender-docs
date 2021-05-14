@@ -115,6 +115,41 @@ An example of the response:
 }
 ```
 
+[[list-transactions]]
+=== List Transactions
+To retrieve a list of recent transactions sent from your relayer, make a `GET` request to the `txs`. You can optionally set `since`, `limit`, and `status` (`mined`, `pending`, or `failed`) as query parameters.
+
+An example of the request:
+
+```bash
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://api.defender.openzeppelin.com/txs?status=pending&limit=5"
+```
+
+An example of the response:
+
+```JSON
+[{
+   "chainId":4,
+   "hash":"0xcef95469a9f02757f0968ec8c11449ae5e7486073075381dcd62bacec9e5d627",
+   "transactionId":"affba150-e563-441e-ae49-04bd6050979a",
+   "value":"0x1",
+   "gasPrice":1000000000,
+   "gasLimit":21000,
+   "to":"0x179810822f56b0e79469189741a3fa5f2f9a7631",
+   "from":"0xbce0b5b71668e42d908e387b68dba91789c932b8",
+   "data":"0x",
+   "nonce":160,
+   "status":"mined",
+   "speed":"fast"
+}]
+```
+
 [[sign-endpoint]]
 == Sign Endpoint
 To sign arbitrary data with your Relay private key make a `POST` request to `/sign` with a payload containing the hex string to sign. The payload format is:
