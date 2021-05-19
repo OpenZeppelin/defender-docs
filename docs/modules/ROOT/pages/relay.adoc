@@ -145,6 +145,20 @@ const latestTx = await relayer.query(tx.transactionId);
 
 NOTE: The `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every few minutes.
 
+[[list-txs]]
+=== List Transactions
+
+You can also list the latest transactions sent via your Relayer, optionally filtering by status (pending, mined, or failed). This can be particularly useful to prevent your Autotask scripts from re-sending a transaction already in-flight: before sending a transaction, you can use the list method filtered by `pending` status to see if there is a transaction in the queue with the same destination and calldata as the one you are about to send.
+
+[source,jsx]
+----
+const txs = await relayer.list({
+  since: new Date(Date.now() - 60 * 1000),
+  status: 'pending', // can be 'pending', 'mined', or 'failed'
+  limit: 5, // newest txs will be returned first
+})
+----
+
 [[signing]]
 == Signing
 
