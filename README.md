@@ -10,6 +10,7 @@ Automate your Ethereum operations to deliver high-quality products faster with l
 
 - [Learn more](https://openzeppelin.com/defender)
 - [Read the docs](https://docs.openzeppelin.com/defender)
+- [Demo Video](https://www.youtube.com/watch?v=98nZ-lsHcPs&ab_channel=OpenZeppelin)
 
 ## Authoring content
 
