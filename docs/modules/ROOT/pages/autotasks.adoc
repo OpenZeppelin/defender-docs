@@ -121,6 +121,32 @@ You can use secrets for storing secure keys to access external APIs, or any othe
 
 NOTE: While you can also use autotask secrets to store private keys for signing messages or transactions, we recommend you use a xref:relay.adoc[Relayer] instead. Signing operations for relayers are executed within a secure vault, providing an extra level of security than loading the private key in an autotask run and signing there.
 
+[[kvstore]]
+=== Key-value data store
+
+The Autotask key-value data store allows you to persist simple data across Autotask runs and between different Autotasks. You can use it to store transaction identifiers, hashed user emails, or even small serialized objects.
+
+Access to the key value store is managed through the http://npmjs.com/package/defender-kvstore-client[`defender-kvstore-client`] package:
+
+[source,jsx]
+----
+const { KeyValueStoreClient } = require('defender-kvstore-client');
+
+exports.handler =  async function(event) {
+  const store = new KeyValueStoreClient(event);
+
+  await store.put('myKey', 'myValue'); 
+  const value = await store.get('myKey');
+  await store.del('myKey');
+}
+----
+
+The key-value store allows you to get, put, and delete key-value pairs.  Keys and values must be strings.  Keys are limited to 1 KB and values to 300 KB. You can store up to 1000, 3000, or 10000 key-value pairs in total, depending if you are on the free, individual, or paid plan.
+
+Keep in mind that the data store is shared across all autotasks. To isolate the records managed by each Autotask, consider prefixing the keys with a namespace unique to each Autotask.
+
+WARNING: Each item expires 90 days after its last update. If you need a long-lived data store, consider setting up an external database and use Autotask secrets to store the credentials for connecting to it.
+
 [[environment]]
 == Environment
 
@@ -128,9 +154,12 @@ Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 
 
 [source,jsx]
 ----
+"@apollo/client": "3.3.16",
 "axios": "0.19.2",
-"axios-retry": "3.1.9",
-"defender-relay-client": "1.4.2",
+"defender-admin-client": "1.7.0",
+"defender-autotask-client": "1.7.0",
+"defender-kvstore-client": "1.7.0",
+"defender-relay-client": "1.7.0",
 "ethers": "5.0.3",
 "web3": "1.3.4"
 ----
