@@ -78,7 +78,26 @@ interface TransactionResponse {
 }
 ```
 
-Note the extra `transactionId` field, which is an internal Defender identifier for the transaction, which is used for querying.
+Note the extra `transactionId` field, which is an internal Defender identifier for the transaction, which is used for querying and replacing.
+
+[[replace-transaction]]
+=== Replace Transaction
+To replace a `pending` transaction make a `PUT` request to the `txs` endpoint with the Defender `transactionId` or `nonce`, *not* with the transaction hash.
+
+An example of the request:
+
+```bash
+curl \
+  -X PUT \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://api.defender.openzeppelin.com/txs/$IDorNONCE"
+```
+
+The request payload and the response are the same as that of sending a transaction.
 
 [[query-transaction]]
 === Query Transaction

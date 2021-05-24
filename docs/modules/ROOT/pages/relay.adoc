@@ -130,7 +130,6 @@ If you're using `ethers.js`, you may set a `validForSeconds` option instead of `
 const signer = new DefenderRelaySigner(credentials, provider, { validForSeconds: 120 });
 ----
 
-
 NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a local one.
 
 [[transaction-ids]]
@@ -140,10 +139,52 @@ Since the Relayer may resubmit a transaction with an updated gas price if it doe
 
 [source,jsx]
 ----
-const latestTx = await relayer.query(tx.transactionId);
+const tx = await relayer.query(tx.transactionId);
 ----
 
-NOTE: The `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every few minutes.
+NOTE: The `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every minute.
+
+[[replace-txs]]
+=== Replace Transactions
+
+While a Defender Relay will automatically resubmit transactions with increased gas price if they are not mined, and will automatically cancel them after their valid-until timestamp, you can still manually replace or cancel your transaction if it has not been mined yet. This allows you to cancel a transaction if it is no longer valid, tweak its TTL, or bump its speed or gas price.
+
+To do this, use the `replaceByNonce` or `replaceById` of the `defender-relay-client`:
+
+[source,jsx]
+----
+// Cancel tx payload (tx to a random address with zero value and data)
+replacement = {
+  to: '0x6b175474e89094c44da98b954eedeac495271d0f',
+  value: '0x00',
+  data: '0x',
+  speed: 'fastest',
+  gasLimit: 21000
+};
+
+// Replace a tx by nonce
+tx = await relayer.replaceTransactionByNonce(42, replacement);
+  
+// Or by transactionId
+tx = await relayer.replaceTransactionById('5fcb8a6d-8d3e-403a-b33d-ade27ce0f85a', replacement);
+----
+
+You can also replace a pending transaction by setting the `nonce` when sending a transaction using the `ethers` or `web3.js` adapters:
+
+[source,jsx]
+----
+// Using ethers
+erc20 = new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
+replaced = await erc20.functions.transfer(beneficiary, 1e18.toString(), { 
+  nonce: 42
+});
+
+// Using web3.js
+erc20 = new web3.eth.Contract(ERC20_ABI, ERC20_ADDRESS, { from });
+replaced = await erc20.methods.transfer(beneficiary, (1e18).toString()).send({ 
+  nonce: 42 
+});
+----
 
 [[list-txs]]
 === List Transactions
