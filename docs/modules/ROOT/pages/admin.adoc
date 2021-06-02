@@ -94,7 +94,7 @@ In addition to the vanilla MultisigWallet, Defender Admin also supports a https:
 
 ==== Creating a Gnosis Safe multisig from Defender
 
-You can create and deploy a new Gnosis Safe multisig wallet on most networks directly from Defender. This comes especially handy in networks where the official Gnosis Safe UI is not yet available. To create a new Gnosis Safe, go to Admin and click on "Create Gnosis Safe". You'll be taken to a simple form where you will be asked to provide the initial list of owners and threshold for the multisig. That's it! 
+You can create and deploy a new Gnosis Safe multisig wallet directly from Defender. This comes especially handy in networks where the official Gnosis Safe UI is not yet available. To create a new Gnosis Safe, go to Admin and click on "Create Gnosis Safe". You'll be taken to a simple form where you will be asked to provide the initial list of owners and threshold for the multisig. That's it! 
 
 ==== Modifying your multisig settings from Defender
 
