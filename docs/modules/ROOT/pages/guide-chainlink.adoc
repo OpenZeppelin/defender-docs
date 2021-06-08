@@ -83,6 +83,10 @@ interface KeeperCompatibleInterface {
 
 After you have implemented these methods, you can compile and deploy your contract using your https://hardhat.org/guides/deploying.html[favorite toolchain].
 
+## Verifying your contract code on Etherscan
+
+To be accepted in the Chainlink Keepers network, your Upkeep contract source code needs to be verified on Etherscan. You can use your https://hardhat.org/plugins/nomiclabs-hardhat-etherscan.html[favorite toolchain] to do this. 
+
 ## Registering on the network
 
 Once deployed, you can register your contract as an Upkeep on the Keeper Network. To do this using Defender, start by adding your contract in Admin. Defender will automatically check if your contract properly implements the Upkeep interface.
@@ -93,7 +97,15 @@ From your contract's page, you can now start the _Upkeep registration in Chainli
 
 image::guides-chainlink-register.png[Register from Chainlink Keeper Network section]
 
-You will be required to enter an admin address (who will be able to withdraw funds), email (for notification purposes from Chainlink), and gas limit for keeper calls (between 2300 and 2500000). The registration process requires you to provide an initial fund of 1 LINK for your contract, so make sure the account you use to request the registration has at least that amount of LINK in it.
+To begin the registration process, Defender will ask you to fill some details into a registration Google Form. This form will be reviewed by the Chainlink Keepers onboarding team as part of the approval process for the open beta. The information you fill in will help improve Chainlink Keepers to provide you with optimal solutions for your use case.
+
+Click on `Open registration Google Form`, fill in the details and come back to Defender after doing so. 
+
+image::guides-chainlink-register-google-form.png[Start by filling the registration Google Form]
+
+Once you return from filling the registration Google Form, Defender will ask you to enter an admin address (who will be able to withdraw funds), email (for notification purposes from Chainlink), and gas limit for keeper calls (between 2300 and 2500000).
+
+At the time of writing, the registration process requires you to provide an initial fund of at least 5 LINK for your contract, so make sure the account you use to request the registration has at least that amount of LINK in it. You may choose to make this initial fund bigger to save on future top up gas fees.
 
 image::guides-chainlink-register-page.png[Enter details for registration]
 
