@@ -76,7 +76,7 @@ Defender Admin supports two kinds of multi-signature wallets: https://gnosis-saf
 
 The Gnosis Safe wallet gathers offline signatures of each admin and then submits a single transaction with all signatures to execute the action. To share signatures, it relies on the https://safe-transaction.gnosis.io/[Safe Transaction Service] hosted by Gnosis.
 
-NOTE: The Safe Transaction Service is only available on Mainnet, xDai, and Rinkeby. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
+NOTE: The Safe Transaction Service is only available on Mainnet, xDai, BSC, and Rinkeby. Still, you can use Defender Admin on any network; it will just skip syncing with the transaction service if it's not available.
 
 When using a Gnosis Safe, Defender Admin will synchronize all signatures to and from the Safe Transaction Service. This way, any admins on your team using the https://gnosis-safe.io/app[Safe UI] will still be able to sign the Defender Admin proposals.
 
@@ -92,9 +92,13 @@ In addition to the vanilla MultisigWallet, Defender Admin also supports a https:
 [[managing-your-multi-sig-from-defender-admin]]
 === Managing your multi-sig from Defender Admin
 
-While Defender Admin does not yet provide a specialized interface for management of the multi-signature wallet contract, you can still manage it through _custom action_ proposals.
+==== Creating a Gnosis Safe multisig from Defender
 
-By adding your multi-sig contract to Defender Admin, you can invoke management functions such as `addOwner` or `changeThreshold` easily, specifying the multisig itself as the multisig to send these calls through.
+You can create and deploy a new Gnosis Safe multisig wallet directly from Defender. This comes especially handy in networks where the official Gnosis Safe UI is not yet available. To create a new Gnosis Safe, go to Admin and click on "Create Gnosis Safe". You'll be taken to a simple form where you will be asked to provide the initial list of owners and threshold for the multisig. That's it! 
+
+==== Modifying your multisig settings from Defender
+
+You can modify your multisig settings by creating _custom action_ proposals to execute management functions `addOwner` or `changeThreshold`, as you would with any other contract you import to Defender.
 
 image::defender-admin-add-owner.png[Defender Admin Add Owner]
 
@@ -124,4 +128,4 @@ Defender Admin's main contribution to security is then related to usability. Fir
 [[coming-up]]
 == Coming up...
 
-We are working on providing better contextual information on the contract you are working with when creating a proposal. We are also working on public views for contracts, so you can optionally share with your community what change proposals are coming. Stay tuned, and let us know if you have any requests!
+We are working on adding first class support for timelocked admin actions as well as a number of enhancements to let you better navigate and organize your contracts. We are also working on public views for contracts, so you can optionally share with your community what change proposals are coming. Stay tuned, and let us know if you have any requests!

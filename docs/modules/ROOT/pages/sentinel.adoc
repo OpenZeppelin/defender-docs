@@ -150,6 +150,111 @@ Transactions that invoke a `greet(...)` function with an unnamed string of "hell
 $1 == "hello"
 ----
 
+=== Autotask Conditions
+
+If an autotask condition is specified, then it will be called with a list of matches found for a given block.  This allows the sentinel to use other datasources and custom logic to evaluate whether a transaction is a match.  
+
+NOTE: Only transactions that match other conditions (event, function, transaction) will invoke the autotask condition.
+
+NOTE: Each invocation can contain up to 25 transactions.  
+
+==== Request Schema
+
+The request body will contain the following structure.
+
+[source,jsx]
+----
+{
+  "events": [
+  {
+    "transaction": {                // eth_getTransactionReceipt response body
+      ...                           // see https://eips.ethereum.org/EIPS/eip-1474
+    },
+    "blockHash": "0xab..123",       // block hash from where this transaction was seen
+    "matchReasons": [               // the reasons why sentinel triggered
+      {
+        "type": "event",            // event, function, or transaction
+        "signature": "...",         // signature of your event/function
+        "condition": "value > 5",   // condition expression (if any)
+        "args": ["5"],              // parameters by index (unnamed are present)
+        "params": { "value": "5" }  // parameters by name (unnamed are not present)
+      }
+    ],
+    "sentinel": {
+      "id": "44a7d5...31df5",       // internal ID of your sentinel
+      "name": "Sentinel Name",      // name of your sentinel
+      "abi": [...],                 // abi of your address (or undefined)
+      "address": "0x000..000",      // address your sentinel is watching
+      "confirmBlocks": 0,           // number of blocks sentinel waits
+      "network": "rinkeby"          // network of your address
+    }
+  }
+  ]
+}
+----
+
+==== Response Schema
+
+The autotask must return a structure containing all matches.  
+
+IMPORTANT: Errors will be treated as a non-match.  All executions can be found on the Autotask's run page.
+
+[source,jsx]
+----
+{
+  "matches": [
+    {
+      "hash": "0xabc...123",   // transaction hash
+      "metadata": {
+        "foo": true            // any object to be shared with notifications
+      }              
+    },
+    {
+      "hash": "0xabc...123"    // example with no metadata specified
+    }
+  ]
+}
+----
+
+==== Example Autotask Condition
+
+[source,jsx]
+----
+exports.handler = async function(payload) {
+  const conditionRequest = payload.request.body;
+  const matches = [];
+  const events = conditionRequest.events;
+  for(const evt of events) {
+
+    // add custom logic for matching here
+
+    // metadata can be any JSON-marshalable object (or undefined)
+    matches.push({
+       hash: evt.hash,
+       metadata: { 
+        "id": "customId",
+        "timestamp": new Date().getTime(),
+        "numberVal": 5,
+        "nested": { "example": { "here": true } }
+       }
+    });
+  }
+  return { matches }
+}
+----
+
+=== Testing Conditions
+
+On the right side of the conditions form, there is a "Test Sentinel conditions" tool.  This tool searches for transactions that match the Sentinel's conditions across a range of blocks. Testing also invokes an autotask condition if one is specified
+
+Options
+
+* *Recent Blocks* searches a range of blocks prior to the network's latest block
+* *Specific Block* will search the specified block
+* *Specific Transaction* will attempt to match a transaction hash (0xabc...def)
+
+The search uses the conditions that are in the form at the current moment.  
+
 [[notifications]]
 == Notifications
 
@@ -263,24 +368,27 @@ exports.handler = async function(params) {
 [source,jsx]
 ----
 {
-  "transaction": {              // eth_getTransactionReceipt response body
-    ...                         // see https://eips.ethereum.org/EIPS/eip-1474
+  "transaction": {                // eth_getTransactionReceipt response body
+    ...                           // see https://eips.ethereum.org/EIPS/eip-1474
   },
-  "blockHash": "0xab..123",     // block hash from where this transaction was seen
-  "matchReasons": [             // the reasons why sentinel triggered
+  "blockHash": "0xab..123",       // block hash from where this transaction was seen
+  "matchReasons": [               // the reasons why sentinel triggered
     {
-      "type": "event",          // event, function, or transaction
-      "signature": "...",       // signature of your event/function
-      "condition": "value > 5"  // condition expression (if any)
+      "type": "event",            // event, function, or transaction
+      "signature": "...",         // signature of your event/function
+      "condition": "value > 5",   // condition expression (if any)
+      "args": ["5"],              // parameters by index (unnamed are present)
+      "params": { "value": "5" }  // parameters by name (unnamed are not present)
+      "metadata": {...}           // metadata injected by Autotask Condition (if applicable)
     }
   ],
   "sentinel": {
-    "id": "44a7d5...31df5",     // internal ID of your sentinel
-    "name": "Sentinel Name",    // name of your sentinel
-    "abi": [...],               // abi of your address (or undefined)
-    "address": "0x000..000",    // address your sentinel is watching
-    "confirmBlocks": 0,         // number of blocks sentinel waits
-    "network": "rinkeby"        // network of your address
+    "id": "44a7d5...31df5",       // internal ID of your sentinel
+    "name": "Sentinel Name",      // name of your sentinel
+    "abi": [...],                 // abi of your address (or undefined)
+    "address": "0x000..000",      // address your sentinel is watching
+    "confirmBlocks": 0,           // number of blocks sentinel waits
+    "network": "rinkeby"          // network of your address
   }
 }
 ----

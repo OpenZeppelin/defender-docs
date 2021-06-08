@@ -40,31 +40,16 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 [[networks]]
 == Available networks
 
-All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://blockscout.com/poa/sokol[*Sokol*], and https://fuse.io/[*Fuse*] chains. Note that some networks may be unavailable depending on your <<tiers,plan>>.
+All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://fuse.io/[*Fuse*], https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*], https://fantom.foundation/what-is-fantom-opera/[*Fantom*], https://docs.moonbeam.network/networks/testnet/[*Moonbase*], https://docs.matic.network/docs/develop/network-details/network[*Polygon* (Matic)], and https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[Avalanche C] chains, along with their respective testnets where applicable. Note that some networks may be unavailable depending on your <<tiers,plan>>.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
 [[tiers]]
-== Tiers and quotas
+== Plans and quotas
 
 The Defender free plan is restricted for testnet access only. In addition, you may only create up to five Relayers and Autotasks, import up to five Contracts into Admin, and have up to five Users in your team. The total number of transactions sent from Relayers cannot exceed 30 per hour, and the same limit applies for Autotask runs.
 
-If you want access to Mainnet, xDai, or Fuse, or to increase any of the quota limits from the free plan, please apply via https://openzeppelin.com/apply/[this form] and we'll reach out to you.
-
-[[user-management]]
-== User management
-
-Access to all resources in Defender is shared across all users in your team. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
-
-You can review your team members under the Collaborators section, accessible from the top-right user menu. You can also invite new users to your team from there. A user can only belong to a single team in Defender (for now).
-
-WARNING: If you want to add a user to your team, make sure to invite them from the Collaborators section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com] and we'll help.
-
-
-[[two-factor-authentication]]
-== Two factor authentication (2FA)
-
-We strongly suggest that you enable 2FA to improve your Defender account security. As a second authentication factor, Defender relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP)]. To enable 2FA on Defender, you need a TOTP compliant application, such as https://authy.com/[Authy] or Google Authenticator. You can enable 2FA under the Account settings section, accessible from the top-right user menu. Defender will guide you through the necessary steps.
+If you want access to Mainnet, xDai, BSC, Fantom, Fuse, Matic, or Avalanche, or to increase any of the quota limits from the free plan, you can upgrade your plan to Team or Individual in the Account Plan menu in the top-right menu in Defender.
 
 [[feedback]]
 == Feedback
