@@ -22,7 +22,7 @@ You will need LINK tokens in order to pay for executions on your Upkeep contract
 
 ## Implementing the Upkeep interface
 
-The first step for registering your contract as an Upkeep is to have it implement the required Upkeep interface, which consists of the https://docs.chain.link/docs/kovan-keeper-network-beta#how-to-register-upkeep[following two methods]:
+The first step for registering your contract as an Upkeep is to have it implement the required Upkeep interface, which consists of the https://docs.chain.link/docs/chainlink-keepers/compatible-contracts/[following two methods]:
 
 - `checkUpKeep`: This function will be called every block (about ~15 sec) & the boolean return value decides if the contract needs to be serviced at this time or not. If the upkeep is required, you can also return bytes that will be passed to `performUpkeep` function.
 - `performUpkeep`: This function is the actual upkeep that the contract wants servicing. This function is called only if checkUpKeep has returned true.
