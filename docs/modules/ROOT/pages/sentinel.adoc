@@ -19,7 +19,7 @@ Use a Sentinel whenever you need to know about or respond to transactions involv
 
 A Sentinel watches transactions that affect a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
 
-IMPORTANT: At this time, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan.  If the internal call emits an event, consider monitoring for that event instead.  Events emitted from internal calls are detected on all networks.
+IMPORTANT: At this time, Sentinels are supported across all networks except Fantom. Furthermore, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan. If the internal call emits an event, consider monitoring for that event instead, as events emitted from internal calls are detected on all supported networks.
 
 [[specify-address]]
 === Specifying an Address
