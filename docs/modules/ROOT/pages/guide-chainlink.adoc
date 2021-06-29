@@ -124,7 +124,7 @@ You can leverage Defender xref:sentinel.adoc[Sentinels] and xref:autotasks.adoc[
 
 You can set up a xref:sentinel.adoc[Sentinels] to alert you whenever your contract has one or several failed executions over a period of time, so you can investigate the cause for these failures and adjust your Upkeep code if needed.
 
-To do this, begin by creating a new Sentinel to monitor the https://kovan.etherscan.io/address/0xAaaD7966EBE0663b8C9C6f683FB9c3e66E03467F[Chainlink Keeper Registry] (`0xAaaD7966EBE0663b8C9C6f683FB9c3e66E03467F` on Kovan).
+To do this, begin by creating a new Sentinel to monitor the https://kovan.etherscan.io/address/0xAaaD7966EBE0663b8C9C6f683FB9c3e66E03467F[Chainlink Keeper Registry] (`0x109A81F1E0A35D4c1D0cae8aCc6597cd54b47Bc6` on Kovan).
 
 image::guides-chainlink-monitor-failed-1.png[Create new Sentinel on the Chainlink Keeper Registry]
 
@@ -160,7 +160,7 @@ image::guides-chainlink-low-funds-autotask.png[Create an Autotask for managing y
 
 Whenever this Autotask runs, if it detects that balance is lower than however many tokens you configure, it will use your Relayer to send more LINK to fund your Upkeep.
 
-Last step is to trigger this Autotask. You can have it run on a recurring basis, by setting it to _schedule_ instead of _webhook_ mode, or trigger it after a job is executed. If you go with the latter, you will need to create a Sentinel to monitor the https://kovan.etherscan.io/address/0xAaaD7966EBE0663b8C9C6f683FB9c3e66E03467F[Chainlink Keeper Registry] (`0xAaaD7966EBE0663b8C9C6f683FB9c3e66E03467F` on Kovan) as in the previous scenario, and filter by all `UpkeepPerformed` events on your job.
+Last step is to trigger this Autotask. You can have it run on a recurring basis, by setting it to _schedule_ instead of _webhook_ mode, or trigger it after a job is executed. If you go with the latter, you will need to create a Sentinel to monitor the https://kovan.etherscan.io/address/0x109A81F1E0A35D4c1D0cae8aCc6597cd54b47Bc6[Chainlink Keeper Registry] (`0x42dD7716721ba279dA2f1F06F97025d739BD79a8` on Kovan) as in the previous scenario, and filter by all `UpkeepPerformed` events on your job.
 
 image::guides-chainlink-monitor-executions.png[Configure the Sentinel to watch all executions on your job in the Keeper Registry]
 
