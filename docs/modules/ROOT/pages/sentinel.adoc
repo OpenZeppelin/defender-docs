@@ -199,6 +199,8 @@ The autotask must return a structure containing all matches.
 
 IMPORTANT: Errors will be treated as a non-match.  All executions can be found on the Autotask's run page.
 
+Returning an empty object indicates no match occurred. 
+
 [source,jsx]
 ----
 {
@@ -254,6 +256,8 @@ Options
 * *Specific Transaction* will attempt to match a transaction hash (0xabc...def)
 
 The search uses the conditions that are in the form at the current moment.  
+
+Note: Running a Test will not trigger a notification. 
 
 [[notifications]]
 == Notifications
