@@ -160,7 +160,7 @@ NOTE: Each invocation can contain up to 25 transactions.
 
 ==== Request Schema
 
-The request body will contain the following structure.
+The request body will contain the following structure. You can use the `SentinelConditionRequest` type from the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package if you are coding your Autotasks in Typescript.
 
 [source,jsx]
 ----
@@ -195,11 +195,9 @@ The request body will contain the following structure.
 
 ==== Response Schema
 
-The autotask must return a structure containing all matches.  
+The autotask must return a structure containing all matches. Returning an empty object indicates no match occurred. The type for this object is `SentinelConditionResponse`.
 
-IMPORTANT: Errors will be treated as a non-match.  All executions can be found on the Autotask's run page.
-
-Returning an empty object indicates no match occurred. 
+IMPORTANT: Errors will be treated as a non-match. All executions can be found on the Autotask's run page.
 
 [source,jsx]
 ----
@@ -344,20 +342,19 @@ $ curl https://api.telegram.org/bot$BOT_TOKEN/getUpdates
 
 === Autotask
 
-IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at defender@openzeppelin.com with a description of your use case.
-
 If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
+
+IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at defender@openzeppelin.com with a description of your use case.
 
 == Autotask Events
 
-The sentinel will pass information about the transaction to your autotask.
+The sentinel will pass information about the transaction to your autotask. You can use the `SentinelTriggerEvent` type from the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package if you are coding your Autotasks in Typescript.
 
 === Example Autotask
 
 [source,jsx]
 ----
-exports.handler = async function(params) {
-  
+exports.handler = async function(params) {  
   const payload = params.request.body;
   const transaction  = payload.transaction;
   const matchReasons = payload.matchReasons;

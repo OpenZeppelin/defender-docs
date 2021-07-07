@@ -155,13 +155,16 @@ Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 
 [source,jsx]
 ----
 "@apollo/client": "3.3.16",
-"axios": "0.19.2",
-"defender-admin-client": "1.7.0",
-"defender-autotask-client": "1.7.0",
-"defender-kvstore-client": "1.7.0",
-"defender-relay-client": "1.7.0",
-"ethers": "5.0.3",
-"web3": "1.3.4"
+"axios": "0.21.1",
+"axios-retry": "3.1.9",
+"defender-admin-client": "1.10.0",
+"defender-autotask-client": "1.10.0",
+"defender-autotask-utils": "1.10.0",
+"defender-kvstore-client": "1.10.0",
+"defender-relay-client": "1.10.0",
+"ethers": "5.4.1",
+"graphql-request": "3.4.0",
+"web3": "1.3.6"
 ----
 
 NOTE: If you need to use any dependency not listed above, you can either use a javascript module bundler such as rollup or webpack to include it in your code or just contact us to add it to the set of common dependencies. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project] for more info.
@@ -199,46 +202,28 @@ if (require.main === module) {
 
 We love https://www.typescriptlang.org/[typescript] in the Defender development team, and we hope you do too! If you want to write your Autotasks in typescript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting javascript code. Unfortunately, we don't support coding directly in typescript in the Defender web interface.
 
-All `defender-client` packages are coded in typescript and are packaged with their type declarations. You can use the following type definition for your Autotasks handler function:
+All `defender-client` packages are coded in typescript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package for type definitions for the event payload.
 
 [source,ts]
 ----
-// Autotasks receive AutotaskRelayerParams when they are invoked by Defender,
-// but we suggest you use the ApiRelayerParams when developing locally.
-type ApiRelayerParams = { apiKey: string; apiSecret: string };
-type AutotaskRelayerParams = { credentials: string; relayerARN: string };
-type RelayerParams = ApiRelayerParams | AutotaskRelayerParams;
+import { AutotaskEvent, SentinelTriggerEvent } from 'defender-autotask-utils';
 
-// Webhook HTTP POST request
-type WebhookRequest = { 
-  body?: object;
-  queryParameters?: { [name: string]: string };
-  headers?: { [name: string]: string };
+// Example for an Autotask being triggered by a Sentinel
+export async function handler(event: AutotaskEvent) {
+  const match = event.request.body as SentinelTriggerEvent;
+  console.log(`Matched tx ${match.hash}`);
 }
-
-// Secret key/value pairs
-type Secrets = {
-  [name: string]: string
-}
-
-type AutotaskEvent = RelayerParams & {
-  secrets?: Secrets;
-  request?: WebhookRequest;
-}
-
-type Handler = (event: AutotaskEvent) => Promise<object | undefined>;
 ----
 
 [[updating-code]]
 === Updating code
 
-You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file.
+You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file:
 
-```js
-const { AutotaskClient } = require('defender-autotask-client');
-const client = new AutotaskClient({apiKey: API_KEY, apiSecret: API_SECRET});
-
-await client.updateCodeFromFolder(autotaskId, './path/to/code');
+```bash
+$ echo API_KEY=$API_KEY >> .env
+$ echo API_SECRET=$API_SECRET >> .env
+$ defender-autotask update-code $AUTOTASK_ID ./path/to/code
 ```
 
 NOTE: The code bundle must not exceed 50MB in size, and you must always include an `index.js` at the root of the zip file to act as the entrypoint.
