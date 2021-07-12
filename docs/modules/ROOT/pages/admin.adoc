@@ -102,6 +102,31 @@ You can modify your multisig settings by creating _custom action_ proposals to e
 
 image::defender-admin-add-owner.png[Defender Admin Add Owner]
 
+[[timelocks]]
+== Timelocks
+
+=== Creating timelocked proposals
+
+Defender Admin supports timelocked admin proposals via the https://docs.openzeppelin.com/contracts/4.x/access-control#using_timelockcontroller[TimelockController contract provided by the OpenZeppelin Contracts library].
+
+To execute a timelocked proposal, you need a `TimelockController` contract to have enough permissions to execute it. Once proper permissions are in place, just create a proposal as you normally would, ticking the `Timelock` checkbox in the _Execution strategy_ section. Then enter your timelock's address and choose the minimum delay between the proposal's approval and its execution. 
+
+image::defender-admin-timelocks-choose.png[Configuring a proposal's timelock]
+
+Notice that you can create a timelocked proposal regardless of whether it is approved through a multisig or an EOA. Any approval policy should work provided the right on-chain permission structure is in place. 
+
+image::defender-admin-timelocks-with-msig.png[Creating a timelocked proposal to be approved through a Gnosis Safe]
+
+=== Managing timelocked proposals
+
+Once you created a timelocked proposal, Defender will guide you and your collaborators to see it through. Assuming you chose to approve the proposal through a Gnosis Safe, the steps from proposal creation to the underlying admin action's execution are:
+
+1. Collect enough multisig owner approvals (as dictated by the multisig's current configuration).
+2. Schedule the action, with the specified delay period. Keep in mind the multisig in use needs to be a _proposer_ in the `TimelockController` contract. https://docs.openzeppelin.com/contracts/4.x/access-control#using_timelockcontroller[Read more here].
+3. After the specified delay period ends, execute the action. It is worth noting here that the EOA that executes this action needs to be an _executor_ in the `TimelockController` contract.
+
+NOTE: Currently Defender does not support timelocked Upgrade proposals. That capability is a work in progress and we plan release it soon.
+
 [[wallets]]
 == Wallets
 
@@ -128,4 +153,4 @@ Defender Admin's main contribution to security is then related to usability. Fir
 [[coming-up]]
 == Coming up...
 
-We are working on adding first class support for timelocked admin actions as well as a number of enhancements to let you better navigate and organize your contracts. We are also working on public views for contracts, so you can optionally share with your community what change proposals are coming. Stay tuned, and let us know if you have any requests!
+We are working on a number of enhancements to let you better navigate and organize your contracts; public views for contracts, so you can optionally share with your community what change proposals are coming; first class support for access control in contracts; and governance. Stay tuned, and let us know if you have any requests!
