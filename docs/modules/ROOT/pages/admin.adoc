@@ -109,7 +109,12 @@ image::defender-admin-add-owner.png[Defender Admin Add Owner]
 
 Defender Admin supports timelocked admin proposals via the https://docs.openzeppelin.com/contracts/4.x/access-control#using_timelockcontroller[TimelockController contract provided by the OpenZeppelin Contracts library].
 
-To execute a timelocked proposal, you need a `TimelockController` contract to have enough permissions to execute it. Once proper permissions are in place, just create a proposal as you normally would, ticking the `Timelock` checkbox in the _Execution strategy_ section. Then enter your timelock's address and choose the minimum delay between the proposal's approval and its execution. 
+To execute a timelocked proposal, you need:
+
+1. A multisig (or EOA) that's a _proposer_ in a TimelockController.
+2. A TimelockController with rights over the action you want to run on your contract.
+
+Once proper permissions are in place, just create a proposal as you normally would, ticking the `Timelock` checkbox in the _Execution strategy_ section. Then enter your timelock's address and choose the minimum delay between the proposal's approval and its execution. 
 
 image::defender-admin-timelocks-choose.png[Configuring a proposal's timelock]
 
