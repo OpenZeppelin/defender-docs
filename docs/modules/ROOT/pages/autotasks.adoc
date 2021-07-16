@@ -99,6 +99,8 @@ A sample response from the webhook endpoint looks like the following, where `sta
 }
 ----
 
+NOTE: Autotasks that take longer than 25 seconds to complete will return a response with a pending state. Nevertheless, the autotask will continue to run in the background and eventually complete.
+
 [[secrets]]
 === Secrets
 
