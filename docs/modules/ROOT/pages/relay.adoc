@@ -31,12 +31,21 @@ NOTE: Defender Relayers are implemented as Externally Owned Accounts. We are wor
 
 Each Relayer has one or more *API keys* associated with it. In order to send a transaction through a Relayer, you will need to authenticate the request with one an API key/secret pair. You can create or delete API keys as you see fit, and this will not change the sending address or Relayer balance.
 
+IMPORTANT: The API key of a relayer is **not** related to its private key. The private key is always kept within a secure key vault and never exposed (see the <<security-considerations,Security considerations>> section for more info). This decoupling allows you to freely rotate API keys while keeping the same Ethereum address for your relayer.
+
 WARNING: When creating a new API key, keep in mind that the API secret is only visible once during the creation — if you don't write it down, it's lost forever. Luckily, creating a new API key is as easy as clicking a button.
 
 [[pausing]]
 === Pausing
 
 You can pause a Relayer from the Defender website, to quickly respond to an emergency. This will cause the Relayer to reject any incoming requests to send a transaction, whether it is from an Autotask or via the API. However, keep in mind that any transactions already sent will not be cancelled. When you are ready to resume operations, just hit the Unpause button and your Relayer will go back to normal.
+
+[[addresses]]
+=== Addresses
+
+Whenever you create a Relayer, a fresh Ethereum account will be created to back it. For security reasons, it is not possible to import an existing private key into a Relayer, not export the private key of a Relayer created by Defender. To avoid platform lock-in, if you grant a privileged role to a Relayer address in your system, consider having an administrative method for switching it to a different one if needed.
+
+You can choose to reuse the same address of one of your existing relayers for a different one on another network. This allows you to have the same addresses on different networks in a multi-chain system. To do this, choose to _Clone a relayer_ in the settings menu of a relayer, and then choose the network for the new relayer that should have the same address. Note that it is not possible to have more than one relayer with the same address per network.
 
 [[sending-transactions]]
 == Sending transactions
@@ -259,7 +268,7 @@ const balance = await provider.getBalance('0x6b175474e89094c44da98b954eedeac4952
 [[autotasks-integration]]
 == Autotasks integration
 
-A Relayer can be attached to an xref:autotask.adoc[Autotask]. When doing so, the Autotask code will have direct access to the attached Relayer methods _without requiring you to specify an API key_. Instead, Defender will inject short-lived credentials for your Relayer in your Autotask `handler` function.
+A Relayer can be attached to an xref:autotask.adoc[Autotask], a code snippet that is run by Defender. When doing so, the Autotask code will have direct access to the attached Relayer methods _without requiring you to specify an API key_. Instead, Defender will inject short-lived credentials for your Relayer in your Autotask `handler` function.
 
 [source,jsx]
 ----
@@ -271,6 +280,8 @@ exports.handler = async function(credentials) {
   // ... use relayer as usual
 }
 ----
+
+NOTE: Autotasks can be invoked either on a scheduled basis or via a webhook. If you want to call your Relayer from a webapp, the recommended way is to do so via an Autotask triggered through a webhook. Never place your Relayer API key and secret in a frontend, since anyone with those keys would have unrestricted control over your Relayer.
 
 [[meta-transactions]]
 == Meta-transactions
@@ -331,7 +342,7 @@ image::defender-relayer-withdraw-funds-screen.png[Defender Relay Withdraw Funds 
 
 Each Relayer is associated to a private key. When a request to send a transaction is received, the Relayer validates the request, atomically assigns it a nonce, reserves balance for paying for its gas fees, resolves its speed to a gas price, signs it with its private key, and enqueues it for submission to the blockchain. The response is sent back to the client only after this process has finished. Then, the transaction is broadcasted through both Infura and Alchemy for redundancy and retried up to three times in case both APIs are down.
 
-Every five minutes, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their gas price (or the latest gas price for their speed, if it's greater), which could be up to a *150% of the reported gas price for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
+Every minute, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their gas price (or the latest gas price for their speed, if it's greater), which could be up to a *150% of the reported gas price for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
 
 [[security-considerations]]
 == Security considerations
@@ -343,4 +354,4 @@ As for API secrets, these are only kept in memory during creation when they are 
 [[coming-up]]
 == Coming up...
 
-We are working on new features, such as fixed gas prices, time-to-live for transactions, and policies to restrict maximum expenditure. Stay tuned, and let us know if you have any requests!
+We are working on new features, such policies to restrict maximum expenditure and whitelists. Stay tuned, and let us know if you have any requests!
