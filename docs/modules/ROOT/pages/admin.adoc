@@ -111,23 +111,14 @@ You can create and deploy a new Timelock Controller directly from Defender. To c
 
 In order to verify the contract on etherscan, you can find the source code and compiler settings below:
 
-The deployment uses a vanilla instance of the https://docs.openzeppelin.com/contracts/4.x/access-control#using_timelockcontroller[TimelockController contract provided by the OpenZeppelin Contracts library].
+The deployment uses a vanilla instance of the https://docs.openzeppelin.com/contracts/4.x/api/governance#TimelockController[TimelockController contract V4.X provided by the OpenZeppelin Contracts library].
 
-```
 
+``` TimelockController.sol
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/governance/TimelockController.sol";
-
-contract MyTimelockController is TimelockController {
-    constructor(
-        uint256 minDelay,
-        address[] memory proposers,
-        address[] memory executors
-    ) TimelockController(minDelay, proposers, executors) {}
-}
-
 
 ```
 
