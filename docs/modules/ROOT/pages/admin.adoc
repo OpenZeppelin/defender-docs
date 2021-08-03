@@ -132,6 +132,13 @@ Once you created a timelocked proposal, Defender will guide you and your collabo
 
 NOTE: Currently Defender does not support timelocked Upgrade proposals. That capability is a work in progress and we plan release it soon.
 
+=== Deploying timelock contracts from Defender
+
+You can create and deploy a new `TimelockController` contract directly from Defender. To create a new `TimelockController`, go to Admin and click _Add Contract_. A menu will open where you can click _Create Timelock_. 
+
+You will be taken to a simple form where you will be asked to provide the initial list of proposers and executors for the timelock contract, as well as the minimum delay that all operations will have to wait for.
+
+
 [[wallets]]
 == Wallets
 
