@@ -152,7 +152,7 @@ WARNING: Each item expires 90 days after its last update. If you need a long-liv
 [[environment]]
 == Environment
 
-Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 12 runtime] with 256mb RAM and a 5-minute timeout. Code snippets are restricted to be smaller than 50mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
+Autotasks are executed in a https://nodejs.org/dist/latest-v12.x/docs/api/[node 12 runtime] with 256mb RAM and a 5-minute timeout. Code snippets are restricted to be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
 
 [source,jsx]
 ----
@@ -228,7 +228,7 @@ $ echo API_SECRET=$API_SECRET >> .env
 $ defender-autotask update-code $AUTOTASK_ID ./path/to/code
 ```
 
-NOTE: The code bundle must not exceed 50MB in size, and you must always include an `index.js` at the root of the zip file to act as the entrypoint.
+NOTE: The code bundle must not exceed 5MB in size, and you must always include an `index.js` at the root of the zip file to act as the entrypoint.
 
 [[a-complete-example]]
 == A complete example
