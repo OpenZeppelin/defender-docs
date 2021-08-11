@@ -82,6 +82,8 @@ When using a Gnosis Safe, Defender Admin will synchronize all signatures to and 
 
 NOTE: The Safe contract requires all its proposals to be executed in order. If you have gathered all signatures for a proposal and still cannot execute it, make sure there are no prior proposals pending execution.
 
+Gnosis Safe wallets also allow executing `DELEGATECALL`s into other contracts, in order to execute arbitrary code in the context of the multisig. You can currently create an Admin action proposal to issue a delegate call via the API using the https://www.npmjs.com/package/defender-admin-client[`defender-admin-client`]. 
+
 [[gnosis-multisigwallet]]
 === Gnosis MultisigWallet
 
