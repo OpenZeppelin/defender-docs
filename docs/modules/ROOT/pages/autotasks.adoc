@@ -1,7 +1,7 @@
 [[autotasks]]
 = Autotasks
 
-_The Defender Autotasks service allows you to run small code snippets on a regular basis or via webhooks that can make calls to the Ethereum network or to external APIs. Thanks to tight integration to xref:relay.adoc[Relay], you can use Autotasks to automate regular actions on your contracts._
+The Defender Autotasks service allows you to **run code snippets** on a **regular basis**, **via webhooks**, or in **response to a transaction**. Thanks to tight integration to xref:relay.adoc[Relay] and xref:sentinel.adoc[Sentinels], you can use Autotasks to automate regular actions by easily sending transactions or reacting to events from your contracts.
 
 [[use-cases]]
 == Use cases

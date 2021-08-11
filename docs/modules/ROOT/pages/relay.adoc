@@ -1,7 +1,7 @@
 [[relay]]
 = Relay
 
-_The Defender Relay service allows you to send transactions via a regular HTTP API, and takes care of private key secure storage, transaction signing, nonce management, gas price estimation, and resubmissions. This way you don't need to worry about securing your private keys in your backend scripts, or by monitoring your transactions to ensure they get mined._
+The Defender Relay service allows you to send transactions via a regular HTTP API, and takes care of **private key secure storage**, **transaction signing**, **nonce management**, **gas price estimation**, and **resubmissions**. This way you don't need to worry about securing your private keys in your backend scripts, or by monitoring your transactions to ensure they get mined.
 
 [[use-cases]]
 == Use cases

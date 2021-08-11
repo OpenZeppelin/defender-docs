@@ -1,7 +1,7 @@
 [[advisor]]
 = Advisor
 
-_The Defender Advisor service contains a knowledgebase of security best practices curated by the OpenZeppelin team. The best practices cover development, testing, monitoring and operations. Defender Advisor can be used as a checklist to prioritize efforts in implementing project security._
+The Defender Advisor service contains a **knowledge base of security best practices** curated by the OpenZeppelin team. The best practices cover development, testing, monitoring and operations. Defender Advisor can be used as a checklist to prioritize efforts in implementing project security.
 
 [[use-cases]]
 == Use cases

@@ -1,7 +1,7 @@
 [[sentinel]]
 = Sentinel
 
-_The Defender Sentinel service allows you to monitor transactions by defining conditions on events, functions, and transaction parameters, and notifying via email, slack, telegram, discord, autotasks and more._
+The Defender Sentinel service allows you to **monitor transactions** by **defining conditions** on events, functions, and transaction parameters, and notifying via email, slack, telegram, discord, xref:autotasks.adoc[Autotasks], and more.
 
 [[use-cases]]
 == Use cases

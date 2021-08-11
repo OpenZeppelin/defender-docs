@@ -1,7 +1,7 @@
 [[admin]]
 = Admin
 
-_The Defender Admin service acts as an interface to manage your smart contract project through one or more secure multi-signature contracts. Defender Admin holds no control at all over your system, which is fully controlled by the keys of the signers._
+The Defender Admin service acts as an interface to **manage your smart contract project** through secure **multisig contracts** or **timelocks**. Defender Admin holds no control at all over your system, which is fully controlled by the keys of the signers.
 
 [[use-cases]]
 == Use cases
