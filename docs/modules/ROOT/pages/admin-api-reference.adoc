@@ -31,6 +31,7 @@ type Network =
   | 'mumbai'
   | 'avalanche'
   | 'fuji';
+
 type Address = string;
 type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];
 
@@ -51,16 +52,16 @@ interface CreateProposalRequest {
   title: string;
   description: string;
   type: 'upgrade' | 'custom';
-  metadata?: {
-    newImplementationAddress: Address
-  };
   via?: Address;
   viaType?: 'Gnosis Safe' | 'Gnosis Multisig';
-  functionInterface?: {
-    name?: string;
-    inputs?: ProposalFunctionInputType[];
-  };
+  functionInterface?: { name?: string; inputs?: ProposalFunctionInputType[]; };
   functionInputs?: ProposalFunctionInputs;
+  metadata?: {
+    newImplementationAddress?: Address;
+    proxyAdminAddress?: Address;
+    action?: 'pause' | 'unpause';
+    operationType?: 'call' | 'delegateCall';
+  };
 }
 ```
 
