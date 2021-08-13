@@ -96,7 +96,7 @@ In addition to the vanilla MultisigWallet, Defender Admin also supports a https:
 
 ==== Creating a Gnosis Safe multisig from Defender
 
-You can create and deploy a new Gnosis Safe multisig wallet directly from Defender. This comes especially handy in networks where the official Gnosis Safe UI is not yet available. To create a new Gnosis Safe, go to Admin and click on "Create Gnosis Safe". You'll be taken to a simple form where you will be asked to provide the initial list of owners and threshold for the multisig. That's it! 
+You can create and deploy a new Gnosis Safe multisig wallet directly from Defender. This comes especially handy in networks where the official Gnosis Safe UI is not yet available. To create a new Gnosis Safe, go to Admin and click on "Contracts" and then "Create Gnosis Safe". You'll be taken to a simple form where you will be asked to provide the initial list of owners and threshold for the multisig. That's it! 
 
 ==== Modifying your multisig settings from Defender
 
@@ -106,6 +106,29 @@ image::defender-admin-add-owner.png[Defender Admin Add Owner]
 
 [[timelocks]]
 == Timelocks
+
+=== Creating a Timelock Controller from Defender
+
+You can create and deploy a new Timelock Controller directly from Defender. To create a new Timelock, go to Admin and click on "Contracts" and then "Create timelock". You'll be taken to a simple form where you will be asked to provide the initial list of proposers and executors as well as the minimum delay for a proposal to be executed.
+
+In order to verify the contract on etherscan, you can find the source code and compiler settings below:
+
+The deployment uses a vanilla instance of the https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.2/contracts/governance/TimelockController.sol[TimelockController contract v4.2 provided by the OpenZeppelin Contracts library].
+
+
+The compiler settings to deploy the contract:
+
+```
+solidity: {
+    version: "0.8.4",
+    settings: {
+        optimizer: {
+            enabled: true,
+            runs: 200
+        }
+    }
+}
+```
 
 === Creating timelocked proposals
 
