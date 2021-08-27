@@ -1,0 +1,115 @@
+# How to manage roles on a TimelockController using Defender Admin
+
+[[timelock-roles]]
+== Timelock roles
+
+*Proposer*: an address (smart contract or EOA) that is in charge of scheduling (and cancelling) operations. On the TimelockController contract, the proposer role (or *PROPOSER_ROLE*) is identified by the following value: `0xb09aa5aeb3702cfd50b6b62bc4532604938f21248a27a1d5ca736082b6819cc1`
+ 
+*Executor*: an address (smart contract or EOA) that is in charge of executing operations once the timelock has expired. On the TimelockController contract, the executor role (or *EXECUTOR_ROLE*) is identified by the following value: `0xd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e63`
+ 
+*Admin*: an address (smart contract or EOA) that is in charge of granting the roles of Proposer and Executor. On the TimelockController contract, the admin role (or *TIMELOCK_ADMIN_ROLE*) is identified by the following value: `0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5`
+
+A role can only be granted or revoked by someone with the admin role. Upon deployment of the timelock, both the timelock and the deployer of the contract have this privilege.
+A TimelockController is *self-governed* if only the timelock holds the admin role.
+
+
+[[importing-a-contract]]
+== Importing a Contract
+
+Defender Admin allows users to import existing smart contracts into Defender to more easily manage them. This can be achieved as follows:
+
+1. Navigate to Admin.
+2. Click on Add Contract.
+3. Select “Import Contract”.
++
+image::guide-timelock-roles-import-contract.png[Import new contract using Defender Admin]
+4. Give the contract a relevant name so you can easily identify it.
+5. Select the network on which the contract is deployed.
+6. Copy the contract address and optionally give it an alias to easily recognise it.
+7. If your contract is not verified on https://etherscan.io[Etherscan, window="_blank"], Defender will not be able to retrieve the ABI automatically You will need to manually https://gist.github.com/mverzilli/a35ab1b5bd7039167cc9270e9fd60632[paste in the ABI, window="_blank"].
+8. Add your contract.
+
+image::guide-timelock-roles-imported-contract.png[Imported contract using Defender Admin]
+
+[[create-a-timelock-proposal]]
+== Creating a Timelock Proposal
+
+Defender Admin allows users to create and manage proposals. Proposals in turn allow you to directly execute actions on or schedule delayed execution of functions through the TimelockController contract. In order to create a new proposal:
+
+1. Navigate to Admin.
+2. Select your timelock contract.
+3. Create a new proposal (“admin action”).
+
+image::guide-timelock-roles-admin-action.png[Create a new proposal]
+
+On the right-hand side, you will see the contract state, including the three values associated with the aforementioned roles.
+
+image::guide-timelock-roles-contract-state.png[Contract state]
+
+[[granting-a-role]]
+== Granting a role
+
+In order to grant someone a role:
+
+1. Connect your wallet that has *admin* or *proposer* rights on the timelock. If the admin or proposer is a multisig, connect a wallet that is a signer of that multisig.
+2. Select the `grantRole` function from the dropdown menu.
+3. Enter the value of the role you wish to grant (you can copy and paste this from the contract state on the right-hand side).
+4. Select the account you wish to grant the role to.
++
+image::guide-timelock-roles-grant-role.png[Grant a role]
+5. Choose your execution strategy:
+** If your EOA or multisig holds the *admin* role on the timelock, you will be able to create the proposal using the EOA or multisig execution strategy.
++
+image::guide-timelock-roles-grant-role-execution-strategy-with-eoa.png[Execution strategy with EOA]
+** If your timelock is *self-governed*, you will need to select the timelock execution strategy followed by the EOA or multisig that is a *proposer* of the timelock.
++
+image::guide-timelock-roles-grant-role-execution-strategy-with-tl.png[Execution strategy with a Timelock]
+6. Describe your proposal and submit the form.
+7. Approve and schedule / execute your proposal accordingly.
+** If your EOA or multisig holds the *admin* role on the timelock, you will be able to execute the proposal immediately, or once you have reached the approval threshold on your multisig.
+** If your timelock is *self-governed*, you will be able to schedule the proposal, and will have to wait for the timelock delay until you can return and execute it, at which point it will actually come into effect.
++
+image::guide-timelock-roles-grant-role-executing.png[Timelock proposal pending approval]
+
+Make sure that your proposal was executed correctly. This can be verified by the status label after clicking the “Execute” button.
+
+image::guide-timelock-roles-grant-role-executed.png[Timelock proposal executed]
+
+[[revoking-a-role]]
+== Revoking a role
+
+In order to revoke a role:
+
+1. Connect your wallet that has *admin* or *proposer* rights on the timelock. If the admin or proposer is a multisig, connect a wallet that is a signer of that multisig.
+2. Select the `revokeRole` function from the dropdown menu.
+3. Enter the value of the role you wish to revoke (you can copy and paste this from the contract state on the right-hand side). For example, to revoke the *EXECUTOR* role for an address, use: 
+`0xd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e63`
+4. Select the account you wish to revoke the role from.
++
+image::guide-timelock-roles-revoke-role.png[Revoke a role]
+5. Choose your execution strategy:
+** If your EOA or multisig holds the *admin* role on the timelock, you will be able to create the proposal using the EOA or multisig execution strategy.
++
+image::guide-timelock-roles-revoke-role-execution-strategy-with-eoa.png[Execution strategy with EOA]
+** If your timelock is *self-governed*, you will need to select the timelock execution strategy followed by the EOA or multisig that is a *proposer* of the timelock.
++
+image::guide-timelock-roles-revoke-role-execution-strategy-with-tl.png[Execution strategy with Timelock]
+6. Describe your proposal and submit the form.
+7. Approve and schedule / execute your proposal accordingly.
+** If your EOA or multisig holds the *admin* role on the timelock, you will be able to execute the proposal immediately, or once you have reached the approval threshold on your multisig.
+** If your timelock is *self-governed*, you will be able to schedule the proposal, and will have to wait for the timelock delay until you can return and execute it, at which point it will actually come into effect.
+
+image::guide-timelock-roles-revoke-role-executing.png[Timelock proposal pending approval]
+
+Make sure that your proposal was executed correctly. This can be verified by the status label after clicking the “Execute” button. 
+
+image::guide-timelock-roles-revoke-role-executed.png[Timelock proposal executed]
+
+
+[[Caveats]]
+== Caveats
+
+1. If the timelock is completely *self-governed*, make sure when revoking a *Proposer* or *Executor* that you have at least one other trusted user assigned to this role. Otherwise, no one will have the correct privileges to create or execute proposals on the TimelockController contract, essentially locking it down. 
+2. If you want to revoke the *Executor* role when the TimelockController has specified that _anyone_ can execute, simply revoke the role for the account `0x0000000000000000000000000000000000000000`. Make sure to grant the role to a specified address prior to this action, otherwise the TimelockController contract might get locked down (see point 1 above).
+
+For more information on Timelock Controllers and its access roles, have a look at our documentation on https://docs.openzeppelin.com/contracts/4.x/api/governance#TimelockController[TimelockControllers, window="_blank"]
