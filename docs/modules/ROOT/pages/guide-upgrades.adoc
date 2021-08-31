@@ -255,7 +255,7 @@ We need to register the Hardhat Defender plugin in our `hardhat.config.js`
 
 [source,js]
 ----
-require("@openzeppelin/hardhat-upgrades");
+require("@openzeppelin/hardhat-defender");
 ----
 
 We also need to add our Defender _Team API key_ to the exported configuration in `hardhat.config.js`:
