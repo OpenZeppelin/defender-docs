@@ -30,7 +30,9 @@ type Network =
   | 'matic'
   | 'mumbai'
   | 'avalanche'
-  | 'fuji';
+  | 'fuji'
+  | 'celo'
+  | 'alfajores';
 
 type Address = string;
 type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];
