@@ -40,7 +40,7 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 [[networks]]
 == Available networks
 
-All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://fuse.io/[*Fuse*], https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*], https://fantom.foundation/what-is-fantom-opera/[*Fantom*], https://docs.moonbeam.network/networks/testnet/[*Moonbase*], https://docs.matic.network/docs/develop/network-details/network[*Polygon* (Matic)], and https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[Avalanche C] chains, along with their respective testnets where applicable. Note that some networks may be unavailable depending on your <<tiers,plan>>.
+All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://fuse.io/[*Fuse*], https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*], https://fantom.foundation/what-is-fantom-opera/[*Fantom*], https://docs.moonbeam.network/networks/testnet/[*Moonbase*], https://docs.matic.network/docs/develop/network-details/network[*Polygon* (Matic)], https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[Avalanche C], and https://celo.org/[Celo] chains, along with their respective testnets where applicable. Note that some networks may be unavailable depending on your <<tiers,plan>>.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
@@ -49,7 +49,7 @@ If there is any other network or layer-2 solution you would like to use from Def
 
 The Defender free plan is restricted for testnet access only. In addition, you may only create up to five Relayers and Autotasks, import up to five Contracts into Admin, and have up to five Users in your team. The total number of transactions sent from Relayers cannot exceed 30 per hour, and the same limit applies for Autotask runs.
 
-If you want access to Mainnet, xDai, BSC, Fantom, Fuse, Matic, or Avalanche, or to increase any of the quota limits from the free plan, you can upgrade your plan to Team or Individual in the Account Plan menu in the top-right menu in Defender.
+If you want access to Mainnet, xDai, BSC, Fantom, Fuse, Matic, Avalanche, or Celo, or to increase any of the quota limits from the free plan, you can upgrade your plan to Team or Individual in the Account Plan menu in the top-right menu in Defender.
 
 [[feedback]]
 == Feedback
