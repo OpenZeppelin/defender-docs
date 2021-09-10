@@ -162,6 +162,8 @@ NOTE: Currently Defender does not support timelocked Upgrade proposals. That cap
 
 You can also delegate control of an Admin proposal to a Governor contract. To create a Governor proposal, simply set the execution strategy to `Governor` and enter a valid `Governor` contract address. Defender will perform basic checks to validate that the contract actually conforms to the `Governor` interface before letting you proceed.
 
+Defender Admin supports creating proposals on OpenZeppelin's Governor contract, as well as Compound's Alpha and Bravo dialects.
+
 image::defender-admin-governor-create-proposal.png[Create a proposal to be managed by a Governor]
 
 Once you entered these details, Defender will let you send the proposal to the Governor contract. 
@@ -171,8 +173,6 @@ image::defender-admin-governor-send.png[Send proposal to the Governor]
 From then on, your community can use any Governor compatible voting DApp (such as https://www.withtally.com/[Tally]). Defender will track the state of the proposal each time you open it. 
 
 image::defender-admin-governor-track.png[Defender tracks the state of your proposal by querying the Governor]
-
-NOTE: At the time of writing, Defender Admin supports OpenZeppelin's Governor contract variant without timelocks. We are working on expanding support for Compound's Governor Alpha and Bravo variants, as well as first class integration with timelocks for all three variants. 
 
 [[wallets]]
 == Wallets
