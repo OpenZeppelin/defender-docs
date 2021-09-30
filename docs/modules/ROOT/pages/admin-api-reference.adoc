@@ -32,7 +32,9 @@ type Network =
   | 'avalanche'
   | 'fuji'
   | 'celo'
-  | 'alfajores';
+  | 'alfajores'
+  | 'arbitrum'
+  | 'arbitrum-rinkeby';
 
 type Address = string;
 type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];
