@@ -351,6 +351,11 @@ All private keys are stored in the AWS Key Management Service. Keys are generate
 
 As for API secrets, these are only kept in memory during creation when they are sent to the client. After that, they are hashed and stored securely in AWS Cognito, which is used behind the scenes for authenticating Relayer requests. This makes API keys easy to rotate while preserving the same private key on the KMS.
 
+[[rollups]]
+=== Rollups
+
+When sending transactions to a rollup chain, such as Arbitrum, the Relayer currently depends on the chain's sequencer/aggregator. This means that, if the sequencer goes down or censors transactions, the Relayer will not bypass it and commit directly to layer 1.
+
 [[coming-up]]
 == Coming up...
 
