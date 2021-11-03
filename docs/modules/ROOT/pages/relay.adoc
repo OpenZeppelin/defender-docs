@@ -288,7 +288,7 @@ NOTE: Autotasks can be invoked either on a scheduled basis or via a webhook. If 
 
 Defender Relayers are general-purpose relayers, in the sense that you can use them to send any transaction you want to your contracts. In particular, they can also be used for relaying meta-transactions on behalf of your users. A simple setup for this requires setting up a server-side function that decides whether or not to relay a given meta-transaction, and then calls the Defender Relayer for effectively sending it.
 
-NOTE: If you would like to use Autotasks to host the server-side function to decide whether to pay for a meta-transaction request, let us know! We are working on a webhooks integration that can be used for this purpose.
+In particular, you can use Autotasks to host that function and invoke it via webhooks. You can read more about xref:autotasks.adoc#webhook-handler[webhook activated Autotasks here].
 
 [[eip2771-gsnv2-compatible-meta-transactions]]
 === EIP2771 GSNv2-compatible meta-transactions
