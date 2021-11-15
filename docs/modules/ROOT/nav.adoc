@@ -12,6 +12,7 @@
 ** xref:admin-api-reference.adoc[Admin]
 ** xref:autotasks-api-reference.adoc[Autotasks]
 ** xref:relay-api-reference.adoc[Relay]
+** xref:sentinel-api-reference.adoc[Sentinel]
 
 * xref:account-management.adoc[Account Management]
 
