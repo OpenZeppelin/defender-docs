@@ -6,23 +6,13 @@ The Defender Sentinel service offers 2 types of Sentinels, **Contract Sentinels*
 [[use-cases]]
 == Use cases
 
-=== Contract Sentinel
-Use a Sentinel whenever you need to know about or respond to transactions and forta alerts involving your smart contracts or other smart contracts you need to monitor.  Your Sentinel will watch every transaction and forta alert and send the ones you care about to your notification methods of choice.
+Use a Sentinel when you need to know about or respond to transactions and Forta Alerts involving your smart contracts, other smart contracts you need to monitor or Forta Agents. Your Sentinel will watch every transaction and Forta Alert and send the ones you care about to your notification methods of choice.
 
 * *Monitor* your *sensitive functions* like transferOwnership, pause, or upgrade
-* *Alert* when transactions are failing against smart contracts
-* *Respond* to transactions by executing *Autotask* logic when key events happen 
+* *Alert* on potentially dangerous transactions on your contracts
+* *Respond* by executing logic when key events happen 
 * *Integrate* with your *existing tools* through slack, telegram, discord, email or custom *Autotask* integration
-* *Know* when an unexpected volume of transactions occur
-
-=== Forta Sentinel
-Use a Forta Sentinel whenever you need to know about or respond to Forta alerts involving smart contracts or Forta Agents you want to monitor.  Your Sentinel will watch every Forta Alert related to the Agents your Addresses you specified and send the Alerts you care about to your notification methods of choice.
-
-* *Monitor* specific Forta Agents or Contract Addresses
-* *Alert* when re-entrancy is detected or unusually high gas
-* *Respond* to Alerts by executing *Autotask* logic when key events happen 
-* *Integrate* with your *existing tools* through slack, telegram, discord, email or custom *Autotask* integration
-
+* *Know* when an unexpected volume of transactions or alerts occur
 
 [[whats-in-a-contract-sentinel]]
 == What's in a Contract Sentinel?
@@ -306,7 +296,7 @@ Note: Running a Test will not trigger a notification.
 [[specify-Forta-conditions]]
 == What are Forta Conditions?
 
-Forta Conditions act as filters that allow you to narrow forta alerts down even further.
+Forta Conditions act as filters that allow you to narrow Forta Alerts down even further.
 
 === Severity Condition
 
@@ -358,8 +348,7 @@ The request body will contain the following structure.
         "name": "High Gas Used",            // human-readable name of finding
         "description": "Gas Used: 999999",  // brief description
         "hash": "0xab..123",                // Forta Alert transaction hash
-        "network": "null",                  // specifies which network the transaction was mined
-        "protocol": "ethereum",             // name of protocol being reported on e.g. "aave", defaults to "ethereum"
+        "protocol": "ethereum",             // specifies which network the transaction was mined
         "scanner_count": 1,
         "severity": "MEDIUM",               // indicates impact level of finding
         "type": "SUSPICIOUS",               // indicates type of finding: Exploit, Suspicious, Degraded, Info
@@ -594,8 +583,7 @@ exports.handler = async function(params) {
     "name": "High Gas Used",            // human-readable name of finding
     "description": "Gas Used: 999999",  // brief description
     "hash": "0xab..123",                // Forta Alert transaction hash
-    "network": "null",                  // specifies which network the transaction was mined
-    "protocol": "ethereum",             // name of protocol being reported on e.g. "aave", defaults to "ethereum"
+    "protocol": "ethereum",             // specifies which network the transaction was mined
     "scanner_count": 1,
     "severity": "MEDIUM",               // indicates impact level of finding
     "type": "SUSPICIOUS",               // indicates type of finding: Exploit, Suspicious, Degraded, Info
