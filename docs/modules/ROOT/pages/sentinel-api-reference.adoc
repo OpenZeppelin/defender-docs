@@ -181,7 +181,8 @@ interface CreateSentinelRequest {
   address: string;
   abi?: string;
   paused?: boolean;
-  conditions: ConditionSet[];
+  eventConditions?: EventCondition[];
+  functionConditions?: FunctionCondition[]
   txCondition?: string;
   autotaskCondition?: string;
   autotaskTrigger?: string;
@@ -204,14 +205,12 @@ const requestParameters = {
   abi: '[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{...}]',
   // optional
   paused: false,
-  conditions: [
-    {
-      eventConditions: [],
-      functionConditions: [{ functionSignature: 'renounceOwnership()' }],
-    },
-  ],
   // optional
-  txCondition: undefined,
+  eventConditions: [],
+  // optional
+  functionConditions: [{ functionSignature: 'renounceOwnership()' }],
+  // optional
+  txCondition: 'gasPrice > 0',
   // optional
   autotaskCondition: '3dcfee82-f5bd-43e3-8480-0676e5c28964',
   // optional
@@ -233,20 +232,16 @@ Once all required parameters are populated, you can create a sentinel by calling
 await client.create(requestParameters);
 ```
 
-If you wish to trigger the sentinel based on additional events, you could append another `ConditionSet` object to the list, for example:
+If you wish to trigger the sentinel based on additional events, you could add another `EventCondition` or `FunctionCondition` object, for example:
 
 ```js
-conditions: [
+functionConditions: [{ functionSignature: 'renounceOwnership()' }],
+eventConditions: [
   {
-    functionConditions: [{ functionSignature: 'renounceOwnership()' }],
-    eventConditions: [
-      {
-        eventSignature: "OwnershipTransferred(address,address)",
-        expression: "\"0xf5453Ac1b5A978024F0469ea36Be25887EA812b5,0x6B9501462d48F7e78Ba11c98508ee16d29a03412\""
-      }
-    ],
-  },
-],
+    eventSignature: "OwnershipTransferred(address,address)",
+    expression: "\"0xf5453Ac1b5A978024F0469ea36Be25887EA812b5,0x6B9501462d48F7e78Ba11c98508ee16d29a03412\""
+  }
+]
 ```
 
 You could also apply a transaction condition by modifying the `txCondition` property:
@@ -267,6 +262,8 @@ autotaskTrigger: '1abfee11-a5bc-51e5-1180-0675a5b24c61',
 
 The `subscribers` endpoint is used to a create new sentinels via a `POST` request.
 If you wish to call the API directly, you will need to construct a `CreateBlockSubscriberRequest` object.
+
+CAUTION: Defender currently only supports a limited subset of Sentinels (only a single addressRule), and we strongly suggest going through the JS client to avoid incompatibilities.
 
 ```js
 interface CreateBlockSubscriberRequest {
