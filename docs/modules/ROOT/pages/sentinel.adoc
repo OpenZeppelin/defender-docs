@@ -14,6 +14,15 @@ Use a Sentinel when you need to know about or respond to transactions and Forta 
 * *Integrate* with your *existing tools* through slack, telegram, discord, email or custom *Autotask* integration
 * *Know* when an unexpected volume of transactions or alerts occur
 
+[[when-to-use]]
+=== When to use a Contract vs a Forta Sentinel
+
+Contract Sentinels are particularly useful for monitoring transactions to a single contract. With the <<specify-conditions, Contract Conditions>> you can filter transactions by various transaction attributes i.e events, functions, params, gasPrice, value, etc. 
+
+Forta Sentinels are useful for monitoring one or more of your smart contracts using a more complex criteria, by hooking into the events and conditions defined by Forta Agent Developers. Forta Agents have greater flexibility for defining transaction conditions than a Contract Sentinel. 
+
+
+
 [[whats-in-a-contract-sentinel]]
 == What's in a Contract Sentinel?
 
