@@ -5,7 +5,7 @@ OpenZeppelin Defender provides a security operations (SecOps) platform for Ether
 [[get-started]]
 == Get started
 
-Signing up to Defender is free! Just head over to https://hubs.li/H0F1_Q50[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account on the free plan. See below for how to invite more users to your team!
+Defender is free*! Just head over to https://hubs.li/H0F1_Q50[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account. See below for how to invite more users to your team!
 
 [.card-section.card-section-2col]
 == Components
@@ -40,18 +40,11 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 [[networks]]
 == Available networks
 
-All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://fuse.io/[*Fuse*], https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*], https://fantom.foundation/what-is-fantom-opera/[*Fantom*], https://docs.moonbeam.network/networks/testnet/[*Moonbase*], https://docs.matic.network/docs/develop/network-details/network[*Polygon\* (Matic)], https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[Avalanche C], https://celo.org/[Celo] and https://arbitrum.io/[Arbitrum] chains, along with their respective testnets where applicable. Note that some networks may be unavailable depending on your <<tiers,plan>>.
+All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks, plus the https://www.xdaichain.com/[*xDai*], https://fuse.io/[*Fuse*], https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*], https://fantom.foundation/what-is-fantom-opera/[*Fantom*], https://docs.moonbeam.network/networks/testnet/[*Moonbase*], https://docs.matic.network/docs/develop/network-details/network[*Polygon\* (Matic)], https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[Avalanche C], https://celo.org/[Celo] and https://arbitrum.io/[Arbitrum] chains, along with their respective testnets where applicable.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
-
-[[tiers]]
-== Plans and quotas
-
-The Defender free plan is restricted for testnet access only. In addition, you may only create up to five Relayers and Autotasks, import up to five Contracts into Admin, and have up to five Users in your team. The total number of transactions sent from Relayers cannot exceed 30 per hour, and the same limit applies for Autotask runs.
-
-If you want access to Mainnet, xDai, BSC, Fantom, Fuse, Matic, Avalanche, Celo, or Abritrum, or to increase any of the quota limits from the free plan, you can upgrade your plan to Team or Individual in the Account Plan menu in the top-right menu in Defender.
 
 [[feedback]]
 == Feedback
 
-As a Defender user, your feedback is important! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your input. Feel free to reach out with questions, feature requests, or issues, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
+As a Defender user, your feedback is important! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your input. Feel free to reach out with questions, feature requests, or issues, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at mailto:defender@openzeppelin.com[defender@openzeppelin.com]. To inquire about enterprise use, click on the link http://zpl.in/defender-inquiry[*here*].
