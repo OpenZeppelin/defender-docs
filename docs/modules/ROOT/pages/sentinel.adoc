@@ -366,6 +366,9 @@ The request body will contain the following structure.
           "agent": {
             "id": "0xab..123",              // Agent ID
             "name": ""                      // Agent name
+          },
+          "block": {
+            "chain_id": 1,                  // Chain ID of the originating network       
           }
         }
       },
@@ -601,6 +604,9 @@ exports.handler = async function(params) {
       "agent": {
         "id": "0xab..123",              // Agent ID
         "name": ""                      // Agent name
+      },
+      "block": {
+        "chain_id": 1,                  // Chain ID of the originating network       
       }
     }
   },
