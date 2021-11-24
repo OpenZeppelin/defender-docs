@@ -369,6 +369,7 @@ The request body will contain the following structure.
           },
           "block": {
             "chain_id": 1,                  // Chain ID of the originating network       
+            "hash": "0xab..123",            // network block hash  e.g ethereum block hash   
           }
         }
       },
@@ -607,6 +608,7 @@ exports.handler = async function(params) {
       },
       "block": {
         "chain_id": 1,                  // Chain ID of the originating network       
+        "hash": "0xab..123",            // network block hash  e.g ethereum block hash  
       }
     }
   },
