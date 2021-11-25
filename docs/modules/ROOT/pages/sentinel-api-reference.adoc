@@ -1,0 +1,412 @@
+[[sentinel-api]]
+= Sentinel API Reference
+
+The Sentinel API allows you to programmatically create and manage sentinels.
+
+Requests need to be authenticated with a bearer token, which is negotiated from the Team API Key with the corresponding capability. Refer to the xref:api-auth.adoc[authentication section] for info on how to negotiate it.
+
+NOTE: We recommend you use the https://www.npmjs.com/package/defender-sentinel-client[defender-sentinel-client] npm package for simplifying interactions with the Sentinel API.
+
+```js
+const { SentinelClient } = require('defender-sentinel-client');
+const creds = { apiKey: ADMIN_API_KEY, apiSecret: ADMIN_API_SECRET };
+const client = new SentinelClient(creds);
+```
+
+[[notifications-endpoint]]
+== Notifications Endpoint
+
+A sentinel requires a notification configuration to alert the right channels in case an event is triggered. In order to do so, you can either use an existing notification ID (from another sentinel for example), or create a new one.
+
+The following notification channels are available:
+
+- email
+- slack
+- discord
+- telegram
+- datadog
+
+The `createNotificationChannel` function requires the `NotificationType` and `NotificationRequest` parameters respectively, and returns a `NotificationResponse` object.
+
+```js
+// List existing notification channels
+// This returns a `NotificationResponse[]` object.
+const notificationChannels = await client.listNotificationChannels()
+const { notificationId, type } = notificationChannels[0];
+```
+
+```js
+// create a new notification
+const notification = await client.createNotificationChannel('email', {
+  name: 'MyEmailNotification',
+  config: {
+    emails: ['john@example.com'],
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel('slack', {
+  name: 'MySlackNotification',
+  config: {
+    url: 'https://slack.com/url/key',
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel('telegram', {
+  name: 'MyTelegramNotification',
+  config: {
+    botToken: 'abcd',
+    chatId: '123',
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel('discord', {
+  name: 'MyDiscordNotification',
+  config: {
+    url: 'https://discord.com/url/key',
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel('datadog', {
+  name: 'MyDatadogNotification',
+  config: {
+    apiKey: 'abcd',
+    metricPrefix: 'prefix',
+  },
+  paused: false,
+});
+```
+
+The `notifications` endpoint is used to retrieve a list of existing notification channels via a `GET` request.
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/notifications"
+```
+
+An example response:
+
+```js
+[
+    {
+        "notificationId": "14e99e8f-e2be-4eb1-a543-b2d90b68cdd8",
+        "config": {
+            "emails": [
+                "john@example.com"
+            ]
+        },
+        "updatedAt": "2021-11-04T12:21:22.858Z",
+        "tenantId": "0c1585a9-1b86-4f9d-8468-28227802ac1d",
+        "paused": false,
+        "name": "MyEmailNotification",
+        "type": "email"
+    },
+]
+```
+
+[[sentinel-endpoint]]
+== Sentinels Endpoint
+
+[[list-endpoint]]
+=== List Sentinels
+
+To list existing sentinels, you can call the `list` function on the client, which returns a `CreateSentinelResponse[]` object:
+
+```js
+await client.list();
+```
+
+The `subscribers` endpoint is used to retrieve a list of existing sentinels via a `GET` request.
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/subscribers"
+```
+
+An example response:
+
+```js
+[
+    {
+        "notifyConfig": {
+            "notifications": [
+                {
+                    "type": "email",
+                    "notificationId": "68e494d7-3b5a-4ffe-bd12-d4e483aa4995"
+                }
+            ],
+            "timeoutMs": 0
+        },
+        "tenantId": "0c1585a9-1b86-4f9d-8468-28227802ac1d",
+        "createdAt": "2021-11-15T16:04:13.936Z",
+        "addressRules": [
+            {
+                "conditions": [],
+                "abi": "[...]",
+                "address": "0xf664FA8aB9AA8021E2c08F45fEeA817D5730A713"
+            }
+        ],
+        "blockWatcherId": "rinkeby-1",
+        "subscriberId": "abebeda6-f670-4e3c-a65b-a34c840e9a5e",
+        "paused": false,
+        "name": "test",
+        "network": "rinkeby"
+    }
+]
+```
+
+[[create-endpoint]]
+=== Create Sentinels
+
+To create a new sentinel, you need to provide the network, name, pause-state, conditions, alert threshold and notification configuration. This request is exported as type `CreateSentinelRequest`.
+
+```js
+interface CreateSentinelRequest {
+  network: string;
+  confirmLevel?: number;
+  name: string;
+  address: string;
+  abi?: string;
+  paused?: boolean;
+  eventConditions?: EventCondition[];
+  functionConditions?: FunctionCondition[]
+  txCondition?: string;
+  autotaskCondition?: string;
+  autotaskTrigger?: string;
+  alertThreshold?: Threshold;
+  alertTimeoutMs?: number;
+  notificationChannels: string[];
+}
+```
+
+An example is provided below. This sentinel will be named `My New Sentinel` and will be monitoring the `renounceOwnership` function on the `0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2` contract on the Rinkeby network.
+The alert threshold is set to 2 times within 1 hour, and the user will be notified via email.
+
+```js
+const requestParameters = {
+  network: 'rinkeby',
+  // optional
+  confirmLevel: 1, // if not set, we pick the blockwatcher for the chosen network with the lowest offset
+  name: 'My New Sentinel',
+  address: '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2',
+  abi: '[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{...}]',
+  // optional
+  paused: false,
+  // optional
+  eventConditions: [],
+  // optional
+  functionConditions: [{ functionSignature: 'renounceOwnership()' }],
+  // optional
+  txCondition: 'gasPrice > 0',
+  // optional
+  autotaskCondition: '3dcfee82-f5bd-43e3-8480-0676e5c28964',
+  // optional
+  autotaskTrigger: undefined,
+  // optional
+  alertThreshold: {
+    amount: 2,
+    windowSeconds: 3600,
+  },
+  // optional
+  alertTimeoutMs: 0,
+  notificationChannels: [notification.notificationId],
+};
+```
+
+Once all required parameters are populated, you can create a sentinel by calling the `create` function on the client. This will return a `CreateSentinelResponse` object.
+
+```js
+await client.create(requestParameters);
+```
+
+If you wish to trigger the sentinel based on additional events, you could add another `EventCondition` or `FunctionCondition` object, for example:
+
+```js
+functionConditions: [{ functionSignature: 'renounceOwnership()' }],
+eventConditions: [
+  {
+    eventSignature: "OwnershipTransferred(address,address)",
+    expression: "\"0xf5453Ac1b5A978024F0469ea36Be25887EA812b5,0x6B9501462d48F7e78Ba11c98508ee16d29a03412\""
+  }
+]
+```
+
+You could also apply a transaction condition by modifying the `txCondition` property:
+Possible variables: `value`, `gasPrice`, `gasUsed`, `to`, `from`, `nonce`, `status` ('success', 'failed' or 'any'), `input`, or `transactionIndex`.
+
+```js
+txCondition: 'gasPrice > 0',
+```
+
+Additionally, the sentinel could invoke an autotask to further evaluate. Documentation around this can be found here: https://docs.openzeppelin.com/defender/sentinel#autotask_conditions.
+
+```js
+// If other conditions match, the sentinel will invoke this autotask to further evaluate.
+autotaskCondition: '3dcfee82-f5bd-43e3-8480-0676e5c28964',
+// Define autotask within the notification configuration
+autotaskTrigger: '1abfee11-a5bc-51e5-1180-0675a5b24c61',
+```
+
+The `subscribers` endpoint is used to a create new sentinels via a `POST` request.
+If you wish to call the API directly, you will need to construct a `CreateBlockSubscriberRequest` object.
+
+CAUTION: Defender currently only supports a limited subset of Sentinels (only a single addressRule), and we strongly suggest going through the JS client to avoid incompatibilities.
+
+```js
+interface CreateBlockSubscriberRequest {
+  name: string;
+  paused: boolean;
+  alertThreshold?: {
+    amount: number;
+    windowSeconds: number;
+  };
+  notifyConfig?: {
+    notifications: [{
+      notificationId: string;
+      type: NotificationType;
+    }];
+    autotaskId?: string;
+    timeoutMs: number;
+  };
+  addressRules: [{
+    conditions: ConditionSet[];
+    autotaskCondition?: {
+      autotaskId: string;
+    };
+    address: string;
+    abi?: string;
+  }];
+  blockWatcherId: string;
+  network: Network;
+  type: 'BLOCK';
+}
+
+type NotificationType = 'slack' | 'email' | 'discord' | 'telegram' | 'datadog';
+
+interface ConditionSet {
+  eventConditions: EventCondition[];
+  txConditions: TxCondition[];
+  functionConditions: FunctionCondition[];
+}
+interface EventCondition {
+  eventSignature: string;
+  expression?: string | null;
+}
+interface TxCondition {
+  status: 'success' | 'failed' | 'any';
+  expression?: string | null;
+}
+interface FunctionCondition {
+  functionSignature: string;
+  expression?: string | null;
+}
+```
+
+```
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/subscribers"
+```
+
+[[retrieve-endpoint]]
+=== Retrieve a Sentinel
+You can retrieve a sentinel by ID. This will return a `CreateSentinelResponse` object.
+
+```js
+await client.get('8181d9e0-88ce-4db0-802a-2b56e2e6a7b1');
+```
+
+The `subscribers/{id}` endpoint is used to retrieve a sentinel via a `GET` request.
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/subscribers/{id}"
+```
+
+[[update-endpoint]]
+=== Update a Sentinel
+
+To update a sentinel, you can call the `update` function on the client. This will require the sentinel ID and a `CreateSentinelRequest` object as parameters:
+
+```js
+await client.update('8181d9e0-88ce-4db0-802a-2b56e2e6a7b1', requestParameters);
+```
+
+The `subscribers/{id}` endpoint is used to a update existing sentinels via a `PUT` request.
+
+If you wish to call the API directly, you will need to construct a `CreateBlockSubscriberRequest` object.
+
+```
+curl \
+  -X PUT \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/subscribers/{id}"
+```
+
+[[delete-endpoint]]
+=== Delete a Sentinel
+
+You can delete a sentinel by ID. This will return a `DeletedSentinelResponse` object.
+
+```js
+await client.delete('8181d9e0-88ce-4db0-802a-2b56e2e6a7b1');
+```
+
+The `subscribers/{id}` endpoint is used to a delete a sentinel via a `DELETE` request.
+
+```
+curl \
+  -X DELETE \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/subscribers/{id}"
+```
+
+An example response:
+
+```js
+{
+    "message": "subscriber deleted"
+}
+```
+
+[[pause-endpoint]]
+=== Pause or unpause a Sentinel
+
+You can pause and unpause a sentinel by ID. This will return a `CreateSentinelResponse` object.
+
+```js
+await client.pause('8181d9e0-88ce-4db0-802a-2b56e2e6a7b1');
+await client.unpause('8181d9e0-88ce-4db0-802a-2b56e2e6a7b1');
+```
+
+If you wish to call the API directly, you can use the `update` endpoint and set `pause` to `true` or `false` accordingly.
