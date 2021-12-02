@@ -47,6 +47,16 @@ Whenever you create a Relayer, a fresh Ethereum account will be created to back 
 
 You can choose to reuse the same address of one of your existing relayers for a different one on another network. This allows you to have the same addresses on different networks in a multi-chain system. To do this, choose to _Clone a relayer_ in the settings menu of a relayer, and then choose the network for the new relayer that should have the same address. Note that it is not possible to have more than one relayer with the same address per network.
 
+[[policies]]
+=== Policies
+
+You can limit a Relayer's behavior by specifying policies. Currently, there are two different opt-in policies:
+
+1. *Gas price cap*: specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the gas price of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
+2. *Receiver whitelist*: specify a list of authorized recipients for every transaction sent by the Relayer. Defender will reject and discard any transaction whose recipient address is not in the list.
+
+To configure your Relayer's policies, go to your Relayer settings page, click the cog icon button, _Manage policies_. You will then see a form where you can opt to enable either of these two policies and tweak their parameters.
+
 [[sending-transactions]]
 == Sending transactions
 
