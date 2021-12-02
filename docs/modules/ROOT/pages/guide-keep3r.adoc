@@ -19,7 +19,7 @@ ____
 
 To get started, you'll need the following:
 
-. *A Defender mainnet account*. Head over to https://defender.openzeppelin.com/[Defender] to sign up for a new account, and then https://openzeppelin.com/apply/[apply for mainnet access] indicating that you are interested in running a Keeper. We'll contact you shortly to activate your account for mainnet access. Note that mainnet accounts are free for now, but will be paid starting end of year.
+. *A Defender mainnet account*. Head over to https://defender.openzeppelin.com/[Defender] to sign up for a new account, and then https://openzeppelin.com/apply/[apply for mainnet access] indicating that you are interested in running a Keeper. We'll contact you shortly to activate your account for mainnet access.
 
 . *ETH to pay for transactions gas*. Keeper transactions require gas for execution, so make sure to have some ETH available to fund your Relay.
 
