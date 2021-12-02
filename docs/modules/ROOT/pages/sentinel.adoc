@@ -1,23 +1,32 @@
 [[sentinel]]
 = Sentinel
 
-The Defender Sentinel service allows you to **monitor transactions** by **defining conditions** on events, functions, and transaction parameters, and notifying via email, slack, telegram, discord, xref:autotasks.adoc[Autotasks], and more.
+The Defender Sentinel service offers 2 types of Sentinels, **Contract Sentinels** and **Forta Sentinels**. Contract Sentinels allow you to **monitor transactions** to a contract by **defining conditions** on events, functions, transaction parameters. Forta Sentinels allow you to **monitor Forta Alerts** by **defining conditions** on Forta Agents, contract addresses, alert IDs and severity. If a Sentinel matches a transaction or a Forta Alert based on your defined conditions it will notify you via email, slack, telegram, discord, xref:autotasks.adoc[Autotasks], and more.
 
 [[use-cases]]
 == Use cases
 
-Use a Sentinel whenever you need to know about or respond to transactions involving your smart contracts or other smart contracts you need to monitor.  Your Sentinel will watch every transaction and send the transactions you care about to your notification methods of choice.
+Use a Sentinel when you need to know about or respond to transactions and Forta Alerts involving your smart contracts, other smart contracts you need to monitor or Forta Agents. Your Sentinel will watch every transaction and Forta Alert and send the ones you care about to your notification methods of choice.
 
 * *Monitor* your *sensitive functions* like transferOwnership, pause, or upgrade
-* *Alert* when transactions are failing against smart contracts
-* *Respond* to transactions by executing *Autotask* logic when key events happen 
+* *Alert* on potentially dangerous transactions on your contracts
+* *Respond* by executing logic when key events happen 
 * *Integrate* with your *existing tools* through slack, telegram, discord, email or custom *Autotask* integration
-* *Know* when an unexpected volume of transactions occur
+* *Know* when an unexpected volume of transactions or alerts occur
 
-[[whats-in-an-sentinel]]
-== What's in an Sentinel?
+[[when-to-use]]
+=== When to use a Contract vs a Forta Sentinel
 
-A Sentinel watches transactions that affect a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
+Contract Sentinels are particularly useful for monitoring transactions to a single contract. With the <<specify-conditions, Contract Conditions>> you can filter transactions by various transaction attributes i.e events, functions, params, gasPrice, value, etc. 
+
+Forta Sentinels are useful for monitoring one or more of your smart contracts using a more complex criteria, by hooking into the events and conditions defined by Forta Agent Developers. Forta Agents have greater flexibility for defining transaction conditions than a Contract Sentinel. 
+
+
+
+[[whats-in-a-contract-sentinel]]
+== What's in a Contract Sentinel?
+
+A Contract Sentinel watches transactions that affect a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
 
 IMPORTANT: At this time, Sentinels are supported across all networks except Fantom. Furthermore, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan. If the internal call emits an event, consider monitoring for that event instead, as events emitted from internal calls are detected on all supported networks.
 
@@ -60,8 +69,44 @@ NOTE: If no Events or Functions are specified, then the Sentinel will monitor AL
 
 IMPORTANT: At this time, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan.  If the internal call emits an event, consider monitoring for that event instead.  Events emitted from internal calls are detected on all networks.
 
+[[whats-in-a-forta-sentinel]]
+== What's in a Forta Sentinel?
+
+A Forta Sentinel watches Forta Alerts that come from a given Forta Agent or affect a given address, and filters those alerts by any conditions that you specify, then notifies you when those alerts occur.
+
+[[specify-agent-address]]
+=== Specifying Forta Agents and Addresses
+
+A Forta Sentinel filters on Agent IDs or Addresses and requires that at least one of these filters are set. It is possible to sepcify multiple Agent IDs and Addresses to filter on.
+
+* *Agent IDs*: Specify the Agent IDs to filter on. These can be comma separated to specify multiple.
+
+* *Address*: Choose either smart contracts or externally owned accounts to filter on.
+
+[[forta-matching-rules]]
+=== Forta Matching Rules
+
+For a Forta Alert to trigger a notification, it must satisfy *ALL* of the following:
+
+* Forta Alert *MUST* come from one of the Agent IDs specified and/or one of the Addresses specified
+
+* If the *Alert ID Condition* is specified
+
+    ** The Alert ID from the alert *MUST* match one of the Alert IDs specified
+
+* If the *Severity Condition* is specified
+
+    ** The Alert Severity *MUST* match or be of greater severity than the one specified
+
+[[severity-alert-ids]]
+=== Severity and Alert IDs
+
+You can specify Alert Severity and Alert IDs to monitor. Specifying both Severity and Alert IDs acts as an OR clause, in that if a alert matches ANY of the selected Alert IDs or matches the selected Severity, it will trigger notification.
+    
+NOTE: If no Severity or Alert IDs are specified, then the Sentinel will monitor ALL alerts matching your specified Agent IDs and/or Adresses.
+
 [[specify-conditions]]
-== What are Conditions?
+== What are Contract Conditions?
 
 Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.  To accomodate comparisons for checksum and non-checksum addresses, comparisons are case-insensitive.
 
@@ -257,6 +302,146 @@ The search uses the conditions that are in the form at the current moment.
 
 Note: Running a Test will not trigger a notification. 
 
+[[specify-Forta-conditions]]
+== What are Forta Conditions?
+
+Forta Conditions act as filters that allow you to narrow Forta Alerts down even further.
+
+=== Severity Condition
+
+The Severity Condition allows you to only get notified about alerts which are greater than a certain impact level. You will be notified of any alerts which match or have a greater impact level than your chosen severity value. 
+
+Forta Alerts may have 1 of the following 5 severity values which indicate different impact levels: 
+
+
+  * *Critical* - Exploitable vulnerabilities, massive impact on users/funds
+
+  * *High* - Exploitable under more specific conditions, significant impact on users/funds
+
+  * *Medium* - Notable unexpected behaviours, moderate to low impact on users/funds
+
+  * *Low* - Minor oversights, negligible impact on users/funds
+
+  * *Info* - Miscellaneous behaviours worth describing
+
+=== Alert IDs Condition
+
+The Alert IDs Condition allows you to filter alerts and only get notified about a specific class of finding. One or more Alert IDs may be specified. 
+
+==== Example Conditions
+
+[source]
+----
+FORTA-1, NETHFORTA-1
+----
+
+
+=== Autotask Conditions
+
+If an autotask condition is specified, then it will be called with a list of matches.  This allows the sentinel to use other datasources and custom logic to evaluate whether a transaction is a match.  
+
+NOTE: Only alerts that match other conditions (Severity, Alert IDs) will invoke the autotask condition.
+
+==== Request Schema
+
+The request body will contain the following structure. 
+
+[source,jsx]
+----
+{
+  "events": [
+    {
+      "alert": {                            // Forta Alert 
+        "addresses": [ "0xab..123" ],       // map of addresses involved in the transaction
+        "alert_id": "NETHFORTA-1",          // unique string to identify this class of finding
+        "name": "High Gas Used",            // human-readable name of finding
+        "description": "Gas Used: 999999",  // brief description
+        "hash": "0xab..123",                // Forta Alert transaction hash
+        "protocol": "ethereum",             // specifies which network the transaction was mined
+        "scanner_count": 1,
+        "severity": "MEDIUM",               // indicates impact level of finding
+        "type": "SUSPICIOUS",               // indicates type of finding: Exploit, Suspicious, Degraded, Info
+        "source": {
+          "tx_hash": "0xab..123",           // network transaction hash  e.g ethereum transaction hash
+          "agent": {
+            "id": "0xab..123",              // Agent ID
+            "name": ""                      // Agent name
+          },
+          "block": {
+            "chain_id": 1,                  // Chain ID of the originating network       
+            "hash": "0xab..123",            // network block hash  e.g ethereum block hash   
+          }
+        }
+      },
+      "matchReasons": [                     // the reasons why sentinel triggered
+        {
+          "type": "alert-id",               // Alert ID or Severity
+          "value": "NETHFORTA-1"            // Condition Value
+        }
+      ],
+      "sentinel": { 
+        "id": "forta_id",                   // internal ID of your sentinel
+        "name": "forta sentinel",           // name of your sentinel
+        "addresses": [ "0xab..123" ],       // addresses your sentinel is monitoring
+        "agents": [ "0xab..123" ]           // Agent IDs your sentinel is monitoring
+        "network": "mainnet"                // Agent IDs your sentinel is monitoring
+      }
+    }
+  ]
+}
+----
+
+==== Response Schema
+
+The autotask must return a structure containing all matches. Returning an empty object indicates no match occurred. The type for this object is `SentinelConditionResponse`.
+
+IMPORTANT: Errors will be treated as a non-match. All executions can be found on the Autotask's run page.
+
+[source,jsx]
+----
+{
+  "matches": [
+    {
+      "hash": "0xabc...123",   // Forta Alert hash i.e events[0].alert.hash
+      "metadata": {
+        "foo": true            // any object to be shared with notifications
+      }              
+    },
+    {
+      "hash": "0xabc...123"    // example with no metadata specified
+    }
+  ]
+}
+----
+
+==== Example Autotask Condition
+
+[source,jsx]
+----
+exports.handler = async function(payload) {
+  const conditionRequest = payload.request.body;
+  const matches = [];
+  const events = conditionRequest.events;
+  for(const evt of events) {
+
+    // add custom logic for matching here
+    // metadata can be any JSON-marshalable object (or undefined)
+    matches.push({
+       hash: evt.hash,
+       metadata: {
+        "id": "customId",
+        "timestamp": new Date().getTime(),
+        "numberVal": 5,
+        "nested": { "example": { "here": true } }
+       }
+    });
+  }
+  return { matches }
+}
+----
+
+
+
 [[notifications]]
 == Notifications
 
@@ -342,13 +527,13 @@ $ curl https://api.telegram.org/bot$BOT_TOKEN/getUpdates
 
 === Autotask
 
-If an autotask is selected, then the autotask will receive a body property containing the transaction details for the triggering transaction.  The autotask can then perform custom logic and reach out to external APIs as needed.
+If an autotask is selected, then the autotask will receive a body property containing the deails for the triggering event, either the transaction details for the triggering transaction or Forta Alert details from the triggerting alert. The autotask can then perform custom logic and reach out to external APIs as needed.
 
 IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at defender@openzeppelin.com with a description of your use case.
 
 == Autotask Events
 
-The sentinel will pass information about the transaction to your autotask. You can use the `SentinelTriggerEvent` type from the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package if you are coding your Autotasks in Typescript.
+The sentinel will pass information about the transaction to your autotask. If you are writing your Autotasks in typescript you can use the `BlockTriggerEvent` type for contract sentinels and the `FortaTriggerEvent` type for Forta sentinels, from the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package.
 
 === Example Autotask
 
@@ -356,16 +541,24 @@ The sentinel will pass information about the transaction to your autotask. You c
 ----
 exports.handler = async function(params) {  
   const payload = params.request.body;
-  const transaction  = payload.transaction;
   const matchReasons = payload.matchReasons;
   const sentinel = payload.sentinel;
+
+  // if contract sentinel
+  const transaction  = payload.transaction;
   const abi = sentinel.abi;
+
+  // if Forta sentinel
+  const alert  = payload.alert;
+
+
 
   // custom logic...
 }
 ----
 
 === Event Schema
+==== Contract Sentinel
 [source,jsx]
 ----
 {
@@ -390,6 +583,47 @@ exports.handler = async function(params) {
     "address": "0x000..000",      // address your sentinel is watching
     "confirmBlocks": 0,           // number of blocks sentinel waits
     "network": "rinkeby"          // network of your address
+  }
+}
+----
+==== Forta Sentinel
+[source,jsx]
+----
+{
+  "alert": {                            // Forta Alert 
+    "addresses": [ "0xab..123" ],       // map of addresses involved in the transaction
+    "alert_id": "NETHFORTA-1",          // unique string to identify this class of finding
+    "name": "High Gas Used",            // human-readable name of finding
+    "description": "Gas Used: 999999",  // brief description
+    "hash": "0xab..123",                // Forta Alert transaction hash
+    "protocol": "ethereum",             // specifies which network the transaction was mined
+    "scanner_count": 1,
+    "severity": "MEDIUM",               // indicates impact level of finding
+    "type": "SUSPICIOUS",               // indicates type of finding: Exploit, Suspicious, Degraded, Info
+    "source": {
+      "tx_hash": "0xab..123",           // network transaction hash  e.g ethereum transaction hash
+      "agent": {
+        "id": "0xab..123",              // Agent ID
+        "name": ""                      // Agent name
+      },
+      "block": {
+        "chain_id": 1,                  // Chain ID of the originating network       
+        "hash": "0xab..123",            // network block hash  e.g ethereum block hash  
+      }
+    }
+  },
+  "matchReasons": [                     // the reasons why sentinel triggered
+    {
+      "type": "alert-id",               // Alert ID or Severity
+      "value": "NETHFORTA-1"            // Condition Value
+    }
+  ],
+  "sentinel": { 
+    "id": "forta_id",                   // internal ID of your sentinel
+    "name": "forta sentinel",           // name of your sentinel
+    "addresses": [ "0xab..123" ],       // addresses your sentinel is monitoring
+    "agents": [ "0xab..123" ]           // Agent IDs your sentinel is monitoring
+    "network": "mainnet"                // Agent IDs your sentinel is monitoring
   }
 }
 ----
