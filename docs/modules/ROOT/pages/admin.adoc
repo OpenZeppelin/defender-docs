@@ -84,6 +84,17 @@ NOTE: The Safe contract requires all its proposals to be executed in order. If y
 
 Gnosis Safe wallets also allow executing `DELEGATECALL`s into other contracts, in order to execute arbitrary code in the context of the multisig. You can currently create an Admin action proposal to issue a delegate call via the API using the https://www.npmjs.com/package/defender-admin-client[`defender-admin-client`]. 
 
+[[send-funds]]
+==== Send funds
+
+A _send funds_ action on a Gnosis Safe wallet lets you transfer network native assets from your Gnosis Safe to the recipient of your choice. 
+
+To use this feature, you need to add the Gnosis Safe wallet to your Defender Admin contracts collection. Go to your Gnosis Safe page in Admin, click _New proposal_ -> _Send funds_. Then choose the recipient address and the amount of funds to transfer. From then on, it works just as any other admin proposal: you will need to collect approvals from enough Gnosis Safe owners to execute the transaction. Defender will guide you through that process.
+
+NOTE: if you originally deployed your Gnosis Safe _from_ Defender, it's already in your list of Defender Admin contracts under section _Multisigs_.
+
+We're working on expanding this feature with the ability to send ERC20 token funds, so stay tuned.
+
 [[gnosis-multisigwallet]]
 === Gnosis MultisigWallet
 
