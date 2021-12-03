@@ -22,7 +22,7 @@ In a nutshell, an Autotask is a snippet of javascript code invoked at a regular 
 
 When you create an Autotask, you provide a javascript snippet, choose a trigger for it to run, and optionally <<relayer-integration,link it to a Relayer>>. Defender currently supports two types of triggers:
 
-* *Schedule*: Choose a frequency to execute your Autotask, and Defender will make sure to invoke your function at the specified interval. Note that the specified interval is between two consecutive execution starts, _not_ between the end of an Autotask and the beginning of the next one.
+* *Schedule*: Choose a frequency to execute your Autotask, and Defender will make sure to invoke your function at the specified interval. Note that the specified interval is between two consecutive execution starts, _not_ between the end of an Autotask and the beginning of the next one. Alternatively, you can specify when the Autotask should run using https://crontab.cronhub.io/[cron expressions].
 
 * *Webhook*: Defender will create a secret URL for your Autotask, and invoke it whenever an HTTP request is POSTed to that endpoint. You can regenerate this URL at any time. Defender will inject the HTTP request information into your Autotask, and return the Autotask run info along with any data you return from your code.
 
