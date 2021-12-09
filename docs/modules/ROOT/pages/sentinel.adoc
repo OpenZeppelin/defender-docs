@@ -533,7 +533,7 @@ To configure a custom webhook notification channel, you just need to provide the
 
 * *Webhook URL* is the URL where Sentinel will send matching events. 
 
-To avoid overwhelming the receiving webhook with many concurrent requests under a high number of matches, Sentinel sends a JSON object with an `events` property a JSON array containing all the matching events found in a block.
+To avoid overwhelming the receiving webhook with many concurrent requests under a high number of matches, Sentinel sends a JSON object with an `events` containing an array with all the matching events found in a block.
 
 [source,js]
 ----
