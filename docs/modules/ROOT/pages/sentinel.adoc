@@ -232,6 +232,7 @@ The request body will contain the following structure. You can use the `Sentinel
       "address": "0x000..000",      // address your sentinel is watching
       "confirmBlocks": 0,           // number of blocks sentinel waits
       "network": "rinkeby"          // network of your address
+      "chainId": 4                  // chain Id of the network
     }
   }
   ]
@@ -384,7 +385,8 @@ The request body will contain the following structure.
         "name": "forta sentinel",           // name of your sentinel
         "addresses": [ "0xab..123" ],       // addresses your sentinel is monitoring
         "agents": [ "0xab..123" ]           // Agent IDs your sentinel is monitoring
-        "network": "mainnet"                // Agent IDs your sentinel is monitoring
+        "network": "mainnet"                // network your sentinel is monitoring
+        "chainId": 1                        // chain Id of the network
       }
     }
   ]
@@ -583,6 +585,7 @@ exports.handler = async function(params) {
     "address": "0x000..000",      // address your sentinel is watching
     "confirmBlocks": 0,           // number of blocks sentinel waits
     "network": "rinkeby"          // network of your address
+    "chainId": 4                  // chain Id of the network
   }
 }
 ----
@@ -623,7 +626,8 @@ exports.handler = async function(params) {
     "name": "forta sentinel",           // name of your sentinel
     "addresses": [ "0xab..123" ],       // addresses your sentinel is monitoring
     "agents": [ "0xab..123" ]           // Agent IDs your sentinel is monitoring
-    "network": "mainnet"                // Agent IDs your sentinel is monitoring
+    "network": "mainnet"                // network your sentinel is monitoring
+    "chainId": 1                        // chain Id of the network
   }
 }
 ----
