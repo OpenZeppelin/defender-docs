@@ -447,7 +447,7 @@ exports.handler = async function(payload) {
 [[notifications]]
 == Notifications
 
-When triggered, a Sentinel can notify one or more slack webhooks, telegram bots, discord webhooks, email lists, datadog metrics, or execute an autotask.
+When triggered, a Sentinel can notify one or more slack webhooks, telegram bots, discord webhooks, email lists, datadog metrics, custom webhooks, or execute an autotask.
 
 === Slack Configuration
 
@@ -526,6 +526,25 @@ $ curl https://api.telegram.org/bot$BOT_TOKEN/getUpdates
 * *Chat ID* is the ID of the Telegram Chat. 
 
 * *Bot Token* is the token you receive from the BotFather when creating the Telegram Bot.
+
+=== Custom webhook Configuration
+
+To configure a custom webhook notification channel, you just need to provide the webhook endpoint URL and an alias for display purposes. 
+
+* *Alias* is the name for this webhook endpoint.
+
+* *Webhook URL* is the URL where Sentinel will send matching events. 
+
+To avoid overwhelming the receiving webhook with many concurrent requests under a high number of matches, Sentinel sends a JSON object with an `events` containing an array with all the matching events found in a block.
+
+[source,js]
+----
+{
+  events: [...] // See Event Schema for details on the contents of this array
+}
+----
+
+The event schema is exactly the same as the one laid out in <<Event Schema>>. You can also use the _test notification_ feature to send a test notification to your webhook.
 
 === Autotask
 
