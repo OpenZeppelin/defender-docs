@@ -55,11 +55,44 @@ const { Relayer } = require('defender-relay-client');
  
 exports.handler = async function(event) {
   const relayer = new Relayer(event);
-  // Use relayer for sending txs or querying the network
+  // Use relayer for sending txs or querying the network...
 }
 ----
 
 This allows you to send transactions using your Relayer from your Autotasks without having to set up any API keys or secrets. Furthermore, you can also use the Relayer JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
+
+If you want to https://www.npmjs.com/package/defender-relay-client#ethersjs[use `ethers.js`] for making queries or sending transactions via your Relayer, change the above to:
+
+[source,jsx]
+----
+const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const ethers = require('ethers');
+ 
+exports.handler = async function(event) {
+  const provider = new DefenderRelayProvider(event);
+  const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' });
+  // Use provider and signer for querying or sending txs from ethers, for example...
+  const contract = new ethers.Contract(ADDRESS, ABI, signer);
+  await contract.ping();
+}
+----
+
+And if you prefer https://www.npmjs.com/package/defender-relay-client#web3js[using `web3.js`], then use the following snippet:
+
+[source,jsx]
+----
+const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const Web3 = require('web3');
+ 
+exports.handler = async function(event) {
+  const provider = new DefenderRelayProvider(event, { speed: 'fast' });
+  const web3 = new Web3(provider);
+  // Use web3 instance for querying or sending txs, for example...
+  const [from] = await web3.eth.getAccounts();
+  const contract = new web3.eth.Contract(ABI, ADDRESS, { from });
+  await contract.methods.ping().send();
+}
+----
 
 [[webhook-handler]]
 === Webhook invocations
