@@ -71,6 +71,9 @@ const ethers = require('ethers');
 exports.handler = async function(event) {
   const provider = new DefenderRelayProvider(event);
   const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' });
+  // Use provider and signer for querying or sending txs from ethers, for example...
+  const contract = new ethers.Contract(ADDRESS, ABI, signer);
+  await contract.ping();
 }
 ----
 
@@ -84,6 +87,10 @@ const Web3 = require('web3');
 exports.handler = async function(event) {
   const provider = new DefenderRelayProvider(event, { speed: 'fast' });
   const web3 = new Web3(provider);
+  // Use web3 instance for querying or sending txs, for example...
+  const [from] = await web3.eth.getAccounts();
+  const contract = new web3.eth.Contract(ABI, ADDRESS, { from });
+  await contract.methods.ping().send();
 }
 ----
 
