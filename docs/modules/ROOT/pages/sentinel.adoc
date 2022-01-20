@@ -134,8 +134,6 @@ Transaction Conditions can refer to the following properties
 
 * *gasPrice* is the price of gas sent in the transaction
 
-* *gasLimit* is the gas limit sent in the transaction
-
 * *gasUsed* is the amount of gas used in the transaction
 
 * *value* is the value sent in the transaction
