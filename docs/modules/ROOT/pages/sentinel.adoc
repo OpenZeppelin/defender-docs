@@ -653,6 +653,101 @@ exports.handler = async function(params) {
 }
 ----
 
+[[customizing-notification-messages]]
+== Customizing Notification Messages
+
+You can optionally modify the message body content and formatting using the checkbox below the notification channel selector.
+
+=== Example
+
+==== Template
+
+[source,md]
+----
+**Sentinel Name**
+
+{{ sentinel.name }}
+
+**Network**
+
+{{ sentinel.network }}
+
+**Block Hash**
+
+{{ blockHash }}
+
+**Transaction Hash**
+
+{{ transaction.transactionHash }}
+
+**Transaction Link** 
+
+[Block Explorer]({{ transaction.link }})
+
+{{ matchReasonsFormatted }}
+----
+
+==== Preview
+
+*Sentinel Name*
+
+Sentinel
+
+*Network*
+
+rinkeby
+
+*Block Hash*
+
+0x22407d00e953e5f8dabea57673b9109dad31acfc15d07126b9dc22c33521af52
+
+*Transaction Hash*
+
+0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50
+
+https://rinkeby.etherscan.io/tx/0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50[Block Explorer]
+
+*Match Reason 1*
+
+_Type:_ Function
+
+_Signature:_ greet(name)
+
+_Condition:_ name == 'test'
+
+_Params:_
+
+name: test
+
+*Match Reason 2*
+
+_Type:_ Transaction
+
+_Condition:_ gasPrice > 10
+
+=== Message Syntax
+
+Custom notifications support a limited set of markdown syntax:
+
+* Bold (\\**this text is bold**)
+* Italic (\*this text* and \_this text_ are italic)
+* Links (this is a [link](\http://example.com))
+
+There is partial support for additional markdown syntax, but rendering behavior varies by platform. Email supports full HTML and has the richest feature set, but other messaging platforms have limitations including support for standard markdown features such as headings, block quotes, and tables. Combinations of the supported features (e.g. both bold and italicized text) also has mixed support. If your markdown contains any syntax with mixed platform support, a warning message will appear directly below the editor.
+
+=== Dynamic Content
+
+Custom notification templates render dynamic content using inline templating. Any string surrounded by double curly braces will be resolved against the <<Event Schema>>. Deeply nested items (including those in arrays) can be accessed using dot notation.
+
+In addition to the standard event schema, the following parameters are injected for usage in custom notification messages: 
+
+* `transaction.link`
+* `matchReasonsFormatted`
+
+=== Character Limit
+
+Messages will be truncated if they exceed a platform's character limit. The best practice is to limit messages to 1900 characters.
+
 == Controlling the Notify Rate
 
 Once you have specified your conditions as desired, there are two ways to limit the number of notifications: Alert and Timeout.  These are meant to be used together to achieve a wide range of alerting behaviors.
