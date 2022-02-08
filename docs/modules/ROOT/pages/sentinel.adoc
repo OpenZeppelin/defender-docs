@@ -607,7 +607,8 @@ exports.handler = async function(params) {
     "confirmBlocks": 0,           // number of blocks sentinel waits
     "network": "rinkeby"          // network of your address
     "chainId": 4                  // chain Id of the network
-  }
+  },
+  "value": "0x0"                  // value of the transaction
 }
 ----
 ==== Forta Sentinel
@@ -649,7 +650,8 @@ exports.handler = async function(params) {
     "agents": [ "0xab..123" ]           // Agent IDs your sentinel is monitoring
     "network": "mainnet"                // network your sentinel is monitoring
     "chainId": 1                        // chain Id of the network
-  }
+  },
+  "value": undefined                    // value will always be undefined for FORTA sentinels
 }
 ----
 
@@ -685,6 +687,10 @@ You can optionally modify the message body content and formatting using the chec
 [Block Explorer]({{ transaction.link }})
 
 {{ matchReasonsFormatted }}
+
+**value**
+
+{{ value }}
 ----
 
 ==== Preview
@@ -724,6 +730,10 @@ name: test
 _Type:_ Transaction
 
 _Condition:_ gasPrice > 10
+
+*Value*
+
+0x0
 
 === Message Syntax
 
