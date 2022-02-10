@@ -118,7 +118,7 @@ An example response:
 [[list-endpoint]]
 === List Sentinels
 
-To list existing sentinels, you can call the `list` function on the client, which returns a `CreateSentinelResponse[]` object:
+To list existing sentinels, you can call the `list` function on the client, which returns a `ListSentinelResponse[]` object:
 
 ```js
 await client.list();
