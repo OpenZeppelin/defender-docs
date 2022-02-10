@@ -608,7 +608,7 @@ exports.handler = async function(params) {
     "network": "rinkeby"          // network of your address
     "chainId": 4                  // chain Id of the network
   },
-  "value": "0x0"                  // value of the transaction
+  "value": "0x123"                  // value of the transaction
 }
 ----
 ==== Forta Sentinel
@@ -733,7 +733,7 @@ _Condition:_ gasPrice > 10
 
 *Value*
 
-0x0
+0x123
 
 === Message Syntax
 
