@@ -57,6 +57,8 @@ You can limit a Relayer's behavior by specifying policies. Currently, there are 
 
 To configure your Relayer's policies, go to your Relayer settings page, click the cog icon button, _Manage policies_. You will then see a form where you can opt to enable either of these two policies and tweak their parameters.
 
+NOTE: In addition to the maximum gas price policy you can specify here, Defender implements a minimum gas price policy of 30 Gwei to transactions sent to the Polygon network. https://forum.matic.network/t/recommended-min-gas-price-setting/2531[You can read more about Polygon's decision to establish a minimum gas price here].
+
 [[sending-transactions]]
 == Sending transactions
 
