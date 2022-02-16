@@ -36,7 +36,9 @@ type Network =
   | 'celo'
   | 'alfajores'
   | 'arbitrum'
-  | 'arbitrum-rinkeby';
+  | 'arbitrum-rinkeby'
+  | 'harmony-s0'
+  | 'harmony-test-s0';
 
 type Address = string;
 type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];
