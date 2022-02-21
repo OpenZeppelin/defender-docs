@@ -39,19 +39,20 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 
 [[networks]]
 == Available networks
+All Defender components, where applicable, provide support for the following chains and networks:
 
-All Defender components, where applicable, provide support for the Ethereum *Mainnet*, as well as the *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli* test networks. The following chains are also supported, along with their respective testnets where applicable:
-* https://www.xdaichain.com/[*xDai*]
-* https://fuse.io/[*Fuse*]
-* https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*]
-* https://fantom.foundation/what-is-fantom-opera/[*Fantom*]
-* https://docs.matic.network/docs/develop/network-details/network[*Polygon\* (Matic)]
-* https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[Avalanche C]
-* https://celo.org/[Celo]
-* https://moonbeam.network/[Moonbeam]
-* http://harmony.one/[Harmony]
-* http://aurora.dev/[Aurora]
-* https://arbitrum.io/[Arbitrum]
+- *Ethereum Mainnet* and its testnets *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli*.
+- https://docs.matic.network/docs/develop/network-details/network[*Polygon* (Matic)] and *Mumbai*.
+- https://arbitrum.io/[*Arbitrum*] and *Arbitrum Rinkeby*.
+- https://moonbeam.network/[*Moonbeam*] and *Moonriver*.
+- https://www.xdaichain.com/[*xDai*] and *Sokol*.
+- https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*] and *BSC testnet*.
+- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*] and *FUJI C-Chain*.
+- https://fuse.io/[*Fuse*].
+- https://fantom.foundation/what-is-fantom-opera/[*Fantom*] and *Fantom Testnet*.
+- https://celo.org/[*Celo*] and *Alfajores*.
+- https://www.harmony.one/[*Harmony* Shard 0] and *Harmony Testnet Shard 0*.
+- http://aurora.dev/[*Aurora*] and *Aurora Testnet*.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
