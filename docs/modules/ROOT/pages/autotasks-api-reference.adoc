@@ -1,11 +1,168 @@
 [[autotask-api]]
 = Autotask API Reference
 
-The Autotask API allows you to programmatically upload new code to any of your Autotasks.
+The Autotask API allows you to programmatically list, create, retrieve, update, delete Autotasks, in addition to uploading new code to any of your Autotasks.
 
 Requests need to be authenticated with a bearer token, which is negotiated from the Team API Key with the corresponding capability. Refer to the xref:api-auth.adoc[authentication section] for info on how to negotiate it.
 
 NOTE: We recommend you use the https://www.npmjs.com/package/defender-autotask-client[defender-autotask-client] npm package for simplifying interactions with the Autotask API.
+
+[[create-endpoint]]
+== Create Endpoint
+
+The `autotasks` endpoint is used for creating a new Autotask via a `POST` request. The endpoint accepts the following interface:
+
+```js
+interface CreateAutotaskRequest {
+  name: string;
+  encodedZippedCode: string;
+  relayerId?: string;
+  trigger: {
+    type: 'schedule' | 'webhook';
+    frequencyMinutes?: number;
+    cron?: string;
+  };
+  paused: boolean;
+}
+```
+
+Using the `defender-autotask-client`, you can call the `create` endpoint as such:
+
+```js
+const myAutotask = {
+  name: "my-autotask",
+  encodedZippedCode: await client.getEncodedZippedCodeFromFolder('./code'),
+  trigger: {
+    type: 'schedule',
+    frequencyMinutes: 1500,
+  },
+  paused: false
+};
+await client.create(myAutotask);
+```
+
+[[list-endpoint]]
+== List Endpoint
+
+The `autotasks` endpoint is used for retrieving an Autotask via a `GET` request.
+
+Using the `defender-autotask-client`, you can call the `list` endpoint as such:
+
+```js
+await client.list();
+```
+
+An example response:
+
+```js
+{
+  items: [
+    {
+      autotaskId: '11ecbea0-7126-4345-a5a5-815898307c9d',
+      name: 'Example 1',
+      paused: false,
+      trigger: [Object],
+      relayerId: 'f75701bb-d0bd-49d2-bec9-3420a7b645f6'
+    },
+    {
+      autotaskId: '143f7d62-22c1-427e-82e7-20036925c4b3',
+      name: 'Example 2',
+      paused: false,
+      trigger: [Object]
+    },
+  ],
+  keyValueStoreItemsCount: 0,
+  runsQuotaUsage: 0
+}
+```
+
+[[retrieve-endpoint]]
+== Get Endpoint
+
+The `autotasks/{id}` endpoint is used for retrieving an Autotask via a `GET` request. The endpoint accepts an autotask Id.
+
+Using the `defender-autotask-client`, you can call the `get` endpoint as such:
+
+```js
+await client.get("671d1f80-99e3-4829-aa15-f01e3298e428");
+```
+
+An example response:
+```js
+{
+  autotaskId: '671d1f80-99e3-4829-aa15-f01e3298e428',
+  name: 'my-autotask',
+  paused: false,
+  trigger: { type: 'schedule', frequencyMinutes: 1500 },
+  encodedZippedCode: 'UEsDBAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAZGVwcy5qc2V4cG9ydHMuZm9vID0gKCkgPT4gNDI7UEsDBAoAAAAAAAFzWFSEyiyCiQAAAIkAAAAIAAAAaW5kZXguanNjb25zdCBkZXBzID0gcmVxdWlyZSgnLi9kZXBzJyk7CgpleHBvcnRzLmhhbmRsZXIgPSBhc3luYyBmdW5jdGlvbigpIHsKICBjb25zdCB2YWx1ZSA9IGRlcHMuZm9vKCk7CiAgY29uc29sZS5sb2codmFsdWUpOwogIHJldHVybiB2YWx1ZTsKfVBLAQIUAAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAAAAAAAAAAAAAAAAAAABkZXBzLmpzUEsBAhQACgAAAAAAAXNYVITKLIKJAAAAiQAAAAgAAAAAAAAAAAAAAAAAPAAAAGluZGV4LmpzUEsFBgAAAAACAAIAawAAAOsAAAAAAA=='
+}
+```
+
+
+[[update-endpoint]]
+== Update Endpoint
+
+The `autotasks` endpoint is used for updating an Autotask via a `PUT` request. The endpoint accepts the following interface:
+
+```js
+interface UpdateAutotaskRequest {
+  autotaskId: string;
+  name: string;
+  encodedZippedCode?: string;
+  relayerId?: string;
+  trigger: {
+    type: 'schedule' | 'webhook';
+    frequencyMinutes?: number;
+    cron?: string;
+  };
+  paused: boolean;
+}
+```
+
+Using the `defender-autotask-client`, you can call the `update` endpoint as such:
+
+```js
+const myAutotask = {
+  autotaskId: "671d1f80-99e3-4829-aa15-f01e3298e428",
+  name: "my-autotask",
+  trigger: {
+    type: 'schedule',
+    frequencyMinutes: 1700,
+  },
+  paused: true
+};
+await client.update(myAutotask);
+```
+
+An example response:
+
+```js
+{
+  autotaskId: '671d1f80-99e3-4829-aa15-f01e3298e428',
+  name: 'my-autotask',
+  paused: true,
+  trigger: { type: 'schedule', frequencyMinutes: 1700 },
+  encodedZippedCode: 'UEsDBAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAZGVwcy5qc2V4cG9ydHMuZm9vID0gKCkgPT4gNDI7UEsDBAoAAAAAAAFzWFSEyiyCiQAAAIkAAAAIAAAAaW5kZXguanNjb25zdCBkZXBzID0gcmVxdWlyZSgnLi9kZXBzJyk7CgpleHBvcnRzLmhhbmRsZXIgPSBhc3luYyBmdW5jdGlvbigpIHsKICBjb25zdCB2YWx1ZSA9IGRlcHMuZm9vKCk7CiAgY29uc29sZS5sb2codmFsdWUpOwogIHJldHVybiB2YWx1ZTsKfVBLAQIUAAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAAAAAAAAAAAAAAAAAAABkZXBzLmpzUEsBAhQACgAAAAAAAXNYVITKLIKJAAAAiQAAAAgAAAAAAAAAAAAAAAAAPAAAAGluZGV4LmpzUEsFBgAAAAACAAIAawAAAOsAAAAAAA=='
+}
+```
+
+[[delete-endpoint]]
+== Delete Endpoint
+
+The `autotasks/{id}` endpoint is used for deleting an Autotask via a `DELETE` request. The endpoint accepts an autotask Id.
+
+Using the `defender-autotask-client`, you can call the `delete` endpoint as such:
+
+```js
+await client.delete("671d1f80-99e3-4829-aa15-f01e3298e428");
+```
+
+An example response:
+
+```js
+  message: '671d1f80-99e3-4829-aa15-f01e3298e428 deleted' 
+```
+
 
 [[code-endpoint]]
 == Update Code Endpoint
@@ -23,6 +180,12 @@ curl \
   -H "Authorization: Bearer $TOKEN" \
   -d "{ \"encodedZippedCode\": \"$(cat code.zip | base64 -w0)\" }" \
     "https://defender-api.openzeppelin.com/autotask/autotasks/${AUTOTASKID}/code"
+```
+
+Or through `defender-autotask-client` as such:
+
+```js
+await client.updateCodeFromFolder("671d1f80-99e3-4829-aa15-f01e3298e428", './code');
 ```
 
 NOTE: You can include multiple files in the bundle, as long as the bundle does not exceed 50MB in size, and you include an `index.js` at the root of the zip file to act as entrypoint.
