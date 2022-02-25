@@ -356,22 +356,21 @@ The request body will contain the following structure.
     {
       "alert": {                            // Forta Alert 
         "addresses": [ "0xab..123" ],       // map of addresses involved in the transaction
-        "alert_id": "NETHFORTA-1",          // unique string to identify this class of finding
+        "alertId": "NETHFORTA-1",           // unique string to identify this class of finding
         "name": "High Gas Used",            // human-readable name of finding
         "description": "Gas Used: 999999",  // brief description
         "hash": "0xab..123",                // Forta Alert transaction hash
         "protocol": "ethereum",             // specifies which network the transaction was mined
-        "scanner_count": 1,
+        "scanNodeCount": 1,
         "severity": "MEDIUM",               // indicates impact level of finding
-        "type": "SUSPICIOUS",               // indicates type of finding: Exploit, Suspicious, Degraded, Info
+        "findingType": "SUSPICIOUS",        // indicates type of finding: Exploit, Suspicious, Degraded, Info
         "source": {
-          "tx_hash": "0xab..123",           // network transaction hash  e.g ethereum transaction hash
+          "transactionHash": "0xab..123",   // network transaction hash  e.g ethereum transaction hash
           "agent": {
             "id": "0xab..123",              // Agent ID
-            "name": ""                      // Agent name
           },
           "block": {
-            "chain_id": 1,                  // Chain ID of the originating network       
+            "chainId": 1,                   // Chain ID of the originating network       
             "hash": "0xab..123",            // network block hash  e.g ethereum block hash   
           }
         }
@@ -617,22 +616,21 @@ exports.handler = async function(params) {
 {
   "alert": {                            // Forta Alert 
     "addresses": [ "0xab..123" ],       // map of addresses involved in the transaction
-    "alert_id": "NETHFORTA-1",          // unique string to identify this class of finding
+    "alertId": "NETHFORTA-1",           // unique string to identify this class of finding
     "name": "High Gas Used",            // human-readable name of finding
     "description": "Gas Used: 999999",  // brief description
     "hash": "0xab..123",                // Forta Alert transaction hash
     "protocol": "ethereum",             // specifies which network the transaction was mined
-    "scanner_count": 1,
+    "scanNodeCount": 1,
     "severity": "MEDIUM",               // indicates impact level of finding
-    "type": "SUSPICIOUS",               // indicates type of finding: Exploit, Suspicious, Degraded, Info
+    "findingType": "SUSPICIOUS",        // indicates type of finding: Exploit, Suspicious, Degraded, Info
     "source": {
-      "tx_hash": "0xab..123",           // network transaction hash  e.g ethereum transaction hash
+      "transactionHash": "0xab..123",   // network transaction hash  e.g ethereum transaction hash
       "agent": {
         "id": "0xab..123",              // Agent ID
-        "name": ""                      // Agent name
       },
       "block": {
-        "chain_id": 1,                  // Chain ID of the originating network       
+        "chainId": 1,                   // Chain ID of the originating network       
         "hash": "0xab..123",            // network block hash  e.g ethereum block hash  
       }
     }
