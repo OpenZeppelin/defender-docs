@@ -349,6 +349,8 @@ NOTE: Only alerts that match other conditions (Severity, Alert IDs) will invoke 
 
 The request body will contain the following structure. 
 
+NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Agent `name` removed. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
+
 [source,jsx]
 ----
 {
@@ -611,6 +613,9 @@ exports.handler = async function(params) {
 }
 ----
 ==== Forta Sentinel
+
+NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Agent `name` removed. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
+
 [source,jsx]
 ----
 {
