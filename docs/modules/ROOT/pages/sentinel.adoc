@@ -26,14 +26,14 @@ Forta Sentinels are useful for monitoring one or more of your smart contracts us
 [[whats-in-a-contract-sentinel]]
 == What's in a Contract Sentinel?
 
-A Contract Sentinel watches transactions that affect a given address, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
+A Contract Sentinel watches for transactions related your chosen addresses, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
 
 IMPORTANT: At this time, Sentinels are supported across all networks except Fantom. Furthermore, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan. If the internal call emits an event, consider monitoring for that event instead, as events emitted from internal calls are detected on all supported networks.
 
-[[specify-address]]
-=== Specifying an Address
+[[specify-addresses]]
+=== Specifying Addresses
 
-* *Address*: Choose either a smart contract or an externally owned account to monitor.
+* *Addresses*: Choose either a smart contracts or externally owned accounts to monitor. You may only have 1 ABI per sentinel, if you choose multiple smart contracts they must adhere to the same ABI/Interface. 
 
 * *ABI*: Specify the ABI for the contract. Defender will automatically load the ABI if the source code is verified.
 
@@ -65,7 +65,7 @@ Select any Events and Function calls that you wish to monitor. Selecting Events 
 
 NOTE: An ABI is required to configure Events and Function detection
 
-NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored address.
+NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored addresses.
 
 IMPORTANT: At this time, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan.  If the internal call emits an event, consider monitoring for that event instead.  Events emitted from internal calls are detected on all networks.
 
@@ -214,27 +214,28 @@ The request body will contain the following structure. You can use the `Sentinel
 {
   "events": [
   {
-    "transaction": {                // eth_getTransactionReceipt response body
-      ...                           // see https://eips.ethereum.org/EIPS/eip-1474
+    "transaction": {                     // eth_getTransactionReceipt response body
+      ...                                // see https://eips.ethereum.org/EIPS/eip-1474
     },
-    "blockHash": "0xab..123",       // block hash from where this transaction was seen
-    "matchReasons": [               // the reasons why sentinel triggered
+    "blockHash": "0xab..123",            // block hash from where this transaction was seen
+    "matchReasons": [                    // the reasons why sentinel triggered
       {
-        "type": "event",            // event, function, or transaction
-        "signature": "...",         // signature of your event/function
-        "condition": "value > 5",   // condition expression (if any)
-        "args": ["5"],              // parameters by index (unnamed are present)
-        "params": { "value": "5" }  // parameters by name (unnamed are not present)
+        "type": "event",                 // event, function, or transaction
+        "signature": "...",              // signature of your event/function
+        "condition": "value > 5",        // condition expression (if any)
+        "args": ["5"],                   // parameters by index (unnamed are present)
+        "params": { "value": "5" }       // parameters by name (unnamed are not present)
       }
     ],
+    "matchedAddresses": ["0x000..000"],  // the addresses from this transaction your are monitoring
     "sentinel": {
-      "id": "44a7d5...31df5",       // internal ID of your sentinel
-      "name": "Sentinel Name",      // name of your sentinel
-      "abi": [...],                 // abi of your address (or undefined)
-      "address": "0x000..000",      // address your sentinel is watching
-      "confirmBlocks": 0,           // number of blocks sentinel waits
-      "network": "rinkeby"          // network of your address
-      "chainId": 4                  // chain Id of the network
+      "id": "44a7d5...31df5",            // internal ID of your sentinel
+      "name": "Sentinel Name",           // name of your sentinel
+      "abi": [...],                      // abi of your addresses (or undefined)
+      "address": ["0x000..000"],         // addresses your sentinel is watching
+      "confirmBlocks": 0,                // number of blocks sentinel waits
+      "network": "rinkeby"               // network of your addresses
+      "chainId": 4                       // chain Id of the network
     }
   }
   ]
@@ -585,30 +586,31 @@ exports.handler = async function(params) {
 [source,jsx]
 ----
 {
-  "transaction": {                // eth_getTransactionReceipt response body
-    ...                           // see https://eips.ethereum.org/EIPS/eip-1474
+  "transaction": {                     // eth_getTransactionReceipt response body
+    ...                                // see https://eips.ethereum.org/EIPS/eip-1474
   },
-  "blockHash": "0xab..123",       // block hash from where this transaction was seen
-  "matchReasons": [               // the reasons why sentinel triggered
+  "blockHash": "0xab..123",            // block hash from where this transaction was seen
+  "matchReasons": [                    // the reasons why sentinel triggered
     {
-      "type": "event",            // event, function, or transaction
-      "signature": "...",         // signature of your event/function
-      "condition": "value > 5",   // condition expression (if any)
-      "args": ["5"],              // parameters by index (unnamed are present)
-      "params": { "value": "5" }  // parameters by name (unnamed are not present)
-      "metadata": {...}           // metadata injected by Autotask Condition (if applicable)
+      "type": "event",                 // event, function, or transaction
+      "signature": "...",              // signature of your event/function
+      "condition": "value > 5",        // condition expression (if any)
+      "args": ["5"],                   // parameters by index (unnamed are present)
+      "params": { "value": "5" }       // parameters by name (unnamed are not present)
+      "metadata": {...}                // metadata injected by Autotask Condition (if applicable)
     }
   ],
+  "matchedAddresses":["0x000..000"]    // the addresses from this transaction your are monitoring
   "sentinel": {
-    "id": "44a7d5...31df5",       // internal ID of your sentinel
-    "name": "Sentinel Name",      // name of your sentinel
-    "abi": [...],                 // abi of your address (or undefined)
-    "address": "0x000..000",      // address your sentinel is watching
-    "confirmBlocks": 0,           // number of blocks sentinel waits
-    "network": "rinkeby"          // network of your address
-    "chainId": 4                  // chain Id of the network
+    "id": "44a7d5...31df5",            // internal ID of your sentinel
+    "name": "Sentinel Name",           // name of your sentinel
+    "abi": [...],                      // abi of your address (or undefined)
+    "addresses": ["0x000..000"],       // addresses your sentinel is watching
+    "confirmBlocks": 0,                // number of blocks sentinel waits
+    "network": "rinkeby"               // network of your address
+    "chainId": 4                       // chain Id of the network
   },
-  "value": "0x16345785D8A0000"    // value of the transaction
+  "value": "0x16345785D8A0000"         // value of the transaction
 }
 ----
 ==== Forta Sentinel
@@ -789,4 +791,4 @@ Example:
 [[pausing]]
 == Pausing
 
-Pausing a Sentinel will pause the monitoring of your address.
+Pausing a Sentinel will pause the monitoring of your addresses.
