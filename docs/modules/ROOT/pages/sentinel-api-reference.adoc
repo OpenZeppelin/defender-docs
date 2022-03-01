@@ -216,7 +216,7 @@ interface ExternalCreateFortaSubscriberRequest {
 
 ```
 
-An example for a `BLOCK` sentinel is provided below. This sentinel will be named `My New Sentinel` and will be monitoring the `renounceOwnership` function on the `0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2` contract on the Rinkeby network.
+An example for a contract (`BLOCK`) sentinel is provided below. This sentinel will be named `My New Sentinel` and will be monitoring the `renounceOwnership` function on the `0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2` contract on the Rinkeby network.
 The alert threshold is set to 2 times within 1 hour, and the user will be notified via email.
 
 ```js
@@ -269,7 +269,7 @@ Possible variables: `value`, `gasPrice`, `gasLimit`, `gasUsed`, `to`, `from`, `n
 txCondition: 'gasPrice > 0',
 ```
 
-You can also construct a request for a `FORTA` sentinel as follows:
+You can also construct a request for a Forta (`FORTA`) sentinel as follows:
 
 ```js
 const requestParameters = {
