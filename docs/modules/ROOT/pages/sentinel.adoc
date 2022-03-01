@@ -33,7 +33,7 @@ IMPORTANT: At this time, Sentinels are supported across all networks except Fant
 [[specify-addresses]]
 === Specifying Addresses
 
-* *Addresses*: Choose either a smart contracts or externally owned accounts to monitor. You may only have 1 ABI per sentinel, if you choose multiple smart contracts they must adhere to the same ABI/Interface. 
+* *Addresses*: Choose either smart contracts or externally owned accounts to monitor. You may only have 1 ABI per sentinel, if you choose multiple smart contracts they must adhere to the same ABI/Interface. 
 
 * *ABI*: Specify the ABI for the contract. Defender will automatically load the ABI if the source code is verified.
 
@@ -232,7 +232,7 @@ The request body will contain the following structure. You can use the `Sentinel
       "id": "44a7d5...31df5",            // internal ID of your sentinel
       "name": "Sentinel Name",           // name of your sentinel
       "abi": [...],                      // abi of your addresses (or undefined)
-      "address": ["0x000..000"],         // addresses your sentinel is watching
+      "addresses": ["0x000..000"],       // addresses your sentinel is watching
       "confirmBlocks": 0,                // number of blocks sentinel waits
       "network": "rinkeby"               // network of your addresses
       "chainId": 4                       // chain Id of the network
