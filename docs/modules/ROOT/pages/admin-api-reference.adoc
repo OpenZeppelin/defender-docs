@@ -38,7 +38,9 @@ type Network =
   | 'arbitrum'
   | 'arbitrum-rinkeby'
   | 'harmony-s0'
-  | 'harmony-test-s0';
+  | 'harmony-test-s0'
+  | 'cronos'
+  | 'cronostest';
 
 type Address = string;
 type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];

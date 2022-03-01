@@ -53,6 +53,7 @@ All Defender components, where applicable, provide support for the following cha
 - https://fantom.foundation/what-is-fantom-opera/[*Fantom*] and *Fantom Testnet*.
 - https://celo.org/[*Celo*] and *Alfajores*.
 - https://www.harmony.one/[*Harmony* Shard 0] and *Harmony Testnet Shard 0*. 
+- https://cronos.org/[*Cronos*] and *Cronos Testnet*.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
