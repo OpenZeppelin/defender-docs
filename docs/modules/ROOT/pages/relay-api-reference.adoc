@@ -171,7 +171,7 @@ An example of the response:
 
 [[sign-endpoint]]
 == Sign Endpoint
-To sign arbitrary data with your Relay private key make a `POST` request to `/sign` with a payload containing the hex string to sign. The payload format is:
+To sign arbitrary messages according to the https://eips.ethereum.org/EIPS/eip-191[EIP-191 Standard] (prefixed by `\x19Ethereum Signed Message:\n`) with your Relay private key make a `POST` request to `/sign` with a payload containing the hex string to sign. The payload format is:
 
 ```TypeScript
 interface SignMessagePayload {
@@ -192,6 +192,54 @@ curl \
   -H "Authorization: Bearer $TOKEN" \
   -d "$DATA" \
     "https://api.defender.openzeppelin.com/sign"
+```
+
+You would receive a response in the following format:
+
+```TypeScript
+interface SignedMessagePayload {
+  sig: Hex;
+  r: Hex;
+  s: Hex;
+  v: number;
+}
+```
+
+An example of the response:
+
+```JSON
+{
+   "r":"0x819b2645a0b73494724dac355e6ecfc983d94597b533d34fe3ecd0277046a1eb",
+   "s":"0x3b73c695b47dd275d17246d86bbfe35f112a7bdb5bf4a5a1a8e22fe37dfd005a",
+   "v":44,
+   "sig":"0x819b2645a0b73494724dac355e6ecfc983d94597b533d34fe3ecd0277046a1eb3b73c695b47dd275d17246d86bbfe35f112a7bdb5bf4a5a1a8e22fe37dfd005a2c"
+}
+```
+
+[[sign-typed-data-endpoint]]
+== Sign Typed Data Endpoint
+To sign typed data according to the [EIP-712 Specification](https://eips.ethereum.org/EIPS/eip-712) with your Relay private key make a `POST` request to `/sign` with a payload containing the `domainSeparator` and the `hashStruct(message)`. Both should be 32-bytes long as they're hashes theirselves. The payload format is:
+
+```TypeScript
+interface SignTypedDataPayload {
+  domainSeparator: Hex;
+  hashStructMessage: Hex;
+}
+```
+
+An example of the request:
+
+```bash
+DATA='{ "domainSeparator": "0x0123456789abcdef...", "hashStructMessage": "0x0123456789abcdef..." }'
+
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://api.defender.openzeppelin.com/sign-typed-data"
 ```
 
 You would receive a response in the following format:
