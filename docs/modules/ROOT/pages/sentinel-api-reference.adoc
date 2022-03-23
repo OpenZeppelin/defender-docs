@@ -156,7 +156,7 @@ An example response:
             {
                 "conditions": [],
                 "abi": "[...]",
-                "address": "0xf664FA8aB9AA8021E2c08F45fEeA817D5730A713"
+                "addresses": ["0xf664FA8aB9AA8021E2c08F45fEeA817D5730A713"]
             }
         ],
         "blockWatcherId": "rinkeby-1",
@@ -181,6 +181,7 @@ type CreateSentinelRequest =
 interface ExternalCreateBlockSubscriberRequest {
   type: 'BLOCK';
   name: string;
+  addresses: string[];
   paused?: boolean;
   alertThreshold?: Threshold;
   notifyConfig?: Notifications;
@@ -190,7 +191,6 @@ interface ExternalCreateBlockSubscriberRequest {
   notificationChannels: string[];
   network: string;
   confirmLevel?: number; // blockWatcherId
-  address: string;
   abi?: string;
   eventConditions?: EventCondition[];
   functionConditions?: FunctionCondition[];
@@ -225,7 +225,7 @@ const requestParameters = {
   // optional
   confirmLevel: 1, // if not set, we pick the blockwatcher for the chosen network with the lowest offset
   name: 'My New Sentinel',
-  address: '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2',
+  addresses: ['0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'],
   abi: '[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{...}]',
   // optional
   paused: false,
@@ -345,7 +345,7 @@ interface CreateBlockSubscriberRequest {
     autotaskCondition?: {
       autotaskId: string;
     };
-    address: string;
+    addresses: string[];
     abi?: string;
   }];
   blockWatcherId: string;
