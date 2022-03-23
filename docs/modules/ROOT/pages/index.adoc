@@ -39,7 +39,6 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 
 [[networks]]
 == Available networks
-
 All Defender components, where applicable, provide support for the following chains and networks:
 
 - *Ethereum Mainnet* and its testnets *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli*.
@@ -52,7 +51,8 @@ All Defender components, where applicable, provide support for the following cha
 - https://fuse.io/[*Fuse*].
 - https://fantom.foundation/what-is-fantom-opera/[*Fantom*] and *Fantom Testnet*.
 - https://celo.org/[*Celo*] and *Alfajores*.
-- https://www.harmony.one/[*Harmony* Shard 0] and *Harmony Testnet Shard 0*. 
+- https://www.harmony.one/[*Harmony* Shard 0] and *Harmony Testnet Shard 0*.
+- http://aurora.dev/[*Aurora*] and *Aurora Testnet*.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
