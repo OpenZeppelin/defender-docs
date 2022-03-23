@@ -15,6 +15,7 @@
 ** xref:sentinel-api-reference.adoc[Sentinel]
 
 * xref:account-management.adoc[Account Management]
+* xref:logging.adoc[Logging]
 
 * Guides
 ** xref:guide-upgrades.adoc[Upgrading via a multisig]
