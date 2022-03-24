@@ -1,1 +1,70 @@
-TBD
+= Logging
+
+Defender generates log trail of every potentially relevant event in the system.
+
+== Log Forwarding
+
+Generated logs can be forwarded to Datadog and Splunk or any other service that supports API Key authorization.
+
+This is a premium feature, if you are interested in it let us know by filling in this https://zpl.in/defender-inquiry[form, window=_blank].
+
+== Setup Log Forwarding Destination
+
+Log Forwarding configuration page can be accessed from the User Menu or by following this https://defender.openzeppelin.com/#/log-forwarding[link,window=_blank].
+
+image::log-forwarding-add.png[Add Forwarding Destination, 600]
+
+Form for creating a new Destination can be accessed by following `Add Forwarding Destination` button.
+
+image::log-forwarding-form.png[Add Log Destination, 600]
+
+Form fields:
+
+* *URL* field is a required field. All logs are forwarded to this URL address by using HTTP POST method.
+
+* *API Header Name* is optional. This is the name of the request header that contains the API Key value. For most log management services API Header Name needs to be set.
+
+* *API Key* is an optional field. API Key is sent with every request in order to authenticate it. For most log management services API Key needs to be set.
+
+* *Log Types* field enables filtering only certain types of logs for forwarding.
+
+NOTE: In the next section we will cover how to setup Log Forwarding with Splunk and Datadog but it is worth noting that Log Forwarding works with any other service that supports API Key authorization.
+
+=== Splunk
+
+Forwarding logs to Splunk is done by using Splunk HEC(HTTP Event Collector).
+Documentation for setting up logging with Splunk HEC can be found on this https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector[link,window=_blank].
+
+NOTE: Log Forwarding does not work with Splunk trial accounts because of Splunk internals.
+
+Example:
+
+* *URL*: `\https://username.splunkcloud.com/services/collector/raw`
+
+* *API Header Name*: `Authorization`
+
+* *API Key*: `Splunk xxxxxxxxxxxxxxxxxxxxxxxxxxx`
+
+NOTE: `URL` value is dynamic as URL includes account username.
+
+NOTE: `API Key` should contain `Splunk` prefix.
+
+
+=== Datadog
+
+Documentation for setting logging on Datadog can be found on this https://docs.datadoghq.com/logs/[link,window=_blank].
+
+
+Example:
+
+* *URL*: `\https://http-intake.logs.datadoghq.com/api/v2/logs`
+
+* *API Header Name*: `DD-API-KEY`
+
+* *API Key*: `xxxxxxxxxxxxxxxxxxxxxxxxxxx`
+
+NOTE: Datadog uses different sites around the world. For EU server `URL` field value should be https://http-intake.logs.datadoghq.eu/api/v2/logs
+
+NOTE: `API Key` value can be obtained from Datadog site by opening `Logs` section from the left menu.
+`Cloud` section and `AWS` provider needs to be selected.
+After following steps, the 'API Key` value is displayed in the bottom section of the page.
