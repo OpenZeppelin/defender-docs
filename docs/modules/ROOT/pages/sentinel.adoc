@@ -367,6 +367,7 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
         "scanNodeCount": 1,
         "severity": "MEDIUM",               // indicates impact level of finding
         "findingType": "SUSPICIOUS",        // indicates type of finding: Exploit, Suspicious, Degraded, Info
+        "metadata": { "gas": "999999" },    // metadata for the alert 
         "source": {
           "transactionHash": "0xab..123",   // network transaction hash  e.g ethereum transaction hash
           "agent": {
@@ -631,6 +632,7 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
     "scanNodeCount": 1,
     "severity": "MEDIUM",               // indicates impact level of finding
     "findingType": "SUSPICIOUS",        // indicates type of finding: Exploit, Suspicious, Degraded, Info
+    "metadata": { "gas": "999999" },    // metadata for the alert 
     "source": {
       "transactionHash": "0xab..123",   // network transaction hash  e.g ethereum transaction hash
       "agent": {
