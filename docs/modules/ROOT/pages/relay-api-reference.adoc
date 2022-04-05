@@ -10,12 +10,177 @@ The Relay API is split into 2 modules:
 
 2. Relayer
 
-* Execute send, sign, and other operations with a specific relayer
+* Execute send, sign, and other operations using a specific relayer
 * Authenticates with bearer token generated using Relayer API Key/Secret (available when relayer is created)
 
 For more information on authentication, refer to the xref:api-auth.adoc[authentication section].
 
 NOTE: You can use the https://www.npmjs.com/package/defender-relay-client[defender-relay-client] npm package for simplifying interactions with the Relay API.
+
+[[relay-client-module]]
+== Relay Client Module Reference
+
+The Relay Client Module exposes the following endpoints: 
+
+- `list`: list all relayers associated with the account
+- `create`: create a new relayer
+- `retrieve`: retrieve data for a single relayer
+- `update`: update an existing relayer
+
+[[list-endpoint]]
+=== List Relayers
+
+To list existing relayers, you can call the `list` function on the client, which returns a `ListRelayerResponse` object:
+
+```js
+await client.list();
+```
+
+The `relayers/summary` endpoint is used to retrieve a list of existing relayers via a `GET` request.
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/relayers/summary"
+```
+
+An example response:
+
+```js
+[
+    {
+      relayerId: '201832e2-c612-4283-97c5-31849242c1fe',
+      name: 'MyRelayer',
+      address: '0x623e258760220127d4856fa24ff126a230560749',
+      network: 'rinkeby',
+      createdAt: '2022-04-05T16:57:37.154Z',
+      paused: false,
+      policies: {},
+      minBalance: '100000000000000000',
+      pendingTxCost: '0'
+    }
+]
+```
+
+[[create-endpoint]]
+=== Create Relayers
+
+To create a new relayer, you need to provide the parameters as described directly below in interface `CreateRelayerRequest`.
+
+```js
+interface CreateRelayerRequest {
+  name: string;
+  useAddressFromRelayerId?: string;
+  network: Network;
+  minBalance: string;
+  policies?: UpdateRelayerPoliciesRequest;
+}
+
+interface UpdateRelayerPoliciesRequest {
+  gasPriceCap?: string;
+  whitelistReceivers?: string[];
+}
+
+include::partial$network.adoc[]
+```
+
+Using the `defender-relay-client` package:
+
+```js
+const requestParameters = {
+  name: 'MyNewRelayer',
+  network: 'rinkeby',
+  minBalance: BigInt(1e17).toString(),
+  policies: {
+    whitelistReceivers: ['0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B'],
+  },
+};
+
+await client.create(requestParameters);
+```
+
+You can also clone an existing relayer to a different network by referencing an existing `relayerId` in the `useAddressFromRelayerId` parameter:
+
+```js
+const requestParameters = {
+  name: 'MyClonedRelayer',
+  useAddressFromRelayerId: '201832e2-c612-4283-97c5-31849242c1fe',
+  network: 'mainnet',
+  minBalance: BigInt(1e17).toString()
+};
+
+await client.create(requestParameters);
+```
+
+Making a POST request to the `/relayers` endpoint:
+
+```
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/relayers"
+```
+
+[[relayer-policies]]
+==== Relayer Policies
+
+The following relayer policies may be optionally included in both create and update calls:
+
+* `gasPriceCap`: Maximum gas price in wei
+* `whitelistReceivers`: an array of all valid addresses with which this relayer can interact; the relayer can send transactions to any address if this policy is undefined or set to an empty array
+
+[[update-endpoint]]
+=== Update Relayers
+
+To update a relayer, you can call the `update` function on the client. This will require the relayer ID and a `UpdateRelayerRequest` object as parameters:
+
+```js
+interface UpdateRelayerRequest {
+  name?: string;
+  minBalance?: string;
+  policies?: UpdateRelayerPoliciesRequest;
+}
+```
+
+Using the `defender-relay-client` package:
+
+```js
+await client.update('201832e2-c612-4283-97c5-31849242c1fe', { name: 'My Updated Name' });
+```
+
+Making a PUT request to the `/relayers` endpoint:
+
+```
+curl \
+  -X PUT \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/relayers"
+```
+
+NOTE: If making the request directly (not with `defender-relay-client`), any policy updates will need to be made via requests to the endpoint directly below with a body type of `UpdateRelayerPoliciesRequest`.
+
+```
+curl \
+  -X PUT \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/relayers/{relayerId}"
+```
 
 [[relayer-module]]
 == Relayer Module Reference
