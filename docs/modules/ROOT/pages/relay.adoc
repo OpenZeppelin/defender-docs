@@ -370,6 +370,15 @@ Each Relayer is associated to a private key. When a request to send a transactio
 
 Every minute, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their gas price (or the latest gas price for their speed, if it's greater), which could be up to a *150% of the reported gas price for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
 
+[[concurrency-and-rate-limiting]]
+== Concurrency and Rate Limiting
+
+Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all relayers in an account):
+
+* 120 transactions/hour (free tier only)
+* 100 total requests/second
+* 10 transactions/second
+
 [[security-considerations]]
 == Security considerations
 
