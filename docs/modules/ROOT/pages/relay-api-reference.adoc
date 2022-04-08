@@ -135,7 +135,7 @@ curl \
 The following relayer policies may be optionally included in both create and update calls:
 
 * `gasPriceCap`: Maximum gas price in wei
-* `whitelistReceivers`: an array of all valid addresses with which this relayer can interact; the relayer can send transactions to any address if this policy is undefined or set to an empty array
+* `whitelistReceivers`: an array of all valid addresses with which this relayer can interact; the relayer can send transactions to any address if this policy is undefined.
 
 [[update-endpoint]]
 === Update Relayers
