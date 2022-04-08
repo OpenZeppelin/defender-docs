@@ -8,7 +8,7 @@ The Relay API is split into 2 modules:
 * Execute create, read, and update operations across all relayers within an account
 * Authenticates with bearer token generated using Team API Key/Secret (available when Team API Key is created)
 
-2. Relayer
+2. Relay Signer
 
 * Execute send, sign, and other operations using a specific relayer
 * Authenticates with bearer token generated using Relayer API Key/Secret (available when relayer is created)
@@ -182,10 +182,10 @@ curl \
     "https://defender-api.openzeppelin.com/relayers/{relayerId}"
 ```
 
-[[relayer-module]]
-== Relayer Module Reference
+[[relay-signer-module]]
+== Relayer Signer Module Reference
 
-The Relayer Module exposes the following endpoints: 
+The Relayer Signer Module exposes the following endpoints: 
 
 - `txs`: send transactions to the Ethereum blockchain and query their status 
 - `sign`: sign arbitrary data with relayer's private key
