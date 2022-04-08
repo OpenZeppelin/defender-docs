@@ -12,39 +12,10 @@ NOTE: We recommend you use the https://www.npmjs.com/package/defender-admin-clie
 
 The `/proposals` endpoint is used for creating new Admin action proposals via a `POST` request. Any actions created this way will have no approvals initially. If the recipient contract of the proposal does not exist, it will be created with the parameters provided.
 
+
+
 ```TypeScript
-type Network =
-  | 'mainnet'
-  | 'rinkeby'
-  | 'ropsten'
-  | 'kovan'
-  | 'goerli'
-  | 'xdai'
-  | 'sokol'
-  | 'fuse'
-  | 'bsc'
-  | 'bsctest'
-  | 'fantom'
-  | 'fantomtest'
-  | 'moonbase'
-  | 'moonriver'
-  | 'moonbeam'
-  | 'matic'
-  | 'mumbai'
-  | 'avalanche'
-  | 'fuji'
-  | 'optimistic'
-  | 'optimistic-kovan'
-  | 'arbitrum'
-  | 'arbitrum-rinkeby'
-  | 'celo'
-  | 'alfajores'
-  | 'arbitrum'
-  | 'arbitrum-rinkeby'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
-  | 'aurora'
-  | 'auroratest';
+include::partial$network.adoc[]
 
 type Address = string;
 type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];

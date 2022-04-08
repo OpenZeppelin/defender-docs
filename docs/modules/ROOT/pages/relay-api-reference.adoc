@@ -1,24 +1,204 @@
 [[relay-api]]
 = Relay API Reference
 
-The Relay API exposes the following endpoints: 
+The Relay API is split into 2 modules:
+
+1. Relay Client
+
+* Execute create, read, and update operations across all relayers within an account
+* Authenticates with bearer token generated using Team API Key/Secret (available when Team API Key is created)
+
+2. Relay Signer
+
+* Execute send, sign, and other operations using a specific relayer
+* Authenticates with bearer token generated using Relayer API Key/Secret (available when relayer is created)
+
+For more information on authentication, refer to the xref:api-auth.adoc[authentication section].
+
+NOTE: You can use the https://www.npmjs.com/package/defender-relay-client[defender-relay-client] npm package for simplifying interactions with the Relay API.
+
+[[relay-client-module]]
+== Relay Client Module Reference
+
+The Relay Client Module exposes the following endpoints: 
+
+- `list`: list all relayers associated with the account
+- `create`: create a new relayer
+- `retrieve`: retrieve data for a single relayer
+- `update`: update an existing relayer
+
+[[list-endpoint]]
+=== List Relayers
+
+To list existing relayers, you can call the `list` function on the client, which returns a `ListRelayerResponse` object:
+
+```js
+await client.list();
+```
+
+The `relayers/summary` endpoint is used to retrieve a list of existing relayers via a `GET` request.
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/relayers/summary"
+```
+
+An example response:
+
+```js
+[
+    {
+      relayerId: '201832e2-c612-4283-97c5-31849242c1fe',
+      name: 'MyRelayer',
+      address: '0x623e258760220127d4856fa24ff126a230560749',
+      network: 'rinkeby',
+      createdAt: '2022-04-05T16:57:37.154Z',
+      paused: false,
+      policies: {},
+      minBalance: '100000000000000000',
+      pendingTxCost: '0'
+    }
+]
+```
+
+[[create-endpoint]]
+=== Create Relayers
+
+To create a new relayer, you need to provide the parameters as described directly below in interface `CreateRelayerRequest`.
+
+```js
+interface CreateRelayerRequest {
+  name: string;
+  useAddressFromRelayerId?: string;
+  network: Network;
+  minBalance: string;
+  policies?: UpdateRelayerPoliciesRequest;
+}
+
+interface UpdateRelayerPoliciesRequest {
+  gasPriceCap?: string;
+  whitelistReceivers?: string[];
+}
+
+include::partial$network.adoc[]
+```
+
+Using the `defender-relay-client` package:
+
+```js
+const requestParameters = {
+  name: 'MyNewRelayer',
+  network: 'rinkeby',
+  minBalance: BigInt(1e17).toString(),
+  policies: {
+    whitelistReceivers: ['0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B'],
+  },
+};
+
+await client.create(requestParameters);
+```
+
+You can also clone an existing relayer to a different network by referencing an existing `relayerId` in the `useAddressFromRelayerId` parameter:
+
+```js
+const requestParameters = {
+  name: 'MyClonedRelayer',
+  useAddressFromRelayerId: '201832e2-c612-4283-97c5-31849242c1fe',
+  network: 'mainnet',
+  minBalance: BigInt(1e17).toString()
+};
+
+await client.create(requestParameters);
+```
+
+Making a POST request to the `/relayers` endpoint:
+
+```
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/relayers"
+```
+
+[[relayer-policies]]
+==== Relayer Policies
+
+The following relayer policies may be optionally included in both create and update calls:
+
+* `gasPriceCap`: Maximum gas price in wei
+* `whitelistReceivers`: an array of all valid addresses with which this relayer can interact; the relayer can send transactions to any address if this policy is undefined.
+
+[[update-endpoint]]
+=== Update Relayers
+
+To update a relayer, you can call the `update` function on the client. This will require the relayer ID and a `UpdateRelayerRequest` object as parameters:
+
+```js
+interface UpdateRelayerRequest {
+  name?: string;
+  minBalance?: string;
+  policies?: UpdateRelayerPoliciesRequest;
+}
+```
+
+Using the `defender-relay-client` package:
+
+```js
+await client.update('201832e2-c612-4283-97c5-31849242c1fe', { name: 'My Updated Name' });
+```
+
+Making a PUT request to the `/relayers` endpoint:
+
+```
+curl \
+  -X PUT \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/relayers"
+```
+
+NOTE: If making the request directly (not with `defender-relay-client`), any policy updates will need to be made via requests to the endpoint directly below with a body type of `UpdateRelayerPoliciesRequest`.
+
+```
+curl \
+  -X PUT \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{...}' \
+    "https://defender-api.openzeppelin.com/relayers/{relayerId}"
+```
+
+[[relay-signer-module]]
+== Relayer Signer Module Reference
+
+The Relayer Signer Module exposes the following endpoints: 
 
 - `txs`: send transactions to the Ethereum blockchain and query their status 
 - `sign`: sign arbitrary data with relayer's private key
 - `relayer`: retrieve information from the relayer
 - `jsonrpc`: make json-rpc calls to the Ethereum network
 
-All requests need to be authenticated with a bearer token, which is generated using a Relayer API Key. Refer to the xref:api-auth.adoc[authentication section] for info on how to negotiate it.
-
-NOTE: You can use the https://www.npmjs.com/package/defender-relay-client[defender-relay-client] npm package for simplifying interactions with the Relay API.
-
 [[txs-endpoint]]
-== Transactions Endpoint
+=== Transactions Endpoint
 
 The `/txs` endpoint is used for both sending transactions and for retrieving transaction information given a transaction identifier.
 
 [[send-transaction]]
-=== Send Transaction
+==== Send Transaction
 To send a transaction to the Ethereum blockchain submit a `POST` request with the desired payload. The payload format is as follows:
 
 ```TypeScript
@@ -81,7 +261,7 @@ interface TransactionResponse {
 Note the extra `transactionId` field, which is an internal Defender identifier for the transaction, which is used for querying and replacing.
 
 [[replace-transaction]]
-=== Replace Transaction
+==== Replace Transaction
 To replace a `pending` transaction make a `PUT` request to the `txs` endpoint with the Defender `transactionId` or `nonce`, *not* with the transaction hash.
 
 An example of the request:
@@ -100,7 +280,7 @@ curl \
 The request payload and the response are the same as that of sending a transaction.
 
 [[query-transaction]]
-=== Query Transaction
+==== Query Transaction
 To retrieve a transaction status and data make a `GET` request to the `txs` endpoint with the Defender `transactionId`, *not* with the transaction hash.
 
 An example of the request:
@@ -135,7 +315,7 @@ An example of the response:
 ```
 
 [[list-transactions]]
-=== List Transactions
+==== List Transactions
 To retrieve a list of recent transactions sent from your relayer, make a `GET` request to the `txs`. You can optionally set `since`, `limit`, and `status` (`mined`, `pending`, or `failed`) as query parameters.
 
 An example of the request:
@@ -170,7 +350,7 @@ An example of the response:
 ```
 
 [[sign-endpoint]]
-== Sign Endpoint
+=== Sign Endpoint
 To sign arbitrary messages according to the https://eips.ethereum.org/EIPS/eip-191[EIP-191 Standard] (prefixed by `\x19Ethereum Signed Message:\n`) with your Relay private key make a `POST` request to `/sign` with a payload containing the hex string to sign. The payload format is:
 
 ```TypeScript
@@ -217,7 +397,7 @@ An example of the response:
 ```
 
 [[sign-typed-data-endpoint]]
-== Sign Typed Data Endpoint
+=== Sign Typed Data Endpoint
 To sign typed data according to the [EIP-712 Specification](https://eips.ethereum.org/EIPS/eip-712) with your Relay private key make a `POST` request to `/sign` with a payload containing the `domainSeparator` and the `hashStruct(message)`. Both should be 32-bytes long as they're hashes theirselves. The payload format is:
 
 ```TypeScript
@@ -265,7 +445,7 @@ An example of the response:
 ```
 
 [[relayer-endpoint]]
-== Relayer Endpoint
+=== Relayer Endpoint
 To retrieve a relayer's data with the Relay API make a `GET` request to the `/relayer` endpoint.
 
 An example of the request:
@@ -309,7 +489,7 @@ An example of the response:
 ```
 
 [[jsonrpc-endpoint]]
-== JSON RPC Endpoint
+=== JSON RPC Endpoint
 To make a JSON RPC call to the network of your Relay, make a `POST` request to the `/relayer/jsonrpc` endpoint with the method name and parameters. Note that event filter methods and websocket subscriptions are not supported.
 
 An example of the request:
