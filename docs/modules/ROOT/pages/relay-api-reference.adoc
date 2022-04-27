@@ -66,6 +66,40 @@ An example response:
 ]
 ```
 
+[[list-keys-endpoint]]
+=== List Relayer Keys
+
+To list keys associated with an existing relayer, you can call the `listKeys` function with a `relayerId` on the client, which returns an array of `RelayerKey` objects:
+
+```js
+await client.listKeys('58b3d255-e357-4b0d-aa16-e86f745e63b9');
+```
+
+The `/relayers/${relayerId}/keys` endpoint is used to retrieve a list of relayer keys via a `GET` request.
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys"
+```
+
+An example response:
+
+```js
+[
+    {
+      apiKey: '5Kk12pMA6LjPSppaRAsfAJRAjYeFJzr6',
+      createdAt: '2022-04-26T19:49:10.292Z',
+      relayerId: '58b3d255-e357-4b0d-aa16-e86f745e63b9',
+      keyId: '898a952b-415b-4d4b-882b-3958f11pbeea'
+  }
+]
+```
+
 [[create-endpoint]]
 === Create Relayers
 
@@ -137,6 +171,42 @@ The following relayer policies may be optionally included in both create and upd
 * `gasPriceCap`: Maximum gas price in wei
 * `whitelistReceivers`: an array of all valid addresses with which this relayer can interact; the relayer can send transactions to any address if this policy is undefined.
 
+[[create-key-endpoint]]
+=== Create Relayer Key
+
+A relayer created via the API will not have any associated relayer keys by default. To create one, you can call the `createKey` method on the client, which returns a `RelayerKey` (including the `secretKey` - available on creation only):
+
+```js
+
+await client.createKey('58b3d255-e357-4b0d-aa16-e86f745e63b9');
+```
+
+Making a POST request to the `/relayers/${relayerId}/keys` endpoint:
+
+```
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys"
+```
+
+An example response:
+
+```js
+[
+    {
+      apiKey: '5Kk12pMA6LjPSppaRAsfAJRAjYeFJzr6',
+      createdAt: '2022-04-26T19:49:10.292Z',
+      relayerId: '58b3d255-e357-4b0d-aa16-e86f745e63b9',
+      keyId: '898a952b-415b-4d4b-882b-3958f11pbeea',
+      secretKey: '1pDxUoWYtrAK4xMsKmOITpd1PQofWDFRRTNp2jshDhZ1XhYxDCfAvQ5vyKprFhXQ'
+  }
+]
+```
+
 [[update-endpoint]]
 === Update Relayers
 
@@ -181,6 +251,40 @@ curl \
   -d '{...}' \
     "https://defender-api.openzeppelin.com/relayers/{relayerId}"
 ```
+
+[[delete-key-endpoint]]
+=== Delete Relayer Key
+
+To delete a key associated with a relayer, you can call the `deleteKey` method on the client, which returns a message indicating deletion status:
+
+```js
+
+await client.deleteKey('58b3d255-e357-4b0d-aa16-e86f745e63b9', 'j3bru93-k32l-3p1s-pp56-u43f675e92p1');
+```
+
+NOTE: The second argument to `deleteKey` is the `keyId`, not the `apiKey`. One way to differentiate the two is the `keyId` contains hyphens. This can be fetched via the list operation described above and is also available in the response on key creation.
+
+Making a DELETE request to the `/relayers/${relayerId}/keys/${keyId}` endpoint:
+
+```
+curl \
+  -X DELETE \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys/j3bru93-k32l-3p1s-pp56-u43f675e92p1"
+```
+
+An example response:
+
+```js
+{
+  message: 'j3bru93-k32l-3p1s-pp56-u43f675e92p1 deleted'
+}
+```
+
+Deletion of a relayer (not just a key) is only available via the Defender console.
 
 [[relay-signer-module]]
 == Relayer Signer Module Reference
