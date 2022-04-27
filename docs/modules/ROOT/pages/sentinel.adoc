@@ -366,6 +366,7 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
         "protocol": "ethereum",             // specifies which network the transaction was mined
         "scanNodeCount": 1,
         "severity": "MEDIUM",               // indicates impact level of finding
+        "metadata": { ... },                // metadata injected by the agent (if any)
         "findingType": "SUSPICIOUS",        // indicates type of finding: Exploit, Suspicious, Degraded, Info
         "source": {
           "transactionHash": "0xab..123",   // network transaction hash  e.g ethereum transaction hash
@@ -629,6 +630,7 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
     "hash": "0xab..123",                // Forta Alert transaction hash
     "protocol": "ethereum",             // specifies which network the transaction was mined
     "scanNodeCount": 1,
+    "metadata": { ... },                // metadata injected by the agent (if any)
     "severity": "MEDIUM",               // indicates impact level of finding
     "findingType": "SUSPICIOUS",        // indicates type of finding: Exploit, Suspicious, Degraded, Info
     "source": {
