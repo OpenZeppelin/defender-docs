@@ -59,7 +59,7 @@ type Address = string;
 type BigUInt = string | number;
 type Hex = string;
 type Speed = 'safeLow' | 'average' | 'fast' | 'fastest';
-type Status = 'pending' | 'sent' | 'submitted' | 'inmempool' | 'mined' | 'confirmed';
+type Status = 'pending' | 'sent' | 'submitted' | 'inmempool' | 'mined' | 'confirmed' | 'failed';
 
 interface TransactionResponse {
   transactionId: string;
@@ -79,6 +79,53 @@ interface TransactionResponse {
 ```
 
 Note the extra `transactionId` field, which is an internal Defender identifier for the transaction, which is used for querying and replacing.
+
+[[transaction-status]]
+==== Transaction Status
+Every transaction response will have an status assigned depending on the last time the backend has seen it. Each time Defender monitors a transaction, the status might be updated.
+
+The available status and their corresponding description are the following:
+
+WARNING: Status `pending`, `sent` and `submitted` are subject to be merged in the future. Avoid to rely on them since backwards compatibility is not assured. 
+
+```Typescript
+type Status =
+  /**
+   * Temporary pre-sent status.
+   * The transaction has been received but not yet signed.
+   */
+  | 'pending'
+  /**
+   * Sent to queue.
+   * The transaction is already signed, enqueued and waiting to be broadcasted to the network.
+   */
+  | 'sent'
+  /**
+   * Transaction broadcasted.
+   * The transaction has been broadcasted to the network providers.
+   */
+  | 'submitted'
+  /**
+   * Seen on mempool.
+   * It's confirmed that the transaction is in the mempool of at least one of the nodes of the network.
+   */
+  | 'inmempool'
+  /**
+   * Transaction mined.
+   * A mined block has included the transaction.
+   */
+  | 'mined'
+  /**
+   * Enough confirmations passed.
+   * The transaction has being kept in a mined block after N new mined blocks, where N depends on the chain.
+   */
+  | 'confirmed'
+  /**
+   * Terminal failure.
+   * The transaction couldn't get processed for unexpected reasons.
+   */
+  | 'failed';
+```
 
 [[replace-transaction]]
 === Replace Transaction
