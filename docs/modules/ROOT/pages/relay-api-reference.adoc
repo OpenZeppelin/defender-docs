@@ -122,7 +122,7 @@ type Status =
   | 'confirmed'
   /**
    * Terminal failure.
-   * The transaction couldn't get mined. This might happen for several reasons (eg. bad nonce, too many retries).
+   * The transaction couldn't get processed for unexpected reasons.
    */
   | 'failed';
 ```
