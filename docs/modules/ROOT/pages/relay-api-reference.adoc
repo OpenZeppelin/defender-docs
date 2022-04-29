@@ -102,7 +102,7 @@ type Status =
   | 'sent'
   /**
    * Transaction broadcasted.
-   * Defender has already picked the transaction and is being broadcasted to the network providers.
+   * The transaction has been broadcasted to the network providers.
    */
   | 'submitted'
   /**
