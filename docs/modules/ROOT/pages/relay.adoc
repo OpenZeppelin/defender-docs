@@ -389,7 +389,7 @@ As for API secrets, these are only kept in memory during creation when they are 
 [[rollups]]
 === Rollups
 
-When sending transactions to a rollup chain, such as Arbitrum, the Relayer currently depends on the chain's sequencer/aggregator. This means that, if the sequencer goes down or censors transactions, the Relayer will not bypass it and commit directly to layer 1.
+When sending transactions to a rollup chain, such as Arbitrum or Optimism, the Relayer currently depends on the chain's sequencer/aggregator. This means that, if the sequencer goes down or censors transactions, the Relayer will not bypass it and commit directly to layer 1.
 
 [[coming-up]]
 == Coming up...
