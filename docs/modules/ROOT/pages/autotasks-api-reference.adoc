@@ -189,3 +189,58 @@ await client.updateCodeFromFolder("671d1f80-99e3-4829-aa15-f01e3298e428", './cod
 ```
 
 NOTE: You can include multiple files in the bundle, as long as the bundle does not exceed 50MB in size, and you include an `index.js` at the root of the zip file to act as entrypoint.
+
+[[runs-endpoints]]
+== Autotask Runs Endpoints
+
+The `autotasks/{id}/runs/manual` endpoint can be used to trigger an autotask run manually:
+
+```bash
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://defender-api.openzeppelin.com/autotask/autotasks/${AUTOTASKID}/runs/manual"
+```
+
+Or through `defender-autotask-client` as such:
+
+```js
+await client.runAutotask("671d1f80-99e3-4829-aa15-f01e3298e428");
+```
+
+Autotask run data can be listed with:
+
+```bash
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/autotask/autotasks/${AUTOTASKID}/runs"
+```
+
+```js
+await client.listAutotaskRuns("671d1f80-99e3-4829-aa15-f01e3298e428");
+```
+
+And logs for a specific run can be fetched with the `AUTOTASK_RUN_ID` (obtained from list request directly above):
+
+```bash
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/autotask/autotasks/runs/${AUTOTASK_RUN_ID}"
+```
+
+```js
+// this method's argument is the autotask run ID, not autotask ID
+await client.getAutotaskRun("ae729f92-11e2-0012-bb16-c98c3298e112");
+```
