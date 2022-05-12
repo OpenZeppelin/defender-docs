@@ -45,7 +45,7 @@ Defender Admin supports three kinds of proposals today: upgrades, pause and cust
 
 An _upgrade action_ can only be executed on EIP1967-compatible or legacy zOS upgradeable proxies that expose an `upgradeTo(address)` function. Defender Admin will handle proxies directly owned by a multi-signature wallet or proxies managed by a ProxyAdmin that is in turn owned by the wallet. The upgrade action only requires you to choose the new implementation address, and Defender Admin takes care of the rest.
 
-WARNING: Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the xref:upgrades-plugins::index.adoc#managing-ownership[`prepareUpgrade`] function from the `openzeppelin-upgrades` library, via xref:upgrades-plugins::api-truffle-upgrades.adoc#prepare-upgrade[truffle] or xref:upgrades-plugins::api-buidler-upgrades.adoc#prepare-upgrade[buidler], to deploy the target implementation.
+WARNING: Defender Admin currently does not validate storage layout compatibility of the implementations. For this reason, we strongly suggest using the `openzeppelin-upgrades` library to xref:upgrades-plugins::index.adoc#managing-ownership[deploy the target implementation]. This can be done with the `prepareUpgrade` function in xref:upgrades-plugins::api-truffle-upgrades.adoc#prepare-upgrade[Truffle] or the `defender.proposeUpgrade` function in xref:upgrades-plugins::api-hardhat-upgrades.adoc#defender-propose-upgrade[Hardhat].
 
 === Pause/Unpause
 
