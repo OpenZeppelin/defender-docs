@@ -26,7 +26,10 @@ The following notification channels are available:
 - telegram
 - datadog
 
-The `createNotificationChannel` function requires the `NotificationType` and `NotificationRequest` parameters respectively, and returns a `NotificationResponse` object.
+[[list-notification-endpoint]]
+=== List Notifications
+
+To list all notification channels, you can call the `listNotificationChannels` function on the client, which returns a `NotificationResponse[]` object.
 
 ```js
 // List existing notification channels
@@ -35,6 +38,12 @@ const notificationChannels = await client.listNotificationChannels()
 const { notificationId, type } = notificationChannels[0];
 ```
 
+[[create-notification-endpoint]]
+=== Create Notifications
+
+To create a new notification channel, you can call the `createNotificationChannel` function on the client.
+
+The `createNotificationChannel` function requires the `NotificationType` and `NotificationRequest` parameters respectively, and returns a `NotificationResponse` object.
 ```js
 // create a new notification
 const notification = await client.createNotificationChannel('email', {
@@ -110,6 +119,15 @@ An example response:
         "type": "email"
     },
 ]
+```
+
+[[delete-notification-endpoint]]
+=== Delete Notifications
+To delete a notification channel, you can call the `deleteNotificationChannel` function on the client, which returns a string if successful. The function takes in a `DeleteNotificationRequest` object, which consists of the `type` and `notificationId` properties.
+
+```js
+const notificationToDelete = {type: 'email', notificationId: '14e99e8f-e2be-4eb1-a543-b2d90b68cdd8'}
+const deleted = await client.deleteNotificationChannel(notificationToDelete);
 ```
 
 [[sentinel-endpoint]]
