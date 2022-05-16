@@ -553,7 +553,7 @@ The event schema is exactly the same as the one laid out in <<Event Schema>>. Yo
 
 === Autotask
 
-If an autotask is selected, then the autotask will receive a body property containing the deails for the triggering event, either the transaction details for the triggering transaction or Forta Alert details from the triggerting alert. The autotask can then perform custom logic and reach out to external APIs as needed.
+If an autotask is selected, then the autotask will receive a body property containing the details for the triggering event, either the transaction details for the triggering transaction or Forta Alert details from the triggerting alert. The autotask can then perform custom logic and reach out to external APIs as needed.
 
 IMPORTANT: Autotask executions are subject to quotas.  After a quota is exhausted, the autotask will no longer execute.  If you need to raise your Autotask execution quotas, please let us know at defender@openzeppelin.com with a description of your use case.
 
