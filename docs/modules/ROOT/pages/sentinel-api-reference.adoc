@@ -121,9 +121,35 @@ An example response:
 ]
 ```
 
+[[update-notification-endpoint]]
+=== Update a Notification
+To update an existing notification channel, you can call the `updateNotificationChannel` function on the client, which returns a `NotificationResponse` object. The function takes in the `UpdateNotificationRequest` object as a parameter.
+
+```js
+const notificationChannel = await client.updateNotificationChannel(
+{ 
+  type: 'email', 
+  notificationId: '14e99e8f-e2be-4eb1-a543-b2d90b68cdd8', 
+  config: {
+    emails: ["john@example.com"]
+  },
+  paused: false,
+  name: "MyUpdatedEmailNotification"
+});
+```
+
+[[get-notification-endpoint]]
+=== Get a Notification
+To retrieve a notification channel, you can call the `getNotificationChannel` function on the client, which returns a `NotificationResponse` object. The function takes in the `GetNotificationRequest` object as a parameter.
+
+```js
+const notificationToRetrieve = {type: 'email', notificationId: '14e99e8f-e2be-4eb1-a543-b2d90b68cdd8'}
+const notificationChannel = await client.getNotificationChannel(notificationToRetrieve);
+```
+
 [[delete-notification-endpoint]]
 === Delete Notifications
-To delete a notification channel, you can call the `deleteNotificationChannel` function on the client, which returns a string if successful. The function takes in a `DeleteNotificationRequest` object, which consists of the `type` and `notificationId` properties.
+To delete a notification channel, you can call the `deleteNotificationChannel` function on the client, which returns a string if successful. The function takes in the `DeleteNotificationRequest` object as a parameter.
 
 ```js
 const notificationToDelete = {type: 'email', notificationId: '14e99e8f-e2be-4eb1-a543-b2d90b68cdd8'}
