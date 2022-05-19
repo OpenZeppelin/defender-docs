@@ -188,7 +188,7 @@ image::defender-admin-governor-track.png[Defender tracks the state of your propo
 [[Fireblocks]]
 == Fireblocks
 
-You can also submit transactions to Fireblocks from Defender directly. https://www.fireblocks.com/[Fireblocks] is an asset management solution that leverages multi-party computation for securing all treasury operations.
+You can also submit transactions to Fireblocks from Defender directly. https://www.fireblocks.com/[Fireblocks, window=_blank] is an asset management solution that leverages multi-party computation for securing all treasury operations.
 
 To utilise this feature, you will first need to generate a Certificate Signing Request (CSR) file.
 
@@ -196,7 +196,7 @@ image::defender-admin-fireblocks-generate-csr.png[Generate a CSR file]
 
 This will trigger Defender to generate a public/private key-pair. The CSR is then generated and signed with the private key and securely stored to prevent leakage.
 
-Next, you will need to import the CSR within the Fireblocks UI when creating https://support.fireblocks.io/hc/en-us/articles/4407823826194-Adding-New-API-Users#h_01FT8BDHNE49TJP8ARZ6ZYQY5J[a new API user]. *Note* that the API user will require any role that can _at least_ initiate transactions, e.g. Signer.
+Next, you will need to import the CSR within the Fireblocks UI when creating https://support.fireblocks.io/hc/en-us/articles/4407823826194-Adding-New-API-Users#h_01FT8BDHNE49TJP8ARZ6ZYQY5J[a new API user, window=_blank]. *Note* that the API user will require any role that can _at least_ initiate transactions, e.g. Signer.
 
 image::fireblocks-add-user.png[Add a new API user]
 
@@ -205,7 +205,7 @@ Once the API user has been created and approved by the Fireblocks workspace owne
 image::defender-admin-fireblocks-incomplete-key.png[Confirm the incomplete key setup]
 image::defender-admin-fireblocks-edit-key.png[Edit the API key]
 
-To submit a transaction to Fireblocks via Defender, ensure the correct permissions are set in Fireblocks, such as the relevant whitelisted addresses and the https://support.fireblocks.io/hc/en-us/articles/4416329765010-Overview[Transaction Access Policy] (TAP). For example, you might need to whitelist the contract address you wish to interact with, as well as ensure that the newly created API user is allowed to interact with the relevant account and vaults (defined in the TAP).
+To submit a transaction to Fireblocks via Defender, ensure the correct permissions are set in Fireblocks, such as the relevant whitelisted addresses and the https://support.fireblocks.io/hc/en-us/articles/4416329765010-Overview[Transaction Access Policy, window=_blank] (TAP). For example, you might need to whitelist the contract address you wish to interact with, as well as ensure that the newly created API user is allowed to interact with the relevant account and vaults (defined in the TAP).
 
 image::defender-admin-fireblocks-complete-key.png[Complete the API key]
 
