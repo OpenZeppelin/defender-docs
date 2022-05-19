@@ -45,7 +45,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/relayers/summary"
+    "https://defender-api.openzeppelin.com/relayer/relayers/summary"
 ```
 
 An example response:
@@ -84,7 +84,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys"
+    "https://defender-api.openzeppelin.com/relayer/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys"
 ```
 
 An example response:
@@ -160,7 +160,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{...}' \
-    "https://defender-api.openzeppelin.com/relayers"
+    "https://defender-api.openzeppelin.com/relayer/relayers"
 ```
 
 [[relayer-policies]]
@@ -190,7 +190,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys"
+    "https://defender-api.openzeppelin.com/relayer/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys"
 ```
 
 An example response:
@@ -236,7 +236,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{...}' \
-    "https://defender-api.openzeppelin.com/relayers"
+    "https://defender-api.openzeppelin.com/relayer/relayers"
 ```
 
 NOTE: If making the request directly (not with `defender-relay-client`), any policy updates will need to be made via requests to the endpoint directly below with a body type of `UpdateRelayerPoliciesRequest`.
@@ -249,7 +249,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{...}' \
-    "https://defender-api.openzeppelin.com/relayers/{relayerId}"
+    "https://defender-api.openzeppelin.com/relayer/relayers/{relayerId}"
 ```
 
 [[delete-key-endpoint]]
@@ -273,7 +273,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys/j3bru93-k32l-3p1s-pp56-u43f675e92p1"
+    "https://defender-api.openzeppelin.com/relayer/relayers/58b3d255-e357-4b0d-aa16-e86f745e63b9/keys/j3bru93-k32l-3p1s-pp56-u43f675e92p1"
 ```
 
 An example response:

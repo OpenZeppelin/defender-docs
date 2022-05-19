@@ -46,7 +46,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/notifications"
+    "https://defender-api.openzeppelin.com/sentinel/notifications"
 ```
 
 An example response:
@@ -182,7 +182,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/subscribers"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers"
 ```
 
 An example response:
@@ -431,7 +431,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{...}' \
-    "https://defender-api.openzeppelin.com/subscribers"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers"
 ```
 
 [[retrieve-endpoint]]
@@ -451,7 +451,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/subscribers/{id}"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers/{id}"
 ```
 
 [[update-endpoint]]
@@ -475,7 +475,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{...}' \
-    "https://defender-api.openzeppelin.com/subscribers/{id}"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers/{id}"
 ```
 
 [[delete-endpoint]]
@@ -496,7 +496,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/subscribers/{id}"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers/{id}"
 ```
 
 An example response:
