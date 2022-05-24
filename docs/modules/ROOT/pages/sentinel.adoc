@@ -1,12 +1,12 @@
 [[sentinel]]
 = Sentinel
 
-The Defender Sentinel service offers 2 types of Sentinels, **Contract Sentinels** and **Forta Sentinels**. Contract Sentinels allow you to **monitor transactions** to a contract by **defining conditions** on events, functions, transaction parameters. Forta Sentinels allow you to **monitor Forta Alerts** by **defining conditions** on Forta Agents, contract addresses, alert IDs and severity. If a Sentinel matches a transaction or a Forta Alert based on your defined conditions it will notify you via email, slack, telegram, discord, xref:autotasks.adoc[Autotasks], and more.
+The Defender Sentinel service offers 2 types of Sentinels, **Contract Sentinels** and **Forta Sentinels**. Contract Sentinels allow you to **monitor transactions** to a contract by **defining conditions** on events, functions, transaction parameters. Forta Sentinels allow you to **monitor Forta Alerts** by **defining conditions** on Forta Bots, contract addresses, alert IDs and severity. If a Sentinel matches a transaction or a Forta Alert based on your defined conditions it will notify you via email, slack, telegram, discord, xref:autotasks.adoc[Autotasks], and more.
 
 [[use-cases]]
 == Use cases
 
-Use a Sentinel when you need to know about or respond to transactions and Forta Alerts involving your smart contracts, other smart contracts you need to monitor or Forta Agents. Your Sentinel will watch every transaction and Forta Alert and send the ones you care about to your notification methods of choice.
+Use a Sentinel when you need to know about or respond to transactions and Forta Alerts involving your smart contracts, other smart contracts you need to monitor or Forta Bots. Your Sentinel will watch every transaction and Forta Alert and send the ones you care about to your notification methods of choice.
 
 * *Monitor* your *sensitive functions* like transferOwnership, pause, or upgrade
 * *Alert* on potentially dangerous transactions on your contracts
@@ -19,7 +19,7 @@ Use a Sentinel when you need to know about or respond to transactions and Forta 
 
 Contract Sentinels are particularly useful for monitoring transactions to a single contract. With the <<specify-conditions, Contract Conditions>> you can filter transactions by various transaction attributes i.e events, functions, params, gasPrice, value, etc. 
 
-Forta Sentinels are useful for monitoring one or more of your smart contracts using a more complex criteria, by hooking into the events and conditions defined by Forta Agent Developers. Forta Agents have greater flexibility for defining transaction conditions than a Contract Sentinel. 
+Forta Sentinels are useful for monitoring one or more of your smart contracts using a more complex criteria, by hooking into the events and conditions defined by Forta Bot Developers. Forta Bots have greater flexibility for defining transaction conditions than a Contract Sentinel. 
 
 
 
@@ -72,14 +72,14 @@ IMPORTANT: At this time, Sentinels can only monitor internal function calls on M
 [[whats-in-a-forta-sentinel]]
 == What's in a Forta Sentinel?
 
-A Forta Sentinel watches Forta Alerts that come from a given Forta Agent or affect a given address, and filters those alerts by any conditions that you specify, then notifies you when those alerts occur.
+A Forta Sentinel watches Forta Alerts that come from a given Forta Bot or affect a given address, and filters those alerts by any conditions that you specify, then notifies you when those alerts occur.
 
-[[specify-agent-address]]
-=== Specifying Forta Agents and Addresses
+[[specify-bot-address]]
+=== Specifying Forta Detection Bots and Addresses
 
-A Forta Sentinel filters on Agent IDs or Addresses and requires that at least one of these filters are set. It is possible to sepcify multiple Agent IDs and Addresses to filter on.
+A Forta Sentinel filters on Bot IDs or Addresses and requires that at least one of these filters are set. It is possible to sepcify multiple Bot IDs and Addresses to filter on.
 
-* *Agent IDs*: Specify the Agent IDs to filter on. These can be comma separated to specify multiple.
+* *Bot IDs*: Specify the Bot IDs to filter on. These can be comma separated to specify multiple.
 
 * *Address*: Choose either smart contracts or externally owned accounts to filter on.
 
@@ -88,7 +88,7 @@ A Forta Sentinel filters on Agent IDs or Addresses and requires that at least on
 
 For a Forta Alert to trigger a notification, it must satisfy *ALL* of the following:
 
-* Forta Alert *MUST* come from one of the Agent IDs specified and/or one of the Addresses specified
+* Forta Alert *MUST* come from one of the Bot IDs specified and/or one of the Addresses specified
 
 * If the *Alert ID Condition* is specified
 
@@ -103,7 +103,7 @@ For a Forta Alert to trigger a notification, it must satisfy *ALL* of the follow
 
 You can specify Alert Severity and Alert IDs to monitor. Specifying both Severity and Alert IDs acts as an OR clause, in that if a alert matches ANY of the selected Alert IDs or matches the selected Severity, it will trigger notification.
     
-NOTE: If no Severity or Alert IDs are specified, then the Sentinel will monitor ALL alerts matching your specified Agent IDs and/or Adresses.
+NOTE: If no Severity or Alert IDs are specified, then the Sentinel will monitor ALL alerts matching your specified Bot IDs and/or Adresses.
 
 [[specify-conditions]]
 == What are Contract Conditions?
@@ -350,7 +350,7 @@ NOTE: Only alerts that match other conditions (Severity, Alert IDs) will invoke 
 
 The request body will contain the following structure. 
 
-NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Agent `name` removed. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
+NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Bot `name` removed, `agent` -> `bot`. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
 
 [source,jsx]
 ----
@@ -370,8 +370,8 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
         "metadata": { "gas": "999999" },    // metadata for the alert 
         "source": {
           "transactionHash": "0xab..123",   // network transaction hash  e.g ethereum transaction hash
-          "agent": {
-            "id": "0xab..123",              // Agent ID
+          "bot": {
+            "id": "0xab..123",              // Bot ID
           },
           "block": {
             "chainId": 1,                   // Chain ID of the originating network       
@@ -389,7 +389,7 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
         "id": "forta_id",                   // internal ID of your sentinel
         "name": "forta sentinel",           // name of your sentinel
         "addresses": [ "0xab..123" ],       // addresses your sentinel is monitoring
-        "agents": [ "0xab..123" ]           // Agent IDs your sentinel is monitoring
+        "agents": [ "0xab..123" ]           // Bot IDs your sentinel is monitoring
         "network": "mainnet"                // network your sentinel is monitoring
         "chainId": 1                        // chain Id of the network
       }
@@ -617,7 +617,7 @@ exports.handler = async function(params) {
 ----
 ==== Forta Sentinel
 
-NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Agent `name` removed. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
+NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Bot `name` removed, `agent` -> `bot`. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
 
 [source,jsx]
 ----
@@ -635,8 +635,8 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
     "metadata": { "gas": "999999" },    // metadata for the alert 
     "source": {
       "transactionHash": "0xab..123",   // network transaction hash  e.g ethereum transaction hash
-      "agent": {
-        "id": "0xab..123",              // Agent ID
+      "bot": {
+        "id": "0xab..123",              // Bot ID
       },
       "block": {
         "chainId": 1,                   // Chain ID of the originating network       
@@ -654,7 +654,7 @@ NOTE: We have updated the Forta Alert schema in correspondence with the new http
     "id": "forta_id",                   // internal ID of your sentinel
     "name": "forta sentinel",           // name of your sentinel
     "addresses": [ "0xab..123" ],       // addresses your sentinel is monitoring
-    "agents": [ "0xab..123" ]           // Agent IDs your sentinel is monitoring
+    "agents": [ "0xab..123" ]           // Bot IDs your sentinel is monitoring
     "network": "mainnet"                // network your sentinel is monitoring
     "chainId": 1                        // chain Id of the network
   },
