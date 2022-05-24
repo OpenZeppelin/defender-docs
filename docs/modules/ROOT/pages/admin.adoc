@@ -196,7 +196,7 @@ image::defender-admin-fireblocks-generate-csr.png[Generate a CSR file]
 
 This will trigger Defender to generate a public/private key-pair. The CSR is then generated and signed with the private key and securely stored to prevent leakage.
 
-Next, you will need to import the CSR within the Fireblocks UI when creating https://support.fireblocks.io/hc/en-us/articles/4407823826194-Adding-New-API-Users#h_01FT8BDHNE49TJP8ARZ6ZYQY5J[a new API user, window=_blank]. *Note* that the API user will require any role that can _at least_ initiate transactions, e.g. Signer.
+Next, you will need to import the CSR within the Fireblocks UI when creating https://support.fireblocks.io/hc/en-us/articles/4407823826194-Adding-New-API-Users#h_01FT8BDHNE49TJP8ARZ6ZYQY5J[a new API user, window=_blank]. *Note* that the API user will require any role that can _at_ _least_ initiate transactions, e.g. Signer.
 
 image::fireblocks-add-user.png[Add a new API user]
 
