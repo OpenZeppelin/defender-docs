@@ -352,6 +352,8 @@ The request body will contain the following structure.
 
 NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Bot `name` removed, `agent` -> `bot`. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
 
+NOTE: Forta have changed the terminology for 'Agent' to 'Detection Bot'. We will continue to refer to them as 'agents' for now. `sentinel.agents` will be a list of your Bot IDs
+
 [source,jsx]
 ----
 {
@@ -618,6 +620,9 @@ exports.handler = async function(params) {
 ==== Forta Sentinel
 
 NOTE: We have updated the Forta Alert schema in correspondence with the new https://docs.forta.network/en/latest/api/[Forta API]. The following changes were made: `alert_id` -> `alertId`, `scanner_count` -> `scanNodeCount`, `type` -> `findingType`, `tx_hash` -> `transactionHash`, `chain_Id` -> `chainId`, Bot `name` removed, `agent` -> `bot`. Old properties are now deprecated but we will continue to send both to remain backwards compatible.
+
+
+NOTE: Forta have changed the terminology for 'Agent' to 'Detection Bot'. We will continue to refer to them as 'agents' for now. `sentinel.agents` will be a list of your Bot IDs
 
 [source,jsx]
 ----
