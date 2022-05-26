@@ -1,10 +1,10 @@
-# Registering an Upkeep on the Chainlink Keeper network
+# Registering an Upkeep on Chainlink Keepers
 
-This article will guide you through the process of registering your contract as an *Upkeep* on the Chainlink Keeper Network, a https://andrecronje.medium.com/scaling-keep3r-with-chainlink-2832bbc76506[revamp] of the https://keep3r.network/[Keep3r Network], using Defender Admin, as well as leveraging Relayers, Autotasks, and Sentinels for monitoring and operations.
+This article will guide you through the process of registering your contract as an *Upkeep* on Chainlink Keepers, a https://andrecronje.medium.com/scaling-keep3r-with-chainlink-2832bbc76506[revamp] of the https://keep3r.network/[Keep3r Network], using Defender Admin, as well as leveraging Relayers, Autotasks, and Sentinels for monitoring and operations.
 
-## What is the Chainlink Keeper network?
+## What is Chainlink Keepers?
 
-The Chainlink Keeper network aims to provide smart contracts options to outsource regular maintenance tasks (harvesting, liquidating, rebase, etc.) in a trust minimized (decentralized) manner. The network aims to provide a protocol for incentivization & governance for the keeper ecosystem.
+Chainlink Keepers aims to provide smart contracts options to outsource regular maintenance tasks (harvesting, liquidating, rebase, etc.) in a trust minimized (decentralized) manner. The network aims to provide a protocol for incentivization & governance for the keeper ecosystem.
 
 There are 3 main actors in this network:
 
@@ -89,9 +89,9 @@ Once deployed, you can register your contract as an Upkeep on the Keeper Network
 
 image::guides-chainlink-add-contract.png[Add new contract with upkeep interface]
 
-From your contract's page, you can now start the _Upkeep registration in Chainlink Keeper_ by clicking on _Register_ in the Chainlink Keeper Network section. 
+From your contract's page, you can now start the _Upkeep registration in Chainlink Keeper_ by clicking on _Register_ in the Chainlink Keeper section. 
 
-image::guides-chainlink-register.png[Register from Chainlink Keeper Network section]
+image::guides-chainlink-register.png[Register from Chainlink Keepers section]
 
 To begin the registration process, Defender will ask you to fill some details into a registration Google Form. This form will be reviewed by the Chainlink Keepers onboarding team as part of the approval process for the open beta. The information you fill in will help improve Chainlink Keepers to provide you with optimal solutions for your use case.
 
@@ -105,7 +105,7 @@ At the time of writing, the registration process requires you to provide an init
 
 image::guides-chainlink-register-page.png[Enter details for registration]
 
-Once the registration is submitted, you'll have a waiting period no longer than a few days, after which your Upkeep will be registered as a valid Upkeep and assigned a numeric identifier in the Registry. Defender will reflect this on the Chainlink Keeper Network of your contract's page. See below how your contract page looks after the registration was submitted, but its approval is pending. 
+Once the registration is submitted, you'll have a waiting period no longer than a few days, after which your Upkeep will be registered as a valid Upkeep and assigned a numeric identifier in the Registry. Defender will reflect this on Chainlink Keepers of your contract's page. See below how your contract page looks after the registration was submitted, but its approval is pending. 
 
 image::guides-chainlink-wait.png[Registration is pending approval]
 
