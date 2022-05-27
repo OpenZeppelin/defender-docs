@@ -7,6 +7,8 @@ Requests need to be authenticated with a bearer token, which is negotiated from 
 
 NOTE: We recommend you use the https://www.npmjs.com/package/defender-sentinel-client[defender-sentinel-client] npm package for simplifying interactions with the Sentinel API.
 
+NOTE: It is not recommended to use https://www.npmjs.com/package/defender-sentinel-client[defender-sentinel-client] npm package in browser environment as sensitive keys would be exposed publicly.
+
 ```js
 const { SentinelClient } = require('defender-sentinel-client');
 const creds = { apiKey: ADMIN_API_KEY, apiSecret: ADMIN_API_SECRET };

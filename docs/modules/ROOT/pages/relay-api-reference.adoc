@@ -17,6 +17,8 @@ For more information on authentication, refer to the xref:api-auth.adoc[authenti
 
 NOTE: You can use the https://www.npmjs.com/package/defender-relay-client[defender-relay-client] npm package for simplifying interactions with the Relay API.
 
+NOTE: It is not recommended to use https://www.npmjs.com/package/defender-relay-client[defender-relay-client] npm package in browser environment as sensitive keys would be exposed publicly.
+
 [[relay-client-module]]
 == Relay Client Module Reference
 
