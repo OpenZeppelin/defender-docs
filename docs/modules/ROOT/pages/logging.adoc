@@ -10,7 +10,7 @@ This is a premium feature, if you are interested in it let us know by filling in
 
 == Setup Log Forwarding Destination
 
-To set up a log forwarding destination, open the User Menu at the top right corner of Defender or https://defender.openzeppelin.com/#/log-forwarding[click here,window=_blank].
+To set up a log forwarding destination, open the User Menu at the top right corner of Defender or https://defender.openzeppelin.com/#/logs/forwarding[click here,window=_blank].
 
 image::log-forwarding-add.png[Add Forwarding Destination, 600]
 
