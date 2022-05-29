@@ -20,7 +20,7 @@ To begin managing one of your *Contracts* in Defender Admin, the first step is t
 
 image::defender-admin-edit-contract.png[Defender Admin Edit Contract]
 
-NOTE: Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible] or a legacy zOS proxy (and load the implementation's ABI in that case) and whether it's managed by a xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] contract.
+NOTE: Defender Admin will automatically attempt to detect some features of your contract. Today, it will detect whether it's an https://eips.ethereum.org/EIPS/eip-1967[EIP1967-compatible] or a legacy zOS proxy (and load the implementation's ABI in that case) and whether it's managed by a xref:upgrades-plugins::faq.adoc#what-is-a-proxy-admin[ProxyAdmin] contract. If you have validated your contract with https://sourcify.dev[Sourcify] your NatSpec annotations will be available in the Admin panel.
 
 image::defender-admin-withdraw.png[Defender Admin Withdraw]
 
