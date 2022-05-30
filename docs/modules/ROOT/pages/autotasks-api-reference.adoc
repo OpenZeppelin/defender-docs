@@ -7,7 +7,7 @@ Requests need to be authenticated with a bearer token, which is negotiated from 
 
 NOTE: We recommend you use the https://www.npmjs.com/package/defender-autotask-client[defender-autotask-client] npm package for simplifying interactions with the Autotask API.
 
-NOTE: It is not recommended to use https://www.npmjs.com/package/defender-autotask-client[defender-autotask-client] npm package in browser environment as sensitive keys would be exposed publicly.
+NOTE: It is not recommended to use the https://www.npmjs.com/package/defender-autotask-client[defender-autotask-client] npm package in a browser environment as sensitive keys would be exposed publicly.
 
 [[create-endpoint]]
 == Create Endpoint
