@@ -26,7 +26,9 @@ Form fields:
 
 * *API Key* is an optional field. API Key is sent with every request for authentication purposes. Most log management services require it. Please refer to your log management service documentation to determine if you need it. 
 
-* *Log Types* lets you specify which subset of Defender generated logs you want to have forwarded.
+* *Log Types* lets you specify which subset of Defender generated logs you want to have forwarded based on Defender components.
+
+* *Log Levels* lets you specify which subset of Defender generated logs you want to have forwarded based on the log levels. For example debug logs can be used for Autotasks debugging purposes and they can contain data that should not be exported to external systems.
 
 NOTE: In the next section we will cover how to setup Log Forwarding with Splunk and Datadog but it is worth noting that Log Forwarding works with any other service that supports API Key authentication.
 
