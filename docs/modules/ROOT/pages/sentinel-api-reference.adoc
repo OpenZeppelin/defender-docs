@@ -7,6 +7,8 @@ Requests need to be authenticated with a bearer token, which is negotiated from 
 
 NOTE: We recommend you use the https://www.npmjs.com/package/defender-sentinel-client[defender-sentinel-client] npm package for simplifying interactions with the Sentinel API.
 
+NOTE: It is not recommended to use the https://www.npmjs.com/package/defender-sentinel-client[defender-sentinel-client] npm package in a browser environment as sensitive keys would be exposed publicly.
+
 ```js
 const { SentinelClient } = require('defender-sentinel-client');
 const creds = { apiKey: ADMIN_API_KEY, apiSecret: ADMIN_API_SECRET };
@@ -26,7 +28,10 @@ The following notification channels are available:
 - telegram
 - datadog
 
-The `createNotificationChannel` function requires the `NotificationType` and `NotificationRequest` parameters respectively, and returns a `NotificationResponse` object.
+[[list-notification-endpoint]]
+=== List Notifications
+
+To list all notification channels, you can call the `listNotificationChannels` function on the client, which returns a `NotificationResponse[]` object.
 
 ```js
 // List existing notification channels
@@ -34,53 +39,7 @@ The `createNotificationChannel` function requires the `NotificationType` and `No
 const notificationChannels = await client.listNotificationChannels()
 const { notificationId, type } = notificationChannels[0];
 ```
-
-```js
-// create a new notification
-const notification = await client.createNotificationChannel('email', {
-  name: 'MyEmailNotification',
-  config: {
-    emails: ['john@example.com'],
-  },
-  paused: false,
-});
-
-const notification = await client.createNotificationChannel('slack', {
-  name: 'MySlackNotification',
-  config: {
-    url: 'https://slack.com/url/key',
-  },
-  paused: false,
-});
-
-const notification = await client.createNotificationChannel('telegram', {
-  name: 'MyTelegramNotification',
-  config: {
-    botToken: 'abcd',
-    chatId: '123',
-  },
-  paused: false,
-});
-
-const notification = await client.createNotificationChannel('discord', {
-  name: 'MyDiscordNotification',
-  config: {
-    url: 'https://discord.com/url/key',
-  },
-  paused: false,
-});
-
-const notification = await client.createNotificationChannel('datadog', {
-  name: 'MyDatadogNotification',
-  config: {
-    apiKey: 'abcd',
-    metricPrefix: 'prefix',
-  },
-  paused: false,
-});
-```
-
-The `notifications` endpoint is used to retrieve a list of existing notification channels via a `GET` request.
+Alternatively, via a `curl` request:
 
 ```
 curl \
@@ -89,7 +48,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/notifications"
+    "https://defender-api.openzeppelin.com/sentinel/notifications"
 ```
 
 An example response:
@@ -110,6 +69,98 @@ An example response:
         "type": "email"
     },
 ]
+```
+
+[[create-notification-endpoint]]
+=== Create Notifications
+
+To create a new notification channel, you can call the `createNotificationChannel` function on the client.
+
+The `createNotificationChannel` function requires the `CreateNotificationRequest` object and returns a `NotificationResponse` object.
+
+```js
+// create a new notification
+const notification = await client.createNotificationChannel({
+  type: 'email',
+  name: 'MyEmailNotification',
+  config: {
+    emails: ['john@example.com'],
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel({
+  type: 'slack',
+  name: 'MySlackNotification',
+  config: {
+    url: 'https://slack.com/url/key',
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel({
+  type: 'telegram',
+  name: 'MyTelegramNotification',
+  config: {
+    botToken: 'abcd',
+    chatId: '123',
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel({
+  type: 'discord', 
+  name: 'MyDiscordNotification',
+  config: {
+    url: 'https://discord.com/url/key',
+  },
+  paused: false,
+});
+
+const notification = await client.createNotificationChannel({
+  type: 'datadog', 
+  name: 'MyDatadogNotification',
+  config: {
+    apiKey: 'abcd',
+    metricPrefix: 'prefix',
+  },
+  paused: false,
+});
+```
+
+[[update-notification-endpoint]]
+=== Update a Notification
+To update an existing notification channel, you can call the `updateNotificationChannel` function on the client, which returns a `NotificationResponse` object. The function takes in the `UpdateNotificationRequest` object as a parameter.
+
+```js
+const notificationChannel = await client.updateNotificationChannel(
+{ 
+  type: 'email', 
+  notificationId: '14e99e8f-e2be-4eb1-a543-b2d90b68cdd8', 
+  config: {
+    emails: ["john@example.com"]
+  },
+  paused: false,
+  name: "MyUpdatedEmailNotification"
+});
+```
+
+[[get-notification-endpoint]]
+=== Get a Notification
+To retrieve a notification channel, you can call the `getNotificationChannel` function on the client, which returns a `NotificationResponse` object. The function takes in the `GetNotificationRequest` object as a parameter.
+
+```js
+const notificationToRetrieve = {type: 'email', notificationId: '14e99e8f-e2be-4eb1-a543-b2d90b68cdd8'}
+const notificationChannel = await client.getNotificationChannel(notificationToRetrieve);
+```
+
+[[delete-notification-endpoint]]
+=== Delete Notifications
+To delete a notification channel, you can call the `deleteNotificationChannel` function on the client, which returns a string if successful. The function takes in the `DeleteNotificationRequest` object as a parameter.
+
+```js
+const notificationToDelete = {type: 'email', notificationId: '14e99e8f-e2be-4eb1-a543-b2d90b68cdd8'}
+const deleted = await client.deleteNotificationChannel(notificationToDelete);
 ```
 
 [[sentinel-endpoint]]
@@ -133,7 +184,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/subscribers"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers"
 ```
 
 An example response:
@@ -382,7 +433,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{...}' \
-    "https://defender-api.openzeppelin.com/subscribers"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers"
 ```
 
 [[retrieve-endpoint]]
@@ -402,7 +453,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/subscribers/{id}"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers/{id}"
 ```
 
 [[update-endpoint]]
@@ -426,7 +477,7 @@ curl \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{...}' \
-    "https://defender-api.openzeppelin.com/subscribers/{id}"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers/{id}"
 ```
 
 [[delete-endpoint]]
@@ -447,7 +498,7 @@ curl \
   -H 'Content-Type: application/json' \
   -H "X-Api-Key: $KEY" \
   -H "Authorization: Bearer $TOKEN" \
-    "https://defender-api.openzeppelin.com/subscribers/{id}"
+    "https://defender-api.openzeppelin.com/sentinel/subscribers/{id}"
 ```
 
 An example response:

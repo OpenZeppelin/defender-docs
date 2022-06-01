@@ -20,5 +20,5 @@
 * Guides
 ** xref:guide-upgrades.adoc[Upgrading via a multisig]
 ** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]
-** xref:guide-chainlink.adoc[Registering an Upkeep in the Chainlink Keeper Network]
+** xref:guide-chainlink.adoc[Registering an Upkeep on Chainlink Keepers]
 ** xref:guide-timelock-roles.adoc[How to manage roles on a TimelockController]
