@@ -184,10 +184,10 @@ interface ExternalCreateBlockSubscriberRequest {
   addresses: string[];
   paused?: boolean;
   alertThreshold?: Threshold;
-  notifyConfig?: Notifications;
   autotaskCondition?: string;
   autotaskTrigger?: string;
   alertTimeoutMs?: number;
+  alertMessageBody?: string;
   notificationChannels: string[];
   network: string;
   confirmLevel?: number; // blockWatcherId
@@ -202,10 +202,10 @@ interface ExternalCreateFortaSubscriberRequest {
   name: string;
   paused?: boolean;
   alertThreshold?: Threshold;
-  notifyConfig?: Notifications;
   autotaskCondition?: string;
   autotaskTrigger?: string;
   alertTimeoutMs?: number;
+  alertMessageBody?: string;
   notificationChannels: string[];
   network?: string;
   fortaLastProcessedTime?: string;
