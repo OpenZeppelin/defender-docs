@@ -7,6 +7,8 @@ Requests need to be authenticated with a bearer token, which is negotiated from 
 
 NOTE: We recommend you use the https://www.npmjs.com/package/defender-admin-client[defender-admin-client] npm package for simplifying interactions with the Admin API.
 
+NOTE: It is not recommended to use the https://www.npmjs.com/package/defender-admin-client[defender-admin-client] npm package in a browser environment as sensitive keys would be exposed publicly.
+
 [[proposals-endpoint]]
 == Proposals Endpoint
 
