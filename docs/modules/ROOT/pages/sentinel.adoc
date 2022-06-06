@@ -221,7 +221,7 @@ The request body will contain the following structure. You can use the `Sentinel
     "matchReasons": [                    // the reasons why sentinel triggered
       {
         "type": "event",                 // event, function, or transaction
-        "address": "0x123..abc",         // adddress of the event emitting contract
+        "address": "0x123..abc",         // address of the event emitting contract
         "signature": "...",              // signature of your event/function
         "condition": "value > 5",        // condition expression (if any)
         "args": ["5"],                   // parameters by index (unnamed are present)
@@ -596,7 +596,7 @@ exports.handler = async function(params) {
   "matchReasons": [                    // the reasons why sentinel triggered
     {
       "type": "event",                 // event, function, or transaction
-      "address": "0x123..abc",         // adddress of the event emitting contract
+      "address": "0x123..abc",         // address of the event emitting contract
       "signature": "...",              // signature of your event/function
       "condition": "value > 5",        // condition expression (if any)
       "args": ["5"],                   // parameters by index (unnamed are present)
