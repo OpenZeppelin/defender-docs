@@ -141,7 +141,11 @@ Transaction Conditions can refer to the following properties
 
 * *from* is the _from_ address for the transaction
 
-* *gasPrice* is the price of gas sent in the transaction
+* *gasPrice* is the price of gas sent in the transaction. In EIP1559 transactions, it's usually the same as `maxFeePerGas`.
+
+* *maxFeePerGas* is the maximum price the transaction was willing to pay for the transaction. Only existent in EIP1559 transactions.
+
+* *maxPriorityFeePerGas* is the maximum amount of wei over the `BASE_FEE` the transaction is willing to pay to the miner for inclusion. Only existent in EIP1559 transactions.
 
 * *gasLimit* is the gas limit sent in the transaction
 

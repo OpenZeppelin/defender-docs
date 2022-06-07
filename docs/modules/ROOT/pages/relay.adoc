@@ -1,7 +1,7 @@
 [[relay]]
 = Relay
 
-The Defender Relay service allows you to send transactions via a regular HTTP API, and takes care of **private key secure storage**, **transaction signing**, **nonce management**, **gas price estimation**, and **resubmissions**. This way you don't need to worry about securing your private keys in your backend scripts, or by monitoring your transactions to ensure they get mined.
+The Defender Relay service allows you to send transactions via a regular HTTP API, and takes care of **private key secure storage**, **transaction signing**, **nonce management**, **gas pricing estimation**, and **resubmissions**. This way you don't need to worry about securing your private keys in your backend scripts, or by monitoring your transactions to ensure they get mined.
 
 [[use-cases]]
 == Use cases
@@ -50,14 +50,17 @@ You can choose to reuse the same address of one of your existing relayers for a 
 [[policies]]
 === Policies
 
-You can limit a Relayer's behavior by specifying policies. Currently, there are two different opt-in policies:
+You can limit a Relayer's behavior by specifying policies. Currently, these are the different opt-in policies:
 
-1. *Gas price cap*: specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the gas price of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
+1. *Gas price cap*: specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the gas price (or the combination of base fee and priority fee) of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
 2. *Receiver whitelist*: specify a list of authorized recipients for every transaction sent by the Relayer. Defender will reject and discard any transaction whose recipient address is not in the list.
+3. *EIP1559 Pricing*: specify if the transactions the Relayer is sending should be EIP1559 by default or not. This applies whenever the Relayer send a transaction with the <<relay-api-reference.adoc#send-transaction,`speed`>> parameter, or a non specified `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas`. Note that this is only shown for EIP1559 compatible networks.
 
 To configure your Relayer's policies, go to your Relayer settings page, click the cog icon button, _Manage policies_. You will then see a form where you can opt to enable either of these two policies and tweak their parameters.
 
 NOTE: In addition to the maximum gas price policy you can specify here, Defender implements a minimum gas price policy of 30 Gwei to transactions sent to the Polygon network. https://forum.matic.network/t/recommended-min-gas-price-setting/2531[You can read more about Polygon's decision to establish a minimum gas price here].
+
+NOTE: EIP1559 Pricing policy is enabled by default for new relayers. If you have a Relayer that was created without the default opt-in, you can always enable this flag.
 
 [[sending-transactions]]
 == Sending transactions
@@ -122,27 +125,50 @@ In the example above, the `transfer` transaction is signed and broadcasted by th
 
 You can read more about the web3 integration https://www.npmjs.com/package/defender-relay-client#user-content-web3js[here].
 
+[[eip1559]]
+=== EIP1559 support
+
+Since not all of the networks Defender support are EIP1559 compatible, the EIP1559 transaction support is only enabled for those **networks identified as compatible** and enabled by the team.
+
+A relayer can send EIP1559 transactions in the following ways:
+
+- Sending a transaction via UI with the EIP1559Pricing policy **enabled**
+- Sending a transaction via API with both `maxFeePerGas` and `maxPriorityFeePerGas` specified
+- Sending a transaction via API with `speed` and with the EIP1559Pricing policy **enabled**
+
+Once any transaction is sent, **it will have the same type** on every stage of its lifecycle (such as replacement and repricing), so it's currently not possible to change the type if it's already been submitted.
+
+NOTE: Any attempt to send `maxFeePerGas` or `maxPriorityFeePerGas` to non-EIP1559 compatible networks will be rejected and discarded by the relayer.
+
+You can tell if a network supports EIP1559 by looking at the Relayer <<policies, policies>>. If the EIP1559Pricing policy doesn't show up, it means that we haven't added EIP1559 support for that network.
+
+NOTE: If you notice an EIP1559 compatible network that we already support but hasn't support enabled, please don't hesitate in request it on our https://forum.openzeppelin.com/c/support/defender/36[Community Forum], or at mailto:defender@openzeppelin.com[defender@openzeppelin.com]
+
 [[speed]]
 === Speed
 
-Instead of the usual `gasPrice`, the Relayer accepts a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
+Instead of the usual `gasPrice` or `maxFeePerGas/maxPriorityFeePerGas`, the Relayer may also accept a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
+Beware that if speed is provided, the transaction would be priced according to the <<relay-api-reference.adoc#relayer-policies, `EIP1559Pricing` relayer policy>>.
 
-NOTE: Mainnet gas prices are calculated based on the values reported by https://ethgasstation.info/[EthGasStation], https://etherchain.org/tools/gasPriceOracle[EtherChain], https://www.gasnow.org/[GasNow], https://docs.blocknative.com/gas-platform[BlockNative], and https://etherscan.io/gastracker[Etherscan]. Testnet gas prices are obtained from a call to `eth_gasPrice` to the network.
+NOTE: Mainnet gas prices are calculated based on the values reported by https://ethgasstation.info/[EthGasStation], https://etherchain.org/tools/gasPriceOracle[EtherChain], https://www.gasnow.org/[GasNow], https://docs.blocknative.com/gas-platform[BlockNative], and https://etherscan.io/gastracker[Etherscan] along with the `eth_getBlockByNumber` to get the current `BASE_FEE` for EIP1559 transactions. Testnet gas prices are obtained from a call to `eth_gasPrice` or `eth_feeHistory` to the network.
 
-[[gas-price]]
-=== Gas Price
+[[fixed-gas-pricing]]
+=== Fixed Gas Pricing
 
-Alternatively, you may specify a **fixed gas price** for a transaction, by setting the <<relay-api-reference.adoc#send-transaction,gasPrice>> parameter. Transactions with a fixed gas price are either mined with the specified `gasPrice` or replaced with a NOOP transaction if they couldn't be mined before <<valid-until, validUntil>> time.
+Alternatively, you may specify a **fixed gasPrice** or a **fixed combination of maxFeePerGas and maxPriorityFeePerGas** for a transaction, by setting either the <<relay-api-reference.adoc#send-transaction,`gasPrice`>> parameter or <<relay-api-reference.adoc#send-transaction,`maxFeePerGas` and `maxPriorityFeePerGas`>> paremeters. Transactions with a fixed pricing are either mined with the specified pricing or replaced with a NOOP transaction if they couldn't be mined before <<valid-until, validUntil>> time.
 
-Keep in mind that you have to provide either `speed` or `gasPrice` but not both in a send transaction request.
+Keep in mind that you have to provide either `speed`, `gasPrice`, `maxFeePerGas/maxPriorityFeePerGas` or none, but not a mix between them in a send transaction request.
 
+NOTE: Whenever a send transaction request is sent without any pricing parameter. It will be priced with a `fast` default speed.
+
+NOTE: If you're providing both fixed `maxFeePerGas` and `maxPriorityFeePerGas`, make sure that `maxFeePerGas` is greater or equal than `maxPriorityFeePerGas`. Otherwise, it'll be rejected.
 
 [[valid-until]]
 === Valid Until
 
 Every transaction in Defender Relay is valid for submission to the Ethereum network until <<relay-api-reference.adoc#send-transaction,validUntil>> time. After `validUntil` time the transaction is replaced by a NOOP transaction in order to prevent relayer from getting stuck at the transaction's nonce. A NOOP transaction does nothing except advancing the relayer's nonce.
 
-`validUntil` defaults to 8 hours after the transaction creation. Note that you can combine validUntil with a fixed gas price to achieve extremely fast mining times and beating other transactions on `gasPrice`.
+`validUntil` defaults to 8 hours after the transaction creation. Note that you can combine validUntil with a <<fixed-gas-pricing,fixed pricing>> to achieve extremely fast mining times and beating other transactions on `gasPrice` or `maxFeePerGas`.
 
 If you're using `ethers.js`, you may set a `validForSeconds` option instead of `validUntil`. In the example below, we configure a `DefenderRelaySigner` to issue a transaction which will be valid for 120 seconds after its creation.
 
@@ -156,7 +182,7 @@ NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a
 [[transaction-ids]]
 === Transaction IDs
 
-Since the Relayer may resubmit a transaction with an updated gas price if it does not get mined in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/defender-relay-client#querying[query] it.
+Since the Relayer may resubmit a transaction with an updated gas pricing if it does not get mined in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/defender-relay-client#querying[query] it.
 
 [source,jsx]
 ----
@@ -168,7 +194,7 @@ NOTE: The `query` endpoint will return the latest view of the transaction from t
 [[replace-txs]]
 === Replace Transactions
 
-While a Defender Relay will automatically resubmit transactions with increased gas price if they are not mined, and will automatically cancel them after their valid-until timestamp, you can still manually replace or cancel your transaction if it has not been mined yet. This allows you to cancel a transaction if it is no longer valid, tweak its TTL, or bump its speed or gas price.
+While a Defender Relay will automatically resubmit transactions with increased gas pricing if they are not mined, and will automatically cancel them after their valid-until timestamp, you can still manually replace or cancel your transaction if it has not been mined yet. This allows you to cancel a transaction if it is no longer valid, tweak its TTL, or bump its speed or gas pricing.
 
 To do this, use the `replaceByNonce` or `replaceById` of the `defender-relay-client`:
 
@@ -206,6 +232,8 @@ replaced = await erc20.methods.transfer(beneficiary, (1e18).toString()).send({
   nonce: 42 
 });
 ----
+
+NOTE: You can **only** replace transactions of the same type. For example, if you're trying to replace an EIP1559 transaction, it **can't be replaced** with a legacy transaction. Also, if `speed` is provided instead, the transaction will be repriced as its original type requires with the given speed.
 
 [[list-txs]]
 === List Transactions
@@ -366,9 +394,9 @@ image::defender-relayer-withdraw-funds-screen.png[Defender Relay Withdraw Funds 
 [[under-the-hood]]
 == Under the hood
 
-Each Relayer is associated to a private key. When a request to send a transaction is received, the Relayer validates the request, atomically assigns it a nonce, reserves balance for paying for its gas fees, resolves its speed to a gas price, signs it with its private key, and enqueues it for submission to the blockchain. The response is sent back to the client only after this process has finished. Then, the transaction is broadcasted through both Infura and Alchemy for redundancy and retried up to three times in case both APIs are down.
+Each Relayer is associated to a private key. When a request to send a transaction is received, the Relayer validates the request, atomically assigns it a nonce, reserves balance for paying for its gas fees, resolves its speed to a `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas` depending on its <<relay-api-reference.adoc#relayer-policies, EIP1559 pricing policy>>, signs it with its private key, and enqueues it for submission to the blockchain. The response is sent back to the client only after this process has finished. Then, the transaction is broadcasted through both Infura and Alchemy for redundancy and retried up to three times in case both APIs are down.
 
-Every minute, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their gas price (or the latest gas price for their speed, if it's greater), which could be up to a *150% of the reported gas price for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
+Every minute, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their respective transaction type pricing (or the latest pricing for their speed, if it's greater), which could be up to a *150% of the reported gas pricing for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
 
 [[concurrency-and-rate-limiting]]
 == Concurrency and Rate Limiting
@@ -394,4 +422,4 @@ When sending transactions to a rollup chain, such as Arbitrum or Optimism, the R
 [[coming-up]]
 == Coming up...
 
-We are working on new features, such policies to restrict maximum expenditure and whitelists. Stay tuned, and let us know if you have any requests!
+We are working on new features. Stay tuned, and let us know if you have any requests!
