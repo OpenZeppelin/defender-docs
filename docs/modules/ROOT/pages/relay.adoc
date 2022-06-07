@@ -147,7 +147,7 @@ NOTE: If you notice an EIP1559 compatible network that we already support but ha
 [[speed]]
 === Speed
 
-Instead of the usual `gasPrice` or `maxFeePerGas/maxPriorityFeePerGas`, the Relayer may also accept a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
+Instead of the usual `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas`, the Relayer may also accept a <<relay-api-reference.adoc#send-transaction,speed>> parameter, which can be `safeLow`, `average`, `fast`, or `fastest`. These values are mapped to actual gas prices when the transaction is sent or resubmitted and vary depending on the state of the network.
 Beware that if speed is provided, the transaction would be priced according to the <<relay-api-reference.adoc#relayer-policies, `EIP1559Pricing` relayer policy>>.
 
 NOTE: Mainnet gas prices are calculated based on the values reported by https://ethgasstation.info/[EthGasStation], https://etherchain.org/tools/gasPriceOracle[EtherChain], https://www.gasnow.org/[GasNow], https://docs.blocknative.com/gas-platform[BlockNative], and https://etherscan.io/gastracker[Etherscan] along with the `eth_getBlockByNumber` to get the current `BASE_FEE` for EIP1559 transactions. Testnet gas prices are obtained from a call to `eth_gasPrice` or `eth_feeHistory` to the network.
@@ -157,7 +157,7 @@ NOTE: Mainnet gas prices are calculated based on the values reported by https://
 
 Alternatively, you may specify a **fixed gasPrice** or a **fixed combination of maxFeePerGas and maxPriorityFeePerGas** for a transaction, by setting either the <<relay-api-reference.adoc#send-transaction,`gasPrice`>> parameter or <<relay-api-reference.adoc#send-transaction,`maxFeePerGas` and `maxPriorityFeePerGas`>> paremeters. Transactions with a fixed pricing are either mined with the specified pricing or replaced with a NOOP transaction if they couldn't be mined before <<valid-until, validUntil>> time.
 
-Keep in mind that you have to provide either `speed`, `gasPrice`, `maxFeePerGas/maxPriorityFeePerGas` or none, but not a mix between them in a send transaction request.
+Keep in mind that you have to provide either `speed`, `gasPrice`, `maxFeePerGas`/`maxPriorityFeePerGas` or none, but not a mix between them in a send transaction request.
 
 NOTE: Whenever a send transaction request is sent without any pricing parameter. It will be priced with a `fast` default speed.
 
@@ -394,7 +394,7 @@ image::defender-relayer-withdraw-funds-screen.png[Defender Relay Withdraw Funds 
 [[under-the-hood]]
 == Under the hood
 
-Each Relayer is associated to a private key. When a request to send a transaction is received, the Relayer validates the request, atomically assigns it a nonce, reserves balance for paying for its gas fees, resolves its speed to a `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas` depending on its <<relay-api-reference.adoc#relayer-policies, EIP1559 pricing policy>>, signs it with its private key, and enqueues it for submission to the blockchain. The response is sent back to the client only after this process has finished. Then, the transaction is broadcasted through both Infura and Alchemy for redundancy and retried up to three times in case both APIs are down.
+Each Relayer is associated to a private key. When a request to send a transaction is received, the Relayer validates the request, atomically assigns it a nonce, reserves balance for paying for its gas fees, resolves its speed to a `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas` depending on its <<relay-api-reference.adoc#relayer-policies, EIP1559 pricing policy>>, signs it with its private key, and enqueues it for submission to the blockchain. The response is sent back to the client only after this process has finished. Then, the transaction is broadcasted through multiple node providers for redundancy and retried up to three times in case APIs are down.
 
 Every minute, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their respective transaction type pricing (or the latest pricing for their speed, if it's greater), which could be up to a *150% of the reported gas pricing for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
 
