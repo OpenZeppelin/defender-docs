@@ -52,7 +52,7 @@ You can choose to reuse the same address of one of your existing relayers for a 
 
 You can limit a Relayer's behavior by specifying policies. Currently, these are the different opt-in policies:
 
-1. *Gas price cap*: specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the gas price (or the combination of base fee and priority fee) of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
+1. *Gas price cap*: specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the `gasPrice` or `maxFeePerGas` of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
 2. *Receiver whitelist*: specify a list of authorized recipients for every transaction sent by the Relayer. Defender will reject and discard any transaction whose recipient address is not in the list.
 3. *EIP1559 Pricing*: specify if the transactions the Relayer is sending should be EIP1559 by default or not. This applies whenever the Relayer send a transaction with the <<relay-api-reference.adoc#send-transaction,`speed`>> parameter, or a non specified `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas`. Note that this is only shown for EIP1559 compatible networks.
 
