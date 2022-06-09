@@ -230,6 +230,7 @@ The request body will contain the following structure. You can use the `Sentinel
     "matchReasons": [                    // the reasons why sentinel triggered
       {
         "type": "event",                 // event, function, or transaction
+        "address": "0x123..abc",         // address of the event emitting contract
         "signature": "...",              // signature of your event/function
         "condition": "value > 5",        // condition expression (if any)
         "args": ["5"],                   // parameters by index (unnamed are present)
@@ -606,6 +607,7 @@ exports.handler = async function(params) {
   "matchReasons": [                    // the reasons why sentinel triggered
     {
       "type": "event",                 // event, function, or transaction
+      "address": "0x123..abc",         // address of the event emitting contract
       "signature": "...",              // signature of your event/function
       "condition": "value > 5",        // condition expression (if any)
       "args": ["5"],                   // parameters by index (unnamed are present)
@@ -737,6 +739,8 @@ https://rinkeby.etherscan.io/tx/0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84
 *Match Reason 1*
 
 _Type:_ Function
+
+_Matched Address_:_ 0x1bb1b73c4f0bda4f67dca266ce6ef42f520fbb98
 
 _Signature:_ greet(name)
 
