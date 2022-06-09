@@ -74,9 +74,9 @@ IMPORTANT: At this time, Sentinels can only monitor internal function calls on M
 
 Hedera mainnet and testnet are supported in Defender Sentinels. There exist some considerations unique to this network when configuring a sentinel:
 
-* The sentinel monitors a contract's EVM address (starts with "0x") not the Hedera contract ID. The EVM address can be found on a Hedera Explorer such as [HashScan](https://hashscan.io/)
-* There is no remote resource to obtain contract ABIs as of now, so they must be generated from the solidity code using a [solidity compiler](https://docs.soliditylang.org/en/latest/installing-solidity.html).
-* For ERC20 token transfers, only those invoked via the smart contract can be monitored using Sentinels, not those using a [Hedera Token Service (HTS)](https://hedera.com/token-service) implementation. 
+* The sentinel monitors a contract's EVM address (starts with "0x") not the Hedera contract ID. The EVM address can be found on a Hedera Explorer such as https://hashscan.io/[HashScan,window=_blank].
+* There is no remote resource to obtain contract ABIs as of now, so they must be generated from the solidity code using a https://docs.soliditylang.org/en/latest/installing-solidity.html[solidity compiler,window=_blank].
+* For ERC20 token transfers, only those invoked via the smart contract can be monitored using Sentinels, not those using a https://hedera.com/token-service[Hedera Token Service (HTS),window=_blank]. 
 * Only Event conditions can be monitored for Hedera internal transactions (contract calling contract). Other conditions will not trigger Sentinels.
 
 [[whats-in-a-forta-sentinel]]
