@@ -96,7 +96,7 @@ NOTE: If you are familiar with javascript, you can edit your Autotask code at an
 
 Defender will automatically pick the gas price for your transactions based on the current network prices. You can tune how aggressive do you want to be with gas prices by changing the `speed` parameter in the script between `safeLow`, `average`, `fast`, or `fastest`. Higher gas price means you will have a better chance of scoring a job if there are multiple Keepers competing for it, but also that your transaction will be more expensive!
 
-Alternatively, you can also set a gas price yourself if you want to have maximum control over your transactions. Instead of setting a `speed`, just set a `gasPrice` for your transaction, and Defender will honor that value. You can rely on this to try to outbid all other Keepers running on Defender, but bear in mind the costs in gas fees.
+Alternatively, you can also set a gas price yourself if you want to have maximum control over your transactions. Instead of setting a `speed`, just set a `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas` for your transaction, and Defender will honor that value. You can rely on this to try to outbid all other Keepers running on Defender, but bear in mind the costs in gas fees.
 
 ## Executing Jobs
 
