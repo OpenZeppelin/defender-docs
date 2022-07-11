@@ -30,6 +30,10 @@ Alternatively, you can also choose to execute an action directly on a Contract u
 
 NOTE: When creating a new proposal, Defender Admin will first simulate it and will refuse to create it if the action reverts, showing the revert reason returned by the contract.
 
+Here is a video walkthrough showing an Admin action being proposed and approved using both an EOA and a multisig:
+
+video::XJ3UUNYlbxg[youtube]
+
 [[api-access]]
 == API Access
 
@@ -107,6 +111,8 @@ In addition to the vanilla MultisigWallet, Defender Admin also supports a https:
 
 ==== Creating a Gnosis Safe multisig from Defender
 
+video::IOescPDrF7Y[youtube]
+
 You can create and deploy a new Gnosis Safe multisig wallet directly from Defender. This comes especially handy in networks where the official Gnosis Safe UI is not yet available. To create a new Gnosis Safe, go to Admin and click on "Contracts" and then "Create Gnosis Safe". You'll be taken to a simple form where you will be asked to provide the initial list of owners and threshold for the multisig. That's it! 
 
 ==== Modifying your multisig settings from Defender
@@ -119,6 +125,8 @@ image::defender-admin-add-owner.png[Defender Admin Add Owner]
 == Timelocks
 
 === Creating a Timelock Controller from Defender
+
+video::Yi9Y0bcj-Zc[youtube]
 
 You can create and deploy a new Timelock Controller directly from Defender. To create a new Timelock, go to Admin and click on "Contracts" and then "Create timelock". You'll be taken to a simple form where you will be asked to provide the initial list of proposers and executors as well as the minimum delay for a proposal to be executed.
 
@@ -141,9 +149,17 @@ solidity: {
 }
 ```
 
+=== Transferring contract ownership to a TimelockController
+
+To make use of a timelock for executing functions, it is necessary for it to be assigned access rights to that smart contract(s), whether via role or ownership. This can be accomplished either by calling either the `transferOwnership` or the relevant https://docs.openzeppelin.com/contracts/3.x/access-control#granting-and-revoking[role assignment] function.
+
+video::cXDp2n5al7U[youtube]
+
 === Creating timelocked proposals
 
 Defender Admin supports timelocked admin proposals via the https://docs.openzeppelin.com/contracts/4.x/access-control#using_timelockcontroller[TimelockController contract provided by the OpenZeppelin Contracts library].
+
+video::59p98wGqdVo[youtube]
 
 To execute a timelocked proposal, you need:
 
@@ -167,6 +183,8 @@ Once you created a timelocked proposal, Defender will guide you and your collabo
 3. After the specified delay period ends, execute the action. It is worth noting here that the EOA that executes this action needs to be an _executor_ in the `TimelockController` contract.
 
 NOTE: Currently Defender does not support timelocked Upgrade proposals. That capability is a work in progress and we plan release it soon.
+
+video::z6EP6JTj7ME[youtube]
 
 [[Governance]]
 == Governance
