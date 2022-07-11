@@ -151,7 +151,7 @@ solidity: {
 
 === Transferring contract ownership to a TimelockController
 
-To make use of a timelock for executing functions, it is necessary for it to be assigned access rights to that smart contract(s), whether via role or ownership. This can be accomplished either by calling either the transferOwnership or the relevant https://docs.openzeppelin.com/contracts/3.x/access-control#granting-and-revoking[role assignment] function.
+To make use of a timelock for executing functions, it is necessary for it to be assigned access rights to that smart contract(s), whether via role or ownership. This can be accomplished either by calling either the `transferOwnership` or the relevant https://docs.openzeppelin.com/contracts/3.x/access-control#granting-and-revoking[role assignment] function.
 
 video::cXDp2n5al7U[youtube]
 
