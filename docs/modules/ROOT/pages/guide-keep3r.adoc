@@ -23,13 +23,13 @@ To get started, you'll need the following:
 
 . *ETH to pay for transactions gas*. Keeper transactions require gas for execution, so make sure to have some ETH available to fund your Relay.
 
-. *KP3R tokens to bond (optional)*. When you register your Keeper, you may choose to https://docs.keep3r.network/keepers#becoming-a-keeper[*bond*] a certain amount of KP3R tokens. This https://forum.openzeppelin.com/t/what-benefit-is-there-for-adding-collateral-bonded-kp3r-vs-not-bonding/4502[affects the rewards] you get when working Jobs. Note that you can still run a Keeper without bonding any tokens.
+. *KP3R tokens to bond (optional)*. When you register your Keeper, you may choose to https://docs.keep3r.network/core/keepers#becoming-a-keeper[*bond*] a certain amount of KP3R tokens. This https://forum.openzeppelin.com/t/what-benefit-is-there-for-adding-collateral-bonded-kp3r-vs-not-bonding/4502[affects the rewards] you get when working Jobs. Note that you can still run a Keeper without bonding any tokens.
 
 // . *An Alchemy, Etherscan, and/or Infura key (optional)*. Running a Keeper requires querying which jobs are available, and https://dashboard.alchemyapi.io/signup?referral=53fcee38-b894-4d5f-bd65-885d241f8d29[Alchemy] (includes referral code), https://infura.io/[Infura], and https://etherscan.io/apis[Etherscan] provide free and paid access to the network for executing these queries. You can do without an API key, but you may get throttled during your Keepers execution. Read more about this https://docs.ethers.io/v5/api-keys/[here].
 
 ## Creating a Relayer
 
-The first step will be to create a Defender Relayer to act as your Keeper. This Relayer will be the Ethereum account you will be executing jobs from. 
+The first step will be to create a Defender Relayer to act as your Keeper. This Relayer will be the Ethereum account you will be executing jobs from.
 
 NOTE: You *do not* need to register as a Keeper manually in https://keep3r.network/[keep3r.network], doing so will register your wallet as a Keeper, not your Relayer.
 
@@ -53,9 +53,9 @@ If you want to *bond* any KP3R tokens to your Relayer, you will need to transfer
 
 ## Bond your Relayer
 
-To get your Relayer registered as a Keeper, the first step is to https://docs.keep3r.network/keepers#becoming-a-keeper[bond it]. Click on the gear icon in your Relayer settings page, and choose to _Bond to Keep3r Network_.
+To get your Relayer registered as a Keeper, the first step is to https://docs.keep3r.network/core/keepers#becoming-a-keeper[bond it]. Click on the gear icon in your Relayer settings page, and choose to _Bond to Keep3r Network_.
 
-If you want to bond KP3R tokens, now is the time to choose how many you want to bond. 
+If you want to bond KP3R tokens, now is the time to choose how many you want to bond.
 
 NOTE: You can work with zero bonded KP3R tokens, and you can bond more tokens later if you want to do so.
 
@@ -74,7 +74,7 @@ NOTE: You can at any time choose to _Bond to Keep3r Network_ again. This will al
 [[activate-your-relayer]]
 ## Activate your Relayer
 
-After the 3-day waiting period is over, you will have the option to manually _Activate as keep3r_. 
+After the 3-day waiting period is over, you will have the option to manually _Activate as keep3r_.
 
 image::guide-keep3r-activate.png[Activate your Relayer as a Keeper, 400]
 
@@ -117,7 +117,7 @@ NOTE: You can also use the _Withdraw funds_ option to send ETH from your Relayer
 
 In the event that you no longer wish to participate as a Keeper, you can just stop your Autotask to stop executing Jobs, and withdraw your KP3R and ETH from your Relayer. If you hadn't bonded any tokens during the registration phase, this is enough.
 
-If you did bond tokens during registration, and you want to retrieve, you will need to https://docs.keep3r.network/keepers#removing-a-keeper[unregister as a Keeper]. To do this, start by choosing to _Send a transaction_ in your Relayer page, enter the Keeper contract address https://etherscan.io/address/0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44[`0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44`], and choose the `unbond` function. The `bonding` parameter corresponds to the address of the token you had bonded (again https://etherscan.io/address/0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44[`0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44`] for KP3R), and `amount` is the number of tokens you want to unbond (including the extra decimals as zeros, so 100 KP3R should be entered as `100000000000000000000`).
+If you did bond tokens during registration, and you want to retrieve, you will need to https://docs.keep3r.network/core/keepers#removing-a-keeper[unregister as a Keeper]. To do this, start by choosing to _Send a transaction_ in your Relayer page, enter the Keeper contract address https://etherscan.io/address/0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44[`0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44`], and choose the `unbond` function. The `bonding` parameter corresponds to the address of the token you had bonded (again https://etherscan.io/address/0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44[`0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44`] for KP3R), and `amount` is the number of tokens you want to unbond (including the extra decimals as zeros, so 100 KP3R should be entered as `100000000000000000000`).
 
 image::guide-keep3r-unbond.png[Unbonding your Relayer from the Keep3r Network]
 
