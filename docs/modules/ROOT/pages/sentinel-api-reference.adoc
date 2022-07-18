@@ -263,7 +263,7 @@ interface ExternalCreateFortaSubscriberRequest {
   addresses?: Address[];
   agentIDs?: string[];
   fortaConditions: FortaConditionSet;
-  privateFortaNodeId?: FortaConditionSet;
+  privateFortaNodeId?: string;
 }
 
 ```
