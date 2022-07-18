@@ -1,7 +1,7 @@
 [[sentinel]]
 = Sentinel
 
-The Defender Sentinel service offers 2 types of Sentinels, **Contract Sentinels** and **Forta Sentinels**. Contract Sentinels allow you to **monitor transactions** to a contract by **defining conditions** on events, functions, transaction parameters. Forta Sentinels allow you to **monitor Forta Alerts** by **defining conditions** on Forta Bots, contract addresses, alert IDs and severity. If a Sentinel matches a transaction or a Forta Alert based on your defined conditions it will notify you via email, slack, telegram, discord, xref:autotasks.adoc[Autotasks], and more.
+The Defender Sentinel service offers 3 types of Sentinels, **Contract Sentinels**, **Forta Sentinels** and **Local Mode Forta Sentinels**. Contract Sentinels allow you to **monitor transactions** to a contract by **defining conditions** on events, functions, transaction parameters. Forta Sentinels allow you to **monitor Forta Alerts** by **defining conditions** on Forta Bots, contract addresses, alert IDs and severity. If a Sentinel matches a transaction or a Forta Alert based on your defined conditions it will notify you via email, slack, telegram, discord, xref:autotasks.adoc[Autotasks], and more.
 
 [[use-cases]]
 == Use cases
@@ -84,8 +84,16 @@ Hedera mainnet and testnet are supported in Defender Sentinels. There exist some
 
 A Forta Sentinel watches Forta Alerts that come from a given Forta Bot or affect a given address, and filters those alerts by any conditions that you specify, then notifies you when those alerts occur.
 
+[[local-mode]]
+=== Local Mode Forta Sentinels
+
+Forta offers the ability to run scanner nodes locally, this can be useful for running only specific detection bots and handling alerts internally instead of publishing to the network. You can monitor scanner nodes running in Local Mode with Defender by creating a new Local Mode Forta Sentinel and specifying the address of your scanner node. After creation your new sentinel will have a Webhook URI, you can add this to your scanner node config file to forward alerts to defender. You can find more information on Local Mode scanner nodes in the https://docs.forta.network/en/latest/scanner-local-mode[Forta Docs,window=_blank].
+
+
 [[specify-bot-address]]
 === Specifying Forta Detection Bots and Addresses
+
+NOTE: Local Mode Forta Sentinels do not have the option to specify Bot IDs as scanner nodes running in local mode don't support Bot IDs
 
 A Forta Sentinel filters on Bot IDs or Addresses and requires that at least one of these filters are set. It is possible to sepcify multiple Bot IDs and Addresses to filter on.
 
