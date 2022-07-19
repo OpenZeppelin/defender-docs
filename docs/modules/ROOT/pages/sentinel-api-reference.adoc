@@ -354,7 +354,7 @@ const requestParameters = {
   notificationChannels: [notification.notificationId],
 };
 ```
-To create a Local Mode Forta Sentinel specify the scanner node address with `privateFortaNodeId` 
+To create a Forta Local Mode Sentinel specify the scanner node address with `privateFortaNodeId` 
 
 ```js
   requestParameters.privateFortaNodeId: '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
