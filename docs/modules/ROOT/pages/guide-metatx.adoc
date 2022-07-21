@@ -1,6 +1,6 @@
 # How to Relay Gasless Meta-Transactions
 
-https://docs.openzeppelin.com/contracts/4.x/api/metatx[Gasless meta-transactions] offer users a more seamless experience, and potentially one where they don't have to spend as much money to engage with the blockchain. This transaction type gives users the option to sign a transaction for free and have it securely executed by a third party, with that other party paying the gas to execute the transaction.
+https://docs.openzeppelin.com/contracts/4.x/api/metatx[Gasless meta-transactions] offer users a more seamless experience, and potentially one where they don't have to spend as much money to engage with the blockchain. This method gives users the option to sign a transaction for free and have it securely executed by a third party, with that other party paying the gas to execute the transaction.
 
 A gasless meta-transaction can be easily and securely implemented using OpenZeppelin Defender by way of a Relayer. A Defender https://docs.openzeppelin.com/defender/relay[Relay] allows you to send transactions via HTTP API and handles private key storage, transaction signing, nonce management, gas estimation, and automatic resubmissions if necessary.
 
