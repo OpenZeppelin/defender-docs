@@ -13,7 +13,7 @@ You can view the live https://defender-metatx-workshop-demo.openzeppelin.com/[de
 
 In the example code, the functionality of the https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/SimpleRegistry.sol[`SimpleRegistry` contract] is to take a string and store it. The contract's https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/Registry.sol[metatransaction implementation] achieves the same result by decoupling the signer from the sender of the transaction.
 
-When comparing the code, note the metatransaction's use of `_msgSender()` as opposed to the SimpleRegistry's use of `msg.sender`. By extending from `ERC2771Context` and `MinimalForwarder`, the contract becomes metatransaction capable. (Note that all OpenZeppelin contracts are compatable with the use of `_msgSender()`.)
+When comparing the code, note the metatransaction's use of `_msgSender()` as opposed to the SimpleRegistry's use of `msg.sender`. By extending from `ERC2771Context` and `MinimalForwarder`, the contract becomes metatransaction capable. (Note that all OpenZeppelin contracts are compatible with the use of `_msgSender()`.)
 
 The second fundamental change between the two contracts is the need for the metatransaction contract to specify the address of the trusted forwarder, which in this case is the address of the `MinimalForwarder` contract.
 
