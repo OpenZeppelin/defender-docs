@@ -4,7 +4,7 @@ https://docs.openzeppelin.com/contracts/4.x/api/metatx[Gasless meta-transactions
 
 A gasless meta-transaction relay can be easily and securely implemented using OpenZeppelin Defender by way of a Relayer. A Defender https://docs.openzeppelin.com/defender/relay[Relay] allows you to send transactions easily and handles private key storage, transaction signing, nonce management, gas estimation, and automatic resubmissions if necessary.
 
-This https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[demo app] implements metatransactions using https://docs.openzeppelin.com/contracts/4.x/api/metatx#MinimalForwarder[MinimalForwarder] and https://docs.openzeppelin.com/contracts/4.x/api/metatx#ERC2771Context[ERC2771Context] to separate `msg.sender` from the relayer's address. All the user needs to do is sign a message using the account they would like to issue the transaction from. The signature is formed from the targget contract and the data of the desired transaction, using the user's private key. This signing happens off-chain and costs no gas. The signature is passed to the Relayer so it can execute the transaction for the user (and pay the gas).
+This https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[demo app] implements meta-transactions using https://docs.openzeppelin.com/contracts/4.x/api/metatx#MinimalForwarder[MinimalForwarder] and https://docs.openzeppelin.com/contracts/4.x/api/metatx#ERC2771Context[ERC2771Context] to separate `msg.sender` from the relayer's address. All the user needs to do is sign a message using the account they would like to issue the transaction from. The signature is formed from the target contract and the data of the desired transaction, using the user's private key. This signing happens off-chain and costs no gas. The signature is passed to the Relayer so it can execute the transaction for the user (and pay the gas).
 
 [[demo-app-overview]]
 == Demo App Overview
@@ -20,7 +20,7 @@ The second fundamental change between the two contracts is the need for the meta
 [[configure-project]]
 == Configure the project
 
-First, fork the repository and then `git clone` your fork to your computer and install dependencies
+First, fork the repository and then `git clone` your fork to your computer and install dependencies:
 
 ```
 $ git clone https://github.com/[GitHub username]/workshops.git
@@ -39,52 +39,33 @@ TEAM_API_SECRET="Defender Team API secret"
 [[create-relayer]]
 == Create Relayer
 
-First, install the necessary package:
-
-`npm install defender-relay-client`
-
-Create a script such as the following, supplying your Defender API key in your .env file and adjusting variable names as appropriate.
+Run the relayer creation script:
 
 ```
-const { RelayClient } = require('defender-relay-client');
-const { appendFile, readFileSync, writeFileSync} = require('fs');
-
-async function run() {
-  require('dotenv').config();
-  const { TEAM_API_KEY: apiKey, TEAM_API_SECRET: apiSecret, AUTOTASK_ID: autotaskId } = process.env;
-  const relayClient = new RelayClient({ apiKey, apiSecret });
-
-  // create relay using defender client
-  const requestParams = {
-    name: 'MetaTxRelayer',
-    network: 'goerli',
-    minBalance: BigInt(1e17).toString(),
-  };
-  const relayer = await relayClient.create(requestParams);
-  
-  // store relayer info in file
-  writeFileSync('relay.json', JSON.stringify({
-    relayer
-  }, null, 2));
-  console.log('Relayer ID: ', relayer);
-
-  // create and save the api key to .env - needed for sending tx
-  const {relay} = JSON.parse(readFileSync('relay.json'))
-  const secretKey = await relayClient.createKey(relayer.relayerId);
-  writeFileSync('.env.relay', JSON.stringify({secretKey}, null, 2));
-}
-
-run().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+$ yarn create-relay
 ```
 
-Run with `yarn create-relay`
+Edit the https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/scripts/createRelay.js[`scripts/createRelay.js`] file, supplying your Defender API key in your .env file and adjusting variable names as appropriate.
+
+The Relayer is created using the `create` method:
+
+```
+const relayClient = new RelayClient({ apiKey, apiSecret });
+
+const requestParams = {
+  name: 'MetaTxRelayer',
+  network: 'goerli',
+  minBalance: BigInt(1e17).toString(),
+};
+const relayer = await relayClient.create(requestParams);
+
+```
+
+Run with `yarn create-relay`.
 
 Note that you will later need the `relayerId` from either the console log or the created `relay.json` file. You'll use this when creating the Autotask.
 
-The Relayer's API key and secret will be used whenever you would like to send a transaction via API. In the above code, it is saved to a `.env.relay` file.
+The Relayer's API key and secret will be used whenever you would like to send a transaction via API. In the above code, it is appended to the existing `.env` file.
 
 [[compile-using-hardhat]]
 == Compile the Contract Using Hardhat
@@ -125,91 +106,42 @@ Run `npx hardhat compile` to get the code ready for deployment.
 
 You can easily deploy a compiled smart contract without handling a private key by using https://www.npmjs.com/package/defender-relay-client[Defender Relayer client].
 
-Use the following script to deploy the contract using the Relayer just created:
+Create an instance of the `relay-client`, supplying the Relay's API key and secret as its credentials, and connect to it when calling `deploy()`.
 
 ```
-require('dotenv').config();
-const { DefenderRelayProvider, DefenderRelaySigner } = require('defender-relay-client/lib/ethers');
-const { ethers } = require('hardhat');
-const fs = require('fs');
+// ...
+  const credentials = {
+    apiKey: process.env.RELAYER_API_KEY,
+    apiSecret: process.env.RELAYER_API_SECRET,
+  }
+  const provider = new DefenderRelayProvider(credentials)
+  const relaySigner = new DefenderRelaySigner(credentials, provider, {
+    speed: 'fast',
+  })
 
-async function main() {
-  const { secretKey: {apiKey, secretKey} } = JSON.parse(fs.readFileSync('.env.relay'))
-  const credentials = { apiKey, apiSecret: secretKey };
-  const provider = new DefenderRelayProvider(credentials);
-  const relaySigner = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
- 
-  const Forwarder = await ethers.getContractFactory('MinimalForwarder');
-  const forwarder = await Forwarder.connect(relaySigner).deploy().then(f => f.deployed());
-
-  const Registry = await ethers.getContractFactory("Registry");
-  const registry = await Registry.connect(relaySigner).deploy(forwarder.address).then(f => f.deployed());
-
-  fs.writeFileSync('deploy.json', JSON.stringify({
-    MinimalForwarder: forwarder.address,
-    Registry: registry.address,
-  }, null, 2));
-
-  console.log(`MinimalForwarder: ${forwarder.address}\nRegistry: ${registry.address}`);
-}
-
-if (require.main === module) {
-  main().then(() => process.exit(0))
-    .catch(error => { console.error(error); process.exit(1); });
-}
-
+  const Forwarder = await ethers.getContractFactory('MinimalForwarder')
+  const forwarder = await Forwarder.connect(relaySigner)
+    .deploy()
+    .then((f) => f.deployed())
+// ...
 ```
 
-This code pulls the Relayer's credentials from the local file along with the artifacts for the `Registry` and `MinimalForwarder` contracts and uses ethers.js to deploy. The relevant addresses of these contracts are saved to the local file `deploy.json`.
+The script in `deploy.js` pulls the Relayer's credentials from the local `.env` file along with the artifacts for the `Registry` and `MinimalForwarder` contracts and uses ethers.js to deploy. The relevant addresses of these contracts are saved to the local file `deploy.json`.
 
 In the demo app, run this script with `yarn deploy`
 
-Note: As the owners of the Relayer, are the paying for the gas, so it is necessary to keep the Relayer funded sufficiently to cover future transactions. For Defender users on testnets, Relayer balances are auto-topped as necessary to ensure transactions go through.
-
+After the code is deployed, the Relayer key and secret can be safely deleted; they are not needed unless additional local testing is desired.
 
 [[create-autotask]]
 == Create Autotask via API
 
-Although you can create an Autotask using the Defender web client, it may be more convenient to use a simple script that makes use of https://www.npmjs.com/package/defender-autotask-client[Defender's API].
+The demo app uses an https://docs.openzeppelin.com/defender/autotasks[Autotask] to supply the necessary logic for telling the Relayer to send a transaction to the forwarder contract, supplying the signer's address. The Autotask will get triggered by each call to its webhook from the dapp.
 
-First you'll need to install the package: `npm install defender-autotask-client`
+Due to the tight relationship between components, the Relayer credentials are securely available to the Autotask simply by instantiating a new provider and signer.
 
-Create a script like the following to create an Autotask and upload its code:
+The position of the Autotask here is crucial -- only the Autotask's webhook is exposed to the frontend. The Autotask's role is to execute the transaction according to the logic assigned to it: if the user has funds, they pay for the transaction. If not, the Relayer pays for the transaction.
 
-```
-const { AutotaskClient } = require('defender-autotask-client');
-const {readFileSync, appendFileSync} = require('fs');
-
-async function main() {
-  require('dotenv').config();
-  const {relayer: {relayerId}} = JSON.parse(readFileSync('./relay.json'))
-  const { TEAM_API_KEY: apiKey, TEAM_API_SECRET: apiSecret } = process.env;
-  const client = new AutotaskClient({ apiKey, apiSecret });
-  const {autotaskId } = await client.create({
-    name: "Relay MetaTX",
-    encodedZippedCode: await client.getEncodedZippedCodeFromFolder('./build/relay'),
-    relayerId: relayerId, 
-    trigger: {
-      type: 'webhook'
-    },
-    paused: false
-  });
-  console.log("Autotask created with ID ", autotaskId);
-  appendFileSync('.env', `\nAUTOTASK_ID="${autotaskId}"`, function (err) {
-    if (err) throw err;
- });
-}
-
-if (require.main === module) {
-  main().then(() => process.exit(0))
-    .catch(error => { console.error(error); process.exit(1); });
-}
-```
-
-Next, create the Autotask itself. The main idea here is to supply the necessary logic for telling the Relayer to send a transaction to the forwarder contract, supplying the signer's address. The Autotask will get triggered by a call to its webhook from the dapp.
-
-Due to the tight relationship between components, the Relayer credentials are securely available to the Autotask simply by instantiating a new provider and signer. Note that the address of the `MinimalForwarder` and the `Registry` contract must be supplied.
-
+It's important that the Relayer's API key and secret are insulated from the frontend. If the Relayer keys were exposed, anyone could potentially use the Relayer to send any transaction they wanted.
 
 ```
 const ethers = require('ethers');
@@ -257,22 +189,41 @@ module.exports = {
 }
 ```
 
-Run `yarn create-autotask` to compile the Autotask code, create the Autotask in Defender and upload the necessary code.
+Note that the Autotask code must include an `index.js` file that exports a handler entrypoint. If the code relies on any external dependencies (such as an imported ABI) it's necessary to bundle the Autotask using webpack, rollup, etc.
+
+Although you can create an Autotask using the Defender web client, it may be more convenient to use a script that makes use of https://www.npmjs.com/package/defender-autotask-client[Defender's API].
+
+In the demo app, run `yarn create-autotask` to compile the Autotask code, create the Autotask in Defender and upload the bundled code by calling the Autotask client's `.create()` method:
+
+```
+// ...
+  const client = new AutotaskClient({ apiKey, apiSecret });
+  const {autotaskId } = await client.create({
+    name: "Relay MetaTX",
+    encodedZippedCode: await client.getEncodedZippedCodeFromFolder('./build/relay'),
+    relayerId: relayerId, 
+    trigger: {
+      type: 'webhook'
+    },
+    paused: false
+  });
+// ...
+```
 
 Head to https://defender.openzeppelin.com[Defender] and grab the Autotask's webhook so that you can test functionality and connect the app to the Autotask for relaying meta-transactions.
 
 image::guide-gasless-metatx-copy-webhook.gif[Copy Webhook URI]
 
-Save it to your .env as the WEBHOOK_URL and in the /app `.env` file as the `REACT_APP_WEBHOOK_URL`. 
+Save the Autotask webhook to your .env as the WEBHOOK_URL and in the /app `.env` file as the `REACT_APP_WEBHOOK_URL`. 
 
-Test the metatransaction's functionality with `yarn sign` followed by `yarn invoke`.
+Test the meta-transaction's functionality with `yarn sign` followed by `yarn invoke`.
 
 [[create-web-app]]
 == Create Web App
 
 The key building blocks have been laid, so next it is a matter of crafting a web application that makes use of these components.
 
-You can see the details of this relationship in the https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/app/src/eth/register.js[`register.js`] file. The user's transaction request is sent to the relayer by way of the Autotask's webhook, and this executes the Autotask's logic given the parameters supplied by the application. Note that the signer's nonce is incremented from the transaction. 
+You can see the details of this relationship in the https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/app/src/eth/register.js[`register.js`] file. The user's transaction request is sent to the Relayer by way of the Autotask's webhook, and this executes the Autotask's logic given the parameters supplied by the application. Note that the signer's nonce is incremented from the transaction. 
 
 ```
 import { ethers } from 'ethers';
@@ -310,7 +261,7 @@ export async function registerName(registry, provider, name) {
   await window.ethereum.enable();
   const userProvider = new ethers.providers.Web3Provider(window.ethereum);
   const userNetwork = await userProvider.getNetwork();
-  if (userNetwork.chainId !== 100) throw new Error(`Please switch to xDAI for signing`);
+  if (userNetwork.chainId !== 5) throw new Error(`Please switch to Goerli for signing`);
 
   const signer = userProvider.getSigner();
   const from = await signer.getAddress();
