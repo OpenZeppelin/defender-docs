@@ -56,15 +56,18 @@ Note that the fields `via` (address of the multisig via which the request is sen
 An example of an upgrade request:
 
 ```bash
-DATA='{ 
-  "contract": {
-    "address": "0x179810822f56b0e79469189741a3fa5f2f9a7631",
-    "network": "rinkeby"
-  },
-  "title": "Upgrade to v2",
-  "description": "Upgrading contract to version 2.0",
-  "type": "upgrade",
-  "metadata": { "newImplementation": "0x3E5e9111Ae8eB78Fe1CC3bb8915d5D461F3Ef9A9", "newImplementationAbi": "..." }
+DATA='{
+	"contract": {
+		"address": "0x179810822f56b0e79469189741a3fa5f2f9a7631",
+		"network": "rinkeby"
+	},
+	"title": "Upgrade to v2",
+	"description": "Upgrading contract to version 2.0",
+	"type": "upgrade",
+	"metadata": {
+		"newImplementation": "0x3E5e9111Ae8eB78Fe1CC3bb8915d5D461F3Ef9A9",
+		"newImplementationAbi": "[{\"inputs \": [],\"name \": \"greet \",\"outputs \": [{\"internalType \": \"string \",\"name \": \"\",\"type \": \"string \"}],\"stateMutability \": \"pure \",\"type \": \"function \"}]"
+	}
 }'
 
 curl \
