@@ -43,6 +43,7 @@ interface CreateProposalRequest {
   functionInputs?: ProposalFunctionInputs;
   metadata?: {
     newImplementationAddress?: Address;
+    newImplementationAbi?: string;
     proxyAdminAddress?: Address;
     action?: 'pause' | 'unpause';
     operationType?: 'call' | 'delegateCall';
@@ -63,7 +64,7 @@ DATA='{
   "title": "Upgrade to v2",
   "description": "Upgrading contract to version 2.0",
   "type": "upgrade",
-  "metadata": { "newImplementation": "0x3E5e9111Ae8eB78Fe1CC3bb8915d5D461F3Ef9A9" }
+  "metadata": { "newImplementation": "0x3E5e9111Ae8eB78Fe1CC3bb8915d5D461F3Ef9A9", "newImplementationAbi": "..." }
 }'
 
 curl \
