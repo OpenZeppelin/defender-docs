@@ -62,6 +62,8 @@ NOTE: In addition to the maximum gas price policy you can specify here, Defender
 
 NOTE: EIP1559 Pricing policy is enabled by default for new relayers. If you have a Relayer that was created without the default opt-in, you can always enable this flag.
 
+NOTE: The receiver whitelist applies only to the `to` field of a transaction. It doesn't filter ERC20 or other assets receivers.
+
 [[sending-transactions]]
 == Sending transactions
 
