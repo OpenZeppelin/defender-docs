@@ -263,6 +263,7 @@ interface ExternalCreateFortaSubscriberRequest {
   addresses?: Address[];
   agentIDs?: string[];
   fortaConditions: FortaConditionSet;
+  privateFortaNodeId?: string;
 }
 
 ```
@@ -352,6 +353,11 @@ const requestParameters = {
   alertTimeoutMs: 0,
   notificationChannels: [notification.notificationId],
 };
+```
+To create a Forta Local Mode Sentinel specify the scanner node address with `privateFortaNodeId` 
+
+```js
+  requestParameters.privateFortaNodeId: '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
 ```
 
 Once all required parameters are populated, you can create a sentinel by calling the `create` function on the client. This will return a `CreateSentinelResponse` object.
