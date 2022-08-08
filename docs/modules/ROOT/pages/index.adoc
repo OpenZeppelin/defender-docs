@@ -43,8 +43,8 @@ All Defender components, where applicable, provide support for the following cha
 
 - *Ethereum Mainnet* and its testnets *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli*.
 - https://docs.matic.network/docs/develop/network-details/network[*Polygon* (Matic)] and *Mumbai*.
-- https://arbitrum.io/[*Arbitrum*] and *Arbitrum Rinkeby*.
-- https://optimism.io/[*Optimism*] and *Optimism Kovan*.
+- https://arbitrum.io/[*Arbitrum*], *Arbitrum Rinkeby*, and *Arbitrum Goerli*.
+- https://optimism.io/[*Optimism*], *Optimism Kovan*, and *Optimism Goerli*.
 - https://moonbeam.network/[*Moonbeam*] and *Moonriver*.
 - https://www.xdaichain.com/[*xDai*] and *Sokol*.
 - https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*] and *BSC testnet*.
