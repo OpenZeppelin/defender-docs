@@ -59,6 +59,7 @@ If, additionally, your contract ABI exposes a `paused()` or `isPaused()` functio
 
 image::defender-admin-pause.png[Defender Admin Paused Contract]
 
+[[access-control-management]]
 === Access Control Management
 
 An _access control action_ is a call that's compliant with https://docs.openzeppelin.com/contracts/access-control[OpenZeppelin's Access Control's] `grantRole` and `revokeRole` interfaces via its ABI. 
@@ -67,9 +68,11 @@ Defender provides functionality to create such proposals when the ABI contains b
 
 In the case you want to provide a role that's not indexed in your contract, you can always provide new roles for your contract by giving it its corresponding `bytes32`.
 
+image::defender-admin-access-control-proposal.png[Defender Access Control Proposal]
+
 Also, if the contract is detected to have the Access Control Interface, we provide a small widget to easily navigate contract roles, their admins and their members.
 
-image::defender-admin-access-control-proposal.png[Defender Access Control Proposal]
+image::defender-admin-access-control-widget.png[Defender Access Control Widget, 300]
 
 [[custom-actions]]
 === Custom actions
