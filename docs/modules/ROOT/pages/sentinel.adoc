@@ -37,7 +37,7 @@ IMPORTANT: At this time, Sentinels are supported across all networks except Fant
 
 * *ABI*: Specify the ABI for the contract. Defender will automatically load the ABI if the source code is verified.
 
-* *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level.   If you want to be notified as soon as possible and are tolerant to re-orgs, then choose *Latest* 
+* *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, choose a higher confirmation block level, but, if you want to be notified as soon as possible and are tolerant to re-orgs, then choose lower confirmation block level. In chains where `safe` and `finalized` block tags are accepted, you can also select them as confirmation block level.
 
 [[matching-rules]]
 === Matching Rules
@@ -256,7 +256,7 @@ The request body will contain the following structure. You can use the `Sentinel
       "name": "Sentinel Name",           // name of your sentinel
       "abi": [...],                      // abi of your addresses (or undefined)
       "addresses": ["0x000..000"],       // addresses your sentinel is watching
-      "confirmBlocks": 0,                // number of blocks sentinel waits
+      "confirmBlocks": 0,                // number of blocks sentinel waits (can be 'safe' or 'finalized' on PoS clients)
       "network": "rinkeby"               // network of your addresses
       "chainId": 4                       // chain Id of the network
     }
@@ -634,7 +634,7 @@ exports.handler = async function(params) {
     "name": "Sentinel Name",           // name of your sentinel
     "abi": [...],                      // abi of your address (or undefined)
     "addresses": ["0x000..000"],       // addresses your sentinel is watching
-    "confirmBlocks": 0,                // number of blocks sentinel waits
+    "confirmBlocks": 0,                // number of blocks sentinel waits (can be 'safe' or 'finalized' on PoS clients)
     "network": "rinkeby"               // network of your address
     "chainId": 4                       // chain Id of the network
   },
