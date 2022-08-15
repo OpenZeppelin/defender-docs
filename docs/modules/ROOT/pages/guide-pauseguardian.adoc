@@ -7,6 +7,8 @@ One of the key capabilities of OpenZeppelin Defender is its usefulness for secur
 
 A https://docs.openzeppelin.com/defender/sentinel[Sentinel] monitors transactions on the contract, and is set up to automatically fire an https://docs.openzeppelin.com/defender/autotasks[Autotask] in the event of a large token transfer. The Autotask script sends a pause transaction to the ERC20 contract via a https://docs.openzeppelin.com/defender/relay[Relayer].
 
+image::guide-pauseguardian-overview.png[Overview]
+
 [[setup]]
 == Setup
 
