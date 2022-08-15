@@ -61,8 +61,6 @@ const relayer = await relayClient.create(requestParams);
 
 ```
 
-Run with `yarn create-relay`.
-
 Note that you will later need the `relayerId` from either the console log or the created `relay.json` file. You'll use this when creating the Autotask.
 
 The Relayer's API key and secret will be used whenever you would like to send a transaction via API. In the above code, it is appended to the existing `.env` file.
@@ -285,7 +283,7 @@ $ yarn
 $ yarn start
 ```
 
-1. Open app: [http://localhost:3000/](http://localhost:3000/)
+1. Open app: http://localhost:3000/[http://localhost:3000/]
 2. Change to Goerli network in Metamask
 3. Enter a name to register and sign the metatransaction in MetaMask
 4. Your name will be registered, showing the address that created the metatransaction and the name.
@@ -295,6 +293,5 @@ Use the frontend to see it working for yourself! Compare what happens when you s
 [[resources]]
 == Resources
 
-* https://github.com/OpenZeppelin/workshops/tree/master/01-defender-meta-txs[Demo Repo - Meta-Transaction Name Registry]
+* https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[Demo Repo - Meta-Transaction Name Registry]
 * https://docs.openzeppelin.com/contracts/4.x/api/metatx[Documentation - Meta Transactions]
-
