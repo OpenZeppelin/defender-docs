@@ -22,5 +22,6 @@
 ** xref:guide-keep3r.adoc[Running a Keep3r Network keeper]
 ** xref:guide-chainlink.adoc[Registering an Upkeep on Chainlink Keepers]
 ** xref:guide-timelock-roles.adoc[How to manage roles on a TimelockController]
-** xref:guide-factory.adoc[Automated security monitoring of factory clones]
+** xref:guide-factory.adoc[Automated Security Monitoring of Factory Clones]
 ** xref:guide-metatx.adoc[Relaying Gasless Meta-Transactions]
+** xref:guide-pauseguardian.adoc[Pause Guardian automated incident response]
