@@ -262,6 +262,8 @@ In addition to sending transactions, the Relayer can also sign arbitrary message
 const signResponse = await relayer.sign({ message });
 ----
 
+NOTE: As opposed to most libraries, Relayers use non-deterministic ECDSA signatures. This means that if you request a Relayer to sign the same message multiple times, you will get multiple different signatures, which may differ to the result you get by signing using ethersjs or web3js. All those different signatures are valid. See https://datatracker.ietf.org/doc/html/rfc6979#section-3[RFC6979] more more information.
+
 [[signing-typed-data]]
 == Signing Typed Data
 
