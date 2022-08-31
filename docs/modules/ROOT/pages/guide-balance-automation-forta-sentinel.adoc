@@ -215,7 +215,7 @@ Edit `package.json`, giving your bot a unique name (in lowercase) and descriptio
 You can witness the bot's functionality using live blockchain data by running it locally, ensuring that you specify an account in the code with no LINK.
 
 ```
-npx hardhat forta:run
+$ npx hardhat forta:run
 ```
 
 [[deploy-bot]]
@@ -226,7 +226,7 @@ Bot deployment can happen via the CLI, the app, or the Hardhat plugin.
 Keep in mind that the account you're deploying it from needs to be funded with some MATIC.
 
 ```
-npm run publish
+$ npm run publish
 ```
 
 This will build the agent image and push it to the remote repository.

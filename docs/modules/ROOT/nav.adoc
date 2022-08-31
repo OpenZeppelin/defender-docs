@@ -24,4 +24,5 @@
 ** xref:guide-timelock-roles.adoc[How to manage roles on a TimelockController]
 ** xref:guide-factory.adoc[Automated Security Monitoring of Factory Clones]
 ** xref:guide-metatx.adoc[Relaying Gasless Meta-Transactions]
-** xref:guide-pauseguardian.adoc[Pause Guardian automated incident response]
+** xref:guide-pauseguardian.adoc[Pause Guardian Automated Incident Response]
+** xref:guide-balance-automation-forta-sentinel.adoc[Automate Relayer Balance Using a Forta Bot]
