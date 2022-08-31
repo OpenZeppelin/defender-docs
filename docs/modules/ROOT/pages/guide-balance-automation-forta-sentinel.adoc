@@ -1,0 +1,317 @@
+# Automate ERC20 Token Balance Maintenance Using A Forta Bot and Defender Autotask 
+
+This guide serves as an A to Z walkthrough for integrating a custom Forta bot with Defender. You'll connect that bot to Defender via a Sentinel. Whenever the bot fires an alert, the Sentinel will send you a notification and trigger an Autotask to run custom logic to send a transaction (via Relayer) to automatically top up the monitored account. In this example, we'll be monitoring for LINK on the Polygon network, although any ERC20 token can easily be substituted. 
+
+image::guide-balance-automation-forta-sentinel.png[Component diagram]
+
+https://github.com/offgridauthor/automate-balance-topping-demo[Demo Repository]
+
+[[install-dependencies]]
+== Install Dependencies
+
+You'll need to install the relevant Defender NPM packages. Note that Forta bot creation also requires that you also have https://www.docker.com/get-started[Docker] installed.
+
+
+```
+$ mkdir minimum-balance && cd minimum-balance
+$ npm init -y
+$ npm i --save-dev defender-relay-client defender-autotask-client defender-sentinel-client dotenv
+```
+
+[[create-relayer]]
+== Create Relayer
+
+From the Defender web interface, open the hamburger menu at the top right. Grab your Team API key and secret and save them to your local .env file.
+
+Using `defender-relay-client`, create a new https://docs.openzeppelin.com/defender/relay[Relayer] on the Polygon network and save the Relayer's ID to your `.env` file. 
+
+```
+const { RelayClient } = require('defender-relay-client');
+const { appendFileSync } = require('fs');
+
+async function run() {
+  require('dotenv').config();
+  const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
+  const relayClient = new RelayClient({ apiKey, apiSecret });
+
+  // create relay using defender client
+  const requestParams = {
+    name: 'LINK Low Balance Relayer',
+    network: 'matic',
+    minBalance: BigInt(1e17).toString(),
+  };
+  const relayer = await relayClient.create(requestParams);
+  
+  // store relayer info in file (optional)
+  appendFileSync('.env', relayer.relayerId)
+  console.log('Relayer created: ', relayer);
+}
+
+run().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+
+```
+
+Save the file and run the script. Having the Relayer's ID gives you all that you need to run transactions via an Autotask.
+
+[[create-autotask]]
+== Create Autotask
+
+Next, you'll need to create an https://docs.openzeppelin.com/defender/autotasks[Autotask] that makes use of ethers.js to transfer LINK from the https://docs.openzeppelin.com/defender/autotasks#relayer-integration[integrated Relayer] to the account you would like to be monitored by the Forta bot.
+
+```
+$ mkdir autotasks && touch autotasks/index.js
+```
+
+In the `index.js` file, include logic to run the transfer function:
+
+```
+// ...
+async function handler(event) {
+  const provider = new DefenderRelayProvider(event)
+  const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' })
+
+  const contract = new ethers.Contract(LINK_CONTRACT, ABI, signer)
+  contract.connect(signer).transfer(MONITORED_ADDRESS, 1);
+}
+
+// ...
+```
+
+The Autotask is able to connect to the Relayer by specifying its ID during Autotask creation. Credential passing is handled automatically and securely.
+
+Using https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`], write a script in a separate file that creates a new Autotask and uploads the code from `autotasks/index.js`:
+
+```
+const { AutotaskClient } = require('defender-autotask-client')
+const { appendFileSync } = require('fs')
+
+async function main() {
+  require('dotenv').config()
+  const credentials = {
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.API_SECRET,
+  }
+  const autotaskClient = new AutotaskClient(credentials)
+
+  const params = {
+    name: 'LINK low balance transfer',
+    encodedZippedCode: await autotaskClient.getEncodedZippedCodeFromFolder(
+      './autotasks'
+    ),
+    trigger: {
+      type: 'webhook',
+    },
+    paused: false,
+    relayerId: process.env.RELAYER_ID,
+  }
+
+  const createdAutotask = await autotaskClient.create(params)
+  console.log('Created Autotask with ID: ', createdAutotask.autotaskId)
+
+  appendFileSync('.env', `\nAUTOTASK_ID="${createdAutotask.autotaskId}"`)
+}
+
+if (require.main === module) {
+  main()
+    .then(() => process.exit(0))
+    .catch((error) => {
+      console.error(error)
+      process.exit(1)
+    })
+}
+```
+
+Save the script and run it. 
+
+Now it's time to build the Forta bot.
+
+[[install-forta-cli]]
+== Install Forta CLI
+
+In this demo, you'll use the command line package to work with Forta bot development. 
+
+$ mkdir forta-bot && cd forta-bot
+$ npx forta-agent@latest init --typescript
+
+A keyfile will be generated in `~/.forta` that you'll encrypt with a password.
+
+[[create-bot]]
+== Create Bot
+
+First, the `bignumber` package needs to be installed:
+
+`$ npm install --save-dev bignumber`
+
+In the `/src` directory, open the `agent.ts` file, replacing the starter code.
+
+Export a handler method that checks whether the account balance has fallen below 0.1 LINK:
+
+```
+import BigNumber from 'bignumber.js'
+import { 
+  BlockEvent, 
+  Finding, 
+  HandleBlock, 
+  FindingSeverity, 
+  FindingType,
+  getEthersProvider,
+  ethers
+} from 'forta-agent'
+
+export const ABI = `[ { "constant": true, "inputs": [ { "name": "_owner", "type": "address" } ], "name": "balanceOf", "outputs": [ { "name": "balance", "type": "uint256" } ], "payable": false, "type": "function" } ]`
+export const ACCOUNT = "[Your Account Address]" // The account you'd like to monitor
+export const MIN_BALANCE = "100000000000000000" // 0.1 LINK
+export const LINK = "0xb0897686c545045afc77cf20ec7a532e3120e0f1" //  LINK address on polygon
+
+const ethersProvider = getEthersProvider()
+
+function provideHandleBlock(ethersProvider: ethers.providers.JsonRpcProvider): HandleBlock {
+  return async function handleBlock(blockEvent: BlockEvent) {
+    // report finding if specified account balance falls below threshold
+    const findings: Finding[] = []
+
+    const erc20Contract = new ethers.Contract(LINK, ABI, ethersProvider)
+    const accountBalance = new BigNumber((await erc20Contract.balanceOf(ACCOUNT, {blockTag:blockEvent.blockNumber})).toString())
+
+    if (accountBalance.isGreaterThanOrEqualTo(MIN_BALANCE)) return findings
+
+    findings.push(
+      Finding.fromObject({
+        name: "Minimum Account Balance",
+        description: `Account balance (${accountBalance.toString()}) below threshold (${MIN_BALANCE})`,
+        alertId: "FORTA-6",
+        severity: FindingSeverity.Info,
+        type: FindingType.Suspicious,
+        metadata: {
+          balance: accountBalance.toString()
+        }
+      }
+    ))
+
+    return findings
+  }
+}
+
+export default {
+  provideHandleBlock,
+  handleBlock: provideHandleBlock(ethersProvider)
+}
+```
+
+Edit `package.json`, giving your bot a unique name (in lowercase) and description, specifying the `chainId`.
+
+```
+{
+  "name": "minimum-link-balance-polygon-example",
+  "version": "0.0.1",
+  "description": "Forta bot that reports whether an account has fallen below .1 LINK balance",
+  "chainIds": [137],
+  // ...
+```
+
+You can witness the bot's functionality using live blockchain data by running it locally, ensuring that you specify an account in the code with no LINK.
+
+```
+npx hardhat forta:run
+```
+
+[[deploy-bot]]
+== Deploy Bot
+
+Bot deployment can happen via the CLI, the app, or the Hardhat plugin.
+
+Keep in mind that the account you're deploying it from needs to be funded with some MATIC.
+
+```
+npm run publish
+```
+
+This will build the agent image and push it to the remote repository.
+After entering the password you created when installing forta-agent, you'll be given the agent ID and manifest.
+
+```
+❯ npm run publish
+
+> minimum-link-balance-polygon-example@0.0.1 publish
+> forta-agent publish
+
+building agent image...
+pushing agent image to repository...
+✔ Enter password to decrypt keyfile UTC--2022-08-26T21:52:34.343Z--3c89fa18f6cb70585b5831970e6b0c067ae46598 … ********
+pushing agent documentation to IPFS...
+pushing agent manifest to IPFS...
+adding agent to registry...
+successfully added agent id 0xd6d29c1584801d5baa867c9edaf595e794be63d207758155f28bed8ffa98d472 with manifest QmSNSaNwbjcvi2SuX73pqzEUcTzb4zdXpjPRbiCzsBLKuo
+```
+
+Congratulations on deploying a Forta bot!
+
+For convenience, save the agent ID to the `.env` file in your main project folder. You'll need it when creating a Sentinel that subscribes to this bot.
+
+[[create-sentinel]]
+== Create Forta Sentinel
+
+Using the `sentinel-client` package, write a script that creates a Forta Sentinel connected to your Relayer and Autotask.
+
+```
+require('dotenv').config()
+const { SentinelClient } = require('defender-sentinel-client')
+
+const BOT = process.env.BOT_ID
+
+async function main() {
+  require('dotenv').config()
+  const client = new SentinelClient({
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.API_SECRET,
+  })
+
+  const notificationChannels = await client.listNotificationChannels();
+  const { notificationId, type } = notificationChannels[0];
+
+  const requestParams = {
+    type: 'FORTA',
+    name: 'Low balance alert',
+    agentIDs: [BOT],
+    fortaConditions: {
+      alertIDs: undefined, // string[]
+      minimumScannerCount: 1, 
+      severity: 2, // (unknown=0, info=1, low=2, medium=3, high=4, critical=5)
+    },
+    autotaskTrigger: process.env.AUTOTASK_ID,
+    alertThreshold: {
+      amount: 2,
+      windowSeconds: 3600,
+    },
+    alertTimeoutMs: 0,
+    notificationChannels: [notificationChannels[0].notificationId],
+  }
+
+  const newSentinel = await client.create(requestParams)
+  console.log(newSentinel)
+}
+
+main().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+The Sentinel is configured to trigger a notification as well as an Autotask when the bot sends two alerts within an hour. 
+
+Run the script to create the Sentinel.
+
+Congratulations! You can now experiment with this integration further by transfering LINK from the monitored account so that the balance drops below 0.1. Detecting this, the Forta bot will fire, causing the Sentinel to trigger the Autotask which runs the transfer function on the Relayer, refilling the monitored account. 
+
+[[reference]]
+== Reference
+
+* https://docs.forta.network/en/latest/quickstart/[Forta quickstart guide]
+* https://github.com/forta-network/forta-bot-examples[Example bots]
+* https://github.com/arbitraryexecution/forta-bot-templates[Bot templates]
+* https://docs.forta.network/en/latest/useful-libraries/[Forta bot libraries]
+* https://www.npmjs.com/package/hardhat-forta[Hardhat plugin]
+* https://docs.forta.network/en/latest/wizard/[Bot creation wizard]
