@@ -265,7 +265,7 @@ image::defender-admin-address-dropdown.png[Defender Admin Address Input]
 [[simulation]]
 == Simulation and effects
 
-Defender can _simulate_ a transaction associated to any pending proposal, so you can review the effects of executing a proposal before approving it. The transaction is simulated as if it were run on the latest block, and sent directly from the executor contract (usually a multi-sig) to the recipient. Simulations are powered using a hardhat fork under the hood, and are stored for other team members to review. 
+Defender can _simulate_ a transaction associated to any pending proposal, so you can review the effects of executing a proposal before approving it. The transaction is simulated as if it were run on a recent finalized block, where the number of confirmations depend on the network, and sent directly from the executor contract (usually a multi-sig) to the recipient. Simulations are powered using a hardhat fork under the hood, and are stored for other team members to review. 
 
 A simulation will show:
 
