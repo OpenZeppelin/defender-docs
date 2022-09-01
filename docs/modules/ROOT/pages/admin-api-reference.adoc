@@ -106,3 +106,41 @@ curl \
 ```
 
 You can also issue a `GET` request to the same endpoint to retrieve a list of all contracts imported.
+
+[[verification-endpoint]]
+== Verifications Endpoint
+
+The `/verifications` endpoint can be used to verify the deployed bytecode of any contract in any of the networks supported by Defender. By issuing a `POST` to the endpoint you issue a verification request whose results will be stored in Defender's address book. That in turn will make those results available to anyone with access to your Defender workspace.
+
+```bash
+DATA='
+{
+  artifactUri: 'https://gist.githubusercontent.com/johndoe/506bff068172583d4d82ef53ba01e26c/raw/5f142de4c33aefddb2625b2cce1e6aba7791ebdc/compile-artifact.json',
+  solidityFilePath: 'contracts/Vault.sol',
+  contractName: 'VaultV2',
+  contractAddress: '0x38e373CC414e90dDec45cf7166d497409902e998',
+  contractNetwork: 'rinkeby',
+  referenceUri: 'https://ci-run-or-git-commit.example/',
+}'
+
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://defender-api.openzeppelin.com/admin/verifications"
+```
+
+You can also issue a `GET` request to `/verifications/${contractNetwork}/${contractAddress} to get the latest verification information associated to _contractAddress_ in Defender. For the example above, this would be:
+
+```
+curl \
+  -X GET \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/admin/verifications/rinkeby/0x38e373CC414e90dDec45cf7166d497409902e998"
+```
+
+For a more in-depth discussion of bytecode verification in Defender, refer to the xref:admin.adoc#bytecode-verification[Defender Admin Verification section of this documentation].

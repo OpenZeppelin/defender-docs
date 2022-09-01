@@ -262,14 +262,60 @@ Defender will also source information from the address book whenever you are req
 
 image::defender-admin-address-dropdown.png[Defender Admin Address Input]
 
+[[bytecode-verification]]
+== Verification of bytecode for deployed contracts
+
+You can have Defender check whether the bytecode compilation artifact for a contract matches the deployed bytecode at a specific address. This verification gets stored in Defender's address book, so anyone in your team can then check that a contract matches a compilation artifact. You can rely on this to have auditable deployments and upgrades for your contracts.
+
+NOTE: At the moment, this Defender feature only supports Hardhat compilation artifacts. If you are interested in having access to this feature but you use a different toolchain please let us know.
+
+=== Verifying the new implementation of an upgrade proposal
+
+You can verify the new implementation of an upgrade proposal through Defender's UI or programmatically.
+
+To verify from the UI, navigate to an upgrade proposal. You will see an _On-chain bytecode verification status_ section. When Defender does not have any information about the bytecode of the new implementation being proposed, this section looks like the figure below.
+
+image::defender-admin-verification-empty.png[Upgrade proposal verification section]
+
+You can then click "Verify bytecode" to point Defender to a compilation artifact that matches the new implementation's deployed bytecode.
+
+image::defender-admin-verification-form.png[Verification form]
+
+Defender will ask you to provide three pieces of information to move forward with the verification process:
+
+- *Hardhat build artifact URL*: a publicly accessible URL to a Hardhat build output file. Defender will pull it, extract the new implementation's bytecode and match it against the bytecode found on-chain at the new implementation's address.
+- *Path to Solidity file in build artifact*: some build artifact formats include multiple compilation output for multiple contracts. This path tells Defender where to look for the .sol file that defines the contract you are trying to verify.
+- *Name of contract inside Solidity file*: since Solidity files can include multiple contract declarations, we ask you to indicate which one corresponds to the implementation to verify.
+
+After clicking on _Verify implementation_, Defender will pull the artifact from the URL you provided and try to match it against the bytecode deployed at the new implementation address.
+
+This can result in one of four outcomes:
+
+- *Defender cannot process your verification request.* This could happen for example if the compilation artifact URL you provided is not publicly accessible, or if the artifact's format is not currently supported.
+- *Defender verifies that the compilation artifact _exactly_ matches the deployed bytecode.* 
+- *Defender verifies that the compilation artifact _partially_ matches the deployed bytecode.* This often means the bytecodes match except for the metadata hash, which usually means the compilation artifact and the deployed bytecode are functionally equivalent, but in theory they differ in things like comments or variable names. In practice, there could be effectful instructions hidden in the source code, so evaluate contracts with this verification result with extra care. It's worth noting that due to internals of the Solidity compiler, depending on the contract, it might not be possible to get an exact match. In such cases, a partial match is the closest we can get to bytecode verification. 
+- *Defender can process your verification request, but it finds the compilation artifact and the deployed bytecode don't match*, even partially. In this case, signers of the upgrade proposal should not approve it.
+
+See below an example of an exact match.
+
+image::defender-admin-verification-exact.png[Exact verification]
+
+
+To verify programmatically, we strongly recommend using the https://www.npmjs.com/package/@openzeppelin/hardhat-defender#verification[hardhat-defender plugin]. However, you may also use https://www.npmjs.com/package/defender-admin-client[defender-client package] (https://github.com/OpenZeppelin/defender-client/tree/master/examples/verify-contract[see a verification example here]), or interact with the raw REST API directly. These components build upon each other, so at the end of the day all capabilities are available through any of them. We still recommend you use the `hardhat-defender` plugin for the most streamlined experience.
+
+=== Verifying any contract
+
+While we expect the most Defender users will use this feature to help secure their upgrade workflows, it is worth noting that the verification feature is available for any contract, regardless of whether it is an upgradeable implementation or not. 
+
+The UI for verification in this case can be found by hovering any contract address shown in Defender, and clicking _Verify_.
+
+image::defender-admin-verification-any.png[Verification of any contract]
+
+Similarly, you can also trigger programmatical verification of any contract using the `defender-admin-client` client library or the `@openzeppelin/hardhat-defender` plugin for Hardhat. It is not necessary for the verified contract to take part in an upgrade.
+
 [[security-considerations]]
 == Security considerations
 
 Defender Admin acts exclusively as an interface to your contracts and multi-signature wallets. This means that you do not grant Defender any rights over your contracts by using Admin to manage them. All proposal approvals are signed client-side using the admin user private key through Metamask. The Defender Admin backend is only involved in storing proposal metadata and sharing the approval signatures when these are not stored on-chain. Ultimately, the multi-signature wallet contracts are the ones that verify these approvals and execute the proposed actions.
 
 Defender Admin's main contribution to security is then related to usability. First, it automates the process of crafting the transaction for a proposal to avoid manual errors. Second, it provides a clear interface for reviewing a proposal without having to manually decode the proposal hex data.
-
-[[coming-up]]
-== Coming up...
-
-We are working on a number of enhancements to let you better navigate and organize your contracts; public views for contracts, so you can optionally share with your community what change proposals are coming; first class support for access control in contracts; and governance. Stay tuned, and let us know if you have any requests!
