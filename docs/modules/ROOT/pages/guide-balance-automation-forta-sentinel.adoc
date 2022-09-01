@@ -74,7 +74,8 @@ async function handler(event) {
   const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' })
 
   const contract = new ethers.Contract(LINK_CONTRACT, ABI, signer)
-  contract.connect(signer).transfer(MONITORED_ADDRESS, 1);
+  const amount = ethers.utils.parseUnits("1.0", 18);	
+  const tx = await contract.connect(signer).transfer(MONITORED_ADDRESS, amount);
 }
 
 // ...
@@ -274,19 +275,14 @@ async function main() {
 
   const requestParams = {
     type: 'FORTA',
-    name: 'Low balance alert',
+    name: 'Low balance alert - trigger refill',
     agentIDs: [BOT],
     fortaConditions: {
-      alertIDs: undefined, // string[]
-      minimumScannerCount: 1, 
-      severity: 2, // (unknown=0, info=1, low=2, medium=3, high=4, critical=5)
+      minimumScannerCount: 2, 
+      severity: 1, // (unknown=0, info=1, low=2, medium=3, high=4, critical=5)
     },
     autotaskTrigger: process.env.AUTOTASK_ID,
-    alertThreshold: {
-      amount: 2,
-      windowSeconds: 3600,
-    },
-    alertTimeoutMs: 0,
+    alertTimeoutMs: 120000,
     notificationChannels: [notificationChannels[0].notificationId],
   }
 
@@ -300,7 +296,7 @@ main().catch((error) => {
 })
 ```
 
-The Sentinel is configured to trigger a notification as well as an Autotask when the bot sends two alerts within an hour. 
+The Sentinel is configured to trigger a notification as well as an Autotask when the bot sends an alert. To prevent being triggered multiple times for the same low balance event, the `alertTimeoutMs` has been set. 
 
 Run the script to create the Sentinel.
 
