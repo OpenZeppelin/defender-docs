@@ -262,6 +262,26 @@ Defender will also source information from the address book whenever you are req
 
 image::defender-admin-address-dropdown.png[Defender Admin Address Input]
 
+[[simulation]]
+== Simulation and effects
+
+Defender can _simulate_ a transaction associated to any pending proposal, so you can review the effects of executing a proposal before approving it. The transaction is simulated as if it were run on a recent finalized block, where the number of confirmations depend on the network, and sent directly from the executor contract (usually a multi-sig) to the recipient. Simulations are powered using a hardhat fork under the hood, and are stored for other team members to review. 
+
+A simulation will show:
+
+* ERC20 token transfers
+* Events emitted on the transaction
+* Storage changes for all contracts involved in the transaction
+* Changes in public getters for all contracts involved in the transaction
+
+image::defender-admin-simulation-result.png[Defender Admin Simulation Result]
+
+NOTE: Simulations are limited to six per hour per team. Contact us if you need a higher quota.
+
+=== Executed proposal effects
+
+In addition, once a proposal has been executed, Defender will show all the ERC20 token transfers and events emitted by its transaction, including those emitted by the executor contract (eg `ExecutionSuccess` by a Gnosis Safe). Note that storage and state changes will not be visible, but you can review these on a public block explorer such as Etherscan.
+
 [[bytecode-verification]]
 == Verification of bytecode for deployed contracts
 
@@ -299,7 +319,6 @@ This can result in one of four outcomes:
 See below an example of an exact match.
 
 image::defender-admin-verification-exact.png[Exact verification]
-
 
 To verify programmatically, we strongly recommend using the https://www.npmjs.com/package/@openzeppelin/hardhat-defender#verification[hardhat-defender plugin]. However, you may also use https://www.npmjs.com/package/defender-admin-client[defender-client package] (https://github.com/OpenZeppelin/defender-client/tree/master/examples/verify-contract[see a verification example here]), or interact with the raw REST API directly. These components build upon each other, so at the end of the day all capabilities are available through any of them. We still recommend you use the `hardhat-defender` plugin for the most streamlined experience.
 
