@@ -424,6 +424,11 @@ As for API secrets, these are only kept in memory during creation when they are 
 
 When sending transactions to a rollup chain, such as Arbitrum or Optimism, the Relayer currently depends on the chain's sequencer/aggregator. This means that, if the sequencer goes down or censors transactions, the Relayer will not bypass it and commit directly to layer 1.
 
+[[hedera-support]]
+== Hedera Support
+
+On the Hedera network, only testnet is supported by Defender Relay at this time. To opt in to this feature, please contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
+
 [[coming-up]]
 == Coming up...
 
