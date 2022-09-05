@@ -2,11 +2,25 @@
 
 == User management
 
-Access to all resources in Defender is shared across all users in your team. This means that every Relayer or Autotask you have created will also be accessible by any of your team members — there is no concept of user-based ownership.
+You can invite, manage access for, and remove team members from your Defender account under the _User management_ section, accessible from the app's top-right menu. 
 
-You can review your team members under the Collaborators section, accessible from the top-right user menu. You can also invite new users to your team from there, as well as remove them. A user can only belong to a single team in Defender (for now).
+NOTE: If you want to add a user to your team, make sure to invite them from the _User management_ section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com] and we'll help.
 
-WARNING: If you want to add a user to your team, make sure to invite them from the Collaborators section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com] and we'll help.
+=== Role based access control
+
+You can manage authorization to access, modify and/or operate your Defender resources (relayers, sentinels, autotasks, contracts, etc) through Defender's role based access control system, which you can operate from the _User management_ section.
+
+When you invite a new user to your team, Defender will ask you to assign a role to them, which will determine what access they get. In case you want to invite a new team member with full access to your Defender team account, you can also choose to grant them _All permissions_.
+
+NOTE: users with _All permissions_ are assigned the built-in role _Admin_ in the user table. 
+
+To create a new role, click on _Create Role_ at the roles table. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each Defender subcomponent: Admin, Relayer, Autotask, Autotask Secrets, Sentinel, Logging. You can also specify which administrative powers the role will give access to: team API keys management, Fireblocks API keys management, address book, log forwarding, and user and roles management. 
+
+image::defender-account-management-role.png
+
+After saving, the new role will be available from the user invite form, and you might also use it to manage access levels of preexisting users in your team.
+
+Naturally, if in the future you decide to modify the access level of a given role, all users who have that role will as a consequence see their access level change. 
 
 [[two-factor-authentication]]
 == Two factor authentication (2FA)
