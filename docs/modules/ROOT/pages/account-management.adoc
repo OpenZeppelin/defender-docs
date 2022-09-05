@@ -22,6 +22,8 @@ After saving, the new role will be available from the user invite form, and you 
 
 Naturally, if in the future you decide to modify the access level of a given role, all users who have that role will as a consequence see their access level change. 
 
+WARNING: Be careful when granting administrative permissions. A user with the rights to modify roles but not to access any other component can modify their own role to grant them access to any other parts of the application.
+
 [[two-factor-authentication]]
 == Two factor authentication (2FA)
 
