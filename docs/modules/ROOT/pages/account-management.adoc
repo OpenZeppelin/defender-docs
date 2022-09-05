@@ -4,7 +4,7 @@
 
 You can invite, manage access for, and remove team members from your Defender account under the _User management_ section, accessible from the app's top-right menu. 
 
-NOTE: If you want to add a user to your team, make sure to invite them from the _User management_ section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com] and we'll help.
+NOTE: If you want to add a user to your team, make sure to invite them from the _User management_ section. If they sign up directly to the application, they will be added to a new team of their own instead. If this happens, consider having your teammate delete their account, so you can re-send the invitation for your team. Alternatively, they can join your team using a different email address.
 
 === Role based access control
 
