@@ -25,6 +25,6 @@
   },
   "homepage": "https://openzeppelin.com/defender/",
   "devDependencies": {
-    "@openzeppelin/docs-utils": "^0.1.0"
+    "@openzeppelin/docs-utils": "^0.1.2"
   }
 }
