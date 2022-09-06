@@ -343,3 +343,5 @@ Defender Admin's main contribution to security is then related to usability. Fir
 == Hedera Support
 
 On the Hedera network, only testnet is supported by Defender Admin at this time. To opt in to this feature, please contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
+
+We are currently testing Governance execution strategy and Upgradable contracts administration, they are not yet available on the Admin module but will be shortly.
