@@ -16,7 +16,7 @@ NOTE: users with _All permissions_ are assigned the built-in role _Admin_ in the
 
 To create a new role, click on _Create Role_ at the roles table. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each Defender subcomponent: Admin, Relayer, Autotask, Autotask Secrets, Sentinel, Logging. You can also specify which administrative powers the role will give access to: team API keys management, Fireblocks API keys management, address book, log forwarding, and user and roles management. 
 
-image::defender-account-management-role.png
+image::defender-account-management-role.png[Defender account management role, 400]
 
 After saving, the new role will be available from the user invite form, and you might also use it to manage access levels of preexisting users in your team.
 
