@@ -246,3 +246,25 @@ curl \
 // this method's argument is the autotask run ID, not autotask ID
 await client.getAutotaskRun("ae729f92-11e2-0012-bb16-c98c3298e112");
 ```
+
+[[secrets-endpoint]]
+== Secrets Endpoint
+
+The `autotasks/secrets` endpoint can be used to create and delete (but not fetch) secrets:
+
+```bash
+curl \
+  -X POST \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://defender-api.openzeppelin.com/autotask/secrets"
+```
+
+Or through `defender-autotask-client` as such:
+
+```js
+await client.createSecrets({ deletes: ['foo'], secrets: { bar: 'baz' } });
+```
