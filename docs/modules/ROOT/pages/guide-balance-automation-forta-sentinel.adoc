@@ -9,7 +9,7 @@ https://github.com/offgridauthor/automate-balance-topping-demo[Demo Repository]
 [[install-dependencies]]
 == Install Dependencies
 
-NOTE: Although this guide makes use of the `defender-client` packages to create a Relayer and Autotask, the very same functionality is also available via the Defender web interface.
+NOTE: Although this guide makes use of the `defender-client` packages to create a Relayer, Sentinel, and Autotask, the very same functionality is also available via the Defender web interface.
 
 You'll need to install the relevant Defender NPM packages. Note that Forta bot creation also requires that you also have https://www.docker.com/get-started[Docker] installed.
 
