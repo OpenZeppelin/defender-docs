@@ -338,3 +338,10 @@ Similarly, you can also trigger programmatical verification of any contract usin
 Defender Admin acts exclusively as an interface to your contracts and multi-signature wallets. This means that you do not grant Defender any rights over your contracts by using Admin to manage them. All proposal approvals are signed client-side using the admin user private key through Metamask. The Defender Admin backend is only involved in storing proposal metadata and sharing the approval signatures when these are not stored on-chain. Ultimately, the multi-signature wallet contracts are the ones that verify these approvals and execute the proposed actions.
 
 Defender Admin's main contribution to security is then related to usability. First, it automates the process of crafting the transaction for a proposal to avoid manual errors. Second, it provides a clear interface for reviewing a proposal without having to manually decode the proposal hex data.
+
+[[hedera-support]]
+== Hedera Support
+
+On the Hedera network, only testnet is supported by Defender Admin at this time. To opt in to this feature, please contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
+
+We are currently testing Governance execution strategy and Upgradable contracts administration, they are not yet available on the Admin module but will be shortly.
