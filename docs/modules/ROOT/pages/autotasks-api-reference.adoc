@@ -263,8 +263,12 @@ curl \
     "https://defender-api.openzeppelin.com/autotask/secrets"
 ```
 
-Or through `defender-autotask-client` as such:
+Or through `defender-autotask-client` as shown below. Both the `deletes` array and `secrets` object are required to be present in the payload, but can contain empty values. For example, these calls are all valid:
 
 ```js
-await client.createSecrets({ deletes: ['foo'], secrets: { bar: 'baz' } });
+await client.createSecrets({ deletes: [], secrets: { foo: 'bar' } });
+
+await client.createSecrets({ deletes: ['foo'], secrets: { baz: 'test' } });
+
+await client.createSecrets({ deletes: ['baz'], secrets: { } });
 ```
