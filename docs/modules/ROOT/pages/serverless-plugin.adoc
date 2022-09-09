@@ -81,7 +81,7 @@ You can use `sls deploy` to deploy your current stack to Defender.
 
 The deploy takes in an optional `--stage` flag, which is defaulted to `dev` when installed from the template above. 
 
-Moreover, the `serverless.yml` must contain a `ssot` property, which stands for Single Source of Truth.
+Moreover, the `serverless.yml` may contain an `ssot` property (default `false`), which stands for Single Source of Truth.
 When enabled, will use the resources defined in the template as the single source of truth, removing Defender resources which do not exist in the template, with the exception of Relayers (given these _could_ contain funds).
 
 
