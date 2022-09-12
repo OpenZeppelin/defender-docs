@@ -1,12 +1,46 @@
 = Logging
 
-Defender generates log trails of every potentially relevant event in the system.
+Defender generates log trails of every potentially relevant event in the system. This includes manual actions, such as modifying an Autotask or Sentinel, as well as automated actions, such as sending a transaction or firing a notification. Logs can be optionally forwarded to Datadog or Splunk for aggregation.
+
+This is a premium feature, if you are interested in it let us know by filling in this https://zpl.in/defender-inquiry[form, window=_blank].
+
+[[use-cases]]
+== Use cases
+
+Use Defender Logging for tracking all changes and actions on your system, such as:
+
+* Track *user actions* on your team by monitoring sign ins and activity across the application
+* Detect *potential attacks* on your infrastrcture from failed sign in attempts
+* Follow *relayer activity* to understand the transactions being sent from your accounts
+* Keep an *audit trail* of all changes to your Autotasks, Sentinels, and Relayers
+
+== Log Entries
+
+Every log entry will be assigned to one of `autotask`, `sentinel`, `relay`, `admin`, or `account`, and tagged with a severity level ranging from `trace` to `error`. Log entries track both the subject and object of the action, and categorize the event in one of the following:
+
+* `added`
+* `archived`
+* `created`
+* `deleted`
+* `exceeded`
+* `executed`
+* `invited`
+* `invoked`
+* `notification`
+* `paused`
+* `proposed`
+* `replaced`
+* `sent`
+* `set`
+* `triggered`
+* `updated`
+* `invalid sign in`
+* `signed in`
+* `signed out'`
 
 == Log Forwarding
 
-Generated logs can be forwarded to Datadog and Splunk or any other service that supports API Key authentication.
-
-This is a premium feature, if you are interested in it let us know by filling in this https://zpl.in/defender-inquiry[form, window=_blank].
+Generated logs can be forwarded to Datadog and Splunk, or any other service that supports API Key authentication. You can use this to aggregate all logs across your infrastructure in a single place.
 
 == Setup Log Forwarding Destination
 

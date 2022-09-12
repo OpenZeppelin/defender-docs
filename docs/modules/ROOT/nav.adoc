@@ -6,6 +6,7 @@
 ** xref:autotasks.adoc[Autotasks]
 ** xref:relay.adoc[Relay]
 ** xref:sentinel.adoc[Sentinel]
+** xref:logging.adoc[Logging]
 
 * API Reference
 ** xref:api-auth.adoc[Authentication]
@@ -15,7 +16,6 @@
 ** xref:sentinel-api-reference.adoc[Sentinel]
 
 * xref:account-management.adoc[Account Management]
-* xref:logging.adoc[Logging]
 
 * Guides
 ** xref:guide-upgrades.adoc[Upgrading via a multisig]
