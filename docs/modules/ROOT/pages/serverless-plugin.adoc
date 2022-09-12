@@ -74,7 +74,7 @@ The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1
 === SSOT mode
 
 Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
-This means that all Defender resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment.
+This means that all Defender resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment. If SSOT is not defined in the template, it will default to `false`.
 
 == Commands
 
