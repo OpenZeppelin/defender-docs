@@ -71,7 +71,10 @@ Ensure the Defender Team API Keys are setup with all appropriate API capabilitie
 
 The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
 
-NOTE: A caveat is when `ssot` (single source of truth) is enabled, all resources on your account that do not belong to the current stack are removed upon deployment.
+=== SSOT mode
+
+Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
+This means that all Defender resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment.
 
 == Commands
 
