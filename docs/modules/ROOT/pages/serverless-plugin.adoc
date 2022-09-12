@@ -71,6 +71,7 @@ Ensure the Defender Team API Keys are setup with all appropriate API capabilitie
 
 The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
 
+[[ssot-mode]]
 === SSOT mode
 
 Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
@@ -84,8 +85,7 @@ You can use `sls deploy` to deploy your current stack to Defender.
 
 The deploy takes in an optional `--stage` flag, which is defaulted to `dev` when installed from the template above. 
 
-Moreover, the `serverless.yml` may contain an `ssot` property (default `false`), which stands for Single Source of Truth.
-When enabled, it will use the resources defined in the template as the single source of truth, removing Defender resources which do not exist in the template, with the exception of Relayers (given these _could_ contain funds).
+Moreover, the `serverless.yml` may contain an `ssot` property. More information can be found in the <<#ssot-mode, SSOT mode>> section.
 
 
 This command will append a log entry in the `.defender` folder of the current working directory. Additionally, if any new relayer keys are created, these will be stored as JSON objects in the `.defender/relayer-keys` folder.
@@ -100,7 +100,7 @@ You can use `sls info` to retrieve information on every resource defined in the 
 
 You can use `sls remove` to remove all defender resources defined in the `serverless.yml` file.
 
-NOTE: Due to the nature of Relayers, these can only be deleted from the Defender UI directly, with the exception of relayer API keys.
+NOTE: To avoid potential loss of funds, Relayers can only be deleted from the Defender UI directly.
 
 === Logs
 
