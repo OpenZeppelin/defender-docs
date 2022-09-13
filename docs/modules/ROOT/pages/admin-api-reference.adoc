@@ -82,6 +82,33 @@ curl \
 
 WARNING: The Defender API will only validate that the function inputs are valid with regards to the signature, but it will not validate that the proposal can actually be executed. This means you can create proposals for calling a non-existing function on a contract, or trying to upgrade a non-upgradeable contract. However, you will not be able to approve them afterwards.
 
+[[proposals-archive-endpoint]]
+=== Archiving Proposals
+
+Proposals can be archived (and unarchived) via API calls by passing a boolean `archived` value in the PUT call payload:
+
+```bash
+DATA='{
+	"archived": true
+}'
+
+curl \
+  -X PUT \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://defender-api.openzeppelin.com/admin/contracts/${CONTRACT_ID}/proposals/${PROPOSAL_ID}/archived"
+```
+
+The same call can be made using `defender-admin-client`:
+
+```js
+await client.archiveProposal(contractId, proposalId);
+await client.unarchiveProposal(contractId, proposalId);
+```
+
 [[contracts-endpoint]]
 == Contracts Endpoint
 
