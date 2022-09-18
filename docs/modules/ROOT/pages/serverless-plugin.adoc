@@ -105,7 +105,14 @@ secrets:
 [[types-and-schema-validation]]
 === Types and Schema validation
 
-The types accepted by the `serverless.yml` can be found https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/index.ts[here]. Specifically, the types preceded with `Y` (e.g. YRelayer). You can also check out the https://github.com/OpenZeppelin/defender-serverless/blob/main/src/provider.ts[provider.ts] file for more information on how the schema is validated.
+We provide auto-generated documentation based on the JSON schemas:
+
+- https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/defender.md[Defender Property]
+- https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/provider.md[Provider Property]
+- https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/function.md[Function (Autotask) Property]
+- https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/resources-resources.md[Resources Property]
+
+More information on types can be found https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/index.ts[here]. Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs-schemas[docs-schema] folder.
 
 Additionally, an https://github.com/OpenZeppelin/defender-serverless/blob/main/examples/defender-test-project/serverless.yml[example project] is available which provides majority of properties that can be defined in the `serverless.yml` file.
 
