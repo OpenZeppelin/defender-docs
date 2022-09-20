@@ -15,6 +15,7 @@
 ** xref:relay-api-reference.adoc[Relay]
 ** xref:sentinel-api-reference.adoc[Sentinel]
 
+* xref:serverless-plugin.adoc[Serverless Plugin]
 * xref:account-management.adoc[Account Management]
 
 * Guides
