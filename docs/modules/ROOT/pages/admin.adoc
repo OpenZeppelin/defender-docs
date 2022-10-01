@@ -85,6 +85,23 @@ Custom actions can also be _repeated_, which will present you to a pre-filled fo
 
 WARNING: Certain ABI types, such as nested structs, are not yet supported. Contact us if you need to call a function that is currently unsupported!
 
+[[batches]]
+=== Batches
+
+A _batch proposal_ is a call to multiple functions from different contracts. It allows you to atomically execute multiple actions in a single transaction.
+
+NOTE: Batch transactions are currently supported only using a MultiSig (such as Gnosis Safe) by encoding a `DELEGATECALL` to the https://github.com/safe-global/safe-contracts/blob/v1.3.0/contracts/libraries/MultiSendCallOnly.sol[Gnosis MultiSendCallOnly module]
+
+Defender provides this functionality through the Admin UI by clicking on the _Add Proposal_ option in the home dashboard.
+
+image::defender-admin-batches-add-proposal.png[Defender Add Proposal]
+
+By using this proposal creation workflow, you can add new steps before creating the proposal after defining the first step. For example, you can add a Modify Access Control step and then add another step to call a Custom Action. This will be shown in the proposal creation review page and it'll be validated as a whole before creation.
+
+image::defender-admin-batches-proposal-steps.png[Defender Proposal Steps]
+
+NOTE: Currently, only _Access Control Management and _Custom Actions_ are supported
+
 [[multi-signature-wallets]]
 == Multi-signature wallets
 
