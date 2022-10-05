@@ -88,9 +88,10 @@ WARNING: Certain ABI types, such as nested structs, are not yet supported. Conta
 [[batches]]
 === Batches
 
-A _batch proposal_ is a call to multiple functions from different contracts. It allows you to atomically execute multiple actions in a single transaction.
+A _batch proposal_ is a call to multiple functions from multiple contracts (or just one). It allows you to atomically execute multiple actions in a single transaction.
 
 NOTE: Batch transactions are currently supported only using a MultiSig (such as Gnosis Safe) by encoding a `DELEGATECALL` to the https://github.com/safe-global/safe-contracts/blob/v1.3.0/contracts/libraries/MultiSendCallOnly.sol[Gnosis MultiSendCallOnly module]
+NOTE: BAtch transactions are also required to be on the same network
 
 Defender provides this functionality through the Admin UI by clicking on the _Add Proposal_ option in the home dashboard.
 
