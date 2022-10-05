@@ -18,36 +18,84 @@ The `/proposals` endpoint is used for creating new Admin action proposals via a 
 include::partial$network.adoc[]
 
 type Address = string;
-type ProposalFunctionInputs = (string | boolean | (string | boolean)[])[];
+type ProposalType = ProposalStepType | ProposalBatchType;
+type ProposalStepType = 'upgrade' | 'custom' | 'pause' | 'send-funds' | 'access-control';
+type ProposalBatchType = 'batch';
+type Hex = string;
+type BigUInt = string | number;
+type ProposalFunctionInputsArray = (string | boolean)[];
+type ProposalFunctionInputs = (
+  | string
+  | boolean
+  | (string | boolean | (string | boolean | (string | boolean | ProposalFunctionInputsArray)[])[])[]
+)[];
 
-type ProposalFunctionInputType = {
+interface CreateProposalRequest {
+  contract: PartialContract | PartialContract[];
+  title: string;
+  description: string;
+  type: ProposalType;
+  via?: Address;
+  viaType?: 'EOA' | 'Gnosis Safe' | 'Gnosis Multisig';
+  functionInterface?: ProposalTargetFunction;
+  functionInputs?: ProposalFunctionInputs;
+  metadata?: ProposalMetadata;
+  steps?: ProposalStep[];
+}
+
+interface PartialContract {
+  network: Network;
+  address: Address;
+  name?: string;
+  abi?: string;
+}
+
+interface ProposalMetadata {
+  newImplementationAddress?: Address;
+  newImplementationAbi?: string;
+  proxyAdminAddress?: Address;
+  action?: 'pause' | 'unpause' | 'grantRole' | 'revokeRole';
+  operationType?: 'call' | 'delegateCall';
+  account?: Address;
+  role?: Hex;
+  sendTo?: Address;
+  sendValue?: BigUInt;
+  sendCurrency?: Token | NativeCurrency;
+}
+
+interface Token {
+  name: string;
+  symbol: string;
+  address: Address;
+  network: Network;
+  decimals: number;
+  type: 'ERC20';
+}
+interface NativeCurrency {
+  name: string;
+  symbol: string;
+  decimals: number;
+  type: 'native';
+}
+
+interface ProposalStep {
+  contractId: string;
+  targetFunction?: ProposalTargetFunction;
+  functionInputs?: ProposalFunctionInputs;
+  metadata?: ProposalMetadata;
+  type: ProposalStepType;
+}
+
+interface ProposalTargetFunction {
+  name?: string;
+  inputs?: ProposalFunctionInputType[];
+}
+
+interface ProposalFunctionInputType {
   name?: string;
   type: string;
   internalType?: string;
   components?: ProposalFunctionInputType[];
-}
-
-interface CreateProposalRequest {
-  contract: {
-    network: Network;
-    address: Address;
-    name?: string;
-    abi?: string;
-  };
-  title: string;
-  description: string;
-  type: 'upgrade' | 'custom';
-  via?: Address;
-  viaType?: 'Gnosis Safe' | 'Gnosis Multisig';
-  functionInterface?: { name?: string; inputs?: ProposalFunctionInputType[]; };
-  functionInputs?: ProposalFunctionInputs;
-  metadata?: {
-    newImplementationAddress?: Address;
-    newImplementationAbi?: string;
-    proxyAdminAddress?: Address;
-    action?: 'pause' | 'unpause';
-    operationType?: 'call' | 'delegateCall';
-  };
 }
 ```
 
