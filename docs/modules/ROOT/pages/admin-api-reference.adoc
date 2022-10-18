@@ -157,6 +157,28 @@ await client.archiveProposal(contractId, proposalId);
 await client.unarchiveProposal(contractId, proposalId);
 ```
 
+[[proposals-get-endpoint]]
+=== Retrieve a Proposal
+
+Proposals can be retrieved via the API:
+
+```bash
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d "$DATA" \
+    "https://defender-api.openzeppelin.com/admin/contracts/${CONTRACT_ID}/proposals/${PROPOSAL_ID}"
+```
+
+The same call can be made using `defender-admin-client` passing the contract and proposal IDs:
+
+```js
+await client.getProposal(contractId, proposalId);
+```
+
 [[contracts-endpoint]]
 == Contracts Endpoint
 
