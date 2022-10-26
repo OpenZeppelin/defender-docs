@@ -120,6 +120,7 @@ interface UpdateRelayerPoliciesRequest {
   gasPriceCap?: string;
   whitelistReceivers?: string[];
   EIP1559Pricing?: boolean;
+  privateTransactions?: boolean;
 }
 
 include::partial$network.adoc[]
@@ -172,10 +173,13 @@ curl \
 The following relayer policies may be optionally included in both create and update calls:
 
 * `gasPriceCap`: Maximum gasPrice or maxFeePerGas in wei
-* `whitelistReceivers`: an array of all valid addresses with which this relayer can interact; the relayer can send transactions to any address if this policy is undefined.
-* `EIP1559Pricing`: A boolean indicating the default behavior of the transactions sent by the relayer. If true, transactions will be priced as EIP1559, otherwise, as legacy transactions.
+* `whitelistReceivers`: An array of all valid addresses with which this relayer can interact; the relayer can send transactions to any address if this policy is undefined.
+* `EIP1559Pricing`: A boolean indicating the default pricing. If true, transactions will be priced as EIP1559, otherwise, as legacy transactions.
+* `privateTransactions`: A boolean indicating the default transaction mempool visibility. If true, transactions will be sent via private mempool.
 
 NOTE: EIP1559Pricing flag is only available for relayers on EIP1559 networks
+
+NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations] might apply while sending private transactions through Defender (such as https://docs.flashbots.net/flashbots-protect/rpc/uncle-bandits[uncle bandit risk])
 
 [[create-key-endpoint]]
 === Create Relayer Key
