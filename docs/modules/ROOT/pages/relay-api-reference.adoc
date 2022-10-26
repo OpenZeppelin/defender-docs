@@ -327,6 +327,7 @@ interface SendBaseTransactionRequest {
   data?: Hex;
   gasLimit: BigUInt;
   validUntil?: string;
+  isPrivate?: boolean;
 }
 
 interface SendSpeedTransactionRequest extends SendBaseTransactionRequest {
@@ -385,6 +386,10 @@ interface RelayerTransactionBase {
   status: Status;
   chainId: number;
   validUntil: string;
+  createdAt: string;
+  sentAt?: string;
+  pricedAt?: string;
+  isPrivate?: boolean;
 }
 
 interface RelayerLegacyTransaction extends RelayerTransactionBase {
@@ -500,6 +505,10 @@ An example of the response:
    "nonce":160,
    "status":"mined",
    "speed":"fast"
+   "validUntil": "2022-10-27T03:22:09.566Z",
+   "sentAt": "2022-10-26T19:22:10.067Z",
+   "createdAt": "2022-10-26T19:22:10.067Z",
+   "isPrivate": false
 }
 ```
 
@@ -536,6 +545,10 @@ An example of the response:
    "nonce":160,
    "status":"mined",
    "speed":"fast"
+   "validUntil": "2022-10-27T03:22:09.566Z",
+   "sentAt": "2022-10-26T19:22:10.067Z",
+   "createdAt": "2022-10-26T19:22:10.067Z",
+   "isPrivate": false
 }]
 ```
 
