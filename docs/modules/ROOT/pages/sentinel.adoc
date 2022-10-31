@@ -625,7 +625,6 @@ exports.handler = async function(params) {
       "condition": "value > 5",        // condition expression (if any)
       "args": ["5"],                   // parameters by index (unnamed are present)
       "params": { "value": "5" }       // parameters by name (unnamed are not present)
-      "metadata": {...}                // metadata injected by Autotask Condition (if applicable)
     }
   ],
   "matchedAddresses":["0x000..000"]    // the addresses from this transaction your are monitoring
@@ -639,6 +638,7 @@ exports.handler = async function(params) {
     "chainId": 4                       // chain Id of the network
   },
   "value": "0x16345785D8A0000"         // value of the transaction
+  "metadata": {...}                // metadata injected by Autotask Condition (if applicable)
 }
 ----
 ==== Forta Sentinel
