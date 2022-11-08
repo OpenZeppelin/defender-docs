@@ -838,6 +838,13 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
+async-retry@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/async-retry/-/async-retry-1.3.3.tgz#0e7f36c04d8478e7a58bdbed80cedf977785f280"
+  integrity sha512-wfr/jstw9xNi/0teMHrRW7dsz3Lt5ARhYNZ2ewpadnhaIp5mbALhOAP+EAdsC7t4Z6wqsDVv9+W6gm1Dk9mEyw==
+  dependencies:
+    retry "0.13.1"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -1329,74 +1336,75 @@ decompress-response@^3.2.0, decompress-response@^3.3.0:
   dependencies:
     mimic-response "^1.0.0"
 
-defender-admin-client@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.25.0.tgz#bcc9841bebd24359adb0c999ecdf4d025f267962"
-  integrity sha512-XG8BJssvFmg0w53rXsqfQp2Pz+THPwN4J1oqUiNB8QvWXlTAL75A1xZxImm5DBKmwJ/5jwXEwkGOcaq4DFS2kA==
+defender-admin-client@1.37.0-rc.2:
+  version "1.37.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-admin-client/-/defender-admin-client-1.37.0-rc.2.tgz#77af078c7a48f534f54a4ebc749d9ed0f3050c2f"
+  integrity sha512-zQr0FxPKGqV/+zcszUJNzhoQRGZ8RxN3vcUYW+U75WCbPz9wGBJuD1F6HdS7bJ+SGI+HzMYzCjw3gsoyTq7Jag==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "1.25.0"
+    defender-base-client "1.37.0-rc.2"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-autotask-client@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.25.0.tgz#8bfb6cb520d31192372c08fe709c580fd54af407"
-  integrity sha512-/aD0jtduQtRqv0q1X8r0g8/UggSDwiYyGd1w7VqP9y86hINm15NwTNvezr2ZqMDgZerWc+5DAZ44M8trUhHmlA==
+defender-autotask-client@1.37.0-rc.2:
+  version "1.37.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-autotask-client/-/defender-autotask-client-1.37.0-rc.2.tgz#8d18c50c0e42b656f9586fbfb2386357b471bf84"
+  integrity sha512-kvkqsC33ZKtEsabhNJFmytYkcOXwmA4y1C5kxJAyDdcFlIQ10AEja/aW/qvjB29VJ+WrSVywbZ0CQCB6/tTdEw==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "1.25.0"
+    defender-base-client "1.37.0-rc.2"
     dotenv "^10.0.0"
     glob "^7.1.6"
     jszip "^3.5.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-autotask-utils@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/defender-autotask-utils/-/defender-autotask-utils-1.25.0.tgz#f4aa795d4fed9af28fe8d250657b848c3248026b"
-  integrity sha512-NeZ2DVL7SOnkG3xWx6vKUi/q97IFcGXDsKL5tyUzcxsHNuI0iGFvSZd15i6zD1f93hSKHzOxmPOuJpZKdRHv5Q==
+defender-autotask-utils@1.34.0:
+  version "1.34.0"
+  resolved "https://registry.yarnpkg.com/defender-autotask-utils/-/defender-autotask-utils-1.34.0.tgz#761f1280e2eeec8547833f528e8808a40313382f"
+  integrity sha512-artp5weVfXz+SpkU24J5IpzJ/IYoXXSctbpyYDvuvJ8wAvgzoiwfPKvI+lsppI797s06K76k/UGroiaWGuXoNg==
 
-defender-base-client@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.25.0.tgz#7db9efc786391dbc3714bd411cfa18593400eb54"
-  integrity sha512-42a9zEnif94mCkM1N19C+6k7R1QUqNq4FIaS/jVQ5kSJaSmv3FTmLT41/6qHXev76VYp87EyKqbDA9biGhgx/Q==
+defender-base-client@1.37.0-rc.2:
+  version "1.37.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-base-client/-/defender-base-client-1.37.0-rc.2.tgz#affda3621e356863eea1de363aa22f4bfed6b1b5"
+  integrity sha512-bArjGlLR7yl5Y2lPY3QsGWyNP9MMMC/evV9+yEt5jzd+ge+QFsVJIsNUtVroVjfXoCUMgCdsyy9oXZCzcOPyUA==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
+    async-retry "^1.3.3"
     axios "^0.21.2"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-kvstore-client@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/defender-kvstore-client/-/defender-kvstore-client-1.25.0.tgz#9bc3b505ec2676a965bbf4dd7cdd5b076e9068ea"
-  integrity sha512-hWgYzFuRJcFGb++22KrnQ4QUHBsC8sYaRwSxJfwxvnhg+q5LIw9HJC4wtJum0SeZv6c4bDzVeHPPo4nr5W1E2Q==
+defender-kvstore-client@1.37.0-rc.2:
+  version "1.37.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-kvstore-client/-/defender-kvstore-client-1.37.0-rc.2.tgz#8f032d5c3e06a11ef51b190ddda1d351cc4098f3"
+  integrity sha512-foa7sUQbFxiovuYrYWlI9YbdiIWPsL9uZJhdzWjK2VbUJVLmAlVjbcOYnaLjA1XhUiZy8B/qIn54Hs+81A6eLg==
   dependencies:
     axios "^0.21.2"
-    defender-base-client "1.25.0"
+    defender-base-client "1.37.0-rc.2"
     fs-extra "^10.0.0"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-relay-client@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.25.0.tgz#dc5f4233536a2696ad7b9929b5f49a3698ba6fbb"
-  integrity sha512-PY/hx9pIjWZtmcPMBy3ShRjPqnRECSaNnwwNlrXpThH5C15HOpJ7B01uemvDSMaLHHqLqhsMiMtFYzWnMUbTKA==
+defender-relay-client@1.37.0-rc.2:
+  version "1.37.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-relay-client/-/defender-relay-client-1.37.0-rc.2.tgz#b860525d61ba381b0fcd82fcb3e2c7d64353b4e0"
+  integrity sha512-bt+cLyA7v8MSO9vZDqswkc7L0OubV4MM/seW1plxnMVa/CROGN31su1sos9Z+yFMSVUSIaO+jy5385Jje0aaxQ==
   dependencies:
     amazon-cognito-identity-js "^4.3.3"
     axios "^0.21.2"
-    defender-base-client "1.25.0"
+    defender-base-client "1.37.0-rc.2"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-defender-sentinel-client@1.25.0:
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.25.0.tgz#7fb22b0b6eb256d2e6fb9e9bfbaf48b3d8b8c07a"
-  integrity sha512-oTaqUvtSb2nptdZFlmkiLgW0f25XRCgJhG1YgpGftD28Ri8wpGn7kMv88sw/bqtC8ultcqHzF9DcnKyWBEjjoQ==
+defender-sentinel-client@1.37.0-rc.2:
+  version "1.37.0-rc.2"
+  resolved "https://registry.yarnpkg.com/defender-sentinel-client/-/defender-sentinel-client-1.37.0-rc.2.tgz#e1c49fb3f4faa9fe1a9632d4ae21cdf36433eb83"
+  integrity sha512-g31HR7+n3FiHlrdaH6jSx2en4/W9sA3jytdW9Pu8z4DWomF53mG+Ba23SRP88LURNiSQ/vNNQrnCxQhX7UJTdA==
   dependencies:
     "@ethersproject/abi" "^5.6.3"
     axios "^0.21.2"
-    defender-base-client "1.25.0"
+    defender-base-client "1.37.0-rc.2"
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
@@ -1840,10 +1848,10 @@ finalhandler@1.2.0:
     statuses "2.0.1"
     unpipe "~1.0.0"
 
-fireblocks-sdk@^1.12.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/fireblocks-sdk/-/fireblocks-sdk-1.14.0.tgz#c5453818547e1fff9ab2cdce251714bd901b7f0e"
-  integrity sha512-/qUKGbqFfZVit5qG/or/CyZxNgYVLsQqe8gm2sd/6ygND0J3o6Suuei5KJbnA45OKnfU79bL0Y0AE09PGk4+ZQ==
+fireblocks-sdk@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/fireblocks-sdk/-/fireblocks-sdk-2.3.2.tgz#4befcd20c2893c9443c454df8fce8d27c08031a5"
+  integrity sha512-VoENw1guKAw+Fdbd2rYDLxWnjTzh9sfeK6WrcDYrKR07bYpntPZxrzX3VpIzSq8fklG79sz4/ja0ma/X1Iwf1A==
   dependencies:
     axios "^0.24.0"
     jsonwebtoken "8.5.1"
@@ -3126,6 +3134,11 @@ responselike@^1.0.2:
   integrity sha1-kYcg7ztjHFZCvgaPFa3lpG9Loec=
   dependencies:
     lowercase-keys "^1.0.0"
+
+retry@0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/retry/-/retry-0.13.1.tgz#185b1587acf67919d63b357349e03537b2484658"
+  integrity sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==
 
 ripemd160@^2.0.0, ripemd160@^2.0.1:
   version "2.0.2"
