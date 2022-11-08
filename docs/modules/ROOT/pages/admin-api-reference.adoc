@@ -179,6 +179,53 @@ The same call can be made using `defender-admin-client` passing the contract and
 await client.getProposal(contractId, proposalId);
 ```
 
+[[simulate-endpoint]]
+=== Simulate a Proposal
+
+Proposals can be simulated via the API. The results of a simulation (`SimulationResponse`) will be stored and can be retrieved with the `getProposalSimulation` endpoint.
+
+```js
+const proposal = await client.getProposal(contractId, proposalId);
+
+// import the ABI and create an ethers interface
+const contractInterface = new utils.Interface(contractABI);
+
+// encode function data
+const data = contractInterface.encodeFunctionData(proposal.functionInterface.name, proposal.functionInputs);
+
+const simulation = await client.simulateProposal(
+  proposal.contractId, // contractId
+  proposal.proposalId, // proposalId
+  {
+    transactionData: {
+      // this is the default hardhat address
+      from: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266', // change this to impersonate the `from` address
+      type: 'function-call', // or 'send-funds'
+      data,
+      to: proposal.contract.address,
+      value: proposal.metadata.sendValue,
+    },
+    // default to latest finalized block,
+    // can be up to 100 blocks ahead of current block,
+    // does not support previous blocks
+    blockNumber: undefined,
+  },
+);
+```
+
+=== Retrieve a simulation
+
+You can also retrieve existing simulations for a proposal
+
+```js
+const proposal = await client.getProposal(contractId, proposalId);
+
+const simulation = await client.getProposalSimulation(
+  proposal.contractId, // contractId
+  proposal.proposalId, // proposalId
+);
+```
+
 [[contracts-endpoint]]
 == Contracts Endpoint
 
