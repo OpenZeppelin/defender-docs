@@ -50,19 +50,35 @@ You can choose to reuse the same address of one of your existing relayers for a 
 [[policies]]
 === Policies
 
-You can limit a Relayer's behavior by specifying policies. Currently, these are the different opt-in policies:
+You can limit a Relayer's behavior by specifying policies. 
 
-1. *Gas price cap*: specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the `gasPrice` or `maxFeePerGas` of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
-2. *Receiver whitelist*: specify a list of authorized recipients for every transaction sent by the Relayer. Defender will reject and discard any transaction whose recipient address is not in the list.
-3. *EIP1559 Pricing*: specify if the transactions the Relayer is sending should be EIP1559 by default or not. This applies whenever the Relayer send a transaction with the <<relay-api-reference.adoc#send-transaction,`speed`>> parameter, or a non specified `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas`. Note that this is only shown for EIP1559 compatible networks.
+To configure your Relayer's policies, go to your Relayer settings page, click the cog icon button, _Manage policies_. You will then see a form where you can opt to enable policies and tweak their parameters.
 
-To configure your Relayer's policies, go to your Relayer settings page, click the cog icon button, _Manage policies_. You will then see a form where you can opt to enable either of these two policies and tweak their parameters.
+Currently, these are the different opt-in policies:
+
+[[gas-price-cap-policy]]
+==== Gas price cap 
+Specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the `gasPrice` or `maxFeePerGas` of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
 
 NOTE: In addition to the maximum gas price policy you can specify here, Defender implements a minimum gas price policy of 30 Gwei to transactions sent to the Polygon network. https://forum.matic.network/t/recommended-min-gas-price-setting/2531[You can read more about Polygon's decision to establish a minimum gas price here].
 
-NOTE: EIP1559 Pricing policy is enabled by default for new relayers. If you have a Relayer that was created without the default opt-in, you can always enable this flag.
+[[receive-whitelist-policy]]
+==== Receiver whitelist
+Specify a list of authorized recipients for every transaction sent by the Relayer. Defender will reject and discard any transaction whose recipient address is not in the list.
 
 NOTE: The receiver whitelist applies only to the `to` field of a transaction. It doesn't filter ERC20 or other assets receivers.
+
+[[eip1559-policy]]
+==== EIP1559 Pricing
+Specify if the transactions the Relayer is sending should be EIP1559 by default or not. This applies whenever the Relayer send a transaction with the <<relay-api-reference.adoc#send-transaction,`speed`>> parameter, or a non specified `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas`. Note that this is only shown for EIP1559 compatible networks.
+
+NOTE: EIP1559 Pricing policy is enabled by default for new relayers. If you have a Relayer that was created without the default opt-in, you can always enable this flag.
+
+[[private-transactions-policy]]
+==== Private transactions
+Specify if the transactions should be sent via private mempoool. This means that a transaction will not be publicly seen until its included in a block.
+
+NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations] might apply while sending private transactions through Defender (such as https://docs.flashbots.net/flashbots-protect/rpc/uncle-bandits[uncle bandit risk])
 
 [[sending-transactions]]
 == Sending transactions
@@ -134,9 +150,9 @@ Since not all of the networks Defender support are EIP1559 compatible, the EIP15
 
 A relayer can send EIP1559 transactions in the following ways:
 
-- Sending a transaction via UI with the EIP1559Pricing policy **enabled**
+- Sending a transaction via UI with the <<#eip1559-policy,`EIP1559Pricing` policy **enabled**>>
 - Sending a transaction via API with both `maxFeePerGas` and `maxPriorityFeePerGas` specified
-- Sending a transaction via API with `speed` and with the EIP1559Pricing policy **enabled**
+- Sending a transaction via API with `speed` and with the `EIP1559Pricing` policy **enabled**
 
 Once any transaction is sent, **it will have the same type** on every stage of its lifecycle (such as replacement and repricing), so it's currently not possible to change the type if it's already been submitted.
 
@@ -145,6 +161,28 @@ NOTE: Any attempt to send `maxFeePerGas` or `maxPriorityFeePerGas` to non-EIP155
 You can tell if a network supports EIP1559 by looking at the Relayer <<policies, policies>>. If the EIP1559Pricing policy doesn't show up, it means that we haven't added EIP1559 support for that network.
 
 NOTE: If you notice an EIP1559 compatible network that we already support but hasn't support enabled, please don't hesitate in request it on our https://forum.openzeppelin.com/c/support/defender/36[Community Forum], or at mailto:defender@openzeppelin.com[defender@openzeppelin.com]
+
+[[private-transactions]]
+=== Private transactions
+
+Private transaction support allows a Relayer to send transactions without being visible on the public mempool, and instead, the transaction is relayed via a private mempool using a special `eth_sendRawTransaction` provider, which will vary depending on the network and current support (such as Flashbots network coverage).
+
+A relayer may send a private transaction in any of the following ways:
+
+- Sending a transaction via API with the <<#private-transactions-policy, `privateTransactions` policy **enabled**>>
+- Sending a transaction via API with `isPrivate` parameter set to `true`
+- Sending a transaction via UI and checking the Mempool Visibility checkbox
+
+image::defender-relayer-mempool-visibility-check.png[Mempool visibility checkbox on Relay's send transaction view]
+
+NOTE: Sending a transaction with the `isPrivate` flag set to `true` to a network that doesn't support private transactions will be rejected and discarded by the relayer.
+
+Currently, only the following networks are supported
+
+- *Mainnet*: Via https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]
+- *Goerli*: Via https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]
+
+WARNING: Key considerations for the `eth_sendRawTransaction` provider should be considered while using private transactions, such as https://docs.flashbots.net/flashbots-protect/rpc/uncle-bandits[uncle bandit risk].
 
 [[speed]]
 === Speed

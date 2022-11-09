@@ -268,7 +268,7 @@ $ echo API_SECRET=$API_SECRET >> .env
 $ defender-autotask update-code $AUTOTASK_ID ./path/to/code
 ```
 
-NOTE: The code bundle must not exceed 5MB in size, and you must always include an `index.js` at the root of the zip file to act as the entrypoint.
+NOTE: The code bundle must not exceed 5MB in size after being compressed and base64-encoded, and you must always include an `index.js` at the root of the zip file to act as the entrypoint.
 
 [[a-complete-example]]
 == A complete example

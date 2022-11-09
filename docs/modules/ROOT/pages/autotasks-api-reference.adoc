@@ -190,7 +190,7 @@ Or through `defender-autotask-client` as such:
 await client.updateCodeFromFolder("671d1f80-99e3-4829-aa15-f01e3298e428", './code');
 ```
 
-NOTE: You can include multiple files in the bundle, as long as the bundle does not exceed 5mb in size, and you include an `index.js` at the root of the zip file to act as entrypoint.
+NOTE: You can include multiple files in the bundle, as long as the bundle does not exceed 5mb in size (after being compressed and base64-encoded), and you include an `index.js` at the root of the zip file to act as entrypoint.
 
 [[runs-endpoints]]
 == Autotask Runs Endpoints
