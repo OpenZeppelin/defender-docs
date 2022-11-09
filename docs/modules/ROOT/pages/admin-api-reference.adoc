@@ -200,7 +200,6 @@ const simulation = await client.simulateProposal(
     transactionData: {
       // this is the default hardhat address
       from: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266', // change this to impersonate the `from` address
-      type: 'function-call', // or 'send-funds'
       data,
       to: proposal.contract.address,
       value: proposal.metadata.sendValue,
