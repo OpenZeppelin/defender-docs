@@ -237,6 +237,20 @@ From then on, your community can use any Governor compatible voting DApp (such a
 
 image::defender-admin-governor-track.png[Defender tracks the state of your proposal by querying the Governor]
 
+
+[[Relayer]]
+== Relayer
+
+You can also execute proposal transactions using one of your Relayers, this allows you to execute actions on your contract without needing to connect a wallet or sign a transaction. One example of how this could be used is giving your Relayer a privileged role in your contract, such as pauser, then anyone with access to the Relayer in Defender can pause the contract, without requiring any access to a private key in metamask.
+
+To do this simply set the execution strategy to `Relayer` and select a valid `Relayer`. Defender will perform basic checks to check the Relayer is capable of executing the proposal before letting you proceed.
+
+image::defender-relayer-create-proposal.png[Create a proposal with a Relayer]
+
+Once you have created the proposal you will then be able to execute it using your Relayer, without needing to connect any wallet. 
+
+image::defender-relayer-execute-proposal.png[Execute a proposal with a Relayer]
+
 [[Fireblocks]]
 == Fireblocks
 
