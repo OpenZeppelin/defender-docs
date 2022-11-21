@@ -188,7 +188,7 @@ Proposals can be simulated via the API. The results of a simulation (`Simulation
 const proposal = await client.getProposal(contractId, proposalId);
 
 // import the ABI and create an ethers interface
-const contractInterface = new utils.Interface(contractABI);
+const contractInterface = new ethers.utils.Interface(contractABI);
 
 // encode function data
 const data = contractInterface.encodeFunctionData(proposal.functionInterface.name, proposal.functionInputs);
