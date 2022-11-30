@@ -212,7 +212,7 @@ const simulation = await client.simulateProposal(
 );
 ```
 
-You can also optionally set the `simulate` flag as part of the `createProposal` request to simulate the proposal within the same request. You can override simulation parameters by setting the `overrideSimulationOpts` property, which is a `SimulationRequest` object.
+You can also optionally set the `simulate` flag as part of the `createProposal` request (as long as this is not a batch proposal) to simulate the proposal within the same request. You can override simulation parameters by setting the `overrideSimulationOpts` property, which is a `SimulationRequest` object.
 
 ```js
 const proposalWithSimulation = await client.createProposal({
@@ -248,6 +248,8 @@ const proposalWithSimulation = await client.createProposal({
   },
 });
 ```
+
+NOTE: Enabling the `simulate` flag as part of the `createProposal` request is not currently supported for batch proposals.
 
 NOTE: A simulation may fail due to a number of reasons, such as network congestion, unstable providers or hitting a quota limitation. We would advise you to track the response code to assure a successful response was returned. If a transaction was reverted with a reason string, this can be obtained from the response object under `response.meta.returnString`. A transaction revert can be tracked from `response.meta.reverted`.
 
