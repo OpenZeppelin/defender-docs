@@ -481,7 +481,7 @@ When triggered, a Sentinel can notify one or more slack webhooks, telegram bots,
 
 === Slack Configuration
 
-Please see https://api.slack.com/messaging/webhooks to configure a Slack webhook.  Once Slack is configured, enter the webhook URL in Defender.
+Please see https://api.slack.com/messaging/webhooks[Slack webhook documentation] to configure a Slack webhook.  Once Slack is configured, enter the webhook URL in Defender.
 
 * *Alias* is the name for this slack configuration. For instance, you might name it after the name of the channel.
 
@@ -495,7 +495,7 @@ Please see https://api.slack.com/messaging/webhooks to configure a Slack webhook
 
 === Discord Configuration
 
-Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks to configure a webhook for your Discord channel.
+Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks[Discord webhook documentation] to configure a webhook for your Discord channel.
 
 * *Alias* is the name for this discord configuration.
 
@@ -503,7 +503,7 @@ Please see https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webh
 
 === Datadog Configuration
 
-Datadog configurations let Defender forward custom metrics to your Datadog account.  For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/
+Datadog configurations let Defender forward custom metrics to your Datadog account.  For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/[Datadog metrics documentation]
 
 The metric we send is a COUNT metric, which represents the number of transactions that triggered the sentinel. We do not send zeros, so a lack of data should be expected if the sentinel does not trigger. With each metric, we send two tags:  `network` (rinkeby, mainnet,...) & `sentinel` (name of sentinel)
 
@@ -517,7 +517,7 @@ NOTE: It can take several minutes for a new custom metric to show up in the Data
 
 === Telegram Configuration
 
-Please see https://core.telegram.org/bots#6-botfather to configure a Telegram Bot using the BotFather
+Please see https://core.telegram.org/bots#6-botfather[Telegram bot documentation] to configure a Telegram Bot using the BotFather
 
 NOTE: The Telegram Bot must be added to your channel and have the rights to post messages.
 
@@ -578,7 +578,7 @@ The event schema is exactly the same as the one laid out in <<Event Schema>>. Yo
 
 === Opsgenie Configuration
 
-Please see https://support.atlassian.com/opsgenie/docs/create-a-default-api-integration/ to configure an Opsgenie API integration that can create alerts.
+Please see https://support.atlassian.com/opsgenie/docs/create-a-default-api-integration/[Opsgenie integration documentation] to configure an Opsgenie API integration that can create alerts.
 
 * *API Key* Integration API key that can be found in the integration settings
 
@@ -588,19 +588,19 @@ Please see https://support.atlassian.com/opsgenie/docs/create-a-default-api-inte
 
 * *Visible To* Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note: that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values (50 teams or users in total)
 
-* *Alias* Client-defined identifier of the alert, that is also the key element of https://support.atlassian.com/opsgenie/docs/what-is-alert-de-duplication/[Alert De-Duplication] (512 characters)
+* *Alias* Client-defined identifier of the alert, that is also the key element of https://support.atlassian.com/opsgenie/docs/what-is-alert-de-duplication/[Alert De-Duplication] (512 max characters)
 
 * *Priority* Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3
 
-* *Entity* Entity field of the alert that is generally used to specify which domain alert is related to (512 characters)
+* *Entity* Entity field of the alert that is generally used to specify which domain alert is related to (512 max characters)
 
-* *Actions*	Custom actions that will be available for the alert (10 x 50 characters)
+* *Actions*	Custom actions that will be available for the alert (10 x 50 max characters)
 
-* *Note* Additional note that will be added while creating the alert (25000 characters)
+* *Note* Additional note that will be added while creating the alert (25000 max characters)
 
-* *Details* Map of key-value pairs to use as custom properties of the alert (8000 characters in total)
+* *Details* Map of key-value pairs to use as custom properties of the alert (8000 max characters)
 
-* *Tags* Tags of the alert (20 x 50 characters)
+* *Tags* Tags of the alert (20 x 50 max characters)
 
 
 
