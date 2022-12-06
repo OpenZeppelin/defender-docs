@@ -24,6 +24,18 @@ Alternatively, you can install it directly into an existing project with:
 
 ## Setup
 
+There are a few ways you can set up the `serverless.yml` configuration:
+
+- Create it from scratch;
+- Use Defender's Serverless export capability;
+- Leverage the example https://github.com/OpenZeppelin/defender-serverless/blob/main/template/serverless.yml[template, window=_blank] provided in the `defender-serverless` repository.
+
+If you already have resources such as contracts, notifications, relayers, autotasks, etc. in Defender, you can export a `serverless.yml` configuration file containing these resources from the settings page in Defender.
+
+image::defender-settings-export-sls-config.png[Defender Export Serverless]
+
+NOTE: If you have previously deployed with `defender-serverless` to the same account and subsequently created new resources through the Defender user interface, the export function will automatically assign a `stackResourceId` to the new resources based on the name of your latest deployment stack. If you have not deployed using `defender-serverless` before, a default stack name of `my-stack` will be used.
+
 This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an autotask, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
