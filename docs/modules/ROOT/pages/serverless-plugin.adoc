@@ -28,7 +28,7 @@ There are a few ways you can set up the `serverless.yml` configuration:
 
 - Create it from scratch;
 - Use Defender's Serverless export capability;
-- Leverage the example template provided in the `defender-serverless` repository.
+- Leverage the example https://github.com/OpenZeppelin/defender-serverless/blob/main/template/serverless.yml[template, window=_blank] provided in the `defender-serverless` repository.
 
 If you already have resources such as contracts, notifications, relayers, autotasks, etc. in Defender, you can export a `serverless.yml` configuration file containing these resources from the settings page in Defender.
 
