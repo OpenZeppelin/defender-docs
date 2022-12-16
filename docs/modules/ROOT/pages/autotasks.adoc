@@ -261,7 +261,7 @@ exports.handler = async function(credentials, context) {
 }
 ----
 
-List of available notification channels that could be used can easily be found on Autotask Create/Update Code screens under Code editor by pressing on link `Which Notification channels can be used?`
+A list of available notification channels that could be used can easily be found on Autotask Create/Update Code screens under Code editor by pressing on link `Which Notification channels can be used?`
 
 image::defender-autotasks-notification-channels.png[Defender Autotask Available Notification channels]
 
