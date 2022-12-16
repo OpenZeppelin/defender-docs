@@ -182,6 +182,96 @@ Keep in mind that the data store is shared across all autotasks. To isolate the 
 
 WARNING: Each item expires 90 days after its last update. If you need a long-lived data store, consider setting up an external database and use Autotask secrets to store the credentials for connecting to it.
 
+[[notifications]]
+=== Notifications
+
+The Autotask Notifications feature allows you to send notifications through various channels that you have already defined in the Notifications channels settings. 
+
+This integration allows you to quickly inform other connected systems about changes detected or made by Autotasks.
+
+To send a notification, use the `notificationClient.send()` method, as shown in the following example:
+[source,js]
+----
+exports.handler = async function(credentials, context) {
+  const { notificationClient } = context;
+
+  try {
+    notificationClient.send({
+      channelAlias: 'example-email-notification-channel-alias',
+      subject: 'Autotask notification example',
+      message: 'This is an example of a email notification sent from an autotask',
+    });
+  } catch (error) {
+    console.error('Failed to send notification', error);
+  }
+}
+----
+
+For email notifications, basic HTML tags are supported. Here's an example of how to generate an HTML message:
+[source,js]
+----
+
+function generateHtmlMessage(autotaskName, txHash) {
+  return `
+<h1>Transaction sent from Autotask ${autotaskName}</h1>
+<p>Transaction with hash <i>${txHash}</i> was sent.</p>
+`;
+}
+
+exports.handler = async function(event, context) {
+  const { notificationClient } = context;
+
+  const relayer = new Relayer(credentials);
+
+  const txRes = await relayer.sendTransaction({
+    to: '0xc7464dbcA260A8faF033460622B23467Df5AEA42',
+    value: 100,
+    speed: 'fast',
+    gasLimit: '21000',
+  });
+
+  try {
+    notificationClient.send({
+      channelAlias: 'example-email-notification-channel-alias',
+      subject: `Transaction sent from Autotask ${event.autotaskName}`,
+      message: generateHtmlMessage(event.autotaskName, txRes.hash),
+    });
+  } catch (error) {
+    console.error('Failed to send notification', error);
+  }
+}
+----
+
+To send a metric notification, use the `notificationClient.sendMetric()` method, as shown in the following example:
+
+[source,js]
+----
+exports.handler = async function(credentials, context) {
+  const { notificationClient } = context;
+
+  try {
+    notificationClient.sendMetric({
+      channelAlias: 'example-email-notification-channel-alias',
+      name: 'datadog-test-metric',
+      value: 1,
+    });
+  } catch (error) {
+    console.error('Failed to send notification', error);
+  }
+}
+----
+
+List of available notification channels that could be used can easily be found on Autotask Create/Update Code screens under Code editor by pressing on link `Which Notification channels can be used?`
+
+image::defender-autotasks-notification-channels.png[Defender Autotask Available Notification channels]
+
+NOTE: If an invalid or paused notification channelAlias is passed, an error will be thrown.
+
+NOTE: If a notification cannot be sent for any other reason, no error will be thrown, but a status message will be added to the Autotask logs. For example, if you send a notification to a webhook channel that has an inactive URL, a log entry will be added but no error will be thrown.
+
+NOTE: If multiple notification channels are using the same alias, the notification will be sent to all of them.
+
+
 [[environment]]
 == Environment
 
@@ -322,4 +412,4 @@ Autotasks are restricted via Identity and Access Management to have zero access 
 [[coming-up]]
 == Coming up...
 
-We are working to better connect Autotasks with other parts of the system, such as the Notification channels used from Sentinels so you can send email or messages easily, or the xref:admin.adoc#address-book[Address Book] used in Admin so you can rely on it as a registry. Let us know if you have anything in mind!
+We are working to better connect Autotasks with other parts of the system, such as xref:admin.adoc#address-book[Address Book] used in Admin so you can rely on it as a registry. Let us know if you have anything in mind!
