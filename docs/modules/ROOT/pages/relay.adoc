@@ -29,7 +29,7 @@ NOTE: Defender Relayers are implemented as Externally Owned Accounts. We are wor
 [[api-keys]]
 === API Keys
 
-Each Relayer has one or more *API keys* associated with it. In order to send a transaction through a Relayer, you will need to authenticate the request with one an API key/secret pair. You can create or delete API keys as you see fit, and this will not change the sending address or Relayer balance.
+Each Relayer can have one or more *API keys* associated with it. In order to send a transaction through a Relayer, you will need to authenticate the request with one an API key/secret pair. You can create or delete API keys as you see fit, and this will not change the sending address or Relayer balance.
 
 IMPORTANT: The API key of a relayer is **not** related to its private key. The private key is always kept within a secure key vault and never exposed (see the <<security-considerations,Security considerations>> section for more info). This decoupling allows you to freely rotate API keys while keeping the same Ethereum address for your relayer.
 
