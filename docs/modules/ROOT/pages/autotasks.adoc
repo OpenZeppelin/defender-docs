@@ -182,6 +182,11 @@ Keep in mind that the data store is shared across all autotasks. To isolate the 
 
 WARNING: Each item expires 90 days after its last update. If you need a long-lived data store, consider setting up an external database and use Autotask secrets to store the credentials for connecting to it.
 
+[[error-handling]]
+=== Error handling
+
+Autotask invocations that result in an error contain an `errorType` field in the Autotask run response that will be set to an [AutotaskErrorType as defined in defender-client](https://github.com/OpenZeppelin/defender-client/blob/master/packages/autotask-client/src/models/autotask-run.res.ts#L6). A user readable error will also appear in the Autotask Runs table.
+
 [[environment]]
 == Environment
 
