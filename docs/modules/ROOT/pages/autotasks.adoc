@@ -273,6 +273,10 @@ NOTE: If a notification cannot be sent for any other reason, no error will be th
 
 NOTE: If multiple notification channels are using the same alias, the notification will be sent to all of them.
 
+[[error-handling]]
+=== Error handling
+
+Autotask invocations that result in an error contain an `errorType` field in the Autotask run response that will be set to an [AutotaskErrorType as defined in defender-client](https://github.com/OpenZeppelin/defender-client/blob/master/packages/autotask-client/src/models/autotask-run.res.ts#L6). A user readable error will also appear in the Autotask Runs table.
 
 [[environment]]
 == Environment
