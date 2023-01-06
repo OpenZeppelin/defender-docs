@@ -163,6 +163,70 @@ const notificationToDelete = {type: 'email', notificationId: '14e99e8f-e2be-4eb1
 const deleted = await client.deleteNotificationChannel(notificationToDelete);
 ```
 
+[[notification-categories-endpoint]]
+== Notification Categories Endpoint
+
+There are 3 default notification categories.
+
+- High Severity
+- Medium Severity
+- Low Severity
+
+Each notification category can be associated with up to two notification channels. For instance, the High Severity category can be linked to a Slack channel and a webhook.
+
+A notification category can then be linked to a sentinel. If a sentinel does not have any notification channels assigned and is linked to a category, the notification channels linked to that category will be notified when the sentinel is triggered.
+
+NOTE: If a sentinel has both manually linked notification channels and channels associated with its category, the manually linked channels will take precedence and the category-associated channels will not be used. The sentinel will only notify the manually linked channels.
+
+[[list-notification-categories-endpoint]]
+=== List Notification Categories
+
+You can also list existing notification categories:
+
+```js
+const notificationCategories = await client.listNotificationCategories();
+const { categoryId, notificationIds } = notificationCategories[0];
+```
+
+This request returns a `NotificationCategoryResponse[]` object.
+
+[[get-notification-category-endpoint]]
+=== Get a Notification Category
+
+You can also retrieve a single notification category.
+
+```js
+await client.getNotificationCategory('66a753ae-90ed-4373-a360-1c3f79610d15');
+```
+
+This request returns a `NotificationCategoryResponse` object.
+
+[[update-notification-category-endpoint]]
+=== Update a Notification Category
+
+You can also update a single notification category. The only fields that can be updated are:
+
+- description
+- notificationIds
+
+Changing the `name` field is currently not supported. Any changes to the `name` field will be ignored.
+
+```js
+const myNotification = await client.getNotificationChannel({
+  type: 'email',
+  notificationId: 'e595ce88-f525-4d5d-b4b9-8e859310b6fb',
+});
+await client.updateNotificationCategory({
+  categoryId: '66a753ae-90ed-4373-a360-1c3f79610d15',
+  name: 'High Severity',
+  description: 'Attach this category to high-risk monitors',
+  notificationIds: [myNotification],
+});
+```
+
+This request returns a `NotificationCategoryResponse` object.
+
+
 [[sentinel-endpoint]]
 == Sentinels Endpoint
 
