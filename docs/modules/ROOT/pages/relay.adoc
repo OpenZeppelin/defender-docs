@@ -401,7 +401,7 @@ NOTE: You can explore the key parts of the code for the application https://gist
 
 The pattern described above is just one variant among several meta-transaction flavors available. Given that Defender Relayers are general-purpose, you can also use them for any other type of meta-transactions, such as relaying gasless ERC20 transfers using https://eips.ethereum.org/EIPS/eip-2612[EIP2612] or https://eips.ethereum.org/EIPS/eip-3009[EIP3009].
 
-In particular, you can leverage Defender xDai Relayers for sending transactions on behalf of your users in xDai, given the low cost of transactions in that sidechain. This way, you can offer a full gasless experience in your dapp. The same applies to other sidechains supported in Defender, such as BSC, Fuse, Fantom, Polygon, Avalanche, Celo, Moonbeam, Aurora, Harmony and Arbitrum.
+In particular, you can leverage Defender xDai Relayers for sending transactions on behalf of your users in xDai, given the low cost of transactions in that sidechain. This way, you can offer a full gasless experience in your dapp. The same applies to other sidechains supported in Defender, such as BSC, Fuse, Fantom, Polygon, Avalanche, Celo, Moonbeam, Moonriver, Aurora, Harmony and Arbitrum.
 
 [[through-the-ui]]
 == Manual operation
