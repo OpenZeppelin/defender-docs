@@ -42,7 +42,7 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 All Defender components, where applicable, provide support for the following chains and networks:
 
 - *Ethereum Mainnet* and its testnets *Rinkeby*, *Ropsten*, *Kovan*, and *Goerli*.
-- https://docs.matic.network/docs/develop/network-details/network[*Polygon* (Matic)] and *Mumbai*.
+- https://www.polygon.technology/[*Polygon* (Matic)] and *Mumbai*.
 - https://arbitrum.io/[*Arbitrum*], https://nova.arbitrum.io/[*Arbitrum Nova*], *Arbitrum Rinkeby*, and *Arbitrum Goerli*.
 - https://optimism.io/[*Optimism*], *Optimism Kovan*, and *Optimism Goerli*.
 - https://moonbeam.network/[*Moonbeam*] and *Moonriver*.
