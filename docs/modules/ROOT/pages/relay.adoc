@@ -60,7 +60,7 @@ Currently, these are the different opt-in policies:
 ==== Gas price cap 
 Specify a maximum gas price for every transaction sent by the Relayer. When this policy is enabled, Defender will overwrite the `gasPrice` or `maxFeePerGas` of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
 
-NOTE: In addition to the maximum gas price policy you can specify here, Defender implements a minimum gas price policy of 30 Gwei to transactions sent to the Polygon network. https://forum.matic.network/t/recommended-min-gas-price-setting/2531[You can read more about Polygon's decision to establish a minimum gas price here].
+NOTE: In addition to the maximum gas price policy you can specify here, Defender implements a minimum gas price policy of 30 Gwei to transactions sent to the Polygon network. https://forum.polygon.technology/t/recommended-min-gas-price-setting/7604[You can read more about Polygon's decision to establish a minimum gas price here].
 
 [[receive-whitelist-policy]]
 ==== Receiver whitelist
