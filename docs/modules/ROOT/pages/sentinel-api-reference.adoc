@@ -443,6 +443,12 @@ curl \
     "https://defender-api.openzeppelin.com/sentinel/subscribers"
 ```
 
+Supported networks include:
+
+```TypeScript
+include::partial$network.adoc[]
+```
+
 [[retrieve-endpoint]]
 === Retrieve a Sentinel
 You can retrieve a sentinel by ID. This will return a `CreateSentinelResponse` object.
