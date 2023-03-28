@@ -45,7 +45,7 @@ All Defender components, where applicable, provide support for the following cha
 - https://www.polygon.technology/[*Polygon* (Matic)] and *Mumbai*.
 - https://arbitrum.io/[*Arbitrum*], https://nova.arbitrum.io/[*Arbitrum Nova*], *Arbitrum Rinkeby*, and *Arbitrum Goerli*.
 - https://optimism.io/[*Optimism*], *Optimism Kovan*, and *Optimism Goerli*.
-- https://moonbeam.network/[*Moonbeam*] and *Moonriver*.
+- https://moonbeam.network/[*Moonbeam*], *Moonriver*, and *Moonbase Alpha (Testnet)*.
 - https://www.xdaichain.com/[*xDai*] and *Sokol*.
 - https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*] and *BSC testnet*.
 - https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*] and *FUJI C-Chain*.
