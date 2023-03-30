@@ -1,6 +1,6 @@
 * xref:index.adoc[Overview]
 
-* Components
+* Products
 ** xref:admin.adoc[Admin]
 ** xref:advisor.adoc[Advisor]
 ** xref:autotasks.adoc[Autotasks]
