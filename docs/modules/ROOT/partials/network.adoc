@@ -30,4 +30,6 @@ type Network =
   | 'harmony-s0'
   | 'harmony-test-s0'
   | 'aurora'
-  | 'auroratest';
+  | 'auroratest'
+  | 'zksync'
+  | 'zksync-goerli';

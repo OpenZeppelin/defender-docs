@@ -97,6 +97,8 @@ const tx = await relayer.sendTransaction({
 
 NOTE: You don't need to enter a private key when initializing a Relayer client, since the private key is kept secure in the Defender vault.
 
+IMPORTANT: Currently, _zkSync_ doesn't have a way to precisely calculate `gasLimit` other than using the `eth_estimateGas` endpoint. Therefore, Defender can't do any gasLimit and overrides the user input with the RPC estimation. 
+
 [[using-ethers.js]]
 === Using ethers.js
 
