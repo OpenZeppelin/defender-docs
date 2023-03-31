@@ -738,7 +738,7 @@ NOTE: Forta have changed the terminology for 'Agent' to 'Detection Bot'. We will
 [[customizing-notification-messages]]
 == Customizing Notification Messages
 
-You can optionally modify the message body content and formatting using the checkbox below the notification channel selector.
+You can optionally modify the message subject (plain text only) and body content and formatting using the checkbox below the notification channel selector.
 
 === Example
 
@@ -819,7 +819,7 @@ _Condition:_ gasPrice > 10
 
 === Message Syntax
 
-Custom notifications support a limited set of markdown syntax:
+Custom message subjects (email and Opsgenie) support plain text only while custom message body content support a limited set of markdown syntax:
 
 * Bold (\\**this text is bold**)
 * Italic (\*this text* and \_this text_ are italic)
