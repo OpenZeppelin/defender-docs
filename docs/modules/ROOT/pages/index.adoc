@@ -42,7 +42,6 @@ xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement
 All Defender components, where applicable, provide support for the following chains and networks:
 
 - *Ethereum Mainnet* and *Goerli* testnet.
-- https://zksync.io/[*zkSync Era Mainnet*] and *zkSync Era Testnet*.
 - https://www.polygon.technology/[*Polygon* (Matic)] and *Mumbai*.
 - https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*], and *Arbitrum Goerli*.
 - https://optimism.io/[*Optimism*] and *Optimism Goerli*.
@@ -57,6 +56,7 @@ All Defender components, where applicable, provide support for the following cha
 - http://aurora.dev/[*Aurora*] and *Aurora Testnet*.
 - https://hedera.com/[*Hedera*] and *Hedera Testnet*.
 - https://zksync.io/[*zkSync Era*] and *zkSync Era Testnet*
+- https://base.org/[*Base Goerli*]
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
