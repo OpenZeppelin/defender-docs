@@ -32,10 +32,6 @@ xref:sentinel.adoc[[.card-title]#Sentinel# [.card-body]#pass:q[Monitor smart con
 xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated scripts to call your smart contracts.]#]
 --
 
-[.card.card-learn]
---
-xref:advisor.adoc[[.card-title]#Advisor# [.card-body]#pass:q[Learn and implement security best practices.]#]
---
 
 [[networks]]
 == Available networks

@@ -2,7 +2,6 @@
 
 * Components
 ** xref:admin.adoc[Admin]
-** xref:advisor.adoc[Advisor]
 ** xref:autotasks.adoc[Autotasks]
 ** xref:relay.adoc[Relay]
 ** xref:sentinel.adoc[Sentinel]
