@@ -29,5 +29,4 @@ type Network =
   | 'aurora'
   | 'auroratest'
   | 'zksync'
-  | 'zksync-goerli'
-  | 'base-goerli';
+  | 'zksync-goerli';
