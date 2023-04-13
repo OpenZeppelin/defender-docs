@@ -1,8 +1,5 @@
 type Network =
   | 'mainnet'
-  | 'rinkeby'
-  | 'ropsten'
-  | 'kovan'
   | 'goerli'
   | 'xdai'
   | 'sokol'
