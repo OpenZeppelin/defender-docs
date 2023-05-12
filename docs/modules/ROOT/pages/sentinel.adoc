@@ -67,9 +67,7 @@ NOTE: An ABI is required to configure Events and Function detection
 
 NOTE: If no Events or Functions are specified, then the Sentinel will monitor ALL transactions to or from your monitored addresses.
 
-NOTE: Sentinels seamlessly supports notifications for events emitted by a smart contract on all networks, regardless of whether they are triggered directly or through internal calls from a third contract. However, the capability to track and provide notifications specifically for internal function calls within a contract is currently limited to the Ethereum mainnet.
-
-IMPORTANT: At this time, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan.  If the internal call emits an event, consider monitoring for that event instead.  Events emitted from internal calls are detected on all networks.
+IMPORTANT: Sentinels seamlessly supports notifications for events emitted by a smart contract on all networks, regardless of whether they are triggered directly or through internal calls from a third contract. However, the capability to track and provide notifications specifically for internal function calls within a contract is currently limited to the Ethereum mainnet.
 
 [[hedera-support]]
 === Hedera Support
