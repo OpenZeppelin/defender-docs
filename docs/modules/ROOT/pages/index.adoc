@@ -37,7 +37,7 @@ xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated
 == Available networks
 All Defender components, where applicable, provide support for the following chains and networks:
 
-- *Ethereum Mainnet* and *Goerli* testnet.
+- *Ethereum Mainnet*, *Goerli* testnet and *Sepolia* testnet.
 - https://zksync.io/[*zkSync Era Mainnet*] and *zkSync Era Testnet*.
 - https://www.polygon.technology/[*Polygon* (Matic)] and *Mumbai*.
 - https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*], and *Arbitrum Goerli*.
