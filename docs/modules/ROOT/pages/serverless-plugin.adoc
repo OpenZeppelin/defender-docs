@@ -140,7 +140,7 @@ Moreover, the `serverless.yml` may contain an `ssot` property. More information 
 
 This command will append a log entry in the `.defender` folder of the current working directory. Additionally, if any new relayer keys are created, these will be stored as JSON objects in the `.defender/relayer-keys` folder.
 
-WARNING: When installed from the template, we ensure the `.defender` folder is ignored from any git commits. However, when installing directly, make sure to add this folder it your `.gitignore` file.
+WARNING: When installed from the template, we ensure the `.defender` folder is ignored from any git commits. However, when installing directly, make sure to add this folder in your `.gitignore` file.
 
 === Info
 
@@ -154,7 +154,7 @@ NOTE: To avoid potential loss of funds, Relayers can only be deleted from the De
 
 === Logs
 
-You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask identifier (e.g. mystack.autotask-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
+You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask identifier (e.g. mystack.autotask-example-1). This command will run continuously and retrieve logs every 2 seconds. The `--data` flag is optional.
 
 === Invoke
 
