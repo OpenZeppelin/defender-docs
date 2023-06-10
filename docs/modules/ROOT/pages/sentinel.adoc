@@ -26,7 +26,7 @@ Forta Sentinels are useful for monitoring one or more of your smart contracts us
 [[whats-in-a-contract-sentinel]]
 == What's in a Contract Sentinel?
 
-A Contract Sentinel watches for transactions related your chosen addresses, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
+A Contract Sentinel watches for transactions related to your chosen addresses, filters those transactions by any conditions that you specify, then notifies you when those transactions occur.
 
 IMPORTANT: At this time, Sentinels are supported across all networks except Fantom. Furthermore, Sentinels can only monitor internal function calls on Mainnet, Ropsten, and Kovan. If the internal call emits an event, consider monitoring for that event instead, as events emitted from internal calls are detected on all supported networks.
 
@@ -95,7 +95,7 @@ Forta offers the ability to run scanner nodes locally, this can be useful for ru
 
 NOTE: Forta Local Mode Sentinels do not have the option to specify Bot IDs as scanner nodes running in local mode don't support Bot IDs
 
-A Forta Sentinel filters on Bot IDs or Addresses and requires that at least one of these filters are set. It is possible to sepcify multiple Bot IDs and Addresses to filter on.
+A Forta Sentinel filters on Bot IDs or Addresses and requires that at least one of these filters is set. It is possible to specify multiple Bot IDs and Addresses to filter on.
 
 * *Bot IDs*: Specify the Bot IDs to filter on. These can be comma separated to specify multiple.
 
@@ -119,14 +119,14 @@ For a Forta Alert to trigger a notification, it must satisfy *ALL* of the follow
 [[severity-alert-ids]]
 === Severity and Alert IDs
 
-You can specify Alert Severity and Alert IDs to monitor. Specifying both Severity and Alert IDs acts as an OR clause, in that if a alert matches ANY of the selected Alert IDs or matches the selected Severity, it will trigger notification.
+You can specify Alert Severity and Alert IDs to monitor. Specifying both Severity and Alert IDs acts as an OR clause, in that if an alert matches ANY of the selected Alert IDs or matches the selected Severity, it will trigger notification.
     
-NOTE: If no Severity or Alert IDs are specified, then the Sentinel will monitor ALL alerts matching your specified Bot IDs and/or Adresses.
+NOTE: If no Severity or Alert IDs are specified, then the Sentinel will monitor ALL alerts matching your specified Bot IDs and/or Addresses.
 
 [[specify-conditions]]
 == What are Contract Conditions?
 
-Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.  To accomodate comparisons for checksum and non-checksum addresses, comparisons are case-insensitive.
+Conditions act as filters that allow you to narrow the transactions even further.  These are entered as expressions and offer a great deal of flexibility.  Conditions are very much like Javascript expressions.  To accommodate comparisons for checksum and non-checksum addresses, comparisons are case-insensitive.
 
 NOTE: If you want to receive ALL transactions that involve your selected events/functions, then do not specify any conditions.
 
@@ -600,7 +600,7 @@ Please see https://support.atlassian.com/opsgenie/docs/create-a-default-api-inte
 
 * *Instance Location* Location where the Opsgenie instance server is located
 
-* *Responders* Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided.You can refer below for example values (50 teams, users, escalations or schedules)
+* *Responders* Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided. You can refer below for example values (50 teams, users, escalations or schedules)
 
 * *Visible To* Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note: that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values (50 teams or users in total)
 
@@ -622,7 +622,7 @@ Please see https://support.atlassian.com/opsgenie/docs/create-a-default-api-inte
 
 === Autotask
 
-If an autotask is selected, then the autotask will receive a body property containing the details for the triggering event, either the transaction details for the triggering transaction or Forta Alert details from the triggerting alert. The autotask can then perform custom logic and reach out to external APIs as needed.
+If an autotask is selected, then the autotask will receive a body property containing the details for the triggering event, either the transaction details for the triggering transaction or Forta Alert details from the triggering alert. The autotask can then perform custom logic and reach out to external APIs as needed.
 
 IMPORTANT: Autotask executions are subject to quotas. After a quota is exhausted, the autotask will no longer execute. If you need to raise your Autotask execution quotas, please let us know at defender@openzeppelin.com with a description of your use case.
 
