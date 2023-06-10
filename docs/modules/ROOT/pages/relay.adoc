@@ -70,13 +70,13 @@ NOTE: The receiver whitelist applies only to the `to` field of a transaction. It
 
 [[eip1559-policy]]
 ==== EIP1559 Pricing
-Specify if the transactions the Relayer is sending should be EIP1559 by default or not. This applies whenever the Relayer send a transaction with the <<relay-api-reference.adoc#send-transaction,`speed`>> parameter, or a non specified `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas`. Note that this is only shown for EIP1559 compatible networks.
+Specify if the transactions the Relayer is sending should be EIP1559 by default or not. This applies whenever the Relayer sends a transaction with the <<relay-api-reference.adoc#send-transaction,`speed`>> parameter, or a non specified `gasPrice` or `maxFeePerGas`/`maxPriorityFeePerGas`. Note that this is only shown for EIP1559 compatible networks.
 
 NOTE: EIP1559 Pricing policy is enabled by default for new relayers. If you have a Relayer that was created without the default opt-in, you can always enable this flag.
 
 [[private-transactions-policy]]
 ==== Private transactions
-Specify if the transactions should be sent via private mempoool. This means that a transaction will not be publicly seen until its included in a block.
+Specify if the transactions should be sent via private mempoool. This means that a transaction will not be publicly seen until it's included in a block.
 
 NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations] might apply while sending private transactions through Defender (such as https://docs.flashbots.net/flashbots-protect/rpc/uncle-bandits[uncle bandit risk])
 
@@ -198,7 +198,7 @@ NOTE: Mainnet gas prices and priority fees are calculated based on the values re
 [[fixed-gas-pricing]]
 === Fixed Gas Pricing
 
-Alternatively, you may specify a **fixed gasPrice** or a **fixed combination of maxFeePerGas and maxPriorityFeePerGas** for a transaction, by setting either the <<relay-api-reference.adoc#send-transaction,`gasPrice`>> parameter or <<relay-api-reference.adoc#send-transaction,`maxFeePerGas` and `maxPriorityFeePerGas`>> paremeters. Transactions with a fixed pricing are either mined with the specified pricing or replaced with a NOOP transaction if they couldn't be mined before <<valid-until, validUntil>> time.
+Alternatively, you may specify a **fixed gasPrice** or a **fixed combination of maxFeePerGas and maxPriorityFeePerGas** for a transaction, by setting either the <<relay-api-reference.adoc#send-transaction,`gasPrice`>> parameter or <<relay-api-reference.adoc#send-transaction,`maxFeePerGas` and `maxPriorityFeePerGas`>> parameters. Transactions with a fixed pricing are either mined with the specified pricing or replaced with a NOOP transaction if they couldn't be mined before <<valid-until, validUntil>> time.
 
 Keep in mind that you have to provide either `speed`, `gasPrice`, `maxFeePerGas`/`maxPriorityFeePerGas` or none, but not a mix between them in a send transaction request.
 
@@ -302,7 +302,7 @@ In addition to sending transactions, the Relayer can also sign arbitrary message
 const signResponse = await relayer.sign({ message });
 ----
 
-NOTE: As opposed to most libraries, Relayers use non-deterministic ECDSA signatures. This means that if you request a Relayer to sign the same message multiple times, you will get multiple different signatures, which may differ to the result you get by signing using ethersjs or web3js. All those different signatures are valid. See https://datatracker.ietf.org/doc/html/rfc6979#section-3[RFC6979] more more information.
+NOTE: As opposed to most libraries, Relayers use non-deterministic ECDSA signatures. This means that if you request a Relayer to sign the same message multiple times, you will get multiple different signatures, which may differ to the result you get by signing using ethersjs or web3js. All those different signatures are valid. See https://datatracker.ietf.org/doc/html/rfc6979#section-3[RFC6979] more information.
 
 [[signing-typed-data]]
 == Signing Typed Data
