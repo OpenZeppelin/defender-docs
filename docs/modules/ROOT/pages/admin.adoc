@@ -64,7 +64,7 @@ image::defender-admin-pause.png[Defender Admin Paused Contract]
 
 An _access control action_ is a call that's compliant with https://docs.openzeppelin.com/contracts/access-control[OpenZeppelin's Access Control's] `grantRole` and `revokeRole` interfaces via its ABI. 
 
-Defender provides functionality to create such proposals when the ABI contains both `grantRole` and `revokeRole` functions, and you can fill them using the roles that a contract have already indexed before (via events consumed from https://thegraph.com/[TheGraph] if the contract's network is supported, otherwise, indexed via `getLogs` JSON-RPC call). 
+Defender provides functionality to create such proposals when the ABI contains both `grantRole` and `revokeRole` functions, and you can fill them using the roles that a contract has already indexed before (via events consumed from https://thegraph.com/[TheGraph] if the contract's network is supported, otherwise, indexed via `getLogs` JSON-RPC call). 
 
 In the case you want to provide a role that's not indexed in your contract, you can always provide new roles for your contract by giving it its corresponding `bytes32`.
 
@@ -216,7 +216,7 @@ Once you created a timelocked proposal, Defender will guide you and your collabo
 2. Schedule the action, with the specified delay period. Keep in mind the multisig in use needs to be a _proposer_ in the `TimelockController` contract. https://docs.openzeppelin.com/contracts/4.x/access-control#using_timelockcontroller[Read more here].
 3. After the specified delay period ends, execute the action. It is worth noting here that the EOA that executes this action needs to be an _executor_ in the `TimelockController` contract.
 
-NOTE: Currently Defender does not support timelocked Upgrade proposals. That capability is a work in progress and we plan release it soon.
+NOTE: Currently Defender does not support timelocked Upgrade proposals. That capability is a work in progress and we plan to release it soon.
 
 video::z6EP6JTj7ME[youtube]
 
