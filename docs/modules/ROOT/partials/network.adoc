@@ -29,7 +29,10 @@ type Network =
   | 'harmony-test-s0'
   | 'aurora'
   | 'auroratest'
+  | 'hedera',
+  | 'hederatest',
   | 'zksync'
   | 'zksync-goerli'
+  | 'base'
   | 'base-goerli'
   | 'linea-goerli';

@@ -52,7 +52,7 @@ All Defender components, where applicable, provide support for the following cha
 - https://www.harmony.one/[*Harmony* Shard 0] and *Harmony Testnet Shard 0*.
 - http://aurora.dev/[*Aurora*] and *Aurora Testnet*.
 - https://hedera.com/[*Hedera*] and *Hedera Testnet*.
-- https://base.org/[*Base Testnet*].
+- https://base.org/[*Base Mainnet*] and *Base Testnet*.
 - https://linea.build/[*Linea Goerli*]
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
