@@ -375,6 +375,6 @@ Defender Admin's main contribution to security is then related to usability. Fir
 [[hedera-support]]
 == Hedera Support
 
-On the Hedera network, only testnet is supported by Defender Admin at this time. To opt in to this feature, please contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
+On the Hedera network, only testnet is supported by Defender Admin at this time. Once the https://docs.hedera.com/hedera/core-concepts/smart-contracts/json-rpc-relay[Hedera JSON RPC Relay service] is out of beta, Defender will provide Hedera Mainnet support.
 
 We are currently testing Governance execution strategy and Upgradable contracts administration, they are not yet available on the Admin module but will be shortly.

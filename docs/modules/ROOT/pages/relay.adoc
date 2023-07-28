@@ -467,7 +467,7 @@ When sending transactions to a rollup chain, such as Arbitrum or Optimism, the R
 [[hedera-support]]
 == Hedera Support
 
-On the Hedera network, only testnet is supported by Defender Relay at this time. To opt in to this feature, please contact us at mailto:defender@openzeppelin.com[defender@openzeppelin.com].
+On the Hedera network, only testnet is supported by Defender Relay at this time. Once the https://docs.hedera.com/hedera/core-concepts/smart-contracts/json-rpc-relay[Hedera JSON RPC Relay service] is out of beta, Defender will provide Hedera Mainnet support.
 
 [[coming-up]]
 == Coming up...
