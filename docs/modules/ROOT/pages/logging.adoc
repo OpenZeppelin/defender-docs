@@ -10,7 +10,7 @@ This is a premium feature, if you are interested in it let us know by filling in
 Use Defender Logging for tracking all changes and actions on your system, such as:
 
 * Track *user actions* on your team by monitoring sign ins and activity across the application
-* Detect *potential attacks* on your infrastrcture from failed sign in attempts
+* Detect *potential attacks* on your infrastructure from failed sign in attempts
 * Follow *relayer activity* to understand the transactions being sent from your accounts
 * Keep an *audit trail* of all changes to your Autotasks, Sentinels, and Relayers
 

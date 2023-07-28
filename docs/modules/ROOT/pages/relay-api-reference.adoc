@@ -408,7 +408,7 @@ Note the extra `transactionId` field, which is an internal Defender identifier f
 
 [[transaction-status]]
 ==== Transaction Status
-Every transaction response will have an status assigned depending on the last time the backend has seen it. Each time Defender monitors a transaction, the status might be updated.
+Every transaction response will have a status assigned depending on the last time the backend has seen it. Each time Defender monitors a transaction, the status might be updated.
 
 The available status and their corresponding description are the following:
 
@@ -443,7 +443,7 @@ type Status =
   | 'mined'
   /**
    * Enough confirmations passed.
-   * The transaction has being kept in a mined block after N new mined blocks, where N depends on the chain.
+   * The transaction has been kept in a mined block after N new mined blocks, where N depends on the chain.
    */
   | 'confirmed'
   /**
