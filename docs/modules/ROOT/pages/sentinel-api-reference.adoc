@@ -543,3 +543,27 @@ await client.listNetworks(); // lists all networks
 await client.listNetworks({ networkType: 'production' }); // lists only production networks
 await client.listNetworks({ networkType: 'test' }); // lists only test networks
 ```
+
+The `networks` endpoint is used to retrieve a list of existing networks via a `GET` request.
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/sentinel/networks"
+```
+
+You can query for a specific network types (production or test) by passing the `type` query parameter:
+
+```
+curl \
+  -X GET \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H "X-Api-Key: $KEY" \
+  -H "Authorization: Bearer $TOKEN" \
+    "https://defender-api.openzeppelin.com/sentinel/networks?type=production"
+```
