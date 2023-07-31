@@ -533,3 +533,13 @@ await client.unpause('8181d9e0-88ce-4db0-802a-2b56e2e6a7b1');
 ```
 
 If you wish to call the API directly, you can use the `update` endpoint and set `pause` to `true` or `false` accordingly.
+
+### List Networks
+
+To list tenant enabled networks, you can call the `listNetworks` function on the client, which returns a `Network[]` object:
+
+```js
+await client.listNetworks(); // lists all networks
+await client.listNetworks({ networkType: 'production' }); // lists only production networks
+await client.listNetworks({ networkType: 'test' }); // lists only test networks
+```
