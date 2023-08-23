@@ -1,7 +1,9 @@
 type Network =
   | 'mainnet'
+  | 'rinkeby'
+  | 'ropsten'
+  | 'kovan'
   | 'goerli'
-  | 'sepolia'
   | 'xdai'
   | 'sokol'
   | 'fuse'
@@ -20,7 +22,6 @@ type Network =
   | 'optimism-kovan'
   | 'optimism-goerli'
   | 'arbitrum'
-  | 'arbitrum-nova'
   | 'arbitrum-rinkeby'
   | 'arbitrum-goerli'
   | 'celo'
@@ -31,8 +32,8 @@ type Network =
   | 'auroratest'
   | 'hedera',
   | 'hederatest',
-  | 'zksync'
-  | 'zksync-goerli'
-  | 'base'
-  | 'base-goerli'
+  | 'zksync',
+  | 'zksync-goerli',
+  | 'base',
+  | 'base-goerli',
   | 'linea-goerli';

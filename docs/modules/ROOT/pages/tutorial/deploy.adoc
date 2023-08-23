@@ -1,0 +1,317 @@
+# Securely deploy and upgrade a smart contract 
+
+Defender 2.0 allows you to easily deploy and upgrade smart contracts across chains while maintaining the best security practices. This tutorial shows how to use a xref::manage.adoc#relayers[Relayer] to deploy a contract called Box and upgrade it with the UUPS proxy pattern via a https://safe.global/[Safe wallet, window=_blank] (multisig).
+
+[[pre-requisites]]
+== Pre-requisites
+
+* OpenZeppelin Defender 2.0 account. You can create an account for free https://defender.openzeppelin.com/v2/[here, window=_blank].
+* https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed
+* Any IDE or text editor
+* Web browser with Metamask (or any other compatible wallet), funded with Goerli ETH.
+
+[[configure]]
+== 1. Configure
+
+=== Safe wallet
+[[safe]]
+
+First, you need to create Safe wallet to manage the upgrade process. To do so, follow these steps:
+
+. Open the https://app.safe.global/welcome[Safe app, window=_blank] in a web browser and connect your wallet (make sure you are connected to the https://goerli.etherscan.io/[Goerli testnet, window=_blank]).
+. Click on *Create new Account* and follow the steps.
+. Note the address of the Safe wallet you created, you will need it later.
++
+image::tutorial-deploy-safe.png[Deploy safe copy address]
+
+=== Environment setup
+[[environment-setup]]
+
+Now, you will create a Defender 2.0 test environment with the Goerli testnet, where you will deploy and upgrade the smart contracts. To do so, follow these steps:
+
+. Open https://defender.openzeppelin.com/v2/#/deploy[Defender 2.0 Deploy, window=_blank].
+. Click on *Setup*.
++
+image::tutorial-deploy-environments.png[Deploy environments page]
+
+. Pick *Goerli* from the dropdown. 
++
+image::tutorial-deploy-networks.png[Deploy networks wizard]
+
+. (Optional) Provide a block explorer API for Goerli Etherscan. 
+We recommend doing this to enable automatic contract verification capabilities. 
+To get an API key, head to https://etherscan.io/[Etherscan, window=_blank], create an account, and copy the https://etherscan.io/myapikey[API key, window=_blank] to paste it here.
++
+image::tutorial-deploy-block-explorer.png[Deploy block explorer wizard]
+
+. Select the relayer that will execute the deployments for the test environment. In case you don't already have a relayer, Defender 2.0 will automatically create one. Relayers automate the payment of gas fees and take care of private key secure storage, transaction signing, nonce management, gas pricing estimation, and resubmissions.
++
+NOTE: Read more about relayers and how to manage them xref::manage.adoc#relayers[here].
+
++
+image::tutorial-deploy-relayer-wizard.png[Deploy block relayer wizard]
+
+. Click on the Approval Process field to expand the dropdown and click on *Create an Approval Process*. Enter "Safe Wallet Approval Process" as the name and expand the contract field to click on *Add contract*. Enter "Safe Wallet" as the name, paste the address of your Safe wallet you copied before and click on *Create*. Select "Safe Wallet" in the contract dropdown and click on *Continue*.
+
++
+image::tutorial-deploy-upgrade-wizard.png[Deploy block upgrade wizard]
+
+. Defender 2.0 will generate an API Key and Secret for this environment, so copy and store them safely. Click on *Let's Deploy* to visit the environment page.
+
++
+image::tutorial-deploy-end-wizard.png[Deploy block end wizard]
+
+. Copy the wallet address of your relayer through the icon, and send some Goerli ETH to it. Although this relayer will send the deploy transaction, you will execute the upgrade transaction through your wallet, so leave some Goerli ETH in your wallet.
+
+image::tutorial-deploy-copy-relayer.png[Environment page copy relayer address]
+
+NOTE: You configured the test environment to learn without the risk of losing actual funds. The steps are the same to set up a production environment.
+
+[[hardhat-integration]]
+=== Hardhat Integration
+
+Deploying through Defender 2.0 is extremely easy with Hardhat. Once it's installed, follow these steps to create a new directory and project:
+
+. Run the this command in your terminal:
++
+```
+mkdir deploy-tutorial && cd deploy-tutorial && npx hardhat
+```
+. Hardhat will ask some questions to setup the configuration, so answer the following:
++ 
+* What do you want to do: Create a *Typescript* project
+* Hardhat project root: _Leave it as it is_
+* Do you want to use .gitignore: Yes
+* Do you want to install this sample project's dependencies with npm: Yes
+
+. Hardhat will now install the tooling libraries, and create the project files for you. Afterwards, install the OpenZeppelin packages with the following command:
++
+```
+npm i @openzeppelin/hardhat-upgrades @openzeppelin/contracts-upgradeable dotenv --save-dev
+```
+
++
+Once everything has been installed, your initial directory structure should look something like this:
+
++
+image::tutorial-deploy-directory.png[Deploy directory structure,185,300]
+
+. You now need to edit your Hardhat configuration to add the Defender 2.0 keys and Goerli network. Open the `hardhat.config.ts` file, and replace its content with the following code:
++
+[source,jsx]
+----
+import { HardhatUserConfig } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox";
+import "@openzeppelin/hardhat-upgrades";
+
+require("dotenv").config();
+
+const config: HardhatUserConfig = {
+  solidity: "0.8.18",
+  defender: {
+    apiKey: process.env.DEFENDER_KEY as string,
+    apiSecret: process.env.DEFENDER_SECRET as string,
+  },
+  networks: {
+    goerli: {
+      url: "https://rpc.ankr.com/eth_goerli",
+      chainId: 5
+    },
+  },
+};
+
+export default config;
+----
+
+. Create a new file called `.env` in the project root directory and add the following content with the keys you received after creating the Defender 2.0 environment:
++
+[source,json]
+----
+DEFENDER_KEY = "<<YOUR_KEY>>"
+DEFENDER_SECRET = "<<YOUR_SECRET>>"
+----
+
+[[deploy]]
+== 2. Deploy
+
+. Create a new file called `Box.sol` inside the `contracts` directory and add the following code:
++
+[source,jsx]
+----
+// SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.18;
+
+import {Initializable} from  "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+
+/// @title Box
+/// @notice A box with objects inside.
+contract Box is Initializable, UUPSUpgradeable, OwnableUpgradeable {
+    /*//////////////////////////////////////////////////////////////
+                                VARIABLES
+    //////////////////////////////////////////////////////////////*/
+
+    /// @notice Number of objects inside the box.
+    uint256 public numberOfObjects;
+
+    /*//////////////////////////////////////////////////////////////
+                                FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
+
+    /// @notice No constructor in upgradable contracts, so initialized with this function.
+    function initialize(uint256 objects, address multisig) public initializer {
+        __UUPSUpgradeable_init();
+        __Ownable_init();
+
+        numberOfObjects = objects;
+
+        // Initialize OwnableUpgradeable explicitly with given multisig address.
+        transferOwnership(multisig);
+    }
+
+    /// @notice Remove an object from the box.
+    function removeObject() external {
+        require(numberOfObjects > 1, "Nothing inside");
+        numberOfObjects -= 1;
+    }
+
+    /// @dev Upgrades the implementation of the proxy to new address.
+    function _authorizeUpgrade(address) internal override onlyOwner {}
+}
+----
++
+This is a contract that replicates a box, with three functions:
++
+* `initialize()`: Initializes the upgradeable proxy with its initial implementation and transfers the ownership to the given multisig address.
+* `removeObject()`: Decreases the number of objects in the box by removing one.
+* `_authorizeUpgrade()`: Points the proxy to a new implementation address.
+
+. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defneder 2.0 with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
++
+[source,jsx]
+----
+import { ethers, defender } from "hardhat";
+
+async function main() {
+  const Box = await ethers.getContractFactory("Box");
+
+  const defaultApprovalProcess = await defender.getDefaultApprovalProcess();
+
+  if (defaultApprovalProcess.address === undefined) {
+    throw new Error(`Upgrade approval process with id ${defaultApprovalProcess.approvalProcessId} has no assigned address`);
+  }
+
+  const deployment = await defender.deployProxy(Box, [5, defaultApprovalProcess.address], { initializer: "initialize" });
+
+  await deployment.deployed();
+
+  console.log(`Contract deployed to ${deployment.address}`);
+}
+
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+----
++
+NOTE: You should use `deployProxy()`, `deployBeacon()` and `deployImplementation()` for upgradeable contracts, and `deployContract()` for non-upgradeable contracts. To forcefully use `deployContract()`, set the `unsafeAllowDeployContract` option to `true`. More information https://github.com/OpenZeppelin/openzeppelin-upgrades/blob/master/docs/modules/ROOT/pages/defender-deploy.adoc[here, window=_blank].
+
+. Deploy your box by running the following command which executes your deployment script:
++
+```
+npx hardhat run --network goerli scripts/deploy.ts
+```
+
+Success! Your contracts should have been deployed in the Goerli testnet. Navigate to Deploy in Defender 2.0 and check that the proxy and implementation have been deployed inside the test environment. All Box transactions should be sent to the proxy address as it will store the state and point to the given implementation. Copy the address of the proxy to upgrade it next.
+
+image::tutorial-deploy-contract.png[Deployed contract]
+
+[[upgrade]]
+== 3. Upgrade
+
+Upgrading a smart contract allows changing its logic while maintaining the same address and storage. Follow these steps to upgrade your deployed Box with new functionalities:
+
+. Create a file called `BoxV2.sol` inside the `contracts` directory and add the following code:
++
+[source,jsx]
+----
+// SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.18;
+
+import {Box} from "./Box.sol";
+
+/// @title BoxV2
+/// @notice An improved box with objects inside.
+contract BoxV2 is Box {
+    /*//////////////////////////////////////////////////////////////
+                                FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
+    
+    /// @notice Add an object to the box.
+    function addObject() external {
+        numberOfObjects += 1;
+    }
+
+    /// @notice Returns the box version.
+    function boxVersion() external pure returns (uint256) {
+        return 2;
+    }
+}
+----
++
+This is a contract adds two new functions to your box:
++
+* `addObject()`: Increases the number of objects in the box by adding one.
+* `boxVersion()`: Returns the version of the box implementation.
+
+. Create a file called `upgrade.ts` inside the `scripts` directory and paste the following code. Make sure to replace the `<BOX ADDRESS>` with the address of your box you copied before.
++
+[source,jsx]
+----
+import { ethers, defender } from "hardhat";
+
+async function main() {
+  const BoxV2 = await ethers.getContractFactory("BoxV2");
+
+  const proposal = await defender.proposeUpgrade('<BOX ADDRESS>', BoxV2);
+    
+  console.log(`Upgrade proposed with URL: ${proposal.url}`);
+}
+
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+----
+
+. Create the upgrade proposal using the upgrade script with the the following command:
++
+```
+npx hardhat run --network goerli scripts/upgrade.ts
+```
+
+. Navigate to the https://defender.openzeppelin.com/v2/#/deploy/environment/test[Defender 2.0 test environment] and click on the upgrade proposal, which expands a modal on the right side of the screen.
+. Click on *View Transaction Proposal* and click on *Approve and Execute* on the top right corner of the page. Sign and execute the transaction with your wallet that you used to create the Safe Wallet.
+
+Ta-da! Your box should now be upgraded to the new version. The upgrade proposal in your test environment page shold now be marked as *Executed*.
+
+image::tutorial-deploy-executed-upgrade.png[Uprade proposal executed]
+
+[[next-steps]]
+== Next steps
+
+Congratulations! You can now deploy and upgrade other contracts using the same environment. In case you are interested in advanced use cases, we are working on deploy-related guides.
+
+NOTE: After deploying a contract, we recommended using Defender 2.0 to monitor its state and transactions. Learn how to use Monitor with its tutorial xref::tutorial/monitor.adoc[here].
+
+[[reference]]
+== Reference
+
+* xref::module/deploy.adoc[Deploy Documentation]
+* https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat Upgrades Package, window=_blank]
+* https://www.npmjs.com/package/@openzeppelin/upgrades-core[Upgrades Core Package, window=_blank]

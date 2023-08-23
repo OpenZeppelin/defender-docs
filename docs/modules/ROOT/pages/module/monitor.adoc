@@ -1,0 +1,442 @@
+[[monitor]]
+= Monitor
+
+Monitors allow you to gain full visibility into your smart contracts' risks and behaviors. You can detect threats, get alerts on threats and anomalies, and automatically respond and resolve issues.
+
+[[use-cases]]
+== Use cases
+
+* Monitor crucial events and authorized functions like ownership transfers, pauses, or mints.
+* Alert on potentially dangerous transactions or operational issues.
+* Integrate notifications to Slack, Telegram, Discord, email, PagerDuty, Opsgenie or custom APIs.
+* Use pre-built templates to setup monitoring quickly and easily.
+* Combine with other Defender 2.0 modules to execute on-chain transactions with monitor triggers.
+
+[[monitors]]
+== Monitors
+
+Monitors can be created from scratch or from templates, which are designed for common use cases. Templates automatically pre-populate a monitor, so you can easily modify and re-adapt them.
+
+image::monitor-templates.png[Monitor Templates]
+
+Monitors are organized into five categories, according to the type of risk they monitor:
+
+* Governance
+* Access Control
+* Suspicious Activity
+* Financial
+* Technical
+
+You can also specify a severity for each alert, which your team can use to prioritize notifications. Each severity can then be associated with one or more notification channels.
+
+* High Severity
+* Medium Severity
+* Low Severity
+
+Severities and notification channels should be combined according to the project. For example, a DeFi protocol may prefer financial monitors with a high-priority channel, such as Slack/Telegram, and technical monitors with a lower-priority channel, such as email.
+
+[[configure-a-monitor]]
+== Configuring a Monitor
+
+A monitor watches all on-chain contract transactions and notifies when one matches the parameters, filters, or events. 
+
+IMPORTANT: At this time, Monitors are supported across all xref:index.adoc#networks[networks] except Fantom.
+
+[[general-info]]
+===  General Information
+* *Name*: The name assigned to the monitor.
+
+* *Risk Category*: The risk category of the monitor, useful for filtering or grouping.
+
+* *Contracts*: The smart contracts to monitor. Monitoring relies on the underlying ABI, so you may only have 1 ABI per monitor. In case of multiple smart contracts, the monitor must adhere to the same ABI/Interface.
+
+* *Confirmation Blocks*: If you want to be notified only after a certain level of confidence that the transaction is accepted, a higher confirmation block level is recommended, but if you want to be notified as soon as possible with tolerance to reorganizations, a lower confirmation block level is better. In chains where safe and finalized block tags are accepted, you can also select them as confirmation block level.
+
+[[matching-rules]]
+=== Matching Rules
+
+For a transaction to trigger a notification, it must satisfy *ALL* of the following:
+
+* Transaction *MUST* have a To, From, or Address (from the log) that matches the configured address.
+
+* If a *Transaction Filter* is specified
+
+    ** The Transaction *MUST* match the *Transaction Filter*.
+
+* If *Events* are selected
+
+    ** The Transaction *MUST* emit any of the selected Events and match the *Event Condition* (if any)
+
+* If *Functions* are selected
+
+    ** The Transaction *MUST* directly invoke any of the selected Functions (contract calls are not detected at the moment) and match the *Function Condition* (if any)
+
+[[transaction-filters]]
+=== Transaction Filters
+
+Transaction filters allows to narrow the transactions being monitored. These are entered as property expressions or Javascript code, offering great flexibility. To accommodate comparisons for checksum and non-checksum addresses, comparisons are case-insensitive.
+
+NOTE: To receive ALL transactions that involve the selected events/functions, transaction conditions should not be specified.
+
+* Conditions can use *AND*, *OR*, *NOT* and *()*
+
+* Conditions can use *==*, *&lt;*, *&gt;*, *&gt;=*, *&lt;=* to compare
+
+* Number values can be referred to by Hex (0xabc123) or Decimal (10000000000)
+
+* String values can only be compared via *==*
+
+* Includes basic math operators: *+*, *-*, ***, */*, *^*
+
+IMPORTANT: If a transaction filter condition is specified, then a transaction MUST meet this condition in order to trigger a notification.
+
+Transaction Conditions can refer to the following properties
+
+* *to* is the _to_ address for the transaction
+
+* *from* is the _from_ address for the transaction
+
+* *gasPrice* is the price of gas sent in the transaction. In EIP1559 transactions, it's equal to or below the `maxFeePerGas`.
+
+* *maxFeePerGas* is the maximum price the transaction was willing to pay for the transaction. Only existent in EIP1559 transactions.
+
+* *maxPriorityFeePerGas* is the maximum amount of wei over the `BASE_FEE` the transaction is willing to pay to the miner for inclusion. Only existent in EIP1559 transactions.
+
+* *gasLimit* is the gas limit sent in the transaction
+
+* *gasUsed* is the amount of gas used in the transaction
+
+* *value* is the value sent in the transaction
+
+* *nonce* is the nonce for the specific transaction
+
+* *status* is a derived value and can be compared with *"success"* or *"failed"*
+
+==== Example Conditions
+
+Transactions that are reverted
+
+[source,jsx]
+----
+status == "failed"
+----
+
+Transactions excluding those from 0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad
+
+[source,jsx]
+----
+from != "0xd5180d374b6d1961ba24d0a4dbf26d696fda4cad"
+----
+
+Transactions that have BOTH a gasPrice higher than 50 gwei AND a gasUsed higher than 20000
+
+[source,jsx]
+----
+gasPrice > 50000000000 and gasUsed > 20000
+----
+
+=== Custom Filters
+
+Custom filters supporsts custom code for filtering transactions. If a custom filter is specified, it will be called with a list of matches found for a given block. This allows the monitor to use other datasources and custom logic to evaluate whether a transaction matches.
+
+NOTE: Only transactions that match other conditions (event, function, transaction) will invoke the custom filter.
+
+NOTE: Each invocation can contain up to 25 transactions.  
+
+==== Request Schema
+
+The request body will contain the following structure. The `SentinelConditionRequest` type from the https://www.npmjs.com/package/defender-sdk-actions[defender-sdk-actions, window=_blank] package can be used for custom filters in Typescript.
+
+[source,jsx]
+----
+{
+  "events": [
+  {
+    "transaction": {                     // eth_getTransactionReceipt response body
+      ...                                // see https://eips.ethereum.org/EIPS/eip-1474
+    },
+    "blockHash": "0xab..123",            // block hash from where this transaction was seen
+    "matchReasons": [                    // the reasons why monitor triggered
+      {
+        "type": "event",                 // event, function, or transaction
+        "address": "0x123..abc",         // address of the event emitting contract
+        "signature": "...",              // signature of your event/function
+        "condition": "value > 5",        // condition expression (if any)
+        "args": ["5"],                   // parameters by index (unnamed are present)
+        "params": { "value": "5" }       // parameters by name (unnamed are not present)
+      }
+    ],
+    "matchedAddresses": ["0x000..000"],  // the addresses from this transaction your are monitoring
+    "sentinel": {
+      "id": "44a7d5...31df5",            // internal ID of your monitor
+      "name": "Monitor Name",            // name of your monitor
+      "abi": [...],                      // abi of your addresses (or undefined)
+      "addresses": ["0x000..000"],       // addresses your monitor is watching
+      "confirmBlocks": 0,                // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
+      "network": "rinkeby"               // network of your addresses
+      "chainId": 4                       // chain Id of the network
+    }
+  }
+  ]
+}
+----
+
+==== Response Schema
+
+The custom filter must return a structure containing all matches. Returning an empty object indicates no match occurred. The type for this object is `SentinelConditionResponse`.
+
+IMPORTANT: Errors will be treated as a non-match.
+
+[source,jsx]
+----
+{
+  "matches": [
+    {
+      "hash": "0xabc...123",   // transaction hash
+      "metadata": {
+        "foo": true            // any object to be shared with notifications
+      }              
+    },
+    {
+      "hash": "0xabc...123"    // example with no metadata specified
+    }
+  ]
+}
+----
+
+==== Example Custom Filters
+
+[source,jsx]
+----
+exports.handler = async function(payload) {
+  const conditionRequest = payload.request.body;
+  const matches = [];
+  const events = conditionRequest.events;
+  for(const evt of events) {
+
+    // add custom logic for matching here
+
+    // metadata can be any JSON-marshalable object (or undefined)
+    matches.push({
+       hash: evt.hash,
+       metadata: { 
+        "id": "customId",
+        "timestamp": new Date().getTime(),
+        "numberVal": 5,
+        "nested": { "example": { "here": true } }
+       }
+    });
+  }
+  return { matches }
+}
+----
+
+[[events-and-functions]]
+=== Events and Functions
+
+Events and functions can be selected as filters. Selecting multiple events acts as an OR clause (triggered for ANY selected events). The same applies for functions.
+
+Conditions for events or functions can further narrow the monitor. These can refer to arguments in the signature either by name (if the argument is named) or by index (e.g., $0, $1...). The variables must match the types shown in the interface. If left empty, the condition will be ignored.
+
+NOTE: If no events or functions are specified, then ALL transactions to or from the contracts will be in scope.
+
+IMPORTANT: Monitors seamlessly supports notifications for events emitted by a smart contract on all networks, regardless of whether they are triggered directly or through internal calls from a third contract. However, the capability to track and provide notifications for internal function calls within a contract is currently limited to the Ethereum mainnet.
+
+==== Example Conditions
+
+Transactions that emit a `Transfer(...)` event with a value between 1 and 100 ETH (in hex)
+
+[source,jsx]
+----
+// Event Signature: Transfer(address to, address from, uint256 value)
+value > 0xde0b6b3a7640000 and value < 0x56bc75e2d63100000 
+----
+
+Transactions that emit a `ValsEvent(...)` event with an array with a first element equal to 5
+
+[source,jsx]
+----
+// Event Signature: ValsEvent(uint256[3] vals)
+vals[0] == 5
+----
+
+Transactions that invoke a `greet(...)` function with an unnamed string of "hello"
+
+[source,jsx]
+----
+// Function Signature: greet(address, string)
+$1 == "hello"
+----
+
+// WARNING: There are some considerations unique to Hedera mainnet and testnet when configuring a monitor. Learn more xref:guide/hedera.adoc[here].
+
+// NOTE: Monitors can be configured to respond to alerts emitted from Forta bots. Check our guide xref:guide/forta-monitor.adoc[here]!
+
+[[alerts]]
+== Alerts
+
+A monitor can either use the notification channel of its category or a custom one. It's also possible to connect an Action or an Incident Response Scenario that should run with the monitor.
+
+To prevent repeated alerts from individual monitors and control the notification rate, you can use the Alert Threshold and Minimum time between consecutive notifications fields.
+
+* Alert Threshold: Define the number of times a monitor must trigger per unit of time before a notification is sent or an action is fired. The unit of time is defined by the Minimum time between consecutive notifications field.
+* Minimum time between consecutive notifications: Set the the minimum wait time between sending notifications.
+
+
+image::monitor-alert.png[Monitor Alerts]
+
+[[customizing-notification]]
+=== Customizing Notification
+
+You can also modify the message body content and formatting using the Customize notification checkbox below the notification channel selector.
+
+==== Template
+
+[source,md]
+----
+**Monitor Name**
+
+{{ sentinel.name }}
+
+**Network**
+
+{{ sentinel.network }}
+
+**Block Hash**
+
+{{ blockHash }}
+
+**Transaction Hash**
+
+{{ transaction.transactionHash }}
+
+**Transaction Link** 
+
+[Block Explorer]({{ transaction.link }})
+
+{{ matchReasonsFormatted }}
+
+**value**
+
+{{ value }}
+----
+
+==== Preview
+
+[source,md]
+----
+*Monitor Name*
+
+Monitor
+
+*Network*
+
+rinkeby
+
+*Block Hash*
+
+0x22407d00e953e5f8dabea57673b9109dad31acfc15d07126b9dc22c33521af52
+
+*Transaction Hash*
+
+0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50
+
+https://rinkeby.etherscan.io/tx/0x1dc91b98249fa9f2c5c37486a2427a3a7825be240c1c84961dfb3063d9c04d50[Block Explorer]
+
+*Match Reason 1*
+
+_Type:_ Function
+
+_Matched Address_:_ 0x1bb1b73c4f0bda4f67dca266ce6ef42f520fbb98
+
+_Signature:_ greet(name)
+
+_Condition:_ name == 'test'
+
+_Params:_
+
+name: test
+
+*Match Reason 2*
+
+_Type:_ Transaction
+
+_Condition:_ gasPrice > 10
+
+*Value*
+
+0x16345785D8A0000
+----
+
+==== Message Syntax
+
+Custom notifications support a limited set of markdown syntax:
+
+* Bold (\\**this text is bold**)
+* Italic (\*this text* and \_this text_ are italic)
+* Links (this is a [link](\https://example.com))
+
+There is partial support for additional markdown syntax, but rendering behavior varies by platform. Email supports full HTML and has the richest feature set, but other messaging platforms have limitations, including support for standard markdown features such as headings, block quotes, and tables. Combinations of the supported features (e.g., bold and italicized text) also have mixed support. A warning message will appear directly below the editor if the markdown contains any syntax with mixed platform support.
+
+==== Monitor Event Schema
+You can access the following schema when using custom notification templates. This schema is also passed to the Action if you configure your monitor to execute one.
+[source,jsx]
+----
+{
+  "transaction": {                     // eth_getTransactionReceipt response body
+    ...                                // see https://eips.ethereum.org/EIPS/eip-1474
+  },
+  "blockHash": "0xab..123",            // block hash from where this transaction was seen
+  "matchReasons": [                    // the reasons why monitor triggered
+    {
+      "type": "event",                 // event, function, or transaction
+      "address": "0x123..abc",         // address of the event emitting contract
+      "signature": "...",              // signature of event/function
+      "condition": "value > 5",        // condition expression (if any)
+      "args": ["5"],                   // parameters by index (unnamed are present)
+      "params": { "value": "5" }       // parameters by name (unnamed are not present)
+    }
+  ],
+  "matchedAddresses":["0x000..000"]    // the addresses from this transaction monitored
+  "sentinel": {
+    "id": "44a7d5...31df5",            // internal ID of monitor
+    "name": "Sentinel Name",           // name of monitor
+    "abi": [...],                      // abi of address (or undefined)
+    "addresses": ["0x000..000"],       // addresses monitored
+    "confirmBlocks": 0,                // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
+    "network": "rinkeby"               // network of address
+    "chainId": 4                       // chain Id of the network
+  },
+  "value": "0x16345785D8A0000"         // value of the transaction
+  "metadata": {...}                // metadata injected by action condition (if applicable)
+}
+----
+
+==== Dynamic Content
+
+Custom notification templates render dynamic content using inline templating. Any string surrounded by double curly braces will be resolved against the Event Schema. Deeply nested items (including those in arrays) can be accessed using dot notation.
+
+In addition to the standard event schema, the following parameters are injected for usage in custom notification messages: 
+
+* `transaction.link`
+* `matchReasonsFormatted`
+
+==== Character Limit
+
+Messages will be truncated if they exceed a platform's character limit. The best practice is to limit messages to 1900 characters.
+
+[[settings]]
+== Settings
+
+In the settings tab, you can specify the default notification channel associated with the different severities: High, Medium, or Low.
+
+image::monitor-settings.png[Monitor Settings]
+
+[[pausing]]
+== Pausing and Deleting
+
+From the monitor page, you can pause created monitors that are active. By clicking on the dotted button on the card, you can delete or save the monitor as a template. 
+
+Saving a monitor as a template stores its configuration and parameters, which can be found by clicking the template gallery tab.
+
+NOTE: We provide a quickstart tutorial to monitor a smart contract using Defender 2.0. Check it out xref:tutorial/monitor.adoc[here]!

@@ -1,0 +1,432 @@
+[[actions]]
+= Actions
+
+Actions allow you to implement custom app logic for on-chain and off-chain operations. You can enable automated responses to threats detected by the xref:module/monitor.adoc[Monitor] and xref:module/incident-response.adoc[Incident Response] modules.
+
+[[use-cases]]
+== Use cases
+
+* Automate smart contract operations
+* Execute actions as response to a xref:module/monitor.adoc[Monitor] alert 
+* Automate xref:module/incident-response.adoc[Incident Response] steps with Actions
+* Create transaction proposals from multisigs, relayers, and more
+* No-code (form-based) for transaction proposals
+* Call external APIs and interact with other smart contracts
+
+[[actions-reference]]
+== Actions
+
+Actions are automated Javascript pieces of code that can be executed via triggers.
+
+image::auto-action-general-info.png[Automatic Action]
+
+[[triggers]]
+=== Triggers
+
+The following triggers are supported:
+
+* *Schedule*: Choose a frequency, and Defender 2.0 will invoke the function at the specified interval. Note that the specified interval is between two consecutive execution starts, _not_ between the end of one run and the beginning of the next one. Alternatively, it's possible to specify when the action should run using https://crontab.cronhub.io/[cron expressions, window=_blank].
+
+* *Webhook*: Defender 2.0 will create a webhook URL for the action, which will be executed whenever an HTTP POST request is sent to that endpoint. The URL can be regenerated at any time. When invoked, the HTTP request information will be injected into the action, and the HTTP response will include the action run info along with any data returned from the action.
+
+* *Monitor*: Triggered by a Defender 2.0 xref:module/monitor.adoc[Monitor]. It will contain a body property with the details for the triggering event that you can use to run custom logic.
+
+[[environment]]
+=== Environment
+
+Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
+
+[source,jsx]
+----
+"@openzeppelin/defender-2-sdk": "0.1.0",
+"@datadog/datadog-api-client": "^1.0.0-beta.5",
+"@gnosis.pm/safe-core-sdk": "^0.3.1",
+"@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
+"axios": "0.21.2",
+"axios-retry": "3.1.9",
+"defender-admin-client": "1.37.0-rc.2",
+"defender-autotask-client": "1.37.0-rc.2",
+"defender-autotask-utils": "1.34.0",
+"defender-kvstore-client": "1.37.0-rc.2",
+"defender-relay-client": "1.37.0-rc.2",
+"defender-sentinel-client": "1.37.0-rc.2",
+"ethers": "5.5.3",
+"fireblocks-sdk": "^2.3.2",
+"graphql": "^15.5.1",
+"graphql-request": "3.4.0",
+"web3": "1.3.6"
+----
+
+NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful! 
+
+NOTE: We love https://www.typescriptlang.org/[typescript, window=_blank] in the OpenZeppelin development team, and we hope you do too! If you want to write your actions in TypeScript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting JavaScript code. Unfortunately, we don't support coding directly in TypeScript in the user interface. All `defender-sdk` packages are coded in TypeScript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package for type definitions for the event payload.
+
+[[defining-code]]
+=== Defining code
+
+[[handler-function]]
+==== Handler function
+
+Your code must export an async `handler` function that will be invoked on each execution of the action. 
+
+[source,jsx]
+----
+exports.handler = async function(event) {
+  // Your code here
+}
+----
+
+[[relayer-integration]]
+==== Relayer integration
+
+If you connect your automatic action to a relayer, then Defender 2.0 will automatically inject temporary credentials to access the relayer from the action code. Simply pass the event object to the relayer client in place of the credentials:
+
+[source,jsx]
+----
+const { Defender } = require('@openzeppelin/defender-2-sdk');
+ 
+exports.handler = async function(event) {
+  const client = new Defender(event);
+
+  // Use relayer for sending txs or querying the network...
+}
+----
+
+This allows you to send transactions using the relayer from actions without having to set up any API keys or secrets. Furthermore, you can also use the relayer's JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
+
+We also support https://www.npmjs.com/package/defender-relay-client#ethersjs[`ethers.js`] for making queries or sending transactions via the relayer. To use ethers.js replace the above snippet with this:
+
+[source,jsx]
+----
+const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const ethers = require('ethers');
+ 
+exports.handler = async function(event) {
+  const provider = new DefenderRelayProvider(event);
+  const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' });
+  // Use provider and signer for querying or sending txs from ethers, for example...
+  const contract = new ethers.Contract(ADDRESS, ABI, signer);
+  await contract.ping();
+}
+----
+
+If you prefer https://www.npmjs.com/package/defender-relay-client#web3js[`web3.js`]:
+
+[source,jsx]
+----
+const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const Web3 = require('web3');
+ 
+exports.handler = async function(event) {
+  const provider = new DefenderRelayProvider(event, { speed: 'fast' });
+  const web3 = new Web3(provider);
+  // Use web3 instance for querying or sending txs, for example...
+  const [from] = await web3.eth.getAccounts();
+  const contract = new web3.eth.Contract(ABI, ADDRESS, { from });
+  await contract.methods.ping().send();
+}
+----
+
+==== Monitor invocations
+
+Actions triggered from a Monitor can have two types of body properties and scheme, depending what type of Monitor triggered the action:
+
+* In the case of a Defender 2.0 monitor, the body will contain the xref:module/monitor.adoc#monitor_event_schema[monitor event schema].
+* In the case of a Forta monitor, the body will contain the xref:guide/forta-monitor.adoc[Forta Alert details].
+
+If the action is written in TypeScript, `BlockTriggerEvent` or `FortaTriggerEvent` types from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used.
+
+[source,jsx]
+----
+exports.handler = async function(params) {  
+  const payload = params.request.body;
+  const matchReasons = payload.matchReasons;
+  const sentinel = payload.sentinel;
+
+  // if contract monitor
+  const transaction  = payload.transaction;
+  const abi = sentinel.abi;
+
+  // if Forta monitor
+  const alert  = payload.alert;
+
+  // custom logic...
+}
+----
+
+==== Webhook invocations
+
+When an action is invoked via a webhook, it can access the HTTP request info as part of the `event` parameter injected in the handler. Likewise, the return value will be included in the `result` field of the HTTP response payload.
+
+[source,jsx]
+----
+exports.handler = async function(event) {
+  const { 
+    body,    // Object with JSON-parsed POST body
+    headers, // Object with key-values from HTTP headers
+    queryParameters, // Object with key-values from query parameters
+  } = event.request;
+
+  return {
+    hello: 'world' // JSON-serialized and included in the `result` field of the response
+  };
+}
+----
+
+At the moment only JSON payloads are supported, and only non-standard headers with the `X-` or `Stripe-` prefix are provided to the action.
+
+A sample response from the webhook endpoint looks like the following, where `status` is one of `success` or `error`, `encodedLogs` has the base64-encoded logs from the run, and `result` has the JSON-encoded value returned from the execution.
+
+[source,json]
+----
+{
+  "autotaskRunId": "37a91eba-9a6a-4404-95e4-38d178ba69ed",
+  "autotaskId": "19ef0257-bba4-4723-a18f-67d96726213e",
+  "trigger": "webhook",
+  "status": "success",
+  "createdAt": "2021-02-23T18:49:14.812Z",
+  "encodedLogs": "U1RBU...cwkK",
+  "result": "{\"hello\":\"world\"}",
+  "requestId": "e7979150-44d3-4021-926c-9d9679788eb8"
+}
+----
+
+NOTE: Actions that take longer than 25 seconds to complete will return a response with a pending state. Nevertheless, the action will continue to run in the background and eventually complete (in less than 5 minutes).
+
+NOTE: If `{"message":"Missing Authentication Token"}` is the response to a Webhook HTTP request, double check that the request was actually a POST. This response occurs when issuing a GET.
+
+==== Secrets
+Defender 2.0 secrets allow you to store sensitive information, such as API keys and secrets that can be accessed securely from actions. +
+Action secrets are key-value case-sensitive pairs of strings, that can be accessed from action code using the `event.secrets` object. There is no limit to the number of secrets used by an action. Secrets are shared across all actions, and not specific to a single one.
+
+[source,jsx]
+----
+exports.handler = async function(event) {
+  const { mySecret, anApiKey } = event.secrets;
+}
+----
+
+Secrets are encrypted and stored in a secure vault, only decrypted for injection when the action runs. Once written, a secret can only be deleted or overwritten from the user interface, but not read. 
+
+WARNING: An action may log the value of a secret, accidentally leaking it.
+
+
+NOTE: While it's possible to use secrets to store private keys for signing messages or transactions, we recommend to use a Defender 2.0 relayer instead. Signing operations for Defender 2.0 relayers provide an extra level of security over loading the private key in action code and signing there.
+
+==== Key-value data store
+
+The action key-value data store allows to persist simple data across action runs and between different actions. It can be used to store transaction identifiers, hashed user emails, or even small serialized objects.
+
+Access to the key value store is managed through the https://npmjs.com/package/defender-kvstore-client[`defender-kvstore-client`, window=_blank] package:
+
+[source,jsx]
+----
+const { KeyValueStoreClient } = require('defender-kvstore-client');
+
+exports.handler =  async function(event) {
+  const store = new KeyValueStoreClient(event);
+
+  await store.put('myKey', 'myValue'); 
+  const value = await store.get('myKey');
+  await store.del('myKey');
+}
+----
+
+The key-value store allows to get, put, and delete key-value pairs, which must be strings that are limited to 1 KB and values to 300 KB.
+
+NOTE: Data stored is shared across all actions. To isolate the records managed by each action, prefixing the keys with a namespace unique to each action is recommended.
+
+WARNING: Each item expires 90 days after its last update. If long-lived data store is needed, we recommend setting up an external database and use action secrets to store the credentials for connecting to it.
+
+==== Notifications
+
+Actions can send notifications through various channels already defined in the Defender 2.0 Notifications settings. This integration allows you to quickly inform other connected systems about changes detected or made by actions.
+
+To send a notification, you should use `notificationClient.send()`, as shown in the following example:
+[source,js]
+----
+exports.handler = async function(credentials, context) {
+  const { notificationClient } = context;
+
+  try {
+    notificationClient.send({
+      channelAlias: 'example-email-notification-channel-alias',
+      subject: 'Action notification example',
+      message: 'This is an example of a email notification sent from an action',
+    });
+  } catch (error) {
+    console.error('Failed to send notification', error);
+  }
+}
+----
+
+For email notifications, basic HTML tags are supported. Here's an example of how to generate an HTML message:
+[source,js]
+----
+
+function generateHtmlMessage(actionName, txHash) {
+  return `
+<h1>Transaction sent from Action ${actionName}</h1>
+<p>Transaction with hash <i>${txHash}</i> was sent.</p>
+`;
+}
+
+exports.handler = async function(event, context) {
+  const { notificationClient } = context;
+
+  const relayer = new Relayer(credentials);
+
+  const txRes = await relayer.sendTransaction({
+    to: '0xc7464dbcA260A8faF033460622B23467Df5AEA42',
+    value: 100,
+    speed: 'fast',
+    gasLimit: '21000',
+  });
+
+  try {
+    notificationClient.send({
+      channelAlias: 'example-email-notification-channel-alias',
+      subject: `Transaction sent from Action ${event.actionName}`,
+      message: generateHtmlMessage(event.actionName, txRes.hash),
+    });
+  } catch (error) {
+    console.error('Failed to send notification', error);
+  }
+}
+----
+
+To send a metric notification, use the `notificationClient.sendMetric()` method instead, as shown in the following example:
+
+[source,js]
+----
+exports.handler = async function(credentials, context) {
+  const { notificationClient } = context;
+
+  try {
+    notificationClient.sendMetric({
+      channelAlias: 'example-email-notification-channel-alias',
+      name: 'datadog-test-metric',
+      value: 1,
+    });
+  } catch (error) {
+    console.error('Failed to send notification', error);
+  }
+}
+----
+
+NOTE: If an invalid or paused notification channelAlias is passed, an error will be thrown.
+
+NOTE: If a notification cannot be sent for any other reason, no error will be thrown, but a status message will be added to the action logs. For example, if a notification to a webhook channel that has an inactive URL is sent, a log entry will be added but no error will be thrown.
+
+NOTE: If multiple notification channels are using the same alias, the notification will be sent to all of them.
+
+==== Error handling
+
+Automatic action invocations that result in an error contain an `errorType` field in the action run response that will be set to an https://github.com/OpenZeppelin/defender-sdk/blob/340fce19e35cfed420c94369630ee8f70254c9ac/packages/action/src/models/action-run.res.ts#L6[ActionErrorType as defined in defender-sdk]. A user readable error will also appear in the Run History view.
+
+[[local-development]]
+=== Local development
+
+If you want to reproduce the behavior of an action locally for debugging or testing, follow these steps:
+
+* Initialize a new npm project (`npm init`)
+* Set the `dependencies` key in `package.json` to the packages indicated in the <<#environment,Environment>> section above
+* Download `yarn.lock`: 📎 link:{attachmentsdir}/yarn.lock[yarn.lock]
+* Run `yarn install --frozen-lockfile`.
+
+You can also use the following template for local development, which will run the action code when invoked using `node`. It will load the relayer credentials from environment variables, or use the injected credentials when run by Defender 2.0.
+
+[source,jsx]
+----
+const { Relayer } = require('defender-relay-client');
+
+// Entrypoint for the action
+exports.handler = async function(event) {
+  const relayer = new Relayer(event);
+  // Use relayer for sending txs
+}
+
+// To run locally (this code will not be executed in actions)
+if (require.main === module) {
+  const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
+  exports.handler({ apiKey, apiSecret })
+    .then(() => process.exit(0))
+    .catch(error => { console.error(error); process.exit(1); });
+}
+----
+
+[[updating-code]]
+=== Updating code
+
+You can edit an action's code via the Defender 2.0 interface, or programmatically via API using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`, window=_blank] npm package. The latter allows to upload a code bundle with more than a single file:
+
+```bash
+$ echo API_KEY=$API_KEY >> .env
+$ echo API_SECRET=$API_SECRET >> .env
+$ defender-autotask update-code $AUTOTASK_ID ./path/to/code
+```
+
+NOTE: The code bundle must not exceed 5MB in size after being compressed and base64-encoded, and it must always include an `index.js` at the root of the zip file to act as the entrypoint.
+
+[[transaction-proposals-reference]]
+== Transaction Proposals
+
+Transaction proposals are very similar to actions, but instead of having to write the javascript code, you can use a form-based editor to define the transaction parameters. +
+This low-code format is very useful for non technical users and simple scenarios, but lacks the flexibility of actions. If you need to invoke external APIs or contracts, or perform more complex logic, you should use actions instead.
+
+[[general-information]]
+=== General Information
+To create a transaction proposal from Defender 2.0, you need to define a few parameters:
+
+* Title: A descriptive name for the proposal. This will be latter shown in the proposal list.
+* Description(optional): A longer description of the proposal. This will be shown in the proposal details.
+* Target Contract: The smart contract that you want to run the transaction on.
+
+[[function]]
+=== Function
+Define the function that you want to call on the target contract. You can select from a list of functions that are available on the contract interface. If the function has parameters, you can define them here.
+
+[[approval-process]]
+=== Approval Process
+Define how you want the transaction to be executed. You can choose from any of the xref:manage.adoc#approval-processes[transaction approval processes] available in Defender 2.0 that you have previously configured or you can optionally create a new one.
+
+[[a-complete-example]]
+== A complete example
+
+The following example uses ethers.js and the relayer integration to send a transaction calling `execute` on a given contract. Before sending the transaction, it checks a `canExecute` view function and validates if a parameter received via a webhook matches a local secret. If the transaction is sent, it returns the hash in the response, which is sent back to the webhook caller.
+
+[source,jsx]
+----
+const { ethers } = require("ethers");
+const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+
+// Entrypoint for the action
+exports.handler = async function(event) {
+  // Load value provided in the webhook payload (not available in schedule or sentinel invocations)
+  const { value } = event.request.body;
+
+  // Compare it with a local secret
+  if (value !== event.secrets.expectedValue) return;
+
+  // Initialize relayer provider and signer
+  const provider = new DefenderRelayProvider(event);
+  const signer = new DefenderRelaySigner(event, provider, { speed: 'fast' });
+
+  // Create contract instance from the signer and use it to send a tx
+  const contract = new ethers.Contract(ADDRESS, ABI, signer);
+  if (await contract.canExecute()) {
+    const tx = await contract.execute();
+    console.log(`Called execute in ${tx.hash}`);
+    return { tx: tx.hash };
+  }
+}
+----
+
+NOTE: The code does not need to wait for the transaction to be mined. Defender 2.0 will take care of monitoring the transaction and resubmitting if needed. The action only needs to send the request and exit.
+
+[[security-considerations]]
+== Security considerations
+
+The code for each action is isolated in Defender 2.0, and actions are restricted via strict access controls to have zero access to other Defender 2.0 internal infrastructure. The only exception is that an action may access its linked relayer, which is negotiated via temporary credentials injected by the action service upon each execution. Still, the action can only call the relayer's exposed methods and has no direct access to the backing private key or any other services.
+
+NOTE: We provide a quickstart tutorial to create an automatic action for a smart contract using Defender 2.0. Check it out xref:tutorial/actions.adoc[here]!

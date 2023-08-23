@@ -1,0 +1,106 @@
+# Modify and assign roles in a role-based access control smart contract
+
+Defender 2.0 allows you to seamlessly oversee and command contract permissions on a grand scale, with the power to view and control access at a granular level. This tutorial shows how to add a smart contract to see and manage its roles, including assigning and removing roles.
+
+[[pre-requisites]]
+== Pre-requisites
+
+* OpenZeppelin Defender 2.0 account. You can create an account for free https://defender.openzeppelin.com/v2/[here, window=_blank].
+* Any external wallet (like Metamask) with an EOA that holds funds in Goerli.
+
+[[add]]
+== 1. Add contract
+
+NOTE: For this tutorial, you will create a contract that implements the role-based Access Control library using https://goerli.etherscan.io/address/0xeBd906d6b14699574bDe9B3293894af8Fe38A198[this, window=_blank] factory deployed to Goerli. Your created contract will automatically assign you the admin role to manage its roles.
+
+. Open the Defender 2.0 https://defender.openzeppelin.com/v2/#/manage/address-book/new[Address Book, window=_blank] in a web browser.
+. Fill the form with the following values and click `Create`:
++
+* Name: `Access Control Factory`
+* Network: `Goerli`
+* Address: `0xeBd906d6b14699574bDe9B3293894af8Fe38A198`
+
++
+image::tutorial-access-control-factory.png[Address Book for factory]
+
+. Navigate to https://defender.openzeppelin.com/v2/#/actions/executable/new?[Transaction Proposals, window=_blank].
+. Fill the **General Information** section with the following values:
++
+* Name: `Create Access Control contract`
+* Target contract: `Access Control Factory`
+
++
+image::tutorial-access-control-tx-general.png[Transaction Proposal general information]
+
+. For the **Function** section, select the `create` function.
+. Open the **Approval Process** section, click the input field and select `Create Approval Process`.
+. Fill the approval process form with the following values and click `Save Changes`:
++
+* Name: `Access Control Admin`
+* Type: `EOA`
+* Address: _Your wallet EOA address_
+
+. Connect your wallet with the EOA address of the approval process created and click `Submit Transaction Proposal`.
++
+image::tutorial-access-control-submit-proposal.gif[Transaction Proposal submit proposal]
+
+. Click on the `Create Access Control contract` transaction proposal.
+. Click the top-right button `Approve and Execute` and confirm the transaction on your wallet.
++
+image::tutorial-access-control-submit-tx.gif[Transaction Proposal submit tx]
+. Scroll down and under **Execution Result**, hover over the first contract to copy its address.
++
+image::tutorial-access-control-copy-address.png[Transaction Proposal copy address]
+. Navigate to the Defender 2.0 https://defender.openzeppelin.com/v2/#/manage/address-book/new Address Book, window=_blank] to add your newly created contract.
+. Fill the form with the following values and click `Create`:
++
+* Name: `Access Control Contract`
+* Network: `Goerli`
+* Address: _Contract address copied from the previous steps_
+* ABI: _Copy and paste the following_
+
++
+[source,json]
+----
+[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"previousAdminRole","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"newAdminRole","type":"bytes32"}],"name":"RoleAdminChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"sender","type":"address"}],"name":"RoleGranted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"sender","type":"address"}],"name":"RoleRevoked","type":"event"},{"inputs":[],"name":"DEFAULT_ADMIN_ROLE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"RANDOM_ROLE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"}],"name":"getRoleAdmin","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"grantRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"hasRole","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"renounceRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"revokeRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}]
+----
+
+. Navigate to the https://defender.openzeppelin.com/v2/#/access-control/contracts[Access Control page, window=_blank].
+. Observe your newly added contract with the number addresses that hold the admin role.
++
+image::tutorial-access-control-page.gif[Access Control page with contract]
+
+. Click on the contract card.
+
+[[contract]]
+== 2. View and modify roles
+
+In your contract-specific page, you can see the addresses that hold the `DEFAULT_ADMIN_ROLE` role, which is the EOA address from the approval process you used to deploy the contract. To make a change, click on the role and input the new address (or remove one address if you want to remove it from the role). Follow these steps to add a new address to the `DEFAULT_ADMIN_ROLE`:
+
+. Click on the `DEFAULT_ADMIN_ROLE` role.
+. Select any address from the dropdown menu or add a new one.
+. Scroll down and click on `Select an Approval Process`.
+. Select your `Access Control Admin` approval process.
+. Check that your wallet is connected with the right EOA address. If not, click on the button below the field to connect your wallet.
+. Click on `Save Changes` and confirm the transaction on your wallet.
+. Wait for the transaction to get executed and check that the new address holds the `DEFAULT_ADMIN_ROLE` role.
+
++
+image::tutorial-access-control-add.gif[Access Control page of contract add role]
+
+For ownable contracts, you can only make changes to the `Owner` role using an approval process that matches the current owner's address. When using a multisig as approval process, you will see the pending proposals on the right side of the page. 
+
+The page sync every minute, and updates when modifying a role.
+
+[[next-steps]]
+== Next steps
+
+Congratulations! You can import other contracts and modify their roles.
+
+NOTE: After configuring Access Control, we recommend seting up Incident Response scenarios. Learn how to use Incident Response with its tutorial xref::tutorial/incident-response.adoc[here].
+
+[[reference]]
+== Reference
+
+* xref::module/access-control.adoc[Access Control Documentation]
+* https://etherscan.io/address/0xbC760FAa5d2366B38C0EF7eC6814A61952504B72[Access Control Contract, window=_blank]

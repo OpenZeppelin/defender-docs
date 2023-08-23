@@ -1,0 +1,37 @@
+[[access-control]]
+= Access Control
+
+Access control allows you to seamlessly oversee and command contract permissions on a grand scale, with the power to view and control access at a granular level. Currently supports https://docs.openzeppelin.com/contracts/4.x/access-control#ownership-and-ownable[ownable, window=_blank] and https://docs.openzeppelin.com/contracts/4.x/access-control#role-based-access-control[role-based, window=_blank] access control.
+
+IMPORTANT: At this time, access control is supported across all networks except *Base Goerli*, *Hadera*, *Fantom Testnet* and *Arbitrum Nova*.
+
+[[use-cases]]
+== Use cases
+
+* Manage ownership of contracts and proxies, including the ability to transfer ownership to a multisig or DAO
+* Identify roles, and remove or give permissions to addresses through multisigs or wallets
+* Import contracts from the supported networks, or use contracts deployed through Defender 2.0.
+
+[[contracts]]
+== Contracts
+
+The main page shows all your contracts from the xref:manage.adoc#address-book[Address Book] that have an access control interface supported. You can also add an existing contract to the Address Book by clicking on the "Add new contract" button. This is a one-time form where you specify the network, address and name. The contract's ABI will be automatically pulled from the respective block explorers if available. If not, you will have to enter the ABI manually. When a contract is added, the main page will update and show it if applicable.
+
+image::access-control.png[Access control main page]
+
+- Not Ownable: contract has no ownership interface
+- Ownable: current owner address
+- Roles: number of roles found in the contract
+
+[[contract]]
+== Contract
+
+The contract page contains all the information about the contract selected, including the name, environment, network, address, and roles found. Defender 2.0 performs on-chain syncs with the contract every minute, with the last sync time found on the top right of the page. 
+
+Access control automatically tries to fetch all roles within a contract, but there's the possibility of missing some. In this case, you can add a role manually by clicking on the "Add new role" button and specifying the name of it.
+
+When modifying a role, you have to choose which admin address to use. In the case of a multisig as admin, the transaction to modify the role will be wrapped into a proposal, which will be pending until approved by the other signers (if any) and executed. You can see the pending proposals on the right side of the page.
+
+image::access-control-contract.png[Access control contract page]
+
+NOTE: We provide a quickstart tutorial to change access control roles using Defender 2.0. Check it out xref:tutorial/access-control.adoc[here]!

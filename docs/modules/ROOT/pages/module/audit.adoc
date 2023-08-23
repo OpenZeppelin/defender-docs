@@ -1,0 +1,44 @@
+[[audit]]
+= Audit
+
+Audit allows you to summon our team of security experts to verify your system works as intended with the highest level of scrutiny. You can track issues and resolutions, and interact directly with auditors for faster and more efficient communication. 
+
+[[use-cases]]
+== Use cases
+
+* Maintain a searchable repository of all smart contract audits and issues.
+* Streamline the interactions between auditors and developers.
+* Automate the fix-review process for all identified issues.
+* Track all issues identified in an audit to completion.
+
+[[audit-reports]]
+== Auditors and Reports
+
+Auditors have special roles in Defender 2.0. Individuals can be assigned to your Defender tenant account with the role of Audit Manager. Audit Managers are able to sync audit reports to Defender 2.0 from GitHub and add other individuals as Auditors. They also identify which members of your team have permission to read or comment on audits.
+
+Once an Audit Manager syncs and delivers an audit report to Defender 2.0, it will be visible to any team members that have been assigned the Audit Read or Audit Comment role. All active and historic audit reports will be visible, and team members can click on any audit report to view the details.
+
+Within each audit, there is an Overview, Issues, and Conclusion section. The Issues section contains a list of all issues identified within the audit report, along with their severity and status. You can filter the list by severity.
+
+image::audit-filter.png[Filter Audit Issues]
+
+Issues within an audit report may contain links directly to the audited source code.
+
+[[fix-review]]
+== Fix-Review process
+
+After an audit report is delivered, the individual issues within a report are open to response and comment until they are each finalized by an Audit Manager. Auditors and team members assigned the Audit Comment role are allowed to respond and comment. Team members may ask questions to Auditors or supply information.
+
+In order to initiate a response on an issue, click on the issue and then click to respond.
+
+image::audit-new-issue.png[Audit Issue Response]
+
+Team members may leave comments for auditors. Specifically, team members can supply links to pull requests (PRs) or commits in their GitHub, which represent fixes associated with a specific issue. Multiple links may be added.
+
+image::audit-reply-issue.png[Audit Issue Reply]
+
+Defender 2.0 will keep and display a trail of all communications between the auditors and team members on each issue.
+
+image::audit-trail.png[Audit Trail]
+
+Depending on the outcome of fixes and reviews, auditors may update the status of issues to Partially Resolved or Resolved. Once the fix-review process is complete for all issues, the Audit Manager will finalize the audit, after which the full trail of activity is visible but no more responses or comments are allowed.

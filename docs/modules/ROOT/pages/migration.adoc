@@ -1,0 +1,19 @@
+= Migration from Defender 1.0
+
+Defender 2.0 is the evolution of Defender 1.0, with an improved user experience, a cleaner interface, and new modules that offer a more cohesive experience across the DevSecOps lifecycle. Migrating to Defender 2.0 is easy, but keep in mind the following changes:
+
+- Active proposals within Admin can now be found at https://defender.openzeppelin.com/v2/#/actions?homeTab=executable[Transaction Proposals,window=_blank].
+- Contracts, Multisigs and EOAs within Admin can now be found at https://defender.openzeppelin.com/v2/#/manage/address-book[Address Book,window=_blank].
+- Autotasks are now known as https://defender.openzeppelin.com/v2/#/actions[Automatic Actions,window=_blank].
+- Sentinels are now known as https://defender.openzeppelin.com/v2/#/monitor[Monitors,window=_blank].
+
+== Enabling Defender 2.0
+
+In order to use Defender 2.0, your Defender 1.0 account must have access to it. You can create a Defender account for free https://defender.openzeppelin.com[here, window=_blank] and request access by emailing us at defender@openzeppelin.com. To enable Defender 2.0 for your account, follow these steps:
+
+. Open https://defender.openzeppelin.com/[Defender, window=_blank] in a web browser.
+. Click on the hamburger icon in the top right corner of the screen.
+. Click on the "Enable Defender 2.0" button at the bottom of the expanded menu.
+
++
+image::enable-defender-2.0-beta.png[Incident Response BoxV2 scenario]
