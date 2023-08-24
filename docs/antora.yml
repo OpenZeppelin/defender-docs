@@ -1,5 +1,6 @@
 name: defender
 title: Defender
 version: v2
+prerelease: -beta
 nav:
   - modules/ROOT/nav.adoc
