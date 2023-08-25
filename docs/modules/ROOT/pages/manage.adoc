@@ -263,6 +263,23 @@ Be sure to copy the secret key, it will be required for access and it will not b
 
 // NOTE: Defender 2.0 integrates with Fireblocks! Check out our guide on how to use Fireblocks for approvals xref:guide/fireblocks.adoc[here].
 
+[[forked-networks]]
+== Forked Networks (coming soon)
+
+In the "Forked Networks" section, you can manage and oversee your forked networks. These networks let you test the efficiency of your security setup and offer a vital chance to identify and fix any problems before launching on testnets and mainnets.
+
+image::manage-forked-networks-create.png[Manage Forked Networks]
+
+Setting up a forked network is accomplished by clicking the "Create Forked Network" button. This action prompts you to provide a name for the forked network and select the base network you intend to fork from. Your choice of forking can be made from any of the networks supported by Defender 2.0. The network's currency symbol will be automatically populated based on the network you select. Additionally, you will need to input the RPC URL for the forked network and, optionally, an API key if it is required for access.
+
+For an improved user experience, you also have the option to include the block explorer URL.
+
+Once created, the network becomes accessible for utilization in any Defender 2.0 module that necessitates network selection. This is particularly valuable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
+
+image::manage-forked-networks-selection.png[Select Forked Network]
+
+NOTE: Once you have created a Forked Network you cannot edit its name. If you need to change the name you will need to delete and recreate the Forked Network. When a forked network is deleted, *all* associated resources will also be deleted. This includes approval processes, relayers, contracts, address book entries, etc.
+
 [[advanced-settings]]
 == Advanced
 

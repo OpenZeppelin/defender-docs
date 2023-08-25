@@ -145,36 +145,37 @@ NOTE: Each invocation can contain up to 25 transactions.
 
 ==== Request Schema
 
-The request body will contain the following structure. The `SentinelConditionRequest` type from the https://www.npmjs.com/package/defender-sdk-actions[defender-sdk-actions, window=_blank] package can be used for custom filters in Typescript.
+The request body will contain the following structure. The `SentinelConditionRequest` type from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used for custom filters in Typescript.
 
 [source,jsx]
 ----
 {
   "events": [
   {
-    "transaction": {                     // eth_getTransactionReceipt response body
-      ...                                // see https://eips.ethereum.org/EIPS/eip-1474
+    "transaction": {                              // eth_getTransactionReceipt response body
+      ...                                         // see https://eips.ethereum.org/EIPS/eip-1474
     },
-    "blockHash": "0xab..123",            // block hash from where this transaction was seen
-    "matchReasons": [                    // the reasons why monitor triggered
+    "blockHash": "0xab..123",                     // block hash from where this transaction was seen
+    "matchReasons": [                             // the reasons why monitor triggered
       {
-        "type": "event",                 // event, function, or transaction
-        "address": "0x123..abc",         // address of the event emitting contract
-        "signature": "...",              // signature of your event/function
-        "condition": "value > 5",        // condition expression (if any)
-        "args": ["5"],                   // parameters by index (unnamed are present)
-        "params": { "value": "5" }       // parameters by name (unnamed are not present)
+        "type": "event",                          // event, function, or transaction
+        "address": "0x123..abc",                  // address of the event emitting contract
+        "signature": "...",                       // signature of your event/function
+        "condition": "value > 5",                 // condition expression (if any)
+        "args": ["5"],                            // parameters by index (unnamed are present)
+        "params": { "value": "5" }                // parameters by name (unnamed are not present)
       }
     ],
-    "matchedAddresses": ["0x000..000"],  // the addresses from this transaction your are monitoring
+    "matchedAddresses": ["0xabc..123"],           // the addresses from this transaction your are monitoring
+    "matchedChecksumAddresses": ["0xAbC..123"],   // the checksummed addresses from this transaction your are monitoring
     "sentinel": {
-      "id": "44a7d5...31df5",            // internal ID of your monitor
-      "name": "Monitor Name",            // name of your monitor
-      "abi": [...],                      // abi of your addresses (or undefined)
-      "addresses": ["0x000..000"],       // addresses your monitor is watching
-      "confirmBlocks": 0,                // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
-      "network": "rinkeby"               // network of your addresses
-      "chainId": 4                       // chain Id of the network
+      "id": "44a7d5...31df5",                     // internal ID of your monitor
+      "name": "Monitor Name",                     // name of your monitor
+      "abi": [...],                               // abi of your addresses (or undefined)
+      "addresses": ["0x000..000"],                // addresses your monitor is watching
+      "confirmBlocks": 0,                         // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
+      "network": "rinkeby"                        // network of your addresses
+      "chainId": 4                                // chain Id of the network
     }
   }
   ]

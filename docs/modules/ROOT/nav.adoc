@@ -21,7 +21,7 @@
 ** xref:manage/integrations.adoc[Integrations]
 * xref:logs.adoc[Logs]
 * xref:dac.adoc[Defender as Code]
-* xref:migration.adoc[Migrating from Defender]
+* xref:faq.adoc[FAQ]
 * xref:changelog.adoc[Changelog]
 
 // * Guides
