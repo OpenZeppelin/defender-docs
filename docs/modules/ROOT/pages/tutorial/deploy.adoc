@@ -6,7 +6,7 @@ Defender 2.0 allows you to easily deploy and upgrade smart contracts across chai
 == Pre-requisites
 
 * OpenZeppelin Defender 2.0 account. You can create an account for free https://defender.openzeppelin.com/v2/[here, window=_blank].
-* https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed
+* https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.17.1)
 * Any IDE or text editor
 * Web browser with Metamask (or any other compatible wallet), funded with Goerli ETH.
 
@@ -204,9 +204,9 @@ async function main() {
 
   const deployment = await defender.deployProxy(Box, [5, defaultApprovalProcess.address], { initializer: "initialize" });
 
-  await deployment.deployed();
+  await deployment.waitForDeployment();
 
-  console.log(`Contract deployed to ${deployment.address}`);
+  console.log(`Contract deployed to ${deployment.getAddress()}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -276,8 +276,8 @@ import { ethers, defender } from "hardhat";
 async function main() {
   const BoxV2 = await ethers.getContractFactory("BoxV2");
 
-  const proposal = await defender.proposeUpgrade('<BOX ADDRESS>', BoxV2);
-    
+  const proposal = await defender.proposeUpgradeWithApproval('<BOX ADDRESS>', BoxV2);
+
   console.log(`Upgrade proposed with URL: ${proposal.url}`);
 }
 
