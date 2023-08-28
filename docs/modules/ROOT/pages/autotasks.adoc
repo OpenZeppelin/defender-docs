@@ -301,7 +301,7 @@ Autotasks are executed in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 
 "graphql": "^15.5.1",
 "graphql-request": "3.4.0",
 "web3": "1.9.0",
-"@openzeppelin/defender-sdk": "^1.0.0"
+"@openzeppelin/defender-sdk": "1.1.0"
 ----
 
 WARNING: Autotasks created with Node.js 12 runtime needs to be migrated to the latest supported runtime.
