@@ -38,7 +38,7 @@ Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environm
 
 [source,jsx]
 ----
-"@openzeppelin/defender-sdk": "^1.0.0",
+"@openzeppelin/defender-sdk": "1.1.0",
 "@datadog/datadog-api-client": "^1.0.0-beta.5",
 "@gnosis.pm/safe-core-sdk": "^0.3.1",
 "@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
