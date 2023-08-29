@@ -38,23 +38,23 @@ Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environm
 
 [source,jsx]
 ----
-"@openzeppelin/defender-2-sdk": "0.1.0",
+"@openzeppelin/defender-sdk": "1.1.0",
 "@datadog/datadog-api-client": "^1.0.0-beta.5",
 "@gnosis.pm/safe-core-sdk": "^0.3.1",
 "@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
-"axios": "0.21.2",
-"axios-retry": "3.1.9",
-"defender-admin-client": "1.37.0-rc.2",
-"defender-autotask-client": "1.37.0-rc.2",
+"axios": "^1.4.0",
+"axios-retry": "3.5.0",
+"defender-admin-client": "1.44.0",
+"defender-autotask-client": "1.44.0",
 "defender-autotask-utils": "1.34.0",
-"defender-kvstore-client": "1.37.0-rc.2",
-"defender-relay-client": "1.37.0-rc.2",
-"defender-sentinel-client": "1.37.0-rc.2",
+"defender-kvstore-client": "1.44.0",
+"defender-relay-client": "1.44.0",
+"defender-sentinel-client": "1.44.0",
 "ethers": "5.5.3",
-"fireblocks-sdk": "^2.3.2",
+"fireblocks-sdk": "^2.5.4",
 "graphql": "^15.5.1",
 "graphql-request": "3.4.0",
-"web3": "1.3.6"
+"web3": "1.9.0"
 ----
 
 NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful! 
