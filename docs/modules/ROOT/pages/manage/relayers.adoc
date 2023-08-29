@@ -24,7 +24,12 @@ image::manage-relayers.png[Manage Relayers]
 
 To create a Relayer, simply click the **Create Relayer** button on the top-right section of the page, specify a name and select the network.
 
-image::manage-relayers-detail.png[Manage Relayers Detail]
+// Using passthrough block to reduce the width of the image and center it.
+++++
+<div class="flex justify-center">
+  <img src="../_images/manage-relayers-detail.png" alt="Manage Relayers Detail" style="width:70%;">
+</div>
+++++
 
 IMPORTANT: Keep in mind that you'll need to fund each Relayer individually with ETH (or the native chain token) to ensure they have enough funds to pay for the gas of the transactions you send. Defender 2.0 will send you an email notification if a Relayer's funds drop below 0.1 ETH.
 
