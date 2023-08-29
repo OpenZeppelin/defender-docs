@@ -6,7 +6,7 @@
 * Defender 2.0 improvements across all components.
 * defender-sdk client packages for 2.0 improvements
 * Update optimism goerli block explorer URL.
-* Bug fixes in Audit, Incident Response & CodeApp.
+* Bug fixes in Audit, Incident Response & Code App.
 
 [[release-2023-08-16]]
 == August 16th, 2023
