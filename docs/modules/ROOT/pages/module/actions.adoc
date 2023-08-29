@@ -338,12 +338,13 @@ You can also use the following template for local development, which will run th
 
 [source,jsx]
 ----
-const { Relayer } = require('defender-relay-client');
+const { Defender } = require('@openzeppelin/defender-sdk');
+
 
 // Entrypoint for the action
 exports.handler = async function(event) {
-  const relayer = new Relayer(event);
-  // Use relayer for sending txs
+  const client = new Defender(credentials);
+  // Use client.relaySigner for sending txs
 }
 
 // To run locally (this code will not be executed in actions)
@@ -358,13 +359,7 @@ if (require.main === module) {
 [[updating-code]]
 === Updating code
 
-You can edit an action's code via the Defender 2.0 interface, or programmatically via API using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`, window=_blank] npm package. The latter allows to upload a code bundle with more than a single file:
-
-```bash
-$ echo API_KEY=$API_KEY >> .env
-$ echo API_SECRET=$API_SECRET >> .env
-$ defender-autotask update-code $AUTOTASK_ID ./path/to/code
-```
+You can edit an action's code via the Defender 2.0 interface, or programmatically via API using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] npm package. The latter allows to upload a code bundle with more than a single file:
 
 NOTE: The code bundle must not exceed 5MB in size after being compressed and base64-encoded, and it must always include an `index.js` at the root of the zip file to act as the entrypoint.
 

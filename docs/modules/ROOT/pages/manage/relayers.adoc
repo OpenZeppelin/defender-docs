@@ -86,14 +86,17 @@ NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using 
 [[sending-transactions]]
 == Sending transactions
 
-The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[`Defender 2.0 SDK Relay Client`, window=_blank] package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
+The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`Defender 2.0 SDK`, window=_blank] package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
 
 [source,jsx]
 ----
-import { Relayer } from 'defender-relay-client';
-const relayer = new Relayer({apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET});
+const { Defender } = require('@openzeppelin/defender-sdk');
+const client = new Defender({
+  relayerApiKey: 'YOUR_API_KEY',
+  relayerApiSecret: 'YOUR_API_SECRET'
+});
 
-const tx = await relayer.sendTransaction({
+const tx = await client.relayerSigner.sendTransaction({
   to, value, data, gasLimit, speed: 'fast'
 });
 ----
@@ -109,19 +112,21 @@ The Relayer client integrates with https://docs.ethers.io/v6/[ethers.js, window=
 
 [source,jsx]
 ----
-const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const { Defender } = require('@openzeppelin/defender-sdk');
 const { ethers } = require('ethers');
  
-const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
-const provider = new DefenderRelayProvider(credentials);
-const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
+const credentials = { relayerApiKey: YOUR_RELAYER_API_KEY, relayerApiSecret: YOUR_RELAYER_API_SECRET };
+const client = new Defender(credentials);
+
+const provider = client.relaySigner.getProvider();
+const signer = client.relaySigner.getSigner(provider, { speed: 'fast', validUntil });
 
 const erc20 = new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
 const tx = await erc20.transfer(beneficiary, 1e18.toString());
 const mined = await tx.wait();
 ----
 
-In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The Platfro signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender 2.0 as a network provider as well. 
+In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender 2.0 as a network provider as well. 
 
 You can read more about the ethers integration https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[here, window=_blank].
 
@@ -132,11 +137,14 @@ The Relayer client integrates with https://web3js.readthedocs.io/[web3.js, windo
 
 [source,jsx]
 ----
-const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const { Defender } = require('@openzeppelin/defender-sdk');
 const Web3 = require('web3');
+
+const credentials = { relayerApiKey: YOUR_RELAYER_API_KEY, relayerApiSecret: YOUR_RELAYER_API_SECRET };
+const client = new Defender(credentials);
+
+const provider = client.relaySigner.getProvider();
  
-const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
-const provider = new DefenderRelayProvider(credentials, { speed: 'fast' });
 const web3 = new Web3(provider);
 
 const [from] = await web3.eth.getAccounts();
