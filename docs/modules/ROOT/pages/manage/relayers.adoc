@@ -24,7 +24,12 @@ image::manage-relayers.png[Manage Relayers]
 
 To create a Relayer, simply click the **Create Relayer** button on the top-right section of the page, specify a name and select the network.
 
-image::manage-relayers-detail.png[Manage Relayers Detail]
+// Using passthrough block to reduce the width of the image and center it.
+++++
+<div class="flex justify-center">
+  <img src="../_images/manage-relayers-detail.png" alt="Manage Relayers Detail" style="width:70%;">
+</div>
+++++
 
 IMPORTANT: Keep in mind that you'll need to fund each Relayer individually with ETH (or the native chain token) to ensure they have enough funds to pay for the gas of the transactions you send. Defender 2.0 will send you an email notification if a Relayer's funds drop below 0.1 ETH.
 
@@ -57,7 +62,12 @@ You can limit a Relayer's behavior by specifying policies.
 
 To configure a Relayer's policies, go to the https://defender.openzeppelin.com/v2/#/manage/relayers[Manage page, window=_blank], select the Relayer, and then go to the *Policies* tab. You will then see a form where you can opt to enable policies and tweak their parameters.
 
-image::manage-relayer-policies.png[Manage Relayer Policies]
+// Using passthrough block to reduce the width of the image and center it.
+++++
+<div class="flex justify-center">
+  <img src="../_images/manage-relayer-policies.png" alt="Manage Relayer Policies" style="width:65%;">
+</div>
+++++
 
 [[gas-price-cap-policy]]
 ==== Gas price cap 
@@ -186,7 +196,12 @@ A Relayer may send a private transaction in any of the following ways:
 - Sending a transaction via API with `isPrivate` parameter set to `true`
 - Sending a transaction via UI and checking the Mempool Visibility checkbox
 
-image::relayer-mempool-visibility-check.png[Mempool visibility checkbox on Relayer's send transaction view]
+// Using passthrough block to reduce the width of the image and center it.
+++++
+<div class="flex justify-center">
+  <img src="../_images/relayer-mempool-visibility-check.png" alt="Mempool visibility checkbox on Relayer's send transaction view" style="width:65%;">
+</div>
+++++
 
 NOTE: Sending a transaction with the `isPrivate` flag set to `true` to a network that doesn't support private transactions will be rejected and discarded by the Relayer.
 
