@@ -12,25 +12,25 @@ Yes. The same features should be available under the following new names, albeit
 * Active proposals within Admin can now be found at Transaction Proposals under Actions
 * Contracts, Multisigs and EOAs within Admin can now be found in Address Book under the Manage section
 
-*Actions - formally Autotask*
+*Actions - formerly Autotask*
 
-image::actions-autotask-faq.png[Actions - formally Autotask]
+image::actions-autotask-faq.png[Actions - formerly Autotask]
 
-*Monitors - formally Sentinels*
+*Monitors - formerly Sentinels*
 
-image::monitors-sentinels-faq.png[Monitors - formally Sentinels]
+image::monitors-sentinels-faq.png[Monitors - formerly Sentinels]
 
 *Relayers - located under the Manage section*
 
 image::relayers-faq.png[Relayers - located under the Manage section]
 
-*Transaction Proposals - formally Admin proposals*
+*Transaction Proposals - formerly Admin proposals*
 
-image::transaction-proposals-faq.png[Transaction Proposals - formally Admin proposals]
+image::transaction-proposals-faq.png[Transaction Proposals - formerly Admin proposals]
 
-*Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formally under the Admin section*
+*Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formerly under the Admin section*
 
-image::address-book-faq.png[Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formally under the Admin section]
+image::address-book-faq.png[Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formerly under the Admin section]
 
 === How can I get early access to Defender 2.0 beta version?
 
