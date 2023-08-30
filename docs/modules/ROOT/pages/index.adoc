@@ -71,7 +71,7 @@ If there is any other network or layer-2 solution you would like to use from Def
 
 [[integrations]]
 == Integrations
-Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:manage/integrations.adoc[here].
+Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:integrations.adoc[here].
 
 [[feedback]]
 == Feedback
