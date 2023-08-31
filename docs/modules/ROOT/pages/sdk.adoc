@@ -2,11 +2,11 @@
 
 https://www.npmjs.com/package/@openzeppelin/defender-sdk[Defender SDK, window=_blank] (Formerly defender-client packages) is a node package that allows developers to interact with Defender 2.0 programatically using Javascript/Typescript.
 
-See https://github.com/OpenZeppelin/defender-sdk[open-source repository, window=_blank] or https://www.sdk-docs.defender.openzeppelin.com/[sdk documentation, window=_blank] for more detailed information.
+See https://github.com/OpenZeppelin/defender-sdk[sdk repository, window=_blank] or https://www.api-docs.defender.openzeppelin.com/[sdk documentation, window=_blank] for more detailed information.
 
 == Installation
 
-You can install the whole package using NPM
+You can install the whole package using NPM or any of your favorite package managers
 
 ```
 npm install @openzeppelin/defender-sdk
