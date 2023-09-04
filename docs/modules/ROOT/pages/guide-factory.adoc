@@ -7,15 +7,15 @@ This guide shows how you can use Defender to automate security monitoring for a 
 This automation is achieved through the following relationship between Defender components:
 
 * A Sentinel watches for every successful Event emitted by the contract that creates a clone. If detected, it triggers an Autotask to run and https://docs.openzeppelin.com/defender/sentinel#autotask_events[passes along information] about the transaction
-* The Autotask makes use of the https://www.npmjs.com/package/defender-admin-client[Admin API] to add the address of the newly created contract to Admin dashboard for easy monitoring of clone contract state
-* The Autotask uses the https://www.npmjs.com/package/defender-sentinel-client[Sentinel API] to add the clone address to the list of addresses watched by a Contract Sentinel
+* The Autotask makes use of the https://www.npmjs.com/package/@openzeppelin/defender-admin-client[Admin API] to add the address of the newly created contract to Admin dashboard for easy monitoring of clone contract state
+* The Autotask uses the https://www.npmjs.com/package/@openzeppelin/defender-sentinel-client[Sentinel API] to add the clone address to the list of addresses watched by a Contract Sentinel
 
 In this case, the contract ABI can be pre-supplied since clone contracts will have identical ABIs. Alternatively, you may be able to dynamically retrieve the ABI from a verified contract at a given address using https://docs.etherscan.io/api-endpoints/contracts[Etherscan’s API].
 
 [[generate-api-key]]
 == Generate API Key
 
-To programmatically add a contract to the Admin dashboard, the `defender-admin-client` API requires credentials in the form of an API key and secret.
+To programmatically add a contract to the Admin dashboard, the `@openzeppelin/defender-admin-client` API requires credentials in the form of an API key and secret.
 
 You can use an existing API key or create one to be used solely for this purpose.
 
@@ -40,7 +40,7 @@ Paste in the following Autotask code and hit Create.
 
 [source,js]
 ----
-const { AdminClient } = require('defender-admin-client')
+const { AdminClient } = require('@openzeppelin/defender-admin-client')
 
 exports.handler = async function (event) {
   const credentials = {
@@ -205,10 +205,10 @@ Add the https://github.com/offgridauthor/defender-admin-autoadd/blob/main/autota
 
 [source,js]
 ----
-const { SentinelClient } = require('defender-sentinel-client')
+const { SentinelClient } = require('@openzeppelin/defender-sentinel-client')
 ----
 
-The same API key used by `defender-admin-client` can be used, provided the key has the necessary permissions for editing Sentinels.
+The same API key used by `@openzeppelin/defender-admin-client` can be used, provided the key has the necessary permissions for editing Sentinels.
 
 Note that the `subscriberId` variable refers to the ID of the Sentinel. You can find this value by:
 

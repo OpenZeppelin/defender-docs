@@ -5,12 +5,12 @@ The Sentinel API allows you to programmatically create and manage sentinels.
 
 Requests need to be authenticated with a bearer token, which is negotiated from the Team API Key with the corresponding capability. Refer to the xref:api-auth.adoc[authentication section] for info on how to negotiate it.
 
-NOTE: We recommend you use the https://www.npmjs.com/package/defender-sentinel-client[defender-sentinel-client] npm package for simplifying interactions with the Sentinel API.
+NOTE: We recommend you use the https://www.npmjs.com/package/@openzeppelin/defender-sentinel-client[@openzeppelin/defender-sentinel-client] npm package for simplifying interactions with the Sentinel API.
 
-NOTE: It is not recommended to use the https://www.npmjs.com/package/defender-sentinel-client[defender-sentinel-client] npm package in a browser environment as sensitive keys would be exposed publicly.
+NOTE: It is not recommended to use the https://www.npmjs.com/package/@openzeppelin/defender-sentinel-client[@openzeppelin/defender-sentinel-client] npm package in a browser environment as sensitive keys would be exposed publicly.
 
 ```js
-const { SentinelClient } = require('defender-sentinel-client');
+const { SentinelClient } = require('@openzeppelin/defender-sentinel-client');
 const creds = { apiKey: ADMIN_API_KEY, apiSecret: ADMIN_API_SECRET };
 const client = new SentinelClient(creds);
 ```

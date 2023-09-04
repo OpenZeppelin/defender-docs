@@ -142,5 +142,5 @@ Now that all the building blocks have been laid, the system is ready to be teste
 == Resources
 
 * https://docs.openzeppelin.com/defender/sentinel[OpenZeppelin Defender Sentinel Documentation]
-* https://www.npmjs.com/package/defender-sentinel-client[OpenZeppelin Defender Sentinel Client API]
+* https://www.npmjs.com/package/@openzeppelin/defender-sentinel-client[OpenZeppelin Defender Sentinel Client API]
 * https://www.npmjs.com/package/@openzeppelin/wizard[OpenZeppelin Contracts Wizard API]

@@ -37,7 +37,7 @@ video::XJ3UUNYlbxg[youtube]
 [[api-access]]
 == API Access
 
-You can programmatically add contracts to your Admin dashboard and create new proposals via the xref:admin-api-reference.adoc[Defender Admin API]. Check out the https://www.npmjs.com/package/defender-admin-client[defender-admin-client] npm package for more info.
+You can programmatically add contracts to your Admin dashboard and create new proposals via the xref:admin-api-reference.adoc[Defender Admin API]. Check out the https://www.npmjs.com/package/@openzeppelin/defender-admin-client[@openzeppelin/defender-admin-client] npm package for more info.
 
 [[proposal-types]]
 == Proposal types
@@ -120,7 +120,7 @@ When using a Gnosis Safe, Defender Admin will synchronize all signatures to and 
 
 NOTE: The Safe contract requires all its proposals to be executed in order. If you have gathered all signatures for a proposal and still cannot execute it, make sure there are no prior proposals pending execution.
 
-Gnosis Safe wallets also allow executing `DELEGATECALL`s into other contracts, in order to execute arbitrary code in the context of the multisig. You can currently create an Admin action proposal to issue a delegate call via the API using the https://www.npmjs.com/package/defender-admin-client[`defender-admin-client`]. 
+Gnosis Safe wallets also allow executing `DELEGATECALL`s into other contracts, in order to execute arbitrary code in the context of the multisig. You can currently create an Admin action proposal to issue a delegate call via the API using the https://www.npmjs.com/package/@openzeppelin/defender-admin-client[`@openzeppelin/defender-admin-client`]. 
 
 [[send-funds]]
 ==== Send funds
@@ -353,7 +353,7 @@ See below an example of an exact match.
 
 image::defender-admin-verification-exact.png[Exact verification]
 
-To verify programmatically, we strongly recommend using the https://www.npmjs.com/package/@openzeppelin/hardhat-defender#verification[hardhat-defender plugin]. However, you may also use https://www.npmjs.com/package/defender-admin-client[defender-client package] (https://github.com/OpenZeppelin/defender-client/tree/master/examples/verify-contract[see a verification example here]), or interact with the raw REST API directly. These components build upon each other, so at the end of the day all capabilities are available through any of them. We still recommend you use the `hardhat-defender` plugin for the most streamlined experience.
+To verify programmatically, we strongly recommend using the https://www.npmjs.com/package/@openzeppelin/hardhat-defender#verification[hardhat-defender plugin]. However, you may also use https://www.npmjs.com/package/@openzeppelin/defender-admin-client[@openzeppelin/defender-client package] (https://github.com/OpenZeppelin/defender-client/tree/master/examples/verify-contract[see a verification example here]), or interact with the raw REST API directly. These components build upon each other, so at the end of the day all capabilities are available through any of them. We still recommend you use the `hardhat-defender` plugin for the most streamlined experience.
 
 === Verifying any contract
 
@@ -363,7 +363,7 @@ The UI for verification in this case can be found by hovering any contract addre
 
 image::defender-admin-verification-any.png[Verification of any contract]
 
-Similarly, you can also trigger programmatical verification of any contract using the `defender-admin-client` client library or the `@openzeppelin/hardhat-defender` plugin for Hardhat. It is not necessary for the verified contract to take part in an upgrade.
+Similarly, you can also trigger programmatical verification of any contract using the `@openzeppelin/defender-admin-client` client library or the `@openzeppelin/hardhat-defender` plugin for Hardhat. It is not necessary for the verified contract to take part in an upgrade.
 
 [[security-considerations]]
 == Security considerations
