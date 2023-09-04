@@ -21,6 +21,7 @@
 * xref:integrations.adoc[Integrations]
 * xref:logs.adoc[Logs]
 * xref:dac.adoc[Defender as Code]
+* xref:sdk.adoc[SDK]
 * xref:faq.adoc[FAQ]
 * xref:changelog.adoc[Changelog]
 
