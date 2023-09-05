@@ -229,6 +229,17 @@ Success! Your contracts should have been deployed in the Goerli testnet. Navigat
 
 image::tutorial-deploy-contract.png[Deployed contract]
 
+
+[[deploy-caveat]]
+=== Caveats
+
+By default, Defender 2.0 utilizes the `CREATE` opcode to deploy contracts. This method creates a new contract instance and assigns it a unique address on the Ethereum blockchain. This address is determined by the transaction's nonce and sender's address.
+
+Defender 2.0 also offers an advanced deployment option using the `CREATE2` opcode. When a deployment request includes a `salt`, Defender 2.0 switches to using the `CREATE2` opcode. This opcode allows you to deploy contracts to a deterministic address based on a combination of the sender's `address`, `salt`, and contract `bytecode`.
+
+
+WARNING: While `CREATE2` offers deterministic contract addresses, it alters `msg.sender` behavior. In `CREATE2` deployments, `msg.sender` in the constructor or initialization code refers to the factory address, not the deploying address as in standard `CREATE` deployments. This distinction can impact contract logic, so careful testing and consideration are advised when opting for `CREATE2`
+
 [[upgrade]]
 == 3. Upgrade
 

@@ -79,3 +79,5 @@ After an environment is configured, you can use it for deployments and upgrades.
 Both the API and the Hardhat plugin allow using different relayers for each contract deployment. However, if none is specified, Defender 2.0 will identify the target network and use the associated default relayer. If the environment is configured with the block explorer API key, Defender 2.0 will also automatically verify the contracts.
 
 NOTE: We provide a quickstart tutorial to deploy and upgrade a smart contract using Defender 2.0. Check it out xref:tutorial/deploy.adoc[here]!
+
+WARNING: Using `CREATE2` may affect `msg.sender` behavior; see documentation for details xref:tutorial/deploy.adoc#deploy-caveat[here]!
