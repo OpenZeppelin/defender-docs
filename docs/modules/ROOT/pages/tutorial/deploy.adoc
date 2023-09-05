@@ -233,7 +233,7 @@ image::tutorial-deploy-contract.png[Deployed contract]
 [[deploy-caveat]]
 === Caveats
 
-By default, Defender 2.0 utilizes the `CREATE` opcode to deploy contracts. This method creates a new contract instance and assigns it a unique address on the Ethereum blockchain. This address is determined by the transaction's nonce and sender's address.
+By default, Defender 2.0 utilizes the `CREATE` opcode to deploy contracts. This method creates a new contract instance and assigns it a unique address. This address is determined by the transaction's nonce and sender's address.
 
 Defender 2.0 also offers an advanced deployment option using the `CREATE2` opcode. When a deployment request includes a `salt`, Defender 2.0 switches to using the `CREATE2` opcode. This opcode allows you to deploy contracts to a deterministic address based on a combination of the sender's `address`, `salt`, and contract `bytecode`.
 
