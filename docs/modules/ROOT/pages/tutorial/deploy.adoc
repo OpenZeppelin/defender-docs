@@ -61,10 +61,6 @@ image::tutorial-deploy-upgrade-wizard.png[Deploy block upgrade wizard]
 +
 image::tutorial-deploy-end-wizard.png[Deploy block end wizard]
 
-. Copy the wallet address of your relayer through the icon, and send some Goerli ETH to it. Although this relayer will send the deploy transaction, you will execute the upgrade transaction through your wallet, so leave some Goerli ETH in your wallet.
-
-image::tutorial-deploy-copy-relayer.png[Environment page copy relayer address]
-
 NOTE: You configured the test environment to learn without the risk of losing actual funds. The steps are the same to set up a production environment.
 
 [[hardhat-integration]]
