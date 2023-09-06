@@ -202,7 +202,7 @@ async function main() {
 
   await deployment.waitForDeployment();
 
-  console.log(`Contract deployed to ${deployment.getAddress()}`);
+  console.log(`Contract deployed to ${await deployment.getAddress()}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
