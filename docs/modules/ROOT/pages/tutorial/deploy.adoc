@@ -187,7 +187,7 @@ This is a contract that replicates a box, with three functions:
 * `removeObject()`: Decreases the number of objects in the box by removing one.
 * `_authorizeUpgrade()`: Points the proxy to a new implementation address.
 
-. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defneder 2.0 with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
+. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defender 2.0 with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
 +
 [source,jsx]
 ----
