@@ -53,7 +53,7 @@ If you connect your Autotask to a Relayer, then Defender will automatically inje
 
 [source,jsx]
 ----
-const { Relayer } = require('defender-relay-client');
+const { Relayer } = require('@openzeppelin/defender-relay-client');
  
 exports.handler = async function(event) {
   const relayer = new Relayer(event);
@@ -63,11 +63,11 @@ exports.handler = async function(event) {
 
 This allows you to send transactions using your Relayer from your Autotasks without having to set up any API keys or secrets. Furthermore, you can also use the Relayer JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
 
-If you want to https://www.npmjs.com/package/defender-relay-client#ethersjs[use `ethers.js`] for making queries or sending transactions via your Relayer, change the above to:
+If you want to https://www.npmjs.com/package/@openzeppelin/defender-relay-client#ethersjs[use `ethers.js`] for making queries or sending transactions via your Relayer, change the above to:
 
 [source,jsx]
 ----
-const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const { DefenderRelaySigner, DefenderRelayProvider } = require('@openzeppelin/defender-relay-client/lib/ethers');
 const ethers = require('ethers');
  
 exports.handler = async function(event) {
@@ -79,11 +79,11 @@ exports.handler = async function(event) {
 }
 ----
 
-And if you prefer https://www.npmjs.com/package/defender-relay-client#web3js[using `web3.js`], then use the following snippet:
+And if you prefer https://www.npmjs.com/package/@openzeppelin/defender-relay-client#web3js[using `web3.js`], then use the following snippet:
 
 [source,jsx]
 ----
-const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const { DefenderRelayProvider } = require('@openzeppelin/defender-relay-client/lib/web3');
 const Web3 = require('web3');
  
 exports.handler = async function(event) {
@@ -322,7 +322,7 @@ You can also use the following template for local development, which will run yo
 
 [source,jsx]
 ----
-const { Relayer } = require('defender-relay-client');
+const { Relayer } = require('@openzeppelin/defender-relay-client');
 
 // Entrypoint for the Autotask
 exports.handler = async function(event) {
@@ -360,7 +360,7 @@ export async function handler(event: AutotaskEvent) {
 [[updating-code]]
 === Updating code
 
-You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file:
+You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/@openzeppelin/defender-autotask-client[`@openzeppelin/defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file:
 
 ```bash
 $ echo API_KEY=$API_KEY >> .env

@@ -5,9 +5,9 @@ The Admin API allows you to programmatically create new Admin proposals.
 
 Requests need to be authenticated with a bearer token, which is negotiated from the Team API Key with the corresponding capability. Refer to the xref:api-auth.adoc[authentication section] for info on how to negotiate it.
 
-NOTE: We recommend you use the https://www.npmjs.com/package/defender-admin-client[defender-admin-client] npm package for simplifying interactions with the Admin API.
+NOTE: We recommend you use the https://www.npmjs.com/package/@openzeppelin/defender-admin-client[@openzeppelin/defender-admin-client] npm package for simplifying interactions with the Admin API.
 
-NOTE: It is not recommended to use the https://www.npmjs.com/package/defender-admin-client[defender-admin-client] npm package in a browser environment as sensitive keys would be exposed publicly.
+NOTE: It is not recommended to use the https://www.npmjs.com/package/@openzeppelin/defender-admin-client[@openzeppelin/defender-admin-client] npm package in a browser environment as sensitive keys would be exposed publicly.
 
 [[proposals-endpoint]]
 == Proposals Endpoint
@@ -150,7 +150,7 @@ curl \
     "https://defender-api.openzeppelin.com/admin/contracts/${CONTRACT_ID}/proposals/${PROPOSAL_ID}/archived"
 ```
 
-The same call can be made using `defender-admin-client`:
+The same call can be made using `@openzeppelin/defender-admin-client`:
 
 ```js
 await client.archiveProposal(contractId, proposalId);
@@ -173,7 +173,7 @@ curl \
     "https://defender-api.openzeppelin.com/admin/contracts/${CONTRACT_ID}/proposals/${PROPOSAL_ID}"
 ```
 
-The same call can be made using `defender-admin-client` passing the contract and proposal IDs:
+The same call can be made using `@openzeppelin/defender-admin-client` passing the contract and proposal IDs:
 
 ```js
 await client.getProposal(contractId, proposalId);

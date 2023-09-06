@@ -5,9 +5,9 @@ The Autotask API allows you to programmatically list, create, retrieve, update, 
 
 Requests need to be authenticated with a bearer token, which is negotiated from the Team API Key with the corresponding capability. Refer to the xref:api-auth.adoc[authentication section] for info on how to negotiate it.
 
-NOTE: We recommend you use the https://www.npmjs.com/package/defender-autotask-client[defender-autotask-client] npm package for simplifying interactions with the Autotask API.
+NOTE: We recommend you use the https://www.npmjs.com/package/@openzeppelin/defender-autotask-client[@openzeppelin/defender-autotask-client] npm package for simplifying interactions with the Autotask API.
 
-NOTE: It is not recommended to use the https://www.npmjs.com/package/defender-autotask-client[defender-autotask-client] npm package in a browser environment as sensitive keys would be exposed publicly.
+NOTE: It is not recommended to use the https://www.npmjs.com/package/@openzeppelin/defender-autotask-client[@openzeppelin/defender-autotask-client] npm package in a browser environment as sensitive keys would be exposed publicly.
 
 [[create-endpoint]]
 == Create Endpoint
@@ -28,7 +28,7 @@ interface CreateAutotaskRequest {
 }
 ```
 
-Using the `defender-autotask-client`, you can call the `create` endpoint as such:
+Using the `@openzeppelin/defender-autotask-client`, you can call the `create` endpoint as such:
 
 ```js
 const myAutotask = {
@@ -48,7 +48,7 @@ await client.create(myAutotask);
 
 The `autotasks` endpoint is used for retrieving an Autotask via a `GET` request.
 
-Using the `defender-autotask-client`, you can call the `list` endpoint as such:
+Using the `@openzeppelin/defender-autotask-client`, you can call the `list` endpoint as such:
 
 ```js
 await client.list();
@@ -83,7 +83,7 @@ An example response:
 
 The `autotasks/{id}` endpoint is used for retrieving an Autotask via a `GET` request. The endpoint accepts an autotask Id.
 
-Using the `defender-autotask-client`, you can call the `get` endpoint as such:
+Using the `@openzeppelin/defender-autotask-client`, you can call the `get` endpoint as such:
 
 ```js
 await client.get("671d1f80-99e3-4829-aa15-f01e3298e428");
@@ -121,7 +121,7 @@ interface UpdateAutotaskRequest {
 }
 ```
 
-Using the `defender-autotask-client`, you can call the `update` endpoint as such:
+Using the `@openzeppelin/defender-autotask-client`, you can call the `update` endpoint as such:
 
 ```js
 const myAutotask = {
@@ -153,7 +153,7 @@ An example response:
 
 The `autotasks/{id}` endpoint is used for deleting an Autotask via a `DELETE` request. The endpoint accepts an autotask Id.
 
-Using the `defender-autotask-client`, you can call the `delete` endpoint as such:
+Using the `@openzeppelin/defender-autotask-client`, you can call the `delete` endpoint as such:
 
 ```js
 await client.delete("671d1f80-99e3-4829-aa15-f01e3298e428");
@@ -184,7 +184,7 @@ curl \
     "https://defender-api.openzeppelin.com/autotask/autotasks/${AUTOTASKID}/code"
 ```
 
-Or through `defender-autotask-client` as such:
+Or through `@openzeppelin/defender-autotask-client` as such:
 
 ```js
 await client.updateCodeFromFolder("671d1f80-99e3-4829-aa15-f01e3298e428", './code');
@@ -208,7 +208,7 @@ curl \
     "https://defender-api.openzeppelin.com/autotask/autotasks/${AUTOTASKID}/runs/manual"
 ```
 
-Or through `defender-autotask-client` as such:
+Or through `@openzeppelin/defender-autotask-client` as such:
 
 ```js
 await client.runAutotask("671d1f80-99e3-4829-aa15-f01e3298e428");
@@ -263,7 +263,7 @@ curl \
     "https://defender-api.openzeppelin.com/autotask/secrets"
 ```
 
-Or through `defender-autotask-client` as shown below. Both the `deletes` array and `secrets` object are required to be present in the payload, but can contain empty values. For example, these calls are all valid:
+Or through `@openzeppelin/defender-autotask-client` as shown below. Both the `deletes` array and `secrets` object are required to be present in the payload, but can contain empty values. For example, these calls are all valid:
 
 ```js
 await client.createSecrets({ deletes: [], secrets: { foo: 'bar' } });
