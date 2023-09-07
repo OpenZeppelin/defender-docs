@@ -15,6 +15,8 @@
 ** xref:tutorial/actions.adoc[Actions]
 ** xref:tutorial/access-control.adoc[Access Control]
 ** xref:tutorial/incident-response.adoc[Incident Response]
+** xref:tutorial/forked-network.adoc[Forked Networks]
+
 
 * xref:manage.adoc[Manage]
 ** xref:manage/relayers.adoc[Relayers]
