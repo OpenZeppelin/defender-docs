@@ -86,7 +86,7 @@ const deployment = await client.deploy.deployContract({
     artifactPayload: JSON.stringify(artifactFile),
     licenseType: 'MIT',
     verifySourceCode: true,
-    // Only provide the `salt` is you wish to use `CREATE2`. Otherwise, omit this field to use `CREATE`.
+    // Only provide the `salt` if you wish to use `CREATE2`. Otherwise, omit this field to use `CREATE`.
     salt: "a-unique-salt" 
 });
 
