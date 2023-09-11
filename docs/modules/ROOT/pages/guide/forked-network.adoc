@@ -3,8 +3,6 @@
 Defender 2.0 empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and incident response. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
 
 [[pre-requisites]]
-
-[[pre-requisites]]
 == Pre-requisites
 
 * OpenZeppelin Defender 2.0 account. You can create an account for free https://defender.openzeppelin.com/v2/[here, window=_blank].
