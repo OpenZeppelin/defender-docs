@@ -50,7 +50,7 @@ image::tutorial-forked-networks-deploy-intro.png[Deploy landing page]
 image::tutorial-forked-networks-deploy-wizard-step1.png[Delpoy wizard step 1]
 
 . Click on *Next* to continue. 
-. When asked to provide a block explorer API key, click on *Skip this step*. Currently it is not possible to use block explorer API keys for forked networks.
+. When asked to provide a block explorer API key, click on *Skip this step* as it's *not possible to use block explorer API keys for forked networks*.
 +
 image::tutorial-forked-networks-deploy-wizard-step2.png[Delpoy wizard step 2]
 
@@ -58,7 +58,7 @@ image::tutorial-forked-networks-deploy-wizard-step2.png[Delpoy wizard step 2]
 +
 image::tutorial-forked-networks-deploy-wizard-step3.png[Delpoy wizard step 3]
 
-. Lastly, click on *Skip this step* when asked to select an upgrade approval process. Currently, upgrades are not supported for forked networks. 
+. Lastly, click on *Skip this step* when asked to select an upgrade approval process. *Currently, upgrades are not supported for forked networks*. 
 . Make sure to copy the generated team API keys and store them in a safe place. You will need them to interact with your deploy environment. 
 
 Your deploy environment is now setup!
@@ -70,9 +70,9 @@ NOTE: You should fund the relayer account with enough ETH to cover the gas costs
 
 You will deploy a smart contract on the forked network you just added to Defender 2.0. To deploy a smart contract, follow these steps:
 
-. Setup a javascript project and install the https://www.npmjs.com/package/@openzeppelin/defender-sdk-deploy-client[defender-sdk-deploy-client] NPM package. Alternatively, you can use the https://github.com/OpenZeppelin/defender-sdk/blob/main/examples/deploy-contract/index.js[defender-sdk delpoy example script] provided in the OpenZeppelin Defender SDK repository.
+. Setup a JavaScript project and install the https://www.npmjs.com/package/@openzeppelin/defender-sdk-deploy-client[defender-sdk-deploy-client, window=_blank] NPM package. Alternatively, you can use the https://github.com/OpenZeppelin/defender-sdk/blob/main/examples/deploy-contract/index.js[defender-sdk delpoy example script, window=_blank] provided in the OpenZeppelin Defender SDK repository.
 . The deployment code will look something like this:
-
++
 ```js
 // Retrieve and confirm the approval process for deployment on your forked network
 const config = await client.deploy.getDeployApprovalProcess('mainnet-fork');
@@ -95,7 +95,7 @@ const deploymentStatus = await client.deploy.getDeployedContract(deployment.depl
 console.log(deploymentStatus);
 ```
 . Run the script to deploy the contract. *Note* that providing a `salt` will deploy the contract using `CREATE2`. Otherwise, the contract will be deployed using the `CREATE` opcode. Visit the documentation for more information on the https://docs.openzeppelin.com/defender/v2/tutorial/deploy#deploy-caveat[caveats of deployment].
-. Once deployed, you can track the deployment status on the Defender 2.0 Deploy dashboard.
+. Once deployed, you can track the deployment status on the https://defender.openzeppelin.com/v2/#/deploy/environment/production[Defender 2.0 Deploy dashboard, window=_blank].
 
 
 [[next-steps]]
