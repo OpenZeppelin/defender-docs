@@ -349,12 +349,14 @@ exports.handler = async function(event) {
 
 // To run locally (this code will not be executed in actions)
 if (require.main === module) {
-  const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
+  const { RELAYER_API_KEY: apiKey, RELAYER_API_SECRET: apiSecret } = process.env;
   exports.handler({ apiKey, apiSecret })
     .then(() => process.exit(0))
     .catch(error => { console.error(error); process.exit(1); });
 }
 ----
+
+Remember to send any other value that your action expects in the `event` object, such as secrets or monitor events.
 
 [[updating-code]]
 === Updating code
