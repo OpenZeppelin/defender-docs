@@ -61,10 +61,6 @@ image::tutorial-deploy-upgrade-wizard.png[Deploy block upgrade wizard]
 +
 image::tutorial-deploy-end-wizard.png[Deploy block end wizard]
 
-. Copy the wallet address of your relayer through the icon, and send some Goerli ETH to it. Although this relayer will send the deploy transaction, you will execute the upgrade transaction through your wallet, so leave some Goerli ETH in your wallet.
-
-image::tutorial-deploy-copy-relayer.png[Environment page copy relayer address]
-
 NOTE: You configured the test environment to learn without the risk of losing actual funds. The steps are the same to set up a production environment.
 
 [[hardhat-integration]]
@@ -187,7 +183,7 @@ This is a contract that replicates a box, with three functions:
 * `removeObject()`: Decreases the number of objects in the box by removing one.
 * `_authorizeUpgrade()`: Points the proxy to a new implementation address.
 
-. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defneder 2.0 with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
+. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defender 2.0 with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
 +
 [source,jsx]
 ----
@@ -206,7 +202,7 @@ async function main() {
 
   await deployment.waitForDeployment();
 
-  console.log(`Contract deployed to ${deployment.getAddress()}`);
+  console.log(`Contract deployed to ${await deployment.getAddress()}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
