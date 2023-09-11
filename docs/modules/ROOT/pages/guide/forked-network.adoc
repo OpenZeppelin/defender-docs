@@ -5,7 +5,7 @@ Defender 2.0 empowers you to harness your customized network forks for deploying
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can create an account for free https://defender.openzeppelin.com/v2/[here, window=_blank].
+You can sign up for early access to Defender 2.0 https://www.openzeppelin.com/defender2-waitlist[here, window=_blank].
 
 [[configure-forked-network]]
 == 1. Configure your forked network
