@@ -24,7 +24,12 @@ image::manage-relayers.png[Manage Relayers]
 
 To create a Relayer, simply click the **Create Relayer** button on the top-right section of the page, specify a name and select the network.
 
-image::manage-relayers-detail.png[Manage Relayers Detail]
+// Using passthrough block to reduce the width of the image and center it.
+++++
+<div class="flex justify-center">
+  <img src="../_images/manage-relayers-detail.png" alt="Manage Relayers Detail" style="width:70%;">
+</div>
+++++
 
 IMPORTANT: Keep in mind that you'll need to fund each Relayer individually with ETH (or the native chain token) to ensure they have enough funds to pay for the gas of the transactions you send. Defender 2.0 will send you an email notification if a Relayer's funds drop below 0.1 ETH.
 
@@ -57,7 +62,12 @@ You can limit a Relayer's behavior by specifying policies.
 
 To configure a Relayer's policies, go to the https://defender.openzeppelin.com/v2/#/manage/relayers[Manage page, window=_blank], select the Relayer, and then go to the *Policies* tab. You will then see a form where you can opt to enable policies and tweak their parameters.
 
-image::manage-relayer-policies.png[Manage Relayer Policies]
+// Using passthrough block to reduce the width of the image and center it.
+++++
+<div class="flex justify-center">
+  <img src="../_images/manage-relayer-policies.png" alt="Manage Relayer Policies" style="width:65%;">
+</div>
+++++
 
 [[gas-price-cap-policy]]
 ==== Gas price cap 
@@ -86,14 +96,17 @@ NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using 
 [[sending-transactions]]
 == Sending transactions
 
-The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[`Defender 2.0 SDK Relay Client`, window=_blank] package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
+The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`Defender 2.0 SDK`, window=_blank] package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
 
 [source,jsx]
 ----
-import { Relayer } from 'defender-relay-client';
-const relayer = new Relayer({apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET});
+const { Defender } = require('@openzeppelin/defender-sdk');
+const client = new Defender({
+  relayerApiKey: 'YOUR_API_KEY',
+  relayerApiSecret: 'YOUR_API_SECRET'
+});
 
-const tx = await relayer.sendTransaction({
+const tx = await client.relayerSigner.sendTransaction({
   to, value, data, gasLimit, speed: 'fast'
 });
 ----
@@ -109,19 +122,21 @@ The Relayer client integrates with https://docs.ethers.io/v6/[ethers.js, window=
 
 [source,jsx]
 ----
-const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const { Defender } = require('@openzeppelin/defender-sdk');
 const { ethers } = require('ethers');
  
-const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
-const provider = new DefenderRelayProvider(credentials);
-const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast' });
+const credentials = { relayerApiKey: YOUR_RELAYER_API_KEY, relayerApiSecret: YOUR_RELAYER_API_SECRET };
+const client = new Defender(credentials);
+
+const provider = client.relaySigner.getProvider();
+const signer = client.relaySigner.getSigner(provider, { speed: 'fast', validUntil });
 
 const erc20 = new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
 const tx = await erc20.transfer(beneficiary, 1e18.toString());
 const mined = await tx.wait();
 ----
 
-In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The Platfro signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender 2.0 as a network provider as well. 
+In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender 2.0 as a network provider as well. 
 
 You can read more about the ethers integration https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[here, window=_blank].
 
@@ -132,11 +147,14 @@ The Relayer client integrates with https://web3js.readthedocs.io/[web3.js, windo
 
 [source,jsx]
 ----
-const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const { Defender } = require('@openzeppelin/defender-sdk');
 const Web3 = require('web3');
+
+const credentials = { relayerApiKey: YOUR_RELAYER_API_KEY, relayerApiSecret: YOUR_RELAYER_API_SECRET };
+const client = new Defender(credentials);
+
+const provider = client.relaySigner.getProvider();
  
-const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
-const provider = new DefenderRelayProvider(credentials, { speed: 'fast' });
 const web3 = new Web3(provider);
 
 const [from] = await web3.eth.getAccounts();
@@ -178,7 +196,12 @@ A Relayer may send a private transaction in any of the following ways:
 - Sending a transaction via API with `isPrivate` parameter set to `true`
 - Sending a transaction via UI and checking the Mempool Visibility checkbox
 
-image::relayer-mempool-visibility-check.png[Mempool visibility checkbox on Relayer's send transaction view]
+// Using passthrough block to reduce the width of the image and center it.
+++++
+<div class="flex justify-center">
+  <img src="../_images/relayer-mempool-visibility-check.png" alt="Mempool visibility checkbox on Relayer's send transaction view" style="width:65%;">
+</div>
+++++
 
 NOTE: Sending a transaction with the `isPrivate` flag set to `true` to a network that doesn't support private transactions will be rejected and discarded by the Relayer.
 
@@ -388,7 +411,6 @@ Every minute, all in-flight transactions are checked by the system. If they have
 
 Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all Relayers in an account):
 
-* 120 transactions/hour (free tier only)
 * 100 total requests/second
 * 10 transactions/second
 

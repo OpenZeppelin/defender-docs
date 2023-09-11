@@ -74,8 +74,10 @@ The history table shows the activity within the environment, allowing you to che
 [[deployments]]
 == Deploying and Upgrading
 
-After an environment is configured, you can use it for deployments and upgrades. To do so, we provide an https://www.npmjs.com/package/defender-sdk-deploy-client[API, window=_blank] and a https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat plugin, window=_blank]. The Deploy API is recommended for non-Hardhat projects. On the other hand, the Hardhat plugin is extremely easy to use in Hardhat projects, as it only requires a few lines of code to implement.
+After an environment is configured, you can use it for deployments and upgrades. To do so, we provide an https://www.npmjs.com/package/@openzeppelin/defender-sdk-deploy-client[API, window=_blank] and a https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat plugin, window=_blank]. The Deploy API is recommended for non-Hardhat projects. On the other hand, the Hardhat plugin is extremely easy to use in Hardhat projects, as it only requires a few lines of code to implement.
 
 Both the API and the Hardhat plugin allow using different relayers for each contract deployment. However, if none is specified, Defender 2.0 will identify the target network and use the associated default relayer. If the environment is configured with the block explorer API key, Defender 2.0 will also automatically verify the contracts.
 
 NOTE: We provide a quickstart tutorial to deploy and upgrade a smart contract using Defender 2.0. Check it out xref:tutorial/deploy.adoc[here]!
+
+WARNING: Using `CREATE2` may affect `msg.sender` behavior; see documentation for details xref:tutorial/deploy.adoc#deploy-caveat[here]!

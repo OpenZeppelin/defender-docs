@@ -18,9 +18,10 @@
 
 * xref:manage.adoc[Manage]
 ** xref:manage/relayers.adoc[Relayers]
-** xref:manage/integrations.adoc[Integrations]
+* xref:integrations.adoc[Integrations]
 * xref:logs.adoc[Logs]
 * xref:dac.adoc[Defender as Code]
+* xref:sdk.adoc[SDK]
 * xref:faq.adoc[FAQ]
 * xref:changelog.adoc[Changelog]
 

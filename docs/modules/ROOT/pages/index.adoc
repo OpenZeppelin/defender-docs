@@ -71,9 +71,12 @@ If there is any other network or layer-2 solution you would like to use from Def
 
 [[integrations]]
 == Integrations
-Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:manage/integrations.adoc[here].
+Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:integrations.adoc[here].
 
 [[feedback]]
 == Feedback
 
-As a Defender 2.0 user, your feedback is important! Please provide us feedback at https://www.openzeppelin.com/defender-2.0-feedback.
+As a Defender 2.0 user, your feedback is important! Please provide us feedback by accesing the form on the bottom-right corner of your screen.
+
+image::feedback-button.png[Feedback form button bottom-right corner]
+image::feedback-form.png[Feedback form]
