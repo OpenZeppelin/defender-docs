@@ -1,63 +1,79 @@
-= Defender
+= Defender 2.0
 
-OpenZeppelin Defender provides a security operations (SecOps) platform for Ethereum with built-in best practices. Development teams implement Defender to ship faster and minimize security risks.
+OpenZeppelin Defender 2.0 is a mission-critical developer security platform to *code*, *audit*, *deploy*, *monitor*, and *operate* blockchain applications with confidence.
 
-[[get-started]]
-== Get started
+Integrating directly into the developer workflow, Defender 2.0 makes it easy and fast for developers and operators to prevent and fix security issues pre and post-deployment.
 
-Defender is free! Just head over to https://hubs.li/H0F1_Q50[defender.openzeppelin.com], hit Sign In, and choose to create a new account. After verifying your email address, you will be redirected to your own Defender account. See below for how to invite more users to your team!
-
+[[modules]]
 [.card-section.card-section-2col]
-== Components
+== Modules
 
-Automate your Ethereum operations to deliver high-quality products faster with lower risk to users. Learn more about each component by clicking on its card.
-
-[.card.card-learn]
---
-xref:admin.adoc[[.card-title]#Admin# [.card-body]#pass:q[Automate and secure all your smart contract administration.]#]
---
+Defender 2.0 modules work seamlessly together, providing users powerful features and a superior, integrated experience. Learn more about each module by clicking on its card.
 
 [.card.card-learn]
 --
-xref:relay.adoc[[.card-title]#Relay# [.card-body]#pass:q[Build with private and secure transaction infrastructure.]#]
+xref:module/code.adoc[[.card-title]#Code# [.card-body]#pass:q[Automate security checks on GitHub PRs with the OpenZeppelin Code App.]#]
 --
 
 [.card.card-learn]
 --
-xref:sentinel.adoc[[.card-title]#Sentinel# [.card-body]#pass:q[Monitor smart contracts and send notifications.]#]
+xref:module/audit.adoc[[.card-title]#Audit# [.card-body]#pass:q[Manage the smart contract audit process and track issues and resolutions.]#]
 --
 
 [.card.card-learn]
 --
-xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated scripts to call your smart contracts.]#]
+xref:module/deploy.adoc[[.card-title]#Deploy# [.card-body]#pass:q[Manage deployments and upgrades to ensure secure releases.]#]
 --
 
+[.card.card-learn]
+--
+xref:module/monitor.adoc[[.card-title]#Monitor# [.card-body]#pass:q[Detect smart contract activity and anomalies through trigger actions and alerts.]#]
+--
+
+[.card.card-learn]
+--
+xref:module/incident-response.adoc[[.card-title]#Incident Response# [.card-body]#pass:q[Configure predefined incident response scenarios triggered automatically by monitors or on-demand.]#]
+--
+
+[.card.card-learn]
+--
+xref:module/actions.adoc[[.card-title]#Actions# [.card-body]#pass:q[Create automated actions to perform on-chain and off-chain operations.]#]
+--
+
+[.card.card-learn]
+--
+xref:module/access-control.adoc[[.card-title]#Access Control# [.card-body]#pass:q[Manage smart contract accounts, roles, and permissions easily.]#]
+--
 
 [[networks]]
 == Available networks
-All Defender components, where applicable, provide support for the following chains and networks:
+Defender 2.0 works with most mainnet and testnet networks, as well as local mainnet forks.
 
-- *Ethereum Mainnet*, *Goerli* testnet and *Sepolia* testnet.
-- https://zksync.io/[*zkSync Era Mainnet*] and *zkSync Era Testnet*.
-- https://www.polygon.technology/[*Polygon* (Matic)] and *Mumbai*.
-- https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*], and *Arbitrum Goerli*.
-- https://optimism.io/[*Optimism*] and *Optimism Goerli*.
-- https://moonbeam.network/[*Moonbeam*], *Moonriver*, and *Moonbase Alpha (Testnet)*.
-- https://www.gnosis.io/[*Gnosis Chain*] and *Sokol*.
-- https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*] and *BSC testnet*.
-- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*] and *FUJI C-Chain*.
-- https://fuse.io/[*Fuse*].
-- https://fantom.foundation/what-is-fantom-opera/[*Fantom*] and *Fantom Testnet*.
-- https://celo.org/[*Celo*] and *Alfajores*.
-- https://www.harmony.one/[*Harmony* Shard 0] and *Harmony Testnet Shard 0*.
-- http://aurora.dev/[*Aurora*] and *Aurora Testnet*.
-- https://hedera.com/[*Hedera*] and *Hedera Testnet*.
-- https://base.org/[*Base Mainnet*] and *Base Goerli*.
-- https://linea.build/[*Linea Mainnet*] and *Linea Goerli*
+- https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Goerli* testnet and *Sepolia* testnet.
+- https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Testnet*.
+- https://www.polygon.technology/[*Polygon* (Matic),window=_blank] and *Mumbai*.
+- https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], and *Arbitrum Goerli*.
+- https://optimism.io/[*Optimism*,window=_blank] and *Optimism Goerli*.
+- https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
+- https://www.gnosis.io/[*Gnosis Chain*,window=_blank] and *Sokol*.
+- https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*,window=_blank] and *BSC testnet*.
+- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*,window=_blank] and *FUJI C-Chain*.
+- https://fuse.io/[*Fuse*,window=_blank].
+- https://fantom.foundation/what-is-fantom-opera/[*Fantom*,window=_blank] and *Fantom Testnet*.
+- https://celo.org/[*Celo*,window=_blank] and *Alfajores*.
+- https://www.harmony.one/[*Harmony* Shard 0,window=_blank] and *Harmony Testnet Shard 0*.
+- https://aurora.dev/[*Aurora*,window=_blank] and *Aurora Testnet*.
+- https://hedera.com/[*Hedera*,window=_blank] and *Hedera Testnet*.
+- https://base.org/[*Base Mainnet*,window=_blank] and *Base Goerli*.
+- https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Goerli*.
 
-If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
+If there is any other network or layer-2 solution you would like to use from Defender 2.0, please https://www.openzeppelin.com/defender-2.0-feedback[reach out to us, window=_blank]!
+
+[[integrations]]
+== Integrations
+Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:manage/integrations.adoc[here].
 
 [[feedback]]
 == Feedback
 
-As a Defender user, your feedback is important! We are committed to making Defender a product that will help you in the secure management of your project, and we cannot do that without your input. Feel free to reach out with questions, feature requests, or issues, either via the https://forum.openzeppelin.com/c/support/defender/36[Community Forum], Telegram, or at mailto:defender@openzeppelin.com[defender@openzeppelin.com]. To inquire about enterprise use, click on the link http://zpl.in/defender-inquiry[*here*].
+As a Defender 2.0 user, your feedback is important! Please provide us feedback at https://www.openzeppelin.com/defender-2.0-feedback.

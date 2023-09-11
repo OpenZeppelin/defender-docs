@@ -1,0 +1,79 @@
+[[incident-response]]
+= Incident Response
+
+Incident Response (IR) allows you to instantly detect, respond, and resolve threats and attacks with pre-defined actions and scenarios. You can conduct attack simulations and test real-world scenarios on forked networks too.
+
+[[use-cases]]
+== Use cases
+
+* Define and choose actions that automtically run in response scenarios.
+* Use scenarios to combine different actions into workflow processes.
+* Trigger incident response scenarios manually or via xref:module/monitor.adoc[Monitors].
+* Upload operational runbooks to mantain operational procedures and policies.
+* Associate runbooks to scenarios for quick decision execution.
+
+[[actions]]
+== Actions
+
+Actions are no-code (form-based) or code-based on-chain transactions that are used to automate tasks during incident response, such as:
+
+* Pause a smart contract
+* Add an account to a smart contract block list (e.g. to prevent a malicious actor from transfering stolen funds)
+* Send a notification to an on-call paging system or team message channel
+* Pull relevant event data and store it for analysis
+* Remove roles of an address from access control
+
+There are two types of actions:
+
+* *Automatic Actions*: automated transactions associated with a Relayer or multisig, defined by JavaScript code. They can send on-chain transactions, trigger notifications to configured channels, call external APIs using keys stored in secrets, and keep stateful data in a key-value store.
+
+* *Transaction Templates*: on-demand transactions defined through codeless forms. They call smart contract functions with custom parameters from a Relayer or multisig.
+
+[[scenarios]]
+== Scenarios
+
+Scenarios are processes that combine automatic actions and transaction templates into a workflow. Actions can be run in parallel or connected sequentially. Scenarios can be triggered manually or via a xref:module/monitor.adoc[Monitor].
+
+Creating scenarios is a seamless experience guided through a form that allows you to organize actions in the workflow process easily.
+
+image::ir-start-scenario.png[Create Scenario]
+
+To populate a scenario, you have to drag existing actions from the list on the right onto the form. Actions are executed vertically, meaning the previous actions must finish successfully to begin the execution of the new row. Parallel actions are executed at the same time. However, the scenario stops completely if an action exits with an error.
+
+image::ir-scenario.png[Edit Scenario]
+
+To run multiple actions in parallel, click "Add Parallel Sequence" and drag actions into the available side-by-side boxes.
+
+image::ir-parallel-scenario.png[Parallel Scenario]
+
+You can drag actions back off the scenario to remove them or click the visible minus icon in the upper right to remove an empty step. The "Save" button on the top right saves the scenario with its configuration and name.
+
+[[runbooks]]
+== Runbooks
+
+Runbooks are PDFs that define operational procedures and policies for production support and security response. You can import and name runbooks so it's easier to associate with scenarios.
+
+Runbooks are extremely useful as guides for system administrators, operators, decision-makers, key holders, security personnel, advisors, and communications personnel.
+
+For example, runbooks can cover the following:
+
+* Blockchain provider outages
+* Critical internal or 3rd party system failures
+* Problems detected after system upgrades
+* Responding to a financial attack
+* War room steps and procedures
+
+We recommend complementing incident response scenarios with runbooks. Moreover, you can create roles with exclusive read-only access to Incident Response for external auditors or guards.
+
+To populate, simply click the button to import a runbook PDF. Runbooks can be viewed, downloaded, and removed by clicking on the card buttons.
+
+image::ir-runbooks.png[Runbooks]
+
+[[settings]]
+== Settings
+
+In Settings, you can access and manage relayers used by actions within scenarios. By clicking on a relayer, you can deposit, withdraw funds, and edit its settings.
+
+image::ir-settings.png[Settings]
+
+NOTE: We provide a quickstart tutorial to create and use incident response scenarios through Defender 2.0. Check it out xref:tutorial/incident-response.adoc[here]!

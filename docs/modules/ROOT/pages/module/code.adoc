@@ -1,0 +1,136 @@
+[[code]]
+= Code
+
+Code seamlessly integrates with Github to maximize security with every step of your development process via automatic code analysis powered by machine learning intelligence and state-of-the-art tools.
+
+For every push to your code, the OpenZeppelin Code App dives into a detailed examination, identifying potential vulnerabilities and suggesting improvements to enhance your code quality. It generates a succinct report, summarizable in your PR comments for quick and immediate access, while a more detailed report is made available on Defender 2.0.
+ 
+[[use-cases]]
+== Use Cases
+
+* Automatically conduct security analysis on pull requests, identifying vulnerabilities and suggesting improvements.
+* Utilize summarized reports in the pull request for immediate insights into your code's health and security.
+* Access comprehensive, detailed reports on Defender 2.0 for an in-depth understanding of potential vulnerabilities and code optimization areas.
+* Use OpenZeppelin's Dependency Checker to identify reused contracts and match them against a database of known vulnerabilities.
+* Apply static analysis rules to Solidity files with the Contract Inspector, identifying potential issues and their severity for high-quality code maintenance.
+
+[[processes]]
+== Processes
+
+[[dependency-checker]]
+=== Dependency Checker
+
+Dependency Checker is an innovative tool specializing in detecting reused smart contract code and identifying associated vulnerabilities. In smart contract development, it's common to utilize pre-existing smart contracts as building blocks for new projects. However, this practice can inadvertently introduce known vulnerabilities into your codebase, making the Dependency Checker a vital instrument in your development toolkit.
+
+Functionally, the Dependency Checker scans through all contracts in your repository, computing a unique "fingerprint" hash for each one. This fingerprint serves as a distinct identifier, allowing for efficient and precise matches against a comprehensive database of known vulnerabilities.
+
+Upon a match, the tool promptly generates an issue, providing you with the crucial information needed to rectify the vulnerability and fortify your smart contract against potential threats.
+
+[[contract-inspector]]
+=== Contract Inspector
+
+[IMPORTANT]
+Some issues found by the Contract Inspector are detected by our AI models. Keep in mind that while we provide confidence levels, the models may occasionally generate incorrect or misleading information. Make sure to verify the information accordingly and we'd love to hear your feedback.
+
+OpenZeppelin's Contract Inspector is a comprehensive tool that conducts static analysis of Solidity files. This powerful resource greatly improves the security of your smart contracts by identifying potential vulnerabilities and suggesting code enhancements.
+
+The Contract Inspector examines your Solidity files using an extensive set of static analysis rules powered by machine learning models, encompassing a wide range of potential issues and severity levels. This examination allows you to uncover and resolve concerns from simple coding best practices to critical security vulnerabilities.
+
+Here are some of the issues the tool identifies:
+
+* *Test Suggestions*: Opportunities to apply fuzzing tests to functions, providing you with areas where further testing could prove beneficial.
+* *External Call Safety*: Safety of external calls, highlighting any instances that might pose a severity concern.
+* *Standard Compatibility*: Compatibility of your contracts with established standards, flagging potential compatibility issues.
+* *Reentrancy Attack Vectors*: Potential reentrancy attack vectors at both the file and function level, assigning these threats high-severity labels.
+* *Code Readability*: Missing docstrings in functions and misspelled words throughout the codebase, ensuring your code is as legible and understandable as possible.
+* *Code Efficiency and Security Practices*: Areas in your code where improvements can be made for better performance and highlights potential security risks, enabling you to optimize and secure your contracts more effectively.
+
+[[installation]]
+== Installation
+
+[NOTE]
+Installation must be initiated from Defender 2.0. Installing the app directly from GitHub will not correctly set up the integration.
+
+The installation process connects your Defender 2.0 account and your GitHub repositories. Follow the following steps:
+
+. Navigate to the https://defender.openzeppelin.com/v2/#/code[Code page, window=_blank] on Defender 2.0.
+. Click on the Install Code App button, which redirects you to Github.
+. Select and approve the repositories to install the app.
+. Generate your first report by creating or updating a pull request on a repository that has the app installed.
+
+The installation is currently done solely through Defender 2.0, ensuring a seamless connection for the reports. Following the installation, no additional setup is required. If you encounter installation issues, refer to our <<installation-issues,Troubleshooting>> section for guidance.
+
+[[usage]]
+== Usage
+
+The Code App is designed to streamline your code analysis workflow. Once installed, the app is triggered whenever a pull request (PR) is opened, or a new commit is pushed to an existing PR in your GitHub repository. 
+
+The app automatically generates a summary report for each new commit, which is posted as a comment in your PR. This summary report is continuously updated with the latest issues discovered in the most recent commit, and the commit hash is directly viewable in the report.
+
+Along with the summary reports in PR comments, a detailed report for each commit is created and can be accessed on Defender 2.0, offering in-depth information on the identified issues and how to fix them.
+
+If you wish to stop receiving reports for a specific repository, it's as simple as navigating to the Code App settings and removing the respective repository from the list.
+
+[[reports]]
+== Reports
+
+[[summary]]
+=== Summary Report
+
+The summary report provides a clear overview of potential vulnerabilities detected in the code during the review process. The report is conveniently categorized by process and severity level, making it easier to identify areas that need attention. You can navigate to the complete report on Defender 2.0 via the provided link. Each report is tied to a specific commit, ensuring accurate tracking of changes and issues over time.
+ 
+image::code-report-summary.png[Summary Report]
+
+In this example, you can see the number of issues detected by both the Contract Inspector and the Dependency Checker, along with their respective severity levels. By clicking the link at the bottom of the report, you can view the full details of these vulnerabilities on Defender 2.0.
+
+[[full]]
+=== Full Report
+
+[[contract-inspector-detailed]]
+==== Contract Inspector
+
+The detailed Contract Inspector report, as depicted below, identifies issues within your smart contracts using a broad range of rules. The rules cover many aspects, such as known vulnerabilities, best practices, code efficiency, and secure coding principles.
+
+image::contract-inspector-detailed-report.png[Contract Inspector Report]
+
+Each issue is assigned a severity level based on the potential impact on the contract's functionality and security. An explanation accompanies each flagged issue, articulating the reason for the concern.
+
+For every issue, the report also suggests a resolution tailored to improving your code quality and overall security. This might include recommendations to refine your code, modify visibility scopes, apply necessary mathematical checks, enhance documentation, or adhere to a specific Ethereum standard.
+
+By reviewing and applying the proposed solutions in this report, you can enhance the robustness and reliability of your smart contracts, ensuring adherence to best practices and industry standards. This makes the audit process smoother and improves the preparedness of your contracts for successful deployment.
+
+[[dependency-checker-detailed]]
+==== Dependency Checker
+
+The Dependency Checker report offers a comprehensive view of potential vulnerabilities found within the dependencies of your project.
+
+image::dependency-checker-detailed-report.png[Dependency Checker Report]
+
+Each reported vulnerability is classified based on severity and comes with a brief description of its potential impact. The report also identifies the specific dependency and its version, pinpointing where the problem exists.
+
+To help you resolve these issues, the report provides recommendations on updates or patches that can address the vulnerabilities. It even offers relevant advisory links for a more detailed understanding of the issue.
+
+Additionally, the Dependency Checker alerts you to the availability of recent releases for the contracts in use, suggesting potential updates for enhanced features and improved security. This allows you to stay up-to-date and further harden the security of your smart contracts.
+
+[[settings]]
+== Settings
+
+The Settings page allows you to manage the permissions and access level of the Code App.
+
+In the Repositories tab, you can view all the repositories where the app is currently installed, helping you track where the app is actively conducting code analysis. If you need to make changes to the repositories that the app has access to, a convenient link takes you directly to the GitHub settings page of the app, facilitating effortless repository management.
+
+image::code-settings-repositories.png[Code Repositories Settings]
+
+In the Advanced tab, you can globally suspend or uninstall the app, giving you complete control over its operation within your projects.
+
+image::code-settings-advanced.png[Code Advanced Settings]
+
+[[troubleshooting]]
+== Troubleshooting
+
+[[installation-issues]]
+=== Installation Issues
+
+* *Installing the app outside Defender 2.0*: The Code App must be installed via Defender 2.0. If you attempt to install it from elsewhere, the installation will not succeed. Ensure you're logged in to your OpenZeppelin account and navigate to the Code App from Defender 2.0 for a successful installation.
+
+* *Code App Access*: Access to the Code App is required for a successful installation. If you find that you don't have access and you think this is a mistake, contact OpenZeppelin support to get the necessary permissions.

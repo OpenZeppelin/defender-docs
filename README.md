@@ -1,16 +1,13 @@
-# OpenZeppelin Defender Documentation
+# OpenZeppelin Defender 2.0 Documentation
 
-Sources for OpenZeppelin Defender documentation. Hosted at [docs.defender.openzeppelin.com](https://docs.defender.openzeppelin.com/).
+Sources for OpenZeppelin Defender 2.0 documentation. Hosted at [docs.openzeppelin.com/defender/v2/](https://docs.openzeppelin.com/defender/v2/).
 
-## About Defender
+## About Defender 2.0
 
-Ship faster with the security of OpenZeppelin Defender.
-
-Automate your Ethereum operations to deliver high-quality products faster with lower risk to users.
+OpenZeppelin Defender 2.0 is a mission-critical developer security platform to code, audit, deploy, monitor, and operate blockchain applications with confidence.
 
 - [Learn more](https://openzeppelin.com/defender)
-- [Read the docs](https://docs.openzeppelin.com/defender)
-- [Demo Video](https://www.youtube.com/watch?v=98nZ-lsHcPs&ab_channel=OpenZeppelin)
+- [Read the docs](https://docs.openzeppelin.com/defender/v2/)
 
 ## Authoring content
 

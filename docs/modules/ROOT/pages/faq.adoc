@@ -1,0 +1,68 @@
+== Frequently Asked Questions (FAQ)
+
+OpenZeppelin Defender 2.0 is the evolution of Defender, with an improved user experience, a cleaner interface, and new features that offer a more cohesive experience across the DevSecOps lifecycle. 
+
+=== Will Defender 2.0 support the same features available in Defender 1.0?
+
+Yes. The same features should be available under the following new names, albeit potentially with some changes to behaviors.
+
+* Autotasks are now known as Automatic Actions
+* Sentinels are now known as Monitors
+* Relayers are now available under the Manage section
+* Active proposals within Admin can now be found at Transaction Proposals under Actions
+* Contracts, Multisigs and EOAs within Admin can now be found in Address Book under the Manage section
+
+*Actions - formally Autotask*
+
+image::actions-autotask-faq.png[Actions - formally Autotask]
+
+*Monitors - formally Sentinels*
+
+image::monitors-sentinels-faq.png[Monitors - formally Sentinels]
+
+*Relayers - located under the Manage section*
+
+image::relayers-faq.png[Relayers - located under the Manage section]
+
+*Transaction Proposals - formally Admin proposals*
+
+image::transaction-proposals-faq.png[Transaction Proposals - formally Admin proposals]
+
+*Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formally under the Admin section*
+
+image::address-book-faq.png[Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formally under the Admin section]
+
+=== How can I get early access to Defender 2.0 beta version?
+
+You can use the following link to submit a request to join the beta program and get early access. Once your request has been approved, you will receive an email with instructions on how to complete the process and enable Defender 2.0 from your current Defender account.
+
+=== Is the existing Defender version still supported?
+
+Yes. Our team will continue to maintain Defender for the foreseeable future. We will communicate our plan as things progress, ensuring there is an upgrade path for existing Defender users.
+
+=== Will I be able to import my existing Defender configuration to Defender 2.0 beta?
+
+Yes. All existing configurations for Autotask, Sentinels, etc., will be automatically imported to Defender 2.0 beta under the new features naming convention.
+
+=== Is there any timeline for Defender 2.0 to be generally available?
+
+Not at this point. We will be collecting feedback from the beta phase and based on the data we’ll collect we will announce our plan to make Defender 2.0 generally available.
+
+=== Are there any breaking changes between Defender 1.0 and Defender 2.0?
+
+Yes, there are multiple changes to the API endpoints that will require you to update your integrations. You can visit the new API docs and SDK to learn more.
+
+=== Will Defender 2.0 offer the same subscriptions as Defender 1.0?
+
+We have yet to finalize the new subscriptions. Once they are finalized we will notify existing users about the expected change.
+
+
+=== Can I switch back to using Defender 1.0 in case I've migrated to Defender 2.0 beta?
+
+Yes. You can switch back and forth between Defender 2.0 beta to the existing Defender version by clicking on the “Switch back to Defender” option in the navigation menu.
+
+image::switch-back-faq.png[Switch back to Defender]
+
+=== Does Defender 2.0 beta offer the same level of support?
+
+Yes. You can reach out and submit a support request for Defender 2.0 in the same channels as the existing Defender version. Additionally, you can submit feedback or report an issue directly from the web application using the dedicated feedback form.
