@@ -3,3 +3,6 @@ title: Defender
 version: v2
 nav:
   - modules/ROOT/nav.adoc
+asciidoc: 
+  attributes:
+    page-sidebar-collapse-default: 'Guides'

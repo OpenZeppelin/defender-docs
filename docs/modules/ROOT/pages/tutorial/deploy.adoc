@@ -5,7 +5,7 @@ Defender 2.0 allows you to easily deploy and upgrade smart contracts across chai
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can create an account for free https://defender.openzeppelin.com/v2/[here, window=_blank].
+* OpenZeppelin Defender 2.0 account. You can sign up for early access to Defender 2.0 https://www.openzeppelin.com/defender2-waitlist[here, window=_blank].
 * https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.17.1)
 * Any IDE or text editor
 * Web browser with Metamask (or any other compatible wallet), funded with Goerli ETH.
