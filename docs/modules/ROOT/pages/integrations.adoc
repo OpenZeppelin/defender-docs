@@ -44,4 +44,4 @@ Defender 2.0 seamlessly integrates with your existing tools and workflows, so yo
 == Source Code
 - https://github.com/[*Github*, window=_black]: Install our xref:module/code.adoc[Code Github application] to scan your project with every pull request to identify potential vulnerabilities and suggest improvements to enhance your code quality.
 
-If there is any other integration you would like, please https://www.openzeppelin.com/defender-2.0-feedback[reach out to us, window=_blank]!
+If there is any other integration you would like, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
