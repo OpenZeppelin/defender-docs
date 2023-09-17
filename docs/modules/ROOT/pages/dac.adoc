@@ -2,7 +2,7 @@
 
 Defender as Code (DaC) is a Serverless Framework plugin for automated resource management and configuration as code.
 
-WARNING: This plugin is under development and behavior can change between releases. Handle with care.
+WARNING: This plugin is under development and behavior might change. Handle with care.
 
 == Prerequisites
 
