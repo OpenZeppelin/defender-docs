@@ -411,7 +411,6 @@ Every minute, all in-flight transactions are checked by the system. If they have
 
 Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all Relayers in an account):
 
-* 120 transactions/hour (free tier only)
 * 100 total requests/second
 * 10 transactions/second
 

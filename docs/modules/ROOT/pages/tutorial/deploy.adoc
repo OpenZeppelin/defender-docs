@@ -5,7 +5,7 @@ Defender 2.0 allows you to easily deploy and upgrade smart contracts across chai
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can create an account for free https://defender.openzeppelin.com/v2/[here, window=_blank].
+* OpenZeppelin Defender 2.0 account. You can sign up for early access to Defender 2.0 https://www.openzeppelin.com/defender2-waitlist[here, window=_blank].
 * https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.17.1)
 * Any IDE or text editor
 * Web browser with Metamask (or any other compatible wallet), funded with Goerli ETH.
@@ -60,10 +60,6 @@ image::tutorial-deploy-upgrade-wizard.png[Deploy block upgrade wizard]
 
 +
 image::tutorial-deploy-end-wizard.png[Deploy block end wizard]
-
-. Copy the wallet address of your relayer through the icon, and send some Goerli ETH to it. Although this relayer will send the deploy transaction, you will execute the upgrade transaction through your wallet, so leave some Goerli ETH in your wallet.
-
-image::tutorial-deploy-copy-relayer.png[Environment page copy relayer address]
 
 NOTE: You configured the test environment to learn without the risk of losing actual funds. The steps are the same to set up a production environment.
 
@@ -187,7 +183,7 @@ This is a contract that replicates a box, with three functions:
 * `removeObject()`: Decreases the number of objects in the box by removing one.
 * `_authorizeUpgrade()`: Points the proxy to a new implementation address.
 
-. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defneder 2.0 with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
+. Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defender 2.0 with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
 +
 [source,jsx]
 ----
@@ -206,7 +202,7 @@ async function main() {
 
   await deployment.waitForDeployment();
 
-  console.log(`Contract deployed to ${deployment.getAddress()}`);
+  console.log(`Contract deployed to ${await deployment.getAddress()}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -228,6 +224,17 @@ npx hardhat run --network goerli scripts/deploy.ts
 Success! Your contracts should have been deployed in the Goerli testnet. Navigate to Deploy in Defender 2.0 and check that the proxy and implementation have been deployed inside the test environment. All Box transactions should be sent to the proxy address as it will store the state and point to the given implementation. Copy the address of the proxy to upgrade it next.
 
 image::tutorial-deploy-contract.png[Deployed contract]
+
+
+[[deploy-caveat]]
+=== Caveats
+
+By default, Defender 2.0 utilizes the `CREATE` opcode to deploy contracts. This method creates a new contract instance and assigns it a unique address. This address is determined by the transaction's nonce and sender's address.
+
+Defender 2.0 also offers an advanced deployment option using the `CREATE2` opcode. When a deployment request includes a `salt`, Defender 2.0 switches to using the `CREATE2` opcode. This opcode allows you to deploy contracts to a deterministic address based on a combination of the sender's `address`, `salt`, and contract `bytecode`.
+
+
+WARNING: While `CREATE2` offers deterministic contract addresses, it alters `msg.sender` behavior. In `CREATE2` deployments, `msg.sender` in the constructor or initialization code refers to the factory address, not the deploying address as in standard `CREATE` deployments. This distinction can impact contract logic, so careful testing and consideration are advised when opting for `CREATE2`
 
 [[upgrade]]
 == 3. Upgrade

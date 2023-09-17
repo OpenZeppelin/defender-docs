@@ -35,9 +35,13 @@ Defender 2.0 seamlessly integrates with your existing tools and workflows, so yo
 - *Email*: Receive alerts via any Email.
 
 [[threat-detection-and-transaction-data]]
-== Threat detection & transaction data
+== Threat Detection & Transaction Data
 - https://forta.org/[*Forta*, window=_blank]: Detect smart contract threats and anomalies in real time using machine learning.
 - https://etherscan.io/[*Etherscan*, window=_blank]: Visualize transactions from Defender 2.0 using Etherscan-based explorers.
 - https://www.blockscout.com/[*Blockscout*, window=_blank]: Visualize transactions from Defender 2.0 using Blockscout-based explorers.
 
-If there is any other integration you would like, please https://www.openzeppelin.com/defender-2.0-feedback[reach out to us, window=_blank]!
+[[source-code]]
+== Source Code
+- https://github.com/[*Github*, window=_black]: Install our xref:module/code.adoc[Code Github application] to scan your project with every pull request to identify potential vulnerabilities and suggest improvements to enhance your code quality.
+
+If there is any other integration you would like, please xref:index.adoc#feedback[reach out to us via the form on Defender]!

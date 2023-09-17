@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2023-09-11]]
+== September 11th, 2023
+
+* Add gnosisSafeTxService key to celo definition
+* Forgot password improvements
+* Defender-as-Code docs link fix
+* Bunch of UI & email bug fixes and improvements
+
 [[release-2023-08-29]]
 == August 29th, 2023
 

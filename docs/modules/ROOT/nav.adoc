@@ -9,6 +9,10 @@
 ** xref:module/access-control.adoc[Access Control]
 ** xref:module/incident-response.adoc[Incident Response]
 
+* xref:manage.adoc[Manage]
+** xref:manage/relayers.adoc[Relayers]
+** xref:logs.adoc[Logs]
+
 * Tutorials
 ** xref:tutorial/deploy.adoc[Deploy]
 ** xref:tutorial/monitor.adoc[Monitor]
@@ -16,21 +20,11 @@
 ** xref:tutorial/access-control.adoc[Access Control]
 ** xref:tutorial/incident-response.adoc[Incident Response]
 
-* xref:manage.adoc[Manage]
-** xref:manage/relayers.adoc[Relayers]
-* xref:integrations.adoc[Integrations]
-* xref:logs.adoc[Logs]
+* Guides
+** xref:guide/forked-network.adoc[Forked Networks]
+
 * xref:dac.adoc[Defender as Code]
 * xref:sdk.adoc[SDK]
+* xref:integrations.adoc[Integrations]
 * xref:faq.adoc[FAQ]
 * xref:changelog.adoc[Changelog]
-
-// * Guides
-// ** xref:guide/serverless-plugin.adoc[Serverless Plugin]
-// ** xref:guide/keep3r.adoc[Running a Keep3r Network keeper]
-// ** xref:guide/chainlink.adoc[Registering an Upkeep on Chainlink Keepers]
-// ** xref:guide/timelock-roles.adoc[How to manage roles on a TimelockController]
-// ** xref:guide/factory.adoc[Automated Security Monitoring of Factory Clones]
-// ** xref:guide/metatx.adoc[Relaying Gasless Meta-Transactions]
-// ** xref:guide/pauseguardian.adoc[Pause Guardian Automated Incident Response]
-// ** xref:guide/balance-automation-forta-sentinel.adoc[Automate Relayer Balance Using a Forta Bot]
