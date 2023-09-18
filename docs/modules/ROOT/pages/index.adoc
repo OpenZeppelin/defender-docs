@@ -79,4 +79,3 @@ Integrations throughout Defender 2.0 allow users to connect with other services 
 As a Defender 2.0 user, your feedback is important! Please provide us feedback by accesing the form on the bottom-right corner of your screen.
 
 image::feedback-button.png[Feedback form button bottom-right corner]
-image::feedback-form.png[Feedback form]
