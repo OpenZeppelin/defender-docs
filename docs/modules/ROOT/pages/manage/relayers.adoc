@@ -370,6 +370,39 @@ export interface RelayerModel {
 }
 ----
 
+[[relayer-status]]
+== Relayer Status
+
+To gain better insight into the current status of a relayer, one can use the `getRelayerStatus` method from the `DefenderRelaySigner` class. This method provides real-time information about a relayer, such as its nonce, transaction quota, and the number of pending transactions.
+[source,jsx]
+----
+const address = await signer.getRelayerStatus();
+----
+
+If you need info about a Relayer then checkout the `getRelayer` method of the client. It returns the following data:
+
+[source,jsx]
+----
+export interface RelayerStatus {
+  relayerId: string;
+  name: string;
+  nonce: number;
+  address: string;
+  numberOfPendingTransactions: number;
+  paused: boolean;
+  pendingTxCost?: string;
+  txsQuotaUsage: number;
+  rpcQuotaUsage: number;
+  lastConfirmedTransaction?: {
+    hash: string;
+    status: string;
+    minedAt: string;
+    sentAt: string;
+    nonce: number;
+  };
+}
+----
+
 [[network-calls]]
 == Network calls
 
