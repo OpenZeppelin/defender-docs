@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2023-10-5]]
+== October 5th, 2023
+
+* Introduce feature flag for forked networks in backend 
+* Fix V1 autotask page
+* Monitors list page stuck rendering massive lists
+* Forked Networks Monitors
+* Improve DX for running v2 user invite scripts
+* UI updates
+
 [[release-2023-09-25]]
 == September 25th, 2023
 
