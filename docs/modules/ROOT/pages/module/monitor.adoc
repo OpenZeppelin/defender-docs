@@ -145,7 +145,7 @@ NOTE: Each invocation can contain up to 25 transactions.
 
 ==== Request Schema
 
-The request body will contain the following structure. The `SentinelConditionRequest` type from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used for custom filters in Typescript.
+The request body will contain the following structure. The `MonitorConditionRequest` type from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used for custom filters in Typescript.
 
 [source,jsx]
 ----
@@ -168,7 +168,7 @@ The request body will contain the following structure. The `SentinelConditionReq
     ],
     "matchedAddresses": ["0xabc..123"],           // the addresses from this transaction your are monitoring
     "matchedChecksumAddresses": ["0xAbC..123"],   // the checksummed addresses from this transaction your are monitoring
-    "sentinel": {
+    "monitor": {
       "id": "44a7d5...31df5",                     // internal ID of your monitor
       "name": "Monitor Name",                     // name of your monitor
       "abi": [...],                               // abi of your addresses (or undefined)
@@ -184,7 +184,7 @@ The request body will contain the following structure. The `SentinelConditionReq
 
 ==== Response Schema
 
-The custom filter must return a structure containing all matches. Returning an empty object indicates no match occurred. The type for this object is `SentinelConditionResponse`.
+The custom filter must return a structure containing all matches. Returning an empty object indicates no match occurred. The type for this object is `MonitorConditionResponse`.
 
 IMPORTANT: Errors will be treated as a non-match.
 
@@ -297,11 +297,11 @@ You can also modify the message body content and formatting using the Customize 
 ----
 **Monitor Name**
 
-{{ sentinel.name }}
+{{ monitor.name }}
 
 **Network**
 
-{{ sentinel.network }}
+{{ monitor.network }}
 
 **Block Hash**
 
@@ -399,9 +399,9 @@ You can access the following schema when using custom notification templates. Th
     }
   ],
   "matchedAddresses":["0x000..000"]    // the addresses from this transaction monitored
-  "sentinel": {
+  "monitor": {
     "id": "44a7d5...31df5",            // internal ID of monitor
-    "name": "Sentinel Name",           // name of monitor
+    "name": "Monitor Name",           // name of monitor
     "abi": [...],                      // abi of address (or undefined)
     "addresses": ["0x000..000"],       // addresses monitored
     "confirmBlocks": 0,                // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
