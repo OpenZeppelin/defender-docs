@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2023-10-12]]
+== October 12th, 2023
+
+* Add index for monitor to track active forked network monitors
+* Add support for mantle network 
+* Add X-Flashbots-Signature header to Flashbots requests
+* Support for scroll network
+* Fix condition for displaying delete pending txs button
+* Reuse contract-inspector newly added generated github links
+
 [[release-2023-10-5]]
 == October 5th, 2023
 
