@@ -1,5 +1,17 @@
 = Changelog
 
+[[release-2023-10-23]]
+== October 23rd, 2023
+
+* Add support on boarding to defender audit.
+* Add ability for monitor to look for an ABI in the address rules when not present in contract.
+* Allow selecting an approval process from UI for deploy.
+* Use system block explorer API keys by default.
+* Improve UI/UX for monitor templates.
+* Update code app installation repos when users change them.
+* Add support to split secret entries into multiple encypted chunks.
+* Return hash of correct bytecode in verification result.
+
 [[release-2023-10-12]]
 == October 12th, 2023
 
