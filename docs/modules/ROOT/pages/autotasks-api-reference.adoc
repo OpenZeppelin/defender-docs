@@ -25,6 +25,7 @@ interface CreateAutotaskRequest {
     cron?: string;
   };
   paused: boolean;
+  environmentVariables?: {[key: string]: string};
 }
 ```
 
@@ -38,10 +39,24 @@ const myAutotask = {
     type: 'schedule',
     frequencyMinutes: 1500,
   },
-  paused: false
+  paused: false,
+  environmentVariables: {
+    hello: "world!"
+  }
 };
 await client.create(myAutotask);
 ```
+
+[[update-env-var-endpoint]]
+== Update Environment Variables Endpoint
+
+Using the `@openzeppelin/defender-autotask-client`, you can call the `updateEnvironmentVariables` endpoint as such:
+
+```js
+await client.updateEnvironmentVariables('autotaskId', { hello: 'world!', test: '123' });
+```
+
+NOTE: Environment variables, as opposed to autotask secrets, are unencrypted and scoped to the individual autotask. They are accessible from the autotask code via `process.env`. 
 
 [[list-endpoint]]
 == List Endpoint
@@ -96,7 +111,8 @@ An example response:
   name: 'my-autotask',
   paused: false,
   trigger: { type: 'schedule', frequencyMinutes: 1500 },
-  encodedZippedCode: 'UEsDBAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAZGVwcy5qc2V4cG9ydHMuZm9vID0gKCkgPT4gNDI7UEsDBAoAAAAAAAFzWFSEyiyCiQAAAIkAAAAIAAAAaW5kZXguanNjb25zdCBkZXBzID0gcmVxdWlyZSgnLi9kZXBzJyk7CgpleHBvcnRzLmhhbmRsZXIgPSBhc3luYyBmdW5jdGlvbigpIHsKICBjb25zdCB2YWx1ZSA9IGRlcHMuZm9vKCk7CiAgY29uc29sZS5sb2codmFsdWUpOwogIHJldHVybiB2YWx1ZTsKfVBLAQIUAAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAAAAAAAAAAAAAAAAAAABkZXBzLmpzUEsBAhQACgAAAAAAAXNYVITKLIKJAAAAiQAAAAgAAAAAAAAAAAAAAAAAPAAAAGluZGV4LmpzUEsFBgAAAAACAAIAawAAAOsAAAAAAA=='
+  encodedZippedCode: 'UEsDBAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAZGVwcy5qc2V4cG9ydHMuZm9vID0gKCkgPT4gNDI7UEsDBAoAAAAAAAFzWFSEyiyCiQAAAIkAAAAIAAAAaW5kZXguanNjb25zdCBkZXBzID0gcmVxdWlyZSgnLi9kZXBzJyk7CgpleHBvcnRzLmhhbmRsZXIgPSBhc3luYyBmdW5jdGlvbigpIHsKICBjb25zdCB2YWx1ZSA9IGRlcHMuZm9vKCk7CiAgY29uc29sZS5sb2codmFsdWUpOwogIHJldHVybiB2YWx1ZTsKfVBLAQIUAAoAAAAAAAFzWFTA91VHFwAAABcAAAAHAAAAAAAAAAAAAAAAAAAAAABkZXBzLmpzUEsBAhQACgAAAAAAAXNYVITKLIKJAAAAiQAAAAgAAAAAAAAAAAAAAAAAPAAAAGluZGV4LmpzUEsFBgAAAAACAAIAawAAAOsAAAAAAA==',
+  environmentVariables: { hello: 'world!', test: '123' }
 }
 ```
 
