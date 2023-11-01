@@ -47,13 +47,15 @@ const myAutotask = {
 await client.create(myAutotask);
 ```
 
-[[update-env-var-endpoint]]
-== Update Environment Variables Endpoint
+[[env-var-endpoint]]
+== Environment Variables Endpoint
 
-Using the `@openzeppelin/defender-autotask-client`, you can call the `updateEnvironmentVariables` endpoint as such:
+Using the `@openzeppelin/defender-autotask-client`, you can call the `updateEnvironmentVariables` and `getEnvironmentVariables` endpoint as such:
 
 ```js
 await client.updateEnvironmentVariables('autotaskId', { hello: 'world!', test: '123' });
+await client.getEnvironmentVariables('autotaskId');
+
 ```
 
 NOTE: Environment variables, as opposed to autotask secrets, are unencrypted and scoped to the individual autotask. They are accessible from the autotask code via `process.env`. 
