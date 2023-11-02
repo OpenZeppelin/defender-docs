@@ -1,4 +1,4 @@
-# Securely deploy and upgrade a smart contract 
+# Securely deploy and upgrade a smart contract
 
 Defender 2.0 allows you to easily deploy and upgrade smart contracts across chains while maintaining the best security practices. This tutorial shows how to use a xref::manage.adoc#relayers[Relayer] to deploy a contract called Box and upgrade it with the UUPS proxy pattern via a https://safe.global/[Safe wallet, window=_blank] (multisig).
 
@@ -36,30 +36,24 @@ image::tutorial-deploy-environments.png[Deploy environments page]
 
 . Pick *Goerli* from the dropdown. 
 +
-image::tutorial-deploy-networks.png[Deploy networks wizard]
+image::tutorial-deploy-step1-wizard.png[Deploy networks wizard]
 
-. (Optional) Provide a block explorer API for Goerli Etherscan. 
-We recommend doing this to enable automatic contract verification capabilities. 
-To get an API key, head to https://etherscan.io/[Etherscan, window=_blank], create an account, and copy the https://etherscan.io/myapikey[API key, window=_blank] to paste it here.
-+
-image::tutorial-deploy-block-explorer.png[Deploy block explorer wizard]
-
-. Select the relayer that will execute the deployments for the test environment. In case you don't already have a relayer, Defender 2.0 will automatically create one. Relayers automate the payment of gas fees and take care of private key secure storage, transaction signing, nonce management, gas pricing estimation, and resubmissions.
+. Select the approval process associated with your funded relayer that will execute the deployments for the test environment. In case you don't already have an approval process, Defender 2.0 will allow you to create one within the wizard flow. Relayers automate the payment of gas fees and take care of private key secure storage, transaction signing, nonce management, gas pricing estimation, and resubmissions. However, you may also choose to deploy using an EOA ("Externally Owned Account") or Safe wallet.
 +
 NOTE: Read more about relayers and how to manage them xref::manage.adoc#relayers[here].
 
 +
-image::tutorial-deploy-relayer-wizard.png[Deploy block relayer wizard]
+image::tutorial-deploy-step2-wizard.png[Deploy block deploy wizard]
 
 . Click on the Approval Process field to expand the dropdown and click on *Create an Approval Process*. Enter "Safe Wallet Approval Process" as the name and expand the contract field to click on *Add contract*. Enter "Safe Wallet" as the name, paste the address of your Safe wallet you copied before and click on *Create*. Select "Safe Wallet" in the contract dropdown and click on *Continue*.
 
 +
-image::tutorial-deploy-upgrade-wizard.png[Deploy block upgrade wizard]
+image::tutorial-deploy-step3-wizard.png[Deploy block upgrade wizard]
 
 . Defender 2.0 will generate an API Key and Secret for this environment, so copy and store them safely. Click on *Let's Deploy* to visit the environment page.
 
 +
-image::tutorial-deploy-end-wizard.png[Deploy block end wizard]
+image::tutorial-deploy-step4-wizard.png[Deploy block end wizard]
 
 NOTE: You configured the test environment to learn without the risk of losing actual funds. The steps are the same to set up a production environment.
 
