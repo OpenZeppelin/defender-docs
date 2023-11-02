@@ -3,7 +3,7 @@
 
 Access control allows you to seamlessly oversee and command contract permissions on a grand scale, with the power to view and control access at a granular level. Currently supports https://docs.openzeppelin.com/contracts/4.x/access-control#ownership-and-ownable[ownable, window=_blank] and https://docs.openzeppelin.com/contracts/4.x/access-control#role-based-access-control[role-based, window=_blank] access control.
 
-IMPORTANT: At this time, access control is supported across all networks except *Base Goerli*, *Hadera*, *Fantom Testnet* and *Arbitrum Nova*.
+IMPORTANT: At this time, access control is supported across all networks except *Base Goerli*, *Hedera*, *Fantom Testnet* and *Arbitrum Nova*.
 
 [[use-cases]]
 == Use cases
