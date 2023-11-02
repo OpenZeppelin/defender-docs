@@ -46,23 +46,19 @@ This last step is optional but recommended if you plan to deploy upgradeable con
 
 Once inside an environment, you can see the configuration and activity of deployments within it.
 
-[[environment-1]]
-
 [[configuration]]
 === Configuration
 
 You can edit the configuration of any network within the environment. To do so, click the edit button to reach the configuration page, where you can add or remove a network and change the default approval processes. We use system block explorer API keys to automatically verify contracts on Etherscan. You can manage your own keys in the configuration page.
-
-[[environment-2]]
 
 [[history]]
 === History
 
 The history table shows the activity within the environment, allowing you to check the status of deployments or upgrades. There are three possible statuses:
 
-* COMPLETE: The deployment has been successfully executed in the network.
-* PENDING: The upgrade is waiting for approval.
-* FAILED: The deployment has failed. Make sure the relayer or EOA associated to the approval process has enough funds and that the smart contract is valid.
+* `COMPLETE`: The deployment has been successfully executed in the network.
+* `PENDING`: The upgrade is waiting for approval.
+* `FAILED`: The deployment has failed. Make sure the relayer or EOA associated to the approval process has enough funds and that the smart contract is valid.
 
 [[deployments]]
 == Deploying and Upgrading
