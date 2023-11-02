@@ -1,7 +1,7 @@
 [[code]]
 = Code
 
-Code seamlessly integrates with Github to maximize security with every step of your development process via automatic code analysis powered by machine learning intelligence and state-of-the-art tools.
+Code seamlessly integrates with Github to maximize security with every step of your development process via automatic code analysis powered by machine learning intelligence and state-of-the-art tools developed by our security experts.
 
 For every push to your code, the OpenZeppelin Code App dives into a detailed examination, identifying potential vulnerabilities and suggesting improvements to enhance your code quality. It generates a succinct report, summarizable in your PR comments for quick and immediate access, while a more detailed report is made available on Defender 2.0.
  
