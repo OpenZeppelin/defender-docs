@@ -6,7 +6,7 @@ Defender 2.0 allows you to easily deploy and upgrade smart contracts across chai
 == Pre-requisites
 
 * OpenZeppelin Defender 2.0 account. You can sign up for early access to Defender 2.0 https://www.openzeppelin.com/defender2-waitlist[here, window=_blank].
-* https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.17.1)
+* https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.19.0)
 * Any IDE or text editor
 * Web browser with Metamask (or any other compatible wallet), funded with Goerli ETH.
 
@@ -65,7 +65,7 @@ Deploying through Defender 2.0 is extremely easy with Hardhat. Once it's install
 . Run the this command in your terminal:
 +
 ```
-mkdir deploy-tutorial && cd deploy-tutorial && npx hardhat
+mkdir deploy-tutorial && cd deploy-tutorial && npx hardhat init
 ```
 . Hardhat will ask some questions to setup the configuration, so answer the following:
 + 
@@ -77,7 +77,7 @@ mkdir deploy-tutorial && cd deploy-tutorial && npx hardhat
 . Hardhat will now install the tooling libraries, and create the project files for you. Afterwards, install the OpenZeppelin packages with the following command:
 +
 ```
-npm i @openzeppelin/hardhat-upgrades @openzeppelin/contracts-upgradeable dotenv --save-dev
+npm i @openzeppelin/hardhat-upgrades @openzeppelin/contracts-upgradeable@4.9.3 dotenv --save-dev
 ```
 
 +
