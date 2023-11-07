@@ -44,12 +44,12 @@ Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environm
 "@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
 "axios": "^1.4.0",
 "axios-retry": "3.5.0",
-"defender-admin-client": "1.44.0",
-"defender-autotask-client": "1.44.0",
-"defender-autotask-utils": "1.34.0",
-"defender-kvstore-client": "1.44.0",
-"defender-relay-client": "1.44.0",
-"defender-sentinel-client": "1.44.0",
+"@openzeppelin/defender-admin-client": "1.50.0",
+"@openzeppelin/defender-autotask-client": "1.50.0",
+"@openzeppelin/defender-autotask-utils": "1.50.0",
+"@openzeppelin/defender-kvstore-client": "1.50.0",
+"@openzeppelin/defender-relay-client": "1.50.0",
+"@openzeppelin/defender-sentinel-client": "1.49.0",
 "ethers": "5.5.3",
 "fireblocks-sdk": "^2.5.4",
 "graphql": "^15.5.1",
@@ -59,7 +59,7 @@ Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environm
 
 NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful! 
 
-NOTE: We love https://www.typescriptlang.org/[typescript, window=_blank] in the OpenZeppelin development team, and we hope you do too! If you want to write your actions in TypeScript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting JavaScript code. Unfortunately, we don't support coding directly in TypeScript in the user interface. All `defender-sdk` packages are coded in TypeScript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package for type definitions for the event payload.
+NOTE: We love https://www.typescriptlang.org/[Typescript, window=_blank] in the OpenZeppelin development team, and we hope you do too! If you want to write your actions in TypeScript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting JavaScript code. Unfortunately, we don't support coding directly in TypeScript in the user interface. All `defender-sdk` packages are coded in TypeScript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/@openzeppelin/defender-autotask-utils[@openzeppelin/defender-autotask-utils, window=_blank] package for https://github.com/OpenZeppelin/defender-client/blob/master/packages/autotask-utils/src/types.ts#L15[type definitions for the event payload, window=_blank].
 
 [[defining-code]]
 === Defining code
@@ -94,7 +94,7 @@ exports.handler = async function(event) {
 
 This allows you to send transactions using the relayer from actions without having to set up any API keys or secrets. Furthermore, you can also use the relayer's JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
 
-We also support https://www.npmjs.com/package/defender-relay-client#ethersjs[`ethers.js`] for making queries or sending transactions via the relayer. To use ethers.js replace the above snippet with this:
+We also support https://www.npmjs.com/package/@openzeppelin/defender-relay-client#ethersjs[`ethers.js`] for making queries or sending transactions via the relayer. To use ethers.js replace the above snippet with this:
 
 [source,jsx]
 ----
@@ -110,7 +110,7 @@ exports.handler = async function(event) {
 }
 ----
 
-If you prefer https://www.npmjs.com/package/defender-relay-client#web3js[`web3.js`]:
+If you prefer https://www.npmjs.com/package/@openzeppelin/defender-relay-client#web3js[`web3.js`]:
 
 [source,jsx]
 ----
@@ -217,7 +217,7 @@ NOTE: While it's possible to use secrets to store private keys for signing messa
 
 The action key-value data store allows to persist simple data across action runs and between different actions. It can be used to store transaction identifiers, hashed user emails, or even small serialized objects.
 
-Access to the key value store is managed through the https://npmjs.com/package/defender-kvstore-client[`defender-kvstore-client`, window=_blank] package:
+Access to the key value store is managed through the https://www.npmjs.com/package/@openzeppelin/defender-kvstore-client[`defender-kvstore-client`, window=_blank] package:
 
 [source,jsx]
 ----
