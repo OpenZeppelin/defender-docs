@@ -54,6 +54,8 @@ All Defender components, where applicable, provide support for the following cha
 - https://hedera.com/[*Hedera*] and *Hedera Testnet*.
 - https://base.org/[*Base Mainnet*] and *Base Goerli*.
 - https://linea.build/[*Linea Mainnet*] and *Linea Goerli*
+- https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
+- https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Testnet*.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
