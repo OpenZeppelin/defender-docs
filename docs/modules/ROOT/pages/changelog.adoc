@@ -1,12 +1,24 @@
 = Changelog
 
+[[release-2023-11-07]]
+== November 7th, 2023
+
+* Fix approval process deletion in configuration view.
+* Remove check for block explorer keys in deployments.
+* Feature/enable tx send retries on nonce too high.
+* Use system block explorer API keys by default.
+* Add back button on deposit and withdraw.
+* Align contracts v5 changes with upgrade api.
+* Add support for scroll network mainnet.
+* Bugfix/add missing policy to read audit ssm map on user invite.
+
 [[release-2023-10-23]]
 == October 23rd, 2023
 
 * Add support on boarding to defender audit.
 * Add ability for monitor to look for an ABI in the address rules when not present in contract.
 * Allow selecting an approval process from UI for deploy.
-* Use system block explorer API keys by default.
+* Add actionRunId and actionId attributes to action run response.
 * Improve UI/UX for monitor templates.
 * Update code app installation repos when users change them.
 * Add support to split secret entries into multiple encypted chunks.
