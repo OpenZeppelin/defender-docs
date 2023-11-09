@@ -1,5 +1,14 @@
 = Changelog
 
+[[release-2023-11-09]]
+== November 9th, 2023
+
+* Support for EOA and Safe backend functions and model changes.
+* Support for environment variables in defender-as-code (DaC)
+* Minor bug fixes in code, audit module and address book
+* Fixes several security vulnerabilities in dependencies
+* Pagination feature for transaction proposals
+
 [[release-2023-11-07]]
 == November 7th, 2023
 
