@@ -152,10 +152,13 @@ The request body will contain the following structure. The `MonitorConditionRequ
 {
   "events": [
   {
+    "hash": "0xab..123",                          // the transaction hash
+    "timestamp": "1699857792",                    // the timestamp of the transaction (block)
+    "blockNumber": 18561272,                      // the block number of the transaction
+    "blockHash": "0xab..123",                     // block hash from where this transaction was seen
     "transaction": {                              // eth_getTransactionReceipt response body
       ...                                         // see https://eips.ethereum.org/EIPS/eip-1474
     },
-    "blockHash": "0xab..123",                     // block hash from where this transaction was seen
     "matchReasons": [                             // the reasons why monitor triggered
       {
         "type": "event",                          // event, function, or transaction
@@ -176,7 +179,8 @@ The request body will contain the following structure. The `MonitorConditionRequ
       "confirmBlocks": 0,                         // number of blocks monitor waits (can be 'safe' or 'finalized' on PoS clients)
       "network": "rinkeby"                        // network of your addresses
       "chainId": 4                                // chain Id of the network
-    }
+    },
+    "metadata": "..."                             // metadata (if available)
   }
   ]
 }
