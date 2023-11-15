@@ -1,5 +1,14 @@
 = Changelog
 
+[[release-2023-11-14]]
+== November 14th, 2023
+
+* Support meld network.
+* Enforced MFA for V1.
+* Markdown support for audit client comments.
+* Optimize address book page.
+* Minor bug fixes.
+
 [[release-2023-11-09]]
 == November 9th, 2023
 
