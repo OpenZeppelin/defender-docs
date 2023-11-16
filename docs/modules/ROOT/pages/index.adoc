@@ -37,25 +37,26 @@ xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated
 == Available networks
 All Defender components, where applicable, provide support for the following chains and networks:
 
-- *Ethereum Mainnet*, *Goerli* testnet and *Sepolia* testnet.
-- https://zksync.io/[*zkSync Era Mainnet*] and *zkSync Era Testnet*.
-- https://www.polygon.technology/[*Polygon* (Matic)] and *Mumbai*.
-- https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*], and *Arbitrum Goerli*.
-- https://optimism.io/[*Optimism*] and *Optimism Goerli*.
-- https://moonbeam.network/[*Moonbeam*], *Moonriver*, and *Moonbase Alpha (Testnet)*.
-- https://www.gnosis.io/[*Gnosis Chain*] and *Sokol*.
-- https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*] and *BSC testnet*.
-- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*] and *FUJI C-Chain*.
-- https://fuse.io/[*Fuse*].
-- https://fantom.foundation/what-is-fantom-opera/[*Fantom*] and *Fantom Testnet*.
-- https://celo.org/[*Celo*] and *Alfajores*.
-- https://www.harmony.one/[*Harmony* Shard 0] and *Harmony Testnet Shard 0*.
-- http://aurora.dev/[*Aurora*] and *Aurora Testnet*.
-- https://hedera.com/[*Hedera*] and *Hedera Testnet*.
-- https://base.org/[*Base Mainnet*] and *Base Goerli*.
-- https://linea.build/[*Linea Mainnet*] and *Linea Goerli*
+- https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Goerli* testnet and *Sepolia* testnet.
+- https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Testnet*.
+- https://www.polygon.technology/[*Polygon* (Matic),window=_blank] and *Mumbai*.
+- https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], and *Arbitrum Goerli*.
+- https://optimism.io/[*Optimism*,window=_blank] and *Optimism Goerli*.
+- https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
+- https://www.gnosis.io/[*Gnosis Chain*,window=_blank] and *Sokol*.
+- https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*,window=_blank] and *BSC testnet*.
+- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*,window=_blank] and *FUJI C-Chain*.
+- https://fuse.io/[*Fuse*,window=_blank].
+- https://fantom.foundation/what-is-fantom-opera/[*Fantom*,window=_blank] and *Fantom Testnet*.
+- https://celo.org/[*Celo*,window=_blank] and *Alfajores*.
+- https://www.harmony.one/[*Harmony* Shard 0,window=_blank] and *Harmony Testnet Shard 0*.
+- https://aurora.dev/[*Aurora*,window=_blank] and *Aurora Testnet*.
+- https://hedera.com/[*Hedera*,window=_blank] and *Hedera Testnet*.
+- https://base.org/[*Base Mainnet*,window=_blank] and *Base Goerli*.
+- https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Goerli*.
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Testnet*.
+- https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please <<feedback,reach out to us>>!
 
