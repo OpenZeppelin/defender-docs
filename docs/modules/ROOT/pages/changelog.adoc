@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2023-11-22]]
+== November 22nd, 2023
+
+* Add safe tx service url for scroll.
+* Audit pages bug fixes.
+* Patch several security vulnerabilities.
+* Minor bug fixes.
+
 [[release-2023-11-14]]
 == November 14th, 2023
 
