@@ -205,6 +205,13 @@ WARNING: Be careful when granting administrative permissions. A user with the ri
 
 We strongly suggest that you enable 2FA to improve your Defender 2.0 account security. As a second authentication factor, Defender 2.0 relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP), window=_blank]. To enable 2FA on Defender 2.0, you need a TOTP compliant application, such as https://authy.com/[Authy, window=_blank] or Google Authenticator. Each user can enable 2FA under their profile, accessible from the top-right user menu. Defender 2.0 will guide users through the necessary steps.
 
+[[two-factor-authentication-enforcement]]
+==== Enforcing 2FA
+
+As an admin user, you can enforce 2FA for all users in your team. To do so, go to the settings under _Team Members_ section, and click on the _Enforce 2FA_ toggle. This will require all users to setup 2FA before they can access Defender again.
+
+NOTE: If you have users that are still accessing Defender 1.0, they will have to setup 2FA as well.
+
 [[password-reset]]
 === Password reset
 
