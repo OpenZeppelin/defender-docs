@@ -8,7 +8,6 @@
 * Show stats for code module.
 * Other misc bug fixes.
 
-
 [[release-2023-11-22]]
 == November 22nd, 2023
 
