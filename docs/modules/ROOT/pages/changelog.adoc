@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2023-11-27]]
+== November 27th, 2023
+
+* Add support for arbitrum sepolia.
+* Deploy & Actions bug fixes.
+* Show stats for code module.
+* Other misc bug fixes.
+
 [[release-2023-11-22]]
 == November 22nd, 2023
 
