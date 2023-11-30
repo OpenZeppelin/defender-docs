@@ -52,7 +52,7 @@ Defender 2.0 works with most mainnet and testnet networks, as well as local main
 - https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Goerli* testnet and *Sepolia* testnet.
 - https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Testnet*.
 - https://www.polygon.technology/[*Polygon* (Matic),window=_blank] and *Mumbai*.
-- https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], and *Arbitrum Goerli*.
+- https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], *Arbitrum Sepolia* and *Arbitrum Goerli*.
 - https://optimism.io/[*Optimism*,window=_blank] and *Optimism Goerli*.
 - https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
 - https://www.gnosis.io/[*Gnosis Chain*,window=_blank] and *Sokol*.
