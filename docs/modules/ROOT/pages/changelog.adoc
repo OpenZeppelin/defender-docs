@@ -15,7 +15,6 @@
 ** Fix readability of audit issues.
 * *Code App*
 ** Modify name in navbar.
-
 * *General*
 ** Minor backend fixes.
 ** Minor UI/UX fixes.
