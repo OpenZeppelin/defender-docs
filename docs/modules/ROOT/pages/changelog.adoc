@@ -1,5 +1,26 @@
 = Changelog
 
+[[release-2023-11-30]]
+== November 30th, 2023
+
+* *Auth*
+** Ability to use google auth for signin.
+* *Relayers*
+** Ability to see error message on relayer withdraw funds page.
+** Ability to delete pending transactions in relayers.
+* *Deploy*
+** Restricting deploy environment creation to only admins.
+** Minor bug fixes with size limitations & deployment history.
+* *Audit*
+** Fix readability of audit issues.
+* *Code App*
+** Modify name in navbar.
+* *General*
+** Minor backend fixes.
+** Minor UI/UX fixes.
+** Security fixes.
+
+
 [[release-2023-11-27]]
 == November 27th, 2023
 
