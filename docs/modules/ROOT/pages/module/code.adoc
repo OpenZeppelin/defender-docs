@@ -23,6 +23,7 @@ Some issues found by Code Inspector are detected by our AI models. Keep in mind 
 Code Inspector has a wide range of functionalities designed to enhance security, efficiency, and code quality. These processes are powered by machine learning models and state-of-the-art tools developed by our security experts.
 
 * *Reused Code*: Identifies vulnerabilities in reused smart contract code by generating a unique fingerprint for each contract and matching it against a database of known issues.
+* *Vulnerable Dependencies*: Notify when a OpenZeppelin Contracts dependency with a known vulnerability is used, providing you with the necessary information to address the issue.
 * *Test Suggestions*: Opportunities to apply fuzzing tests to functions, providing you with areas where further testing could prove beneficial.
 * *External Call Safety*: Safety of external calls, highlighting any instances that might pose a severity concern.
 * *Standard Compatibility*: Compatibility of your contracts with established standards, flagging potential compatibility issues.
