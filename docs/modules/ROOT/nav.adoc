@@ -1,7 +1,7 @@
 * xref:index.adoc[Overview]
 
 * Modules
-** xref:module/code.adoc[Code]
+** xref:module/code.adoc[Code Inspector]
 ** xref:module/audit.adoc[Audit]
 ** xref:module/deploy.adoc[Deploy]
 ** xref:module/monitor.adoc[Monitor]

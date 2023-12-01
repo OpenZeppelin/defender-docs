@@ -12,7 +12,7 @@ Defender 2.0 modules work seamlessly together, providing users powerful features
 
 [.card.card-learn]
 --
-xref:module/code.adoc[[.card-title]#Code# [.card-body]#pass:q[Automate security checks on GitHub PRs with the OpenZeppelin Code App.]#]
+xref:module/code.adoc[[.card-title]#Code Inspector# [.card-body]#pass:q[Automatic code analysis powered by AI models and tools developed by our security experts.]#]
 --
 
 [.card.card-learn]
