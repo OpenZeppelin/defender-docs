@@ -40,7 +40,7 @@ Installation must be initiated from Defender 2.0. Installing the app directly fr
 
 The installation process connects your Defender 2.0 account and your GitHub repositories. Follow the following steps:
 
-. Navigate to the https://defender.openzeppelin.com/v2/#/code[Code page, window=_blank] on Defender 2.0.
+. Navigate to the https://defender.openzeppelin.com/v2/#/code[Code Inspector page, window=_blank] on Defender 2.0.
 . Click on the Install Code Inspector button, which redirects you to Github.
 . Select and approve the repositories to install the app.
 . Generate your first report by creating or updating a pull request on a repository that has the app installed.
