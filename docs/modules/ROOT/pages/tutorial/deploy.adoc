@@ -186,13 +186,13 @@ import { ethers, defender } from "hardhat";
 async function main() {
   const Box = await ethers.getContractFactory("Box");
 
-  const defaultApprovalProcess = await defender.getDefaultApprovalProcess();
+  const upgradeApprovalProcess = await defender.getUpgradeApprovalProcess();
 
-  if (defaultApprovalProcess.address === undefined) {
-    throw new Error(`Upgrade approval process with id ${defaultApprovalProcess.approvalProcessId} has no assigned address`);
+  if (upgradeApprovalProcess.address === undefined) {
+    throw new Error(`Upgrade approval process with id ${upgradeApprovalProcess.approvalProcessId} has no assigned address`);
   }
 
-  const deployment = await defender.deployProxy(Box, [5, defaultApprovalProcess.address], { initializer: "initialize" });
+  const deployment = await defender.deployProxy(Box, [5, upgradeApprovalProcess.address], { initializer: "initialize" });
 
   await deployment.waitForDeployment();
 
