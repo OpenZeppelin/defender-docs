@@ -3,7 +3,7 @@
 [[release-2023-12-04]]
 == December 4th, 2023
 
-* Monitor
+* *Monitor*
 ** Add support for link:https://docs.forta.network/en/latest/attack-detector-bot/[new Attack Detector forta bot] in monitor templates.
 
 * *General*
