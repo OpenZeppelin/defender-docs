@@ -5,7 +5,7 @@ Defender 2.0 allows you to monitor smart contract transactions and events across
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up for early access to Defender 2.0 https://www.openzeppelin.com/defender2-waitlist[here, window=_blank].
+* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
 NOTE: Learn to deploy contracts to monitor using Defender 2.0 xref::tutorial/deploy.adoc[here]!
 

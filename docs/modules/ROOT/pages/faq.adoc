@@ -32,9 +32,9 @@ image::transaction-proposals-faq.png[Transaction Proposals - formerly Admin prop
 
 image::address-book-faq.png[Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formerly under the Admin section]
 
-=== How can I get early access to Defender 2.0 beta version?
+=== How can I sign up to Defender 2.0?
 
-You can use the following link to submit a request to join the beta program and get early access. Once your request has been approved, you will receive an email with instructions on how to complete the process and enable Defender 2.0 from your current Defender account.
+You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
 === Is the existing Defender version still supported?
 
