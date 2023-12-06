@@ -50,13 +50,22 @@ The installation is currently done solely through Defender 2.0, ensuring a seaml
 [[usage]]
 == Usage
 
-Code Inspector is designed to streamline your code analysis workflow. Once installed, the app is triggered whenever a pull request (PR) is opened, or a new commit is pushed to an existing PR in your GitHub repository. 
+Code Inspector is designed to streamline your code analysis workflow. Once installed, the app is triggered whenever a pull request (PR) is opened or a new commit is pushed to an existing PR in your GitHub repository. To avoid skipping the report, the PR must contain at least a modification to any Solidity file or the `package.json` file.
 
 The app automatically generates a summary report for each new commit, which is posted as a comment in your PR. This summary report is continuously updated with the latest issues discovered in the most recent commit, and the commit hash is directly viewable in the report.
 
 Along with the summary reports in PR comments, a detailed report for each commit is created and can be accessed on Defender 2.0, offering in-depth information on the identified issues and how to fix them.
 
 If you wish to stop receiving reports for a specific repository, it's as simple as navigating to the Code Inspector settings and removing the respective repository from the list.
+
+=== Statuses
+These are the possible statuses of reports:
+
+* `Running`: The report has been triggered, and it's running.
+* `Succeeded`: The report has been successfully generated, and it's available in Defender and Github.
+* `Failed`: The report has failed. Make sure that your repository contains valid Solidity files. If this issue persists, please get in touch.
+* `Throttled`: The report has been throttled as your tenant exceeded the Code Inpsector quota limit. If you would like to increase your quota, please get in touch.
+* `Skipped`: The report has been skipped. Check that the PR and/or commit contains at least one modification to a Solidity file or the `package.json` file.
 
 [[reports]]
 == Reports
