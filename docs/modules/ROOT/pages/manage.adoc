@@ -271,7 +271,7 @@ Be sure to copy the secret key, it will be required for access and it will not b
 // NOTE: Defender 2.0 integrates with Fireblocks! Check out our guide on how to use Fireblocks for approvals xref:guide/fireblocks.adoc[here].
 
 [[forked-networks]]
-== Forked Networks (coming soon)
+== Forked Networks
 
 In the "Forked Networks" section, you can manage and oversee your forked networks. These networks let you test the efficiency of your security setup and offer a vital chance to identify and fix any problems before launching on testnets and mainnets.
 
@@ -285,7 +285,36 @@ Once created, the network becomes accessible for utilization in any Defender 2.0
 
 image::manage-forked-networks-selection.png[Select Forked Network]
 
-NOTE: Once you have created a Forked Network you cannot edit its name. If you need to change the name you will need to delete and recreate the Forked Network. When a forked network is deleted, *all* associated resources will also be deleted. This includes approval processes, relayers, contracts, address book entries, etc.
+NOTE: Once you have created a Forked Network you cannot edit its name or RPC URL. If you need to change these settings you will need to delete and recreate the Forked Network. When a forked network is deleted, *all* associated resources will also be deleted. This includes approval processes, relayers, contracts, address book entries, etc.
+
+[[private-networks]]
+
+== Private Networks
+
+Navigate through the "Private Networks" section to effectively manage and oversee your private networks. These networks establish a restricted and controlled environment tailored for testing and validating network configurations. This controlled space empowers users to identify and resolve potential issues before deploying configurations to production environments, providing a secure venue to evaluate system functionality and security measures in isolation.
+
+image::manage-private-networks-create.png[Manage Private Networks]
+
+To set up a private network, simply click the "Create Private Network" button. This action prompts you to define a name for the private network and select the currency symbol ("ETH") for your network. Additionally, provide the RPC URL, and optionally, an API key if access requires it.
+
+For an enhanced user experience, customize your setup by including the block explorer URL, Safe contract deployment addresses, and a subgraph URL.
+
+https://github.com/safe-global/safe-contracts[Safe Contracts, window=_blank] form a comprehensive collection of smart contracts designed for deploying, managing, and interacting with multi-signature wallets. Defender 2.0 utilizes the following Safe contract deployments to enrich the user experience:
+
+- **Master**: Facilitates a Safe multisignature wallet deployment with support for confirmations using signed messages based on EIP-712.
+- **Proxy Factory**: Enables a Safe smart contract deployment to create a new proxy contract and execute a message call to the new proxy within a single transaction.
+- **Multi Send Call Only**: Allows a Safe smart contract deployment to batch multiple transactions into one, specifically for calls.
+- **Create Call**: Facilitates a Safe smart contract deployment to utilize different create opcodes for deploying a contract.
+
+You can https://github.com/safe-global/safe-deployments[deploy these contracts, window=_blank] on your private network, providing the contract addresses in the creation form to leverage them in Defender 2.0, especially when deploying using `CREATE2`.
+
+Defender utilizes Subgraph for GraphQL-based querying of blockchain data, primarily for the Access Control module. Create your own https://thegraph.com/docs/en/developing/creating-a-subgraph/[Subgraph, window=_blank], and input the endpoint in the creation form to activate this functionality in Defender 2.0. You can find an example configuration for the Access Control subgraph link:_attachments/oz-mainnet-graphql-config-example.zip[here].
+
+Once created, the network becomes accessible for utilization in any Defender 2.0 module requiring network selection. This proves invaluable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
+
+image::manage-private-networks-selection.png[Select Private Network]
+
+NOTE: After creating a Private Network, you cannot edit its name, RPC URL, or symbol. To make changes, you must delete and recreate the Private Network. Deleting a private network will also delete *all* associated resources, including approval processes, relayers, contracts, address book entries, etc.
 
 [[advanced-settings]]
 == Advanced
