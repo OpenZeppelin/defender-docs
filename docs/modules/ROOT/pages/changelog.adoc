@@ -1,5 +1,23 @@
 = Changelog
 
+[[release-2023-12-07]]
+== December 7th, 2023
+
+* *Auth*
+** Enable access to Defender 2.0 for Defender 1.0 users.
+** Minor bug fixes in quotas and sign ups.
+
+* *Relayers*
+** Bug fix in ability in cancelling pending private(flashbot) transactions.
+** Bug fix in updating gas prices across multiple networks.
+
+* *General*
+** Add support for *Optimism Sepolia*.
+** Add support for *Base Sepolia*.
+** Add support for yearly subscriptions.
+** UI improvements.
+
+
 [[release-2023-12-04]]
 == December 4th, 2023
 
