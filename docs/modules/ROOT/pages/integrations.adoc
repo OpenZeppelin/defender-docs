@@ -14,7 +14,7 @@ Defender 2.0 seamlessly integrates with your existing tools and workflows, so yo
 
 [[continous-integration]]
 == Continuous Integration
-- xref:module/code.adoc[*GitHub*]: Install the Code App to maximize security in every project PR.
+- xref:module/code.adoc[*GitHub*]: Install Code Inspector to maximize security in every project PR.
 - xref:dac.adoc[*Defender as Code (DaC)*]: Serverless Framework plugin for automated resource management.
 
 [[key-management-transaction-execution]]

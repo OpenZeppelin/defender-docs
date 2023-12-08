@@ -2,7 +2,7 @@
 
 Defender as Code (DaC) is a Serverless Framework plugin for automated resource management and configuration as code.
 
-WARNING: This plugin is under development and behavior can change between releases. Handle with care.
+WARNING: This plugin is under development and behavior might change. Handle with care.
 
 == Prerequisites
 
@@ -63,6 +63,10 @@ resources:
         type: 'schedule'
         frequency: 1500
       paused: false
+      # optional - unencrypted and scoped to the individual action
+      environment-variables:
+        hello: 'world!'
+    action-example-2: 2cbc3f58-d962-4be8-a158-1035be4b661c
 
   policies:
     policy-1:
@@ -89,6 +93,47 @@ This requires setting the `key` and `secret` under the `defender` property of th
 Ensure the Defender 2.0 Team API Keys are setup with all appropriate API capabilities.
 
 The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same tenant.
+
+You may also reference existing Defender resources directly by their unique ID (e.g. `2cbc3f58-d962-4be8-a158-1035be4b661c`). These resources will not be managed by the plugin and will be ignored during the deploy process. However, you may reference them in other resources to update their configuration accordingly.
+A list of properties that support direct referencing:
+
+- `relayer` may reference a `relayerId` in Actions
+- `action-trigger` may reference an `actionid` in Monitor
+- `action-condition` may reference an `actionId` in Monitor
+- `address-from-relayer` may reference a `relayerId` in Relayer
+- `notification-ids` may reference multiple `notificationId` in Category
+- `notify-config.channels` may reference multiple `notificationId` in Monitor
+- `notify-config.category` may reference a `categoryId` in Monitor
+- `contracts` may be used over `addresses` and reference multiple `contractId` in Monitor
+  The following is an example of how a direct reference to a Defender contract and relayer can be used in monitor and action respectively:
+
+```yaml
+...
+contracts:
+  contract-1: 'goerli-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # contractId of an existing resource in Defender
+relayers:
+  relayer-2: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId of an existing relayer in Defender
+actions:
+  action-example-1:
+    name: 'Hello world from serverless'
+    path: './actions/hello-world'
+    relayer: ${self:resources.relayers.relayer-2}
+    trigger:
+      type: 'schedule'
+      frequency: 1500
+    paused: false
+monitors:
+  block-example:
+    name: 'Block Example'
+    type: 'BLOCK'
+    network: 'goerli'
+    risk-category: 'TECHNICAL'
+    # optional - either contracts OR addresses should be defined
+    contracts:
+      - ${self:resources.contracts.contract-1}
+    ...
+...
+```
 
 [[ssot-mode]]
 === SSOT mode
@@ -152,7 +197,7 @@ NOTE: To avoid potential loss of funds, Relayers can only be deleted from the De
 
 === Logs
 
-You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest action logs for a given action identifier (e.g. mystack.action-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
+You can use `sls logs --function <stack_resource_id>` to retrieve the latest action logs for a given action identifier (e.g. mystack.action-example-1). This command will run continiously and retrieve logs every 2 seconds.
 
 === Invoke
 
@@ -162,6 +207,14 @@ NOTE: Each command has a standard output to a JSON object.
 
 == Caveats
 
+Note that when setting up the notification configuration for a monitor, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a monitor with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
+
+```yaml
+notify-config:
+  channels: [] # assign channels as empty list if you wish to use a category
+  category: ${self:resources.categories.medium-severity} # optional
+```
+
 Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
 
 - Not having set the API key and secret
@@ -169,3 +222,5 @@ Errors thrown during the `deploy` process, will not revert any prior changes. Co
 - Validation error of the `serverless.yml` file (see <<types-and-schema-validation, Types and Schema Validation>>)
 
 Usually, fixing the error and retrying the deploy should suffice as any existing resources will fall within the `update` clause of the deployment. However, if unsure, you can always call `sls remove` to remove the entire stack, and retry.
+
+Action secrets are encrypted key-value pairs and injected at runtime into the lambda environment. Secrets are scoped to all actions automatically. Alternatively, you may use environment-variables to define key-value pairs that are scoped to the individual action, and available at runtime through `process.env`. Note that these values are not encrypted.

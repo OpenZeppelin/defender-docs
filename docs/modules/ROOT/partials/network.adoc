@@ -1,8 +1,6 @@
 type Network =
   | 'mainnet'
-  | 'rinkeby'
-  | 'ropsten'
-  | 'kovan'
+  | 'sepolia'
   | 'goerli'
   | 'xdai'
   | 'sokol'
@@ -18,22 +16,31 @@ type Network =
   | 'mumbai'
   | 'avalanche'
   | 'fuji'
-  | 'optimism'
-  | 'optimism-kovan'
-  | 'optimism-goerli'
   | 'arbitrum'
-  | 'arbitrum-rinkeby'
+  | 'arbitrum-nova'
   | 'arbitrum-goerli'
+  | 'arbitrum-sepolia'
+  | 'optimism'
+  | 'optimism-goerli'
+  | 'optimism-sepolia'
   | 'celo'
   | 'alfajores'
   | 'harmony-s0'
   | 'harmony-test-s0'
   | 'aurora'
   | 'auroratest'
-  | 'hedera',
-  | 'hederatest',
-  | 'zksync',
-  | 'zksync-goerli',
-  | 'base',
-  | 'base-goerli',
-  | 'linea-goerli';
+  | 'hedera'
+  | 'hederatest'
+  | 'zksync'
+  | 'zksync-goerli'
+  | 'base'
+  | 'base-goerli'
+  | 'base-sepolia'
+  | 'linea-goerli'
+  | 'linea'
+  | 'mantle'
+  | 'mantle-testnet'
+  | 'scroll'
+  | 'scroll-sepolia'
+  | 'meld'
+  | 'meld-kanazawa';
