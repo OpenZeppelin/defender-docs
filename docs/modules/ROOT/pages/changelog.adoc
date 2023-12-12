@@ -1,5 +1,25 @@
 = Changelog
 
+[[release-2023-12-12]]
+== December 12th, 2023
+
+* *Auth*
+** Bug fixes in reset password flow.
+
+* *Code Inspector*
+** Ability to trigger a code inspector report through Defender by specifying the repository and a commit.
+
+* *Relayers*
+** Bug fix on gas estimation for relayers in mainnet.
+** Bug fix stuck page when deleting a relayer.
+
+* *Monitors*
+** Disable monitor action filters and monitor action notifications for free trial.
+
+* *General*
+** Minor bug fix in quotas.
+
+
 [[release-2023-12-07]]
 == December 7th, 2023
 
