@@ -121,3 +121,8 @@ image::code-settings-advanced.png[Code Advanced Settings]
 * *Installing the app outside Defender 2.0*: Code Inspector must be installed via Defender 2.0. If you attempt to install it from elsewhere, the installation will not succeed. Ensure you're logged in to your OpenZeppelin account and navigate to Code Inspector from Defender 2.0 for a successful installation.
 
 * *Code Inspector Access*: Access to Code Inspector is required for a successful installation. If you find that you don't have access and you think this is a mistake, contact OpenZeppelin support to get the necessary permissions.
+
+[[rules]]
+== Rules
+
+
