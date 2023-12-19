@@ -72,6 +72,10 @@ Defender 2.0 works with most mainnet and testnet networks, as well as local main
 
 If there is any other network or layer-2 solution you would like to use from Defender 2.0, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
 
+[[network-status]]
+=== Status
+If a supported network experiences issues, some features in Defender 2.0 for that network may not be working properly. You can check the status of Defender and the supported networks on the https://status.defender.openzeppelin.com/[status page, window=_blank].
+
 [[integrations]]
 == Integrations
 Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:integrations.adoc[here].
