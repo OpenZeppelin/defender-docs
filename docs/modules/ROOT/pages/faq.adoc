@@ -66,3 +66,7 @@ image::switch-back-faq.png[Switch back to Defender]
 === Does Defender 2.0 beta offer the same level of support?
 
 Yes. You can reach out and submit a support request for Defender 2.0 in the same channels as the existing Defender version. Additionally, you can submit feedback or report an issue directly from the web application using the dedicated feedback form.
+
+=== How can I get an additional quota or upgrade my tenant account?
+
+If your current quota no longer meets your needs, we'll help you scale up. You can upgrade your quota by contacting our team at link:mailto:sales@openzeppelin.com[sales@openzeppelin.com] or by using the in-app feedback form and selecting the "Additional quota" topic.
