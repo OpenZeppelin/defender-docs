@@ -3,13 +3,21 @@
 [[release-2023-12-20]]
 == December 20th, 2023
 
-* Make Forta contract field optional.
-* Add access control changes and account activity templates.
-* Fix menu button visibility issue.
-* Add base chain to allowed assets for fireblocks.
-* Add ability to finalize an audit with no auditor comments.
-* Fix the order of tabs in the navbar.
-* Add option to include ABI for list contract endpoint.
+* *General*
+** Fix menu button visibility issue.
+** Add base chain to allowed assets for fireblocks.
+** Fix the order of tabs in the navbar.
+
+* *Audit*
+** Add ability to finalize an audit with no auditor comments.
+
+* *Monitor*
+** Update Forta Monitor required fields — We have updated the logic to require only a contract or an agent ID instead of requiring both. When using Forta monitor, you can subscribe to an agent without specifying a contract.
+** Added Access Control Monitor template — We have added a new Monitor template that allows you to easily monitor when changes are applied to your access control. For example, when assigning an address to a role.
+** Added Account Activity Monitor template — We have added a new Monitor template that allows you to monitor the activity of an account easily. For example, it will monitor for any transaction where the specified address is involved, both as origin or destination.
+
+* *API/SDK*
+** Added an ABI option for the list contract API endpoint — We have added an option to include a contract's ABI when using our API or SDK. The flag is set to false by default, but when set to true, the response will include the ABIs of the list of contracts.
 
 [[release-2023-12-12]]
 == December 12th, 2023
