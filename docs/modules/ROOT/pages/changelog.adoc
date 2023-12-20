@@ -17,7 +17,7 @@
 ** Added Account Activity Monitor template — We have added a new Monitor template that allows you to monitor the activity of an account easily. For example, it will monitor for any transaction where the specified address is involved, both as origin or destination.
 
 * *API/SDK*
-** Added an ABI option for the list contract API endpoint — We have added an option to include a contract's ABI when using our API or SDK. The flag is set to false by default, but when set to true, the response will include the ABIs of the list of contracts.
+** Added an ABI option for the list contract API endpoint — We have added an option to include a contract's ABI when using our https://www.api-docs.defender.openzeppelin.com/#list-contracts[API or SDK, window=_blank]. The flag is set to false by default, but when set to true, the response will include the ABIs of the list of contracts.
 
 [[release-2023-12-12]]
 == December 12th, 2023
