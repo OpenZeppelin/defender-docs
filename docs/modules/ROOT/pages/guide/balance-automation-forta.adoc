@@ -12,14 +12,14 @@ image::guide-forta-diagram.png[Component diagram]
 [[install-dependencies]]
 == 1. Install Dependencies
 
-NOTE: Although this guide makes use of the `defender-client` packages to create a Relayer, Monitor, and Action, the very same functionality is also available via the Defender web interface.
+NOTE: Although this guide makes use of the `defender-sdk` package to create a Relayer, Monitor, and Action, the very same functionality is also available via the Defender web interface.
 
 You'll need to install the relevant Defender NPM packages. Note that Forta bot creation also requires that you also have https://www.docker.com/get-started[Docker] installed.
 
 ```
 $ mkdir balance-automation && cd balance-automation
 $ npm init -y
-$ npm i --save-dev @openzeppelin/defender-relay-client @openzeppelin/defender-autotask-client @openzeppelin/defender-sentinel-client dotenv
+$ npm i --save-dev @openzeppelin/defender-sdk dotenv
 ```
 
 [[create-relayer]]
@@ -38,35 +38,34 @@ API_KEY='key'
 API_SECRET='secret'
 ```
 
-Using https://www.npmjs.com/package/@openzeppelin/defender-relay-client[`@openzeppelin/defender-relay-client`, window=_blank], create a new xref:manage/relayers.adoc[Relayer] on Polygon and save the Relayer's ID to your `.env` file.
+With the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`@openzeppelin/defender-sdk`, window=_blank] package, use the following script to create a new xref:manage/relayers.adoc[Relayer] on Polygon and save the Relayer's ID to your `.env` file.
 
 [source,jsx]
 ----
-const { RelayClient } = require('@openzeppelin/defender-relay-client');
+require('dotenv').config();
+
+const { Defender } = require('@openzeppelin/defender-sdk');
 const { appendFileSync } = require('fs');
 
-async function run() {
-  require('dotenv').config();
-  const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
-  const relayClient = new RelayClient({ apiKey, apiSecret });
+async function main() {
+  const creds = { apiKey: process.env.API_KEY, apiSecret: process.env.API_SECRET };
+  const client = new Defender(creds);
 
-  // Create Relayer using Defender client
-  const requestParams = {
+  const createParams = {
     name: 'Balance Automation Relayer',
     network: 'matic',
-    minBalance: BigInt(1e17).toString(),
+    minBalance: BigInt(1e17).toString()
   };
-  const relayer = await relayClient.create(requestParams);
-  
-  // Store Relayer info in file (optional)
+
+  const relayer = await client.relay.create(createParams);
+
   appendFileSync('.env', relayer.relayerId)
   console.log('Relayer created: ', relayer);
 }
 
-run().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  main().catch(console.error);
+}
 ----
 
 Save the file and run the script. Having the Relayer's ID gives you all that you need to run transactions via an Action.
@@ -93,53 +92,45 @@ async function handler(event) {
   const amount = ethers.utils.parseUnits("1.0", 18);	
   const tx = await contract.connect(signer).transfer(MONITORED_ADDRESS, amount);
 }
-
-// ...
 ----
 
 The Action is able to connect to the Relayer by specifying its ID during creation. Credential passing is handled automatically and securely.
 
-Using https://www.npmjs.com/package/@openzeppelin/defender-autotask-client[`@openzeppelin/defender-autotask-client`, window=_blank], write a script in a separate file that creates a new Action using the code from `action/index.js`:
+Again, with the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`@openzeppelin/defender-sdk`, window=_blank] package, use the following script to create the Action using the code from `action/index.js`:
 
 [source,jsx]
 ----
-const { AutotaskClient } = require('@openzeppelin/defender-autotask-client')
+require('dotenv').config();
+
+const { Defender } = require('@openzeppelin/defender-sdk');
 const { appendFileSync } = require('fs')
 
 async function main() {
-  require('dotenv').config()
-  const credentials = {
-    apiKey: process.env.API_KEY,
-    apiSecret: process.env.API_SECRET,
-  }
-  const actionClient = new AutotaskClient(credentials)
+  const creds = { apiKey: process.env.API_KEY, apiSecret: process.env.API_SECRET };
+  const client = new Defender(creds);
+
+  client.action.validatePath('./action');
+  const encodedZippedCode = await client.action.getEncodedZippedCodeFromFolder('./action');
 
   const params = {
     name: 'Low balance transfer',
-    encodedZippedCode: await actionClient.getEncodedZippedCodeFromFolder(
-      './action'
-    ),
+    encodedZippedCode,
     trigger: {
-      type: 'webhook',
+      type: 'webhook'
     },
     paused: false,
     // Use the ID of the previosuly created Relayer
     relayerId: process.env.RELAYER_ID,
-  }
+  };
 
-  const createdAction = await actionClient.create(params)
-  console.log('Created Action with ID: ', createdAction.autotaskId)
+  const action = await client.action.create(params);
+  console.log('Created Action with ID: ', action.autotaskId)
 
-  appendFileSync('.env', `\nACTION_ID="${createdAction.autotaskId}"`)
+  appendFileSync('.env', `\nACTION_ID="${action.autotaskId}"`)
 }
 
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-      console.error(error)
-      process.exit(1)
-    })
+  main().catch(console.error);
 }
 ----
 
@@ -278,21 +269,19 @@ For convenience, save the agent ID to the `.env` file in your main project folde
 [[create-monitor]]
 == 5. Create Forta Monitor
 
-Using the https://www.npmjs.com/package/@openzeppelin/defender-sentinel-client[`@openzeppelin/defender-sentinel-client`, window=_blank] package, write a script that creates a Forta Monitor connected to your Relayer and Action.
+With the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`@openzeppelin/defender-sdk`, window=_blank] package, use the following script to create a Forta Monitor connected to your Relayer and Action.
 
 [source,jsx]
 ----
-require('dotenv').config()
-const { SentinelClient } = require('@openzeppelin/defender-sentinel-client')
+require('dotenv').config();
+
+const { Defender } = require('@openzeppelin/defender-sdk');
 
 const BOT = process.env.BOT_ID
 
 async function main() {
-  require('dotenv').config()
-  const client = new SentinelClient({
-    apiKey: process.env.API_KEY,
-    apiSecret: process.env.API_SECRET,
-  })
+  const creds = { apiKey: process.env.API_KEY, apiSecret: process.env.API_SECRET };
+  const client = new Defender(creds);
 
   const notificationChannels = await client.listNotificationChannels();
   const { notificationId, type } = notificationChannels[0];
@@ -308,16 +297,15 @@ async function main() {
     autotaskTrigger: process.env.ACTION_ID,
     alertTimeoutMs: 120000,
     notificationChannels: [notificationChannels[0].notificationId],
-  }
+  };
 
-  const newMonitor = await client.create(requestParams)
-  console.log(newMonitor)
+  const monitor = await client.monitor.create(requestParams);
+  console.log(monitor)
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exitCode = 1
-})
+if (require.main === module) {
+  main().catch(console.error);
+}
 ----
 
 The Monitor is configured to trigger a notification as well as an Action when the bot sends an alert. To prevent being triggered multiple times for the same low balance event, the `alertTimeoutMs` has been set.  Run the script to create the Monitor.
