@@ -22,6 +22,7 @@
 
 * Guides
 ** xref:guide/forked-network.adoc[Forked Networks]
+** xref:guide/balance-automation-forta.adoc[Automate relayer balance using a Forta bot]
 
 * xref:dac.adoc[Defender as Code]
 * xref:sdk.adoc[SDK and API]
