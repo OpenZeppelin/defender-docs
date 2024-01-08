@@ -6,7 +6,7 @@ Code Inspector seamlessly integrates with Github to maximize security with every
 For every push to your code, the OpenZeppelin Code Inspector dives into a detailed examination, identifying potential vulnerabilities and suggesting improvements to enhance your code quality. It generates a succinct report, summarizable in your PR comments for quick and immediate access, while a more detailed report is made available on Defender 2.0.
  
 [[use-cases]]
-== Use Cases
+== Use cases
 
 * Automatically conduct security analysis on pull requests, identifying vulnerabilities and suggesting improvements.
 * Utilize summarized reports in the pull request for immediate insights into your code's health and security.
@@ -30,7 +30,6 @@ Code Inspector has a wide range of functionalities designed to enhance security,
 * *Reentrancy Attack Vectors*: Potential reentrancy attack vectors at both the file and function level, assigning these threats high-severity labels.
 * *Code Readability*: Missing docstrings in functions and misspelled words throughout the codebase, ensuring your code is as legible and understandable as possible.
 * *Code Efficiency and Security Practices*: Areas in your code where improvements can be made for better performance and highlights potential security risks, enabling you to optimize and secure your contracts more effectively.
-
 
 [[installation]]
 == Installation
@@ -125,4 +124,267 @@ image::code-settings-advanced.png[Code Advanced Settings]
 [[rules]]
 == Rules
 
+[cols='1,1,1']
+|===
+|ID|Description|Severity
 
+|`chainlink-deprecated-functions`
+|Identifies usage of chainlink's deprecated functions.
+|medium
+
+|`check-consistent-usage-of-msgsender-msgdata`
+|Identifies usage of `msg.sender` or `msg.data` when `_msgSender()` or/and `_msgData()` are present
+|note
+
+|`conflicting-inheritance`
+|Identifies a possible violation of 'No Conflicting Inheritance' EEA EthTrust Security Level [S] requirement.
+|ethtrust
+
+|`constants-not-using-proper-format`
+|Identifies when a constant is not using the proper format.
+|note
+
+|`create2-usage`
+|Identifies an instance of create2.
+|ethtrust
+
+|`dangerous-strict-equality`
+|Identifies the use of strict equalities that can cause a Gridlock.
+|medium
+
+|`default-values-assigned`
+|Identifies an instance of a variable initialized to its default value.
+|note
+
+|`delegatecall-to-arbitrary-address`
+|Identifies when an there is a delegatecall or call code to an arbitrary address.
+|high
+
+|`delegatecall-usage`
+|Identifies an instance of delegatecall.
+|ethtrust
+
+|`different-pragma-directives`
+|Identifies whether different Solidity versions are used.
+|low
+
+|`duplicated-import`
+|Identifies duplicated imports.
+|note
+
+|`fallback-with-return-value`
+|Identifies if there are fallback functions with return values.
+|note
+
+|`file-contract-name-mismatch`
+|Identifies whether the file name and the contract name mismatch.
+|note
+
+|`floating-pragma`
+|Identifies pragma directives that do not specify a particular, fixed version of Solidity.
+|low
+
+|`function-init-state-variable`
+|Identifies when a state variable is initialized by a function.
+|note
+
+|`function-visibility-too-broad`
+|Identifies if function visibility is unnecessarily broad.
+|note
+
+|`gas-limit-on-call`
+|Identifies when an external call has a hard-coded gas limit.
+|low
+
+|`identify-solmate-import`
+|Identifies a solmate import.
+|note
+
+|`identify-to-do-comments`
+|Identifies todo comments in the code.
+|note
+
+|`inconsistent-order-contract`
+|Identifies when a contract has a inconsistent order.
+|note
+
+|`inconsistent-use-named-returns`
+|Identifies inconsistent usage of named returns within a codebase.
+|note
+
+|`incorrect-format-onERC721Received`
+|Identifies when a contract includes the `onERC721Received` function and it has an incorrect format.
+|note
+
+|`incorrect-modifier`
+|Identifies an incorrect definition of a modifier.
+|medium
+
+|`incremental-update-optimization`
+|Identifies the use of `i++` (rather than `++i`) to save gas in for loop headers.
+|note
+
+|`indecisive-license`
+|Identifies when a file has multiple SPDX licenses.
+|note
+
+|`lack-of-indexed-event-parameters`
+|Identifies when a lack of indexed event parameter.
+|note
+
+|`lack-of-security-contact`
+|Identifies when a contract does not have a security contact.
+|note
+
+|`lock-ether`
+|Identifies any instance of locked ETH within a contract.
+|high
+
+|`memory-side-effect-assembly`
+|Identifies when some code may be vulnerable to a Solidity compiler vulnerability.
+|medium
+
+|`missing-docstrings`
+|Identifies when a function is missing docstrings.
+|low
+
+|`missing-mapping-named-parameters`
+|identifies when a mapping is missing named parameters
+|note
+
+|`missing-return`
+|Identifies when a function is missing the return statement.
+|low
+
+|`misuse-boolean-literal`
+|Detects the misuse of a Boolean literal (used in complex expressions or as conditionals).
+|medium
+
+|`msg-value-loop`
+|Identifies usage of msg.value inside a loop.
+|note
+
+|`name-reused`
+|Identifies in a codebase when two or more contracts have the same name.
+|note
+
+|`non-explicit-imports`
+|Identifies a non-explicit import.
+|note
+
+|`precision-loss-div-before-mul`
+|Identifies possible precision loss due to division before multiplication
+|note
+
+|`require-multiple-conditions`
+|Identifies a require statement with multiple conditions.
+|low
+
+|`selfdestruct-usage`
+|Identifies an instance of selfdestruct.
+|ethtrust
+
+|`shadow-argument`
+|Identifies a function argument that has been shadowed.
+|note
+
+|`shadow-builtin`
+|Identifies when a builtin symbol is being shadowed.
+|low
+
+|`shadow-state-variable`
+|Identifies a state variable that has been shadowed.
+|note
+
+|`state-updated-without-event`
+|Identifies if a function is updating the state without an event emission.
+|note
+
+|`state-var-visibility-not-explicitly-declared`
+|Identifies when the visibility of a state variable that has not been explicitly declared.
+|note
+
+|`swapped-arguments-function-call`
+|Identifies when the arguments of function call have been swapped.
+|note
+
+|`too-many-digits`
+|Identifies a literal number with many digits.
+|note
+
+|`transferfrom-dangerous-from`
+|Identifies usage of `transferFrom` with `from` parameter not being a `msg.sender`.
+|high
+
+|`tx-origin-usage`
+|Identifies an instance of tx.origin.
+|ethtrust
+
+|`unchecked-call-success`
+|Identifies when the external call fail check is missing.
+|ethtrust
+
+|`unicode-direction-control`
+|Identifies the use of unicode direction control character.
+|ethtrust
+
+|`unnecessary-assignment`
+|Identifies an unnecessary assignment of a variable.
+|note
+
+|`unnecessary-cast`
+|Identifies an unnecessary cast.
+|note
+
+|`unsafe-mint-ERC721`
+|Identifies if a `_mint` function is used instead of `_safeMint` in ERC721 context.
+|note
+
+|`unused-arguments`
+|Identifies an unused function argument.
+|note
+
+|`unused-enum`
+|Identifies an unused enum.
+|note
+
+|`unused-error`
+|Identifies an unused error.
+|note
+
+|`unused-event`
+|Identifies an unused event.
+|note
+
+|`unused-function`
+|Identifies an unused function with internal or private visibility.
+|note
+
+|`unused-imports`
+|Identifies an unused import.
+|note
+
+|`unused-named-returns`
+|Identifies an unused named return variable.
+|note
+
+|`unused-state-variable`
+|Identifies an unused state variable.
+|note
+
+|`unused-struct`
+|Identifies an unused struct.
+|note
+
+|`use-of-uint-instead-of-uint256`
+|Identifies if an `int/uint` is used instead of `int256/uint256`.
+|note
+
+|`variable-could-be-constant`
+|Identifies variables that could be declared as `constant`.
+|note
+
+|`void-constructor-call`
+|Identifies the call to a constructor that is not implemented.
+|low
+|===
