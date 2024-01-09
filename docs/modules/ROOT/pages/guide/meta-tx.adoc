@@ -305,8 +305,8 @@ $ yarn start
 
 Use the frontend to see it working for yourself! Compare what happens when you sign the registry with an account that has funds, and then try it with an account that has a zero ETH balance.
 
-[[resources]]
-== Resources
+[[reference]]
+== Reference
 
 * https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[Demo repo - Meta-Transaction Name Registry, window=_blank]
 * https://docs.openzeppelin.com/contracts/api/metatx[Documentation - Meta Transactions, window=_blank]
