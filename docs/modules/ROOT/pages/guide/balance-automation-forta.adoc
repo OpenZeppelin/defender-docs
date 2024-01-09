@@ -73,7 +73,7 @@ Save the file and run the script. Having the Relayer's ID gives you all that you
 [[create-action]]
 == 3. Create Action
 
-Next, you'll need to create an xref:module/actions.adoc[Action] that uses ethers.js to transfer LINK from the xref:module/actions.adoc#relayer-integration[integrated Relayer] to the account you would like to be monitored by the Forta bot.
+Next, you'll need to create an xref:module/actions.adoc[Action] that uses ethers.js to transfer LINK from the c[integrated Relayer] to the account you would like to be monitored by the Forta bot.
 
 ```
 $ mkdir action && touch action/index.js

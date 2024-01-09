@@ -23,6 +23,7 @@
 * Guides
 ** xref:guide/forked-network.adoc[Forked Networks]
 ** xref:guide/balance-automation-forta.adoc[Automate balance maintenance using a Forta bot]
+** xref:guide/factory-monitor.adoc[Automatic monitoring for factory clones]
 
 * xref:dac.adoc[Defender as Code]
 * xref:sdk.adoc[SDK and API]
