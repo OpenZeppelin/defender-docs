@@ -38,7 +38,7 @@ xref:autotasks.adoc[[.card-title]#Autotask# [.card-body]#pass:q[Create automated
 All Defender components, where applicable, provide support for the following chains and networks:
 
 - https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Goerli* testnet and *Sepolia* testnet.
-- https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Testnet*.
+- https://zksync.io/[*zkSync Era Mainnet*,window=_blank], *zkSync Era Testnet* and *zkSync Sepolia Testnet*.
 - https://www.polygon.technology/[*Polygon* (Matic),window=_blank] and *Mumbai*.
 - https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], *Arbitrum Sepolia* and *Arbitrum Goerli*.
 - https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia* and *Optimism Goerli*.
