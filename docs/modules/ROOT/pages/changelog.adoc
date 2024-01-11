@@ -12,13 +12,14 @@
 * *Monitor*
 ** Forta monitors added support for Optimism and Fantom networks.
 
-* *Private & Tenant Networks*
-** Access to tenant networks with read-only permissions.
+* *Forked Networks*
+** Access to forked networks with read-only permissions.
+
+* *Private Networks*
 ** Apply restrictions on the usage of specific chain ids.
 
 * *Audit*
 ** Audit report logo and code block spacing styling improvements.
-** Allow role-base access control changes by auditors.
 
 * *Deploy*
 ** Fix deployment status when the deploy request fails.
