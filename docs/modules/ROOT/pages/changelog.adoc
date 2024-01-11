@@ -4,7 +4,6 @@
 == January 10th, 2024
 
 * *General*
-** Fix scroll transaction service url.
 ** Minor bug fixes, security improvements across all components.
 
 * *Auth*
@@ -12,7 +11,6 @@
 ** Resend email invitations to 2.0 by default.
 
 * *Monitor*
-** Add new matic blocks confirmation level (32) in addition to existing 1, 128, 150, 225 confirmation levels.
 ** Support forta monitors for optimism and fantom networks.
 ** Bug fix in monitor condition test for tenant networks.
 ** Minor backend improvements and bug fixes.
