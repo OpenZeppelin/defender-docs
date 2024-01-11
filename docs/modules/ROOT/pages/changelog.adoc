@@ -4,35 +4,27 @@
 == January 10th, 2024
 
 * *General*
-** Minor bug fixes, security improvements across all components.
+** Minor bug fixes and security improvements across all components.
 
-* *Auth*
-** Feature to allow team members to re-send invitation for pending users.
-** Resend email invitations to 2.0 by default.
+* *Authorization*
+** Allow team members to re-send an invitation for pending users.
 
 * *Monitor*
-** Support forta monitors for optimism and fantom networks.
-** Bug fix in monitor condition test for tenant networks.
-** Minor backend improvements and bug fixes.
+** Forta monitors added support for Optimism and Fantom networks.
 
 * *Private & Tenant Networks*
-** Access to tenant networks with read only permissions.
-** Apply restrictions on usage of specific chainIds.
-
-* *Relayers*
-** Bug fix with relayer navigation page.
+** Access to tenant networks with read-only permissions.
+** Apply restrictions on the usage of specific chain ids.
 
 * *Audit*
-** Audit report syling fixes with logo & code block spacing.
-** Allow rbac changes by auditors.
-** Bug fix in tenant deletion.
-** Backend improvements.
+** Audit report logo and code block spacing styling improvements.
+** Allow role-base access control changes by auditors.
 
 * *Deploy*
-** Fix deployment status when deploy fails in the backend.
+** Fix deployment status when the deploy request fails.
 
 * *Code Inspector*
-** Feature to allow users to directly request an audit if there are reports with >= 10 findings.
+** Allow users to directly request an audit if there are reports with more than 10 findings.
 
 
 [[release-2023-12-20]]
