@@ -1,5 +1,43 @@
 = Changelog
 
+[[release-2024-01-10]]
+== January 10th, 2024
+
+* *General*
+** Fix scroll transaction service url.
+** Minor bug fixes, security improvements across all components.
+
+* *Auth*
+** Feature to allow team members to re-send invitation for pending users.
+** Resend email invitations to 2.0 by default.
+
+* *Monitor*
+** Add new matic blocks confirmation level (32) in addition to existing 1, 128, 150, 225 confirmation levels.
+** Support forta monitors for optimism and fantom networks.
+** Bug fix in monitor condition test for tenant networks.
+** Minor backend improvements and bug fixes.
+
+* *Private & Tenant Networks*
+** Access to tenant networks with read only permissions.
+** Apply restrictions on usage of specific chainIds.
+
+* *Relayers*
+** Bug fix with relayer navigation page.
+
+* *Audit*
+** Audit report syling fixes with logo & code block spacing.
+** Allow rbac changes by auditors.
+** Bug fix in tenant deletion.
+** Backend improvements.
+
+* *Deploy*
+** Fix deployment status when deploy fails in the backend.
+
+* *Code Inspector*
+** Feature to allow users to specify settings and configuration of a repository via a file called "defender.config.json" on the root directory.
+** Feature to allow users to directly request an audit if there are reports with >= 10 findings.
+
+
 [[release-2023-12-20]]
 == December 20th, 2023
 
