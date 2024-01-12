@@ -24,6 +24,7 @@
 ** xref:guide/forked-network.adoc[Forked Networks]
 ** xref:guide/balance-automation-forta.adoc[Automate balance maintenance using a Forta bot]
 ** xref:guide/factory-monitor.adoc[Automatic monitoring for factory clones]
+** xref:guide/timelock-roles.adoc[Managing roles of a TimelockController]
 
 * xref:dac.adoc[Defender as Code]
 * xref:sdk.adoc[SDK and API]
