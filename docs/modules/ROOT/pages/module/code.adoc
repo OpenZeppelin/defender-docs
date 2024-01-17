@@ -160,17 +160,9 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies when the external call return data check is missing.
 |note
 
-|`conflicting-inheritance`
-|Identifies a possible violation of 'No Conflicting Inheritance' EEA EthTrust Security Level [S] requirement.
-|ethtrust
-
 |`constants-not-using-proper-format`
 |Identifies when a constant is not using the proper format.
 |note
-
-|`create2-usage`
-|Identifies an instance of create2.
-|ethtrust
 
 |`dangerous-strict-equality`
 |Identifies the use of strict equalities that can cause a Gridlock.
@@ -216,14 +208,6 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies if there are fallback functions with return values.
 |note
 
-|`file-contract-name-mismatch`
-|Identifies whether the file name and the contract name mismatch.
-|note
-
-|`file-level-reentrancy-model`
-|Identifies a possible reentrancy attack vector on a file.
-|high
-
 |`floating-pragma`
 |Identifies pragma directives that do not specify a particular, fixed version of Solidity.
 |low
@@ -252,20 +236,8 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies a hashing of a packed encoded dynamic value.
 |ethtrust
 
-|`identify-assembly`
-|Identifies assembly code inside a function.
-|note
-
 |`identify-hardhat-console-import`
 |Identifies a hardhat console import.
-|note
-
-|`identify-non-oz-external-imports`
-|Identifies external import that is not from the OZ library.
-|note
-
-|`identify-solmate-import`
-|Identifies a solmate import.
 |note
 
 |`identify-to-do-comments`
@@ -416,18 +388,6 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies an instance of selfdestruct.
 |ethtrust
 
-|`shadow-argument`
-|Identifies a function argument that has been shadowed.
-|note
-
-|`shadow-builtin`
-|Identifies when a builtin symbol is being shadowed.
-|low
-
-|`shadow-state-variable`
-|Identifies a state variable that has been shadowed.
-|note
-
 |`state-updated-without-event`
 |Identifies if a function is updating the state without an event emission.
 |note
@@ -451,14 +411,6 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |`transferfrom-dangerous-from`
 |Identifies usage of `transferFrom` with `from` parameter not being a `msg.sender`.
 |high
-
-|`trust-assumptions`
-|Identifies if a function has access control with a modifier.
-|introduction
-
-|`tx-origin-usage`
-|Identifies an instance of tx.origin.
-|ethtrust
 
 |`unchecked-call-success`
 |Identifies when the external call fail check is missing.
