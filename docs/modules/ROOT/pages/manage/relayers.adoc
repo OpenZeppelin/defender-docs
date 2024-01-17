@@ -111,6 +111,11 @@ const tx = await client.relayerSigner.sendTransaction({
 });
 ----
 
+[CAUTION]
+====
+For better reliability of the relayers, we recommend sending no more than *50 transactions/min* on a single relayer especially on fast moving chains like Polygon, Optimism, Arbitrum etc.. For example, if you want 250 transactions/min throughput, you would need to load balance across 5 relayers. These 5 relayers can be part of the same account.
+====
+
 NOTE: You don't need to enter a private key when initializing a Relayer client, since the private key is kept secure in the Defender 2.0 vault.
 
 IMPORTANT: Currently, _zkSync_ doesn't have a way to precisely calculate `gasLimit` other than using the `eth_estimateGas` endpoint. Therefore, Defender 2.0 can't do any gasLimit and overrides the user input with the RPC estimation. 
