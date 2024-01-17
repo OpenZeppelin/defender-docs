@@ -128,12 +128,36 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |===
 |ID|Description|Severity
 
+|`alert-uniswap-v2-router-liquidity-considerations`
+|Identifies any instance of a Uniswap Router V2 addLiquidity call.
+|note
+
+|`array-length-to-stack`
+|Identifies when the length of an array can be written to the stack to save gas.
+|note
+
+|`call-with-arbitrary-address-bytes`
+|Identifies a potentially unsafe external call.
+|medium
+
 |`chainlink-deprecated-functions`
 |Identifies usage of chainlink's deprecated functions.
 |medium
 
 |`check-consistent-usage-of-msgsender-msgdata`
 |Identifies usage of `msg.sender` or `msg.data` when `_msgSender()` or/and `_msgData()` are present
+|note
+
+|`check-effect-interact`
+|Identifies a possible violation of the check, effect and interact pattern.
+|ethtrust
+
+|`check-erc4337-compatibility`
+|Identifies if the contract may not be compatible with ERC-4337.
+|note
+
+|`check-return-data-from-external-call`
+|Identifies when the external call return data check is missing.
 |note
 
 |`conflicting-inheritance`
@@ -168,8 +192,24 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies whether different Solidity versions are used.
 |low
 
+|`disableinitializers-not-called-in-implementation-constructor`
+|Identifies if `_disableInitializers()` is not being called in the constructor of an Initializable contract
+|note
+
+|`doc-code-mismatch-model`
+|Identifies a possible docstrings and code mismatch.
+|low
+
 |`duplicated-import`
 |Identifies duplicated imports.
+|note
+
+|`exact-balance`
+|Identifies whether a balance is  compared to an exact value.
+|ethtrust
+
+|`external-call-reentrancy-attack-vector`
+|Identifies external calls as a possible vector for a reentrancy attacks.
 |note
 
 |`fallback-with-return-value`
@@ -180,6 +220,10 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies whether the file name and the contract name mismatch.
 |note
 
+|`file-level-reentrancy-model`
+|Identifies a possible reentrancy attack vector on a file.
+|high
+
 |`floating-pragma`
 |Identifies pragma directives that do not specify a particular, fixed version of Solidity.
 |low
@@ -188,6 +232,14 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies when a state variable is initialized by a function.
 |note
 
+|`function-level-access-control-model`
+|Identifies a possible access control attack vector on a function.
+|high
+
+|`function-level-reentrancy-model`
+|Identifies a possible reentrancy attack vector on a function.
+|high
+
 |`function-visibility-too-broad`
 |Identifies if function visibility is unnecessarily broad.
 |note
@@ -195,6 +247,22 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |`gas-limit-on-call`
 |Identifies when an external call has a hard-coded gas limit.
 |low
+
+|`hashing-dynamic-values`
+|Identifies a hashing of a packed encoded dynamic value.
+|ethtrust
+
+|`identify-assembly`
+|Identifies assembly code inside a function.
+|note
+
+|`identify-hardhat-console-import`
+|Identifies a hardhat console import.
+|note
+
+|`identify-non-oz-external-imports`
+|Identifies external import that is not from the OZ library.
+|note
 
 |`identify-solmate-import`
 |Identifies a solmate import.
@@ -228,12 +296,24 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies when a file has multiple SPDX licenses.
 |note
 
+|`int-negative-evaluation-overflow`
+|Identifies when additive inverse of an int variable is evaluated.
+|note
+
+|`lack-of-gap-variable`
+|Identifies when an upgradeable contract does not have a gap variable.
+|low
+
 |`lack-of-indexed-event-parameters`
 |Identifies when a lack of indexed event parameter.
 |note
 
 |`lack-of-security-contact`
 |Identifies when a contract does not have a security contact.
+|note
+
+|`lack-of-spdx-license-identifier`
+|Identifies when a lack of SPDX license identifier.
 |note
 
 |`lock-ether`
@@ -246,6 +326,10 @@ image::code-settings-advanced.png[Code Advanced Settings]
 
 |`missing-docstrings`
 |Identifies when a function is missing docstrings.
+|low
+
+|`missing-initializer-modifier`
+|Identifies when a function is missing the initializer modifier.
 |low
 
 |`missing-mapping-named-parameters`
@@ -264,6 +348,10 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies usage of msg.value inside a loop.
 |note
 
+|`multiple-contracts-per-file`
+|Identifies multiple contract declarations per file.
+|note
+
 |`name-reused`
 |Identifies in a codebase when two or more contracts have the same name.
 |note
@@ -272,12 +360,56 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies a non-explicit import.
 |note
 
+|`not-operator-assembly`
+|Identifies usage of the `not` operator inside assembly code because it functions differently than in other languages.
+|note
+
+|`outdated-solidity-version`
+|Identifies a Solidity file with an outdated Solidity version.
+|note
+
+|`overriding-state-values-in-constructor`
+|Identifies cases where state variables are explicitly set to values within a contract but are overwritten by the constructor.
+|note
+
+|`possible-incorrect-abi-decode`
+|Identifies the potential for incorrect ABI decoding.
+|note
+
+|`possible-return-bomb`
+|Identifies a possible vector for a return bomb attack.
+|note
+
+|`pragma-spans-breaking-changes`
+|Identifies a Solidity file with pragma that spans versions of solidity where breaking changes may have been introduced.
+|low
+
 |`precision-loss-div-before-mul`
 |Identifies possible precision loss due to division before multiplication
 |note
 
+|`redundant-safemath-library`
+|Identifies a redundant use of SafeMath library.
+|note
+
+|`replace-revert-strings-custom-errors`
+|Identifies when a revert string could be replaced by a custom error.
+|note
+
+|`require-instead-of-revert`
+|Identifies when a require statement does not check for any conditions.
+|low
+
+|`require-missing-message`
+|Identifies when an error message is missing from the require statement.
+|low
+
 |`require-multiple-conditions`
 |Identifies a require statement with multiple conditions.
+|low
+
+|`revert-missing-message`
+|Identifies when a revert statement is missing the error message.
 |low
 
 |`selfdestruct-usage`
@@ -304,6 +436,10 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies when the visibility of a state variable that has not been explicitly declared.
 |note
 
+|`sushiswap-callback-attack`
+|Identifies possible attacks on sushiswap callback where a fake pool address can pass authorization check.
+|note
+
 |`swapped-arguments-function-call`
 |Identifies when the arguments of function call have been swapped.
 |note
@@ -316,6 +452,10 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies usage of `transferFrom` with `from` parameter not being a `msg.sender`.
 |high
 
+|`trust-assumptions`
+|Identifies if a function has access control with a modifier.
+|introduction
+
 |`tx-origin-usage`
 |Identifies an instance of tx.origin.
 |ethtrust
@@ -323,6 +463,18 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |`unchecked-call-success`
 |Identifies when the external call fail check is missing.
 |ethtrust
+
+|`unchecked-increment`
+|Identifies that an incremental update is not wrapped in an unchecked block.
+|note
+
+|`unchecked-keyword`
+|Identifies unchecked code inside a function.
+|note
+
+|`unchecked-math`
+|Identifies a potentially unsafe usage of unchecked math.
+|high
 
 |`unicode-direction-control`
 |Identifies the use of unicode direction control character.
@@ -335,6 +487,10 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |`unnecessary-cast`
 |Identifies an unnecessary cast.
 |note
+
+|`unsafe-abi-encoding`
+|Identifies any use of unsafe ABI encoding.
+|low
 
 |`unsafe-mint-ERC721`
 |Identifies if a `_mint` function is used instead of `_safeMint` in ERC721 context.
@@ -376,12 +532,20 @@ image::code-settings-advanced.png[Code Advanced Settings]
 |Identifies an unused struct.
 |note
 
+|`use-of-transfer-send`
+|Identifies instance of transfer or send.
+|low
+
 |`use-of-uint-instead-of-uint256`
 |Identifies if an `int/uint` is used instead of `int256/uint256`.
 |note
 
 |`variable-could-be-constant`
 |Identifies variables that could be declared as `constant`.
+|note
+
+|`variable-could-be-immutable`
+|Identifies variables that are only ever set in the constructor and could be `immutable`.
 |note
 
 |`void-constructor-call`
