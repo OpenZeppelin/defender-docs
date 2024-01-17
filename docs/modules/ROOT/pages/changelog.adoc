@@ -66,7 +66,6 @@
 * *General*
 ** Minor bug fix in quotas.
 
-
 [[release-2023-12-07]]
 == December 7th, 2023
 
