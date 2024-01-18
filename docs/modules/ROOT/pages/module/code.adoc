@@ -97,6 +97,38 @@ To help you resolve these issues recommendations on updates or patches that can 
 
 By reviewing and applying the proposed solutions in this report, you can enhance the robustness and reliability of your smart contracts, ensuring adherence to best practices and industry standards. This makes the audit process smoother and improves the preparedness of your contracts for successful deployment.
 
+[[configuration]]
+== Configuration
+
+You can configure repository-specific parameters for Code Inspector using a file called `defender.config.json` in the root directory. The structure of the file is separated into processes run by Code Inspector. Each process has a list of parameters that you can adjust to your needs. For example, you can specify which directories to scan, which is useful to prevent Code Inspector from analyzing test or script files written in Solidity.
+
+=== Contract Inspector
+Contract Inspector runs a xref:#rules[set of rules] to detect potential issues in your code. You can configure the following parameters:
+
+- `enabled`:  ability to turn off the Contract Inspector. False meaning not to run, and true to run. (default: `true`)
+- `scan_directories`: list of directories to scan with paths starting from the root directory. default: `["."]`
+
+=== Dependency Checker
+Dependency Checker verifies that your dependencies are not vulnerable to known issues. You can configure the following parameters:
+
+- `enabled`:  ability to turn off Dependency Checker. False meaning not to run, and true to run. (default: `true`)
+
+==== Example
+
+The following configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories.
+
+[source,json]
+----
+{
+    "contract_inspector": {
+        "enabled": true,
+        "scan_directories": ['src/contracts1','src/contracts2']
+    },
+    "dependency_checker": {
+        "enabled": false
+    }
+}
+----
 
 [[settings]]
 == Settings
