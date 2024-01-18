@@ -4,7 +4,7 @@
 == January 18th, 2024
 
 * *General*
-* Support for *Polygon zkEVM Mainnet* and *Polygon zkEVM Testnet*.
+** Support for *Polygon zkEVM Mainnet* and *Polygon zkEVM Testnet*.
 
 * *Relayers*
 ** Fix Flashbots RPC URL calls when retrieving transaction status.
