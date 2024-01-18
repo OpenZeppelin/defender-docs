@@ -1,5 +1,24 @@
 = Changelog
 
+[[release-2024-01-18]]
+== January 18th, 2024
+
+* *General*
+* Support for *Polygon zkEVM Mainnet* and *Polygon zkEVM Testnet*.
+
+* *Relayers*
+** Fix Flashbots RPC URL calls when retrieving transaction status.
+
+* *Access Control*
+** Add Access Manager banner on top of contracts list and embed Access Manager explorer UI for easier navigation.
+
+* *Actions*
+** Upgrade Fireblocks SDK version and its dependencies.
+
+* *Code Inspector*
+** Feature to allow users to specify settings and configuration of a repository via a file called "defender.config.json" on the root directory.
+
+
 [[release-2024-01-10]]
 == January 10th, 2024
 
