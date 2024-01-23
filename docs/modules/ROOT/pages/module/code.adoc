@@ -115,14 +115,14 @@ Dependency Checker verifies that your dependencies are not vulnerable to known i
 
 ==== Example
 
-The following configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories.
+The following `defender.config.json` configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories.
 
 [source,json]
 ----
 {
     "contract_inspector": {
         "enabled": true,
-        "scan_directories": ['src/contracts1','src/contracts2']
+        "scan_directories": ["src/contracts1", "src/contracts2"]
     },
     "dependency_checker": {
         "enabled": false
