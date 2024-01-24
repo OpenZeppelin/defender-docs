@@ -4,27 +4,26 @@
 == January 24th, 2024
 
 * *General*
-** Support zksync sepolia
-** Modify billing usage response to satisfy FE requirements
-** Fix permission issue for feedback form 
-** Update tenant scoped query with keyword
-** Return all usages from usage api
-** Restrict axios to IPv4
+** Support zkSync Era Sepolia.
+** Modify billing usage response to satisfy FE requirements.
+** Fix permission issue for feedback form.
+** Update tenant scoped query with keyword.
+** Return all usages from usage API.
+** Restrict axios to IPv4.
 
 * *Audit*
 ** Repository list audit feature.
 ** Change fonts for audit report.
-** Allow auditor users to work across multiple tenants.
+** Allow auditors to work across multiple tenants.
 
 * *Relayers*
-** Deploy matic zkevm subgraphs.
-** Disable Pokt provider
+** Deploy Polygon zkEVM subgraphs.
 
 * *Actions*
-** Change autotaskcondition and autotasktrigger params in defender-sd
+** Change `autotaskCondition` and `autotaskTrigger` parameters in `defender-sdk`.
 
 * *Code Inspector*
-** Update TTL calculation in code analysis run script to 30 days after creation date
+** Update TTL calculation in Code Inspector run script to 30 days after creation date
 
 
 [[release-2024-01-18]]
