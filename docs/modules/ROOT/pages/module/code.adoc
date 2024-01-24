@@ -107,6 +107,8 @@ Contract Inspector runs a xref:#rules[set of rules] to detect potential issues i
 
 - `enabled`:  ability to turn off the Contract Inspector. False meaning not to run, and true to run. (default: `true`)
 - `scan_directories`: list of directories to scan with paths starting from the root directory. default: `["."]`
+- `include_rules`: list of rules to run. default: xref:#rules[all rules].
+- `exclude_rules`: list of rules to not run. default: none.
 
 === Dependency Checker
 Dependency Checker verifies that your dependencies are not vulnerable to known issues. You can configure the following parameters:
@@ -115,14 +117,15 @@ Dependency Checker verifies that your dependencies are not vulnerable to known i
 
 ==== Example
 
-The following `defender.config.json` configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories.
+The following `defender.config.json` configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories, excluding two rules (`naming-convention` and `unused-state`).
 
 [source,json]
 ----
 {
     "contract_inspector": {
         "enabled": true,
-        "scan_directories": ["src/contracts1", "src/contracts2"]
+        "scan_directories": ["src/contracts1", "src/contracts2"],
+        "exclude_rules": ["naming-convention", "unusued-state"]
     },
     "dependency_checker": {
         "enabled": false
