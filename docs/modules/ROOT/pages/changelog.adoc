@@ -5,16 +5,10 @@
 
 * *General*
 ** Support zkSync Era Sepolia.
-** Modify billing usage response to satisfy FE requirements.
-** Fix permission issue for feedback form.
-** Update tenant scoped query with keyword.
-** Return all usages from usage API.
-** Restrict axios to IPv4.
+** Bug fix in feedback form.
 
 * *Audit*
-** Repository list audit feature.
-** Change fonts for audit report.
-** Allow auditors to work across multiple tenants.
+** Design improvements for audit report.
 
 * *Relayers*
 ** Deploy Polygon zkEVM subgraphs.
@@ -23,7 +17,7 @@
 ** Change `autotaskCondition` and `autotaskTrigger` parameters in `defender-sdk`.
 
 * *Code Inspector*
-** Update TTL calculation in Code Inspector run script to 30 days after creation date
+** Ability to allow users to choose what rules to run on by using adding "include" and "exclude" rules in the `defender.config.json` file.
 
 
 [[release-2024-01-18]]
