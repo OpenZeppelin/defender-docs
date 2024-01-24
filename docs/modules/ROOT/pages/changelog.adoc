@@ -1,5 +1,25 @@
 = Changelog
 
+[[release-2024-01-24]]
+== January 24th, 2024
+
+* *General*
+** Support zkSync Era Sepolia.
+** Bug fix in feedback form.
+
+* *Audit*
+** Design improvements for audit report.
+
+* *Relayers*
+** Deploy Polygon zkEVM subgraphs.
+
+* *Actions*
+** Change `autotaskCondition` and `autotaskTrigger` parameters in `defender-sdk`.
+
+* *Code Inspector*
+** Ability to allow users to choose what rules to run on by using adding "include" and "exclude" rules in the `defender.config.json` file.
+
+
 [[release-2024-01-18]]
 == January 18th, 2024
 
