@@ -1,5 +1,72 @@
 = Changelog
 
+[[release-2024-01-24]]
+== January 24th, 2024
+
+* *General*
+** Support zkSync Era Sepolia.
+** Bug fix in feedback form.
+
+* *Audit*
+** Design improvements for audit report.
+
+* *Relayers*
+** Deploy Polygon zkEVM subgraphs.
+
+* *Actions*
+** Change `autotaskCondition` and `autotaskTrigger` parameters in `defender-sdk`.
+
+* *Code Inspector*
+** Ability to allow users to choose what rules to run on by using adding "include" and "exclude" rules in the `defender.config.json` file.
+
+
+[[release-2024-01-18]]
+== January 18th, 2024
+
+* *General*
+** Support for *Polygon zkEVM Mainnet* and *Polygon zkEVM Testnet*.
+
+* *Relayers*
+** Fix Flashbots RPC URL calls when retrieving transaction status.
+
+* *Access Control*
+** Add Access Manager banner on top of contracts list and embed Access Manager explorer UI for easier navigation.
+
+* *Actions*
+** Upgrade Fireblocks SDK version and its dependencies.
+
+* *Code Inspector*
+** Feature to allow users to specify settings and configuration of a repository via a file called "defender.config.json" on the root directory.
+
+
+[[release-2024-01-10]]
+== January 10th, 2024
+
+* *General*
+** Minor bug fixes and security improvements across all components.
+
+* *Authorization*
+** Allow team members to re-send an invitation for pending users.
+
+* *Monitor*
+** Forta monitors added support for Optimism and Fantom networks.
+
+* *Forked Networks*
+** Access to forked networks with read-only permissions.
+
+* *Private Networks*
+** Apply restrictions on the usage of specific chain ids.
+
+* *Audit*
+** Audit report logo and code block spacing styling improvements.
+
+* *Deploy*
+** Fix deployment status when the deploy request fails.
+
+* *Code Inspector*
+** Allow users to directly request an audit if there are reports with more than 10 findings.
+
+
 [[release-2023-12-20]]
 == December 20th, 2023
 
@@ -37,7 +104,6 @@
 
 * *General*
 ** Minor bug fix in quotas.
-
 
 [[release-2023-12-07]]
 == December 7th, 2023
