@@ -7,7 +7,6 @@
 ** xref:module/monitor.adoc[Monitor]
 ** xref:module/actions.adoc[Actions]
 ** xref:module/access-control.adoc[Access Control]
-** xref:module/incident-response.adoc[Incident Response]
 
 * xref:manage.adoc[Manage]
 ** xref:manage/relayers.adoc[Relayers]
@@ -18,7 +17,7 @@
 ** xref:tutorial/monitor.adoc[Monitor]
 ** xref:tutorial/actions.adoc[Actions]
 ** xref:tutorial/access-control.adoc[Access Control]
-** xref:tutorial/incident-response.adoc[Incident Response]
+** xref:tutorial/workflows.adoc[Workflows]
 
 * Guides
 ** xref:guide/forked-network.adoc[Forked Networks]

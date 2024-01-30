@@ -16,7 +16,7 @@ Defender 2.0 generates log trails of every potentially relevant event in the sys
 
 Every log entry is structured with the following format:
 
-* `Module`: The origin of the log entry, such as Monitor, Actions, Incident Response, Deploy, etc.
+* `Module`: The origin of the log entry, such as Monitor, Actions, Workflows, Deploy, etc.
 * `Date and Time`: The day and time the log entry was generated with the format `Day Month Year` and 12-hour clock format in the browser local timezone
 * `Severity`: The  severity level of the log entry, ranging from `trace` to `error`
 * `Subject`: The trigger/cause that generated the log. If contract related, the contract name is displayed

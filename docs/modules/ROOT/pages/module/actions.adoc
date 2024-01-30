@@ -1,14 +1,14 @@
 [[actions]]
 = Actions
 
-Actions allow you to implement custom app logic for on-chain and off-chain operations. You can enable automated responses to threats detected by the xref:module/monitor.adoc[Monitor] and xref:module/incident-response.adoc[Incident Response] modules.
+Actions allow you to implement custom app logic for on-chain and off-chain operations. You can enable automated responses to threats detected by the xref:module/monitor.adoc[Monitor] and xref:module/actions.adoc#workflows[Workflows] modules.
 
 [[use-cases]]
 == Use cases
 
 * Automate smart contract operations
 * Execute actions as response to a xref:module/monitor.adoc[Monitor] alert 
-* Automate xref:module/incident-response.adoc[Incident Response] steps with Actions
+* Automate xref:module/actions.adoc#workflows[Workflow] steps with Actions
 * Create transaction proposals from multisigs, relayers, and more
 * No-code (form-based) for transaction proposals
 * Call external APIs and interact with other smart contracts
@@ -430,6 +430,32 @@ Define the function that you want to call on the target contract. You can select
 [[approval-process]]
 === Approval Process
 Define how you want the transaction to be executed. You can choose from any of the xref:manage.adoc#approval-processes[transaction approval processes] available in Defender 2.0 that you have previously configured or you can optionally create a new one.
+
+[[workflows]]
+== Workflows
+
+Workflows allow you to instantly detect, respond, and resolve threats and attacks with pre-defined actions and scenarios. You can conduct attack simulations and test real-world scenarios on forked networks too.
+
+Workflows are processes that combine automatic actions and transaction templates. Actions can be run in parallel or connected sequentially. Workflows can be triggered manually or via a xref:module/monitor.adoc[Monitor].
+
+
+Creating workflows is a seamless experience guided through a form that allows you to organize actions in the workflow process easily.
+
+image::actions-start-workflow.png[Create Workflow]
+
+To populate a workflow, you have to drag existing actions from the list on the right onto the form. Actions are executed vertically, meaning the previous actions must finish successfully to begin the execution of the new row. Parallel actions are executed at the same time. However, the workflow stops completely if an action exits with an error.
+
+image::actions-workflow.png[Edit Workflow]
+
+To run multiple actions in parallel, click "Add Parallel Sequence" and drag actions into the available side-by-side boxes.
+
+image::actions-parallel-workflow.png[Parallel Workflow]
+
+You can drag actions back off the workflow to remove them or click the visible minus icon in the upper right to remove an empty step. The "Save" button on the top right saves the workflow with its configuration and name.
+
+
+NOTE: We provide a quickstart tutorial to create and use Workflows through Defender 2.0. Check it out xref:tutorial/workflows.adoc[here]!
+
 
 [[a-complete-example]]
 == A complete example

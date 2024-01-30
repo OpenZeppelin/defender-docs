@@ -1,6 +1,6 @@
 # Deploy a smart contract on a forked network
 
-Defender 2.0 empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and incident response. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
+Defender 2.0 empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and workflows. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
 
 [[pre-requisites]]
 == Pre-requisites

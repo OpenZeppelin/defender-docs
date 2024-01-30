@@ -32,7 +32,7 @@ xref:module/monitor.adoc[[.card-title]#Monitor# [.card-body]#pass:q[Detect smart
 
 [.card.card-learn]
 --
-xref:module/incident-response.adoc[[.card-title]#Incident Response# [.card-body]#pass:q[Configure predefined incident response scenarios triggered automatically by monitors or on-demand.]#]
+xref:module/actions.adoc#workflows[[.card-title]#Workflows# [.card-body]#pass:q[Configure predefined workflows triggered automatically by monitors or on-demand.]#]
 --
 
 [.card.card-learn]
