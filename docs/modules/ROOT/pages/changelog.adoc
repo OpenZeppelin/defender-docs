@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-01-31]]
+== January 31st, 2024
+
+* *General*
+** Disable *Polygon zkEVM networks* due to a bug in `eth_getLogs` method on Polygon side.
+** Bug fix in feedback form.
+** Minor UI & security improvements.
+
 [[release-2024-01-24]]
 == January 24th, 2024
 
