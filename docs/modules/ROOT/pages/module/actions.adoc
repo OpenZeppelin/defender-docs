@@ -454,7 +454,7 @@ image::actions-parallel-workflow.png[Parallel Workflow]
 You can drag actions back off the workflow to remove them or click the visible minus icon in the upper right to remove an empty step. The "Save" button on the top right saves the workflow with its configuration and name.
 
 
-NOTE: We provide a quickstart tutorial to create and use Workflows through Defender 2.0. Check it out xref:tutorial/workflows.adoc[here]!
+NOTE: We provide a quickstart tutorial to create and use Workflows. Check it out xref:tutorial/workflows.adoc[here]!
 
 
 [[a-complete-example]]
