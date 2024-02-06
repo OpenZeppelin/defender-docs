@@ -4,6 +4,8 @@ OpenZeppelin Defender 2.0 is a mission-critical developer security platform to *
 
 Integrating directly into the developer workflow, Defender 2.0 makes it easy and fast for developers and operators to prevent and fix security issues pre and post-deployment.
 
+IMPORTANT: Defender 1.0 is now deprecated in favor of Defender 2.0. Learn how to migrate xref:migration.adoc[here]! *On May 21st 2024, you will no longer have access to Defender 1.0 UI and API*.
+
 [[modules]]
 [.card-section.card-section-2col]
 == Modules

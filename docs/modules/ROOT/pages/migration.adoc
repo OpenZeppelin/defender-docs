@@ -1,0 +1,109 @@
+[[migration]]
+= Migrating from Defender 1.0
+
+IMPORTANT: *On May 21st 2024, you will no longer have access to Defender 1.0 UI and API*. 
+
+With the announcement of Defender 2.0 general availability, we are deprecating Defender 1.0 in favor of Defender 2.0. To make the transition as smooth as possible, we've developed an upgrade assistant to help you upgrade with just a few clicks. To use the assistant, navigate to Defender 1.0 https://defender.openzeppelin.com/#/[here, window=_blank], log in with our account, and follow the steps. You can find the FAQ xref:faq.adoc[here].
+
+[[differences]]
+== Differences
+
+Features from Defender 1.0 have been reorganized and improved in Defender 2.0. Here are the main differences:
+
+=== Tenant-wide pages → Manage
+
+Tenant-wide pages in the Defender 1.0 dropdown menu can now be found under the `Manage` tab. Learn more xref:manage.adoc[here].
+
+==== Defender 1.0
+image::tenant-migration-1.0.png[Tenant pages on Defender 1.0]
+
+==== Defender 2.0
+image::tenant-migration-2.0.png[Tenant pages on Defender 2.0]
+
+=== Admin / Add Contract → Manage / Address Book
+
+Now, you can add smart contracts to use across the platform via the Address Book, which is accesible under the `Manage` tab. Learn more xref:manage.adoc#address-book[here].
+
+==== Defender 1.0
+image::address-book-migration-1.0.png[Add Contract on Defender 1.0]
+
+==== Defender 2.0
+image::address-book-migration-2.0.png[Add Contract on Defender 2.0]
+
+=== Admin / Create Safe → Deprecated
+
+The ability of creating a Safe smart contract via Defender is *not* available in Defender 2.0. We recommend using the https://app.safe.global[Safe interface, window=_blank] to create a Safe, and then import it to Defender using the Address Book.
+
+==== Defender 1.0
+image::safe-migration-1.0.png[Safe creation Defender 1.0]
+
+=== Admin / Create Timelock → Deprecated
+
+The ability of creating a Timelock smart contract via Defender is *not* available in Defender 2.0. We recommend using the https://docs.openzeppelin.com/contracts/api/governance#timelock[OpenZeppelin Contracts 5.0 implementation of the TimelockController, window=_blank] with a development framework, like Hardhat or Foundry, to deploy it. You can then import it to Defender using the Address Book. Learn more xref:guide/timelock-roles.adoc[here].
+
+==== Defender 1.0
+image::timelock-migration-1.0.png[Timelock creation on Defender 1.0]
+
+### Admin / Add Proposal → Actions / Transaction Proposals
+
+In Defender 2.0, you can now use Transactions Proposals within Actions to send transactions via Approval Processes, like Safe, EOAs, Relayers, and more. Learn more xref:module/actions.adoc#transaction-proposals-reference[here].
+
+==== Defender 1.0
+image::proposal-migration-1.0.png[Proposals on Defender 1.0]
+
+==== Defender 2.0
+image::proposal-migration-2.0.png[Proposals on Defender 2.0]
+
+### Relay → Manage / Relayers
+
+Relayers can now be found under the `Manage` tab. Learn more xref:manage/relayers.adoc[here].
+
+==== Defender 1.0
+image::relayers-migration-1.0.png[Relayers on Defender 1.0]
+
+==== Defender 2.0
+image::relayers-migration-2.0.png[Relayers on Defender 2.0]
+
+### Autotasks → Actions
+
+Autotasks were renamed to Actions.
+
+Learn more xref:module/actions.adoc[here].
+
+==== Defender 1.0
+image::autotasks-migration-1.0.png[Autotasks on Defender 1.0]
+
+==== Defender 2.0
+image::action-migration-2.0.png[Actions on Defender 2.0]
+
+### Autotasks / Secrets → Manage / Secrets
+
+The `Secrets` tab is now available under `Manage`. Learn more xref:manage.adoc#secrets[here].
+
+==== Defender 1.0
+image::secrets-migration-1.0.png[Secrets on Defender 1.0]
+
+==== Defender 2.0
+image::secrets-migration-2.0.png[Secrets on Defender 2.0]
+
+### Sentinel → Monitor
+
+`Sentinel` was renamed to `Monitor`. Learn more xref:module/monitor.adoc[here].
+
+==== Defender 1.0
+image::sentinel-migration-1.0.png[Sentinel on Defender 1.0]
+
+==== Defender 2.0
+image::monitor-migration-2.0.png[Monitor on Defender 2.0]
+
+### Logging → Logs
+
+`Logging` was renamed to `Logs`. Learn more xref:logs.adoc[here].
+
+==== Defender 1.0
+image::logs-migration-1.0.png[Logging on Defender 1.0]
+
+==== Defender 2.0
+image::logs-migration-2.0.png[Logs on Defender 2.0]
+
+== New features
