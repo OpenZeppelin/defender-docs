@@ -5,7 +5,6 @@
 
 * *General*
 ** Display upgrade proposals in Defender 2.0.
-** Rename Incident Response to Workflows.
 
 * *Audit*
 ** UI fixes with overflow text.
