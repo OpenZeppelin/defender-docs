@@ -1,5 +1,25 @@
 = Changelog
 
+[[release-2024-02-08]]
+== Feb 8th, 2024
+
+* *General*
+** Display upgrade proposals in Defender 2.0.
+
+* *Audit*
+** UI fixes with overflow text.
+
+* *Deploy*
+** Fail gracefully when deploying to zkSync networks
+
+* *Monitor*
+** Enforce monitor quota limits to Defender 1.0 users.
+** UI bug fix in Monitor starter templates.
+
+* *Forked Networks*
+** Fix Forked Network guide to point tutorial link correctly.
+
+
 [[release-2024-01-31]]
 == January 31st, 2024
 
