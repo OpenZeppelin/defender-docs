@@ -4,7 +4,7 @@
 == Feb 8th, 2024
 
 * *General*
-** Display upgrade proposals in defender 2.0.
+** Display upgrade proposals in Defender 2.0.
 ** Rename Incident Response to Workflows.
 
 * *Audit*
@@ -14,11 +14,11 @@
 ** Fail gracefully when deploying to zkSync networks
 
 * *Monitor*
-** Enforce monitor quota limits to defender 1.0 users.
-** UI bug fix in monitor starter templates.
+** Enforce monitor quota limits to Defender 1.0 users.
+** UI bug fix in Monitor starter templates.
 
 * *Forked Networks*
-** Fix forked network guide to point tutorial link correctly.
+** Fix Forked Network guide to point tutorial link correctly.
 
 
 [[release-2024-01-31]]
