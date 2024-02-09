@@ -1,7 +1,7 @@
 = Changelog
 
 [[release-2024-02-08]]
-== Feb 8th, 2024
+== February 8th, 2024
 
 * *General*
 ** Display upgrade proposals in Defender 2.0.
