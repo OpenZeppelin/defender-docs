@@ -5,12 +5,14 @@
 
 * *General*
 ** Add migration assistant to allow defender 1.0 users to migrate to defender 2.0.
+** Rename Incident Response to Workflows.
 
 * *Private Networks*
 ** Add support to allow private networks to use RPC URLs from public networks.
 
 * *Monitors*
 ** Bug fix in usage quotas for active monitors.
+
 
 
 [[release-2024-02-08]]
