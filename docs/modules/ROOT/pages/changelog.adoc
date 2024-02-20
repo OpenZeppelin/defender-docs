@@ -14,7 +14,6 @@
 ** Bug fix in usage quotas for active monitors.
 
 
-
 [[release-2024-02-08]]
 == February 8th, 2024
 
