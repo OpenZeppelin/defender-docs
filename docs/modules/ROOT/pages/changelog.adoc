@@ -1,5 +1,19 @@
 = Changelog
 
+[[release-2024-02-20]]
+== February 20th, 2024
+
+* *General*
+** Add migration assistant to allow Defender 1.0 users to migrate to Defender 2.0.
+** Rename Incident Response to Workflows.
+
+* *Private Networks*
+** Add support to allow Private Networks to use RPC URLs from public networks.
+
+* *Monitors*
+** Bug fix in usage quotas for active monitors.
+
+
 [[release-2024-02-08]]
 == February 8th, 2024
 
