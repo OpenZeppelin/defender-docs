@@ -81,9 +81,9 @@ You can check the status of Defender and the supported networks on our https://s
 Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:integrations.adoc[here].
 
 [[sla]]
-== Service Level and Support Agreement
+== Support and Service Level Agreement
 
-For users subscribed to the https://www.openzeppelin.com/pricing[Pro tier or higher, window=_blank], we provide a Service Level and Support Agreement (SLA) that includes a set of commitments and guarantees. Learn more about the SLA https://www.openzeppelin.com/service-level-agreement[here, window=_blank].
+For users subscribed to the https://www.openzeppelin.com/pricing[Pro tier or higher, window=_blank], we provide a Support and Service Level Agreement (SLA) that includes a set of commitments and guarantees. Learn more about the SLA https://www.openzeppelin.com/service-level-agreement[here, window=_blank].
 
 [[feedback]]
 == Feedback
