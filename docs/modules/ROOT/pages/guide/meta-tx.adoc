@@ -144,7 +144,7 @@ After the contracts are deployed, the Relayer key and secret can be safely delet
 [[create-action]]
 == 5. Create Action via API
 
-The demo app uses an xref::manage/actions.adoc[Action] to supply the necessary logic for telling the Relayer to send a transaction to the `Forwarder` contract, supplying the signer's address. The Action will get triggered by each call to its webhook from the app.
+The demo app uses an xref:module/actions.adoc[Action] to supply the necessary logic for telling the Relayer to send a transaction to the `Forwarder` contract, supplying the signer's address. The Action will get triggered by each call to its webhook from the app.
 
 Due to the tight relationship between components, the Relayer credentials are securely available to the Action simply by instantiating a new provider and signer.
 
