@@ -32,11 +32,6 @@ xref:module/monitor.adoc[[.card-title]#Monitor# [.card-body]#pass:q[Detect smart
 
 [.card.card-learn]
 --
-xref:module/actions.adoc#workflows[[.card-title]#Workflows# [.card-body]#pass:q[Configure predefined workflows triggered automatically by monitors or on-demand.]#]
---
-
-[.card.card-learn]
---
 xref:module/actions.adoc[[.card-title]#Actions# [.card-body]#pass:q[Create automated actions to perform on-chain and off-chain operations.]#]
 --
 
@@ -79,6 +74,11 @@ You can check the status of Defender and the supported networks on our https://s
 [[integrations]]
 == Integrations
 Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:integrations.adoc[here].
+
+[[sla]]
+== Service Level and Support Agreement
+
+For our https://www.openzeppelin.com/pricing[paid subscriptions, window=_blank], we're offering enhanced service reliability, guaranteed uptime, and priority support. You can learn more on our https://www.openzeppelin.com/service-level-agreement[Service Level and Support Agreement (SLA) page, window=_blank].
 
 [[feedback]]
 == Feedback
