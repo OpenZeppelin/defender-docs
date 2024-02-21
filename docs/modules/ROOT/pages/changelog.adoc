@@ -4,11 +4,11 @@
 == February 20th, 2024
 
 * *General*
-** Add migration assistant to allow defender 1.0 users to migrate to defender 2.0.
+** Add migration assistant to allow Defender 1.0 users to migrate to Defender 2.0.
 ** Rename Incident Response to Workflows.
 
 * *Private Networks*
-** Add support to allow private networks to use RPC URLs from public networks.
+** Add support to allow Private Networks to use RPC URLs from public networks.
 
 * *Monitors*
 ** Bug fix in usage quotas for active monitors.
