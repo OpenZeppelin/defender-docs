@@ -79,7 +79,6 @@ Integrations throughout Defender 2.0 allow users to connect with other services 
 
 [[sla]]
 == Service Level and Support Agreement
-
 For our https://www.openzeppelin.com/pricing[paid subscriptions, window=_blank], we're offering enhanced service reliability, guaranteed uptime, and priority support. You can learn more on our https://www.openzeppelin.com/service-level-agreement[Service Level and Support Agreement (SLA) page, window=_blank].
 
 [[feedback]]
