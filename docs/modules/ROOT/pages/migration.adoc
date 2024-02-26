@@ -3,7 +3,7 @@
 
 IMPORTANT: *On May 21st 2024, you will no longer have access to Defender 1.0 UI and API*. 
 
-With the announcement of Defender 2.0 general availability, we are deprecating Defender 1.0 in favor of Defender 2.0. To make the transition as smooth as possible, we've developed an upgrade assistant to help you upgrade with just a few clicks. To use the assistant, navigate to Defender 1.0 https://defender.openzeppelin.com/#/[here, window=_blank], log in with our account, and follow the steps. You can find the FAQ xref:faq.adoc[here].
+With the announcement of Defender 2.0 general availability, we are deprecating Defender 1.0 in favor of Defender 2.0. To make the transition as smooth as possible, we've developed an onboarding assistant to help you with just a few clicks. To use the assistant, click https://defender.openzeppelin.com/v2/#/overview?onboarding=true[here, window=_blank], log in with our account, and follow the steps. You can find the FAQ xref:faq.adoc[here].
 
 [[differences]]
 == Differences
@@ -33,7 +33,7 @@ Now, you can add smart contracts to use across the platform via the `Address Boo
 image::address-book-migration-1.0.png[Add Contract on Defender 1.0]
 
 ==== Defender 2.0
-image::address-book-migration-2.0.png[Add Contract on Defender 2.0]
+video::address-book.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 === Admin / Create Safe → Deprecated
 
@@ -57,7 +57,7 @@ In Defender 2.0, you can now use `Transactions Proposals` within `Actions` to se
 image::proposal-migration-1.0.png[Proposals on Defender 1.0]
 
 ==== Defender 2.0
-image::proposal-migration-2.0.png[Proposals on Defender 2.0]
+video::proposal.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Relay → Manage / Relayers
 
@@ -67,7 +67,7 @@ image::proposal-migration-2.0.png[Proposals on Defender 2.0]
 image::relayers-migration-1.0.png[Relayers on Defender 1.0]
 
 ==== Defender 2.0
-image::relayers-migration-2.0.png[Relayers on Defender 2.0]
+video::relayers.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Autotasks → Actions
 
@@ -79,7 +79,7 @@ Learn more xref:module/actions.adoc[here].
 image::autotasks-migration-1.0.png[Autotasks on Defender 1.0]
 
 ==== Defender 2.0
-image::action-migration-2.0.png[Actions on Defender 2.0]
+video::actions.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Autotasks / Secrets → Manage / Secrets
 
@@ -99,7 +99,7 @@ image::secrets-migration-2.0.png[Secrets on Defender 2.0]
 image::sentinel-migration-1.0.png[Sentinel on Defender 1.0]
 
 ==== Defender 2.0
-image::monitor-migration-2.0.png[Monitor on Defender 2.0]
+video::monitor.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Logging → Logs
 
