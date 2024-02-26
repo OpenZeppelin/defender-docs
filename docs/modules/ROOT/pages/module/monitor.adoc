@@ -280,7 +280,7 @@ $1 == "hello"
 [[alerts]]
 == Alerts
 
-A monitor can either use the notification channel of its category or a custom one. It's also possible to connect an Action or an Incident Response Scenario that should run with the monitor.
+A monitor can either use the notification channel of its category or a custom one. It's also possible to connect an Action or an Workflow that should run with the monitor.
 
 To prevent repeated alerts from individual monitors and control the notification rate, you can use the Alert Threshold and Minimum time between consecutive notifications fields.
 

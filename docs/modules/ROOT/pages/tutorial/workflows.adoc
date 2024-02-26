@@ -1,6 +1,6 @@
-# Create an Incident Response scenario to decrease the number of objects in a Box contract
+# Create an Action Workflow to decrease the number of objects in a Box contract
 
-Defender 2.0 allows you to target and activate on-chain activity using Incident Response scenarios quickly. This tutorial shows how to create a scenario that monitors the number of objects in a Box contract and executes an action when an object is added to it.
+Defender 2.0 allows you to target and activate on-chain activity using Action Workflow quickly. This tutorial shows how to create a workflow that monitors the number of objects in a Box contract and executes an action when an object is added to it.
 
 [[pre-requisites]]
 == Pre-requisites
@@ -10,7 +10,7 @@ Defender 2.0 allows you to target and activate on-chain activity using Incident 
 [[action]]
 == 1. Action setup
 
-In this tutorial, you will monitor https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[this, window=_blank] contract in Goerli, which stores a number of objects while allowing anyone to add or remove objects using the `addObject()` and `removeObject()` functions respectively. For every object added, your scenario will execute an action that removes an object and decreases the total by one. To set up the action, follow these steps:
+In this tutorial, you will monitor https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[this, window=_blank] contract in Goerli, which stores a number of objects while allowing anyone to add or remove objects using the `addObject()` and `removeObject()` functions respectively. For every object added, your workflow will execute an action that removes an object and decreases the total by one. To set up the action, follow these steps:
 
 . Open https://defender.openzeppelin.com/v2/#/manage/relayers/new[Defender 2.0 Manage Relayers, window=_blank] in a web browser.
 . Fill the form with the following parameters and click on *Create*:
@@ -26,7 +26,7 @@ In this tutorial, you will monitor https://goerli.etherscan.io/address/0x7A99C47
 * *Network*: `Goerli`
 * *Address*: `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4`
 
-. Navigate to https://defender.openzeppelin.com/v2/#/incident-response/actions/executable/new?[Defender 2.0 Incident Response Transaction Template creation page, window=_blank].
+. Navigate to https://defender.openzeppelin.com/v2/#/actions/workflows/transaction-template/new?[Defender 2.0 Workflows Transaction Template creation page, window=_blank].
 . Fill the **General Information** section with the following parameters:
 +
 * *Name*: `Remove object`
@@ -42,25 +42,25 @@ In this tutorial, you will monitor https://goerli.etherscan.io/address/0x7A99C47
 . Select `BoxV2 IR Sender` as the approval process and click on `Save Transaction Template`
 
 +
-image::tutorial-ir-first-action.png[Incident Response page with Transaction Template]
+image::tutorial-workflow-first-action.png[Workflow page with Transaction Template]
 
-[[scenario]]
-== 2. Scenario setup
+[[workflow]]
+== 2. Workflow setup
 
-With the action configured, you now need to create the scenario. To do so, follow these steps:
+With the action configured, you now need to create the workflow. To do so, follow these steps:
 
-. Open the https://defender.openzeppelin.com/v2/#/incident-response/scenarios/new[Defender 2.0 Incident Response scenario creation page, window=_blank].
-. Rename the scenario `Remove from BoxV2 if Object is Added`.
+. Open the https://defender.openzeppelin.com/v2/#/actions/workflows/new[Defender 2.0 Workflows creation page, window=_blank].
+. Rename the workflow `Remove from BoxV2 if Object is Added`.
 . Drag the `Remove object` action to the first row.
 . Click on *Save*.
 
 +
-image::tutorial-ir-scenario.png[Incident Response BoxV2 scenario]
+image::tutorial-workflow-scenario.png[BoxV2 workflow]
 
 [[monitor]]
 == 3. Monitor setup
 
-After creating the scenario, you need to configure a monitor that keeps track of the number of objects in the BoxV2 contract to trigger the scenario. To do so, follow these steps:
+After creating the workflow, you need to configure a monitor that keeps track of the number of objects in the BoxV2 contract to trigger the workflow. To do so, follow these steps:
 
 . Open the https://defender.openzeppelin.com/v2/#/monitor/new/custom[Defender 2.0 Monitor creation page, window=_blank].
 . Fill the **General Information** section with the following parameters:
@@ -71,21 +71,21 @@ After creating the scenario, you need to configure a monitor that keeps track of
 * *Confirmation Blocks*: `Confirmed (1 blocks)`
 
 +
-image::tutorial-ir-first-monitor.png[Incident Response Monitor General Information]
+image::tutorial-ir-first-monitor.png[Workflow Monitor General Information]
 
 . In the **Transaction Filters** section, add `status == "success"` for the `Transaction properties` field.
 . In the **Function** section, select `addObject()`
-. Within the **Alerts** section, select the `Remove from BoxV2 if Object is Added` scenario for the `Execute an Incident Response Scenario` option.
+. Within the **Alerts** section, select the `Remove from BoxV2 if Object is Added` workflow for the `Execute a Workflow` option.
 
 +
-image::tutorial-ir-monitor.png[Incident Response BoxV2 Objects monitor]
+image::tutorial-ir-monitor.png[Workflow BoxV2 Objects monitor]
 
 . Click on *Save Monitor*, which will start running.
 
 [[in-action]]
 == 4. Seeing it in action
 
-While the monitor runs, it will detect any transaction that matches the `addObject()` function to trigger the Incident Response scenario. To manually execute such a transaction, follow these steps:
+While the monitor runs, it will detect any transaction that matches the `addObject()` function to trigger the workflow. To manually execute such a transaction, follow these steps:
 
 . Open the https://defender.openzeppelin.com/v2/#/actions/executable/new?[Defender 2.0 Transaction Proposal creation page, window=_blank].
 . Fill the form with the following parameters:
@@ -101,25 +101,25 @@ While the monitor runs, it will detect any transaction that matches the `addObje
 image::tutorial-ir-proposal-action.png[Transaction Proposal Trigger]
 
 . Click on the transaction proposal to open its page.
-. Click on the top-right button *Approve and Execute* to execute the transaction, which will trigger the Incident Response scenario through the monitor.
-. Wait for the transaction to be executed and open the https://defender.openzeppelin.com/v2/#/incident-response/scenarios[Defender 2.0 Incident Response Scenarios page, window=_blank].
+. Click on the top-right button *Approve and Execute* to execute the transaction, which will trigger the workflow through the monitor.
+. Wait for the transaction to be executed and open the https://defender.openzeppelin.com/v2/#/actions/workflows[Defender 2.0 Workflows page, window=_blank].
 
 +
-image::tutorial-ir-active-scenario.png[Incident Response Active Scenario]
+image::tutorial-workflow-active-scenario.png[Active Workflow]
 
-. Click on *View Active Run* and check the details of your scenario response.
+. Click on *View Active Run* and check the details of your workflow response.
 . After the run is executed successfully, you can verify the response by checking the activity of the contract on https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Etherscan, window=_blank]. It should look like this:
 
 +
-image::tutorial-ir-etherscan.png[Incident Response Etherscan Response]
+image::tutorial-ir-etherscan.png[Workflow Etherscan Response]
 
 [[next-steps]]
 == Next steps
 
-Congratulations! You now have a complete Incident Response scenario that will be running and checking every confirmed block. Scenarios can be expanded with parallel actions for more technical combinations. In case you are interested in advanced use cases, we are working on Incident-Response-related guides.
+Congratulations! You now have a complete workflow that will be running and checking every confirmed block. Workflows can be expanded with parallel actions for more technical combinations. In case you are interested in advanced use cases, we are working on Workflow-related guides.
 
 [[reference]]
 == Reference
 
-* xref::module/incident-response.adoc[Incident Response Documentation]
+* xref::module/actions.adoc#workflows[Workflow Documentation]
 * https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[BoxV2, window=_blank]

@@ -20,14 +20,14 @@ Approval processes act as a wrapper for transactions to be executed on-chain. Th
 * Timelock contracts
 * Fireblocks
 
-They are defined per network, and are used throughout Defender 2.0 to execute transactions, such as in the xref:module/deploy.adoc[Deploy] wizard, xref:module/actions.adoc[Actions] and xref:module/incident-response.adoc[Incident Response].
+They are defined per network, and are used throughout Defender 2.0 to execute transactions, such as in the xref:module/deploy.adoc[Deploy] wizard, xref:module/actions.adoc[Actions] and xref:module/actions.adoc#workflows[Workflows].
 
 image::manage-approvals.png[Manage Approval Processes]
 
 [[notifications]]
 == Notification Channels
 
-When triggered, Defender 2.0 can deliver notifications to one or more configured notification channels which can include any of Slack, email, Telegram, Discord, Datadog, PagerDuty, OpsGenie, or custom webhooks. These notification channels can be used in monitors, actions, and incident response.
+When triggered, Defender 2.0 can deliver notifications to one or more configured notification channels which can include any of Slack, email, Telegram, Discord, Datadog, PagerDuty, OpsGenie, or custom webhooks. These notification channels can be used in monitors, actions, and workflows.
 
 image::manage-notify-channels.png[Manage Notification Channels]
 
@@ -173,7 +173,7 @@ Please see https://support.pagerduty.com/docs/services-and-integrations[PagerDut
 
 The address book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender 2.0 just by clicking on it, or you can manage your entire address book in the Manage section. Defender 2.0 automatically creates address book entries for you when you import accounts and contracts in other modules.
 
-When working with products in Defender 2.0, account and contract information will be directly sourced from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book when configuring monitors, actions, and incident response.
+When working with products in Defender 2.0, account and contract information will be directly sourced from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book when configuring monitors and actions.
 
 image::manage-address-book.png[Manage Address Book]
 

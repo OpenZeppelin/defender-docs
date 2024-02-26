@@ -1,5 +1,39 @@
 = Changelog
 
+[[release-2024-02-20]]
+== February 20th, 2024
+
+* *General*
+** Add migration assistant to allow Defender 1.0 users to migrate to Defender 2.0.
+** Rename Incident Response to Workflows.
+
+* *Private Networks*
+** Add support to allow Private Networks to use RPC URLs from public networks.
+
+* *Monitors*
+** Bug fix in usage quotas for active monitors.
+
+
+[[release-2024-02-08]]
+== February 8th, 2024
+
+* *General*
+** Display upgrade proposals in Defender 2.0.
+
+* *Audit*
+** UI fixes with overflow text.
+
+* *Deploy*
+** Fail gracefully when deploying to zkSync networks
+
+* *Monitor*
+** Enforce monitor quota limits to Defender 1.0 users.
+** UI bug fix in Monitor starter templates.
+
+* *Forked Networks*
+** Fix Forked Network guide to point tutorial link correctly.
+
+
 [[release-2024-01-31]]
 == January 31st, 2024
 

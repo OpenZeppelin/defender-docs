@@ -97,7 +97,7 @@ The page sync every minute, and updates when modifying a role.
 
 Congratulations! You can import other contracts and modify their roles.
 
-NOTE: After configuring Access Control, we recommend seting up Incident Response scenarios. Learn how to use Incident Response with its tutorial xref::tutorial/incident-response.adoc[here].
+NOTE: After configuring Access Control, we recommend seting up Workflows. Learn how to use Workflows with its tutorial xref::tutorial/workflows.adoc[here].
 
 [[reference]]
 == Reference
