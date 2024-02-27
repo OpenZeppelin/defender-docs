@@ -1,5 +1,25 @@
 = Changelog
 
+[[release-2024-02-27]]
+== February 27th, 2024
+
+* *General*
+** Improve logic to hide billing menu option.
+** Prevent account deletion if there is active subscription.
+** Update display of yearly price in subscription confirmation.
+** Enforce deployment quotas to Defender 1.0 users.
+** Fix session reloads after upgrade migration.
+** Bug fix: Update references to scenarios and broken doc links.
+** Bug fix: Prevent user without customerId from accessing settings.
+** Improve empty section upgrade button text.
+
+* *Private Networks*
+** Allow private networks to use RPC urls from public networks.
+** Enable zkevm networks.
+
+* *Monitors*
+** Bug fix in usage quotas for active monitors.
+
 [[release-2024-02-20]]
 == February 20th, 2024
 
