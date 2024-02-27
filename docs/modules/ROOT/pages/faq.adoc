@@ -15,7 +15,7 @@ You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campai
 
 Defender 1.0 is now deprecated in favor of Defender 2.0. On May 21st 2024, users will no longer have access to Defender 1.0 UI and API. Users that haven't migrated will be forced to migrate. Learn how to migrate xref:migration.adoc[here].
 
-== Once I migraete to Defender 2.0, can I continue using Defende 1.0?
+== Once I migrate to Defender 2.0, can I continue using Defender 1.0?
 
 No, once you migrate to Defender 2.0, you will no longer have access to Defender 1.0 UI and API.
 
