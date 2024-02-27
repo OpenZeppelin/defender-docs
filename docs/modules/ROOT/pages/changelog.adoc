@@ -18,8 +18,8 @@
 ** Enable zkevm networks.
 
 * *Monitors*
-** Count only active monitors for usage and quota
-** Count only active monitors when reporting MonitorsMaxCount
+** Count only active monitors for usage and quota.
+** Count only active monitors when reporting MonitorsMaxCount.
 
 [[release-2024-02-20]]
 == February 20th, 2024
