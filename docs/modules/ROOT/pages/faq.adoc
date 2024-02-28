@@ -13,7 +13,7 @@ You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=D
 
 == Is Defender legacy still supported?
 
-Defender legacy is now deprecated in favor of Defender. On May 21st 2024, users will no longer have access to Defender 1.0 UI and API. Users that haven't migrated will be forced to migrate. Learn how to migrate xref:migration.adoc[here].
+Defender legacy is now deprecated in favor of Defender. On June 1st 2024, users will no longer have access to Defender 1.0 UI and API. Users that haven't migrated will be forced to migrate. Learn how to migrate xref:migration.adoc[here].
 
 == Once I migrate to Defender, can I continue using Defender legacy?
 
