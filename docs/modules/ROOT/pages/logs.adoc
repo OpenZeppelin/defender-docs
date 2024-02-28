@@ -1,7 +1,7 @@
 [[logs]]
 = Logs
 
-Defender 2.0 generates log trails of every potentially relevant event in the system. This includes manual actions, such as modifying an Action or Monitor, as well as automated activity, such as sending a transaction or firing a notification. Logs can be optionally forwarded to Datadog and Splunk for aggregation or exported.
+Defender generates log trails of every potentially relevant event in the system. This includes manual actions, such as modifying an Action or Monitor, as well as automated activity, such as sending a transaction or firing a notification. Logs can be optionally forwarded to Datadog and Splunk for aggregation or exported.
 
 [[use-cases]]
 == Use cases

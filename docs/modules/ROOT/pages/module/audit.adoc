@@ -14,9 +14,9 @@ Audit allows you to summon our team of security experts to verify your system wo
 [[audit-reports]]
 == Auditors and Reports
 
-Auditors have special roles in Defender 2.0. Audit Managers are able to sync audit reports to Defender 2.0 from GitHub and add the Auditors, which are able to read and track issues and questions. Audit Manager can also identify which members of your team have permission to read or comment on audits.
+Auditors have special roles in Defender. Audit Managers are able to sync audit reports to Defender from GitHub and add the Auditors, which are able to read and track issues and questions. Audit Manager can also identify which members of your team have permission to read or comment on audits.
 
-Once an Audit Manager syncs and delivers an audit report to Defender 2.0, it will be visible to any team members who have been assigned the Audit Read or Audit Comment role. All active and historic audit reports will be visible, and team members can click on any audit report to view the details.
+Once an Audit Manager syncs and delivers an audit report to Defender, it will be visible to any team members who have been assigned the Audit Read or Audit Comment role. All active and historic audit reports will be visible, and team members can click on any audit report to view the details.
 
 image::audit-status.png[Audit Status Header]
 
@@ -75,7 +75,7 @@ Team members may leave comments for auditors. Specifically, team members can sup
 
 image::audit-reply-issue.png[Audit Issue Reply]
 
-Defender 2.0 will keep and display a trail of all communications between the auditors and team members on each issue.
+Defender will keep and display a trail of all communications between the auditors and team members on each issue.
 
 image::audit-trail.png[Audit Trail]
 

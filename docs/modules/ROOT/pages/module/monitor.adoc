@@ -10,7 +10,7 @@ Monitors allow you to gain full visibility into your smart contracts' risks and 
 * Alert on potentially dangerous transactions or operational issues.
 * Integrate notifications to Slack, Telegram, Discord, email, PagerDuty, Opsgenie or custom APIs.
 * Use pre-built templates to setup monitoring quickly and easily.
-* Combine with other Defender 2.0 modules to execute on-chain transactions with monitor triggers.
+* Combine with other Defender modules to execute on-chain transactions with monitor triggers.
 
 [[monitors]]
 == Monitors
@@ -444,4 +444,4 @@ From the monitor page, you can pause created monitors that are active. By clicki
 
 Saving a monitor as a template stores its configuration and parameters, which can be found by clicking the template gallery tab.
 
-NOTE: We provide a quickstart tutorial to monitor a smart contract using Defender 2.0. Check it out xref:tutorial/monitor.adoc[here]!
+NOTE: We provide a quickstart tutorial to monitor a smart contract using Defender. Check it out xref:tutorial/monitor.adoc[here]!

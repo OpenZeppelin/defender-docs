@@ -1,37 +1,37 @@
 [[faq]]
 = Frequently Asked Questions (FAQ)
 
-OpenZeppelin Defender 2.0 is the evolution of Defender, with an improved user experience, a cleaner interface, and new features that offer a more cohesive experience across the DevSecOps lifecycle. 
+OpenZeppelin Defender is the evolution of Defender, with an improved user experience, a cleaner interface, and new features that offer a more cohesive experience across the DevSecOps lifecycle. 
 
-== Does Defender 2.0 support the same features available in Defender 1.0?
+== Does Defender support the same features available in Defender legacy?
 
-Yes, most features are available in Defender 2.0. Please note the following changes described xref:migration.adoc#differences[here].
+Yes, most features are available in Defender. Please note the following changes described xref:migration.adoc#differences[here].
 
-== How can I sign up to Defender 2.0?
+== How can I sign up to Defender?
 
-You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
-== Is the existing Defender version still supported?
+== Is Defender legacy still supported?
 
-Defender 1.0 is now deprecated in favor of Defender 2.0. On June 1st 2024, users will no longer have access to Defender 1.0 UI and API. Users that haven't migrated will be forced to migrate. Learn how to migrate xref:migration.adoc[here].
+Defender legacy is now deprecated in favor of Defender. On June 1st 2024, users will no longer have access to Defender 1.0 UI and API. Users that haven't migrated will be forced to migrate. Learn how to migrate xref:migration.adoc[here].
 
-== Once I migrate to Defender 2.0, can I continue using Defender 1.0?
+== Once I migrate to Defender, can I continue using Defender legacy?
 
-No, once you migrate to Defender 2.0, you will no longer have access to Defender 1.0 UI and API.
+No, once you migrate to Defender, you will no longer have access to Defender 1.0 UI and API.
 
-== Will I be able to import my existing Defender configuration to Defender 2.0?
+== Will I be able to import my existing Defender configuration to Defender?
 
-Yes. All existing configurations for Autotask, Sentinels, etc., is automatically imported to Defender 2.0 under the new features naming convention (described xref:migration.adoc#differences[here]).
+Yes. All existing configurations for Autotask, Sentinels, etc., is automatically imported to Defender under the new features naming convention (described xref:migration.adoc#differences[here]).
 
-== Are there any breaking changes between Defender 1.0 and Defender 2.0?
+== Are there any breaking changes when migrating?
 
 Yes, there are multiple changes to the API endpoints that will require you to update your integrations. You can find the API docs https://www.api-docs.defender.openzeppelin.com/#defender-sdk[here, window=_blank].
 
-== What are the pricing options for Defender 2.0?
+== What are the pricing options for Defender?
 
-You can find the pricing for Defender 2.0 https://www.openzeppelin.com/pricing[here, window=_blank]. 
+You can find the pricing for Defender https://www.openzeppelin.com/pricing[here, window=_blank]. 
 
-== Does Defender 2.0 offer support?
+== Does Defender offer support?
 
 We offer a Service Level and Support Agreement (SLA) for paid subscriptions. Learn more xref:index.adoc#sla[here].
 

@@ -1,6 +1,6 @@
 = Defender SDK and API
 
-https://www.npmjs.com/package/@openzeppelin/defender-sdk[Defender SDK, window=_blank] (Formerly defender-client packages) is a node package that allows developers to interact with Defender 2.0 programatically using Javascript/Typescript.
+https://www.npmjs.com/package/@openzeppelin/defender-sdk[Defender SDK, window=_blank] (Formerly defender-client packages) is a node package that allows developers to interact with Defender programatically using Javascript/Typescript.
 
 See https://github.com/OpenZeppelin/defender-sdk[sdk repository, window=_blank] or https://www.api-docs.defender.openzeppelin.com/[SDK and API documentation, window=_blank] for more detailed information.
 

@@ -10,7 +10,7 @@ IMPORTANT: At this time, access control is supported across all networks except 
 
 * Manage ownership of contracts and proxies, including the ability to transfer ownership to a multisig or DAO
 * Identify roles, and remove or give permissions to addresses through multisigs or wallets
-* Import contracts from the supported networks, or use contracts deployed through Defender 2.0.
+* Import contracts from the supported networks, or use contracts deployed through Defender.
 
 [[contracts]]
 == Contracts
@@ -26,7 +26,7 @@ image::access-control.png[Access control main page]
 [[contract]]
 == Contract
 
-The contract page contains all the information about the contract selected, including the name, environment, network, address, and roles found. Defender 2.0 performs on-chain syncs with the contract every minute, with the last sync time found on the top right of the page. 
+The contract page contains all the information about the contract selected, including the name, environment, network, address, and roles found. Defender performs on-chain syncs with the contract every minute, with the last sync time found on the top right of the page. 
 
 Access control automatically tries to fetch all roles within a contract, but there's the possibility of missing some. In this case, you can add a role manually by clicking on the "Add new role" button and specifying the name of it.
 
@@ -34,4 +34,4 @@ When modifying a role, you have to choose which admin address to use. In the cas
 
 image::access-control-contract.png[Access control contract page]
 
-NOTE: We provide a quickstart tutorial to change access control roles using Defender 2.0. Check it out xref:tutorial/access-control.adoc[here]!
+NOTE: We provide a quickstart tutorial to change access control roles using Defender. Check it out xref:tutorial/access-control.adoc[here]!
