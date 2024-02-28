@@ -1,12 +1,12 @@
 [[Integrations]]
 = Integrations
 
-Defender 2.0 seamlessly integrates with your existing tools and workflows, so you can easily secure your project throughout the secure development lifecycle.
+Defender seamlessly integrates with your existing tools and workflows, so you can easily secure your project throughout the secure development lifecycle.
 
 [[sdk]]
 == SDK Plugins
-- https://hardhat.org/[*Hardhat*, window=_blank]: Code, deploy and upgrade your Hardhat projects through Defender 2.0.
-- https://getfoundry.sh/[*Foundry*, window=_blank]: Code your Foundry projects with support of Defender 2.0.
+- https://hardhat.org/[*Hardhat*, window=_blank]: Code, deploy and upgrade your Hardhat projects through Defender.
+- https://getfoundry.sh/[*Foundry*, window=_blank]: Code your Foundry projects with support of Defender.
 
 [[libraries]]
 == Libraries
@@ -19,8 +19,8 @@ Defender 2.0 seamlessly integrates with your existing tools and workflows, so yo
 
 [[key-management-transaction-execution]]
 == Key Management & Transaction Execution
-- https://app.safe.global/[*Safe*, window=_blank]: Use Safe multisigs to approve Defender 2.0 operations.
-- https://www.fireblocks.com/[*Fireblocks*, window=_blank]: Use Fireblocks assets to approve Defender 2.0 operations.
+- https://app.safe.global/[*Safe*, window=_blank]: Use Safe multisigs to approve Defender operations.
+- https://www.fireblocks.com/[*Fireblocks*, window=_blank]: Use Fireblocks assets to approve Defender operations.
 - https://www.flashbots.net/[*Flashbots*, window=_blank]: Send private transactions to prevent MEV and other attack vectors.
 
 [[notification-and-logging]]
@@ -37,8 +37,8 @@ Defender 2.0 seamlessly integrates with your existing tools and workflows, so yo
 [[threat-detection-and-transaction-data]]
 == Threat Detection & Transaction Data
 - https://forta.org/[*Forta*, window=_blank]: Detect smart contract threats and anomalies in real time using machine learning.
-- https://etherscan.io/[*Etherscan*, window=_blank]: Visualize transactions from Defender 2.0 using Etherscan-based explorers.
-- https://www.blockscout.com/[*Blockscout*, window=_blank]: Visualize transactions from Defender 2.0 using Blockscout-based explorers.
+- https://etherscan.io/[*Etherscan*, window=_blank]: Visualize transactions from Defender using Etherscan-based explorers.
+- https://www.blockscout.com/[*Blockscout*, window=_blank]: Visualize transactions from Defender using Blockscout-based explorers.
 
 [[source-code]]
 == Source Code

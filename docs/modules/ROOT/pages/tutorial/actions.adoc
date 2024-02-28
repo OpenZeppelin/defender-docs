@@ -1,13 +1,13 @@
 # Automate smart contract transaction for hourly activity 
 
-Defender 2.0 allows you to automate smart contract operational tasks with easy integration with the rest of Defender 2.0. This tutorial shows how to build an action that sends an on-chain transaction every hour that adds an object to a box and increases the number of objects inside.
+Defender allows you to automate smart contract operational tasks with easy integration with the rest of Defender. This tutorial shows how to build an action that sends an on-chain transaction every hour that adds an object to a box and increases the number of objects inside.
 
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
-NOTE: Learn to xref::tutorial/deploy.adoc[deploy] and xref::tutorial/monitor.adoc[monitor] contracts through Defender 2.0!
+NOTE: Learn to xref::tutorial/deploy.adoc[deploy] and xref::tutorial/monitor.adoc[monitor] contracts through Defender!
 
 [[setup]]
 == 1. Set up action
@@ -15,10 +15,10 @@ NOTE: Learn to xref::tutorial/deploy.adoc[deploy] and xref::tutorial/monitor.ado
 You will configure an action that sends an hourly transaction with the `addObject()` function to the `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4` contract in Goerli, which is an example of a Box contract deployed in the xref::tutorial/deploy.adoc[Deploy] tutorial. To do so, follow these steps:
 
 . Run the following command in your terminal:
-. Open https://defender.openzeppelin.com/v2/#/manage/relayers[Defender 2.0 Manage, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/manage/relayers[Defender Manage, window=_blank] in a web browser.
 . Click on *Create Relayer* with the name `Actions Relayer` and Goerli network.
 . Fund it with some Goerli ETH. This relayer will send and pay for the automated transactions.
-. Open https://defender.openzeppelin.com/v2/#/actions[Defender 2.0 Actions, window=_blank].
+. Open https://defender.openzeppelin.com/v2/#/actions[Defender Actions, window=_blank].
 . Click on *Create Action*.
 . Name the action `Hourly object add`.
 . Select *Schedule* as trigger, and a *Timespan* of 1 hour as schedule.
@@ -51,7 +51,7 @@ After saving, the Actions page should look like this:
 
 image::tutorial-actions-action.png[Actions action card]
 
-Your action will now be running every hour! You can check the https://defender.openzeppelin.com/v2/#/logs[Defender 2.0 Logs, window=_blank] for more detailed information about the activity.
+Your action will now be running every hour! You can check the https://defender.openzeppelin.com/v2/#/logs[Defender Logs, window=_blank] for more detailed information about the activity.
 
 [[verify]]
 == 2. Verify activity
@@ -67,7 +67,7 @@ image::tutorial-actions-alert.png[Actions alert]
 
 Congratulations! You can modify the action to automate other contracts and build more complex transactions. In case you are interested in advanced use cases, we are working on actions-related guides.
 
-NOTE: Alongisde actions, we recommend using Access Control to manage a contract's permissions through Defender 2.0. Learn how to use Access Control with its tutorial xref::tutorial/access-control.adoc[here].
+NOTE: Alongisde actions, we recommend using Access Control to manage a contract's permissions through Defender. Learn how to use Access Control with its tutorial xref::tutorial/access-control.adoc[here].
 
 [[reference]]
 == Reference

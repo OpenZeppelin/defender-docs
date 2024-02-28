@@ -1,10 +1,10 @@
-# OpenZeppelin Defender 2.0 Documentation
+# OpenZeppelin Defender Documentation
 
-Sources for OpenZeppelin Defender 2.0 documentation. Hosted at [docs.openzeppelin.com/defender/v2/](https://docs.openzeppelin.com/defender/v2/).
+Sources for OpenZeppelin Defender documentation. Hosted at [docs.openzeppelin.com/defender/v2/](https://docs.openzeppelin.com/defender/v2/).
 
-## About Defender 2.0
+## About Defender
 
-OpenZeppelin Defender 2.0 is a mission-critical developer security platform to code, audit, deploy, monitor, and operate blockchain applications with confidence.
+OpenZeppelin Defender is a mission-critical developer security platform to code, audit, deploy, monitor, and operate blockchain applications with confidence.
 
 - [Learn more](https://openzeppelin.com/defender)
 - [Read the docs](https://docs.openzeppelin.com/defender/v2/)

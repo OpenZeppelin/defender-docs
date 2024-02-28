@@ -1,7 +1,7 @@
 [[relayers]]
 = Relayers
 
-Relayers allow you to send on-chain transactions via regular API requests or through other Defender 2.0 modules, like Actions, Workflows, and Deploy. Relayers also automate the payment of gas fees and take care of private key secure storage, transaction signing, nonce management, gas pricing estimation, and resubmissions. With Relayers, you don't have to worry about storing private keys on your back-end servers or monitoring gas prices and transactions to ensure they get confirmed.
+Relayers allow you to send on-chain transactions via regular API requests or through other Defender modules, like Actions, Workflows, and Deploy. Relayers also automate the payment of gas fees and take care of private key secure storage, transaction signing, nonce management, gas pricing estimation, and resubmissions. With Relayers, you don't have to worry about storing private keys on your back-end servers or monitoring gas prices and transactions to ensure they get confirmed.
 
 [[use-cases]]
 == Use cases
@@ -16,7 +16,7 @@ Relayers allow you to send on-chain transactions via regular API requests or thr
 [[whats-a-relayer]]
 == What's a Relayer?
 
-A Relayer is an Ethereum-based externally-owned account (EOA) assigned exclusively to your team. Every time you create a new Relayer, Defender 2.0 will create a new private key in a secure vault. Whenever you request Defender 2.0 to send a transaction through that Relayer, the corresponding private key will be used for signing.
+A Relayer is an Ethereum-based externally-owned account (EOA) assigned exclusively to your team. Every time you create a new Relayer, Defender will create a new private key in a secure vault. Whenever you request Defender to send a transaction through that Relayer, the corresponding private key will be used for signing.
 
 You can think of each Relayer as a queue for sending transactions, where all transactions sent through the same Relayer will be sent in order and from the same account, controlled exclusively by your team. Learn more about the technical implemention <<under-the-hood,here>>.
 
@@ -31,7 +31,7 @@ To create a Relayer, simply click the **Create Relayer** button on the top-right
 </div>
 ++++
 
-IMPORTANT: Keep in mind that you'll need to fund each Relayer individually with ETH (or the native chain token) to ensure they have enough funds to pay for the gas of the transactions you send. Defender 2.0 will send you an email notification if a Relayer's funds drop below 0.1 ETH.
+IMPORTANT: Keep in mind that you'll need to fund each Relayer individually with ETH (or the native chain token) to ensure they have enough funds to pay for the gas of the transactions you send. Defender will send you an email notification if a Relayer's funds drop below 0.1 ETH.
 
 NOTE: Testnet Relayers created through the Deploy wizard will be automatically funded if possible. Read more xref::module/deploy.adoc#wizard-3[here].
 
@@ -53,7 +53,7 @@ IMPORTANT: The API key of a Relayer is **not** related to its private key. The p
 [[addresses]]
 === Addresses
 
-Whenever you create a Relayer, a fresh EOA will be created to back it. For security reasons, it's not possible to import an existing private key into a Relayer nor export the private key of a Relayer created by Defender 2.0. If you grant a privileged role to a Relayer address in your system to avoid lock-in, consider having an administrative method for switching it to a different one if needed.
+Whenever you create a Relayer, a fresh EOA will be created to back it. For security reasons, it's not possible to import an existing private key into a Relayer nor export the private key of a Relayer created by Defender. If you grant a privileged role to a Relayer address in your system to avoid lock-in, consider having an administrative method for switching it to a different one if needed.
 
 [[policies]]
 === Policies
@@ -71,13 +71,13 @@ To configure a Relayer's policies, go to the https://defender.openzeppelin.com/v
 
 [[gas-price-cap-policy]]
 ==== Gas price cap 
-Specify a maximum gas price for every transaction sent with the Relayer. When this policy is enabled, Defender 2.0 will overwrite the `gasPrice` or `maxFeePerGas` of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
+Specify a maximum gas price for every transaction sent with the Relayer. When this policy is enabled, Defender will overwrite the `gasPrice` or `maxFeePerGas` of any transaction that goes beyond the specified cap. Take into account that the gas price for a transaction is specified based on gas price oracles at the moment the Relayer actually sends the transaction to be mined, so this policy can be used as a protection on gas price surges.
 
-NOTE: In addition to the maximum gas price policy you can specify here, Defender 2.0 implements a minimum gas price policy for networks that have minimum gas requirements. Check requirements with the individual networks you use.
+NOTE: In addition to the maximum gas price policy you can specify here, Defender implements a minimum gas price policy for networks that have minimum gas requirements. Check requirements with the individual networks you use.
 
 [[receive-whitelist-policy]]
 ==== Receiver whitelist
-Specify a list of authorized contracts for every transaction sent using the Relayer. Defender 2.0 will reject and discard any transaction whose destination address is not in the list.
+Specify a list of authorized contracts for every transaction sent using the Relayer. Defender will reject and discard any transaction whose destination address is not in the list.
 
 NOTE: The whitelist applies only to the `to` field of a transaction. It doesn't filter ERC20 or other assets receivers.
 
@@ -91,12 +91,12 @@ NOTE: EIP1559 Pricing policy is enabled by default for new Relayers. If you have
 ==== Private transactions
 Specify if the transactions should be sent via private mempool. This means that a transaction will not be publicly seen until it's included in a block.
 
-NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC, window=_blank]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations, window=_blank] might apply while sending private transactions through Defender 2.0.
+NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC, window=_blank]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations, window=_blank] might apply while sending private transactions through Defender.
 
 [[sending-transactions]]
 == Sending transactions
 
-The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`Defender 2.0 SDK`, window=_blank] package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
+The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`Defender SDK`, window=_blank] package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
 
 [source,jsx]
 ----
@@ -116,9 +116,9 @@ const tx = await client.relayerSigner.sendTransaction({
 For better reliability of the relayers, we recommend sending no more than *50 transactions/min* on a single relayer especially on fast moving chains like Polygon, Optimism, Arbitrum etc.. For example, if you want 250 transactions/min throughput, you would need to load balance across 5 relayers. These 5 relayers can be part of the same account.
 ====
 
-NOTE: You don't need to enter a private key when initializing a Relayer client, since the private key is kept secure in the Defender 2.0 vault.
+NOTE: You don't need to enter a private key when initializing a Relayer client, since the private key is kept secure in the Defender vault.
 
-IMPORTANT: Currently, _zkSync_ doesn't have a way to precisely calculate `gasLimit` other than using the `eth_estimateGas` endpoint. Therefore, Defender 2.0 can't do any gasLimit and overrides the user input with the RPC estimation. 
+IMPORTANT: Currently, _zkSync_ doesn't have a way to precisely calculate `gasLimit` other than using the `eth_estimateGas` endpoint. Therefore, Defender can't do any gasLimit and overrides the user input with the RPC estimation. 
 
 [[using-ethers.js]]
 === Using ethers.js
@@ -141,7 +141,7 @@ const tx = await erc20.transfer(beneficiary, 1e18.toString());
 const mined = await tx.wait();
 ----
 
-In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender 2.0 as a network provider as well. 
+In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender as a network provider as well. 
 
 You can read more about the ethers integration https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[here, window=_blank].
 
@@ -167,7 +167,7 @@ const erc20 = new web3.eth.Contract(ERC20_ABI, ERC20_ADDRESS, { from });
 const tx = await erc20.methods.transfer(beneficiary, (1e18).toString()).send();
 ----
 
-In the example above, the `transfer` transaction is signed and broadcasted by the Relayer, and any additional JSON RPC calls are routed via Defender 2.0 private endpoint.
+In the example above, the `transfer` transaction is signed and broadcasted by the Relayer, and any additional JSON RPC calls are routed via Defender private endpoint.
 
 You can read more about the web3 integration https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[here, window=_blank].
 
@@ -261,7 +261,7 @@ Since a Relayer may resubmit a transaction with an updated gas pricing if it doe
 const tx = await relayer.query(tx.transactionId);
 ----
 
-NOTE: The `query` endpoint will return the latest view of the transaction from the Defender 2.0 service, which gets updated every minute.
+NOTE: The `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every minute.
 
 [[replace-txs]]
 === Replace Transactions
@@ -411,7 +411,7 @@ export interface RelayerStatus {
 [[network-calls]]
 == Network calls
 
-Defender 2.0 also provides an easy way to make arbitrary JSON RPC calls to the network. You can use the low-level `relayer.call` method to send any JSON RPC HTTP request:
+Defender also provides an easy way to make arbitrary JSON RPC calls to the network. You can use the low-level `relayer.call` method to send any JSON RPC HTTP request:
 
 [source,jsx]
 ----

@@ -1,72 +1,72 @@
 [[migration]]
-= Migrating from Defender 1.0
+= Migrating from Defender legacy
 
-IMPORTANT: *On May 21st 2024, you will no longer have access to Defender 1.0 UI and API*. 
+IMPORTANT: *On May 21st 2024, you will no longer have access to Defender legacy UI and API*. 
 
-With the announcement of Defender 2.0 general availability, we are deprecating Defender 1.0 in favor of Defender 2.0. To make the transition as smooth as possible, we've developed an onboarding assistant to help you with just a few clicks. To use the assistant, click https://defender.openzeppelin.com/v2/#/overview?onboarding=true[here, window=_blank], log in with our account, and follow the steps. You can find the FAQ xref:faq.adoc[here].
+With the announcement of Defender general availability, we are deprecating Defender legacy (also known as legacy) in favor of Defender. To make the transition as smooth as possible, we've developed an onboarding assistant to help you with just a few clicks. To use the assistant, click https://defender.openzeppelin.com/v2/#/overview?onboarding=true[here, window=_blank], log in with our account, and follow the steps. You can find the FAQ xref:faq.adoc[here].
 
 [[differences]]
 == Differences
 
-Features from Defender 1.0 have been reorganized and improved in Defender 2.0. All of your created assets will be completely available in Defender 2.0.
+Features from Defender legacy have been reorganized and improved in Defender. All of your created assets will be completely available when migrating.
 
 === Tenant-wide pages → Manage
 
-Tenant-wide pages in the Defender 1.0 dropdown menu can now be found under the `Manage` tab. 
+Tenant-wide pages in the Defender legacy dropdown menu can now be found under the `Manage` tab. 
 
 - `User managament` is now called `Team Members`
 - `Team API Keys`  and `Fireblocks API Keys` are now under `API Keys`
 
 Learn more xref:manage.adoc[here].
 
-==== Defender 1.0
-image::tenant-migration-1.0.png[Tenant pages on Defender 1.0]
+==== Defender legacy
+image::tenant-migration-1.0.png[Tenant pages on Defender legacy]
 
-==== Defender 2.0
-image::tenant-migration-2.0.png[Tenant pages on Defender 2.0]
+==== Defender
+image::tenant-migration-2.0.png[Tenant pages on Defender]
 
 === Admin / Add Contract → Manage / Address Book
 
 Now, you can add smart contracts to use across the platform via the `Address Book`, which is accesible under the `Manage` tab. Learn more xref:manage.adoc#address-book[here].
 
-==== Defender 1.0
-image::address-book-migration-1.0.png[Add Contract on Defender 1.0]
+==== Defender legacy
+image::address-book-migration-1.0.png[Add Contract on Defender legacy]
 
-==== Defender 2.0
+==== Defender
 video::address-book.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 === Admin / Create Safe → Deprecated
 
-The ability of creating a Safe smart contract via Defender is *not* available in Defender 2.0. We recommend using the https://app.safe.global[Safe interface, window=_blank] to create a Safe, and then import it to Defender using the `Address Book`.
+The ability of creating a Safe smart contract via Defender is *not* available in Defender. We recommend using the https://app.safe.global[Safe interface, window=_blank] to create a Safe, and then import it to Defender using the `Address Book`.
 
-==== Defender 1.0
-image::safe-migration-1.0.png[Safe creation Defender 1.0]
+==== Defender legacy
+image::safe-migration-1.0.png[Safe creation Defender legacy]
 
 === Admin / Create Timelock → Deprecated
 
-The ability of creating a Timelock smart contract via Defender is *not* available in Defender 2.0. We recommend using the https://docs.openzeppelin.com/contracts/api/governance#timelock[OpenZeppelin Contracts 5.0 TimelockController implementation, window=_blank] with a development framework, like Hardhat or Foundry, to deploy it. You can then import it to Defender using the `Address Book`. Learn more xref:guide/timelock-roles.adoc[here].
+The ability of creating a Timelock smart contract via Defender is *not* available in Defender. We recommend using the https://docs.openzeppelin.com/contracts/api/governance#timelock[OpenZeppelin Contracts 5.0 TimelockController implementation, window=_blank] with a development framework, like Hardhat or Foundry, to deploy it. You can then import it to Defender using the `Address Book`. Learn more xref:guide/timelock-roles.adoc[here].
 
-==== Defender 1.0
-image::timelock-migration-1.0.png[Timelock creation on Defender 1.0]
+==== Defender legacy
+image::timelock-migration-1.0.png[Timelock creation on Defender legacy]
 
 ### Admin / Add Proposal → Actions / Transaction Proposals
 
-In Defender 2.0, you can now use `Transactions Proposals` within `Actions` to send transactions via `Approval Processes`, like Safes, EOAs, Relayers, and more. Learn more xref:module/actions.adoc#transaction-proposals-reference[here].
+In Defender, you can now use `Transactions Proposals` within `Actions` to send transactions via `Approval Processes`, like Safes, EOAs, Relayers, and more. Learn more xref:module/actions.adoc#transaction-proposals-reference[here].
 
-==== Defender 1.0
-image::proposal-migration-1.0.png[Proposals on Defender 1.0]
+==== Defender legacy
+image::proposal-migration-1.0.png[Proposals on Defender legacy]
 
-==== Defender 2.0
+==== Defender
 video::proposal.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Relay → Manage / Relayers
 
 `Relayers` can now be found under the `Manage` tab. Learn more xref:manage/relayers.adoc[here].
 
-==== Defender 1.0
-image::relayers-migration-1.0.png[Relayers on Defender 1.0]
+==== Defender legacy
+image::relayers-migration-1.0.png[Relayers on Defender legacy]
 
-==== Defender 2.0
+==== Defender
 video::relayers.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Autotasks → Actions
@@ -75,38 +75,38 @@ video::relayers.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 Learn more xref:module/actions.adoc[here].
 
-==== Defender 1.0
-image::autotasks-migration-1.0.png[Autotasks on Defender 1.0]
+==== Defender legacy
+image::autotasks-migration-1.0.png[Autotasks on Defender legacy]
 
-==== Defender 2.0
+==== Defender
 video::actions.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Autotasks / Secrets → Manage / Secrets
 
 The `Secrets` tab is now available under `Manage`. Learn more xref:manage.adoc#secrets[here].
 
-==== Defender 1.0
-image::secrets-migration-1.0.png[Secrets on Defender 1.0]
+==== Defender legacy
+image::secrets-migration-1.0.png[Secrets on Defender legacy]
 
-==== Defender 2.0
-image::secrets-migration-2.0.png[Secrets on Defender 2.0]
+==== Defender
+image::secrets-migration-2.0.png[Secrets on Defender]
 
 ### Sentinel → Monitor
 
 `Sentinel` was renamed to `Monitor`. Learn more xref:module/monitor.adoc[here].
 
-==== Defender 1.0
-image::sentinel-migration-1.0.png[Sentinel on Defender 1.0]
+==== Defender legacy
+image::sentinel-migration-1.0.png[Sentinel on Defender legacy]
 
-==== Defender 2.0
+==== Defender
 video::monitor.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Logging → Logs
 
 `Logging` was renamed to `Logs`. Learn more xref:logs.adoc[here].
 
-==== Defender 1.0
-image::logs-migration-1.0.png[Logging on Defender 1.0]
+==== Defender legacy
+image::logs-migration-1.0.png[Logging on Defender legacy]
 
-==== Defender 2.0
-image::logs-migration-2.0.png[Logs on Defender 2.0]
+==== Defender
+image::logs-migration-2.0.png[Logs on Defender]
