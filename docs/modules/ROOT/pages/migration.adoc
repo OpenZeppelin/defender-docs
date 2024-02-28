@@ -1,7 +1,7 @@
 [[migration]]
 = Migrating from Defender 1.0
 
-IMPORTANT: *On May 21st 2024, you will no longer have access to Defender 1.0 UI and API*. 
+IMPORTANT: *On June 1st 2024, you will no longer have access to Defender 1.0 UI and API*. 
 
 With the announcement of Defender 2.0 general availability, we are deprecating Defender 1.0 in favor of Defender 2.0. To make the transition as smooth as possible, we've developed an onboarding assistant to help you with just a few clicks. To use the assistant, click https://defender.openzeppelin.com/v2/#/overview?onboarding=true[here, window=_blank], log in with our account, and follow the steps. You can find the FAQ xref:faq.adoc[here].
 
