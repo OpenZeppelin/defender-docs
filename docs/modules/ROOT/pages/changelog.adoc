@@ -4,10 +4,10 @@
 == March 5th, 2024
 
 * *General*
-** Enable Onboarding guide for all Defender 2.0 users.
+** Enable onboarding guide for all Defender 2.0 users.
 
 * *Private Networks*
-** Bug fix in private network initialization using sdk.
+** Bug fix in private network initialization when using SDK.
 
 * *Audit*
 ** Fix formatting for audit invite emails.
@@ -16,11 +16,11 @@
 ** Update monitor transaction filter property.
 ** Bug fix when customizing notification template for monitors.
 
-* *Proposals*
+* *Transaction Proposals*
 ** Fix timelock gas estimation for proposals.
 
 * *Relayers*
-** Bug fix in relayer redirection from workflows.
+** Bug fix in relayer redirection from Workflows.
 
 
 [[release-2024-02-27]]
