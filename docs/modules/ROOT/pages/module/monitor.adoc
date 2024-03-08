@@ -137,7 +137,7 @@ gasPrice > 50000000000 and gasUsed > 20000
 
 === Custom Filters
 
-Custom filters supporsts custom code for filtering transactions. If a custom filter is specified, it will be called with a list of matches found for a given block. This allows the monitor to use other datasources and custom logic to evaluate whether a transaction matches.
+Custom filters supports custom code for filtering transactions. If a custom filter is specified, it will be called with a list of matches found for a given block. This allows the monitor to use other datasources and custom logic to evaluate whether a transaction matches.
 
 NOTE: Only transactions that match other conditions (event, function, transaction) will invoke the custom filter.
 
