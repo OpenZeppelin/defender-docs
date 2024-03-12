@@ -1,5 +1,21 @@
 = Changelog
 
+[[release-2024-03-12]]
+== March 12th, 2024
+
+* *General*
+** Add support for Professional custom plan and custom overage prices.
+** Open public pricing page for Enterprise plan requests.
+** Deprecate Optimism Goerli.
+
+* *Access Control*
+** Allow users to hide address book contracts.
+
+* *Private Networks*
+** Prevent removing signing policy from relayer when linked to approval process.
+** Fix relayer redirection to the sidedrawer after creation.
+
+
 [[release-2024-03-05]]
 == March 5th, 2024
 
