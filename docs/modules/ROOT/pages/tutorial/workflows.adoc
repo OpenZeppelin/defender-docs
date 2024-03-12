@@ -1,32 +1,32 @@
 # Create an Action Workflow to decrease the number of objects in a Box contract
 
-Defender 2.0 allows you to target and activate on-chain activity using Action Workflow quickly. This tutorial shows how to create a workflow that monitors the number of objects in a Box contract and executes an action when an object is added to it.
+Defender allows you to target and activate on-chain activity using Action Workflow quickly. This tutorial shows how to create a workflow that monitors the number of objects in a Box contract and executes an action when an object is added to it.
 
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
 [[action]]
 == 1. Action setup
 
 In this tutorial, you will monitor https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[this, window=_blank] contract in Goerli, which stores a number of objects while allowing anyone to add or remove objects using the `addObject()` and `removeObject()` functions respectively. For every object added, your workflow will execute an action that removes an object and decreases the total by one. To set up the action, follow these steps:
 
-. Open https://defender.openzeppelin.com/v2/#/manage/relayers/new[Defender 2.0 Manage Relayers, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/manage/relayers/new[Defender Manage Relayers, window=_blank] in a web browser.
 . Fill the form with the following parameters and click on *Create*:
 +
 * *Name*: `Relayer Goerli`
 * *Network*: `Goerli`
 
 . Transfer some Goerli ETH to the relayer address created in the previous step.
-. Navigate to https://staging.defender-dev.openzeppelin.com/#/manage/address-book/new[Defender 2.0 Address Book, window=_blank] to import the `BoxV2` contract.
+. Navigate to https://staging.defender-dev.openzeppelin.com/#/manage/address-book/new[Defender Address Book, window=_blank] to import the `BoxV2` contract.
 . Fill the form with the following parameters and click on *Create*:
 +
 * *Name*: `BoxV2`
 * *Network*: `Goerli`
 * *Address*: `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4`
 
-. Navigate to https://defender.openzeppelin.com/v2/#/actions/workflows/transaction-template/new?[Defender 2.0 Workflows Transaction Template creation page, window=_blank].
+. Navigate to https://defender.openzeppelin.com/v2/#/actions/workflows/transaction-template/new?[Defender Workflows Transaction Template creation page, window=_blank].
 . Fill the **General Information** section with the following parameters:
 +
 * *Name*: `Remove object`
@@ -49,7 +49,7 @@ image::tutorial-workflow-first-action.png[Workflow page with Transaction Templat
 
 With the action configured, you now need to create the workflow. To do so, follow these steps:
 
-. Open the https://defender.openzeppelin.com/v2/#/actions/workflows/new[Defender 2.0 Workflows creation page, window=_blank].
+. Open the https://defender.openzeppelin.com/v2/#/actions/workflows/new[Defender Workflows creation page, window=_blank].
 . Rename the workflow `Remove from BoxV2 if Object is Added`.
 . Drag the `Remove object` action to the first row.
 . Click on *Save*.
@@ -62,7 +62,7 @@ image::tutorial-workflow-scenario.png[BoxV2 workflow]
 
 After creating the workflow, you need to configure a monitor that keeps track of the number of objects in the BoxV2 contract to trigger the workflow. To do so, follow these steps:
 
-. Open the https://defender.openzeppelin.com/v2/#/monitor/new/custom[Defender 2.0 Monitor creation page, window=_blank].
+. Open the https://defender.openzeppelin.com/v2/#/monitor/new/custom[Defender Monitor creation page, window=_blank].
 . Fill the **General Information** section with the following parameters:
 +
 * *Name*: `BoxV2 Objects Monitor`
@@ -87,7 +87,7 @@ image::tutorial-ir-monitor.png[Workflow BoxV2 Objects monitor]
 
 While the monitor runs, it will detect any transaction that matches the `addObject()` function to trigger the workflow. To manually execute such a transaction, follow these steps:
 
-. Open the https://defender.openzeppelin.com/v2/#/actions/executable/new?[Defender 2.0 Transaction Proposal creation page, window=_blank].
+. Open the https://defender.openzeppelin.com/v2/#/actions/executable/new?[Defender Transaction Proposal creation page, window=_blank].
 . Fill the form with the following parameters:
 +
 * *Name*: `BoxV2 Add Object Trigger`
@@ -102,7 +102,7 @@ image::tutorial-ir-proposal-action.png[Transaction Proposal Trigger]
 
 . Click on the transaction proposal to open its page.
 . Click on the top-right button *Approve and Execute* to execute the transaction, which will trigger the workflow through the monitor.
-. Wait for the transaction to be executed and open the https://defender.openzeppelin.com/v2/#/actions/workflows[Defender 2.0 Workflows page, window=_blank].
+. Wait for the transaction to be executed and open the https://defender.openzeppelin.com/v2/#/actions/workflows[Defender Workflows page, window=_blank].
 
 +
 image::tutorial-workflow-active-scenario.png[Active Workflow]

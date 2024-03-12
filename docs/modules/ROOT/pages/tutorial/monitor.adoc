@@ -1,20 +1,20 @@
 # Monitor a smart contract for on-chain activity 
 
-Defender 2.0 allows you to monitor smart contract transactions and events across chains. This tutorial shows how to build a customized Monitor template and use it in a real-world context to monitor a https://uniswap.org/[Uniswap V2, window=_blank] pool.
+Defender allows you to monitor smart contract transactions and events across chains. This tutorial shows how to build a customized Monitor template and use it in a real-world context to monitor a https://uniswap.org/[Uniswap V2, window=_blank] pool.
 
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
-NOTE: Learn to deploy contracts to monitor using Defender 2.0 xref::tutorial/deploy.adoc[here]!
+NOTE: Learn to deploy contracts to monitor using Defender xref::tutorial/deploy.adoc[here]!
 
 [[configure]]
 == 1. Configure the monitor
 
 You will monitor the `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc` contract in the Ethereum mainnet, which is the https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc[Uniswap V2 USDC-ETH pool, window=_blank]. This contract has constant activity, making it a good candidate to see how quick monitors are. To configure a monitor, follow these steps:
 
-. Open https://defender.openzeppelin.com/v2/#/monitor[Defender 2.0 Monitor, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/monitor[Defender Monitor, window=_blank] in a web browser.
 . Click on *Create Monitor*.
 +
 image::tutorial-monitor-landing.png[Monitor landing page]
@@ -29,7 +29,7 @@ image::tutorial-monitor-landing.png[Monitor landing page]
 * Network: `Mainnet`
 * Address: `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc`
 
-. Select `1 confirmation block`. Defender 2.0 will automatically pick up the ABI, so we can select the transaction filters next.
+. Select `1 confirmation block`. Defender will automatically pick up the ABI, so we can select the transaction filters next.
 
 +
 image::tutorial-monitor-first.png[Monitor added contract]
@@ -62,7 +62,7 @@ Alerts will start rolling in as long as the monitor is active. Your notification
 
 image::tutorial-monitor-receive.png[Monitor Telegram alert]
 
-You can pause or delete monitors on the https://defender.openzeppelin.com/v2/#/monitor[Defender 2.0 Monitor, window=_blank] page. This one will trigger frequently so you will likely want to pause it using the toggle on the right after you receive a couple of alerts. You can also save a monitor as a template by clicking on the dotted icon of its card and `Save as Template`.
+You can pause or delete monitors on the https://defender.openzeppelin.com/v2/#/monitor[Defender Monitor, window=_blank] page. This one will trigger frequently so you will likely want to pause it using the toggle on the right after you receive a couple of alerts. You can also save a monitor as a template by clicking on the dotted icon of its card and `Save as Template`.
 
 image::tutorial-monitor-save-template.png[Monitor save template]
 
@@ -71,7 +71,7 @@ image::tutorial-monitor-save-template.png[Monitor save template]
 
 Congratulations! You can modify the monitor to filter for specific `Swap` data or target another pool. In case you are interested in advanced use cases, we are working on monitor-related guides.
 
-NOTE: After setting up a monitor, we recommend creating Actions on Defender 2.0. Learn how to use Actions with its tutorial xref::tutorial/actions.adoc[here].
+NOTE: After setting up a monitor, we recommend creating Actions on Defender. Learn how to use Actions with its tutorial xref::tutorial/actions.adoc[here].
 
 [[reference]]
 == Reference

@@ -1,14 +1,16 @@
-= Defender 2.0
+= Defender
 
-OpenZeppelin Defender 2.0 is a mission-critical developer security platform to *code*, *audit*, *deploy*, *monitor*, and *operate* blockchain applications with confidence.
+OpenZeppelin Defender is a mission-critical developer security platform to *code*, *audit*, *deploy*, *monitor*, and *operate* blockchain applications with confidence.
 
-Integrating directly into the developer workflow, Defender 2.0 makes it easy and fast for developers and operators to prevent and fix security issues pre and post-deployment.
+Integrating directly into the developer workflow, Defender makes it easy and fast for developers and operators to prevent and fix security issues pre and post-deployment.
+
+IMPORTANT: Defender legacy is now deprecated in favor of Defender. Learn how to migrate xref:migration.adoc[here]! *On June 1st 2024, you will no longer have access to Defender 1.0 UI and API*.
 
 [[modules]]
 [.card-section.card-section-2col]
 == Modules
 
-Defender 2.0 modules work seamlessly together, providing users powerful features and a superior, integrated experience. Learn more about each module by clicking on its card.
+Defender modules work seamlessly together, providing users powerful features and a superior, integrated experience. Learn more about each module by clicking on its card.
 
 [.card.card-learn]
 --
@@ -42,11 +44,11 @@ xref:module/access-control.adoc[[.card-title]#Access Control# [.card-body]#pass:
 
 [[networks]]
 == Available networks
-Defender 2.0 works with most mainnet and testnet networks, as well as local mainnet forks.
+Defender works with most mainnet and testnet networks, as well as local mainnet forks.
 
 - https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Goerli* testnet and *Sepolia* testnet.
 - https://zksync.io/[*zkSync Era Mainnet*,window=_blank], *zkSync Era Goerli* and *zkSync Era Sepolia*.
-- https://www.polygon.technology/[*Polygon* (Matic),window=_blank] and *Mumbai*.
+- https://www.polygon.technology/[*Polygon* (Matic),window=_blank] *Mumbai*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *zkEVM Testnet*
 - https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], *Arbitrum Sepolia* and *Arbitrum Goerli*.
 - https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia* and *Optimism Goerli*.
 - https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
@@ -65,7 +67,7 @@ Defender 2.0 works with most mainnet and testnet networks, as well as local main
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Testnet*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
 
-If there is any other network or layer-2 solution you would like to use from Defender 2.0, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
+If there is any other network or layer-2 solution you would like to use from Defender, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
 
 [[network-status]]
 === Status
@@ -73,16 +75,15 @@ You can check the status of Defender and the supported networks on our https://s
 
 [[integrations]]
 == Integrations
-Integrations throughout Defender 2.0 allow users to connect with other services and tools. Find the list of integrations and more information xref:integrations.adoc[here].
+Integrations throughout Defender allow users to connect with other services and tools. Find the list of integrations and more information xref:integrations.adoc[here].
 
 [[sla]]
 == Service Level and Support Agreement
-
 For our https://www.openzeppelin.com/pricing[paid subscriptions, window=_blank], we're offering enhanced service reliability, guaranteed uptime, and priority support. You can learn more on our https://www.openzeppelin.com/service-level-agreement[Service Level and Support Agreement (SLA) page, window=_blank].
 
 [[feedback]]
 == Feedback
 
-As a Defender 2.0 user, your feedback is important! Please provide us feedback by accesing the form on the bottom-right corner of your screen.
+As a Defender user, your feedback is important! Please provide us feedback by accesing the form on the bottom-right corner of your screen.
 
 image::feedback-button.png[Feedback form button bottom-right corner]

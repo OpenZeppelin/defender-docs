@@ -1,12 +1,12 @@
 [[manage]]
 = Manage
 
-Manage everything related to the configuration of Defender 2.0, including Relayers, notification channels, addresses, team members, API keys, and more.
+Manage everything related to the configuration of Defender, including Relayers, notification channels, addresses, team members, API keys, and more.
 
 [[relayers]]
 == Relayers
 
-Relayers are used to send transactions to the blockchain via Defender 2.0 automatically. Read more about in the xref:manage/relayers.adoc[Relayers] section.
+Relayers are used to send transactions to the blockchain via Defender automatically. Read more about in the xref:manage/relayers.adoc[Relayers] section.
 
 [[approval-processes]]
 == Approval Processes
@@ -14,26 +14,26 @@ Relayers are used to send transactions to the blockchain via Defender 2.0 automa
 Approval processes act as a wrapper for transactions to be executed on-chain. They currently wrap the following:
 
 * Multisigs
-* EOAs (outside Defender 2.0)
-* Relayers (inside Defender 2.0)
+* EOAs (outside Defender)
+* Relayers (inside Defender)
 * Governor contracts
 * Timelock contracts
 * Fireblocks
 
-They are defined per network, and are used throughout Defender 2.0 to execute transactions, such as in the xref:module/deploy.adoc[Deploy] wizard, xref:module/actions.adoc[Actions] and xref:module/actions.adoc#workflows[Workflows].
+They are defined per network, and are used throughout Defender to execute transactions, such as in the xref:module/deploy.adoc[Deploy] wizard, xref:module/actions.adoc[Actions] and xref:module/actions.adoc#workflows[Workflows].
 
 image::manage-approvals.png[Manage Approval Processes]
 
 [[notifications]]
 == Notification Channels
 
-When triggered, Defender 2.0 can deliver notifications to one or more configured notification channels which can include any of Slack, email, Telegram, Discord, Datadog, PagerDuty, OpsGenie, or custom webhooks. These notification channels can be used in monitors, actions, and workflows.
+When triggered, Defender can deliver notifications to one or more configured notification channels which can include any of Slack, email, Telegram, Discord, Datadog, PagerDuty, OpsGenie, or custom webhooks. These notification channels can be used in monitors, actions, and workflows.
 
 image::manage-notify-channels.png[Manage Notification Channels]
 
 === Slack Configuration
 
-Please see https://api.slack.com/messaging/webhooks[Slack webhook documentation, window=_blank] to configure a Slack webhook. Once Slack is configured, enter the webhook URL in Defender 2.0.
+Please see https://api.slack.com/messaging/webhooks[Slack webhook documentation, window=_blank] to configure a Slack webhook. Once Slack is configured, enter the webhook URL in Defender.
 
 * *Alias* is the name for this Slack configuration. For instance, you might name it after the name of the channel.
 
@@ -97,7 +97,7 @@ $ curl https://api.telegram.org/bot$BOT_TOKEN/getUpdates
 
 === Datadog Configuration
 
-Datadog configurations let Defender 2.0 forward custom metrics to your Datadog account. For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/[Datadog metrics documentation, window=_blank]
+Datadog configurations let Defender forward custom metrics to your Datadog account. For more information about custom metrics, please see https://docs.datadoghq.com/developers/metrics/[Datadog metrics documentation, window=_blank]
 
 The metric we send is a COUNT metric, which represents the number of transactions that triggered the notification. We do not send zeros, so a lack of data should be expected if there is no trigger. With each metric, we send two tags:  `network` (rinkeby, mainnet,...) and when a monitor has triggered the notification then `monitor` (name of the monitor)
 
@@ -117,7 +117,7 @@ To configure a custom webhook notification channel, you just need to provide the
 
 * *Webhook URL* is the URL where notifications will be sent. 
 
-To avoid overwhelming the receiving webhook with many concurrent requests under a high number of matches, Defender 2.0 sends a JSON object with an `events` containing an array with all the matching events found in a block.
+To avoid overwhelming the receiving webhook with many concurrent requests under a high number of matches, Defender sends a JSON object with an `events` containing an array with all the matching events found in a block.
 
 [source,js]
 ----
@@ -171,16 +171,16 @@ Please see https://support.pagerduty.com/docs/services-and-integrations[PagerDut
 [[address-book]]
 == Address book
 
-The address book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender 2.0 just by clicking on it, or you can manage your entire address book in the Manage section. Defender 2.0 automatically creates address book entries for you when you import accounts and contracts in other modules.
+The address book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the Manage section. Defender automatically creates address book entries for you when you import accounts and contracts in other modules.
 
-When working with products in Defender 2.0, account and contract information will be directly sourced from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book when configuring monitors and actions.
+When working with products in Defender, account and contract information will be directly sourced from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book when configuring monitors and actions.
 
 image::manage-address-book.png[Manage Address Book]
 
 [[team-members]]
 == Team Members
 
-You can invite, manage access for, and remove team members from your Defender 2.0 account under the _Team Members_ section. 
+You can invite, manage access for, and remove team members from your Defender account under the _Team Members_ section. 
 
 image::manage-team-invite.png[Manage Team Members]
 
@@ -188,7 +188,7 @@ NOTE: If you want to add a user to your team, make sure to invite them from the 
 
 === Roles
 
-Every team member has an assigned role. You can manage authorization to access, modify and execute across all Defender 2.0 products through the role-based access control system.
+Every team member has an assigned role. You can manage authorization to access, modify and execute across all Defender products through the role-based access control system.
 
 When you invite a new user to your team, you will assign a role to them, determining their access permissions.
 
@@ -203,7 +203,7 @@ WARNING: Be careful when granting administrative permissions. A user with the ri
 [[two-factor-authentication]]
 === Two factor authentication (2FA)
 
-We strongly suggest that you enable 2FA to improve your Defender 2.0 account security. As a second authentication factor, Defender 2.0 relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP), window=_blank]. To enable 2FA on Defender 2.0, you need a TOTP compliant application, such as https://authy.com/[Authy, window=_blank] or Google Authenticator. Each user can enable 2FA under their profile, accessible from the top-right user menu. Defender 2.0 will guide users through the necessary steps.
+We strongly suggest that you enable 2FA to improve your Defender account security. As a second authentication factor, Defender relies on the https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm[Time-based One-Time Password standard (TOTP), window=_blank]. To enable 2FA on Defender, you need a TOTP compliant application, such as https://authy.com/[Authy, window=_blank] or Google Authenticator. Each user can enable 2FA under their profile, accessible from the top-right user menu. Defender will guide users through the necessary steps.
 
 [[two-factor-authentication-enforcement]]
 ==== Enforcing 2FA
@@ -215,13 +215,13 @@ NOTE: If you have users that are still accessing Defender 1.0, they will have to
 [[password-reset]]
 === Password reset
 
-To change your user password for Defender 2.0, follow the steps below.
+To change your user password for Defender, follow the steps below.
 
 * If you are logged in, sign out by opening the upper right corner menu and clicking on *Sign out*. You will be redirected to the landing page.
 
-* From Defender 2.0 landing page, click on *Sign in*. You will be redirected to the sign in page.
+* From Defender landing page, click on *Sign in*. You will be redirected to the sign in page.
 
-* From Defender 2.0 sign in page, click on *Forgot your password?*.
+* From Defender sign in page, click on *Forgot your password?*.
 
 * Enter your email address and click on *Reset my password*. You will shortly receive an email with instructions on how to continue with the password reset process.
 
@@ -240,7 +240,7 @@ Secrets are encrypted and stored in a secure vault, only decrypted for injection
 
 WARNING: An action may log the value of a secret, accidentally leaking it.
 
-image::manage-secrets.png[Defender 2.0 Secrets]
+image::manage-secrets.png[Defender Secrets]
 
 You can use secrets for storing secure keys to access external APIs, or any other secret value that you do not want to expose in the Actions code.
 
@@ -249,7 +249,7 @@ NOTE: While you can also use actions secrets to store private keys for signing m
 [[manage-api-keys]]
 == API Keys
 
-In API Keys you can manage the keys used by clients to access the Defender 2.0 API for your account, and also enter integration API keys if you are using Fireblocks for approvals. Note that relayers have their own API keys that are separate from these API keys and are configured directly in Manage Relayers.
+In API Keys you can manage the keys used by clients to access the Defender API for your account, and also enter integration API keys if you are using Fireblocks for approvals. Note that relayers have their own API keys that are separate from these API keys and are configured directly in Manage Relayers.
 
 To add an API key, click on the Create API Key button. 
 
@@ -262,13 +262,13 @@ Select the API capabilities that you want associated with the API key:
 * *Manage Automatic Actions* for creating and modifying automatic actions and their configurations.
 * *Manage Monitors* for creating and managing monitors and their configurations.
 
-Once the API key is created, Defender 2.0 will show you the details.
+Once the API key is created, Defender will show you the details.
 
 image::manage-api-key.png[Manage Team API Key]
 
 Be sure to copy the secret key, it will be required for access and it will not be accessible again after the form is dismissed.
 
-// NOTE: Defender 2.0 integrates with Fireblocks! Check out our guide on how to use Fireblocks for approvals xref:guide/fireblocks.adoc[here].
+// NOTE: Defender integrates with Fireblocks! Check out our guide on how to use Fireblocks for approvals xref:guide/fireblocks.adoc[here].
 
 [[forked-networks]]
 == Forked Networks
@@ -277,11 +277,11 @@ In the "Forked Networks" section, you can manage and oversee your forked network
 
 image::manage-forked-networks-create.png[Manage Forked Networks]
 
-Setting up a forked network is accomplished by clicking the "Create Forked Network" button. This action prompts you to provide a name for the forked network and select the base network you intend to fork from. Your choice of forking can be made from any of the networks supported by Defender 2.0. The network's currency symbol will be automatically populated based on the network you select. Additionally, you will need to input the RPC URL for the forked network and, optionally, an API key if it is required for access.
+Setting up a forked network is accomplished by clicking the "Create Forked Network" button. This action prompts you to provide a name for the forked network and select the base network you intend to fork from. Your choice of forking can be made from any of the networks supported by Defender. The network's currency symbol will be automatically populated based on the network you select. Additionally, you will need to input the RPC URL for the forked network and, optionally, an API key if it is required for access.
 
 For an improved user experience, you also have the option to include the block explorer URL.
 
-Once created, the network becomes accessible for utilization in any Defender 2.0 module that necessitates network selection. This is particularly valuable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
+Once created, the network becomes accessible for utilization in any Defender module that necessitates network selection. This is particularly valuable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
 
 image::manage-forked-networks-selection.png[Select Forked Network]
 
@@ -299,18 +299,18 @@ To set up a private network, simply click the "Create Private Network" button. T
 
 For an enhanced user experience, customize your setup by including the block explorer URL, Safe contract deployment addresses, and a subgraph URL.
 
-https://github.com/safe-global/safe-contracts[Safe Contracts, window=_blank] form a comprehensive collection of smart contracts designed for deploying, managing, and interacting with multi-signature wallets. Defender 2.0 utilizes the following Safe contract deployments to enrich the user experience:
+https://github.com/safe-global/safe-contracts[Safe Contracts, window=_blank] form a comprehensive collection of smart contracts designed for deploying, managing, and interacting with multi-signature wallets. Defender utilizes the following Safe contract deployments to enrich the user experience:
 
 - **Master**: Facilitates a Safe multisignature wallet deployment with support for confirmations using signed messages based on EIP-712.
 - **Proxy Factory**: Enables a Safe smart contract deployment to create a new proxy contract and execute a message call to the new proxy within a single transaction.
 - **Multi Send Call Only**: Allows a Safe smart contract deployment to batch multiple transactions into one, specifically for calls.
 - **Create Call**: Facilitates a Safe smart contract deployment to utilize different create opcodes for deploying a contract.
 
-You can https://github.com/safe-global/safe-deployments[deploy these contracts, window=_blank] on your private network, providing the contract addresses in the creation form to leverage them in Defender 2.0, especially when deploying using `CREATE2`.
+You can https://github.com/safe-global/safe-deployments[deploy these contracts, window=_blank] on your private network, providing the contract addresses in the creation form to leverage them in Defender, especially when deploying using `CREATE2`.
 
-Defender utilizes Subgraph for GraphQL-based querying of blockchain data, primarily for the Access Control module. Create your own https://thegraph.com/docs/en/developing/creating-a-subgraph/[Subgraph, window=_blank], and input the endpoint in the creation form to activate this functionality in Defender 2.0. You can find an example configuration for the Access Control subgraph link:_attachments/oz-mainnet-graphql-config-example.zip[here].
+Defender utilizes Subgraph for GraphQL-based querying of blockchain data, primarily for the Access Control module. Create your own https://thegraph.com/docs/en/developing/creating-a-subgraph/[Subgraph, window=_blank], and input the endpoint in the creation form to activate this functionality in Defender. You can find an example configuration for the Access Control subgraph link:_attachments/oz-mainnet-graphql-config-example.zip[here].
 
-Once created, the network becomes accessible for utilization in any Defender 2.0 module requiring network selection. This proves invaluable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
+Once created, the network becomes accessible for utilization in any Defender module requiring network selection. This proves invaluable when engaging in tasks such as establishing an approval process, configuring a relayer, or deploying a contract.
 
 image::manage-private-networks-selection.png[Select Private Network]
 
@@ -319,8 +319,8 @@ NOTE: After creating a Private Network, you cannot edit its name, RPC URL, or sy
 [[advanced-settings]]
 == Advanced
 
-In the Advanced tab, you can export the serverless configuration file from the current configuration for your Defender 2.0 account.
+In the Advanced tab, you can export the serverless configuration file from the current configuration for your Defender account.
 
-This can be used to setup automated resource management for your account with configuration as code. Also, in Advanced, you can delete your Defender 2.0 account. This action is non-reversible, all Defender 2.0 configurations will be deleted, and all product functions will be canceled and removed.
+This can be used to setup automated resource management for your account with configuration as code. Also, in Advanced, you can delete your Defender account. This action is non-reversible, all Defender configurations will be deleted, and all product functions will be canceled and removed.
 
 // NOTE: Interested in using the serverless plugin? Read its documentation page xref:serverless-plugin.adoc[here].

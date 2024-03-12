@@ -9,7 +9,7 @@ This https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-ap
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git, window=_blank] and https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable[Yarn, window=_blank] installed
 
 [[demo-app-overview]]
