@@ -46,7 +46,7 @@ xref:module/access-control.adoc[[.card-title]#Access Control# [.card-body]#pass:
 == Available networks
 Defender works with most mainnet and testnet networks, as well as local mainnet forks.
 
-- https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Goerli* testnet and *Sepolia* testnet.
+- https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Goerli* testnet, *Sepolia* testnet and *Holesky* testnet.
 - https://zksync.io/[*zkSync Era Mainnet*,window=_blank], *zkSync Era Goerli* and *zkSync Era Sepolia*.
 - https://www.polygon.technology/[*Polygon* (Matic),window=_blank] *Mumbai*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *zkEVM Testnet*
 - https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], *Arbitrum Sepolia* and *Arbitrum Goerli*.
