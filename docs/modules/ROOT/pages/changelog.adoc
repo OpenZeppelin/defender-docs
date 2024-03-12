@@ -14,6 +14,50 @@
 ** Fix: Relayer doesnt redirect to the sidedrawer after the creation.
 
 
+[[release-2024-03-05]]
+== March 5th, 2024
+
+* *General*
+** Enable onboarding guide for all Defender 2.0 users.
+
+* *Private Networks*
+** Bug fix in private network initialization when using SDK.
+
+* *Audit*
+** Fix formatting for audit invite emails.
+
+* *Monitors*
+** Update monitor transaction filter property.
+** Bug fix when customizing notification template for monitors.
+
+* *Transaction Proposals*
+** Fix timelock gas estimation for proposals.
+
+* *Relayers*
+** Bug fix in relayer redirection from Workflows.
+
+
+[[release-2024-02-27]]
+== February 27th, 2024
+
+* *General*
+** Improve logic to hide billing menu option.
+** Prevent account deletion if there is active subscription.
+** Update display of yearly price in subscription confirmation.
+** Enforce deployment quotas to Defender 1.0 users.
+** Fix session reloads after upgrade migration.
+** Bug fix: Update references to scenarios and broken doc links.
+** Bug fix: Prevent user without customerId from accessing settings.
+** Improve empty section upgrade button text.
+
+* *Private Networks*
+** Allow private networks to use RPC urls from public networks.
+** Enable zkevm networks.
+
+* *Monitors*
+** Count only active monitors for usage and quota.
+** Count only active monitors when reporting MonitorsMaxCount.
+
 [[release-2024-02-20]]
 == February 20th, 2024
 
