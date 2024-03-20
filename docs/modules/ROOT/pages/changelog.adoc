@@ -4,7 +4,7 @@
 == March 20th, 2024
 
 * *General*
-** Make sure action condition logs are being displayed for monitors.
+** Make sure Action condition logs are being displayed for Monitors.
 ** Obfuscate secret fields from logger.
 ** Automatically collect metered subscription invoice.
 ** Add Matic RPC endpoint.
