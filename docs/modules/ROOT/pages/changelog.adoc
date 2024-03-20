@@ -7,7 +7,6 @@
 ** Make sure action condition logs are being displayed for monitors.
 ** Obfuscate secret fields from logger.
 ** Automatically collect metered subscription invoice.
-** Add Matic RPC endpoint.
 
 [[release-2024-03-12]]
 == March 12th, 2024
