@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-03-20]]
+== March 20th, 2024
+
+* *General*
+** Make sure Action condition logs are being displayed for Monitors.
+** Obfuscate secret fields from logger.
+** Automatically collect metered subscription invoice.
+
 [[release-2024-03-12]]
 == March 12th, 2024
 
