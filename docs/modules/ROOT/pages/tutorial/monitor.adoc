@@ -45,7 +45,7 @@ image::tutorial-monitor-transaction-filters.png[Monitor transaction filters]
 image::tutorial-monitor-event-filter.png[Monitor event filter]
 
 . Skip function-level filters as you are already tracking all `Swap` events emitted from the contract. 
-. Select the `High Severity` notification category, tied to a channel of your choice (such as email).
+. Select a notification channel of your choice (such as email).
 . Click on *Save Monitor*.
 
 +

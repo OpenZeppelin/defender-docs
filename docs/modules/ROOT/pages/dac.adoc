@@ -101,9 +101,7 @@ A list of properties that support direct referencing:
 - `action-trigger` may reference an `actionid` in Monitor
 - `action-condition` may reference an `actionId` in Monitor
 - `address-from-relayer` may reference a `relayerId` in Relayer
-- `notification-ids` may reference multiple `notificationId` in Category
 - `notify-config.channels` may reference multiple `notificationId` in Monitor
-- `notify-config.category` may reference a `categoryId` in Monitor
 - `contracts` may be used over `addresses` and reference multiple `contractId` in Monitor
   The following is an example of how a direct reference to a Defender contract and relayer can be used in monitor and action respectively:
 
@@ -206,14 +204,6 @@ You can use `sls invoke --function <stack_resource_id>` to manually run an actio
 NOTE: Each command has a standard output to a JSON object.
 
 == Caveats
-
-Note that when setting up the notification configuration for a monitor, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a monitor with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
-
-```yaml
-notify-config:
-  channels: [] # assign channels as empty list if you wish to use a category
-  category: ${self:resources.categories.medium-severity} # optional
-```
 
 Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
 
