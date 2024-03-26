@@ -6,19 +6,19 @@ Defender allows you to seamlessly oversee and command contract permissions on a 
 == Pre-requisites
 
 * OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
-* Any external wallet (like Metamask) with an EOA that holds funds in Goerli.
+* Any external wallet (like Metamask) with an EOA that holds funds in Sepolia.
 
 [[add]]
 == 1. Add contract
 
-NOTE: For this tutorial, you will create a contract that implements the role-based Access Control library using https://goerli.etherscan.io/address/0xeBd906d6b14699574bDe9B3293894af8Fe38A198[this, window=_blank] factory deployed to Goerli. Your created contract will automatically assign you the admin role to manage its roles.
+NOTE: For this tutorial, you will create a contract that implements the role-based Access Control library using https://sepolia.etherscan.io/address/0xF909B3dBB525fDe7C3e8cd59FbECF3D42c217454[this, window=_blank] factory deployed to Sepolia. Your created contract will automatically assign you the admin role to manage its roles.
 
 . Open the Defender https://defender.openzeppelin.com/v2/#/manage/address-book/new[Address Book, window=_blank] in a web browser.
 . Fill the form with the following values and click `Create`:
 +
 * Name: `Access Control Factory`
-* Network: `Goerli`
-* Address: `0xeBd906d6b14699574bDe9B3293894af8Fe38A198`
+* Network: `Sepolia`
+* Address: `0xF909B3dBB525fDe7C3e8cd59FbECF3D42c217454`
 
 +
 image::tutorial-access-control-factory.png[Address Book for factory]
@@ -55,14 +55,14 @@ image::tutorial-access-control-copy-address.png[Transaction Proposal copy addres
 . Fill the form with the following values and click `Create`:
 +
 * Name: `Access Control Contract`
-* Network: `Goerli`
+* Network: `Sepolia`
 * Address: _Contract address copied from the previous steps_
 * ABI: _Copy and paste the following_
 
 +
 [source,json]
 ----
-[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"previousAdminRole","type":"bytes32"},{"indexed":true,"internalType":"bytes32","name":"newAdminRole","type":"bytes32"}],"name":"RoleAdminChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"sender","type":"address"}],"name":"RoleGranted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"role","type":"bytes32"},{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"sender","type":"address"}],"name":"RoleRevoked","type":"event"},{"inputs":[],"name":"DEFAULT_ADMIN_ROLE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"RANDOM_ROLE","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"}],"name":"getRoleAdmin","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"grantRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"hasRole","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"renounceRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"role","type":"bytes32"},{"internalType":"address","name":"account","type":"address"}],"name":"revokeRole","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"}]
+[{"inputs": [],"stateMutability": "nonpayable","type": "constructor"},{"inputs": [],"name": "AccessControlBadConfirmation","type": "error"},{"inputs": [{"internalType": "address","name": "account","type": "address"},{"internalType": "bytes32","name": "neededRole","type": "bytes32"}],"name": "AccessControlUnauthorizedAccount","type": "error"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "bytes32","name": "role","type": "bytes32"},{"indexed": true,"internalType": "bytes32","name": "previousAdminRole","type": "bytes32"},{"indexed": true,"internalType": "bytes32","name": "newAdminRole","type": "bytes32"}],"name": "RoleAdminChanged","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "bytes32","name": "role","type": "bytes32"},{"indexed": true,"internalType": "address","name": "account","type": "address"},{"indexed": true,"internalType": "address","name": "sender","type": "address"}],"name": "RoleGranted","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "bytes32","name": "role","type": "bytes32"},{"indexed": true,"internalType": "address","name": "account","type": "address"},{"indexed": true,"internalType": "address","name": "sender","type": "address"}],"name": "RoleRevoked","type": "event"},{"inputs": [],"name": "DEFAULT_ADMIN_ROLE","outputs": [{"internalType": "bytes32","name": "","type": "bytes32"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "RANDOM_ROLE","outputs": [{"internalType": "bytes32","name": "","type": "bytes32"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "bytes32","name": "role","type": "bytes32"}],"name": "getRoleAdmin","outputs": [{"internalType": "bytes32","name": "","type": "bytes32"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "bytes32","name": "role","type": "bytes32"},{"internalType": "address","name": "account","type": "address"}],"name": "grantRole","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "bytes32","name": "role","type": "bytes32"},{"internalType": "address","name": "account","type": "address"}],"name": "hasRole","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "bytes32","name": "role","type": "bytes32"},{"internalType": "address","name": "callerConfirmation","type": "address"}],"name": "renounceRole","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "bytes32","name": "role","type": "bytes32"},{"internalType": "address","name": "account","type": "address"}],"name": "revokeRole","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "bytes4","name": "interfaceId","type": "bytes4"}],"name": "supportsInterface","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"}]
 ----
 
 . Navigate to the https://defender.openzeppelin.com/v2/#/access-control/contracts[Access Control page, window=_blank].
@@ -103,4 +103,5 @@ NOTE: After configuring Access Control, we recommend seting up Workflows. Learn 
 == Reference
 
 * xref::module/access-control.adoc[Access Control Documentation]
-* https://etherscan.io/address/0xbC760FAa5d2366B38C0EF7eC6814A61952504B72[Access Control Contract, window=_blank]
+* https://sepolia.etherscan.io/address/0xF909B3dBB525fDe7C3e8cd59FbECF3D42c217454[Access Control Factory, window=_blank]
+* https://sepolia.etherscan.io/address/0x1b073085c60ace585c4179984b3be5bf9ef53176[Access Control Contract, window=_blank]
