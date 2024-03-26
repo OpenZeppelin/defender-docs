@@ -75,7 +75,7 @@ resources:
     relayers:
       relayer-1:
         name: 'Test Relayer 1'
-        network: 'goerli'
+        network: 'sepolia'
         min-balance: 1000
         policy: ${self:resources.Resources.policies.policy-1}
         api-keys:
