@@ -12,12 +12,12 @@ NOTE: Learn to xref::tutorial/deploy.adoc[deploy] and xref::tutorial/monitor.ado
 [[setup]]
 == 1. Set up action
 
-You will configure an action that sends an hourly transaction with the `addObject()` function to the `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4` contract in Goerli, which is an example of a Box contract deployed in the xref::tutorial/deploy.adoc[Deploy] tutorial. To do so, follow these steps:
+You will configure an action that sends an hourly transaction with the `addObject()` function to the `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4` contract in Sepolia, which is an example of a Box contract deployed in the xref::tutorial/deploy.adoc[Deploy] tutorial. To do so, follow these steps:
 
 . Run the following command in your terminal:
 . Open https://defender.openzeppelin.com/v2/#/manage/relayers[Defender Manage, window=_blank] in a web browser.
-. Click on *Create Relayer* with the name `Actions Relayer` and Goerli network.
-. Fund it with some Goerli ETH. This relayer will send and pay for the automated transactions.
+. Click on *Create Relayer* with the name `Actions Relayer` and Sepolia network.
+. Fund it with some Sepolia ETH. This relayer will send and pay for the automated transactions.
 . Open https://defender.openzeppelin.com/v2/#/actions[Defender Actions, window=_blank].
 . Click on *Create Action*.
 . Name the action `Hourly object add`.
@@ -56,7 +56,7 @@ Your action will now be running every hour! You can check the https://defender.o
 [[verify]]
 == 2. Verify activity
 
-After the action has run for a while, you can verify that the transaction is being sent every hour. To do so, open the https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Etherscan contract page, window=_blank] and look for transactions from the configured Relayer. An alternative is to search your Relayer in Etherscan and look for the transactions sent to the contract.
+After the action has run for a while, you can verify that the transaction is being sent every hour. To do so, open the https://sepolia.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Etherscan contract page, window=_blank] and look for transactions from the configured Relayer. An alternative is to search your Relayer in Etherscan and look for the transactions sent to the contract.
 
 You will also receive alerts in case the action fails (for example, if the Relayer runs out of gas). They look like this:
 
@@ -74,4 +74,4 @@ NOTE: Alongisde actions, we recommend using Access Control to manage a contract'
 
 * xref::module/actions.adoc[Actions Documentation]
 * xref::module/actions.adoc#defining-code[More information on Action's Javascript code]
-* https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Box Goerli contract, window=_blank]
+* https://sepolia.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Box Sepolia contract, window=_blank]

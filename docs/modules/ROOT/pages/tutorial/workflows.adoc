@@ -10,20 +10,20 @@ Defender allows you to target and activate on-chain activity using Action Workfl
 [[action]]
 == 1. Action setup
 
-In this tutorial, you will monitor https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[this, window=_blank] contract in Goerli, which stores a number of objects while allowing anyone to add or remove objects using the `addObject()` and `removeObject()` functions respectively. For every object added, your workflow will execute an action that removes an object and decreases the total by one. To set up the action, follow these steps:
+In this tutorial, you will monitor https://sepolia.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[this, window=_blank] contract in Sepolia, which stores a number of objects while allowing anyone to add or remove objects using the `addObject()` and `removeObject()` functions respectively. For every object added, your workflow will execute an action that removes an object and decreases the total by one. To set up the action, follow these steps:
 
 . Open https://defender.openzeppelin.com/v2/#/manage/relayers/new[Defender Manage Relayers, window=_blank] in a web browser.
 . Fill the form with the following parameters and click on *Create*:
 +
-* *Name*: `Relayer Goerli`
-* *Network*: `Goerli`
+* *Name*: `Relayer Sepolia`
+* *Network*: `Sepolia`
 
-. Transfer some Goerli ETH to the relayer address created in the previous step.
-. Navigate to https://staging.defender-dev.openzeppelin.com/#/manage/address-book/new[Defender Address Book, window=_blank] to import the `BoxV2` contract.
+. Transfer some Sepolia ETH to the relayer address created in the previous step.
+. Navigate to https://defender.openzeppelin.com/v2/#/manage/address-book/new[Defender Address Book, window=_blank] to import the `BoxV2` contract.
 . Fill the form with the following parameters and click on *Create*:
 +
 * *Name*: `BoxV2`
-* *Network*: `Goerli`
+* *Network*: `Sepolia`
 * *Address*: `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4`
 
 . Navigate to https://defender.openzeppelin.com/v2/#/actions/workflows/transaction-template/new?[Defender Workflows Transaction Template creation page, window=_blank].
@@ -37,7 +37,7 @@ In this tutorial, you will monitor https://goerli.etherscan.io/address/0x7A99C47
 . Fill the form with the following parameters and click on *Save Changes*:
 +
 * *Name*: `BoxV2 IR Sender`
-* *Relayer*: `Relayer Goerli` (created in the first step)
+* *Relayer*: `Relayer Sepolia` (created in the first step)
 
 . Select `BoxV2 IR Sender` as the approval process and click on `Save Transaction Template`
 
@@ -108,7 +108,7 @@ image::tutorial-ir-proposal-action.png[Transaction Proposal Trigger]
 image::tutorial-workflow-active-scenario.png[Active Workflow]
 
 . Click on *View Active Run* and check the details of your workflow response.
-. After the run is executed successfully, you can verify the response by checking the activity of the contract on https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Etherscan, window=_blank]. It should look like this:
+. After the run is executed successfully, you can verify the response by checking the activity of the contract on https://sepolia.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Etherscan, window=_blank]. It should look like this:
 
 +
 image::tutorial-ir-etherscan.png[Workflow Etherscan Response]
@@ -122,4 +122,4 @@ Congratulations! You now have a complete workflow that will be running and check
 == Reference
 
 * xref::module/actions.adoc#workflows[Workflow Documentation]
-* https://goerli.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[BoxV2, window=_blank]
+* https://sepolia.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[BoxV2, window=_blank]
