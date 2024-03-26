@@ -278,7 +278,7 @@ $1 == "hello"
 [[alerts]]
 == Alerts
 
-A monitor can use any supported notification channel for alerting. It's also possible to connect an Action or an Workflow that should run with the monitor.
+A monitor can use any supported notification channel for alerting. It's also possible to connect an Action or a Workflow that should run with the monitor.
 
 To prevent repeated alerts from individual monitors and control the notification rate, you can use the Alert Threshold and Minimum time between consecutive notifications fields.
 
