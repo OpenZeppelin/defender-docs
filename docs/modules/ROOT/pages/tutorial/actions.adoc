@@ -12,7 +12,7 @@ NOTE: Learn to xref::tutorial/deploy.adoc[deploy] and xref::tutorial/monitor.ado
 [[setup]]
 == 1. Set up action
 
-You will configure an action that sends an hourly transaction with the `addObject()` function to the `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4` contract in Sepolia, which is an example of a Box contract deployed in the xref::tutorial/deploy.adoc[Deploy] tutorial. To do so, follow these steps:
+You will configure an action that sends an hourly transaction with the `addObject()` function to the `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074` contract in Sepolia, which is an example of a Box contract deployed in the xref::tutorial/deploy.adoc[Deploy] tutorial. To do so, follow these steps:
 
 . Run the following command in your terminal:
 . Open https://defender.openzeppelin.com/v2/#/manage/relayers[Defender Manage, window=_blank] in a web browser.
@@ -33,7 +33,7 @@ exports.handler = async function(credentials) {
   const client = new Defender(credentials);
 
   const txRes = await client.relaySigner.sendTransaction({
-    to: '0x7A99C479775C945C2Ea4CF6986425de1d816DaE4',
+    to: '0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074',
     speed: 'fast',
     data: '0x62029d2a',
     gasLimit: '80000',
@@ -43,7 +43,7 @@ exports.handler = async function(credentials) {
   return txRes.hash;
 }
 ----
-The contract address is the target, which is `0x7A99C479775C945C2Ea4CF6986425de1d816DaE4`, and data is `0x62029d2a`, the encoded version of the `addObject()` function of the contract.
+The contract address is the target, which is `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074`, and data is `0x62029d2a`, the encoded version of the `addObject()` function of the contract.
 +
 . Click on *Save Action*.
 
@@ -56,7 +56,7 @@ Your action will now be running every hour! You can check the https://defender.o
 [[verify]]
 == 2. Verify activity
 
-After the action has run for a while, you can verify that the transaction is being sent every hour. To do so, open the https://sepolia.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Etherscan contract page, window=_blank] and look for transactions from the configured Relayer. An alternative is to search your Relayer in Etherscan and look for the transactions sent to the contract.
+After the action has run for a while, you can verify that the transaction is being sent every hour. To do so, open the https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[Etherscan contract page, window=_blank] and look for transactions from the configured Relayer. An alternative is to search your Relayer in Etherscan and look for the transactions sent to the contract.
 
 You will also receive alerts in case the action fails (for example, if the Relayer runs out of gas). They look like this:
 
@@ -74,4 +74,4 @@ NOTE: Alongisde actions, we recommend using Access Control to manage a contract'
 
 * xref::module/actions.adoc[Actions Documentation]
 * xref::module/actions.adoc#defining-code[More information on Action's Javascript code]
-* https://sepolia.etherscan.io/address/0x7A99C479775C945C2Ea4CF6986425de1d816DaE4[Box Sepolia contract, window=_blank]
+* https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[BoxV2 Sepolia contract, window=_blank]
