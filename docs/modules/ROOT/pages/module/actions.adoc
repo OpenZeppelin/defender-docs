@@ -34,7 +34,7 @@ The following triggers are supported:
 [[environment]]
 === Environment
 
-Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
+Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
 
 [source,jsx]
 ----
