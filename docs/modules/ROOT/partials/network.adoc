@@ -1,7 +1,7 @@
 type Network =
   | 'mainnet'
   | 'sepolia'
-  | 'goerli'
+  | 'holesky'
   | 'xdai'
   | 'sokol'
   | 'fuse'
