@@ -78,7 +78,7 @@ resources:
   relayers:
     relayer-1:
       name: 'Test Relayer 1'
-      network: 'goerli'
+      network: 'sepolia'
       min-balance: 1000
       policy: ${self:resources.policies.policy-1}
       api-keys:
@@ -110,7 +110,7 @@ A list of properties that support direct referencing:
 ```yaml
 ...
 contracts:
-  contract-1: 'goerli-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # contractId of an existing resource in Defender
+  contract-1: 'sepolia-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # contractId of an existing resource in Defender
 relayers:
   relayer-2: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId of an existing relayer in Defender
 actions:
@@ -126,7 +126,7 @@ monitors:
   block-example:
     name: 'Block Example'
     type: 'BLOCK'
-    network: 'goerli'
+    network: 'sepolia'
     risk-category: 'TECHNICAL'
     # optional - either contracts OR addresses should be defined
     contracts:
