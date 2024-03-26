@@ -31,7 +31,7 @@ $ yarn
 Create a `.env` file in the project root and supply your Team API key and secret from Defender. A private key will be used for local testing but the Relayer is used for actual contract deployment.
 
 ```
-PRIVATE_KEY="Goerli private key"
+PRIVATE_KEY="Sepolia private key"
 TEAM_API_KEY="Defender Team API key, used for uploading autotask code"
 TEAM_API_SECRET="Defender Team API secret"
 ```
@@ -54,7 +54,7 @@ const relayClient = new RelayClient({ apiKey, apiSecret });
 
 const requestParams = {
   name: 'MetaTxRelayer',
-  network: 'goerli',
+  network: 'sepolia',
   minBalance: BigInt(1e17).toString(),
 };
 const relayer = await relayClient.create(requestParams);
@@ -259,7 +259,7 @@ export async function registerName(registry, provider, name) {
   await window.ethereum.enable();
   const userProvider = new ethers.providers.Web3Provider(window.ethereum);
   const userNetwork = await userProvider.getNetwork();
-  if (userNetwork.chainId !== 5) throw new Error(`Please switch to Goerli for signing`);
+  if (userNetwork.chainId !== 11155111) throw new Error(`Please switch to Sepolia for signing`);
 
   const signer = userProvider.getSigner();
   const from = await signer.getAddress();
@@ -284,7 +284,7 @@ $ yarn start
 ```
 
 1. Open app: http://localhost:3000/[http://localhost:3000/]
-2. Change to Goerli network in Metamask
+2. Change to Sepolia network in Metamask
 3. Enter a name to register and sign the metatransaction in MetaMask
 4. Your name will be registered, showing the address that created the metatransaction and the name.
 
