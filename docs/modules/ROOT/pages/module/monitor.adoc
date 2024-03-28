@@ -27,13 +27,11 @@ Monitors are organized into five categories, according to the type of risk they 
 * Financial
 * Technical
 
-You can also specify a severity for each alert, which your team can use to prioritize notifications. Each severity can then be associated with one or more notification channels.
+You can also specify a severity level, which your team can use to group or filter monitors by.
 
 * High Severity
 * Medium Severity
 * Low Severity
-
-Severities and notification channels should be combined according to the project. For example, a DeFi protocol may prefer financial monitors with a high-priority channel, such as Slack/Telegram, and technical monitors with a lower-priority channel, such as email.
 
 [[configure-a-monitor]]
 == Configuring a Monitor
@@ -280,7 +278,7 @@ $1 == "hello"
 [[alerts]]
 == Alerts
 
-A monitor can either use the notification channel of its category or a custom one. It's also possible to connect an Action or an Workflow that should run with the monitor.
+A monitor can use any supported notification channel for alerting. It's also possible to connect an Action or a Workflow that should run with the monitor.
 
 To prevent repeated alerts from individual monitors and control the notification rate, you can use the Alert Threshold and Minimum time between consecutive notifications fields.
 
