@@ -1,5 +1,20 @@
 = Changelog
 
+[[release-2024-03-28]]
+== March 28th, 2024
+
+* *General*
+** Update feature lock props on empty screen.
+** Fix billing usage/account usage/contract create endpoints.
+** Add new switcher component for subscription cards.
+** Prevent scheduling metered subscription cancelation on downgrade to builder request.
+** Increase contract inspector timeout, resources and eliminate retries.
+** Collect billing address in checkout flow.
+
+* *Private Networks*
+** Add support for Holesky testnet.
+** Deprecate Base and Arbitrum Goerli network.
+
 [[release-2024-03-20]]
 == March 20th, 2024
 
