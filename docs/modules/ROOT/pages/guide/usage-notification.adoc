@@ -34,7 +34,7 @@ image::guide-usage-notifications-all.png[Billing Settings]
 image::guide-usage-notifications-create.png[Usage Notification Create Dialog, width=400]
 
 At any time, you may pause or unpause usage notifications. You can do this by toggling the switch next to the notification name. You can also manage your notifications by clicking on the three dots next to the notification threshold. From the dropdown menu, you can edit or delete the notification. System usage notifications can only be paused.
-
++
 image::guide-usage-notifications-edit-menu.png[Manage Notification]
 
 [[manage-system-usage-notification]]
@@ -52,6 +52,10 @@ To pause a system usage notification, follow these steps:
 image::guide-usage-notifications-system-unmetered.png[Nearing Monitor Alerts]
 
 image::guide-usage-notifications-system.png[Surpassing Monitor Alerts]
+
+NOTE: If a user disabled system notifications from their profile, they will also be opted out of all system notifications, regardless of their individual paused state. 
+
+image::guide-profile-disable-system-notifications.png[Disable System Notifications]
 
 [[next-steps]]
 == Next Steps
