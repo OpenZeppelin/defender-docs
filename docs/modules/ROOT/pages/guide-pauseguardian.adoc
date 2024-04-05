@@ -12,7 +12,7 @@ image::guide-pauseguardian-overview.png[Overview]
 [[setup]]
 == Setup
 
-First, sign up for https://defender.openzeppelin.com[Defender] and ensure the EOA used for contract deployment is funded with Goerli ETH (https://forum.openzeppelin.com/t/goerli-testnet-faucets/26710[via a faucet]).
+First, sign up for https://defender.openzeppelin.com[Defender] and ensure the EOA used for contract deployment is funded with Sepolia ETH (https://sepolia-faucet.pk910.de/[via a faucet]).
 
 Fork the 
 Fork the https://github.com/offgridauthor/pause-guardian[demo repo].
@@ -28,7 +28,7 @@ $ npm install
 Supply the necessary api keys in your local `.env` file.
 The following values are expected:
 
-* `PRIVATE_KEY` : For contract deployment on Goerli network
+* `PRIVATE_KEY` : For contract deployment on Sepolia network
 * `API_KEY` : Defender team API key
 * `API_SECRET` : Defender team API secret
 
@@ -63,7 +63,7 @@ Next, run `$ npm run deploy` to compile and deploy the contract.
   })
 
   const contractDetails = {
-    network: 'goerli',
+    network: 'sepolia',
     address: contract.address,
     name: NAME,
     abi: contractABI,

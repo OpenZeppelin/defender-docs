@@ -78,7 +78,7 @@ NOTE: EIP1559 Pricing policy is enabled by default for new relayers. If you have
 ==== Private transactions
 Specify if the transactions should be sent via private mempoool. This means that a transaction will not be publicly seen until it's included in a block.
 
-NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations] might apply while sending private transactions through Defender (such as https://docs.flashbots.net/flashbots-protect/rpc/uncle-bandits[uncle bandit risk])
+NOTE: Private transactions are only enabled for _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations] might apply while sending private transactions through Defender (such as https://docs.flashbots.net/flashbots-protect/rpc/uncle-bandits[uncle bandit risk])
 
 [[sending-transactions]]
 == Sending transactions
@@ -182,7 +182,6 @@ NOTE: Sending a transaction with the `isPrivate` flag set to `true` to a network
 Currently, only the following networks are supported
 
 - *Mainnet*: Via https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]
-- *Goerli*: Via https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC]
 
 WARNING: Key considerations for the `eth_sendRawTransaction` provider should be considered while using private transactions, such as https://docs.flashbots.net/flashbots-protect/rpc/uncle-bandits[uncle bandit risk].
 

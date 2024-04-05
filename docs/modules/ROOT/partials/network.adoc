@@ -1,6 +1,5 @@
 type Network =
   | 'mainnet'
-  | 'goerli'
   | 'sepolia'
   | 'xdai'
   | 'sokol'
@@ -18,11 +17,9 @@ type Network =
   | 'fuji'
   | 'optimism'
   | 'optimism-kovan'
-  | 'optimism-goerli'
   | 'arbitrum'
   | 'arbitrum-nova'
   | 'arbitrum-rinkeby'
-  | 'arbitrum-goerli'
   | 'celo'
   | 'alfajores'
   | 'harmony-s0'
@@ -32,7 +29,5 @@ type Network =
   | 'hedera',
   | 'hederatest',
   | 'zksync'
-  | 'zksync-goerli'
   | 'base'
-  | 'base-goerli'
   | 'linea-goerli';
