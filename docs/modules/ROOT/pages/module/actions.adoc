@@ -69,7 +69,7 @@ Actions must be kept updated with recent Node.js runtime versions to ensure they
 1. Sending multiple email notifications, around 45, 30, 15, and 1 day before the automatic upgrade.
 2. Displaying a UI banner under the actions page to warn about the upcoming automatic upgrade.
 3. Making a forum announcement.
-3. On the automatic upgrade day, Defender automatically upgrades all action runtimes to the minimum required version.
+4. On the automatic upgrade day, Defender automatically upgrades all action runtimes to the minimum required version.
 
 We suggest checking your Actions, making necessary changes, and upgrading in advance to prevent any breaking changes.
 
