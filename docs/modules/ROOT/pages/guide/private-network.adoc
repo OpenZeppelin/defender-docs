@@ -1,4 +1,4 @@
-# Create a complete private network
+# Create a complete Private Network
 
 Defender empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and workflows. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
 
@@ -8,7 +8,7 @@ Defender empowers you to harness your customized network forks for deploying and
 * OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
 [[configure-forked-network]]
-== 1. Configure private network
+== 1. Configure Private Network
 
 As an example, this guide uses https://tenderly.co/[Tenderly, window=_blank] to create a network to use. Follow these steps:
 
@@ -16,14 +16,14 @@ As an example, this guide uses https://tenderly.co/[Tenderly, window=_blank] to 
 +
 image::guide-tenderly-private-network.png[Tenderly create network]
 
-. Copy the network RPC and go to the https://defender.openzeppelin.com/v2/#/manage/networks/private/new[private network page on Defender, window=_blank]. Fill and submit the form with the network information, leaving the optional fields on blank (which will be configured in the next steps):
+. Copy the network RPC and go to the https://defender.openzeppelin.com/v2/#/manage/networks/private/new[Private Network page on Defender, window=_blank]. Fill and submit the form with the network information, leaving the optional fields on blank (which will be configured in the next steps):
 +
 image::guide-configure-private-network.png[Configure network on Defender]
 
 [[deploy-safe-contracts]]
 == 2. Deploy Safe contracts
 
-With the private network created, you can now deploy the Safe contracts, which can be used for multisigs or CREATE2 deployments. Follow these steps:
+With the Private Network created, you can now deploy the Safe contracts, which can be used for multisigs or CREATE2 deployments. Follow these steps:
 
 . Clone the `safe-smart-account` repository and install the dependencies:
 +
@@ -31,7 +31,7 @@ With the private network created, you can now deploy the Safe contracts, which c
 git clone https://github.com/safe-global/safe-smart-account && cd safe-smart-account && npm install
 ```
 
-. Create a new wallet, copy its mnemonic, and paste it in the `.env` file alongside the RPC url of the private network in the `NODE_URL` parameter. For example, with https://book.getfoundry.sh/[Foundry, window=_blank]:
+. Create a new wallet, copy its mnemonic, and paste it in the `.env` file alongside the RPC url of the Private Network in the `NODE_URL` parameter. For example, with https://book.getfoundry.sh/[Foundry, window=_blank]:
 +
 ```
 cast wallet new-mnemonic
@@ -39,7 +39,7 @@ cast wallet new-mnemonic
 
 . Fund the wallet with native tokens (like Ether) via Tenderly.
 +
-image::guide-fund-private-network-relayer.png[Fund wallet on private network]
+image::guide-fund-private-network-relayer.png[Fund wallet on Private Network]
 
 . Paste the private key of the wallet and network RPC in the following command to deploy the CREATE2 Deployer contract. Copy the contract address in `contractAddress` for the next step.
 +
@@ -69,7 +69,7 @@ npm run deploy-all custom
 
 . Navigate to the https://defender.openzeppelin.com/v2/#/manage/networks/private[`Private Networks` page on Defender, window=_blank] and click on the edit button of the network you created. 
 +
-image::guide-edit-private-network.png[Edit private network on Defender]
+image::guide-edit-private-network.png[Edit Private Network on Defender]
 
 . Copy the following addreses from the Safe contracts deployment output and paste them on Defender:
 * Safe Master Address: `Safe`
@@ -78,15 +78,28 @@ image::guide-edit-private-network.png[Edit private network on Defender]
 * Safe Create Call Address: `CreateCall`
 
 [[create-subgraph]]
-== 3. Create Subgraph
+== 3. Create subgraph
+
+Subgraphs on Defender are powered by https://thegraph.com[TheGraph, window=_blank]. In order to create one for a Private Network, the network must be first supported by the TheGraph. https://github.com/graphprotocol/graph-tooling/blob/121843e982c69ffb31aae911431a68a2349ea062/packages/cli/src/protocols/index.ts#L91[Here's, window=_blank] the list of supported networks as data sources. Follow these steps to create a subgraph:
+
+. Clone the Defender subgraph toolkit repository and install the dependencies:
++
+```
+git clone https://github.com/OpenZeppelin/defender-subgraphs && cd defender-subgraphs && yarn
+```
+
+. Follow the steps in the https://github.com/OpenZeppelin/defender-subgraphs/blob/main/README.md[README,window=_blank].
+. Copy the subgraph URL and paste it in the `Subgraph URL` field on the Defender Private Network configuration.
+
+image::guide-subgraph-private-network.png[Subgraph URL on Defender]
 
 [[next-steps]]
 == Next steps
 
-Congratulations! You have successfully created a complete private network. You can now use it to deploy and test your smart contracts with the Safe contracts and subgraph.
+Congratulations! You have successfully created a complete Private Network. You can now use it to deploy and test your smart contracts with the Safe contracts and subgraph.
 
 [[references]]
 == References
 
 * https://github.com/safe-global/safe-smart-account#deployments[Safe contracts deployments, window=_blank]
-* https://thegraph.com/docs/en/developing/creating-a-subgraph[Creating a Subgraph, window=_blank]
+* https://github.com/OpenZeppelin/defender-subgraphs[Defender subgraph toolkit, window=_blank]
