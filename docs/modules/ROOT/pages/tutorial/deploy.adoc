@@ -6,7 +6,7 @@ Defender allows you to easily deploy and upgrade smart contracts across chains w
 == Pre-requisites
 
 * OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
-* https://nodejs.org/en[NodeJS and NPM, window=_blank] with https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.19.0)
+* https://nodejs.org/en[NodeJS and NPM, window=_blank]
 * Any IDE or text editor
 * Web browser with Metamask (or any other compatible wallet), funded with Sepolia ETH.
 
@@ -57,10 +57,40 @@ image::tutorial-deploy-step4-wizard.png[Deploy block end wizard]
 
 NOTE: You configured the test environment to learn without the risk of losing actual funds. The steps are the same to set up a production environment.
 
-[[hardhat-integration]]
-=== Hardhat Integration
+Defender supports both Hardhat and Foundry integrations. Pick the one that suits your project!
 
-Deploying through Defender is extremely easy with Hardhat. Once it's installed, follow these steps to create a new directory and project:
+[[foundry-setup]]
+=== Foundry setup
+
+First, make sure you have https://book.getfoundry.sh/getting-started/installation[Foundry, window=_blank] installed. Follow these steps to create a new directory and project:
+
+. Run the this command in your terminal:
++
+```
+forge init deploy-tutorial && cd deploy-tutorial && forge install OpenZeppelin/openzeppelin-foundry-upgrades --no-commit && forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
+```
+. Now, configure the `foundry.toml` file to enable ffi, ast, build info and storage layout:
++
+[source,json]
+----
+[profile.default]
+ffi = true
+ast = true
+build_info = true
+extra_output = ["storageLayout"]
+----
+. Create a new file called `.env` in the project root directory and add the following content with the keys you received after creating the Defender environment:
++
+[source,json]
+----
+DEFENDER_KEY = "<<YOUR_KEY>>"
+DEFENDER_SECRET = "<<YOUR_SECRET>>"
+----
+
+[[hardhat-setup]]
+=== Hardhat setup
+
+First, make sure you have https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.19.0). Follow these steps to create a new directory and project:
 
 . Run the this command in your terminal:
 +
@@ -124,7 +154,7 @@ DEFENDER_SECRET = "<<YOUR_SECRET>>"
 [[deploy]]
 == 2. Deploy
 
-. Create a new file called `Box.sol` inside the `contracts` directory and add the following code:
+. Create a new file called `Box.sol` inside the `contracts` or `src` directory and add the following code:
 +
 [source,jsx]
 ----
@@ -174,6 +204,59 @@ This is a contract that replicates a box, with three functions:
 * `removeObject()`: Decreases the number of objects in the box by removing one.
 * `_authorizeUpgrade()`: Points the proxy to a new implementation address.
 
+[[foundry-deploy]]
+=== Foundry
+
+. Create a file named `Deploy.s.sol` inside the `script` directory. This script will deploy the upgradeable Box contract through Defender with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `Deploy.s.sol`:
++
+[source,jsx]
+----
+// SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.20;
+
+import {Script} from "forge-std/Script.sol";
+import {console} from "forge-std/console.sol";
+
+import {Defender, ApprovalProcessResponse} from "openzeppelin-foundry-upgrades/Defender.sol";
+import {Upgrades, Options} from "openzeppelin-foundry-upgrades/Upgrades.sol";
+
+import {Box} from "src/Box.sol";
+
+contract DefenderScript is Script {
+    function setUp() public {}
+
+    function run() public {
+        ApprovalProcessResponse memory upgradeApprovalProcess = Defender.getUpgradeApprovalProcess();
+
+        if (upgradeApprovalProcess.via == address(0)) {
+            revert(
+                string.concat(
+                    "Upgrade approval process with id ",
+                    upgradeApprovalProcess.approvalProcessId,
+                    " has no assigned address"
+                )
+            );
+        }
+
+        Options memory opts;
+        opts.defender.useDefenderDeploy = true;
+
+        address proxy =
+            Upgrades.deployUUPSProxy("Box.sol", abi.encodeCall(Box.initialize, (5, upgradeApprovalProcess.via)), opts);
+
+        console.log("Deployed proxy to address", proxy);
+    }
+}
+----
+. Deploy by running the following command which executes your deployment script:
++
+```
+forge script script/Deploy.s.sol --ffi --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
+```
+
+[[hardhat-deploy]]
+=== Hardhat
+
 . Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defender with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
 +
 [source,jsx]
@@ -216,7 +299,6 @@ Success! Your contracts should have been deployed in the Sepolia testnet. Naviga
 
 image::tutorial-deploy-contract.png[Deployed contract]
 
-
 [[deploy-caveat]]
 === Caveats
 
@@ -229,9 +311,9 @@ WARNING: While `CREATE2` offers deterministic contract addresses, it alters `msg
 [[upgrade]]
 == 3. Upgrade
 
-Upgrading a smart contract allows changing its logic while maintaining the same address and storage. Follow these steps to upgrade your deployed Box with new functionalities:
+Upgrading a smart contract allows changing its logic while maintaining the same address and storage.
 
-. Create a file called `BoxV2.sol` inside the `contracts` directory and add the following code:
+. Create a file called `BoxV2.sol` inside the `contracts` or `src` directory and add the following code:
 +
 [source,jsx]
 ----
@@ -264,6 +346,46 @@ This is a contract adds two new functions to your box:
 * `addObject()`: Increases the number of objects in the box by adding one.
 * `boxVersion()`: Returns the version of the box implementation.
 
+[[foundry-upgrade]]
+=== Foundry
+
+. Create a file called `Upgrade.s.sol` inside the `script` directory and paste the following code. Make sure to replace the `<PROXY ADDRESS>` with the address of the proxy you copied before.
++
+[source,jsx]
+----
+// SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.20;
+
+import {Script} from "forge-std/Script.sol";
+import {console} from "forge-std/console.sol";
+
+import {ProposeUpgradeResponse, Defender, Options} from "openzeppelin-foundry-upgrades/Defender.sol";
+
+contract DefenderScript is Script {
+    function setUp() public {}
+
+    function run() public {
+        Options memory opts;
+        ProposeUpgradeResponse memory response = Defender.proposeUpgrade(
+            <PROXY ADDRESS>,
+            "BoxV2.sol",
+            opts
+        );
+        console.log("Proposal id", response.proposalId);
+        console.log("Url", response.url);
+    }
+}
+----
+
+. Create the upgrade proposal using the upgrade script with the the following command:
++
+```
+forge script script/Upgrade.s.sol --ffi --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
+```
+
+[[hardhat-upgrade]]
+=== Hardhat
+
 . Create a file called `upgrade.ts` inside the `scripts` directory and paste the following code. Make sure to replace the `<PROXY ADDRESS>` with the address of the proxy you copied before.
 +
 [source,jsx]
@@ -292,10 +414,13 @@ main().catch((error) => {
 npx hardhat run --network sepolia scripts/upgrade.ts
 ```
 
+[[approve-upgrade]]
+=== Approve
+
 . Navigate to the https://defender.openzeppelin.com/v2/#/deploy/environment/test[Defender test environment] and click on the upgrade proposal, which expands a modal on the right side of the screen.
 . Click on *View Transaction Proposal* and click on *Approve and Execute* on the top right corner of the page. Sign and execute the transaction with your wallet that you used to create the Safe Wallet.
 
-Your box should now be upgraded to the new version!. The upgrade proposal in your test environment page shold now be marked as *Executed*.
+Your box should now be upgraded to the new version! The upgrade proposal in your test environment page shold now be marked as *Executed*.
 
 image::tutorial-deploy-executed-upgrade.png[Uprade proposal executed]
 
@@ -310,5 +435,6 @@ NOTE: After deploying a contract, we recommended using Defender to monitor its s
 == Reference
 
 * xref::module/deploy.adoc[Deploy Documentation]
+* https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades[Foundry Upgrades Package, window=_blank]
 * https://www.npmjs.com/package/@openzeppelin/hardhat-upgrades[Hardhat Upgrades Package, window=_blank]
 * https://www.npmjs.com/package/@openzeppelin/upgrades-core[Upgrades Core Package, window=_blank]
