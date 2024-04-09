@@ -21,7 +21,7 @@
 
 * Guides
 ** xref:guide/forked-network.adoc[Forked Networks]
-** xref:guide/private-network.adoc[Creating a complete private network]
+** xref:guide/private-network.adoc[Adding a complete private network]
 ** xref:guide/meta-tx.adoc[Relaying gasless meta-transactions]
 ** xref:guide/balance-automation-forta.adoc[Automate balance maintenance using a Forta bot]
 ** xref:guide/factory-monitor.adoc[Automatic monitoring for factory clones]

@@ -1,6 +1,6 @@
-# Create a complete Private Network
+# Adding a complete Private Network
 
-Defender empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and workflows. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
+Private Networks allow you to customize your account by adding compatible mainnets and testnets. You can then use them as any other supported network to deploy, monitor, and manage smart contracts on those networks. This guide will lead you through the steps of adding a Private Network with a subgraph and Safe contracts.
 
 [[pre-requisites]]
 == Pre-requisites
@@ -96,7 +96,7 @@ image::guide-subgraph-private-network.png[Subgraph URL on Defender]
 [[next-steps]]
 == Next steps
 
-Congratulations! You have successfully created a complete Private Network. You can now use it to deploy and test your smart contracts with the Safe contracts and subgraph.
+Congratulations! You have successfully added a complete Private Network. You can now use it to deploy and test your smart contracts with the Safe contracts and subgraph.
 
 [[references]]
 == References
