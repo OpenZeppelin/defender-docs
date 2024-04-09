@@ -118,8 +118,8 @@ image::tutorial-ir-etherscan.png[Workflow Etherscan Response]
 
 Congratulations! You now have a complete workflow that will be running and checking every confirmed block. Workflows can be expanded with parallel actions for more technical combinations. In case you are interested in advanced use cases, we are working on Workflow-related guides.
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/actions.adoc#workflows[Workflow Documentation]
 * https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[BoxV2, window=_blank]

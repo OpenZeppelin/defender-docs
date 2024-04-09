@@ -85,8 +85,8 @@ image::guide-edit-private-network.png[Edit private network on Defender]
 
 Congratulations! You have successfully created a complete private network. You can now use it to deploy and test your smart contracts with the Safe contracts and subgraph.
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * https://github.com/safe-global/safe-smart-account#deployments[Safe contracts deployments, window=_blank]
 * https://thegraph.com/docs/en/developing/creating-a-subgraph[Creating a Subgraph, window=_blank]

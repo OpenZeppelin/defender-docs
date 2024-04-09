@@ -99,8 +99,8 @@ Congratulations! You can import other contracts and modify their roles.
 
 NOTE: After configuring Access Control, we recommend seting up Workflows. Learn how to use Workflows with its tutorial xref::tutorial/workflows.adoc[here].
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/access-control.adoc[Access Control Documentation]
 * https://sepolia.etherscan.io/address/0xF909B3dBB525fDe7C3e8cd59FbECF3D42c217454[Access Control Factory, window=_blank]
