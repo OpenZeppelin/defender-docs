@@ -84,8 +84,8 @@ Then, use the same approval process and save the changes. The transaction should
 
 image::guide-timelock-role-revoked.png[Revoked role]
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref:module/actions.adoc#transaction-proposals-reference[Transaction Proposals Documentation]
 * xref::module/access-control.adoc[Access Control Documentation]

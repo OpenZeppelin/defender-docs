@@ -73,8 +73,8 @@ Congratulations! You can modify the monitor to filter for specific `Swap` data o
 
 NOTE: After setting up a monitor, we recommend creating Actions on Defender. Learn how to use Actions with its tutorial xref::tutorial/actions.adoc[here].
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/actions.adoc[Actions Documentation]
 * xref::manage.adoc#notifications[Manage Notificacion Channels Documentation]
