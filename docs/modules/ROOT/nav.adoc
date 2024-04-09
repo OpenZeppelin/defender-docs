@@ -20,7 +20,7 @@
 ** xref:tutorial/workflows.adoc[Workflows]
 
 * Guides
-** xref:guide/forked-network.adoc[Forked Networks]
+** xref:guide/forked-network.adoc[Deploy a smart contract on a forked network]
 ** xref:guide/meta-tx.adoc[Relaying gasless meta-transactions]
 ** xref:guide/balance-automation-forta.adoc[Automate balance maintenance using a Forta bot]
 ** xref:guide/factory-monitor.adoc[Automatic monitoring for factory clones]
