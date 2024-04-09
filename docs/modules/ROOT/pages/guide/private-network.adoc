@@ -1,0 +1,92 @@
+# Create a complete private network
+
+Defender empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and workflows. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
+
+[[pre-requisites]]
+== Pre-requisites
+
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+
+[[configure-forked-network]]
+== 1. Configure private network
+
+As an example, this guide uses https://tenderly.co/[Tenderly, window=_blank] to create a network to use. Follow these steps:
+
+. Regsiter an account on Tenderly and create a fork network from Ethereum mainnet. Toggle the custom chain ID and set it to a unique value to prevent conflicts with public chain IDs.
++
+image::guide-tenderly-private-network.png[Tenderly create network]
+
+. Copy the network RPC and go to the https://defender.openzeppelin.com/v2/#/manage/networks/private/new[private network page on Defender, window=_blank]. Fill and submit the form with the network information, leaving the optional fields on blank (which will be configured in the next steps):
++
+image::guide-configure-private-network.png[Configure network on Defender]
+
+[[deploy-safe-contracts]]
+== 2. Deploy Safe contracts
+
+With the private network created, you can now deploy the Safe contracts, which can be used for multisigs or CREATE2 deployments. Follow these steps:
+
+. Clone the `safe-smart-account` repository and install the dependencies:
++
+```
+git clone https://github.com/safe-global/safe-smart-account && cd safe-smart-account && npm install
+```
+
+. Create a new wallet, copy its mnemonic, and paste it in the `.env` file alongside the RPC url of the private network in the `NODE_URL` parameter. For example, with https://book.getfoundry.sh/[Foundry, window=_blank]:
++
+```
+cast wallet new-mnemonic
+```
+
+. Fund the wallet with native tokens (like Ether) via Tenderly.
++
+image::guide-fund-private-network-relayer.png[Fund wallet on private network]
+
+. Paste the private key of the wallet and network RPC in the following command to deploy the CREATE2 Deployer contract. Copy the contract address in `contractAddress` for the next step.
++
+```
+cast send --rpc-url NETWORK_RPC --private-key PRIVATE_KEY --create 0x604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf3
+```
+
+. Replace the `deterministicDeployment` function in `hardhat.config.ts` with the following code, replacing `YOUR_CONTRACT_ADDRESS` and `YOUR_WALLET_ADDRESS`:
++
+[source,jsx]
+----
+const deterministicDeployment = (): DeterministicDeploymentInfo => {
+    return {
+        factory: "YOUR_CONTRACT_ADDRESS",
+        deployer: "YOUR_WALLET_ADDRESS",
+        funding: BigNumber.from(100000).mul(BigNumber.from(100000000000)).toString(),
+        signedTx: "0xf8a58085174876e800830186a08080b853604580600e600039806000f350fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe03601600081602082378035828234f58015156039578182fd5b8082525050506014600cf326a0b1fd9f4102283a663738983f1aac789e979e220a1b649faa74033f507b911af5a061dd0f2f6f2341ee95913cf94b3b8a49cac9fdd7be6310da7acd7a96e31958d7",
+    };
+};
+----
+
+. Run the following command to deploy the Safe contracts (don't worry about the verification errors):
++ 
+```
+npm run deploy-all custom
+```
+
+. Navigate to the https://defender.openzeppelin.com/v2/#/manage/networks/private[`Private Networks` page on Defender, window=_blank] and click on the edit button of the network you created. 
++
+image::guide-edit-private-network.png[Edit private network on Defender]
+
+. Copy the following addreses from the Safe contracts deployment output and paste them on Defender:
+* Safe Master Address: `Safe`
+* Safe Proxy Factory Address: `SafeProxyFactory`
+* Safe Multi-Send Call-Only Address: `MultiSendCallOnly`
+* Safe Create Call Address: `CreateCall`
+
+[[create-subgraph]]
+== 3. Create Subgraph
+
+[[next-steps]]
+== Next steps
+
+Congratulations! You have successfully created a complete private network. You can now use it to deploy and test your smart contracts with the Safe contracts and subgraph.
+
+[[reference]]
+== Reference
+
+* https://github.com/safe-global/safe-smart-account#deployments[Safe contracts deployments, window=_blank]
+* https://thegraph.com/docs/en/developing/creating-a-subgraph[Creating a Subgraph, window=_blank]
