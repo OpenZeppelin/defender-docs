@@ -67,7 +67,7 @@ First, make sure you have https://book.getfoundry.sh/getting-started/installatio
 . Run the this command in your terminal:
 +
 ```
-forge init deploy-tutorial && cd deploy-tutorial && forge install foundry-rs/forge-std --no-commit && forge install OpenZeppelin/openzeppelin-foundry-upgrades --no-commit && forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
+forge init deploy-tutorial && cd deploy-tutorial && forge install foundry-rs/forge-std && forge install OpenZeppelin/openzeppelin-foundry-upgrades && forge install OpenZeppelin/openzeppelin-contracts-upgradeable
 ```
 . Now, configure the `foundry.toml` file to enable ffi, ast, build info and storage layout:
 +
@@ -251,7 +251,7 @@ contract DefenderScript is Script {
 . Deploy by running the following command which executes your deployment script:
 +
 ```
-forge script script/Deploy.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
+forge script script/Deploy.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com
 ```
 
 [[hardhat-deploy]]
@@ -381,7 +381,7 @@ contract DefenderScript is Script {
 . Create the upgrade proposal using the upgrade script with the the following command:
 +
 ```
-forge script script/Upgrade.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
+forge script script/Upgrade.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com
 ```
 
 [[hardhat-upgrade]]
