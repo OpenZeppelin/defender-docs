@@ -241,8 +241,8 @@ Now when the Action runs, not only will it add the contract to Defender, it will
 
 To verify, execute another test run!
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/actions.adoc[Actions Documentation]
 * xref::module/monitor.adoc[Monitor Documentation]

@@ -432,8 +432,8 @@ Congratulations! You can now deploy and upgrade other contracts using the same e
 
 NOTE: After deploying a contract, we recommended using Defender to monitor its state and transactions. Learn how to use Monitor xref::tutorial/monitor.adoc[here].
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/deploy.adoc[Deploy Documentation]
 * https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades[Foundry Upgrades Package, window=_blank]
