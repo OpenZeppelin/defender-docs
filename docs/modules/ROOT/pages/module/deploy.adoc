@@ -32,7 +32,7 @@ NOTE: To maintain the best security practices, the wizard will only show network
 [[wizard-2]]
 ==== Step 2: Deploying
 
-In this step, users choose the default approval process for each network. The resource associated to this approval process is the one that will be used to pay and execute the deployment transactions; however, you can choose a different approval process for each deployment by specifying it in the Hardhat or Foundry script. If you don't have an approval process for a network, the wizard will allow you to create one of either type Relayer, Safe or EOA ("Externally Owned Account"). You can learn more about approval processes xref:manage.adoc#approval-processes[here].
+In this step, users choose the default approval process for each network. The resource associated to this approval process is the one that will be used to pay and execute the deployment transactions. If you don't have an approval process for a network, the wizard will allow you to create one of either type Relayer, Safe or EOA ("Externally Owned Account"). You can learn more about approval processes xref:manage.adoc#approval-processes[here].
 
 [[wizard-3]]
 ==== Step 3: Upgrading
