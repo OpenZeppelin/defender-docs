@@ -90,7 +90,7 @@ DEFENDER_SECRET = "<<YOUR_SECRET>>"
 [[hardhat-setup]]
 === Hardhat setup
 
-First, make sure you have https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6 (Hardhat version recommended v2.19.0). Follow these steps to create a new directory and project:
+First, make sure you have https://hardhat.org/hardhat-runner/docs/getting-started#installation[Hardhat, window=_blank] installed with ethers v6. Follow these steps to create a new directory and project:
 
 . Run the this command in your terminal:
 +
@@ -251,7 +251,7 @@ contract DefenderScript is Script {
 . Deploy by running the following command which executes your deployment script:
 +
 ```
-forge script script/Deploy.s.sol --ffi --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
+forge script script/Deploy.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
 ```
 
 [[hardhat-deploy]]
@@ -324,6 +324,7 @@ import {Box} from "./Box.sol";
 
 /// @title BoxV2
 /// @notice An improved box with objects inside.
+/// @custom:oz-upgrades-from Box
 contract BoxV2 is Box {
     /*//////////////////////////////////////////////////////////////
                                 FUNCTIONS
@@ -380,7 +381,7 @@ contract DefenderScript is Script {
 . Create the upgrade proposal using the upgrade script with the the following command:
 +
 ```
-forge script script/Upgrade.s.sol --ffi --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
+forge script script/Upgrade.s.sol --force --rpc-url https://ethereum-sepolia.publicnode.com -vvvv
 ```
 
 [[hardhat-upgrade]]
