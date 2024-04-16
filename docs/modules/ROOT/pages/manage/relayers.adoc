@@ -443,10 +443,13 @@ Each Relayer is associated to a private key. When a request to send a transactio
 
 Every minute, all in-flight transactions are checked by the system. If they have not been mined and more than a certain time has passed (which depends on the transaction speed), they are resubmitted with a 10% increase in their respective transaction type pricing (or the latest pricing for their speed, if it's greater), which could be up to a *150% of the reported gas pricing for their speed*. This process causes the transaction hash to change, but their ID is preserved. On the other hand, if the transaction has been mined, it is still monitored for several blocks until we consider it to be confirmed.
 
+=== Insufficient Funds
+
 Defender carefully tracks the costs of transactions sent to a relayer. In instances where the relayer cannot immediately process a transaction, Defender accumulates the costs of all pending transactions. Before allowing any new transactions to be submitted, Defender will ensure that the balance of the relayer is sufficient to cover the costs of all pending transactions including the new one. Consequently, you may encounter an "insufficient funds" error for a particular transaction during such occurrences.
 
-The cost of a transaction is calculated as: `txCost = gasLimit * maxFeePerGas + value`.
-The balance of a relayer is calculated as: `predictedBalance = balance - pendingTransactionCosts`.
+* The cost of a transaction is calculated as: `txCost = gasLimit * maxFeePerGas + value`.
+* The balance of a relayer is calculated as: `predictedBalance = balance - pendingTxCosts`.
+
 An "insufficient funds" error will throw when: `txCost > predictedBalance`.
 
 [[concurrency-and-rate-limiting]]
