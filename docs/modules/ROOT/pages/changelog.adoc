@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2024-04-17]]
+== April 17th, 2024
+
+* *General*
+** Replace Gnosis chain explorer to Etherscan-based.
+** Support lower maximum gas price for optimism Relayers.
+** Update the builder subscription pane to show it's free and forever.
+** Add new field to create account name on onboarding.
+** Allow monitors to work with EOAs and Relayers.
+
 [[release-2024-03-28]]
 == March 28th, 2024
 
