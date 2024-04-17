@@ -69,8 +69,8 @@ Congratulations! You can modify the action to automate other contracts and build
 
 NOTE: Alongisde actions, we recommend using Access Control to manage a contract's permissions through Defender. Learn how to use Access Control with its tutorial xref::tutorial/access-control.adoc[here].
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/actions.adoc[Actions Documentation]
 * xref::module/actions.adoc#defining-code[More information on Action's Javascript code]

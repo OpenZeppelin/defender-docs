@@ -103,8 +103,8 @@ Congratulations! You have successfully deployed a smart contract on a forked net
 
 NOTE: After deploying a contract, we recommend creating a Monitor and setting up Actions on Defender. Learn how to setup a Monitor xref::tutorial/monitor.adoc[here], and use Actions with its tutorial xref::tutorial/actions.adoc[here].
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/deploy.adoc[Deploy Documentation]
 * xref::module/actions.adoc[Actions Documentation]
