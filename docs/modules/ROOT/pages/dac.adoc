@@ -36,7 +36,7 @@ image::manage-advanced-export-serverless.png[Defender Export Serverless]
 
 NOTE: If you have previously deployed with `defender-as-code` to the same account and subsequently created new resources through the Defender user interface, the export function will automatically assign a `stackResourceId` to the new resources based on the name of your latest deployment stack. If you have not deployed using `defender-as-code` before, a default stack name of `mystack` will be used.
 
-This plugin allows you to define Actions, Monitors, Notifications, Categories, Block Explorer API Keys, Relayers, Contracts, Policies, and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
+This plugin allows you to define Actions, Monitors, Notifications, Block Explorer API Keys, Relayers, Contracts, Policies, and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
 service: defender-as-code-template
