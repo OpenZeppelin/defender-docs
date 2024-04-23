@@ -460,7 +460,6 @@ Relayers assign nonces atomically which allows them to handle many concurrent tr
 By default, when you create an api key for a specific relayer it's automatically assigned with the following rate limits. 
 
 * 100 requests/second with a burst of 300 requests.
-* 10 transactions/second
 
 These rate limits are for both reads ( e.g. - getting transaction status ) and writes ( e.g. - sending transactions ).
 
