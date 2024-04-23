@@ -455,10 +455,16 @@ An "insufficient funds" error will throw when: `txCost > predictedBalance`.
 [[transaction-throughput-and-load-balancing]]
 == Transaction Throughput and Load Balancing
 
-Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all Relayers in an account):
+Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all Relayers in an account)
 
-* 100 total requests/second
+By default, when you create an api key for a specific relayer it's automatically assigned with the following rate limits. 
+
+* 100 requests/second with a burst of 300 requests.
 * 10 transactions/second
+
+These rate limits are for both reads ( e.g. - getting transaction status ) and writes ( e.g. - sending transactions ).
+
+If you need additional throughput for your use case please reach out `defender-support@openzeppelin.com`. You need to be on *enterprise tier* for throughput increases.
 
 For better reliability of the relayers, we recommend sending no more than *50 transactions/min* on a single relayer especially on fast moving chains like Polygon, Optimism, Arbitrum etc.. For example, if you want 250 transactions/min throughput, you would need to load balance across 5 relayers. These 5 relayers can be part of the same account.
 
