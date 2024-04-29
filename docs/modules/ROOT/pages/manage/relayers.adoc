@@ -91,6 +91,10 @@ NOTE: EIP1559 Pricing policy is enabled by default for new Relayers. If you have
 ==== Private transactions
 Specify if the transactions should be sent via private mempool. This means that a transaction will not be publicly seen until it's included in a block.
 
+The parameter can be toggled between the following states: `true` to enable private mempool transactions, `false` to opt for public visibility. Alternatively, users can specify the transaction speed by setting the value to either `flashbots-normal` or `flashbots-fast`. By default, when the policy is set to `true`, the speed defaults to `flashbots-normal`, allowing for seamless inclusion while maintaining transaction privacy. This configuration empowers users to tailor their transaction strategy to suit their specific privacy and speed requirements effectively. You can read about faster transactions with Flashbots https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions[here, window=_blank].
+
+[[rpc-quota-policy]]
+
 NOTE: Private transactions are only enabled for _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC, window=_blank]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations, window=_blank] might apply while sending private transactions through Defender.
 
 [[sending-transactions]]
@@ -197,7 +201,7 @@ Private transaction allows a Relayer to send transactions without being visible 
 
 A Relayer may send a private transaction in any of the following ways:
 
-- Sending a transaction via API with the <<#private-transactions-policy, `privateTransactions`>> policy **enabled**
+- Sending a transaction via API with the <<#private-transactions-policy, `privateTransactions`>> policy **enabled** or set to `flashbots-normal` or `flashbots-fast`
 - Sending a transaction via API with `isPrivate` parameter set to `true`
 - Sending a transaction via UI and checking the Mempool Visibility checkbox
 
