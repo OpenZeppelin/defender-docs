@@ -109,6 +109,8 @@ const client = new Defender({
 const tx = await client.relayerSigner.sendTransaction({
   to, value, data, gasLimit, speed: 'fast'
 });
+
+const mined = await tx.wait();
 ----
 
 [CAUTION]
