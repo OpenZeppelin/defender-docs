@@ -229,7 +229,7 @@ NOTE: Each invocation can contain up to 25 transactions.
 
 ==== Request Schema
 
-The request body will contain the following structure. You can use the `SentinelConditionRequest` type from the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package if you are coding your Autotasks in Typescript.
+The request body will contain the following structure. You can use the `SentinelConditionRequest` type from the https://www.npmjs.com/package/@openzeppelin/defender-autotask-utils[@openzeppelin/defender-autotask-utils] package if you are coding your Autotasks in Typescript.
 
 [source,jsx]
 ----
@@ -628,7 +628,7 @@ IMPORTANT: Autotask executions are subject to quotas. After a quota is exhausted
 
 == Autotask Events
 
-The sentinel will pass information about the transaction to your autotask. If you are writing your Autotasks in typescript you can use the `BlockTriggerEvent` type for contract sentinels and the `FortaTriggerEvent` type for Forta sentinels, from the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package.
+The sentinel will pass information about the transaction to your autotask. If you are writing your Autotasks in typescript you can use the `BlockTriggerEvent` type for contract sentinels and the `FortaTriggerEvent` type for Forta sentinels, from the https://www.npmjs.com/package/@openzeppelin/defender-autotask-utils[@openzeppelin/defender-autotask-utils] package.
 
 === Example Autotask
 

@@ -83,11 +83,11 @@ NOTE: Private transactions are only enabled for _goerli_ and _mainnet_ by using 
 [[sending-transactions]]
 == Sending transactions
 
-The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/defender-relay-client[`defender-relay-client`] npm package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
+The easiest way to send a transaction via a Relayer is using the https://www.npmjs.com/package/@openzeppelin/defender-relay-client[`@openzeppelin/defender-relay-client`] npm package. The client is initialized with an API key/secret and exposes a simple API for sending transactions through the corresponding Relayer.
 
 [source,jsx]
 ----
-import { Relayer } from 'defender-relay-client';
+import { Relayer } from '@openzeppelin/defender-relay-client';
 const relayer = new Relayer({apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET});
 
 const tx = await relayer.sendTransaction({
@@ -106,7 +106,7 @@ The Relayer client integrates with https://docs.ethers.io/v5/[ethers.js] via a c
 
 [source,jsx]
 ----
-const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const { DefenderRelaySigner, DefenderRelayProvider } = require('@openzeppelin/defender-relay-client/lib/ethers');
 const { ethers } = require('ethers');
  
 const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
@@ -120,7 +120,7 @@ const mined = await tx.wait();
 
 In the example above, we are also using a `DefenderRelayProvider` for making calls to the network. The Defender signer can work with any provider, such as `ethers.getDefaultProvider()`, but you can rely on Defender as a network provider as well. 
 
-You can read more about the ethers integration https://www.npmjs.com/package/defender-relay-client#user-content-ethersjs[here].
+You can read more about the ethers integration https://www.npmjs.com/package/@openzeppelin/defender-relay-client#user-content-ethersjs[here].
 
 [[using-web3.js]]
 === Using web3.js
@@ -129,7 +129,7 @@ The Relayer client integrates with https://web3js.readthedocs.io/[web3.js] as we
 
 [source,jsx]
 ----
-const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const { DefenderRelayProvider } = require('@openzeppelin/defender-relay-client/lib/web3');
 const Web3 = require('web3');
  
 const credentials = { apiKey: YOUR_API_KEY, apiSecret: YOUR_API_SECRET };
@@ -143,7 +143,7 @@ const tx = await erc20.methods.transfer(beneficiary, (1e18).toString()).send();
 
 In the example above, the `transfer` transaction is signed and broadcasted by the Defender Relayer, and any additional JSON RPC calls are routed via the Defender private endpoint.
 
-You can read more about the web3 integration https://www.npmjs.com/package/defender-relay-client#user-content-web3js[here].
+You can read more about the web3 integration https://www.npmjs.com/package/@openzeppelin/defender-relay-client#user-content-web3js[here].
 
 [[eip1559]]
 === EIP1559 support
@@ -225,7 +225,7 @@ NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a
 [[transaction-ids]]
 === Transaction IDs
 
-Since the Relayer may resubmit a transaction with an updated gas pricing if it does not get mined in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/defender-relay-client#querying[query] it.
+Since the Relayer may resubmit a transaction with an updated gas pricing if it does not get mined in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/@openzeppelin/defender-relay-client#querying[query] it.
 
 [source,jsx]
 ----
@@ -239,7 +239,7 @@ NOTE: The `query` endpoint will return the latest view of the transaction from t
 
 While a Defender Relay will automatically resubmit transactions with increased gas pricing if they are not mined, and will automatically cancel them after their valid-until timestamp, you can still manually replace or cancel your transaction if it has not been mined yet. This allows you to cancel a transaction if it is no longer valid, tweak its TTL, or bump its speed or gas pricing.
 
-To do this, use the `replaceByNonce` or `replaceById` of the `defender-relay-client`:
+To do this, use the `replaceByNonce` or `replaceById` of the `@openzeppelin/defender-relay-client`:
 
 [source,jsx]
 ----
@@ -371,7 +371,7 @@ A Relayer can be attached to an xref:autotask.adoc[Autotask], a code snippet tha
 
 [source,jsx]
 ----
-const { Relayer } = require('defender-relay-client');
+const { Relayer } = require('@openzeppelin/defender-relay-client');
 
 // The credentials object is injected by the Defender Autotasks engine 
 exports.handler = async function(credentials) {

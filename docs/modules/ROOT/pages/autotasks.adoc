@@ -53,7 +53,7 @@ If you connect your Autotask to a Relayer, then Defender will automatically inje
 
 [source,jsx]
 ----
-const { Relayer } = require('defender-relay-client');
+const { Relayer } = require('@openzeppelin/defender-relay-client');
  
 exports.handler = async function(event) {
   const relayer = new Relayer(event);
@@ -63,11 +63,11 @@ exports.handler = async function(event) {
 
 This allows you to send transactions using your Relayer from your Autotasks without having to set up any API keys or secrets. Furthermore, you can also use the Relayer JSON RPC endpoint for making queries to any Ethereum network without having to configure API keys for external network providers.
 
-If you want to https://www.npmjs.com/package/defender-relay-client#ethersjs[use `ethers.js`] for making queries or sending transactions via your Relayer, change the above to:
+If you want to https://www.npmjs.com/package/@openzeppelin/defender-relay-client#ethersjs[use `ethers.js`] for making queries or sending transactions via your Relayer, change the above to:
 
 [source,jsx]
 ----
-const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const { DefenderRelaySigner, DefenderRelayProvider } = require('@openzeppelin/defender-relay-client/lib/ethers');
 const ethers = require('ethers');
  
 exports.handler = async function(event) {
@@ -79,11 +79,11 @@ exports.handler = async function(event) {
 }
 ----
 
-And if you prefer https://www.npmjs.com/package/defender-relay-client#web3js[using `web3.js`], then use the following snippet:
+And if you prefer https://www.npmjs.com/package/@openzeppelin/defender-relay-client#web3js[using `web3.js`], then use the following snippet:
 
 [source,jsx]
 ----
-const { DefenderRelayProvider } = require('defender-relay-client/lib/web3');
+const { DefenderRelayProvider } = require('@openzeppelin/defender-relay-client/lib/web3');
 const Web3 = require('web3');
  
 exports.handler = async function(event) {
@@ -163,11 +163,11 @@ NOTE: While you can also use autotask secrets to store private keys for signing 
 
 The Autotask key-value data store allows you to persist simple data across Autotask runs and between different Autotasks. You can use it to store transaction identifiers, hashed user emails, or even small serialized objects.
 
-Access to the key value store is managed through the http://npmjs.com/package/defender-kvstore-client[`defender-kvstore-client`] package:
+Access to the key value store is managed through the http://npmjs.com/package/@openzeppelin/defender-kvstore-client[`@openzeppelin/defender-kvstore-client`] package:
 
 [source,jsx]
 ----
-const { KeyValueStoreClient } = require('defender-kvstore-client');
+const { KeyValueStoreClient } = require('@openzeppelin/defender-kvstore-client');
 
 exports.handler =  async function(event) {
   const store = new KeyValueStoreClient(event);
@@ -290,18 +290,20 @@ Autotasks are executed in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 
 "@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
 "axios": "^0.27.2",
 "axios-retry": "3.1.9",
-"defender-admin-client": "1.37.0-rc.2",
-"defender-autotask-client": "1.37.0-rc.2",
-"defender-autotask-utils": "1.34.0",
-"defender-kvstore-client": "1.37.0-rc.2",
-"defender-relay-client": "1.37.0-rc.2",
-"defender-sentinel-client": "1.37.0-rc.2",
+"@openzeppelin/defender-admin-client": "1.52.0",
+"@openzeppelin/defender-autotask-client": "1.52.0",
+"@openzeppelin/defender-autotask-utils": "1.52.0",
+"@openzeppelin/defender-kvstore-client": "1.52.0",
+"@openzeppelin/defender-relay-client": "1.52.0",
+"@openzeppelin/defender-sentinel-client": "1.52.0",
 "ethers": "5.5.3",
 "fireblocks-sdk": "^2.5.4",
 "graphql": "^15.5.1",
 "graphql-request": "3.4.0",
 "web3": "1.9.0"
 ----
+
+WARNING: Defender dependencies that are not under the `@openzeppelin` namespace are now deprecated from the autotask runtime
 
 WARNING: Autotasks created with Node.js 12 runtime needs to be migrated to the latest supported runtime.
 
@@ -321,7 +323,7 @@ You can also use the following template for local development, which will run yo
 
 [source,jsx]
 ----
-const { Relayer } = require('defender-relay-client');
+const { Relayer } = require('@openzeppelin/defender-relay-client');
 
 // Entrypoint for the Autotask
 exports.handler = async function(event) {
@@ -343,11 +345,11 @@ if (require.main === module) {
 
 We love https://www.typescriptlang.org/[typescript] in the Defender development team, and we hope you do too! If you want to write your Autotasks in typescript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting javascript code. Unfortunately, we don't support coding directly in typescript in the Defender web interface.
 
-All `defender-client` packages are coded in typescript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/defender-autotask-utils[defender-autotask-utils] package for type definitions for the event payload.
+All `defender-client` packages are coded in typescript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/@openzeppelin/defender-autotask-utils[@openzeppelin/defender-autotask-utils] package for type definitions for the event payload.
 
 [source,ts]
 ----
-import { AutotaskEvent, SentinelTriggerEvent } from 'defender-autotask-utils';
+import { AutotaskEvent, SentinelTriggerEvent } from '@openzeppelin/defender-autotask-utils';
 
 // Example for an Autotask being triggered by a Sentinel
 export async function handler(event: AutotaskEvent) {
@@ -359,7 +361,7 @@ export async function handler(event: AutotaskEvent) {
 [[updating-code]]
 === Updating code
 
-You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/defender-autotask-client[`defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file:
+You can edit an Autotask's code via the Defender webapp, or programmatically xref:autotasks-api-reference.adoc[via API] using the https://www.npmjs.com/package/@openzeppelin/defender-autotask-client[`@openzeppelin/defender-autotask-client`] npm package. The latter allows you to upload a code bundle with more than a single file:
 
 ```bash
 $ echo API_KEY=$API_KEY >> .env
@@ -377,7 +379,7 @@ The following example uses ethers.js and the Autotask-Relayer integration to sen
 [source,jsx]
 ----
 const { ethers } = require("ethers");
-const { DefenderRelaySigner, DefenderRelayProvider } = require('defender-relay-client/lib/ethers');
+const { DefenderRelaySigner, DefenderRelayProvider } = require('@openzeppelin/defender-relay-client/lib/ethers');
 
 // Entrypoint for the Autotask
 exports.handler = async function(event) {

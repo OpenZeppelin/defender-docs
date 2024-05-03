@@ -15,9 +15,9 @@ The Relay API is split into 2 modules:
 
 For more information on authentication, refer to the xref:api-auth.adoc[authentication section].
 
-NOTE: You can use the https://www.npmjs.com/package/defender-relay-client[defender-relay-client] npm package for simplifying interactions with the Relay API.
+NOTE: You can use the https://www.npmjs.com/package/@openzeppelin/defender-relay-client[@openzeppelin/defender-relay-client] npm package for simplifying interactions with the Relay API.
 
-NOTE: It is not recommended to use the https://www.npmjs.com/package/defender-relay-client[defender-relay-client] npm package in a browser environment as sensitive keys would be exposed publicly.
+NOTE: It is not recommended to use the https://www.npmjs.com/package/@openzeppelin/defender-relay-client[@openzeppelin/defender-relay-client] npm package in a browser environment as sensitive keys would be exposed publicly.
 
 [[relay-client-module]]
 == Relay Client Module Reference
@@ -126,7 +126,7 @@ interface UpdateRelayerPoliciesRequest {
 include::partial$network.adoc[]
 ```
 
-Using the `defender-relay-client` package:
+Using the `@openzeppelin/defender-relay-client` package:
 
 ```js
 const requestParameters = {
@@ -230,7 +230,7 @@ interface UpdateRelayerRequest {
 }
 ```
 
-Using the `defender-relay-client` package:
+Using the `@openzeppelin/defender-relay-client` package:
 
 ```js
 await client.update('201832e2-c612-4283-97c5-31849242c1fe', { name: 'My Updated Name' });
@@ -249,7 +249,7 @@ curl \
     "https://defender-api.openzeppelin.com/relayer/relayers"
 ```
 
-NOTE: If making the request directly (not with `defender-relay-client`), any policy updates will need to be made via requests to the endpoint directly below with a body type of `UpdateRelayerPoliciesRequest`.
+NOTE: If making the request directly (not with `@openzeppelin/defender-relay-client`), any policy updates will need to be made via requests to the endpoint directly below with a body type of `UpdateRelayerPoliciesRequest`.
 
 ```
 curl \
