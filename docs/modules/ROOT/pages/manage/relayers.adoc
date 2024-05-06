@@ -454,13 +454,84 @@ Defender carefully tracks the costs of transactions sent to a relayer. In instan
 
 An "insufficient funds" error will throw when: `txCost > predictedBalance`.
 
-[[concurrency-and-rate-limiting]]
-== Concurrency and Rate Limiting
+[[transaction-throughput-and-load-balancing]]
+== Transaction Throughput and Load Balancing
 
-Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all Relayers in an account):
+Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all Relayers in an account)
 
-* 100 total requests/second
-* 10 transactions/second
+By default, when you create an api key for a specific relayer it's automatically assigned with the following rate limits. 
+
+* 100 requests/second with a burst of 300 requests.
+
+These rate limits are for both reads ( e.g. - getting transaction status ) and writes ( e.g. - sending transactions ).
+
+If you need additional throughput for your use case please reach out `defender-support@openzeppelin.com`. You need to be on *enterprise tier* for throughput increases.
+
+For better reliability of the relayers, we recommend sending no more than *50 transactions/min* on a single relayer especially on fast moving chains like Polygon, Optimism, Arbitrum etc.. For example, if you want 250 transactions/min throughput, you would need to load balance across 5 relayers. These 5 relayers can be part of the same account.
+
+You may use the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`Defender SDK`, window=_blank] package to load balance across multiple relayers. Here is a simple example on how you can do this:
+
+```ts
+require('dotenv').config();
+
+const { Defender } = require('@openzeppelin/defender-sdk');
+
+async function loadbalance() {
+  const LOAD_BALANCE_THRESHOLD = 50;
+  const relayerCredsForMainNet = [
+    {
+      relayerApiKey: process.env.RELAYER_API_KEY_1,
+      relayerApiSecret: process.env.RELAYER_API_SECRET_1,
+    },
+    {
+      relayerApiKey: process.env.RELAYER_API_KEY_2,
+      relayerApiSecret: process.env.RELAYER_API_SECRET_2,
+    },
+  ];
+  const relayerClientsForMainNet = relayerCredsForMainNet.map((creds) => new Defender(creds));
+
+  const getNextAvailableRelayer = async () => {
+    for (const client of relayerClientsForMainNet) {
+      const relayerStatus = await client.relaySigner.getRelayerStatus();
+      if (relayerStatus.numberOfPendingTransactions < LOAD_BALANCE_THRESHOLD) {
+        return client;
+      }
+      console.log(
+        `${relayerStatus.relayerId} is busy. Pending transactions: ${relayerStatus.numberOfPendingTransactions}/${LOAD_BALANCE_THRESHOLD}`,
+      );
+    }
+    return undefined;
+  };
+
+  const executeTransaction = async () => {
+    const client = await getNextAvailableRelayer();
+    if (!client) throw new Error('Unable to load balance. All relayers are operating above the suggested threshold.');
+
+    const txResponse = await client.relaySigner.sendTransaction({
+      to: '0x179810822f56b0e79469189741a3fa5f2f9a7631',
+      value: 1,
+      speed: 'fast',
+      gasLimit: '21000',
+    });
+    console.log('txResponse', JSON.stringify(txResponse, null, 2));
+  };
+
+  await executeTransaction();
+}
+
+async function main() {
+  try {
+    return await loadbalance();
+  } catch (e) {
+    console.log(`Unexpected error:`, e);
+    process.exit(1);
+  }
+}
+
+if (require.main === module) {
+  main().catch(console.error);
+}
+```
 
 [[security-considerations]]
 == Security considerations
