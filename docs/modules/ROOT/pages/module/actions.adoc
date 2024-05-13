@@ -57,7 +57,7 @@ Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environm
 "web3": "1.9.0"
 ----
 
-WARNING: Defender dependencies that are not under the `@openzeppelin` namespace are now deprecated from the autotask runtime
+WARNING: Defender dependencies that are not under the `@openzeppelin` namespace are now deprecated. Impacted dependencies are defender-admin-client, defender-autotask-client, defender-autotask-utils, defender-kvstore-client, defender-relay-client, defender-sentinel-client
 
 NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful! 
 
