@@ -35,7 +35,7 @@ type Network =
   | 'linea-goerli'
   | 'linea'
   | 'mantle'
-  | 'mantle-testnet'
+  | 'mantle-sepolia'
   | 'scroll'
   | 'scroll-sepolia'
   | 'meld'
