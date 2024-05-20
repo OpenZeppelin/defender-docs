@@ -548,3 +548,8 @@ As for API secrets, these are only kept in memory during creation when they are 
 === Rollups
 
 When sending transactions to a rollup chain, such as Arbitrum or Optimism, Relayers currently depend on the chain's sequencer/aggregator. This means that, if the sequencer goes down or censors transactions, Relayers will not bypass it and commit directly to layer 1.
+
+[[inactivity]]
+== Inactivity
+
+Testnet relayers are considered inactive if they haven't sent any transactions in more than 60 days. When a testnet relayer is inactive, we provide a 14-day grace period to mark the relayer as active. If users don't take any action, the relayer will be automatically deleted once the period is over.
