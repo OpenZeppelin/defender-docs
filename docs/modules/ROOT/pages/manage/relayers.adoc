@@ -326,6 +326,21 @@ const txs = await relayer.list({
 })
 ----
 
+[[delete-pending-txs]]
+=== Delete Pending Transaction
+
+In situations where a relayer is stuck and unable to process transactions, the system provides a functionality to delete pending transactions. This action is designed as a last resort to address issues with transactions that have not been mined for at least 30 minutes. This feature can be activated from the Relayer Drawer, under the Pending Transactions tab, when the relayer has pending transactions.
+
+
+Key Points:
+
+- **Intended Use**: This feature is specifically aimed at resolving issues with relayers that are stuck due to unmined transactions. It is recommended to use this only after confirming that there have been no transactions mined for at least 30 minutes.
+- **Operation Overview**: Upon initiating the delete operation, the relayer will enter a paused state. During this pause, the system will either send NOOPs (No-Operation Instructions) to clear certain transactions or remove them entirely from the database. This distinction is made based on the specific characteristics of each pending transaction.
+- **Duration**: The entire process of deleting pending transactions and resuming normal operations can take up to 30 minutes. This includes the time taken to assess each transaction, apply the necessary actions, and ensure the relayer is ready to resume its functions.
+- **Resumption of Operations**: After the completion of the delete operation, the relayer will automatically resume its standard activities. Users do not need to take any further action to reactivate the relayer.
+- **Notification**: Users will receive an email notification once the process is complete and the relayer has resumed its operations.
+
+
 [[signing]]
 == Signing
 
