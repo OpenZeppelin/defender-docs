@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2024-05-20]]
+== May 20th, 2024
+
+* *General*
+** Show legacy plan in feedback form.
+** Prevent users from deleting their account if any prod relayers have a balance.
+** Enable simulation for moonbeam networks.
+** Deprecate goerli (+ zksync, base, arbitrum, optimism).
+** Upgrade Node 16.x to Node 20.x.
+
 [[release-2024-04-17]]
 == April 17th, 2024
 

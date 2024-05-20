@@ -34,22 +34,22 @@ The following triggers are supported:
 [[environment]]
 === Environment
 
-Actions run in a https://nodejs.org/dist/latest-v16.x/docs/api/[node 16 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
+Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
 
 [source,jsx]
 ----
-"@openzeppelin/defender-sdk": "1.1.0",
+"@openzeppelin/defender-sdk": "1.13.1",
 "@datadog/datadog-api-client": "^1.0.0-beta.5",
 "@gnosis.pm/safe-core-sdk": "^0.3.1",
 "@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
 "axios": "^1.4.0",
 "axios-retry": "3.5.0",
-"@openzeppelin/defender-admin-client": "1.50.0",
-"@openzeppelin/defender-autotask-client": "1.50.0",
-"@openzeppelin/defender-autotask-utils": "1.50.0",
-"@openzeppelin/defender-kvstore-client": "1.50.0",
-"@openzeppelin/defender-relay-client": "1.50.0",
-"@openzeppelin/defender-sentinel-client": "1.49.0",
+"@openzeppelin/defender-admin-client": "1.54.4",
+"@openzeppelin/defender-autotask-client": "1.54.4",
+"@openzeppelin/defender-autotask-utils": "1.54.4",
+"@openzeppelin/defender-kvstore-client": "1.54.5",
+"@openzeppelin/defender-relay-client": "1.54.4",
+"@openzeppelin/defender-sentinel-client": "1.54.4",
 "ethers": "5.5.3",
 "fireblocks-sdk": "^2.5.4",
 "graphql": "^15.5.1",
