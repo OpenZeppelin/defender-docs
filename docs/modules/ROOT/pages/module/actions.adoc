@@ -63,6 +63,18 @@ NOTE: If other dependencies are needed, a JavaScript module bundler, such as rol
 
 NOTE: We love https://www.typescriptlang.org/[Typescript, window=_blank] in the OpenZeppelin development team, and we hope you do too! If you want to write your actions in TypeScript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting JavaScript code. Unfortunately, we don't support coding directly in TypeScript in the user interface. All `defender-sdk` packages are coded in TypeScript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/@openzeppelin/defender-autotask-utils[@openzeppelin/defender-autotask-utils, window=_blank] package for https://github.com/OpenZeppelin/defender-sdk/blob/main/packages/action/src/models/action-event-utils.ts#L4[type definitions for the event payload, window=_blank].
 
+[[runtime-upgrades]]
+=== Runtime Upgrades
+
+Actions must be kept updated with recent Node.js runtime versions to ensure they run in an up-to-date and secure environment. Occasionally, we enforce runtime upgrades to all Actions to a minimum runtime version. The process consists of:
+
+1. Sending multiple email notifications, around 45, 30, 15, and 1 day before the automatic upgrade.
+2. Displaying a UI banner under the actions page to warn about the upcoming automatic upgrade.
+3. Making a forum announcement.
+4. On the automatic upgrade day, Defender automatically upgrades all action runtimes to the minimum required version.
+
+We suggest checking your Actions, making necessary changes, and upgrading in advance to prevent any breaking changes.
+
 [[defining-code]]
 === Defining code
 
