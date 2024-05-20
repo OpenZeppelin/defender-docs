@@ -8,7 +8,7 @@
 ** Prevent users from deleting their account if any prod relayers have a balance.
 ** Enable simulation for moonbeam networks.
 ** Deprecate goerli (+ zksync, base, arbitrum, optimism).
-** Change Contact Us CTAs to unrestricted Contact Sales .
+** Upgrade Node 16.x to Node 20.x.
 
 [[release-2024-04-17]]
 == April 17th, 2024
