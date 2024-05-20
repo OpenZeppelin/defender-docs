@@ -10,7 +10,7 @@ Monitors allow you to gain full visibility into your smart contracts' risks and 
 * Alert on potentially dangerous transactions or operational issues.
 * Integrate notifications to Slack, Telegram, Discord, email, PagerDuty, Opsgenie or custom APIs.
 * Use pre-built templates to setup monitoring quickly and easily.
-* Combine with other Defender 2.0 modules to execute on-chain transactions with monitor triggers.
+* Combine with other Defender modules to execute on-chain transactions with monitor triggers.
 
 [[monitors]]
 == Monitors
@@ -27,13 +27,11 @@ Monitors are organized into five categories, according to the type of risk they 
 * Financial
 * Technical
 
-You can also specify a severity for each alert, which your team can use to prioritize notifications. Each severity can then be associated with one or more notification channels.
+You can also specify a severity level, which your team can use to group or filter monitors by.
 
 * High Severity
 * Medium Severity
 * Low Severity
-
-Severities and notification channels should be combined according to the project. For example, a DeFi protocol may prefer financial monitors with a high-priority channel, such as Slack/Telegram, and technical monitors with a lower-priority channel, such as email.
 
 [[configure-a-monitor]]
 == Configuring a Monitor
@@ -137,7 +135,7 @@ gasPrice > 50000000000 and gasUsed > 20000
 
 === Custom Filters
 
-Custom filters supporsts custom code for filtering transactions. If a custom filter is specified, it will be called with a list of matches found for a given block. This allows the monitor to use other datasources and custom logic to evaluate whether a transaction matches.
+Custom filters supports custom code for filtering transactions. If a custom filter is specified, it will be called with a list of matches found for a given block. This allows the monitor to use other datasources and custom logic to evaluate whether a transaction matches.
 
 NOTE: Only transactions that match other conditions (event, function, transaction) will invoke the custom filter.
 
@@ -280,7 +278,7 @@ $1 == "hello"
 [[alerts]]
 == Alerts
 
-A monitor can either use the notification channel of its category or a custom one. It's also possible to connect an Action or an Incident Response Scenario that should run with the monitor.
+A monitor can use any supported notification channel for alerting. It's also possible to connect an Action or a Workflow that should run with the monitor.
 
 To prevent repeated alerts from individual monitors and control the notification rate, you can use the Alert Threshold and Minimum time between consecutive notifications fields.
 
@@ -444,4 +442,4 @@ From the monitor page, you can pause created monitors that are active. By clicki
 
 Saving a monitor as a template stores its configuration and parameters, which can be found by clicking the template gallery tab.
 
-NOTE: We provide a quickstart tutorial to monitor a smart contract using Defender 2.0. Check it out xref:tutorial/monitor.adoc[here]!
+NOTE: We provide a quickstart tutorial to monitor a smart contract using Defender. Check it out xref:tutorial/monitor.adoc[here]!

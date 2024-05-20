@@ -14,9 +14,9 @@ Audit allows you to summon our team of security experts to verify your system wo
 [[audit-reports]]
 == Auditors and Reports
 
-Auditors have special roles in Defender 2.0. Audit Managers are able to sync audit reports to Defender 2.0 from GitHub and add the Auditors, which are able to read and track issues and questions. Audit Manager can also identify which members of your team have permission to read or comment on audits.
+Auditors have special roles in Defender. Audit Managers are able to sync audit reports to Defender from GitHub and add the Auditors, which are able to read and track issues and questions. Audit Manager can also identify which members of your team have permission to read or comment on audits.
 
-Once an Audit Manager syncs and delivers an audit report to Defender 2.0, it will be visible to any team members who have been assigned the Audit Read or Audit Comment role. All active and historic audit reports will be visible, and team members can click on any audit report to view the details.
+Once an Audit Manager syncs and delivers an audit report to Defender, it will be visible to any team members who have been assigned the Audit Read or Audit Comment role. All active and historic audit reports will be visible, and team members can click on any audit report to view the details.
 
 image::audit-status.png[Audit Status Header]
 
@@ -46,14 +46,14 @@ The description explains the nature of the issue, its potential impact, and any 
 
 The "Recommendations" section offers actionable guidance to improve the security posture of the project based on the audit results. This section is often composed of mitigation strategies, monitor recommendations, incident response plans, potential pitfalls, and other technical and non-technical advice.
 
-Monitoring and incident response recommendations included in this section are crucial for ensuring the ongoing security and resilience of your blockchain project or smart contract. These recommendations focus on proactive measures to detect and respond to security incidents, breaches, or anomalies effectively. The information given will provide details on how to apply these recommendations with Defender xref:module/monitor.adoc[Monitors], xref:module/actions.adoc[Actions], and xref:module/incident-response.adoc[Incident Response] scenarios. We recommend following the tutorials found in this documentation to learn how to use the Defender modules, like the xref:tutorial/monitor.adoc[Monitor], xref:tutorial/actions.adoc[Actions], and xref:tutorial/incident-response.adoc[Incident Response] tutorials.
+Monitoring and incident response recommendations included in this section are crucial for ensuring the ongoing security and resilience of your blockchain project or smart contract. These recommendations focus on proactive measures to detect and respond to security incidents, breaches, or anomalies effectively. The information given will provide details on how to apply these recommendations with Defender xref:module/monitor.adoc[Monitors], xref:module/actions.adoc[Actions], and xref:module/actions.adoc#workflows[Workflows]. We recommend following the tutorials found in this documentation to learn how to use the Defender modules, like the xref:tutorial/monitor.adoc[Monitor], xref:tutorial/actions.adoc[Actions], and xref:tutorial/workflows.adoc[Workflow] tutorials.
 
 Recommendations often include:
 
 * *Event Monitoring*: event monitoring to track and analyze events emitted by your smart contracts. This is essential for identifying unusual or unexpected behavior that may indicate a security issue.
 * *Custom Alerts*: Custom alerts based on specific conditions or events. This aligns with the incident response recommendation to have alerting mechanisms in place.
-* *Automated Response*: Automated responses to specific events or conditions, enabling rapid incident mitigation. Combined with xref:module/actions.adoc[Actions] and xref:module/incident-response.adoc[Incident Response] scenarios.
-* *Threshold Monitoring*: Monitoring for unusual deviations from established thresholds is a common incident response practice. Defender can assist in setting up threshold-based monitoring with xref:module/monitor.adoc[Monitors] and to react with automatic xref:module/incident-response.adoc[Incident Response] scenarios.
+* *Automated Response*: Automated responses to specific events or conditions, enabling rapid incident mitigation. Combined with xref:module/actions.adoc[Actions] and xref:module/actions.adoc#workflows[Workflows].
+* *Threshold Monitoring*: Monitoring for unusual deviations from established thresholds is a common incident response practice. Defender can assist in setting up threshold-based monitoring with xref:module/monitor.adoc[Monitors] and to react with automatic xref:module/actions.adoc#workflows[Workflows].
 * *Deployment Considerations*: Minimize risk while avoiding unnecessary delays and post-deployment using Defender xref:module/deploy.adoc[Deploy]. Employ automatic analysis to avoid storage collisions or other issues and benefit from features like cross-chain deterministic deployments, bytecode verification, and more.
 
 === Conclusion
@@ -75,7 +75,7 @@ Team members may leave comments for auditors. Specifically, team members can sup
 
 image::audit-reply-issue.png[Audit Issue Reply]
 
-Defender 2.0 will keep and display a trail of all communications between the auditors and team members on each issue.
+Defender will keep and display a trail of all communications between the auditors and team members on each issue.
 
 image::audit-trail.png[Audit Trail]
 

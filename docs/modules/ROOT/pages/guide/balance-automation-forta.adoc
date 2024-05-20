@@ -7,7 +7,7 @@ image::guide-forta-diagram.png[Component diagram]
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
 [[install-dependencies]]
 == 1. Install Dependencies
@@ -312,8 +312,8 @@ The Monitor is configured to trigger a notification as well as an Action when th
 
 Congratulations! You can now experiment with this integration further by transfering LINK from the monitored account so that the LINK balance drops below 0.1. When the Forta bot detects this, it will trigger the Monitor, which sends a notification and runs the Action to refill the monitored account.
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * https://docs.forta.network/en/latest/quickstart/[Forta quickstart guide]
 * https://github.com/forta-network/forta-bot-examples[Forta bot examples]

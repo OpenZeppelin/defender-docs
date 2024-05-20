@@ -1,72 +1,44 @@
-== Frequently Asked Questions (FAQ)
+[[faq]]
+= Frequently Asked Questions (FAQ)
 
-OpenZeppelin Defender 2.0 is the evolution of Defender, with an improved user experience, a cleaner interface, and new features that offer a more cohesive experience across the DevSecOps lifecycle. 
+OpenZeppelin Defender is the evolution of Defender, with an improved user experience, a cleaner interface, and new features that offer a more cohesive experience across the DevSecOps lifecycle. 
 
-=== Will Defender 2.0 support the same features available in Defender 1.0?
+== Does Defender support the same features available in Defender legacy?
 
-Yes. The same features should be available under the following new names, albeit potentially with some changes to behaviors.
+Yes, most features are available in Defender. Please note the following changes described xref:migration.adoc#differences[here].
 
-* Autotasks are now known as Automatic Actions
-* Sentinels are now known as Monitors
-* Relayers are now available under the Manage section
-* Active proposals within Admin can now be found at Transaction Proposals under Actions
-* Contracts, Multisigs and EOAs within Admin can now be found in Address Book under the Manage section
+== How can I sign up to Defender?
 
-*Actions - formerly Autotask*
+You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
-image::actions-autotask-faq.png[Actions - formerly Autotask]
+== Is Defender legacy still supported?
 
-*Monitors - formerly Sentinels*
+Defender legacy is now deprecated in favor of Defender. On June 1st 2024, users will no longer have access to Defender 1.0 UI and API. Users that haven't migrated will be forced to migrate. Learn how to migrate xref:migration.adoc[here].
 
-image::monitors-sentinels-faq.png[Monitors - formerly Sentinels]
+== Once I migrate to Defender, can I continue using Defender legacy?
 
-*Relayers - located under the Manage section*
+No, once you migrate to Defender, you will no longer have access to Defender 1.0 UI and API.
 
-image::relayers-faq.png[Relayers - located under the Manage section]
+== Will I be able to import my existing Defender configuration to Defender?
 
-*Transaction Proposals - formerly Admin proposals*
+Yes. All existing configurations for Autotask, Sentinels, etc., is automatically imported to Defender under the new features naming convention (described xref:migration.adoc#differences[here]).
 
-image::transaction-proposals-faq.png[Transaction Proposals - formerly Admin proposals]
+== Are there any breaking changes when migrating?
 
-*Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formerly under the Admin section*
+Yes, there are multiple changes to the API endpoints that will require you to update your integrations. You can find the API docs https://www.api-docs.defender.openzeppelin.com/#defender-sdk[here, window=_blank].
 
-image::address-book-faq.png[Address Book - located under the Manage section used to manage contracts, EOAs, and multisigs, formerly under the Admin section]
+== What are the pricing options for Defender?
 
-=== How can I sign up to Defender 2.0?
+You can find the pricing for Defender https://www.openzeppelin.com/pricing[here, window=_blank]. 
 
-You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+== Does Defender offer support?
 
-=== Is the existing Defender version still supported?
+We offer a Service Level and Support Agreement (SLA) for paid subscriptions. Learn more xref:index.adoc#sla[here].
 
-Yes. Our team will continue to maintain Defender for the foreseeable future. We will communicate our plan as things progress, ensuring there is an upgrade path for existing Defender users.
+== How can I get an upgrade my tenant account?
 
-=== Will I be able to import my existing Defender configuration to Defender 2.0 beta?
+You can use the billing page to upgrade your tenant account to a higher tier https://defender.openzeppelin.com/v2/#/billing/[here, window=_blank].
 
-Yes. All existing configurations for Autotask, Sentinels, etc., will be automatically imported to Defender 2.0 beta under the new features naming convention.
+== Where can I see my tier quota usage?
 
-=== Is there any timeline for Defender 2.0 to be generally available?
-
-Not at this point. We will be collecting feedback from the beta phase and based on the data we’ll collect we will announce our plan to make Defender 2.0 generally available.
-
-=== Are there any breaking changes between Defender 1.0 and Defender 2.0?
-
-Yes, there are multiple changes to the API endpoints that will require you to update your integrations. You can visit the new API docs and SDK to learn more.
-
-=== Will Defender 2.0 offer the same subscriptions as Defender 1.0?
-
-We have yet to finalize the new subscriptions. Once they are finalized we will notify existing users about the expected change.
-
-
-=== Can I switch back to using Defender 1.0 in case I've migrated to Defender 2.0 beta?
-
-Yes. You can switch back and forth between Defender 2.0 beta to the existing Defender version by clicking on the “Switch back to Defender” option in the navigation menu.
-
-image::switch-back-faq.png[Switch back to Defender]
-
-=== Does Defender 2.0 beta offer the same level of support?
-
-Yes. You can reach out and submit a support request for Defender 2.0 in the same channels as the existing Defender version. Additionally, you can submit feedback or report an issue directly from the web application using the dedicated feedback form.
-
-=== How can I get an additional quota or upgrade my tenant account?
-
-If your current quota no longer meets your needs, we'll help you scale up. You can upgrade your quota by contacting our team at link:mailto:sales@openzeppelin.com[sales@openzeppelin.com] or by using the in-app feedback form and selecting the "Additional quota" topic.
+You can see your tier quota usage in the billing page https://defender.openzeppelin.com/v2/#/billing/usage[here, window=_blank].

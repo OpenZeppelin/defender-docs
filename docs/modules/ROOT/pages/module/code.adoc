@@ -3,14 +3,14 @@
 
 Code Inspector seamlessly integrates with Github to maximize security with every step of your development process via automatic code analysis powered by machine learning intelligence and state-of-the-art tools developed by our security experts.
 
-For every push to your code, the OpenZeppelin Code Inspector dives into a detailed examination, identifying potential vulnerabilities and suggesting improvements to enhance your code quality. It generates a succinct report, summarizable in your PR comments for quick and immediate access, while a more detailed report is made available on Defender 2.0.
+For every push to your code, the OpenZeppelin Code Inspector dives into a detailed examination, identifying potential vulnerabilities and suggesting improvements to enhance your code quality. It generates a succinct report, summarizable in your PR comments for quick and immediate access, while a more detailed report is made available on Defender.
  
 [[use-cases]]
 == Use cases
 
 * Automatically conduct security analysis on pull requests, identifying vulnerabilities and suggesting improvements.
 * Utilize summarized reports in the pull request for immediate insights into your code's health and security.
-* Access comprehensive, detailed reports on Defender 2.0 for an in-depth understanding of potential vulnerabilities and code optimization areas.
+* Access comprehensive, detailed reports on Defender for an in-depth understanding of potential vulnerabilities and code optimization areas.
 * Use OpenZeppelin's Dependency Checker to identify reused contracts and match them against a database of known vulnerabilities.
 * Apply static analysis rules to Solidity files, identifying potential issues and their severity for high-quality code maintenance.
 
@@ -35,16 +35,16 @@ Code Inspector has a wide range of functionalities designed to enhance security,
 == Installation
 
 [NOTE]
-Installation must be initiated from Defender 2.0. Installing the app directly from GitHub will not correctly set up the integration.
+Installation must be initiated from Defender. Installing the app directly from GitHub will not correctly set up the integration.
 
-The installation process connects your Defender 2.0 account and your GitHub repositories. Follow the following steps:
+The installation process connects your Defender account and your GitHub repositories. Follow the following steps:
 
-. Navigate to the https://defender.openzeppelin.com/v2/#/code[Code Inspector page, window=_blank] on Defender 2.0.
+. Navigate to the https://defender.openzeppelin.com/v2/#/code[Code Inspector page, window=_blank] on Defender.
 . Click on the Install Code Inspector button, which redirects you to Github.
 . Select and approve the repositories to install the app.
 . Generate your first report by creating or updating a pull request on a repository that has the app installed.
 
-The installation is currently done solely through Defender 2.0, ensuring a seamless connection for the reports. Following the installation, no additional setup is required. If you encounter installation issues, refer to our <<installation-issues,Troubleshooting>> section for guidance.
+The installation is currently done solely through Defender, ensuring a seamless connection for the reports. Following the installation, no additional setup is required. If you encounter installation issues, refer to our <<installation-issues,Troubleshooting>> section for guidance.
 
 [[usage]]
 == Usage
@@ -53,7 +53,7 @@ Code Inspector is designed to streamline your code analysis workflow. Once insta
 
 The app automatically generates a summary report for each new commit, which is posted as a comment in your PR. This summary report is continuously updated with the latest issues discovered in the most recent commit, and the commit hash is directly viewable in the report.
 
-Along with the summary reports in PR comments, a detailed report for each commit is created and can be accessed on Defender 2.0, offering in-depth information on the identified issues and how to fix them.
+Along with the summary reports in PR comments, a detailed report for each commit is created and can be accessed on Defender, offering in-depth information on the identified issues and how to fix them.
 
 If you wish to stop receiving reports for a specific repository, it's as simple as navigating to the Code Inspector settings and removing the respective repository from the list.
 
@@ -72,11 +72,11 @@ These are the possible statuses of reports:
 [[summary]]
 === Summary Report
 
-The summary report provides a clear overview of potential vulnerabilities detected in the code during the review process. The report is conveniently categorized by process and severity level, making it easier to identify areas that need attention. You can navigate to the complete report on Defender 2.0 via the provided link. Each report is tied to a specific commit, ensuring accurate tracking of changes and issues over time.
+The summary report provides a clear overview of potential vulnerabilities detected in the code during the review process. The report is conveniently categorized by process and severity level, making it easier to identify areas that need attention. You can navigate to the complete report on Defender via the provided link. Each report is tied to a specific commit, ensuring accurate tracking of changes and issues over time.
  
 image::code-report-summary.png[Summary Report]
 
-In this example, you can see the number of issues detected by Code Inspector, along with their respective severity levels. By clicking the link at the bottom of the report, you can view the full details of these vulnerabilities on Defender 2.0.
+In this example, you can see the number of issues detected by Code Inspector, along with their respective severity levels. By clicking the link at the bottom of the report, you can view the full details of these vulnerabilities on Defender.
 
 [[full]]
 === Full Report
@@ -107,6 +107,8 @@ Contract Inspector runs a xref:#rules[set of rules] to detect potential issues i
 
 - `enabled`:  ability to turn off the Contract Inspector. False meaning not to run, and true to run. (default: `true`)
 - `scan_directories`: list of directories to scan with paths starting from the root directory. default: `["."]`
+- `include_rules`: list of rules to run. default: xref:#rules[all rules].
+- `exclude_rules`: list of rules to not run. default: none.
 
 === Dependency Checker
 Dependency Checker verifies that your dependencies are not vulnerable to known issues. You can configure the following parameters:
@@ -115,14 +117,15 @@ Dependency Checker verifies that your dependencies are not vulnerable to known i
 
 ==== Example
 
-The following `defender.config.json` configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories.
+The following `defender.config.json` configuration file will disable Dependency Checker and run Contract Inspector on the `src/contracts1` and `src/contracts2` directories, excluding two rules (`naming-convention` and `unused-state`).
 
 [source,json]
 ----
 {
     "contract_inspector": {
         "enabled": true,
-        "scan_directories": ["src/contracts1", "src/contracts2"]
+        "scan_directories": ["src/contracts1", "src/contracts2"],
+        "exclude_rules": ["naming-convention", "unusued-state"]
     },
     "dependency_checker": {
         "enabled": false
@@ -149,7 +152,7 @@ image::code-settings-advanced.png[Code Advanced Settings]
 [[installation-issues]]
 === Installation Issues
 
-* *Installing the app outside Defender 2.0*: Code Inspector must be installed via Defender 2.0. If you attempt to install it from elsewhere, the installation will not succeed. Ensure you're logged in to your OpenZeppelin account and navigate to Code Inspector from Defender 2.0 for a successful installation.
+* *Installing the app outside Defender*: Code Inspector must be installed via Defender. If you attempt to install it from elsewhere, the installation will not succeed. Ensure you're logged in to your OpenZeppelin account and navigate to Code Inspector from Defender for a successful installation.
 
 * *Code Inspector Access*: Access to Code Inspector is required for a successful installation. If you find that you don't have access and you think this is a mistake, contact OpenZeppelin support to get the necessary permissions.
 

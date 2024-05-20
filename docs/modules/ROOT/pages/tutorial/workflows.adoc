@@ -1,0 +1,125 @@
+# Create an Action Workflow to decrease the number of objects in a Box contract
+
+Defender allows you to target and activate on-chain activity using Action Workflow quickly. This tutorial shows how to create a workflow that monitors the number of objects in a Box contract and executes an action when an object is added to it.
+
+[[pre-requisites]]
+== Pre-requisites
+
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+
+[[action]]
+== 1. Action setup
+
+In this tutorial, you will monitor https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[this, window=_blank] contract in Sepolia, which stores a number of objects while allowing anyone to add or remove objects using the `addObject()` and `removeObject()` functions respectively. For every object added, your workflow will execute an action that removes an object and decreases the total by one. To set up the action, follow these steps:
+
+. Open https://defender.openzeppelin.com/v2/#/manage/relayers/new[Defender Manage Relayers, window=_blank] in a web browser.
+. Fill the form with the following parameters and click on *Create*:
++
+* *Name*: `Relayer Sepolia`
+* *Network*: `Sepolia`
+
+. Transfer some Sepolia ETH to the relayer address created in the previous step.
+. Navigate to https://defender.openzeppelin.com/v2/#/manage/address-book/new[Defender Address Book, window=_blank] to import the `BoxV2` contract.
+. Fill the form with the following parameters and click on *Create*:
++
+* *Name*: `BoxV2`
+* *Network*: `Sepolia`
+* *Address*: `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074`
+
+. Navigate to https://defender.openzeppelin.com/v2/#/actions/workflows/transaction-template/new?[Defender Workflows Transaction Template creation page, window=_blank].
+. Fill the **General Information** section with the following parameters:
++
+* *Name*: `Remove object`
+* *Contract*: `BoxV2`
+
+. Select the `removeObject` function from the dropdown menu in the **Function** section.
+. Expand the dropdown on the **Approval Process** section and click on `Create Approval Process`.
+. Fill the form with the following parameters and click on *Save Changes*:
++
+* *Name*: `BoxV2 IR Sender`
+* *Relayer*: `Relayer Sepolia` (created in the first step)
+
+. Select `BoxV2 IR Sender` as the approval process and click on `Save Transaction Template`
+
++
+image::tutorial-workflow-first-action.png[Workflow page with Transaction Template]
+
+[[workflow]]
+== 2. Workflow setup
+
+With the action configured, you now need to create the workflow. To do so, follow these steps:
+
+. Open the https://defender.openzeppelin.com/v2/#/actions/workflows/new[Defender Workflows creation page, window=_blank].
+. Rename the workflow `Remove from BoxV2 if Object is Added`.
+. Drag the `Remove object` action to the first row.
+. Click on *Save*.
+
++
+image::tutorial-workflow-scenario.png[BoxV2 workflow]
+
+[[monitor]]
+== 3. Monitor setup
+
+After creating the workflow, you need to configure a monitor that keeps track of the number of objects in the BoxV2 contract to trigger the workflow. To do so, follow these steps:
+
+. Open the https://defender.openzeppelin.com/v2/#/monitor/new/custom[Defender Monitor creation page, window=_blank].
+. Fill the **General Information** section with the following parameters:
++
+* *Name*: `BoxV2 Objects Monitor`
+* *Risk Category*: `Suspicious Activity`
+* *Contract*: `BoxV2`
+* *Confirmation Blocks*: `Confirmed (1 blocks)`
+
++
+image::tutorial-ir-first-monitor.png[Workflow Monitor General Information]
+
+. In the **Transaction Filters** section, add `status == "success"` for the `Transaction properties` field.
+. In the **Function** section, select `addObject()`
+. Within the **Alerts** section, select the `Remove from BoxV2 if Object is Added` workflow for the `Execute a Workflow` option.
+
++
+image::tutorial-ir-monitor.png[Workflow BoxV2 Objects monitor]
+
+. Click on *Save Monitor*, which will start running.
+
+[[in-action]]
+== 4. Seeing it in action
+
+While the monitor runs, it will detect any transaction that matches the `addObject()` function to trigger the workflow. To manually execute such a transaction, follow these steps:
+
+. Open the https://defender.openzeppelin.com/v2/#/actions/executable/new?[Defender Transaction Proposal creation page, window=_blank].
+. Fill the form with the following parameters:
++
+* *Name*: `BoxV2 Add Object Trigger`
+* *Contract*: `BoxV2`
+* *Function*: `addObject`
+* *Approval Process*: `BoxV2 IR Sender`
+
+. Click on *Submit Transaction Proposal*.
+
++
+image::tutorial-ir-proposal-action.png[Transaction Proposal Trigger]
+
+. Click on the transaction proposal to open its page.
+. Click on the top-right button *Approve and Execute* to execute the transaction, which will trigger the workflow through the monitor.
+. Wait for the transaction to be executed and open the https://defender.openzeppelin.com/v2/#/actions/workflows[Defender Workflows page, window=_blank].
+
++
+image::tutorial-workflow-active-scenario.png[Active Workflow]
+
+. Click on *View Active Run* and check the details of your workflow response.
+. After the run is executed successfully, you can verify the response by checking the activity of the contract on https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[Etherscan, window=_blank]. It should look like this:
+
++
+image::tutorial-ir-etherscan.png[Workflow Etherscan Response]
+
+[[next-steps]]
+== Next steps
+
+Congratulations! You now have a complete workflow that will be running and checking every confirmed block. Workflows can be expanded with parallel actions for more technical combinations. In case you are interested in advanced use cases, we are working on Workflow-related guides.
+
+[[references]]
+== References
+
+* xref::module/actions.adoc#workflows[Workflow Documentation]
+* https://sepolia.etherscan.io/address/0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074[BoxV2, window=_blank]

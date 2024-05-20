@@ -1,27 +1,27 @@
 # Deploy a smart contract on a forked network
 
-Defender 2.0 empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and incident response. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
+Defender empowers you to harness your customized network forks for deploying and testing smart contracts, along with associated configurations of, for example, actions, monitors, and workflows. This guide will lead you through the steps of deploying a smart contract on a forked network and interacting with it.
 
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
 [[configure-forked-network]]
 == 1. Configure your forked network
 
-You will setup a forked network on https://phalcon.xyz[Phalcon, window=_blank] and add this network to Defender 2.0. To configure a forked network, follow these steps:
+You will setup a forked network on https://phalcon.xyz[Phalcon, window=_blank] and add this network to Defender. To configure a forked network, follow these steps:
 
 . Register an account on https://phalcon.xyz[Phalcon, window=_blank] and create a new fork using Ethereum mainnet as the source network.
 . Ensure anti-replay protection is activated to use a distinct chain ID for your fork, preventing conflicts with public chain IDs.
 +
 image::tutorial-forked-network-phalcon-create.png[Phalcon create a fork]
 
-. Copy the RPC URL and Explorer URL (this can be found under 'Scan') of your forked network. You will need it to add the network to Defender 2.0.
+. Copy the RPC URL and Explorer URL (this can be found under 'Scan') of your forked network. You will need it to add the network to Defender.
 +
 image::tutorial-forked-networks-phalcon-dashboard.png[Phalcon dashboard]
 
-. Open https://defender.openzeppelin.com/v2/#/manage/networks/forks[Defender 2.0 Forked Networks, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/manage/networks/forks[Defender Forked Networks, window=_blank] in a web browser.
 . Click on *Add Forked Network*.
 +
 image::tutorial-forked-networks-intro.png[Forked Networks landing page]
@@ -36,9 +36,9 @@ NOTE: You may use any provider to fork a network, such as https://conduit.xyz[Co
 [[configure-deploy-environment]]
 == 2. Configure the deploy environment
 
-You will setup a deploy environment for the forked network you just added to Defender 2.0. To configure a deploy environment, follow these steps:
+You will setup a deploy environment for the forked network you just added to Defender. To configure a deploy environment, follow these steps:
 
-. Open https://defender.openzeppelin.com/v2/#/deploy[Defender 2.0 Deploy, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/deploy[Defender Deploy, window=_blank] in a web browser.
 . Click on *Setup* for your production environment (or setup a test environment if your network is forked from a testnet).
 +
 image::tutorial-forked-networks-deploy-intro.png[Deploy landing page]
@@ -66,7 +66,7 @@ NOTE: You should fund the relayer account with enough ETH to cover the gas costs
 [[deploy-contract]]
 == 3. Deploy a smart contract on a forked network
 
-You will deploy a smart contract on the forked network you just added to Defender 2.0. To deploy a smart contract, follow these steps:
+You will deploy a smart contract on the forked network you just added to Defender. To deploy a smart contract, follow these steps:
 
 . Setup a JavaScript project and install the https://www.npmjs.com/package/@openzeppelin/defender-sdk-deploy-client[defender-sdk-deploy-client, window=_blank] NPM package. Alternatively, you can use the https://github.com/OpenZeppelin/defender-sdk/blob/main/examples/deploy-contract/index.js[defender-sdk delpoy example script, window=_blank] provided in the OpenZeppelin Defender SDK repository.
 . The deployment code will look something like this:
@@ -93,7 +93,7 @@ const deploymentStatus = await client.deploy.getDeployedContract(deployment.depl
 console.log(deploymentStatus);
 ```
 . Run the script to deploy the contract. *Note* that providing a `salt` will deploy the contract using `CREATE2`. Otherwise, the contract will be deployed using the `CREATE` opcode. Visit the documentation for more information on the https://docs.openzeppelin.com/defender/v2/tutorial/deploy#deploy-caveat[caveats of deployment].
-. Once deployed, you can track the deployment status on the https://defender.openzeppelin.com/v2/#/deploy/environment/production[Defender 2.0 Deploy dashboard, window=_blank].
+. Once deployed, you can track the deployment status on the https://defender.openzeppelin.com/v2/#/deploy/environment/production[Defender Deploy dashboard, window=_blank].
 
 
 [[next-steps]]
@@ -101,10 +101,10 @@ console.log(deploymentStatus);
 
 Congratulations! You have successfully deployed a smart contract on a forked network. If you have provided a `blockExplorerUrl`, you can verify the transaction on the block explorer of your forked network.
 
-NOTE: After deploying a contract, we recommend creating a Monitor and setting up Actions on Defender 2.0. Learn how to setup a Monitor xref::tutorial/monitor.adoc[here], and use Actions with its tutorial xref::tutorial/actions.adoc[here].
+NOTE: After deploying a contract, we recommend creating a Monitor and setting up Actions on Defender. Learn how to setup a Monitor xref::tutorial/monitor.adoc[here], and use Actions with its tutorial xref::tutorial/actions.adoc[here].
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref::module/deploy.adoc[Deploy Documentation]
 * xref::module/actions.adoc[Actions Documentation]

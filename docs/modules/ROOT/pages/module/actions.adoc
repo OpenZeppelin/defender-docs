@@ -1,14 +1,14 @@
 [[actions]]
 = Actions
 
-Actions allow you to implement custom app logic for on-chain and off-chain operations. You can enable automated responses to threats detected by the xref:module/monitor.adoc[Monitor] and xref:module/incident-response.adoc[Incident Response] modules.
+Actions allow you to implement custom app logic for on-chain and off-chain operations. You can enable automated responses to threats detected by the xref:module/monitor.adoc[Monitor] and xref:module/actions.adoc#workflows[Workflows] modules.
 
 [[use-cases]]
 == Use cases
 
 * Automate smart contract operations
 * Execute actions as response to a xref:module/monitor.adoc[Monitor] alert 
-* Automate xref:module/incident-response.adoc[Incident Response] steps with Actions
+* Automate xref:module/actions.adoc#workflows[Workflow] steps with Actions
 * Create transaction proposals from multisigs, relayers, and more
 * No-code (form-based) for transaction proposals
 * Call external APIs and interact with other smart contracts
@@ -25,11 +25,11 @@ image::auto-action-general-info.png[Automatic Action]
 
 The following triggers are supported:
 
-* *Schedule*: Choose a frequency, and Defender 2.0 will invoke the function at the specified interval. Note that the specified interval is between two consecutive execution starts, _not_ between the end of one run and the beginning of the next one. Alternatively, it's possible to specify when the action should run using https://crontab.cronhub.io/[cron expressions, window=_blank].
+* *Schedule*: Choose a frequency, and Defender will invoke the function at the specified interval. Note that the specified interval is between two consecutive execution starts, _not_ between the end of one run and the beginning of the next one. Alternatively, it's possible to specify when the action should run using https://crontab.cronhub.io/[cron expressions, window=_blank].
 
-* *Webhook*: Defender 2.0 will create a webhook URL for the action, which will be executed whenever an HTTP POST request is sent to that endpoint. The URL can be regenerated at any time. When invoked, the HTTP request information will be injected into the action, and the HTTP response will include the action run info along with any data returned from the action.
+* *Webhook*: Defender will create a webhook URL for the action, which will be executed whenever an HTTP POST request is sent to that endpoint. The URL can be regenerated at any time. When invoked, the HTTP request information will be injected into the action, and the HTTP response will include the action run info along with any data returned from the action.
 
-* *Monitor*: Triggered by a Defender 2.0 xref:module/monitor.adoc[Monitor]. It will contain a body property with the details for the triggering event that you can use to run custom logic.
+* *Monitor*: Triggered by a Defender xref:module/monitor.adoc[Monitor]. It will contain a body property with the details for the triggering event that you can use to run custom logic.
 
 [[environment]]
 === Environment
@@ -38,24 +38,26 @@ Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environm
 
 [source,jsx]
 ----
-"@openzeppelin/defender-sdk": "1.1.0",
+"@openzeppelin/defender-sdk": "1.13.1",
 "@datadog/datadog-api-client": "^1.0.0-beta.5",
 "@gnosis.pm/safe-core-sdk": "^0.3.1",
 "@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
 "axios": "^1.4.0",
 "axios-retry": "3.5.0",
-"@openzeppelin/defender-admin-client": "1.50.0",
-"@openzeppelin/defender-autotask-client": "1.50.0",
-"@openzeppelin/defender-autotask-utils": "1.50.0",
-"@openzeppelin/defender-kvstore-client": "1.50.0",
-"@openzeppelin/defender-relay-client": "1.50.0",
-"@openzeppelin/defender-sentinel-client": "1.49.0",
+"@openzeppelin/defender-admin-client": "1.54.4",
+"@openzeppelin/defender-autotask-client": "1.54.4",
+"@openzeppelin/defender-autotask-utils": "1.54.4",
+"@openzeppelin/defender-kvstore-client": "1.54.5",
+"@openzeppelin/defender-relay-client": "1.54.4",
+"@openzeppelin/defender-sentinel-client": "1.54.4",
 "ethers": "5.5.3",
 "fireblocks-sdk": "^2.5.4",
 "graphql": "^15.5.1",
 "graphql-request": "3.4.0",
 "web3": "1.9.0"
 ----
+
+WARNING: Defender dependencies that are not under the `@openzeppelin` namespace are now deprecated. Impacted dependencies are defender-admin-client, defender-autotask-client, defender-autotask-utils, defender-kvstore-client, defender-relay-client, defender-sentinel-client
 
 NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful! 
 
@@ -135,7 +137,7 @@ export interface AutotaskEvent {
 [[relayer-integration]]
 ==== Relayer integration
 
-If you connect your automatic action to a relayer, then Defender 2.0 will automatically inject temporary credentials to access the relayer from the action code. Simply pass the event object to the relayer client in place of the credentials:
+If you connect your automatic action to a relayer, then Defender will automatically inject temporary credentials to access the relayer from the action code. Simply pass the event object to the relayer client in place of the credentials:
 
 [source,jsx]
 ----
@@ -187,7 +189,7 @@ exports.handler = async function(event) {
 
 Actions triggered from a Monitor can have two types of body properties and scheme, depending what type of Monitor triggered the action:
 
-* In the case of a Defender 2.0 monitor, the body will contain the xref:module/monitor.adoc#monitor_event_schema[monitor event schema].
+* In the case of a Defender monitor, the body will contain the xref:module/monitor.adoc#monitor_event_schema[monitor event schema].
 * In the case of a Forta monitor, the body will contain the Forta Alert details.
 
 If the action is written in TypeScript, `BlockTriggerEvent` or `FortaTriggerEvent` types from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used.
@@ -252,7 +254,7 @@ NOTE: Actions that take longer than 25 seconds to complete will return a respons
 NOTE: If `{"message":"Missing Authentication Token"}` is the response to a Webhook HTTP request, double check that the request was actually a POST. This response occurs when issuing a GET.
 
 ==== Secrets
-Defender 2.0 secrets allow you to store sensitive information, such as API keys and secrets that can be accessed securely from actions. +
+Defender secrets allow you to store sensitive information, such as API keys and secrets that can be accessed securely from actions. +
 Action secrets are key-value case-sensitive pairs of strings, that can be accessed from action code using the `event.secrets` object. There is no limit to the number of secrets used by an action. Secrets are shared across all actions, and not specific to a single one.
 
 [source,jsx]
@@ -267,7 +269,7 @@ Secrets are encrypted and stored in a secure vault, only decrypted for injection
 WARNING: An action may log the value of a secret, accidentally leaking it.
 
 
-NOTE: While it's possible to use secrets to store private keys for signing messages or transactions, we recommend to use a Defender 2.0 relayer instead. Signing operations for Defender 2.0 relayers provide an extra level of security over loading the private key in action code and signing there.
+NOTE: While it's possible to use secrets to store private keys for signing messages or transactions, we recommend to use a Defender relayer instead. Signing operations for Defender relayers provide an extra level of security over loading the private key in action code and signing there.
 
 ==== Key-value data store
 
@@ -296,7 +298,7 @@ WARNING: Each item expires 90 days after its last update. If long-lived data sto
 
 ==== Notifications
 
-Actions can send notifications through various channels already defined in the Defender 2.0 Notifications settings. This integration allows you to quickly inform other connected systems about changes detected or made by actions.
+Actions can send notifications through various channels already defined in the Defender Notifications settings. This integration allows you to quickly inform other connected systems about changes detected or made by actions.
 
 To send a notification, you should use `notificationClient.send()`, as shown in the following example:
 [source,js]
@@ -390,7 +392,7 @@ If you want to reproduce the behavior of an action locally for debugging or test
 * Download `yarn.lock`: 📎 link:{attachmentsdir}/yarn.lock[yarn.lock]
 * Run `yarn install --frozen-lockfile`.
 
-You can also use the following template for local development, which will run the action code when invoked using `node`. It will load the relayer credentials from environment variables, or use the injected credentials when run by Defender 2.0.
+You can also use the following template for local development, which will run the action code when invoked using `node`. It will load the relayer credentials from environment variables, or use the injected credentials when run by Defender.
 
 [source,jsx]
 ----
@@ -417,7 +419,7 @@ Remember to send any other value that your action expects in the `event` object,
 [[updating-code]]
 === Updating code
 
-You can edit an action's code via the Defender 2.0 interface, or programmatically via API using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] npm package. The latter allows to upload a code bundle with more than a single file:
+You can edit an action's code via the Defender interface, or programmatically via API using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] npm package. The latter allows to upload a code bundle with more than a single file:
 
 NOTE: The code bundle must not exceed 5MB in size after being compressed and base64-encoded, and it must always include an `index.js` at the root of the zip file to act as the entrypoint.
 
@@ -429,7 +431,7 @@ This low-code format is very useful for non technical users and simple scenarios
 
 [[general-information]]
 === General Information
-To create a transaction proposal from Defender 2.0, you need to define a few parameters:
+To create a transaction proposal from Defender, you need to define a few parameters:
 
 * Title: A descriptive name for the proposal. This will be latter shown in the proposal list.
 * Description(optional): A longer description of the proposal. This will be shown in the proposal details.
@@ -441,7 +443,33 @@ Define the function that you want to call on the target contract. You can select
 
 [[approval-process]]
 === Approval Process
-Define how you want the transaction to be executed. You can choose from any of the xref:manage.adoc#approval-processes[transaction approval processes] available in Defender 2.0 that you have previously configured or you can optionally create a new one.
+Define how you want the transaction to be executed. You can choose from any of the xref:manage.adoc#approval-processes[transaction approval processes] available in Defender that you have previously configured or you can optionally create a new one.
+
+[[workflows]]
+== Workflows
+
+Workflows allow you to instantly detect, respond, and resolve threats and attacks with pre-defined actions and scenarios. You can conduct attack simulations and test real-world scenarios on forked networks too.
+
+Workflows are processes that combine automatic actions and transaction templates. Actions can be run in parallel or connected sequentially. Workflows can be triggered manually or via a xref:module/monitor.adoc[Monitor].
+
+
+Creating workflows is a seamless experience guided through a form that allows you to organize actions in the workflow process easily.
+
+image::actions-start-workflow.png[Create Workflow]
+
+To populate a workflow, you have to drag existing actions from the list on the right onto the form. Actions are executed vertically, meaning the previous actions must finish successfully to begin the execution of the new row. Parallel actions are executed at the same time. However, the workflow stops completely if an action exits with an error.
+
+image::actions-workflow.png[Edit Workflow]
+
+To run multiple actions in parallel, click "Add Parallel Sequence" and drag actions into the available side-by-side boxes.
+
+image::actions-parallel-workflow.png[Parallel Workflow]
+
+You can drag actions back off the workflow to remove them or click the visible minus icon in the upper right to remove an empty step. The "Save" button on the top right saves the workflow with its configuration and name.
+
+
+NOTE: We provide a quickstart tutorial to create and use Workflows. Check it out xref:tutorial/workflows.adoc[here]!
+
 
 [[a-complete-example]]
 == A complete example
@@ -475,11 +503,11 @@ exports.handler = async function(event) {
 }
 ----
 
-NOTE: The code does not need to wait for the transaction to be mined. Defender 2.0 will take care of monitoring the transaction and resubmitting if needed. The action only needs to send the request and exit.
+NOTE: The code does not need to wait for the transaction to be mined. Defender will take care of monitoring the transaction and resubmitting if needed. The action only needs to send the request and exit.
 
 [[security-considerations]]
 == Security considerations
 
-The code for each action is isolated in Defender 2.0, and actions are restricted via strict access controls to have zero access to other Defender 2.0 internal infrastructure. The only exception is that an action may access its linked relayer, which is negotiated via temporary credentials injected by the action service upon each execution. Still, the action can only call the relayer's exposed methods and has no direct access to the backing private key or any other services.
+The code for each action is isolated in Defender, and actions are restricted via strict access controls to have zero access to other Defender internal infrastructure. The only exception is that an action may access its linked relayer, which is negotiated via temporary credentials injected by the action service upon each execution. Still, the action can only call the relayer's exposed methods and has no direct access to the backing private key or any other services.
 
-NOTE: We provide a quickstart tutorial to create an automatic action for a smart contract using Defender 2.0. Check it out xref:tutorial/actions.adoc[here]!
+NOTE: We provide a quickstart tutorial to create an automatic action for a smart contract using Defender. Check it out xref:tutorial/actions.adoc[here]!

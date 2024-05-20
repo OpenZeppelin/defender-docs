@@ -1,6 +1,6 @@
 # How to manage roles of a TimelockController
 
-Defender 2.0 allows you to oversee and command contract permissions of any smart contract that uses https://docs.openzeppelin.com/contracts/api/access#AccessControl[AccessControl from OpenZeppelin Contracts, window=_blank]. This guide will lead you through the steps of importing a TimelockController contract, creating a proposal, and managing its roles. A `TimelockController` is a smart contract that enforces a delay between when an operation is queued and when it can be executed. This mechanism is commonly used in decentralized governance to increase security and provide transparency, allowing stakeholders to observe and react to changes before they are executed. TimelockController uses the following `AccessControl`` setup:
+Defender allows you to oversee and command contract permissions of any smart contract that uses https://docs.openzeppelin.com/contracts/api/access#AccessControl[AccessControl from OpenZeppelin Contracts, window=_blank]. This guide will lead you through the steps of importing a TimelockController contract, creating a proposal, and managing its roles. A `TimelockController` is a smart contract that enforces a delay between when an operation is queued and when it can be executed. This mechanism is commonly used in decentralized governance to increase security and provide transparency, allowing stakeholders to observe and react to changes before they are executed. TimelockController uses the following `AccessControl`` setup:
 
 * The *Proposer* role is in charge of queueing operations: this is the role the Governor instance should be granted, and it should likely be the only proposer in the system.
 
@@ -11,7 +11,7 @@ Defender 2.0 allows you to oversee and command contract permissions of any smart
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender 2.0 account. You can sign up to Defender 2.0 https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 
 [[timelock-controller]]
 == 1. Creating TimelockController
@@ -84,8 +84,8 @@ Then, use the same approval process and save the changes. The transaction should
 
 image::guide-timelock-role-revoked.png[Revoked role]
 
-[[reference]]
-== Reference
+[[references]]
+== References
 
 * xref:module/actions.adoc#transaction-proposals-reference[Transaction Proposals Documentation]
 * xref::module/access-control.adoc[Access Control Documentation]

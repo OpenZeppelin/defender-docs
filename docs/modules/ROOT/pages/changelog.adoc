@@ -1,5 +1,171 @@
 = Changelog
 
+[[release-2024-05-20]]
+== May 20th, 2024
+
+* *General*
+** Show legacy plan in feedback form.
+** Prevent users from deleting their account if any prod relayers have a balance.
+** Enable simulation for moonbeam networks.
+** Deprecate goerli (+ zksync, base, arbitrum, optimism).
+** Upgrade Node 16.x to Node 20.x.
+
+[[release-2024-04-17]]
+== April 17th, 2024
+
+* *General*
+** Replace Gnosis chain explorer to Etherscan-based.
+** Support lower maximum gas price for Optimism Relayers.
+** Update the subscription page to show that the Builder tier is free and perpetual.
+** Add new field for account name on onboarding.
+** Allow monitors to work with EOAs and Relayers.
+
+[[release-2024-03-28]]
+== March 28th, 2024
+
+* *General*
+** Update feature lock props on empty screen.
+** Fix billing usage/account usage/contract create endpoints.
+** Add new switcher component for subscription cards.
+** Prevent scheduling metered subscription cancelation on downgrade to builder request.
+** Increase Code report timeout, resources and eliminate retries.
+** Collect billing address in checkout flow.
+
+* *Private Networks*
+** Add support for Holesky testnet.
+** Deprecate Base and Arbitrum Goerli network.
+
+[[release-2024-03-20]]
+== March 20th, 2024
+
+* *General*
+** Make sure Action condition logs are being displayed for Monitors.
+** Obfuscate secret fields from logger.
+** Automatically collect metered subscription invoice.
+** Fix the selection of branch and commit for Code Inspector manual trigger report modal.
+
+[[release-2024-03-12]]
+== March 12th, 2024
+
+* *General*
+** Add support for Professional custom plan and custom overage prices.
+** Open public pricing page for Enterprise plan requests.
+** Deprecate Optimism Goerli.
+
+* *Access Control*
+** Allow users to hide address book contracts.
+
+* *Private Networks*
+** Prevent removing signing policy from relayer when linked to approval process.
+** Fix relayer redirection to the sidedrawer after creation.
+
+
+[[release-2024-03-05]]
+== March 5th, 2024
+
+* *General*
+** Enable onboarding guide for all Defender 2.0 users.
+
+* *Private Networks*
+** Bug fix in private network initialization when using SDK.
+
+* *Audit*
+** Fix formatting for audit invite emails.
+
+* *Monitors*
+** Update monitor transaction filter property.
+** Bug fix when customizing notification template for monitors.
+
+* *Transaction Proposals*
+** Fix timelock gas estimation for proposals.
+
+* *Relayers*
+** Bug fix in relayer redirection from Workflows.
+
+
+[[release-2024-02-27]]
+== February 27th, 2024
+
+* *General*
+** Improve logic to hide billing menu option.
+** Prevent account deletion if there is active subscription.
+** Update display of yearly price in subscription confirmation.
+** Enforce deployment quotas to Defender 1.0 users.
+** Fix session reloads after upgrade migration.
+** Bug fix: Update references to scenarios and broken doc links.
+** Bug fix: Prevent user without customerId from accessing settings.
+** Improve empty section upgrade button text.
+
+* *Private Networks*
+** Allow private networks to use RPC urls from public networks.
+** Enable zkevm networks.
+
+* *Monitors*
+** Count only active monitors for usage and quota.
+** Count only active monitors when reporting MonitorsMaxCount.
+
+[[release-2024-02-20]]
+== February 20th, 2024
+
+* *General*
+** Add migration assistant to allow Defender 1.0 users to migrate to Defender 2.0.
+** Rename Incident Response to Workflows.
+
+* *Private Networks*
+** Add support to allow Private Networks to use RPC URLs from public networks.
+
+* *Monitors*
+** Bug fix in usage quotas for active monitors.
+
+
+[[release-2024-02-08]]
+== February 8th, 2024
+
+* *General*
+** Display upgrade proposals in Defender 2.0.
+
+* *Audit*
+** UI fixes with overflow text.
+
+* *Deploy*
+** Fail gracefully when deploying to zkSync networks
+
+* *Monitor*
+** Enforce monitor quota limits to Defender 1.0 users.
+** UI bug fix in Monitor starter templates.
+
+* *Forked Networks*
+** Fix Forked Network guide to point tutorial link correctly.
+
+
+[[release-2024-01-31]]
+== January 31st, 2024
+
+* *General*
+** Disable *Polygon zkEVM networks* due to a bug in `eth_getLogs` method on Polygon side.
+** Bug fix in feedback form.
+** Minor UI & security improvements.
+
+[[release-2024-01-24]]
+== January 24th, 2024
+
+* *General*
+** Support zkSync Era Sepolia.
+** Bug fix in feedback form.
+
+* *Audit*
+** Design improvements for audit report.
+
+* *Relayers*
+** Deploy Polygon zkEVM subgraphs.
+
+* *Actions*
+** Change `autotaskCondition` and `autotaskTrigger` parameters in `defender-sdk`.
+
+* *Code Inspector*
+** Ability to allow users to choose what rules to run on by using adding "include" and "exclude" rules in the `defender.config.json` file.
+
+
 [[release-2024-01-18]]
 == January 18th, 2024
 
