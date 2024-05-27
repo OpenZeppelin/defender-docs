@@ -27,6 +27,7 @@
 ** xref:guide/factory-monitor.adoc[Automatic monitoring for factory clones]
 ** xref:guide/timelock-roles.adoc[Managing roles of a TimelockController]
 ** xref:guide/usage-notification.adoc[Managing usage notifications]
+** xref:guide/upgrade-actions-dependencies.adoc[Upgrading actions dependencies]
 
 
 * xref:dac.adoc[Defender as Code]
