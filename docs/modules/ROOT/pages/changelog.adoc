@@ -1,5 +1,24 @@
 = Changelog
 
+[[release-2024-06-03]]
+== June 3rd, 2024
+
+* *General*
+** Add support for flashbots fast endpoints.
+** Add support for EIP 1559 in Mantle.
+** Add fantom opera safe transaction service.
+** Deprecate zksync goerli & linea goerli networks.
+** Add support for safe transaction sanitization service in private networks.
+** Deploy subgraph for polygon amoy.
+** Add infura gas tracker api to fetch better gas prices on mainnet.
+
+* *Code Inspector*
+** Fix correct types in the backend for code inspector runs.
+
+* *Monitors*
+** Enhance test monitor functionality.
+
+
 [[release-2024-05-20]]
 == May 20th, 2024
 
@@ -9,6 +28,10 @@
 ** Enable simulation for moonbeam networks.
 ** Deprecate goerli (+ zksync, base, arbitrum, optimism).
 ** Upgrade Node 16.x to Node 20.x.
+
+* *Code Inspector*
+** Enable Code Assets Monitoring.
+
 
 [[release-2024-04-17]]
 == April 17th, 2024
