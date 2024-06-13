@@ -6,12 +6,8 @@
 * *General*
 ** Add ability to rename relayers.
 ** Add utility script for creating just Stripe metered subscription.
-** Set max number of no-ops in a transaction.
 ** Fix Access control reactivity issues for disabled state banner.
 ** Initialise tenant networks for proposals.
-
-* *Monitors*
-** Pause tenant block watcher if there are no active monitors.
 
 [[release-2024-06-03]]
 == June 3rd, 2024
