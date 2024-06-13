@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-06-13]]
+== June 13th, 2024
+
+* *General*
+** Add ability to rename relayers.
+** Fix Access control reactivity issues for disabled state banner.
+** Initialise tenant networks for proposals.
+
 [[release-2024-06-03]]
 == June 3rd, 2024
 
