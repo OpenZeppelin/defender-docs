@@ -5,7 +5,6 @@
 
 * *General*
 ** Add ability to rename relayers.
-** Add utility script for creating just Stripe metered subscription.
 ** Fix Access control reactivity issues for disabled state banner.
 ** Initialise tenant networks for proposals.
 
