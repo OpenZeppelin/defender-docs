@@ -156,6 +156,12 @@ image::code-settings-advanced.png[Code Advanced Settings]
 
 * *Code Inspector Access*: Access to Code Inspector is required for a successful installation. If you find that you don't have access and you think this is a mistake, contact OpenZeppelin support to get the necessary permissions.
 
+[[repo-size-issues]]
+=== Repository Size Issues
+
+Errors related to analysis timeouts are often caused by large codebases. To mitigate this issue, it is recommended to use the `scan_directories` option in the defender configuration file to scope the analysis to relevant files only. By specifying which directories to include in the scan, the configuration file can significantly reduce processing times and prevent timeouts. For detailed instructions on setting up the configuration file, please refer to the xref:module/code.adoc#configuration[Configuration] section.
+
+
 [[rules]]
 == Rules
 
