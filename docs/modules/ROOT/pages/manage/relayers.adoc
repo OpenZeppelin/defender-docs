@@ -312,6 +312,65 @@ replaced = await erc20.methods.transfer(beneficiary, (1e18).toString()).send({
 
 NOTE: You can **only** replace transactions of the same type. For example, if you're trying to replace an EIP1559 transaction, it **can't be replaced** with a legacy transaction. Also, if `speed` is provided instead, the transaction will be repriced as its original type requires with the given speed.
 
+[[webhook-notifications]]
+=== Webhooks Notifications
+
+Listening to transaction status changes can be efficiently achieved using a push-based approach through webhooks. This method allows your application to receive real-time notifications whenever there are updates to the status of a transaction.
+
+**Steps to Configure Webhook Notifications**:
+
+1. **Access the Relayers Page**
+
+2. **Select Transaction Statuses**:
+   On the Relayers page, you will find options to select the specific transaction statuses for which you want to receive notifications. Available statuses:
+   - **Pending**: Transaction received by the Defender.
+   - **Sent**: Transaction prepared for sending(priced and signed).
+   - **Submitted**: Transaction submitted to the network.
+   - **InMemPool**: Transaction found in the mempool.
+   - **Mined**: Transaction mined.
+   - **Confirmed**: Transaction confirmed(a minimum of 12 confirmations).
+
+3. **Choose Notification Channel**:
+   After selecting the desired statuses, you need to choose webhook notification channels. This is where the webhook notifications will be sent.
+
+4. **Save Your Configuration**:
+   Once you have selected the statuses and configured the notification channel, save your settings. This will register your webhook and start the process of receiving notifications for the selected events.
+
+
+Example of Webhook Notification:
+[source,json]
+----
+{
+  "event": "transaction_status_change",
+  "timestamp": "2024-06-13T12:29:41.254Z",
+  "transaction": {
+    "signature": {
+      "r": "0xee81d58c53c1d3432c95847c71a525417bad6e8fa711007137b2e11155ba8f94",
+      "s": "0x362ce1f75d660504e22590f678c243bc24954ccfbf17864f4aab05fd8b1d6ca3",
+      "v": "0x1b"
+    },
+    "maxPriorityFeePerGas": 7556907973,
+    "maxFeePerGas": 39004490874,
+    "chainId": 11155111,
+    "hash": "0xea04c34422295ef60b57fea50790b4f9396d852274fa46ee5cf8d0407d7cc32b",
+    "transactionId": "1eece8bb-05d6-493f-903a-12c750700b81",
+    "value": "0x5af3107a4000",
+    "gasLimit": 25200,
+    "to": "0x5e87fD270D40C47266B7E3c822f4a9d21043012D",
+    "from": "0xf87921a0999d522383afa2b41db2538231a647f0",
+    "data": "0x",
+    "nonce": 19,
+    "status": "mined",
+    "speed": "fast",
+    "validUntil": "2024-06-13T20:29:01.051Z",
+    "createdAt": "2024-06-13T12:29:01.546Z",
+    "sentAt": "2024-06-13T12:29:01.546Z",
+    "pricedAt": "2024-06-13T12:29:01.546Z",
+    "isPrivate": false
+  }
+}
+----
+
 [[list-txs]]
 === List Transactions
 
