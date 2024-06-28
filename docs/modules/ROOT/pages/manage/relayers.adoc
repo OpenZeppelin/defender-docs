@@ -382,6 +382,9 @@ const txs = await relayer.list({
   since: new Date(Date.now() - 60 * 1000),
   status: 'pending', // can be 'pending', 'mined', or 'failed'
   limit: 5, // newest txs will be returned first
+  usePagination: true,
+  next: '' // optional next cursor for pagination
+  sort: 'desc'
 })
 ----
 
