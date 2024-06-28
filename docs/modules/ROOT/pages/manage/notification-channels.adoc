@@ -1,0 +1,121 @@
+[[notification-channels]]
+= Notification Channels
+
+Use Notification Channels to get notified about events across different Defender Modules, like Monitor Triggers, Workflows or Relayer Transactions lifecycle events.
+
+[[supported-channels]]
+== Supported Channels
+
+[[from-defender]]
+=== From Defender
+- *Email*: Receive emails from the Defender trusted address: noreply@defender.openzeppelin.com
+- *Webhooks*: Configure your own endpoints to receive signed notifications.
+
+[[third-party-services]]
+=== Third Party Services
+- https://slack.com/[*Slack*, window=_blank].
+- https://telegram.org/[*Telegram*, window=_blank].
+- https://discord.com/[*Discord*, window=_blank].
+- https://www.datadoghq.com/[*Datadog*, window=_blank].
+- https://www.pagerduty.com/[*PagerDuty*, window=_blank].
+- https://www.atlassian.com/software/opsgenie[*Opsgenie*, window=_blank].
+
+
+
+[[setup]]
+== Setup
+
+Go to *Manage -> Notification Channels* section and select and configure your preferred channel.
+
+++++
+<div class="flex justify-center">
+  <img src="../_images/notification-channel-setup-1.0.png" alt="Notification channel creation in Defender">
+</div>
+++++
+
+[[usage]]
+== Usage
+The previopusly created Notification Channel can be linked to any Defender module to get notified about events.
+
+++++
+<div class="flex justify-center">
+  <img src="../_images/notification-channel-setup-2.0.png" alt="Use notification channel in Defender module" style="width: 60%">
+</div>
+++++
+
+Also, it is possible to customize the notification template, xref:module/monitor.adoc#customizing-notification[see how].
+
+
+[[additional-configurations]]
+== Additional configurations
+
+[[webhooks]]
+=== Webhook Secrets
+
+As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://docs.flashbots.net/flashbots-protect/rpc/quick-start[HMAC, window=_blank]), by adding a `signature` field in the payloads sent to webhook endpoints. 
+
+This means that the endpoint receiving the notification can verify the authenticity of the request.
+
+```js
+{
+  "events": [...],
+  "signature": "0d85d9d705054c179e4a33290da3d44e7a32368d0a6d771785fa4b683e905338",
+}
+```
+
+Each webhook notification has a secret key associated that can be accessed under *Manage -> Notification Channnels -> Webhook details*.
+
+The `signature` field is generated using the `webhook secret` as the key.
+
+// TODO: add screenshot here.
+
+[[signature-validation]]
+====  Signature Validation
+
+[[using-defender-sdk]]
+=====  Using Defender SDK
+
+The authenticity of the signature can be validated using verifySignature utility in xref:sdk.adoc[Defender SDK].
+
+```js
+function webhookHandler(req, res) {
+
+  const defender = new Defender({
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.API_SECRET,
+  });
+
+  const valid = defender.notificationChannel.verifySignature({
+    secret: WEBHOOK_SECRET, // your webhook secret
+    signature: req.signature,
+  });
+
+  if (!valid) throw new Error("Invalid signature!");
+
+  // your handler code
+}
+```
+
+[[manual-verifcation]]
+=====  Manual Verification
+
+The signature is generated using HMAC with `SHA256` algorithm, so it can be verified in any programming language using the right `Webhook Secret`.
+
+[[python-example]]
+=====  Python example
+
+
+```py
+import hmac
+import hashlib
+
+def verify_signature(key: str, message: str, signature: str) -> bool:
+    # Create a new HMAC object using the key and the SHA256 hash algorithm
+    hmac_obj = hmac.new(key.encode(), message.encode(), hashlib.sha256)
+
+    # Generate signature
+    generated_signature = hmac_obj.hexdigest()
+
+    # Compare the generated signature with the provided signature
+    return hmac.compare_digest(generated_signature, signature)
+```
