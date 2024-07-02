@@ -1,0 +1,51 @@
+= Fireblocks integration within Defender
+
+You can also submit transactions to Fireblocks from Defender directly. Fireblocks is an asset management solution that leverages multi-party computation for securing all treasury operations. 
+
+
+[[pre-requisites]]
+== Pre-requisites
+
+* If you want leverage Fireblocks within Defender you can contact the OZ team to enable to Fireblocks integration for your account.
+
+[[generate-csr-file]]
+== 1. Generate CSR file
+. To utilise the feature you can navigate to the *Manage* page subsequently click *Approval Process* in the sidebar. If the Fireblocks integration is enabled for your account navigate to the *Integrations* tab, visible next to the All approval process.
++
+image::guide-fireblocks-integration-tab.png[Integration tab]
++
+. Click *Generate new API Key for Fireblocks*, here you will need to generate a Certificate Signing Request (CSR) that we can use within Fireblocks file to utilise this feature and create API keys.
++
+image::guide-fireblocks-csr-modal.png[CSR Generation Modal]
+This will trigger Defender to generate a public/private key-pair. The CSR is then generated and signed with the private key and securely stored to prevent leakage.
+
+[[create-fireblocks-api-user]]
+== 2. Create Fireblocks API user
+. First, you will need to import the CSR within the Fireblocks UI when creating a new API user. Note that the API user will require any role that can _at least initiate transactions, e.g. Signer.
++
+image::guide-fireblocks-add-user.png[Create API user, width=400]
++
+. Once the API user has been created and approved by the Fireblocks workspace owner, copy the Fireblocks API key and navigate to the Fireblocks API Keys page. You should see an incomplete API key setup, which you can then edit and complete with the Fireblocks API key. Note that you will not be able to generate a new CSR file unless you complete the setup or delete the previous incomplete one.
++
+image::guide-fireblocks-api-key.png[API Key generated]
++
+
+
+[[setup-defender-integration]]
+== 3. Connect Fireblocks with Defender
+. First, navigate to the *Manage* page subsequently click *Approval Process* in the sidebar, the navigate to the *Integrations* tab. Over here click on the *Paste API Key from Fireblocks*.
++
+image::guide-fireblock-paste-api-key.png[Insert API Key Defender]
++
+. Insert the Fireblocks API key.
++
+image::guide-fireblocks-edit-api-key.png[Insert API key, width=600]
++
+NOTE: To submit a transaction to Fireblocks via Defender, ensure the correct permissions are set in Fireblocks, such as the relevant whitelisted addresses and the Transaction Access Policy (TAP). For example, you might need to whitelist the contract address you wish to interact with, as well as ensure that the newly created API user is allowed to interact with the relevant account and vaults (defined in the TAP).
+
+[[create-approval-process]]
+== 4. Create Approval Process
+. Once configured, you will be able to submit a transaction via a proposal. Select Fireblocks as the execution strategy, the API key and the vault you wish to initiate the transaction from. Once submitted, Defender will track the status of the transaction. Note, Defender will not allow you to approve or reject a transaction from the UI. This will require the Fireblocks mobile app, or console.
++
+image::guide-fireblocks-approval-process.png[Create Defender Approval Process]
++
