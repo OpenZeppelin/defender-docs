@@ -35,7 +35,7 @@ Go to *Manage -> Notification Channels* section and select and configure your pr
 
 [[usage]]
 == Usage
-The previopusly created Notification Channel can be linked to any Defender module to get notified about events.
+The Notification Channel can be linked to any Defender module to get notified about events.
 
 ++++
 <div class="flex justify-center">
@@ -52,20 +52,24 @@ Also, it is possible to customize the notification template, xref:module/monitor
 [[webhooks]]
 === Webhook Secrets
 
-As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://docs.flashbots.net/flashbots-protect/rpc/quick-start[HMAC, window=_blank]), by adding a `signature` field in the payloads sent to webhook endpoints. 
+As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://docs.flashbots.net/flashbots-protect/rpc/quick-start[HMAC, window=_blank]), by adding a `signature` and `timestamp` fields in the payloads sent to webhook endpoints. 
 
 This means that the endpoint receiving the notification can verify the authenticity of the request.
 
 ```js
 {
   "events": [...],
-  "signature": "0d85d9d705054c179e4a33290da3d44e7a32368d0a6d771785fa4b683e905338",
+  "timestamp": "2024-07-04T17:02:40.364Z",
+  "signature": "b20d0784b9d82f61fd22ce4fc1ae486b213b3d8d9e24e0ad2e9194d95bca1ece",
 }
 ```
 
 Each webhook notification has a secret key associated that can be accessed under *Manage -> Notification Channnels -> Webhook details*.
 
 The `signature` field is generated using the `webhook secret` as the key.
+
+NOTE: Only Admin users in the Account have permission to see the webhook secret.
+
 
 // TODO: add screenshot here.
 
@@ -75,7 +79,7 @@ The `signature` field is generated using the `webhook secret` as the key.
 [[using-defender-sdk]]
 =====  Using Defender SDK
 
-The authenticity of the signature can be validated using verifySignature utility in xref:sdk.adoc[Defender SDK].
+The authenticity of the signature can be validated using `verifySignature` utility function in xref:sdk.adoc[Defender SDK].
 
 ```js
 function webhookHandler(req, res) {
@@ -85,9 +89,11 @@ function webhookHandler(req, res) {
     apiSecret: process.env.API_SECRET,
   });
 
-  const valid = defender.notificationChannel.verifySignature({
-    secret: WEBHOOK_SECRET, // your webhook secret
+  const valid = client.notificationChannel.verifySignature({
+    secret: WEBHOOK_SECRET,
     signature: req.signature,
+    timestamp: req.timestamp,
+    validityInMs: 1000 * 60 * 10, // 10 mins
   });
 
   if (!valid) throw new Error("Invalid signature!");
@@ -106,12 +112,27 @@ The signature is generated using HMAC with `SHA256` algorithm, so it can be veri
 
 
 ```py
+from datetime import datetime, timedelta, UTC
 import hmac
 import hashlib
 
-def verify_signature(key: str, message: str, signature: str) -> bool:
-    # Create a new HMAC object using the key and the SHA256 hash algorithm
-    hmac_obj = hmac.new(key.encode(), message.encode(), hashlib.sha256)
+def verify_signature(secret: str, timestamp: str, signature: str) -> bool:
+    # Parse the timestamp
+    try:
+        timestamp_dt = datetime.fromisoformat(timestamp)
+    except ValueError:
+        return False  # Invalid timestamp format
+
+    # Get the current time and calculate the time difference
+    current_time = datetime.now(UTC)
+    time_difference = current_time - timestamp_dt
+
+    # Check if the time difference is within the allowed range (10 minutes)
+    if time_difference > timedelta(minutes=10):
+        return False
+
+    # Create a new HMAC object using the secret and the SHA256 hash algorithm
+    hmac_obj = hmac.new(secret.encode(), timestamp.encode(), hashlib.sha256)
 
     # Generate signature
     generated_signature = hmac_obj.hexdigest()
