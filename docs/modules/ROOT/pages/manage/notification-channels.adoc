@@ -109,7 +109,7 @@ from datetime import datetime, timedelta, UTC
 import hmac
 import hashlib
 
-def verify_signature(body_object: RequestBody, timestamp: str, signature: str secret: str) -> bool:
+def verify_signature(body_object: dict, timestamp: str, signature: str secret: str) -> bool:
     # Parse the timestamp
     try:
         timestamp_dt = datetime.fromisoformat(timestamp)
