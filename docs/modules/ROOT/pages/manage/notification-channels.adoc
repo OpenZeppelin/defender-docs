@@ -52,21 +52,11 @@ Also, it is possible to customize the notification template, xref:module/monitor
 [[webhooks]]
 === Webhook Secrets
 
-As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://docs.flashbots.net/flashbots-protect/rpc/quick-start[HMAC, window=_blank]), by adding a `signature` and `timestamp` fields in the payloads sent to webhook endpoints. 
-
-This means that the endpoint receiving the notification can verify the authenticity of the request.
-
-```js
-{
-  "events": [...],
-  "timestamp": "2024-07-04T17:02:40.364Z",
-  "signature": "b20d0784b9d82f61fd22ce4fc1ae486b213b3d8d9e24e0ad2e9194d95bca1ece",
-}
-```
+As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://docs.flashbots.net/flashbots-protect/rpc/quick-start[HMAC, window=_blank]), by adding a `Defender-Signature` and `Defender-Timestamp` request headers to the notification sent to webhook endpoints. Therefore, the endpoint receiving the notification can verify the authenticity of the request.
 
 Each webhook notification has a secret key associated that can be accessed under *Manage -> Notification Channnels -> Webhook details*.
 
-The `signature` field is generated using the `webhook secret` as the key.
+The `Defender-Signature` is generated using https://en.wikipedia.org/wiki/SHA-2[SHA256 algorithm, window=_blank] and `webhook secret` to sign the payload and the timestamp.
 
 NOTE: Only Admin users in the Account have permission to see the webhook secret.
 
@@ -83,20 +73,23 @@ The authenticity of the signature can be validated using `verifySignature` utili
 
 ```js
 function webhookHandler(req, res) {
+  const signature = req.headers['Defender-Signature'];
+  const timestamp = req.headers['Defender-Timestamp'];
 
   const defender = new Defender({
     apiKey: process.env.API_KEY,
     apiSecret: process.env.API_SECRET,
   });
 
-  const valid = client.notificationChannel.verifySignature({
-    secret: WEBHOOK_SECRET,
-    signature: req.signature,
-    timestamp: req.timestamp,
+  const result = client.notificationChannel.verifySignature({
+    body: req.body,
+    signature,
+    timestamp,
+    secret: process.env.WEBHOOK_SECRET,
     validityInMs: 1000 * 60 * 10, // 10 mins
   });
 
-  if (!valid) throw new Error("Invalid signature!");
+  if (!result.valid) throw new Error(result.error);
 
   // your handler code
 }
@@ -116,7 +109,7 @@ from datetime import datetime, timedelta, UTC
 import hmac
 import hashlib
 
-def verify_signature(secret: str, timestamp: str, signature: str) -> bool:
+def verify_signature(body_object: RequestBody, timestamp: str, signature: str secret: str) -> bool:
     # Parse the timestamp
     try:
         timestamp_dt = datetime.fromisoformat(timestamp)
@@ -131,8 +124,12 @@ def verify_signature(secret: str, timestamp: str, signature: str) -> bool:
     if time_difference > timedelta(minutes=10):
         return False
 
+    # Merge timestamp with body_object
+    payload_to_verify = {**body_object, 'timestamp': timestamp}
+    payload_to_verify_str = json.dumps(payload_to_verify)
+
     # Create a new HMAC object using the secret and the SHA256 hash algorithm
-    hmac_obj = hmac.new(secret.encode(), timestamp.encode(), hashlib.sha256)
+    hmac_obj = hmac.new(secret.encode(), payload_to_verify_str.encode(), hashlib.sha256)
 
     # Generate signature
     generated_signature = hmac_obj.hexdigest()
