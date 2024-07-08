@@ -10,7 +10,7 @@ You can directly submit transactions to Fireblocks from Defender. Fireblocks is 
 
 [[generate-csr-file]]
 == 1. Generate CSR file
-. To utilise the feature you can navigate to the *Manage* page subsequently click *Approval Process* in the sidebar. If the Fireblocks integration is enabled for your account navigate to the *Integrations* tab, visible next to the All approval process.
+. To use this feature, navigate to the *Manage* page and click on *Approval Process* in the sidebar. If the Fireblocks integration is enabled for your account, go to the *Integrations* tab, which is located next to the *All Approval Process* tab.
 +
 image::guide-fireblocks-integration-tab.png[Integration tab]
 +
