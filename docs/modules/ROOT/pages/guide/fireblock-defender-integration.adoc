@@ -14,7 +14,7 @@ You can directly submit transactions to Fireblocks from Defender. Fireblocks is 
 +
 image::guide-fireblocks-integration-tab.png[Integration tab]
 +
-. Click *Generate new API Key for Fireblocks*, here you will need to generate a Certificate Signing Request (CSR) that we can use within Fireblocks file to utilise this feature and create API keys.
+. Click on *Generate new API Key for Fireblocks*. Here, you will need to generate a Certificate Signing Request (CSR), which will be used within the Fireblocks platform to enable this feature and create API keys.
 +
 image::guide-fireblocks-csr-modal.png[CSR Generation Modal]
 This will trigger Defender to generate a public/private key-pair. The CSR is then generated and signed with the private key and securely stored to prevent leakage.
