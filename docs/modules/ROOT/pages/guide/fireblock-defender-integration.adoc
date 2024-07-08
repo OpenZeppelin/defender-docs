@@ -45,7 +45,7 @@ NOTE: To submit a transaction to Fireblocks via Defender, ensure the correct per
 
 [[create-approval-process]]
 == 4. Create Approval Process
-. Once configured, you will be able to submit a transaction via a proposal. Select Fireblocks as the execution strategy, the API key and the vault you wish to initiate the transaction from. Once submitted, Defender will track the status of the transaction. Note, Defender will not allow you to approve or reject a transaction from the UI. This will require the Fireblocks mobile app, or console.
+. Once configured, you will be able to submit a transaction via a proposal. Select a Fireblocks approval process, the API key and the vault you wish to initiate the transaction from. Once submitted, Defender will track the status of the transaction. Note, Defender will not allow you to approve or reject a transaction from the UI. This is only possible via the Fireblocks mobile app or console.
 +
 image::guide-fireblocks-approval-process.png[Create Defender Approval Process]
 +
