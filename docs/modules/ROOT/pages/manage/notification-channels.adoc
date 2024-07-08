@@ -52,7 +52,7 @@ Also, it is possible to customize the notification template, xref:module/monitor
 [[webhooks]]
 === Webhook Secrets
 
-As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://docs.flashbots.net/flashbots-protect/rpc/quick-start[HMAC, window=_blank]), by adding a `Defender-Signature` and `Defender-Timestamp` request headers to the notification sent to webhook endpoints. Therefore, the endpoint receiving the notification can verify the authenticity of the request.
+As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://en.wikipedia.org/wiki/HMAC[HMAC, window=_blank]), by adding a `Defender-Signature` and `Defender-Timestamp` request headers to the notification sent to webhook endpoints. Therefore, the endpoint receiving the notification can verify the authenticity of the request.
 
 Each webhook notification has a secret key associated that can be accessed under *Manage -> Notification Channnels -> Webhook details*.
 
@@ -60,8 +60,6 @@ The `Defender-Signature` is generated using https://en.wikipedia.org/wiki/SHA-2[
 
 NOTE: Only Admin users in the Account have permission to see the webhook secret.
 
-
-// TODO: add screenshot here.
 
 [[signature-validation]]
 ====  Signature Validation
