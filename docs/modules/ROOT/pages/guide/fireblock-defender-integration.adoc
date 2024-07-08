@@ -1,6 +1,6 @@
 = Fireblocks integration within Defender
 
-You can also submit transactions to Fireblocks from Defender directly. Fireblocks is an asset management solution that leverages multi-party computation for securing all treasury operations. 
+You can directly submit transactions to Fireblocks from Defender. Fireblocks is a robust asset management solution that utilizes multi-party computation to secure all treasury operations, ensuring enhanced security and efficiency.
 
 
 [[pre-requisites]]
