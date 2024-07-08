@@ -21,7 +21,7 @@ This will trigger Defender to generate a public/private key-pair. The CSR is the
 
 [[create-fireblocks-api-user]]
 == 2. Create Fireblocks API user
-. First, you will need to import the CSR within the Fireblocks UI when creating a new API user. Note that the API user will require any role that can _at least initiate transactions, e.g. Signer.
+. First, you will need to import the CSR within the Fireblocks UI when creating a new API user. Note that the API user will require any role that can _at least_ initiate transactions, e.g. Signer.
 +
 image::guide-fireblocks-add-user.png[Create API user, width=400]
 +
