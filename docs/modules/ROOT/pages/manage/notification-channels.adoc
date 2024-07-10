@@ -1,0 +1,137 @@
+[[notification-channels]]
+= Notification Channels
+
+Use Notification Channels to get notified about events across different Defender Modules, like Monitor Triggers, Workflows or Relayer Transactions lifecycle events.
+
+[[supported-channels]]
+== Supported Channels
+
+[[from-defender]]
+=== From Defender
+- *Email*: Receive emails from the Defender trusted address: noreply@defender.openzeppelin.com
+- *Webhooks*: Configure your own endpoints to receive signed notifications.
+
+[[third-party-services]]
+=== Third Party Services
+- https://slack.com/[*Slack*, window=_blank].
+- https://telegram.org/[*Telegram*, window=_blank].
+- https://discord.com/[*Discord*, window=_blank].
+- https://www.datadoghq.com/[*Datadog*, window=_blank].
+- https://www.pagerduty.com/[*PagerDuty*, window=_blank].
+- https://www.atlassian.com/software/opsgenie[*Opsgenie*, window=_blank].
+
+
+
+[[setup]]
+== Setup
+
+Go to *Manage -> Notification Channels* section and select and configure your preferred channel.
+
+++++
+<div class="flex justify-center">
+  <img src="../_images/notification-channel-setup-1.0.png" alt="Notification channel creation in Defender">
+</div>
+++++
+
+[[usage]]
+== Usage
+The Notification Channel can be linked to any Defender module to get notified about events.
+
+++++
+<div class="flex justify-center">
+  <img src="../_images/notification-channel-setup-2.0.png" alt="Use notification channel in Defender module" style="width: 60%">
+</div>
+++++
+
+Also, it is possible to customize the notification template, xref:module/monitor.adoc#customizing-notification[see how].
+
+
+[[additional-configurations]]
+== Additional configurations
+
+[[webhooks]]
+=== Webhook Secrets
+
+As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://en.wikipedia.org/wiki/HMAC[HMAC, window=_blank]), by adding a `Defender-Signature` and `Defender-Timestamp` request headers to the notification sent to webhook endpoints. Therefore, the endpoint receiving the notification can verify the authenticity of the request.
+
+Each webhook notification has a secret key associated that can be accessed under *Manage -> Notification Channnels -> Webhook details*.
+
+The `Defender-Signature` is generated using https://en.wikipedia.org/wiki/SHA-2[SHA256 algorithm, window=_blank] and `webhook secret` to sign the payload and the timestamp.
+
+NOTE: Only Admin users in the Account have permission to see the webhook secret.
+
+
+[[signature-validation]]
+====  Signature Validation
+
+[[using-defender-sdk]]
+=====  Using Defender SDK
+
+The authenticity of the signature can be validated using `verifySignature` utility function in xref:sdk.adoc[Defender SDK].
+
+```js
+function webhookHandler(req, res) {
+  const signature = req.headers['Defender-Signature'];
+  const timestamp = req.headers['Defender-Timestamp'];
+
+  const defender = new Defender({
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.API_SECRET,
+  });
+
+  const result = client.notificationChannel.verifySignature({
+    body: req.body,
+    signature,
+    timestamp,
+    secret: process.env.WEBHOOK_SECRET,
+    validityInMs: 1000 * 60 * 10, // 10 mins
+  });
+
+  if (!result.valid) throw new Error(result.error);
+
+  // your handler code
+}
+```
+
+[[manual-verifcation]]
+=====  Manual Verification
+
+The signature is generated using HMAC with `SHA256` algorithm, so it can be verified in any programming language using the right `Webhook Secret`.
+
+[[python-example]]
+=====  Python example
+
+
+```py
+from datetime import datetime, timedelta, UTC
+import hmac
+import hashlib
+
+def verify_signature(body_object: dict, timestamp: str, signature: str secret: str) -> bool:
+    # Parse the timestamp
+    try:
+        timestamp_dt = datetime.fromisoformat(timestamp)
+    except ValueError:
+        return False  # Invalid timestamp format
+
+    # Get the current time and calculate the time difference
+    current_time = datetime.now(UTC)
+    time_difference = current_time - timestamp_dt
+
+    # Check if the time difference is within the allowed range (10 minutes)
+    if time_difference > timedelta(minutes=10):
+        return False
+
+    # Merge timestamp with body_object
+    payload_to_verify = {**body_object, 'timestamp': timestamp}
+    payload_to_verify_str = json.dumps(payload_to_verify)
+
+    # Create a new HMAC object using the secret and the SHA256 hash algorithm
+    hmac_obj = hmac.new(secret.encode(), payload_to_verify_str.encode(), hashlib.sha256)
+
+    # Generate signature
+    generated_signature = hmac_obj.hexdigest()
+
+    # Compare the generated signature with the provided signature
+    return hmac.compare_digest(generated_signature, signature)
+```

@@ -285,15 +285,23 @@ To prevent repeated alerts from individual monitors and control the notification
 * Alert Threshold: Define the number of times a monitor must trigger per unit of time before a notification is sent or an action is fired. The unit of time is defined by the Minimum time between consecutive notifications field.
 * Minimum time between consecutive notifications: Set the the minimum wait time between sending notifications.
 
+++++
+<div class="flex justify-center">
+  <img src="../_images/monitor-alert-v2.png" alt="Configure Defender Monitor alerts" style="width: 60%">
+</div>
+++++
 
-image::monitor-alert.png[Monitor Alerts]
+[[notification-channels]]
+=== Notification Channels
+
+You can create *Notification Channels* attached to the Monitor alerts for getting notified about the on-chain events across many channels, see more about how to create and configure them in xref:manage/notification-channels.adoc[this section].
 
 [[customizing-notification]]
-=== Customizing Notification
+==== Customizing Notification
 
 You can also modify the message body content and formatting using the Customize notification checkbox below the notification channel selector.
 
-==== Template
+===== Template
 
 [source,md]
 ----
@@ -371,7 +379,7 @@ _Condition:_ gasPrice > 10
 0x16345785D8A0000
 ----
 
-==== Message Syntax
+===== Message Syntax
 
 Custom notifications support a limited set of markdown syntax:
 
@@ -415,7 +423,7 @@ You can access the following schema when using custom notification templates. Th
 }
 ----
 
-==== Dynamic Content
+===== Dynamic Content
 
 Custom notification templates render dynamic content using inline templating. Any string surrounded by double curly braces will be resolved against the Event Schema. Deeply nested items (including those in arrays) can be accessed using dot notation.
 
