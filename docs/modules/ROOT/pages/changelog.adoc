@@ -5,7 +5,6 @@
 
 * *General*
 ** Allow creating EOA proposals for non-owned accounts.
-** Add support for Japan open chain.
 ** Bring back the option to sign and execute multisig requests.
 
 [[release-2024-06-13]]
