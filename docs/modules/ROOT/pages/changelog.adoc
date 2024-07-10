@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2024-07-10]]
+== July 10th, 2024
+
+* *General*
+** Allow users to send multisig proposals without signature.
+** Fix transaction filter expression validation for monitors.
+** Optimise tx list calls by using optimised queries and indexes.
+** Reduce txs in flight when relayer is processing slowly.
+** Allow users to disable code inspector auto-runs.
+
 [[release-2024-06-13]]
 == June 13th, 2024
 
