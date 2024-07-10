@@ -1,5 +1,12 @@
 = Changelog
 
+[[release-2024-06-27]]
+== June 27th, 2024
+
+* *General*
+** Allow creating EOA proposals for non-owned accounts.
+** Bring back the option to sign and execute multisig requests.
+
 [[release-2024-06-13]]
 == June 13th, 2024
 
