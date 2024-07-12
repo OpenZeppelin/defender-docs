@@ -1,0 +1,21 @@
+
+# Upgrading Actions Dependencies
+
+Actions must be kept updated with the latest Node.js runtime and dependencies versions to ensure they run in an up-to-date and secure environment. Occasionally, Node.js and dependencies versions get deprecated on Defender, which means that the Actions running on those Node.js versions (and related dependencies) must be upgraded to the latest ones to ensure they continue to function as expected.
+
+[[upgrade-process]]
+== Upgrade Process
+
+When there is a major Node.js version deprecation, the Defender team notifies users about this event and sets a deadline for upgrading actions to the latest dependency versions. If no action is taken by the deadline, Defender automatically upgrades the actions on behalf of users. 
+
+WARNING: We encourage users to make the upgrade process by themselves as the automatic upgrade might introduce breaking changes in dependencies.
+
+[[how-to-upgrade-actions-runtimes]]
+== How to Upgrade Actions Runtimes
+
+1. Check the Action https://docs.openzeppelin.com/defender/v2/module/actions#environment[dependencies latest versions, window=_blank] and search for any breaking changes in your Action code.
+2. Make any necessary code changes.
+3. Test the Action code. A safe approach to do this:
+  a. Create a new Action with the same code using the target dependencies version and run it to verify that it works as expected.
+  b. If your action sends relayer transactions using https://docs.openzeppelin.com/defender/v2/sdk[defender-sdk, window=_blank] (or any other Defender legacy package), validate that it works by connecting a testnet relayer with your action.
+4. Once you have verified that the code and dependencies are compatible, upgrade the Action dependencies to the latest version.
