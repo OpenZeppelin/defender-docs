@@ -1,5 +1,6 @@
 name: defender
 title: Defender
+version: ~
 nav:
   - modules/ROOT/nav.adoc
 asciidoc: 
