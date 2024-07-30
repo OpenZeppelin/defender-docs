@@ -65,6 +65,8 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Sepolia*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
+- https://www.japanopenchain.org/en/[*Japan Open Chain*, window=_blank] and *Japan Open Chain Testnet*.
+
 
 If there is any other network or layer-2 solution you would like to use from Defender, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
 
