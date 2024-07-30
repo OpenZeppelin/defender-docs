@@ -56,7 +56,7 @@ NOTE: Only `client.relaySigner` package is available when authenticating using `
 
 === Admin API Keys
 
-Admin API Keys are generated in **Manage -> API Keys**, and they are used to operate all other resources in Defender, inluding relayers CRUD operations.
+Admin API Keys are generated in **Manage -> API Keys**, and they are used to operate all other resources in Defender, including relayers CRUD operations.
 ```js
 const creds = {
   apiKey: <API_KEY>,
