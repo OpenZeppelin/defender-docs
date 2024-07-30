@@ -52,7 +52,7 @@ const txResponse = await client.relaySigner.sendTransaction({
 });
 ```
 
-NOTE: Only `client.relaySigner` package is available when authenticating using `relayerApiKey` and `relayerApiSecret` only.
+NOTE: Only `client.relaySigner` package is available when authenticating using `relayerApiKey` and `relayerApiSecret`.
 
 === Admin API Keys
 
