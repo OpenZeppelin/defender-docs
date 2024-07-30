@@ -31,7 +31,7 @@ image::api-key-expiration-config.png[API Key expiration configuration in Defende
 
 Defender notifies **3 days** before and **at expiration time** about the API keys expiration. 
 
-WARNING: Once the key have expired, any request sent to Defender API will throw `API Key is either expired or invalid` error.
+WARNING: Once the key is expired, any request sent to Defender API will throw `API Key is either expired or invalid` error.
 
 === Relayer API Keys
 
