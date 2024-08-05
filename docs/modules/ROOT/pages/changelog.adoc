@@ -9,7 +9,7 @@
 ** Disable the aggressive error when proposal signing fails.
 ** Allow functionality to only show status dialog loader when state machine is active.
 ** Fix Actions dependencies version UI selector.
-** Improve action notifications throttling logic.
+** [Improve action notifications throttling logic](https://docs.openzeppelin.com/defender/manage/notification-channels#additional-configurations).
 
 [[release-2024-07-10]]
 == July 10th, 2024
