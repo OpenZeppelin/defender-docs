@@ -19,3 +19,54 @@ npm install @openzeppelin/defender-sdk-deploy-client
 ```
 
 NOTE: For more information about setup, examples and usage, please visit https://github.com/OpenZeppelin/defender-sdk[Defender SDK, window=_blank] README file in Github.
+
+
+== API Keys
+
+In order to operate your Defender account using the SDK or API, Defender requires API keys and secrets generated in the dashboard to authenticate requests. 
+
+When creating API keys, you can also specify the expiration in days, hours and minutes.
+
+image::api-key-expiration-config.png[API Key expiration configuration in Defender]
+
+Defender notifies **3 days** before and **at expiration time** about the API keys expiration. 
+
+WARNING: Once the key is expired, any request sent to Defender API will throw `API Key is either expired or invalid` error.
+
+=== Relayer API Keys
+
+Relayers API Keys are generated in Relayer details page, and are exclusively used for managing the signer operations for that Relayer, e.g. send or query transactions, get the nonce or sign data.
+
+```js
+const creds = {
+  relayerApiKey: <RELAYER_API_KEY>,
+  relayerApiSecret: <RELAYER_API_SECRET>,
+};
+const client = new Defender(creds);
+
+const txResponse = await client.relaySigner.sendTransaction({
+  to: '0x179810822f56b0e79469189741a3fa5f2f9a7631',
+  value: 1,
+  speed: 'fast',
+  gasLimit: '21000',
+});
+```
+
+NOTE: Only `client.relaySigner` package is available when authenticating using `relayerApiKey` and `relayerApiSecret`.
+
+=== Admin API Keys
+
+Admin API Keys are generated in **Manage -> API Keys**, and they are used to operate all other resources in Defender, including relayers CRUD operations.
+```js
+const creds = {
+  apiKey: <API_KEY>,
+  apiSecret: <API_SECRET>,
+};
+const client = new Defender(creds);
+
+const proposals = await client.proposal.list({
+  limit: 10,
+  next: undefined,
+});
+```
+
