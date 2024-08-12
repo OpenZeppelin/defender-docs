@@ -19,7 +19,7 @@ In this tutorial, you will monitor https://sepolia.etherscan.io/address/0xC64f7a
 * *Network*: `Sepolia`
 
 . Transfer some Sepolia ETH to the relayer address created in the previous step.
-. Navigate to https://defender.openzeppelin.com/v2/#/settings/address-book/new[Defender Address Book, window=_blank] to import the `BoxV2` contract.
+. Navigate to https://defender.openzeppelin.com/v2/#/address-book/new[Defender Address Book, window=_blank] to import the `BoxV2` contract.
 . Fill the form with the following parameters and click on *Create*:
 +
 * *Name*: `BoxV2`
