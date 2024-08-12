@@ -16,7 +16,7 @@ As an example, this guide uses https://tenderly.co/[Tenderly, window=_blank] to 
 +
 image::guide-tenderly-private-network.png[Tenderly create network]
 
-. Copy the network RPC and go to the https://defender.openzeppelin.com/v2/#/manage/networks/private/new[Private Network page on Defender, window=_blank]. Fill and submit the form with the network information, leaving the optional fields on blank (which will be configured in the next steps):
+. Copy the network RPC and go to the https://defender.openzeppelin.com/v2/#/settings/networks/private/new[Private Network page on Defender, window=_blank]. Fill and submit the form with the network information, leaving the optional fields on blank (which will be configured in the next steps):
 +
 image::guide-configure-private-network.png[Configure network on Defender]
 
@@ -67,7 +67,7 @@ const deterministicDeployment = (): DeterministicDeploymentInfo => {
 npm run deploy-all custom
 ```
 
-. Navigate to the https://defender.openzeppelin.com/v2/#/manage/networks/private[`Private Networks` page on Defender, window=_blank] and click on the edit button of the network you created. 
+. Navigate to the https://defender.openzeppelin.com/v2/#/settings/networks/private[`Private Networks` page on Defender, window=_blank] and click on the edit button of the network you created. 
 +
 image::guide-edit-private-network.png[Edit Private Network on Defender]
 

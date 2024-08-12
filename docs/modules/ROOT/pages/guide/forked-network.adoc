@@ -21,7 +21,7 @@ image::tutorial-forked-network-phalcon-create.png[Phalcon create a fork]
 +
 image::tutorial-forked-networks-phalcon-dashboard.png[Phalcon dashboard]
 
-. Open https://defender.openzeppelin.com/v2/#/manage/networks/forks[Defender Forked Networks, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/settings/networks/forks[Defender Forked Networks, window=_blank] in a web browser.
 . Click on *Add Forked Network*.
 +
 image::tutorial-forked-networks-intro.png[Forked Networks landing page]

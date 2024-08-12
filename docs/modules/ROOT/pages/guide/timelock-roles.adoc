@@ -35,12 +35,12 @@ This contract will grant the *Admin* role to the deployer, and the *Proposer* an
 [[importing-to-defender]]
 == 2. Importing to Defender
 
-Navigate to the https://defender.openzeppelin.com/v2/#/manage/address-book/new[Address Book on Defender, window=_blank] and add your contract with its address and network. If the contract is verified, Defender will automatically pick up the ABI. Otherwise, you need to https://gist.github.com/mverzilli/a35ab1b5bd7039167cc9270e9fd60632[paste the ABI, window=_blank] manually.
+Navigate to the https://defender.openzeppelin.com/v2/#/address-book/new[Address Book on Defender, window=_blank] and add your contract with its address and network. If the contract is verified, Defender will automatically pick up the ABI. Otherwise, you need to https://gist.github.com/mverzilli/a35ab1b5bd7039167cc9270e9fd60632[paste the ABI, window=_blank] manually.
 
 [[create-a-proposal]]
 == 3. Creating a proposal
 
-xref:module/actions.adoc#transaction-proposals-reference[Defender Transaction Proposals] allows you to create and manage proposals. Proposals in turn can directly execute actions on schedule delayed execution of functions through the TimelockController contract. In order to create a new proposal, navigate to the https://defender.openzeppelin.com/v2/#/actions/executable/new?[Transaction Proposal creation page, window=_blank] and select your imported `TimelockController`.
+xref:module/actions.adoc#transaction-proposals-reference[Defender Transaction Proposals] allows you to create and manage proposals. Proposals in turn can directly execute actions on schedule delayed execution of functions through the TimelockController contract. In order to create a new proposal, navigate to the https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposal creation page, window=_blank] and select your imported `TimelockController`.
 
 Then, select the `schedule` function from the functions dropdown and fill the information about the proposal you want to execute. For example:
 

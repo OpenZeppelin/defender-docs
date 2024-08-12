@@ -13,11 +13,11 @@ In this case, the contract ABI can be pre-supplied since clone contracts will ha
 [[generate-api-key]]
 == Generate API Key
 
-To programmatically add a contract to the address book, the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`sdk`, window=_blank] requires credentials in the form of an API key and secret. Create and copy the credentials in the https://defender.openzeppelin.com/v2/#/manage/api-keys/team/new[API keys page, window=_blank].
+To programmatically add a contract to the address book, the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`sdk`, window=_blank] requires credentials in the form of an API key and secret. Create and copy the credentials in the https://defender.openzeppelin.com/v2/#/settings/api-keys/new[API keys page, window=_blank].
 
 image::guide-factory-api.png[Create API credentials]
 
-Now, navigate to the https://defender.openzeppelin.com/v2/#/manage/secrets[Secrets, window=_blank] page in Defender and create a new secret with the name `API_KEY` and paste in the API key. Create another secret with the name `API_SECRET` and paste in the API secret. These secrets will be used by the Action securely.
+Now, navigate to the https://defender.openzeppelin.com/v2/#/settings/secrets[Secrets, window=_blank] page in Defender and create a new secret with the name `API_KEY` and paste in the API key. Create another secret with the name `API_SECRET` and paste in the API secret. These secrets will be used by the Action securely.
 
 image::guide-factory-secrets.png[Save API credentials]
 
@@ -130,7 +130,7 @@ As with any action, the triggering of this Monitor will be recorded in the xref:
 [[test-run]]
 == Test run
 
-To test the set up, navigate to https://defender.openzeppelin.com/v2/#/actions/executable/new?[Transaction Proposals, window=_blank] to manually create a clone through the factory. Select the factory contract, and call the function that creates a clone with any parameters needed.
+To test the set up, navigate to https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposals, window=_blank] to manually create a clone through the factory. Select the factory contract, and call the function that creates a clone with any parameters needed.
 
 image::guide-factory-create-clone.png[Transaction Proposal to create clone]
 

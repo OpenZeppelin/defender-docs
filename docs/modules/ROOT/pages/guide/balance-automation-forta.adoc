@@ -25,7 +25,7 @@ $ npm i --save-dev @openzeppelin/defender-sdk dotenv
 [[create-relayer]]
 == 2. Create Relayer
 
-From Defender, navigate to the https://defender.openzeppelin.com/v2/#/manage/api-keys/team/new[API keys creation page, window=_blank] in order to create a key set to use in the project. The capabilities of the key should include:
+From Defender, navigate to the https://defender.openzeppelin.com/v2/#/settings/api-keys/team/new[API keys creation page, window=_blank] in order to create a key set to use in the project. The capabilities of the key should include:
 
 - Manage Relayers
 - Manage Actions
