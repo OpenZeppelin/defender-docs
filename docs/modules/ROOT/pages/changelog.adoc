@@ -4,6 +4,7 @@
 == August 21st, 2024
 
 * *General*
+** Feature: Ability to authenticate/login using your github account.
 ** Feature: Provide expiration date option for api keys.
 ** Feature: Remove blacklisted filter methods (`eth_newFilter`, `eth_newBlockFilter`, `eth_getFilterChanges` & `eth_uninstallFilter`) and allow access to all methods.
 ** Minor bug fixes & security improvements throughout the codebase.
