@@ -1,5 +1,5 @@
-[[manage]]
-= Manage
+[[settings]]
+= Settings
 
 Manage everything related to the configuration of Defender, including notification channels, addresses, team members, API keys, and more.
 
@@ -165,8 +165,8 @@ Please see https://support.pagerduty.com/docs/services-and-integrations[PagerDut
 
 [[address-book]]
 == Address book
-
-The address book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the Manage section. Defender automatically creates address book entries for you when you import accounts and contracts in other modules.
+// TODO: move address book outside of settings
+The address book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the Settings section. Defender automatically creates address book entries for you when you import accounts and contracts in other modules.
 
 When working with products in Defender, account and contract information will be directly sourced from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book when configuring monitors and actions.
 

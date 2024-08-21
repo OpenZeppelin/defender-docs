@@ -9,9 +9,9 @@
 ** xref:module/actions.adoc[Actions]
 ** xref:module/access-control.adoc[Access Control]
 
-* xref:manage.adoc[Manage]
+* xref:settings.adoc[Settings]
 ** xref:logs.adoc[Logs]
-** xref:manage/notification-channels.adoc[Notification Channels]
+** xref:settings/notification-channels.adoc[Notification Channels]
 
 * Tutorials
 ** xref:tutorial/deploy.adoc[Deploy]

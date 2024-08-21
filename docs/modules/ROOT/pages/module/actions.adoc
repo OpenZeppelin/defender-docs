@@ -454,7 +454,7 @@ Define the function that you want to call on the target contract. You can select
 
 [[approval-process]]
 === Approval Process
-Define how you want the transaction to be executed. You can choose from any of the xref:manage.adoc#approval-processes[transaction approval processes] available in Defender that you have previously configured or you can optionally create a new one.
+Define how you want the transaction to be executed. You can choose from any of the xref:settings.adoc#approval-processes[transaction approval processes] available in Defender that you have previously configured or you can optionally create a new one.
 
 [[workflows]]
 == Workflows
