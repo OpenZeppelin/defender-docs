@@ -50,24 +50,14 @@ The ability of creating a Timelock smart contract via Defender is *not* availabl
 image::timelock-migration-1.0.png[Timelock creation on Defender legacy]
 
 ### Admin / Add Proposal → Actions / Transaction Proposals
-
-In Defender, you can now use `Transactions Proposals` within `Actions` to send transactions via `Approval Processes`, like Safes, EOAs, Relayers, and more. Learn more xref:module/actions.adoc#transaction-proposals-reference[here].
+// TODO: move transaction proposals outside of actions
+In Defender, you can now use `Transactions Proposals` to send transactions via `Approval Processes`, like Safes, EOAs, Relayers, and more. Learn more xref:module/actions.adoc#transaction-proposals-reference[here].
 
 ==== Defender legacy
 image::proposal-migration-1.0.png[Proposals on Defender legacy]
 
 ==== Defender
 video::proposal.webm[width=670,opts="autoplay,loop,nocontrols"]
-
-### Relay → Manage / Relayers
-
-`Relayers` can now be found under the `Manage` tab. Learn more xref:manage/relayers.adoc[here].
-
-==== Defender legacy
-image::relayers-migration-1.0.png[Relayers on Defender legacy]
-
-==== Defender
-video::relayers.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Autotasks → Actions
 

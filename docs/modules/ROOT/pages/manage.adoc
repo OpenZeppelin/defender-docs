@@ -1,12 +1,7 @@
 [[manage]]
 = Manage
 
-Manage everything related to the configuration of Defender, including Relayers, notification channels, addresses, team members, API keys, and more.
-
-[[relayers]]
-== Relayers
-
-Relayers are used to send transactions to the blockchain via Defender automatically. Read more about in the xref:manage/relayers.adoc[Relayers] section.
+Manage everything related to the configuration of Defender, including notification channels, addresses, team members, API keys, and more.
 
 [[approval-processes]]
 == Approval Processes

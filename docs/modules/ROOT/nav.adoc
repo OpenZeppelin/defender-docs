@@ -4,12 +4,12 @@
 ** xref:module/code.adoc[Code Inspector]
 ** xref:module/audit.adoc[Audit]
 ** xref:module/deploy.adoc[Deploy]
+** xref:module/relayers.adoc[Relayers]
 ** xref:module/monitor.adoc[Monitor]
 ** xref:module/actions.adoc[Actions]
 ** xref:module/access-control.adoc[Access Control]
 
 * xref:manage.adoc[Manage]
-** xref:manage/relayers.adoc[Relayers]
 ** xref:logs.adoc[Logs]
 ** xref:manage/notification-channels.adoc[Notification Channels]
 

@@ -29,6 +29,11 @@ xref:module/deploy.adoc[[.card-title]#Deploy# [.card-body]#pass:q[Manage deploym
 
 [.card.card-learn]
 --
+xref:module/relayers.adoc[[.card-title]#Relayers# [.card-body]#pass:q[Send transactions to the blockchain via Defender automatically.]#]
+--
+
+[.card.card-learn]
+--
 xref:module/monitor.adoc[[.card-title]#Monitor# [.card-body]#pass:q[Detect smart contract activity and anomalies through trigger actions and alerts.]#]
 --
 
