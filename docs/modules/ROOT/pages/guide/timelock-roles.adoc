@@ -40,7 +40,7 @@ Navigate to the https://defender.openzeppelin.com/v2/#/address-book/new[Address 
 [[create-a-proposal]]
 == 3. Creating a proposal
 
-xref:module/actions.adoc#transaction-proposals-reference[Defender Transaction Proposals] allows you to create and manage proposals. Proposals in turn can directly execute actions on schedule delayed execution of functions through the TimelockController contract. In order to create a new proposal, navigate to the https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposal creation page, window=_blank] and select your imported `TimelockController`.
+xref:module/transaction-proposals.adoc[Defender Transaction Proposals] allows you to create and manage proposals. Proposals in turn can directly execute actions on schedule delayed execution of functions through the TimelockController contract. In order to create a new proposal, navigate to the https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposal creation page, window=_blank] and select your imported `TimelockController`.
 
 Then, select the `schedule` function from the functions dropdown and fill the information about the proposal you want to execute. For example:
 
@@ -87,6 +87,6 @@ image::guide-timelock-role-revoked.png[Revoked role]
 [[references]]
 == References
 
-* xref:module/actions.adoc#transaction-proposals-reference[Transaction Proposals Documentation]
+* xref:module/transaction-proposals.adoc[Transaction Proposals Documentation]
 * xref::module/access-control.adoc[Access Control Documentation]
 * https://docs.openzeppelin.com/contracts/governance#timelock[TimelockController Documentation, window=_blank]

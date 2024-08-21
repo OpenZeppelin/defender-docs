@@ -9,8 +9,6 @@ Actions allow you to implement custom app logic for on-chain and off-chain opera
 * Automate smart contract operations
 * Execute actions as response to a xref:module/monitor.adoc[Monitor] alert
 * Automate xref:module/actions.adoc#workflows[Workflow] steps with Actions
-* Create transaction proposals from multisigs, relayers, and more
-* No-code (form-based) for transaction proposals
 * Call external APIs and interact with other smart contracts
 
 [[actions-reference]]
@@ -433,28 +431,6 @@ Remember to send any other value that your action expects in the `event` object,
 You can edit an action's code via the Defender interface, or programmatically via API using the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] npm package. The latter allows to upload a code bundle with more than a single file:
 
 NOTE: The code bundle must not exceed 5MB in size after being compressed and base64-encoded, and it must always include an `index.js` at the root of the zip file to act as the entrypoint.
-
-[[transaction-proposals-reference]]
-== Transaction Proposals
-
-Transaction proposals are very similar to actions, but instead of having to write the javascript code, you can use a form-based editor to define the transaction parameters. +
-This low-code format is very useful for non technical users and simple scenarios, but lacks the flexibility of actions. If you need to invoke external APIs or contracts, or perform more complex logic, you should use actions instead.
-
-[[general-information]]
-=== General Information
-To create a transaction proposal from Defender, you need to define a few parameters:
-
-* Title: A descriptive name for the proposal. This will be latter shown in the proposal list.
-* Description(optional): A longer description of the proposal. This will be shown in the proposal details.
-* Target Contract: The smart contract that you want to run the transaction on.
-
-[[function]]
-=== Function
-Define the function that you want to call on the target contract. You can select from a list of functions that are available on the contract interface. If the function has parameters, you can define them here.
-
-[[approval-process]]
-=== Approval Process
-Define how you want the transaction to be executed. You can choose from any of the xref:settings.adoc#approval-processes[transaction approval processes] available in Defender that you have previously configured or you can optionally create a new one.
 
 [[workflows]]
 == Workflows

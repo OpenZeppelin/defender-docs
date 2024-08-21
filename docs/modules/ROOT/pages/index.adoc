@@ -39,6 +39,11 @@ xref:module/monitor.adoc[[.card-title]#Monitor# [.card-body]#pass:q[Detect smart
 
 [.card.card-learn]
 --
+xref:module/transaction-proposals.adoc[[.card-title]#Transaction Proposals# [.card-body]#pass:q[Create transactions to be executed on-chain.]#]
+--
+
+[.card.card-learn]
+--
 xref:module/actions.adoc[[.card-title]#Actions# [.card-body]#pass:q[Create automated actions to perform on-chain and off-chain operations.]#]
 --
 
