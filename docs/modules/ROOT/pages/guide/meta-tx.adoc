@@ -1,10 +1,16 @@
 # Relaying gasless meta-transactions with a web app
+Gasless meta-transactions offer users a more seamless experience on the blockchain, potentially eliminating the need to spend money on gas fees for every interaction. This method allows users to sign a transaction for free and have it securely executed by a third party, with that party paying the gas to complete the transaction.
 
-https://docs.openzeppelin.com/contracts/api/metatx[Gasless meta-transactions, window=_blank] offer users a more seamless experience, and potentially one where they don't have to spend as much money to engage with the blockchain. This method gives users the option to sign a transaction for free and have it securely executed by a third party, with that other party paying the gas to execute the transaction.
+Defender provides a seamless experience and secure way to implement gasless meta-transactions using Relayers. These Relayers handle sending transactions on behalf of users, eliminating the need for users to manage private keys, transaction signing, nonce management, gas estimation, and transaction inclusion.
+
+This demo app showcases how to implement meta-transactions using not just ERC-2771, but also explores other gasless transaction standards:
+
+* ERC-2771: Secure Native Meta Transactions: This https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[demo app, window=_blank] implements meta-transactions using https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Forwarder[ERC2771Forwarder, window=_blank] and https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Context[ERC2771Context, window=_blank] to separate `msg.sender` from the Relayer's address. All the user needs to do is sign a message using the account they would like to issue the transaction from. The signature is formed for the target contract and the data of the desired transaction, using the user's private key. This signing happens off-chain and costs no gas. The signature is passed to the Relayer so it can execute the transaction for the user (and pay the gas).
+* ERC-2612: Permit Function: This standard introduces a method for enabling gasless token approvals in ERC-20 tokens. Users can grant spending permission to a relayer service by signing a message instead of directly paying gas fees for the traditional "approve" function. This allows the relayer to handle token approvals on the user's behalf.
+* ERC-3009: Transfer with Authorization: This standard facilitates gasless token transfers through off-chain authorizations. Users sign messages authorizing specific token transfers, which can then be submitted to the blockchain by anyone, including a relayer service.
 
 A gasless meta-transaction relay can be easily and securely implemented using Defender with xref::module/relayers.adoc[Relayers], which allow you to send transactions easily without needing to manage private keys, transaction signing, nonce management, gas estimation, and transaction inclusion.
 
-This https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-api[demo app, window=_blank] implements meta-transactions using https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Forwarder[ERC2771Forwarder, window=_blank] and https://docs.openzeppelin.com/contracts/api/metatx#ERC2771Context[ERC2771Context, window=_blank] to separate `msg.sender` from the Relayer's address. All the user needs to do is sign a message using the account they would like to issue the transaction from. The signature is formed for the target contract and the data of the desired transaction, using the user's private key. This signing happens off-chain and costs no gas. The signature is passed to the Relayer so it can execute the transaction for the user (and pay the gas).
 
 [[pre-requisites]]
 == Pre-requisites
@@ -12,8 +18,8 @@ This https://github.com/OpenZeppelin/workshops/tree/master/25-defender-metatx-ap
 * OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git, window=_blank] and https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable[Yarn, window=_blank] installed
 
-[[demo-app-overview]]
-== Demo App Overview
+[[erc-2771]]
+== 1. ERC-2771: Secure Native Meta Transactions
 
 You can view the live https://defender-metatx-workshop-demo.openzeppelin.com/[demo app, window=_blank] here. It accepts registrations directly if the user has the available funds to pay for the transaction, otherwise the data is sent as a meta-transaction.
 
@@ -26,7 +32,7 @@ NOTE: All OpenZeppelin contracts are compatible with the use of `_msgSender()`.
 The second fundamental change between the two contracts is the need for the meta-transaction contract (https://github.com/OpenZeppelin/workshops/blob/master/25-defender-metatx-api/contracts/Registry.sol[Registry, window=_blank]) to specify the address of the trusted forwarder, which in this case is the address of the `ERC2771Forwarder` contract.
 
 [[configure-project]]
-== 1. Configure the project
+=== 1.1 Configure the project
 
 First, fork the repository and navigate to the directory for this guide. There, install the dependencies with `yarn`:
 
@@ -45,7 +51,7 @@ API_SECRET="abc"
 ```
 
 [[create-relayer]]
-== 2. Create Relayer
+=== 1.2 Create Relayer
 
 Run the Relayer creation script, which will use the Defender API parameters in the `.env` file:
 
@@ -74,7 +80,7 @@ const relayer = await client.relay.create(requestParams);
 After creating it, the script will fetch the Relayer ID and create an API key and secret set to send transacitons via it. The Relayer ID is automatically stored in the `relayer.json` file, and its API paramteres in the `.env` file.
 
 [[compile-using-hardhat]]
-== 3. Compile the Contract Using Hardhat
+=== 1.3 Compile the Contract Using Hardhat
 
 Within the `contracts` directory, you can find the both the `SimpleRegistry.sol` and `Registry.sol` contracts. The former contract contains the meta-transaction functionality, as you can see here:
 
@@ -109,7 +115,7 @@ contract Registry is ERC2771Context {
 Run `npx hardhat compile` to compile it for deployment.
 
 [[deploy-using-relayer]]
-== 4. Deploy Using Relayer
+=== 1.4 Deploy Using Relayer
 
 You can easily deploy a compiled smart contract without handling a private key by using the Relayer client from the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] package.
 
@@ -142,7 +148,7 @@ Run this script with `yarn deploy`.
 After the contracts are deployed, the Relayer key and secret can be safely deleted; they are not needed unless additional local testing is desired. The contract addresses will be saved in the `deploy.json` file.
 
 [[create-action]]
-== 5. Create Action via API
+=== 1.5 Create Action via API
 
 The demo app uses an xref:module/actions.adoc[Action] to supply the necessary logic for telling the Relayer to send a transaction to the `Forwarder` contract, supplying the signer's address. The Action will get triggered by each call to its webhook from the app.
 
@@ -231,7 +237,7 @@ Save the Action webhook in your `.env` file as `WEBHOOK_URL` and in the /app `.e
 Test the meta-transaction's functionality with `yarn sign` followed by `yarn invoke`.
 
 [[create-web-app]]
-== 6. Create Web App
+=== 1.6 Create Web App
 
 The key building blocks have been laid, so next it is a matter of crafting a web application that makes use of these components.
 
@@ -285,6 +291,227 @@ export async function registerName(registry, provider, name) {
   if (canSendTx) return sendTx(registry.connect(signer), name);
   else return sendMetaTx(registry, provider, signer, name);
 }
+----
+
+[[permit]]
+== 2. ERC-2612: Permit Function
+EIP-2612 introduces the https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Permit[permit, window=_blank] function, a tool for enabling gasless transactions in ERC-20 tokens. By extending the ERC-20 interface with a method allowing users to modify their allowance via a signed message instead of the approve function, this standard empowers users to approve tokens without directly paying gas fees. This standard enables relayer services to execute transactions on behalf of users by paying gas fees, while the user only needs to sign a message.
+```
+function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external
+```
+This function modifies the `allowance` of the spender for the owner's tokens, based on a signed approval. The signature is split into `v`, `r`, and `s` components for verification.
+
+[[eip712-signing]]
+=== 2.1 EIP-712 signing front-end
+How it uses EIP-712 for structured data signing: EIP-2612 leverages EIP-712 for creating and signing structured data. This provides a human-readable representation of the data being signed, enhancing security and user experience. Example code:
+
+[source,jsx]
+----
+// ...
+ const domain = {
+    name: name,
+    version: '1',
+    chainId: chainId,
+    verifyingContract: ERC20_ADDRESS,
+  };
+
+  const types = {
+    Permit: [
+      { name: 'owner', type: 'address' },
+      { name: 'spender', type: 'address' },
+      { name: 'value', type: 'uint256' },
+      { name: 'nonce', type: 'uint256' },
+      { name: 'deadline', type: 'uint256' },
+    ]
+  };
+
+  const value = {
+    owner: OWNER_ADDRESS,
+    spender: SPENDER_ADDRESS,
+    value: amount,
+    nonce: nonce,
+    deadline: deadline,
+  };
+
+
+  const signature = await wallet.signTypedData(domain, types, value);
+  const sig = ethers.Signature.from(signature);
+  const recoveredAddress = ethers.verifyTypedData(domain, types, value, signature);
+
+  const request = {
+    owner: OWNER_ADDRESS,
+    spender: SPENDER_ADDRESS,
+    amount,
+    deadline,
+    v: sig.v,
+    r: sig.r,
+    s: sig.s
+  };
+
+  return fetch(`${url}/relayerForwardMessage`, {
+    method: 'POST',
+    body: JSON.stringify(request),
+    headers: { 'Content-Type': 'application/json' },
+  });
+----
+[[eip712-signing]]
+=== 2.2 Relayer service
+Create a back-end service to interact with Defender Relayers. The service will initially require the setup of https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayers]. Once configured, it will handle incoming requests from the front-end and forward the signed EIP-712 message to the contract. The service will utilize the Relayers to execute the contract's permit function, allowing the Relayer to cover gas fees. The service will facilitate token approvals for end-users, enabling subsequent operations with the Relayers, such as transferring tokens to different wallets. 
+[source,jsx]
+----
+import { ethers, defender } from "hardhat";
+
+// ...
+const creds = {
+  relayerApiKey: process.env.RELAYER_API_KEY,
+  relayerApiSecret: process.env.RELAYER_API_SECRET,
+};
+const client = new Defender(creds);
+
+const provider = client.relaySigner.getProvider();
+const signer = client.relaySigner.getSigner(provider, { speed: 'fast' });
+
+const erc20 = await ethers.getContractAt("ERC20Token", CONTRACT_ADDRESS);
+
+// You can now use these values to call the permit function
+// permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+const tx = await erc20.permit(
+  request.owner,
+  request.spender,
+  request.amount,
+  request.deadline,
+  request.v,
+  request.r,
+  request.s
+);
+
+await tx.wait();
+console.log("Permit executed!");
+
+// Example subsequent operation 
+const transferTx = await erc20.transferFrom(request.owner, to, request.amount);
+await transferTx.wait();
+// ...
+----
+
+[[permit]]
+== 3. ERC-3009: Transfer with Authorization
+ERC-3009 introduces a standard for gasless token transfers through off-chain authorizations. This standard allows users to sign messages authorizing token transfers, which can then be submitted to on-chain by anyone, through the https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayers] service. Comparison with EIP-2612 (signing differences):
+While EIP-2612 focuses on approvals, ERC-3009 directly authorizes transfers. The key differences are:
+
+* Purpose: ERC-3009 authorizes specific transfers, while EIP-2612 approves an allowance.
+* Flexibility: ERC-3009 doesn't require EIP-712 for structured data signing, offering more flexibility in message formatting.
+* Time Window: ERC-3009 includes validAfter and validBefore parameters, allowing for more precise control over when the authorization can be executed.
+
+The function definition:
+```
+function transferWithAuthorization(
+    address from,
+    address to,
+    uint256 value,
+    uint256 validAfter,
+    uint256 validBefore,
+    bytes32 nonce,
+    uint8 v,
+    bytes32 r,
+    bytes32 s
+) external
+```
+
+[[erc2009-signing]]
+=== 3.1 EIP-712 signing front-end
+Similar to ERC-2612, you can use the EIP-712 format to sign messages on the front-end as the end user. While ERC-3009 offers more flexibility for front-end message signing, this example adheres to the EIP-712 standard. Example code:
+
+[source,jsx]
+----
+  //...
+
+  const validAfter = Math.floor(Date.now() / 1000); // Now
+  const validBefore = validAfter + 3600; // 1 hour from validAfter
+  const value = ethers.parseEther("10"); // Amount to transfer
+  const nonce = ethers.randomBytes(32);
+
+  const domain = {
+    name: name,
+    version: '1',
+    chainId: chainId,
+    verifyingContract: ERC20_ADDRESS,
+  };
+
+  const types = {
+    TransferWithAuthorization: [
+      { name: 'from', type: 'address' },
+      { name: 'to', type: 'address' },
+      { name: 'value', type: 'uint256' },
+      { name: 'validAfter', type: 'uint256' },
+      { name: 'validBefore', type: 'uint256' },
+      { name: 'nonce', type: 'bytes32' },
+    ]
+  };
+
+  const valueToSign = {
+    from: FROM_ADDRESS,
+    to: TO_ADDRESS,
+    value: value,
+    validAfter: validAfter,
+    validBefore: validBefore,
+    nonce: nonce,
+  };
+
+
+  const signature = await wallet.signTypedData(domain, types, valueToSign);
+  const sig = ethers.Signature.from(signature);
+  const request = {
+    from: FROM_ADDRESS,
+    to: TO_ADDRESS,
+    value,
+    validAfter,
+    validBefore,
+    nonce,
+    v: sig.v,
+    r: sig.r,
+    s: sig.s
+  };
+
+  return fetch(`${url}/relayerForwardMessage`, {
+    method: 'POST',
+    body: JSON.stringify(request),
+    headers: { 'Content-Type': 'application/json' },
+  });
+----
+=== 3.2 Relayer service
+Create a back-end service to interact with Defender Relayers. The service will initially require the setup of Defender Relayers. Once configured, it will handle incoming requests from the front-end and forward the signed messages to the contract. The service will utilize the Relayers to execute the contract's `transferWithAuthorization` function, allowing the Relayer to cover gas fees. The service will facilitate the transfer of tokens for the end-users.
+[source,jsx]
+----
+import { ethers, defender } from "hardhat";
+
+// ...
+const creds = {
+  relayerApiKey: process.env.RELAYER_API_KEY,
+  relayerApiSecret: process.env.RELAYER_API_SECRET,
+};
+const client = new Defender(creds);
+
+const provider = client.relaySigner.getProvider();
+const signer = client.relaySigner.getSigner(provider, { speed: 'fast' });
+
+const erc20 = await ethers.getContractAt("ERC20Token", CONTRACT_ADDRESS);
+
+const tx = await erc20.transferWithAuthorization(
+    request.from,
+    request.to,
+    request.value,
+    request.validAfter,
+    request.validBefore,
+    request.nonce,
+    request.v,
+    request.r,
+    request.s
+);
+
+await tx.wait();
+console.log("TransferWithAuthorization executed!");
+// ...
 ----
 
 [[try-app]]
