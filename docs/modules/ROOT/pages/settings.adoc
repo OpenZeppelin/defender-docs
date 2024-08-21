@@ -163,15 +163,6 @@ Please see https://support.pagerduty.com/docs/services-and-integrations[PagerDut
 * *Class* The class/type of the event
 * *Custom_detail* Map of key-value pairs to provide additional details about the event and affected system
 
-[[address-book]]
-== Address book
-// TODO: move address book outside of settings
-The address book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the Settings section. Defender automatically creates address book entries for you when you import accounts and contracts in other modules.
-
-When working with products in Defender, account and contract information will be directly sourced from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book when configuring monitors and actions.
-
-image::manage-address-book.png[Manage Address Book]
-
 [[team-members]]
 == Team Members
 
@@ -187,7 +178,7 @@ Every team member has an assigned role. You can manage authorization to access, 
 
 When you invite a new user to your team, you will assign a role to them, determining their access permissions.
 
-To create a new role, click on the _Create Role_ button. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each product. You can also specify which administrative powers the role will give access to: manage users and roles, manage team API keys, manage Fireblocks API keys, manage address book, and configure log forwarding. 
+To create a new role, click on the _Create Role_ button. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each product. You can also specify which administrative powers the role will give access to: manage users and roles, manage team API keys, manage Fireblocks API keys, manage Address Book, and configure log forwarding. 
 
 image::manage-role-create.png[Manage Role Creation]
 

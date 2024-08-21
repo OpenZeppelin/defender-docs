@@ -49,6 +49,11 @@ xref:module/actions.adoc[[.card-title]#Actions# [.card-body]#pass:q[Create autom
 
 [.card.card-learn]
 --
+xref:module/address-book.adoc[[.card-title]#Address Book# [.card-body]#pass:q[Create a shared repository of user-friendly names for your accounts or contracts.]#]
+--
+
+[.card.card-learn]
+--
 xref:module/access-control.adoc[[.card-title]#Access Control# [.card-body]#pass:q[Manage smart contract accounts, roles, and permissions easily.]#]
 --
 

@@ -8,6 +8,7 @@
 ** xref:module/monitor.adoc[Monitor]
 ** xref:module/actions.adoc[Actions]
 ** xref:module/transaction-proposals.adoc[Transaction Proposals]
+** xref:module/address-book.adoc[Address Book]
 ** xref:module/access-control.adoc[Access Control]
 
 * xref:settings.adoc[Settings]

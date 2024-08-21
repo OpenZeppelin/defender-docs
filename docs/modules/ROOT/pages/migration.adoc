@@ -24,9 +24,9 @@ image::tenant-migration-1.0.png[Tenant pages on Defender legacy]
 ==== Defender
 image::tenant-migration-2.0.png[Tenant pages on Defender]
 
-=== Admin / Add Contract → Settings / Address Book
-// TODO: move address book outside of settings
-Now, you can add smart contracts to use across the platform via the `Address Book`, which is accessible under the `Settings` tab. Learn more xref:settings.adoc#address-book[here].
+=== Admin / Add Contract → Address Book
+
+Now, you can add smart contracts to use across the platform via the `Address Book`, which is accessible under the `Operate & Automate`. Learn more xref:module/address-book.adoc[here].
 
 ==== Defender legacy
 image::address-book-migration-1.0.png[Add Contract on Defender legacy]

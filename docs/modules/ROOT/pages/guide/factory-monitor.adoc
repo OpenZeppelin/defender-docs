@@ -5,7 +5,7 @@ The factory-clone pattern can be advantageous for minimizing gas costs. However,
 This guide shows how to use Defender to monitor a factory contract as well as the clone contracts created by it. Monitor automation is achieved through the following structure of Defender modules:
 
 * A Monitor watches for successful event emitted by the factory contract that creates a clone. If detected, it triggers an xref:module/actions.adoc[Action] and xref:module/actions.adoc#monitor_invocations[passes along information] about the transaction.
-* The Action makes use of the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] to add the address of the newly created contract to the xref:settings.adoc#address-book[address book] for easier monitoring.
+* The Action makes use of the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] to add the address of the newly created contract to the xref:module/address-book.adoc[address book] for easier monitoring.
 * Aditionally, the Action uses the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`defender-sdk`, window=_blank] to add the clone address to the list of addresses watched by a Monitor.
 
 In this case, the contract ABI can be pre-supplied since clone contracts will have identical ABIs. Alternatively, you may be able to dynamically retrieve the ABI from a verified contract at a given address using https://docs.etherscan.io/api-endpoints/contracts[Etherscan's API, window=_blank].

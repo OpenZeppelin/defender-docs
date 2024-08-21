@@ -15,7 +15,7 @@ IMPORTANT: At this time, access control is supported across all networks except 
 [[contracts]]
 == Contracts
 
-The main page shows all your contracts from the xref:settings.adoc#address-book[Address Book] that have an access control interface supported. You can also add an existing contract to the Address Book by clicking on the "Add new contract" button. This is a one-time form where you specify the network, address and name. The contract's ABI will be automatically pulled from the respective block explorers if available. If not, you will have to enter the ABI manually. When a contract is added, the main page will update and show it if applicable.
+The main page shows all your contracts from the xref:module/address-book.adoc[Address Book] that have an access control interface supported. You can also add an existing contract to the Address Book by clicking on the "Add new contract" button. This is a one-time form where you specify the network, address and name. The contract's ABI will be automatically pulled from the respective block explorers if available. If not, you will have to enter the ABI manually. When a contract is added, the main page will update and show it if applicable.
 
 image::access-control.png[Access control main page]
 
