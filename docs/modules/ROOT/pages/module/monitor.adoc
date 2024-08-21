@@ -362,10 +362,10 @@ To prevent repeated alerts from individual monitors and control the notification
 </div>
 ++++
 
-[[notification-channels]]
-=== Notification Channels
+[[notifications]]
+=== Notifications
 
-You can create *Notification Channels* attached to the Monitor alerts for getting notified about the on-chain events across many channels, see more about how to create and configure them in xref:settings/notification-channels.adoc[this section].
+You can create *Notifications* attached to the Monitor alerts for getting notified about the on-chain events across many channels, see more about how to create and configure them in xref:settings/notifications.adoc[this section].
 
 [[customizing-notification]]
 ==== Customizing Notification

@@ -1,7 +1,7 @@
 [[settings]]
 = Settings
 
-Manage everything related to the configuration of Defender, including notification channels, addresses, team members, API keys, and more.
+Manage everything related to the configuration of Defender, including notifications, addresses, team members, API keys, and more.
 
 [[approval-processes]]
 == Approval Processes
@@ -20,11 +20,11 @@ They are defined per network, and are used throughout Defender to execute transa
 image::manage-approvals.png[Manage Approval Processes]
 
 [[notifications]]
-== Notification Channels
+== Notifications
 
 When triggered, Defender can deliver notifications to one or more configured notification channels which can include any of Slack, email, Telegram, Discord, Datadog, PagerDuty, OpsGenie, or custom webhooks. These notification channels can be used in monitors, actions, and workflows.
 
-image::manage-notify-channels.png[Manage Notification Channels]
+image::manage-notify-channels.png[Manage Notifications]
 
 === Slack Configuration
 

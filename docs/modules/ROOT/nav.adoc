@@ -13,7 +13,7 @@
 
 * xref:settings.adoc[Settings]
 ** xref:logs.adoc[Logs]
-** xref:settings/notification-channels.adoc[Notification Channels]
+** xref:settings/notifications.adoc[Notifications]
 
 * Tutorials
 ** xref:tutorial/deploy.adoc[Deploy]
