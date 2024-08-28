@@ -61,7 +61,7 @@ dotenv.config();
 
 async function main() {
 
-const client = new Defender(
+const client = new Defender({
 
 relayerApiKey: process.env.RELAYER_API_KEY,
 relayerApiSecret: process.env.RELAYER_SECRET_KEY,
