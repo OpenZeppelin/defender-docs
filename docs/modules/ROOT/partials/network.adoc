@@ -32,7 +32,7 @@ type Network =
   | 'zksync'
   | 'base'
   | 'base-sepolia'
-  | 'linea-goerli'
+  | 'linea-sepolia'
   | 'linea'
   | 'mantle'
   | 'mantle-sepolia'
