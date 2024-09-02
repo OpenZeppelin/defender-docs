@@ -61,7 +61,7 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://www.harmony.one/[*Harmony* Shard 0,window=_blank] and *Harmony Testnet Shard 0*.
 - https://aurora.dev/[*Aurora*,window=_blank] and *Aurora Testnet*.
 - https://hedera.com/[*Hedera*,window=_blank] and *Hedera Testnet*.
-- https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Goerli*.
+- https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Sepolia*.
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Sepolia*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
