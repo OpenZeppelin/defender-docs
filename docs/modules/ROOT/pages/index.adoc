@@ -46,25 +46,28 @@ xref:module/access-control.adoc[[.card-title]#Access Control# [.card-body]#pass:
 == Available networks
 Defender works with most mainnet and testnet networks, as well as local mainnet forks.
 
-- https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Sepolia* testnet and *Holesky* testnet.
-- https://zksync.io/[*zkSync Era Mainnet*,window=_blank], *zkSync Era Sepolia*.
-- https://www.polygon.technology/[*Polygon* (Matic),window=_blank] *Mumbai*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *zkEVM Testnet*
 - https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], *Arbitrum Sepolia*.
-- https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia*.
-- https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
-- https://www.gnosis.io/[*Gnosis Chain*,window=_blank] and *Sokol*.
-- https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*,window=_blank] and *BSC testnet*.
-- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*,window=_blank] and *FUJI C-Chain*.
-- https://fuse.io/[*Fuse*,window=_blank].
-- https://fantom.foundation/what-is-fantom-opera/[*Fantom*,window=_blank] and *Fantom Testnet*.
-- https://celo.org/[*Celo*,window=_blank] and *Alfajores*.
-- https://www.harmony.one/[*Harmony* Shard 0,window=_blank] and *Harmony Testnet Shard 0*.
 - https://aurora.dev/[*Aurora*,window=_blank] and *Aurora Testnet*.
+- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*,window=_blank] and *FUJI C-Chain*.
+- https://www.base.org/[*Base Mainnet*,window=_blank] and *Base Sepolia*.
+- https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*,window=_blank] and *BSC testnet*.
+- https://celo.org/[*Celo*,window=_blank] and *Alfajores*.
+- https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Sepolia* testnet and *Holesky* testnet.
+- https://fantom.foundation/what-is-fantom-opera/[*Fantom*,window=_blank] and *Fantom Testnet*.
+- https://fuse.io/[*Fuse*,window=_blank].
+- https://www.gnosis.io/[*Gnosis Chain*,window=_blank] and *Sokol*.
+- https://www.harmony.one/[*Harmony* Shard 0,window=_blank] and *Harmony Testnet Shard 0*.
 - https://hedera.com/[*Hedera*,window=_blank] and *Hedera Testnet*.
 - https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Sepolia*.
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Sepolia*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
+- https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
+- https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia*.
+- https://www.polygon.technology/[*Polygon* (Matic),window=_blank] *Mumbai*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *zkEVM Testnet*
+- https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
+- https://zksync.io/[*zkSync Era Mainnet*,window=_blank], *zkSync Era Sepolia*.
+
 
 If there is any other network or layer-2 solution you would like to use from Defender, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
 

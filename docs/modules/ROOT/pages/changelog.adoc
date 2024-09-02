@@ -1,5 +1,25 @@
 = Changelog
 
+[[release-2024-08-21]]
+== August 21st, 2024
+
+* *General*
+** Feature: Ability to authenticate/login using your github account.
+** Feature: Provide expiration date option for api keys.
+** Feature: Remove blacklisted filter methods (`eth_newFilter`, `eth_newBlockFilter`, `eth_getFilterChanges` & `eth_uninstallFilter`) and allow access to all methods.
+** Minor bug fixes & security improvements throughout the codebase.
+
+[[release-2024-08-05]]
+== August 5th, 2024
+
+* *General*
+** Initialise tenant networks for tx iterator.
+** Migrate all subgraphs from hosted service to subgraph studio.
+** Disable the aggressive error when proposal signing fails.
+** Allow functionality to only show status dialog loader when state machine is active.
+** Fix Actions dependencies version UI selector.
+** https://docs.openzeppelin.com/defender/manage/notification-channels#additional-configurations[Add support to webhook signing of notifications].
+
 [[release-2024-07-10]]
 == July 10th, 2024
 
