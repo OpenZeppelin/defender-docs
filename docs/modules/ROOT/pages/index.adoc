@@ -4,8 +4,6 @@ OpenZeppelin Defender is a mission-critical developer security platform to *code
 
 Integrating directly into the developer workflow, Defender makes it easy and fast for developers and operators to prevent and fix security issues pre and post-deployment.
 
-IMPORTANT: Defender legacy is now deprecated in favor of Defender. Learn how to migrate xref:migration.adoc[here]! *On June 1st 2024, you will no longer have access to Defender 1.0 UI and API*.
-
 [[modules]]
 [.card-section.card-section-2col]
 == Modules
@@ -29,12 +27,27 @@ xref:module/deploy.adoc[[.card-title]#Deploy# [.card-body]#pass:q[Manage deploym
 
 [.card.card-learn]
 --
+xref:module/relayers.adoc[[.card-title]#Relayers# [.card-body]#pass:q[Send transactions to the blockchain via Defender automatically.]#]
+--
+
+[.card.card-learn]
+--
 xref:module/monitor.adoc[[.card-title]#Monitor# [.card-body]#pass:q[Detect smart contract activity and anomalies through trigger actions and alerts.]#]
 --
 
 [.card.card-learn]
 --
+xref:module/transaction-proposals.adoc[[.card-title]#Transaction Proposals# [.card-body]#pass:q[Create transactions to be executed on-chain.]#]
+--
+
+[.card.card-learn]
+--
 xref:module/actions.adoc[[.card-title]#Actions# [.card-body]#pass:q[Create automated actions to perform on-chain and off-chain operations.]#]
+--
+
+[.card.card-learn]
+--
+xref:module/address-book.adoc[[.card-title]#Address Book# [.card-body]#pass:q[Create a shared repository of user-friendly names for your accounts or contracts.]#]
 --
 
 [.card.card-learn]

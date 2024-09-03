@@ -9,6 +9,7 @@ This demo app showcases how to implement meta-transactions using not just ERC-27
 * ERC-2612: Permit Function: This standard introduces a method for enabling gasless token approvals in ERC-20 tokens. Users can grant spending permission to a relayer service by signing a message instead of directly paying gas fees for the traditional "approve" function. This allows the relayer to handle token approvals on the user's behalf.
 * ERC-3009: Transfer with Authorization: This standard facilitates gasless token transfers through off-chain authorizations. Users sign messages authorizing specific token transfers, which can then be submitted to the blockchain by anyone, including a relayer service.
 
+A gasless meta-transaction relay can be easily and securely implemented using Defender with xref::module/relayers.adoc[Relayers], which allow you to send transactions easily without needing to manage private keys, transaction signing, nonce management, gas estimation, and transaction inclusion.
 
 
 [[pre-requisites]]
@@ -41,7 +42,7 @@ $ cd workshops/25-defender-metatx-api/
 $ yarn
 ```
 
-Create a `.env` file in the project root and supply an API key and secret from the https://defender.openzeppelin.com/v2/#/manage/api-keys/team/new[API keys page, window=_blank]. A private key will be used for local testing but the Relayer is used for actual contract deployment.
+Create a `.env` file in the project root and supply an API key and secret from the https://defender.openzeppelin.com/v2/#/settings/api-keys/new[API keys page, window=_blank]. A private key will be used for local testing but the Relayer is used for actual contract deployment.
 
 ```
 PRIVATE_KEY="0xabc"
@@ -353,7 +354,7 @@ How it uses EIP-712 for structured data signing: EIP-2612 leverages EIP-712 for 
     headers: { 'Content-Type': 'application/json' },
   });
 ----
-[[eip712-signing]]
+[[relayer-service]]
 === 2.2 Relayer service
 Create a back-end service to interact with Defender Relayers. The service will initially require the setup of https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayers]. Once configured, it will handle incoming requests from the front-end and forward the signed EIP-712 message to the contract. The service will utilize the Relayers to execute the contract's permit function, allowing the Relayer to cover gas fees. The service will facilitate token approvals for end-users, enabling subsequent operations with the Relayers, such as transferring tokens to different wallets. 
 [source,jsx]
@@ -393,7 +394,7 @@ await transferTx.wait();
 // ...
 ----
 
-[[permit]]
+[[transfer-with-authorization]]
 == 3. ERC-3009: Transfer with Authorization
 ERC-3009 introduces a standard for gasless token transfers through off-chain authorizations. This standard allows users to sign messages authorizing token transfers, which can then be submitted to on-chain by anyone, through the https://docs.openzeppelin.com/defender/manage/relayers[Defender Relayers] service. Comparison with EIP-2612 (signing differences):
 While EIP-2612 focuses on approvals, ERC-3009 directly authorizes transfers. The key differences are:

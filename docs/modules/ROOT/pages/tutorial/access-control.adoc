@@ -13,7 +13,7 @@ Defender allows you to seamlessly oversee and command contract permissions on a 
 
 NOTE: For this tutorial, you will create a contract that implements the role-based Access Control library using https://sepolia.etherscan.io/address/0xF909B3dBB525fDe7C3e8cd59FbECF3D42c217454[this, window=_blank] factory deployed to Sepolia. Your created contract will automatically assign you the admin role to manage its roles.
 
-. Open the Defender https://defender.openzeppelin.com/v2/#/manage/address-book/new[Address Book, window=_blank] in a web browser.
+. Open the Defender https://defender.openzeppelin.com/v2/#/address-book/new[Address Book, window=_blank] in a web browser.
 . Fill the form with the following values and click `Create`:
 +
 * Name: `Access Control Factory`
@@ -23,7 +23,7 @@ NOTE: For this tutorial, you will create a contract that implements the role-bas
 +
 image::tutorial-access-control-factory.png[Address Book for factory]
 
-. Navigate to https://defender.openzeppelin.com/v2/#/actions/executable/new?[Transaction Proposals, window=_blank].
+. Navigate to https://defender.openzeppelin.com/v2/#/transaction-proposals/new?[Transaction Proposals, window=_blank].
 . Fill the **General Information** section with the following values:
 +
 * Name: `Create Access Control contract`
@@ -51,7 +51,7 @@ image::tutorial-access-control-submit-tx.gif[Transaction Proposal submit tx]
 . Scroll down and under **Execution Result**, hover over the first contract to copy its address.
 +
 image::tutorial-access-control-copy-address.png[Transaction Proposal copy address]
-. Navigate to the Defender https://defender.openzeppelin.com/v2/#/manage/address-book/new Address Book, window=_blank] to add your newly created contract.
+. Navigate to the Defender https://defender.openzeppelin.com/v2/#/address-book/new Address Book, window=_blank] to add your newly created contract.
 . Fill the form with the following values and click `Create`:
 +
 * Name: `Access Control Contract`
