@@ -37,6 +37,5 @@
 * xref:dac.adoc[Defender as Code]
 * xref:sdk.adoc[SDK and API]
 * xref:integrations.adoc[Integrations]
-* xref:migration.adoc[Migration]
 * xref:faq.adoc[FAQ]
 * xref:changelog.adoc[Changelog]
