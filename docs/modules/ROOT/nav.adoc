@@ -4,14 +4,16 @@
 ** xref:module/code.adoc[Code Inspector]
 ** xref:module/audit.adoc[Audit]
 ** xref:module/deploy.adoc[Deploy]
+** xref:module/relayers.adoc[Relayers]
 ** xref:module/monitor.adoc[Monitor]
 ** xref:module/actions.adoc[Actions]
+** xref:module/transaction-proposals.adoc[Transaction Proposals]
+** xref:module/address-book.adoc[Address Book]
 ** xref:module/access-control.adoc[Access Control]
 
-* xref:manage.adoc[Manage]
-** xref:manage/relayers.adoc[Relayers]
+* xref:settings.adoc[Settings]
 ** xref:logs.adoc[Logs]
-** xref:manage/notification-channels.adoc[Notification Channels]
+** xref:settings/notifications.adoc[Notifications]
 
 * Tutorials
 ** xref:tutorial/deploy.adoc[Deploy]

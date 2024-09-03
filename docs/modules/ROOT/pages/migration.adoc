@@ -10,14 +10,13 @@ With the announcement of Defender general availability, we are deprecating Defen
 
 Features from Defender legacy have been reorganized and improved in Defender. All of your created assets will be completely available when migrating.
 
-=== Tenant-wide pages → Manage
+=== Tenant-wide pages → Settings
 
-Tenant-wide pages in the Defender legacy dropdown menu can now be found under the `Manage` tab. 
+Tenant-wide pages in the Defender legacy dropdown menu can now be found under the `Settings` tab. 
 
-- `User managament` is now called `Team Members`
 - `Team API Keys`  and `Fireblocks API Keys` are now under `API Keys`
 
-Learn more xref:manage.adoc[here].
+Learn more xref:settings.adoc[here].
 
 ==== Defender legacy
 image::tenant-migration-1.0.png[Tenant pages on Defender legacy]
@@ -25,9 +24,9 @@ image::tenant-migration-1.0.png[Tenant pages on Defender legacy]
 ==== Defender
 image::tenant-migration-2.0.png[Tenant pages on Defender]
 
-=== Admin / Add Contract → Manage / Address Book
+=== Admin / Add Contract → Address Book
 
-Now, you can add smart contracts to use across the platform via the `Address Book`, which is accesible under the `Manage` tab. Learn more xref:manage.adoc#address-book[here].
+Now, you can add smart contracts to use across the platform via the `Address Book`, which is accessible under the `Operate & Automate`. Learn more xref:module/address-book.adoc[here].
 
 ==== Defender legacy
 image::address-book-migration-1.0.png[Add Contract on Defender legacy]
@@ -49,25 +48,15 @@ The ability of creating a Timelock smart contract via Defender is *not* availabl
 ==== Defender legacy
 image::timelock-migration-1.0.png[Timelock creation on Defender legacy]
 
-### Admin / Add Proposal → Actions / Transaction Proposals
+### Admin / Add Proposal →  Transaction Proposals
 
-In Defender, you can now use `Transactions Proposals` within `Actions` to send transactions via `Approval Processes`, like Safes, EOAs, Relayers, and more. Learn more xref:module/actions.adoc#transaction-proposals-reference[here].
+In Defender, you can now use `Transactions Proposals` to send transactions via `Approval Processes`, like Safes, EOAs, Relayers, and more. Learn more xref:module/transaction-proposals.adoc[here].
 
 ==== Defender legacy
 image::proposal-migration-1.0.png[Proposals on Defender legacy]
 
 ==== Defender
 video::proposal.webm[width=670,opts="autoplay,loop,nocontrols"]
-
-### Relay → Manage / Relayers
-
-`Relayers` can now be found under the `Manage` tab. Learn more xref:manage/relayers.adoc[here].
-
-==== Defender legacy
-image::relayers-migration-1.0.png[Relayers on Defender legacy]
-
-==== Defender
-video::relayers.webm[width=670,opts="autoplay,loop,nocontrols"]
 
 ### Autotasks → Actions
 
@@ -81,9 +70,9 @@ image::autotasks-migration-1.0.png[Autotasks on Defender legacy]
 ==== Defender
 video::actions.webm[width=670,opts="autoplay,loop,nocontrols"]
 
-### Autotasks / Secrets → Manage / Secrets
+### Autotasks / Secrets → Settings / Secrets
 
-The `Secrets` tab is now available under `Manage`. Learn more xref:manage.adoc#secrets[here].
+The `Secrets` tab is now available under `Settings`. Learn more xref:settings.adoc#secrets[here].
 
 ==== Defender legacy
 image::secrets-migration-1.0.png[Secrets on Defender legacy]

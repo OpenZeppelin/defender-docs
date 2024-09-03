@@ -9,6 +9,7 @@ This demo app showcases how to implement meta-transactions using not just ERC-27
 * ERC-2612: Permit Function: This standard introduces a method for enabling gasless token approvals in ERC-20 tokens. Users can grant spending permission to a relayer service by signing a message instead of directly paying gas fees for the traditional "approve" function. This allows the relayer to handle token approvals on the user's behalf.
 * ERC-3009: Transfer with Authorization: This standard facilitates gasless token transfers through off-chain authorizations. Users sign messages authorizing specific token transfers, which can then be submitted to the blockchain by anyone, including a relayer service.
 
+A gasless meta-transaction relay can be easily and securely implemented using Defender with xref::module/relayers.adoc[Relayers], which allow you to send transactions easily without needing to manage private keys, transaction signing, nonce management, gas estimation, and transaction inclusion.
 
 
 [[pre-requisites]]
@@ -41,7 +42,7 @@ $ cd workshops/25-defender-metatx-api/
 $ yarn
 ```
 
-Create a `.env` file in the project root and supply an API key and secret from the https://defender.openzeppelin.com/v2/#/manage/api-keys/team/new[API keys page, window=_blank]. A private key will be used for local testing but the Relayer is used for actual contract deployment.
+Create a `.env` file in the project root and supply an API key and secret from the https://defender.openzeppelin.com/v2/#/settings/api-keys/new[API keys page, window=_blank]. A private key will be used for local testing but the Relayer is used for actual contract deployment.
 
 ```
 PRIVATE_KEY="0xabc"

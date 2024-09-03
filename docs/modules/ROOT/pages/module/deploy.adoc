@@ -32,12 +32,12 @@ NOTE: To maintain the best security practices, the wizard will only show network
 [[wizard-2]]
 ==== Step 2: Deploying
 
-In this step, users choose the default approval process for each network. The resource associated to this approval process is the one that will be used to pay and execute the deployment transactions. If you don't have an approval process for a network, the wizard will allow you to create one of either type Relayer, Safe or EOA ("Externally Owned Account"). You can learn more about approval processes xref:manage.adoc#approval-processes[here].
+In this step, users choose the default approval process for each network. The resource associated to this approval process is the one that will be used to pay and execute the deployment transactions. If you don't have an approval process for a network, the wizard will allow you to create one of either type Relayer, Safe or EOA ("Externally Owned Account"). You can learn more about approval processes xref:settings.adoc#approval-processes[here].
 
 [[wizard-3]]
 ==== Step 3: Upgrading
 
-This last step is optional but recommended if you plan to deploy upgradeable contracts. Here you choose the approval process for upgrades for each network. You can find a list of supported processes xref:manage.adoc#approval-processes[here].
+This last step is optional but recommended if you plan to deploy upgradeable contracts. Here you choose the approval process for upgrades for each network. You can find a list of supported processes xref:settings.adoc#approval-processes[here].
 
 [[wizard-4]]
 

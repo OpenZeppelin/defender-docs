@@ -1,6 +1,6 @@
 # Securely deploy and upgrade a smart contract
 
-Defender allows you to easily deploy and upgrade smart contracts across chains while maintaining the best security practices. This tutorial shows how to use a xref::manage.adoc#relayers[Relayer] to deploy a contract called Box and upgrade it with the UUPS proxy pattern via a https://safe.global/[Safe wallet, window=_blank] (multisig).
+Defender allows you to easily deploy and upgrade smart contracts across chains while maintaining the best security practices. This tutorial shows how to use a xref::settings.adoc#relayers[Relayer] to deploy a contract called Box and upgrade it with the UUPS proxy pattern via a https://safe.global/[Safe wallet, window=_blank] (multisig).
 
 [[pre-requisites]]
 == Pre-requisites
@@ -40,7 +40,7 @@ image::tutorial-deploy-step1-wizard.png[Deploy networks wizard]
 
 . Select the approval process associated with your funded relayer that will execute the deployments for the test environment. In case you don't already have an approval process, Defender will allow you to create one within the wizard flow. Relayers automate the payment of gas fees and take care of private key secure storage, transaction signing, nonce management, gas pricing estimation, and resubmissions. However, you may also choose to deploy using an EOA ("Externally Owned Account") or Safe wallet.
 +
-NOTE: Read more about relayers and how to manage them xref::manage.adoc#relayers[here].
+NOTE: Read more about relayers and how to manage them xref::settings.adoc#relayers[here].
 
 +
 image::tutorial-deploy-step2-wizard.png[Deploy block deploy wizard]

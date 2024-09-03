@@ -18,7 +18,7 @@
 ** Disable the aggressive error when proposal signing fails.
 ** Allow functionality to only show status dialog loader when state machine is active.
 ** Fix Actions dependencies version UI selector.
-** https://docs.openzeppelin.com/defender/manage/notification-channels#additional-configurations[Add support to webhook signing of notifications].
+** https://docs.openzeppelin.com/defender/settings/notification-channels#additional-configurations[Add support to webhook signing of notifications].
 
 [[release-2024-07-10]]
 == July 10th, 2024
