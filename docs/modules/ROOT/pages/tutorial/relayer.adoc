@@ -21,7 +21,7 @@ By the end of this tutorial, you will have a basic understanding of how to use t
 
 Let's start by creating a Relayer:
 
-* Open https://defender.openzeppelin.com/v2/#/manage/relayers[Defender Manage] in a web browser.
+* Open https://defender.openzeppelin.com/v2/#/relayers[Defender Operate & Automate] in a web browser.
 +
 image::tutorial-relayer-step1.png[Manage Relayer]
 * Click on *Create Relayer* with the name ETH Sepolia Relayer and Sepolia network.
@@ -31,6 +31,9 @@ image::tutorial-relayer-step2.png[Create Relayer]
 * To create an API key for a Relayer, click on the Relayer and then on the *More* button to expand the dropdown and select *Create API Key*
 +
 image::tutorial-relayer-step3.png[Create Relayer API]
+* Now you can set API key expiration in minutes, hours or days.
++
+image::tutorial-relayer-step3-1.png[Save Relayer API]
 * Once the API Key is created, make sure to write down the secret key. The API secret is only visible once during the creation — if you don’t write it down, it’s lost forever.
 +
 image::tutorial-relayer-step4.png[Save Relayer API]
