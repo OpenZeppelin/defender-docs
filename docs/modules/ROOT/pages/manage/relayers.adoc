@@ -112,7 +112,7 @@ Relayer Groups are collections of individual relayers that work together to subm
 
 === Drawbacks of Relayer Groups
 
-* **Unified Configuration:** Policies and configurations apply uniformly across all relayers in the group, making it difficult to manage individual relayer settings..
+* **Unified Configuration:** Policies and configurations apply uniformly across all relayers in the group, making it difficult to manage individual relayer settings.
 * **Limited Functionality:** Certain functionalities, like message signing, are not available for relayers that are part of a group.
 * **Group-Restricted Operation:** Relayers within a group cannot be used independently; they must function collectively as part of the group.
 
