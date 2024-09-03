@@ -444,6 +444,18 @@ Intents are used to maintain the order of transactions and prevent overloading t
 * **High Transaction Volume:** When the number of pending transactions exceeds the maximum allowed in-flight, new transactions are stored as intents. This prevents the system from being overwhelmed and ensures that transactions are submitted in the correct order.
 * **Slow Processing:** If the network or relayer is processing transactions slowly (e.g., no transaction has been mined in the last 30 minutes), new transactions are stored as intents to avoid adding to the congestion.
 
+[[cancel-intents]]
+=== Cancel Intents
+
+Relayer transaction intents can be canceled and permanently removed from our end. This feature is particularly useful when you need to prevent a specific intent from being submitted or want to free up space in the queue for other, more urgent transactions.
+
+To do this, use the `cancelTransactionById` method of the `@openzeppelin/defender-sdk-relay-client`:
+
+[source,jsx]
+----
+tx = await relayer.cancelTransactionById('5fcb8a6d-8d3e-403a-b33d-ade27ce0f85a');
+----
+
 [[signing]]
 == Signing
 
