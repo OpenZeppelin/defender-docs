@@ -4,7 +4,7 @@
 == September 5th, 2024
 
 * *General*
-** Feature: UI redesign and improvements for the Defender 2.0 dashboard.
+** Feature: UI redesign and improvements for the Defender dashboard.
 ** Feature: Add support for the proposals pagination.
 ** Feature: Allow EOAs to be used for upgrade approval process.
 ** Refactor: Change MATIC token symbol to POL token according to changes on Polygon network.
