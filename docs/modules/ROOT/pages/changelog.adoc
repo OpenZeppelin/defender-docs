@@ -1,6 +1,5 @@
 = Changelog
 
-
 [[release-2024-09-05]]
 == September 5th, 2024
 
