@@ -89,6 +89,12 @@ process.exitCode = 1;
 ts-node storeObject.ts
 ----
 
+ Alternatively, if you want to use Node directly:
+[source,jsx]
+----
+node storeObject.js
+----
+
 [[Send-Transaction]]
 == 3. Send Transaction
 
@@ -126,6 +132,12 @@ and data is the encoded version of the store() function with ‘10’ as input p
 ts-node storeObject.ts
 ----
 
+ Alternatively, if you want to use Node directly:
+[source,jsx]
+----
+node storeObject.js
+----
+
 [[Check-Transaction-Status]]
 == 4. Check Transaction Status
 
@@ -144,6 +156,12 @@ console.log('Tx Status', JSON.stringify(txUpdate, null, 2));
 [source,jsx]
 ----
 ts-node storeObject.ts
+----
+
+ Alternatively, if you want to use Node directly:
+[source,jsx]
+----
+node storeObject.js
 ----
 
 [[Next-Steps]]
