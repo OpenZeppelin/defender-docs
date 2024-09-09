@@ -73,6 +73,7 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://hedera.com/[*Hedera*,window=_blank] and *Hedera Testnet*.
 - https://www.japanopenchain.org/en/docs/developer/mainnet[*Japan Open Chain*,window=_blank] and *Japan Open Chain Testnet*.
 - https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Sepolia*.
+- https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Sepolia*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
 - https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
