@@ -17,6 +17,7 @@
 
 * Tutorials
 ** xref:tutorial/deploy.adoc[Deploy]
+** xref:tutorial/relayer.adoc[Relayer]
 ** xref:tutorial/monitor.adoc[Monitor]
 ** xref:tutorial/actions.adoc[Actions]
 ** xref:tutorial/access-control.adoc[Access Control]
