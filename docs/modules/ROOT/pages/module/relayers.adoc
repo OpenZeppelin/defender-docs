@@ -60,7 +60,7 @@ Whenever you create a Relayer, a fresh EOA will be created to back it. For secur
 
 You can limit a Relayer's behavior by specifying policies. 
 
-To configure a Relayer's policies, go to the https://defender.openzeppelin.com/v2/#/manage/relayers[Manage page, window=_blank], select the Relayer, and then go to the *Policies* tab. You will then see a form where you can opt to enable policies and tweak their parameters.
+To configure a Relayer's policies, go to the https://defender.openzeppelin.com/v2/#/relayers[Relayer page, window=_blank], select the Relayer, and then go to the *Policies* tab. You will then see a form where you can opt to enable policies and tweak their parameters.
 
 // Using passthrough block to reduce the width of the image and center it.
 ++++
@@ -511,7 +511,7 @@ const balance = await provider.getBalance('0x6b175474e89094c44da98b954eedeac4952
 [[withdrawing-funds]]
 == Withdrawing funds
 
-You can withdraw funds from a Relayer on the https://defender.openzeppelin.com/v2/#/manage/relayers[Relayers Manage page, window=_blank], selecting the Relayer, and clicking on *Withdraw*.
+You can withdraw funds from a Relayer on the https://defender.openzeppelin.com/v2/#/relayers[Relayers page, window=_blank], selecting the Relayer, and clicking on *Withdraw*.
 
 image::relayer-withdraw.png[Relayer Withdraw Button]
 

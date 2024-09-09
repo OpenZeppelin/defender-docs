@@ -4,8 +4,6 @@ OpenZeppelin Defender is a mission-critical developer security platform to *code
 
 Integrating directly into the developer workflow, Defender makes it easy and fast for developers and operators to prevent and fix security issues pre and post-deployment.
 
-IMPORTANT: Defender legacy is now deprecated in favor of Defender. Learn how to migrate xref:migration.adoc[here]! *On June 1st 2024, you will no longer have access to Defender 1.0 UI and API*.
-
 [[modules]]
 [.card-section.card-section-2col]
 == Modules
@@ -29,12 +27,27 @@ xref:module/deploy.adoc[[.card-title]#Deploy# [.card-body]#pass:q[Manage deploym
 
 [.card.card-learn]
 --
+xref:module/relayers.adoc[[.card-title]#Relayers# [.card-body]#pass:q[Send transactions to the blockchain via Defender automatically.]#]
+--
+
+[.card.card-learn]
+--
 xref:module/monitor.adoc[[.card-title]#Monitor# [.card-body]#pass:q[Detect smart contract activity and anomalies through trigger actions and alerts.]#]
 --
 
 [.card.card-learn]
 --
+xref:module/transaction-proposals.adoc[[.card-title]#Transaction Proposals# [.card-body]#pass:q[Create transactions to be executed on-chain.]#]
+--
+
+[.card.card-learn]
+--
 xref:module/actions.adoc[[.card-title]#Actions# [.card-body]#pass:q[Create automated actions to perform on-chain and off-chain operations.]#]
+--
+
+[.card.card-learn]
+--
+xref:module/address-book.adoc[[.card-title]#Address Book# [.card-body]#pass:q[Create a shared repository of user-friendly names for your accounts or contracts.]#]
 --
 
 [.card.card-learn]
@@ -48,23 +61,24 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 
 - https://arbitrum.io/[*Arbitrum One*], https://nova.arbitrum.io/[*Arbitrum Nova*,window=_blank], *Arbitrum Sepolia*.
 - https://aurora.dev/[*Aurora*,window=_blank] and *Aurora Testnet*.
-- https://docs.avax.network/learn/platform-overview#contract-chain-c-chain[*Avalanche C*,window=_blank] and *FUJI C-Chain*.
+- https://docs.avax.network/dapps[*Avalanche C*,window=_blank] and *FUJI C-Chain*.
 - https://www.base.org/[*Base Mainnet*,window=_blank] and *Base Sepolia*.
 - https://docs.binance.org/smart-chain/guides/bsc-intro.html[*Binance Smart Chain*,window=_blank] and *BSC testnet*.
 - https://celo.org/[*Celo*,window=_blank] and *Alfajores*.
 - https://ethereum.org/en/[*Ethereum Mainnet*, window=_blank], *Sepolia* testnet and *Holesky* testnet.
 - https://fantom.foundation/what-is-fantom-opera/[*Fantom*,window=_blank] and *Fantom Testnet*.
 - https://fuse.io/[*Fuse*,window=_blank].
-- https://www.gnosis.io/[*Gnosis Chain*,window=_blank] and *Sokol*.
+- https://www.gnosis.io/[*Gnosis Chain*,window=_blank]
 - https://www.harmony.one/[*Harmony* Shard 0,window=_blank] and *Harmony Testnet Shard 0*.
 - https://hedera.com/[*Hedera*,window=_blank] and *Hedera Testnet*.
+- https://www.japanopenchain.org/en/docs/developer/mainnet[*Japan Open Chain*,window=_blank] and *Japan Open Chain Testnet*.
 - https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Sepolia*.
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Sepolia*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
 - https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
 - https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia*.
-- https://www.polygon.technology/[*Polygon* (Matic),window=_blank] *Mumbai*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *zkEVM Testnet*
+- https://www.polygon.technology/[*Polygon* (POL),window=_blank], *Amoy*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *Polygon Cardona zkEVM testnet*
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://zksync.io/[*zkSync Era Mainnet*,window=_blank], *zkSync Era Sepolia*.
 

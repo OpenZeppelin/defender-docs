@@ -1,5 +1,21 @@
 = Changelog
 
+[[release-2024-09-05]]
+== September 5th, 2024
+
+* *General*
+** Feature: UI redesign and improvements for the Defender dashboard.
+** Feature: Add support for the proposals pagination.
+** Feature: Allow EOAs to be used for upgrade approval process.
+** Refactor: Change MATIC token symbol to POL token according to changes on Polygon network.
+** Feature: Add support for EIP 1559 for Fuse network.
+** Feature: Improve resiliency of the relayers by retrying transactions with specific error responses from providers.
+** Fix: Bug in rendering Monitor card.
+** Fix: Bug in proposal filters.
+** Fix: Bug in repeat transaction proposals flow.
+** Fix: Bug in view transaction proposal button link.
+** Minor bug fixes and improvements in UI/UX.
+
 [[release-2024-08-21]]
 == August 21st, 2024
 
@@ -18,7 +34,7 @@
 ** Disable the aggressive error when proposal signing fails.
 ** Allow functionality to only show status dialog loader when state machine is active.
 ** Fix Actions dependencies version UI selector.
-** https://docs.openzeppelin.com/defender/manage/notification-channels#additional-configurations[Add support to webhook signing of notifications].
+** https://docs.openzeppelin.com/defender/settings/notification-channels#additional-configurations[Add support to webhook signing of notifications].
 
 [[release-2024-07-10]]
 == July 10th, 2024

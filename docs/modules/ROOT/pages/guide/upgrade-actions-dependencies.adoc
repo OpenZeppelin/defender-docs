@@ -13,9 +13,9 @@ WARNING: We encourage users to make the upgrade process by themselves as the aut
 [[how-to-upgrade-actions-runtimes]]
 == How to Upgrade Actions Runtimes
 
-1. Check the Action https://docs.openzeppelin.com/defender/v2/module/actions#environment[dependencies latest versions, window=_blank] and search for any breaking changes in your Action code.
+1. Check the Action https://docs.openzeppelin.com/defender/module/actions#environment[dependencies latest versions, window=_blank] and search for any breaking changes in your Action code.
 2. Make any necessary code changes.
 3. Test the Action code. A safe approach to do this:
   a. Create a new Action with the same code using the target dependencies version and run it to verify that it works as expected.
-  b. If your action sends relayer transactions using https://docs.openzeppelin.com/defender/v2/sdk[defender-sdk, window=_blank] (or any other Defender legacy package), validate that it works by connecting a testnet relayer with your action.
+  b. If your action sends relayer transactions using https://docs.openzeppelin.com/defender/sdk[defender-sdk, window=_blank] (or any other Defender legacy package), validate that it works by connecting a testnet relayer with your action.
 4. Once you have verified that the code and dependencies are compatible, upgrade the Action dependencies to the latest version.

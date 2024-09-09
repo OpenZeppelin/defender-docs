@@ -10,7 +10,7 @@ You can directly submit transactions to Fireblocks from Defender. Fireblocks is 
 
 [[generate-csr-file]]
 == 1. Generate CSR file
-. To use this feature, navigate to the *Manage* page and click on *Approval Process* in the sidebar. If the Fireblocks integration is enabled for your account, go to the *Integrations* tab, which is located next to the *All Approval Process* tab.
+. To use this feature, navigate to the *Settings* page and click on *Approval Process* in the sidebar. If the Fireblocks integration is enabled for your account, go to the *Integrations* tab, which is located next to the *All Approval Process* tab.
 +
 image::guide-fireblocks-integration-tab.png[Integration tab]
 +
@@ -33,7 +33,7 @@ image::guide-fireblocks-api-key.png[API Key generated]
 
 [[setup-defender-integration]]
 == 3. Connect Fireblocks with Defender
-. First, navigate to the *Manage* page subsequently click *Approval Process* in the sidebar, the navigate to the *Integrations* tab. Over here click on the *Paste API Key from Fireblocks*.
+. First, navigate to the *Settings* page subsequently click *Approval Process* in the sidebar, the navigate to the *Integrations* tab. Over here click on the *Paste API Key from Fireblocks*.
 +
 image::guide-fireblock-paste-api-key.png[Insert API Key Defender]
 +

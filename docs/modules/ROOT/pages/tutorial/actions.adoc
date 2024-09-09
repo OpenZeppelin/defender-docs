@@ -15,7 +15,7 @@ NOTE: Learn to xref::tutorial/deploy.adoc[deploy] and xref::tutorial/monitor.ado
 You will configure an action that sends an hourly transaction with the `addObject()` function to the `0xC64f7ace6127bc7B0bAb23bD1871aC81e6AEC074` contract in Sepolia, which is an example of a Box contract deployed in the xref::tutorial/deploy.adoc[Deploy] tutorial. To do so, follow these steps:
 
 . Run the following command in your terminal:
-. Open https://defender.openzeppelin.com/v2/#/manage/relayers[Defender Manage, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/relayers[Defender Relayers, window=_blank] in a web browser.
 . Click on *Create Relayer* with the name `Actions Relayer` and Sepolia network.
 . Fund it with some Sepolia ETH. This relayer will send and pay for the automated transactions.
 . Open https://defender.openzeppelin.com/v2/#/actions[Defender Actions, window=_blank].
