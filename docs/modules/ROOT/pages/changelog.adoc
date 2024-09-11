@@ -4,16 +4,16 @@
 == September 11th, 2024
 
 * *General*
-** Feature: Update onboarding dialog based on the updated design.
-** Feature: Parallelize requests to improve initial load times.
-** Fix: Bug in feature quota enforcement banner.
-** Fix: Add backend validation for multisig networks.
-** Fix: Premature input validation.
-** Fix: Avoid conflicting params with existing params.
-** Fix: Fixed View Transaction Proposal button link.
+** Feature: Support Linea Sepolia.
 ** Feature: Display warning when creating a Multisig proposal without signatures.
-** Fix: Fixed the error when trying to operate access control contracts using relayers.
-** Fix: Fixed the circular import issue when importing a user.
+** Feature: Add commit hash to the deploy module.
+** Chore: Deprecate defender legacy app.
+** Fix: Add backend validation for multisig networks.
+** Fix: Fixed View Transaction Proposal button link.
+** Fix: Bug in deploy test environments.
+** Fix: Bug in access control contracts using relayers.
+** Feature: Improve relayer transaction submission mechanism.
+** Several UI bug fixes & security improvements.
 
 [[release-2024-09-05]]
 == September 5th, 2024
