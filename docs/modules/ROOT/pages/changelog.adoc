@@ -1,5 +1,23 @@
 = Changelog
 
+[[release-2024-09-11]]
+== September 11th, 2024
+
+* *General*
+** Feature: Update onboarding dialog based on the updated design.
+** Feature: Parallelize requests to improve initial load times.
+** Feature: Allow EOAs to be used for upgrade approval process.
+** Refactor: Change MATIC token symbol to POL token according to changes on Polygon network.
+** Feature: Add support for EIP 1559 for Fuse network.
+** Feature: Improve resiliency of the relayers by retrying transactions with specific error responses from providers.
+** Fix: Bug in feature quota enforcement banner.
+** Fix: Bug in CSS imports.
+** Fix: Add backend validation for multisig networks.
+** Fix: Show different error if user is already in the org.
+** Fix: Premature input validation.
+** Fix: Improve error messages when using expired or used activation link.
+** Fix: Avoid conflicting params with existing params.
+
 [[release-2024-09-05]]
 == September 5th, 2024
 
