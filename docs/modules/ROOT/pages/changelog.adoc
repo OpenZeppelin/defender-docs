@@ -7,14 +7,10 @@
 ** Feature: Update onboarding dialog based on the updated design.
 ** Feature: Parallelize requests to improve initial load times.
 ** Fix: Bug in feature quota enforcement banner.
-** Fix: Bug in CSS imports.
 ** Fix: Add backend validation for multisig networks.
-** Fix: Show different error if user is already in the org.
 ** Fix: Premature input validation.
-** Fix: Improve error messages when using expired or used activation link.
 ** Fix: Avoid conflicting params with existing params.
 ** Fix: Fixed View Transaction Proposal button link.
-** Feature: Migrate Matic to Polygon.
 ** Feature: Display warning when creating a Multisig proposal without signatures.
 ** Fix: Fixed the error when trying to operate access control contracts using relayers.
 ** Fix: Fixed the circular import issue when importing a user.
