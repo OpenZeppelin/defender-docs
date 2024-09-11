@@ -16,8 +16,8 @@
 ** Fix: Fixed View Transaction Proposal button link.
 ** Feature: Migrate Matic to Polygon.
 ** Feature: Display warning when creating a Multisig proposal without signatures.
-** Fix: Fixes the error when trying to operate access control contracts using relayers.
-** Fix: Fixes the circular import issue when importing a user.
+** Fix: Fixed the error when trying to operate access control contracts using relayers.
+** Fix: Fixed the circular import issue when importing a user.
 
 [[release-2024-09-05]]
 == September 5th, 2024
