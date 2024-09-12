@@ -239,7 +239,7 @@ In API Keys you can manage the keys used by clients to access the Defender API f
 
 To add an API key, click on the Create API Key button. 
 
-image::manage-new-api-key.png[Manage Create Team API Key]
+image::manage-new-api-key-v2.png[Manage Create Team API Key]
 
 Select the API capabilities that you want associated with the API key:
 
@@ -248,9 +248,11 @@ Select the API capabilities that you want associated with the API key:
 * *Manage Automatic Actions* for creating and modifying automatic actions and their configurations.
 * *Manage Monitors* for creating and managing monitors and their configurations.
 
+Optionally, select the API Key expiration. You can specify the expiration time in minutes, hours or days.
+
 Once the API key is created, Defender will show you the details.
 
-image::manage-api-key.png[Manage Team API Key]
+image::manage-api-key-v2.png[Manage Team API Key]
 
 Be sure to copy the secret key, it will be required for access and it will not be accessible again after the form is dismissed.
 
