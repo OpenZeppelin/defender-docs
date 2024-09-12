@@ -77,5 +77,5 @@ NOTE: After setting up a monitor, we recommend creating Actions on Defender. Lea
 == References
 
 * xref::module/actions.adoc[Actions Documentation]
-* xref::manage.adoc#notifications[Manage Notificacion Channels Documentation]
+* xref::settings.adoc#notifications[Manage Notificacion Channels Documentation]
 * https://etherscan.io/address/0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc[Uniswap V2 USDC-ETH Pool, window=_blank]

@@ -25,7 +25,7 @@ Use Notification Channels to get notified about events across different Defender
 [[setup]]
 == Setup
 
-Go to *Manage -> Notification Channels* section and select and configure your preferred channel.
+Go to *Settings -> Notification Channels* section and select and configure your preferred channel.
 
 ++++
 <div class="flex justify-center">
@@ -54,7 +54,7 @@ Also, it is possible to customize the notification template, xref:module/monitor
 
 As an additional security measure, Defender implements a Hash-based Message Authentication Code (https://en.wikipedia.org/wiki/HMAC[HMAC, window=_blank]), by adding a `Defender-Signature` and `Defender-Timestamp` request headers to the notification sent to webhook endpoints. Therefore, the endpoint receiving the notification can verify the authenticity of the request.
 
-Each webhook notification has a secret key associated that can be accessed under *Manage -> Notification Channnels -> Webhook details*.
+Each webhook notification has a secret key associated that can be accessed under *Settings -> Notification Channnels -> Webhook details*.
 
 The `Defender-Signature` is generated using https://en.wikipedia.org/wiki/SHA-2[SHA256 algorithm, window=_blank] and `webhook secret` to sign the payload and the timestamp.
 

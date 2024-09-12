@@ -24,8 +24,8 @@ $ npm i --save-dev @openzeppelin/defender-sdk dotenv
 
 [[create-relayer]]
 == 2. Create Relayer
-
-From Defender, navigate to the https://defender.openzeppelin.com/v2/#/manage/api-keys/team/new[API keys creation page, window=_blank] in order to create a key set to use in the project. The capabilities of the key should include:
+// TODO: change api-keys/team/new to api-keys/new
+From Defender, navigate to the https://defender.openzeppelin.com/v2/#/settings/api-keys/team/new[API keys creation page, window=_blank] in order to create a key set to use in the project. The capabilities of the key should include:
 
 - Manage Relayers
 - Manage Actions
@@ -38,7 +38,7 @@ API_KEY='key'
 API_SECRET='secret'
 ```
 
-With the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`@openzeppelin/defender-sdk`, window=_blank] package, use the following script to create a new xref:manage/relayers.adoc[Relayer] on Polygon and save the Relayer's ID to your `.env` file.
+With the https://www.npmjs.com/package/@openzeppelin/defender-sdk[`@openzeppelin/defender-sdk`, window=_blank] package, use the following script to create a new xref:module/relayers.adoc[Relayer] on Polygon and save the Relayer's ID to your `.env` file.
 
 [source,jsx]
 ----

@@ -21,7 +21,7 @@ image::tutorial-forked-network-phalcon-create.png[Phalcon create a fork]
 +
 image::tutorial-forked-networks-phalcon-dashboard.png[Phalcon dashboard]
 
-. Open https://defender.openzeppelin.com/v2/#/manage/networks/forks[Defender Forked Networks, window=_blank] in a web browser.
+. Open https://defender.openzeppelin.com/v2/#/settings/networks/forks[Defender Forked Networks, window=_blank] in a web browser.
 . Click on *Add Forked Network*.
 +
 image::tutorial-forked-networks-intro.png[Forked Networks landing page]
@@ -92,7 +92,7 @@ const deployment = await client.deploy.deployContract({
 const deploymentStatus = await client.deploy.getDeployedContract(deployment.deploymentId);
 console.log(deploymentStatus);
 ```
-. Run the script to deploy the contract. *Note* that providing a `salt` will deploy the contract using `CREATE2`. Otherwise, the contract will be deployed using the `CREATE` opcode. Visit the documentation for more information on the https://docs.openzeppelin.com/defender/v2/tutorial/deploy#deploy-caveat[caveats of deployment].
+. Run the script to deploy the contract. *Note* that providing a `salt` will deploy the contract using `CREATE2`. Otherwise, the contract will be deployed using the `CREATE` opcode. Visit the documentation for more information on the https://docs.openzeppelin.com/defender/tutorial/deploy#deploy-caveat[caveats of deployment].
 . Once deployed, you can track the deployment status on the https://defender.openzeppelin.com/v2/#/deploy/environment/production[Defender Deploy dashboard, window=_blank].
 
 
