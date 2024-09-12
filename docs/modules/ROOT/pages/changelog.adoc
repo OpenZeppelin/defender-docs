@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2024-09-12]]
+== September 12th, 2024
+
+* *General*
+** Fix: Address Book improvements.
+** Fix: Gas price estimation to improve avalanche transactions.
+** Feature: Allow users to change their password.
+** Feature: Show settings tab for all plans.
+
+
 [[release-2024-09-11]]
 == September 11th, 2024
 
