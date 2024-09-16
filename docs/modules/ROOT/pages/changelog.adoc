@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2024-09-16]]
+== September 16th, 2024
+
+* *General*
+** Feature: Allow users to submit feedback on code app report issue.
+** Feature: API keys UI improvements.
+** Fix: Fixed CORS errors when inspecting private network deployments.
+** Fix: Bug in notification channels.
+** Feature: Better notification when quotas reached.
+
 [[release-2024-09-12]]
 == September 12th, 2024
 
