@@ -4,11 +4,10 @@
 == September 16th, 2024
 
 * *General*
-** Fix: Resolved an issue where UI components did not refresh after subscribing to a paid subscription, preventing resource creation when exceeding quota until the page is manually refreshed.
 ** Feature: Allow users to submit feedback on code app report issue.
 ** Feature: API keys UI improvements.
 ** Fix: Fixed CORS errors when inspecting private network deployments.
-** Fix: Solved issue where pausing and unpausing notification channels didn't always work.
+** Fix: Bug in notification channels.
 ** Feature: Better notification when quotas reached.
 
 [[release-2024-09-12]]
