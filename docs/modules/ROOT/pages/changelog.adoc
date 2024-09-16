@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-09-16]]
+== September 16th, 2024
+
+* *General*
+** Fix: Resolved an issue where UI components did not refresh after subscribing to a paid subscription, preventing resource creation when exceeding quota until the page is manually refreshed.
+** Feature: Allow users to submit feedback on code app report issue.
+** Feature: API keys UI improvements.
+
 [[release-2024-09-12]]
 == September 12th, 2024
 
