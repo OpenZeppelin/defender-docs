@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-09-18]]
+== September 18th, 2024
+
+* *General*
+** Fix: Update the base Sepolia safe transaction service url.
+** Fix: Whitelist Taiko RPC endpoints.
+** Feature: Allow users to send feedback for contract inspector issues.
+** Feature: Add Multisig or EOA addresses used for transaction proposals to the table view.
 [[release-2024-09-16]]
 == September 16th, 2024
 
