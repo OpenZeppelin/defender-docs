@@ -4,11 +4,8 @@
 == September 19th, 2024
 
 * *General*
-** Feature: Implemented network-based filtering for transaction proposals.
-** Fix: Fixed an issue where the Relayer side drawers occasionally triggered console errors.
-** Fix: Resolved the issue of duplicate form fields in the "Create Private Networks" feature.
-** Fix: Fixed an issue with conflicting transactions when creating a multisig proposal.
-** Fix: Validate monitor names.
+** Feature: UI/UX improvements.
+** Feature: Add a form to request an admin to share the reason for canceling/downgrading.
 
 [[release-2024-09-18]]
 == September 18th, 2024
