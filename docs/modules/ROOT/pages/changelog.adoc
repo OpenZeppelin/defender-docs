@@ -4,7 +4,7 @@
 == September 19th, 2024
 
 * *General*
-** Feature: UI/UX improvements.
+** Fix: UI/UX improvements.
 ** Feature: Add a form to request an admin to share the reason for canceling/downgrading.
 
 [[release-2024-09-18]]
