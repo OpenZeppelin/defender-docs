@@ -1,5 +1,12 @@
 = Changelog
 
+[[release-2024-09-19]]
+== September 19th, 2024
+
+* *General*
+** Fix: UI/UX improvements.
+** Feature: Add a form to request an admin to share the reason for canceling/downgrading.
+
 [[release-2024-09-18]]
 == September 18th, 2024
 
