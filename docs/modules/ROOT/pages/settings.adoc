@@ -1,12 +1,7 @@
-[[manage]]
-= Manage
+[[settings]]
+= Settings
 
-Manage everything related to the configuration of Defender, including Relayers, notification channels, addresses, team members, API keys, and more.
-
-[[relayers]]
-== Relayers
-
-Relayers are used to send transactions to the blockchain via Defender automatically. Read more about in the xref:manage/relayers.adoc[Relayers] section.
+Manage everything related to the configuration of Defender, including notifications, addresses, team members, API keys, and more.
 
 [[approval-processes]]
 == Approval Processes
@@ -25,11 +20,11 @@ They are defined per network, and are used throughout Defender to execute transa
 image::manage-approvals.png[Manage Approval Processes]
 
 [[notifications]]
-== Notification Channels
+== Notifications
 
 When triggered, Defender can deliver notifications to one or more configured notification channels which can include any of Slack, email, Telegram, Discord, Datadog, PagerDuty, OpsGenie, or custom webhooks. These notification channels can be used in monitors, actions, and workflows.
 
-image::manage-notify-channels.png[Manage Notification Channels]
+image::manage-notify-channels.png[Manage Notifications]
 
 === Slack Configuration
 
@@ -168,15 +163,6 @@ Please see https://support.pagerduty.com/docs/services-and-integrations[PagerDut
 * *Class* The class/type of the event
 * *Custom_detail* Map of key-value pairs to provide additional details about the event and affected system
 
-[[address-book]]
-== Address book
-
-The address book allows you to create a shared repository of user-friendly names for your accounts or contracts. You can set up these names anywhere you see an address in Defender just by clicking on it, or you can manage your entire address book in the Manage section. Defender automatically creates address book entries for you when you import accounts and contracts in other modules.
-
-When working with products in Defender, account and contract information will be directly sourced from the address book whenever you are required to enter an address, so you can easily fetch addresses from your address book when configuring monitors and actions.
-
-image::manage-address-book.png[Manage Address Book]
-
 [[team-members]]
 == Team Members
 
@@ -192,7 +178,7 @@ Every team member has an assigned role. You can manage authorization to access, 
 
 When you invite a new user to your team, you will assign a role to them, determining their access permissions.
 
-To create a new role, click on the _Create Role_ button. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each product. You can also specify which administrative powers the role will give access to: manage users and roles, manage team API keys, manage Fireblocks API keys, manage address book, and configure log forwarding. 
+To create a new role, click on the _Create Role_ button. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each product. You can also specify which administrative powers the role will give access to: manage users and roles, manage team API keys, manage Fireblocks API keys, manage Address Book, and configure log forwarding. 
 
 image::manage-role-create.png[Manage Role Creation]
 
@@ -253,7 +239,7 @@ In API Keys you can manage the keys used by clients to access the Defender API f
 
 To add an API key, click on the Create API Key button. 
 
-image::manage-new-api-key.png[Manage Create Team API Key]
+image::manage-new-api-key-v2.png[Manage Create Team API Key]
 
 Select the API capabilities that you want associated with the API key:
 
@@ -262,9 +248,11 @@ Select the API capabilities that you want associated with the API key:
 * *Manage Automatic Actions* for creating and modifying automatic actions and their configurations.
 * *Manage Monitors* for creating and managing monitors and their configurations.
 
+Optionally, select the API Key expiration. You can specify the expiration time in minutes, hours or days.
+
 Once the API key is created, Defender will show you the details.
 
-image::manage-api-key.png[Manage Team API Key]
+image::manage-api-key-v2.png[Manage Team API Key]
 
 Be sure to copy the secret key, it will be required for access and it will not be accessible again after the form is dismissed.
 

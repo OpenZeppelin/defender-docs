@@ -32,12 +32,12 @@ NOTE: To maintain the best security practices, the wizard will only show network
 [[wizard-2]]
 ==== Step 2: Deploying
 
-In this step, users choose the default approval process for each network. The resource associated to this approval process is the one that will be used to pay and execute the deployment transactions. If you don't have an approval process for a network, the wizard will allow you to create one of either type Relayer, Safe or EOA ("Externally Owned Account"). You can learn more about approval processes xref:manage.adoc#approval-processes[here].
+In this step, users choose the default approval process for each network. The resource associated to this approval process is the one that will be used to pay and execute the deployment transactions. If you don't have an approval process for a network, the wizard will allow you to create one of either type Relayer, Safe or EOA ("Externally Owned Account"). You can learn more about approval processes xref:settings.adoc#approval-processes[here].
 
 [[wizard-3]]
 ==== Step 3: Upgrading
 
-This last step is optional but recommended if you plan to deploy upgradeable contracts. Here you choose the approval process for upgrades for each network. You can find a list of supported processes xref:manage.adoc#approval-processes[here].
+This last step is optional but recommended if you plan to deploy upgradeable contracts. Here you choose the approval process for upgrades for each network. You can find a list of supported processes xref:settings.adoc#approval-processes[here].
 
 [[wizard-4]]
 
@@ -70,3 +70,29 @@ Defender will use the default approve process for deployments and upgrades. Howe
 NOTE: We provide a quickstart tutorial to deploy and upgrade a smart contract using Defender with Hardhat and Foundry. Check it out xref:tutorial/deploy.adoc[here]!
 
 WARNING: Using `CREATE2` may affect `msg.sender` behavior; see documentation for details xref:tutorial/deploy.adoc#deploy-caveat[here]!
+
+[[metadata]]
+== Metadata
+
+To identify, tag, or classify deployments, you can use the `metadata` field, which includes properties like `commitHash`, `tag`, or any custom property that suits your use case.
+
+```js
+  const client = new Defender({
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.API_SECRET,
+  });
+  
+  const deployment = await client.deploy.deployContract({
+    contractName: 'Example',
+    ...
+    metadata: {
+      commitHash: '4ae3e0d',
+      tag: 'v1.0.0',
+      anyOtherField: 'anyValue',
+    },
+  });
+```
+
+Once the deployment is submitted, these metadata fields will be displayed in the Defender UI under _Metadata_, formatted in JSON.
+
+image::deploy-metadata-1.0.png[Deploy Metadata]
