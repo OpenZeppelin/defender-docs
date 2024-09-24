@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2024-09-24]]
+== September 24th, 2024
+
+* *General*
+** Fix: Bug in retrieving action logs.
+** Fix: Bug in logo displays in the emails.
+** Feature: Allow integration with datadog across different regions.
+** Feature: Allow users to hide Code Inspector report issues.
+** UI/UX improvements. 
+
 [[release-2024-09-19]]
 == September 19th, 2024
 
