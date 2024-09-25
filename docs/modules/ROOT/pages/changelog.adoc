@@ -6,6 +6,7 @@
 * *General*
 ** Fix: Fixed issue where the ERC20 transfer event was not correctly identified in simulation results.
 ** UI/UX improvements.
+** Feature: Add standards for code inspector.
 
 [[release-2024-09-24]]
 == September 24th, 2024
