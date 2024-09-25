@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-09-25]]
+== September 25th, 2024
+
+* *General*
+** Fix: Issue where the ERC20 transfer event was not correctly identified in simulation results.
+** UI/UX improvements.
+** Feature: Add standards for code inspector.
+
 [[release-2024-09-24]]
 == September 24th, 2024
 
