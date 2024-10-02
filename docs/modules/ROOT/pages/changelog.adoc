@@ -4,7 +4,7 @@
 == October 2nd, 2024
 
 * *General*
-** Fix: Fix minor bug issues.
+** Fix: Minor bugs
 ** UI/UX improvements.
 
 [[release-2024-09-25]]
