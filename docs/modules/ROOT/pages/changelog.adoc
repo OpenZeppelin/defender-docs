@@ -1,5 +1,12 @@
 = Changelog
 
+[[release-2024-10-02]]
+== October 2nd, 2024
+
+* *General*
+** Fix: Minor bugs
+** UI/UX improvements.
+
 [[release-2024-09-25]]
 == September 25th, 2024
 
