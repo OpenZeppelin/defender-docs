@@ -78,10 +78,10 @@ image::code-report-summary.png[Summary Report]
 
 In this example, you can see the number of issues detected by Code Inspector, along with their respective severity levels. By clicking the link at the bottom of the report, you can view the full details of these vulnerabilities on Defender.
 
-[[full]]
-=== Full Report
+[[issues]]
+=== Issues
 
-Full reports, as depicted below, identify issues within your smart contracts using a broad range of rules. The rules cover many aspects, such as known vulnerabilities, best practices, code efficiency, and secure coding principles.
+Full reports identify issues within your smart contracts using a broad range of rules. The rules cover many aspects, such as known vulnerabilities, best practices, code efficiency, and secure coding principles.
 
 image::contract-inspector-detailed-report.png[Full Report 1]
 
@@ -93,9 +93,26 @@ Depicted below is an example of a vulnerability detected in a dependency with a 
 
 image::dependency-checker-detailed-report.png[Dependency Checker Report]
 
-To help you resolve these issues recommendations on updates or patches that can address the vulnerabilities are provided along with the relevant advisory links for a more detailed understanding of the issue.
+To help you resolve these issues, recommendations on updates or patches that can address the vulnerabilities are provided along with the relevant advisory links for a more detailed understanding of the issue.
 
 By reviewing and applying the proposed solutions in this report, you can enhance the robustness and reliability of your smart contracts, ensuring adherence to best practices and industry standards. This makes the audit process smoother and improves the preparedness of your contracts for successful deployment.
+
+[[standards]]
+=== Standards
+
+This feature introduces a new section in the report called **Standards**. This section provides insights into your contracts that implement interfaces from the OpenZeppelin Contracts library. For example, if you are using an IERC20, Code Inspector will check the implementation details and properties to ensure you are using this ERC correctly.
+
+#### Detailed Checks
+
+For each function and event defined in an interface, Code Inspector performs comprehensive checks to verify compliance with the standard. These checks include:
+
+- **Signature:** Ensures that the function or event signature matches the standard's specification.
+- **Return Type:** Verifies that the return types of functions align with the expected types defined in the standard.
+- **Parameter Names:** Confirms that the parameter names are consistent with those defined in the standard, enhancing code readability and maintainability.
+- **Visibility:** Checks that the visibility (e.g., `external`, `public`) of functions and events adheres to the standard's requirements.
+- **Mutability:** For functions, ensures that the mutability (e.g., `view`, `pure`) is correctly specified as per the standard.
+
+If any attribute of a function or event fails, the entire function or event is marked as failed. Additionally, if any function or event within an implementation fails, the entire implementation is considered non-compliant.
 
 [[configuration]]
 == Configuration
