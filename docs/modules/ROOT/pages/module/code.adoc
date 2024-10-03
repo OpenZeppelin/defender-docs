@@ -100,17 +100,18 @@ By reviewing and applying the proposed solutions in this report, you can enhance
 [[standards]]
 === Standards
 
-This feature introduces a new section in the report called **Standards**. This section provides insights into your contracts that implement interfaces from the OpenZeppelin Contracts library. For example, if you are using an IERC20, Code Inspector will check the implementation details and properties to ensure you are using this ERC correctly.
+This feature introduces a new section in the report called **Standards**. This section provides insights into your contracts that implement interfaces from the OpenZeppelin Contracts library. For example, if you are using an `IERC20`, Code Inspector will check the implementation details and properties to ensure you are using this ERC correctly.
 
 #### Detailed Checks
 
 For each function and event defined in an interface, Code Inspector performs comprehensive checks to verify compliance with the standard. These checks include:
 
-- **Signature:** Ensures that the function or event signature matches the standard's specification.
-- **Return Type:** Verifies that the return types of functions align with the expected types defined in the standard.
-- **Parameter Names:** Confirms that the parameter names are consistent with those defined in the standard, enhancing code readability and maintainability.
-- **Visibility:** Checks that the visibility (e.g., `external`, `public`) of functions and events adheres to the standard's requirements.
-- **Mutability:** For functions, ensures that the mutability (e.g., `view`, `pure`) is correctly specified as per the standard.
+- **Signature:** Ensures that the function or event signature matches the standard's specification. Example: `transfer(address,uint256)`
+- **Visibility:** Checks that the visibility of functions and events adheres to the standard's requirements. Example: `external`, `public`
+- **Mutability:** For functions, ensures that the mutability is correctly specified as per the standard. Example: `view`, `pure`
+- **Return Type:** Verifies that the return types of functions align with the expected types defined in the standard. Example `returns (bool)`
+- **Parameter Names:** Confirms that the parameter names are consistent with those defined in the standard, enhancing code readability and maintainability. Example: `transfer(address recipient, uint256 amount)`
+- **Return Names:** Ensures that the return variable names, where used, are consistent with the standard. Example: `returns (bool success)`
 
 If any attribute of a function or event fails, the entire function or event is marked as failed. Additionally, if any function or event within an implementation fails, the entire implementation is considered non-compliant.
 
