@@ -151,18 +151,44 @@ The following `defender.config.json` configuration file will disable Dependency 
 }
 ----
 
+[[assets]]
+== Assets
+
+The Assets page allows you to manage your Code Inspector assets, supporting two types: Smart Contracts and GitHub repositories. When you install the Code Inspector GitHub app and select repositories, they will appear on this page. Additionally, you can create Smart Contract assets from addresses in your address book. Note that Smart Contract assets must be verified on Etherscan for this feature to work.
+
+Smart Contract assets can be manually triggered for reports on the report page. GitHub assets can be triggered manually and automatically from new pull requests (PRs) and commits.
+
+image::code-assets.png[Code Assets]
+
+[[asset-settings]]
+=== Settings
+
+The Asset Settings page offers two main settings to manage how Defender handles asset security: Automatically Generate Report and Vulnerability Detection.
+
+==== Automatically Trigger Report for Pull Requests
+
+Automatically Generate Report, is specifically for GitHub repositories. When enabled, this setting ensures continuous monitoring by generating new reports automatically whenever a new pull request (PR) is opened or a new commit is pushed to a PR. 
+
+==== Active Vulnerability Detection and Notification
+
+Active Vulnerability Detection and Notification provides a robust security measure by automatically scanning your assets for new vulnerabilities.
+This setting is applicable to both GitHub repositories and smart contracts. To enable this feature for Github repositories assets, you must activate the setting and select a specific branch to be monitored.
+
+* *Automated Scanning*: Leveraging Defender's advanced smart contracts scanning capabilities, when our team becomes aware of a new vulnerability, whether disclosed or undisclosed, we promptly update our scanning algorithms to detect it. We then scan all assets configured to be monitored
+* *Automated Notification*: Once the automatic scanning is completed an automated system notification email will be sent to inform you whether the vulnerability was detected in your monitored assets. If detected, the notifications include relevant information tailored to the nature of the vulnerability.
+* *Risk Mitigation*: When detected, to aid in addressing and mitigating detected vulnerabilities, notifications may include suggestions for risk mitigation, providing actionable steps for administrators to protect their smart contracts and associated assets.
+
+By enabling Active Vulnerability Detection and Notification for your assets, you can benefit from continuous, automated scanning and timely notifications, empowering you to respond quickly to new threats and maintain the security of your smart contracts and GitHub repositories. This proactive approach ensures that you can stay ahead of potential vulnerabilities and safeguard your code effectively.
+
+
 [[settings]]
 == Settings
 
-The Settings page allows you to manage the permissions and access level of the Code Inspector.
+The Settings page allows you to manage the permissions and access level of the Code Inspector. If you need to make changes to the repositories that the app has access to, a convenient link takes you directly to the GitHub settings page of the app, facilitating effortless repository management.
 
-In the Repositories tab, you can view all the repositories where the app is currently installed, helping you track where the app is actively conducting code analysis. If you need to make changes to the repositories that the app has access to, a convenient link takes you directly to the GitHub settings page of the app, facilitating effortless repository management.
+In the Github tab, you can globally suspend or uninstall the app, giving you complete control over its operation within your projects.
 
-image::code-settings-repositories.png[Code Repositories Settings]
-
-In the Advanced tab, you can globally suspend or uninstall the app, giving you complete control over its operation within your projects.
-
-image::code-settings-advanced.png[Code Advanced Settings]
+image::code-settings-advanced.png[Code Inspector Github]
 
 [[troubleshooting]]
 == Troubleshooting
