@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-10-07]]
+== October 7th, 2024
+
+* *General*
+** Feature: Introduce relayer groups.
+** Feature: Remove toggles in dialog when cloning a relayer.
+** Fix: Minor bugs fixes.
+
 [[release-2024-10-02]]
 == October 2nd, 2024
 
