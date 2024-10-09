@@ -182,7 +182,18 @@ To create a new role, click on the _Create Role_ button. You will be asked to en
 
 image::manage-role-create.png[Manage Role Creation]
 
-After saving, the new role will be available to assign to new or existing team members. Naturally, if in the future you decide to modify the access level of a given role, all users who have that role will as a consequence see their access level change. 
+After saving, the new role will be available to assign to new or existing team members. Naturally, if in the future you decide to modify the access level of a given role, all users who have that role will as a consequence see their access level change.
+
+==== Billing Role
+
+The Billing role is designed to manage all billing-related activities within the Defender products. Users with this role can have one of the following permissions:
+- **Billing Manager**: Full access to view and manage billing information, access and generate billing reports, manage payment methods, and handle subscription plans and renewals.
+- **Billing Read Only**: Limited access to view billing information and generate billing reports without the ability to make changes.
+- **No Access**: No access to billing-related activities. This is the default if no specific permission is assigned.
+
+(A new billing dropdown is present to select between the different permissions)
+
+This role does not grant access to other administrative functions such as user management or API key management.
 
 WARNING: Be careful when granting administrative permissions. A user with the rights to modify roles but not to access any other component can modify their own role to grant them access to any other parts of the application.
 
