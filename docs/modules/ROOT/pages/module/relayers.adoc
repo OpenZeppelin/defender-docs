@@ -97,6 +97,40 @@ The parameter can be toggled between the following states: `true` to enable priv
 
 NOTE: Private transactions are only enabled for _mainnet_ by using the https://docs.flashbots.net/flashbots-protect/rpc/quick-start[Flashbots Protect RPC, window=_blank]. So, the same https://docs.flashbots.net/flashbots-protect/rpc/quick-start#key-considerations[key considerations, window=_blank] might apply while sending private transactions through Defender.
 
+
+[[relayer-groups]]
+== Relayer Groups
+
+Relayer Groups are collections of individual relayers that work together to submit transactions. By grouping relayers, you can increase the overall transaction throughput and redundancy, which enhances the reliability of the transaction submission process. Relayer Groups are designed to distribute the workload across multiple relayers, ensuring that no single relayer becomes a bottleneck.
+
+[[relayer-group-benefits]]
+=== Benefits of Relayer Groups
+
+* **Increased Throughput:** Relayer Groups can handle a higher volume of transactions because the workload is spread across multiple relayers.
+* **Redundancy:** If one relayer in the group fails or becomes slow, others can take over, reducing the risk of delays.
+* **Efficiency:** By coordinating multiple relayers, you can optimize transaction submission and ensure that transactions are processed as quickly as possible.
+* **Centralised Management:** The ability to manage multiple relayers under a single API key simplifies administration, making it easier to maintain control over a complex system.
+
+=== Drawbacks of Relayer Groups
+
+* **Unified Configuration:** Policies and configurations apply uniformly across all relayers in the group, making it difficult to manage individual relayer settings.
+* **Limited Functionality:** Certain functionalities, like message signing, are not available for relayers that are part of a group.
+* **Group-Restricted Operation:** Relayers within a group cannot be used independently; they must function collectively as part of the group.
+* **Potential Transaction Order Issues:** Since transactions are distributed among different relayers based on their condition, they may not be processed in the order they were received, leading to some transactions being mined out of sequence.
+
+=== Health Monitoring
+Relayer groups rely on regular health checks to ensure that transactions are distributed efficiently among the relayers in the group. These health checks assess the performance and availability of each relayer, helping the system decide which relayers are best suited to handle new transactions.
+
+The system regularly evaluates each relayer in the group. It calculates a "weight" for each relayer based on several key factors. These weights are then used to determine how transactions should be distributed within the group, with priority given to the most reliable and responsive relayers.
+
+* **Speed of First Transaction Processing (Highest Priority):** The most important factor is how quickly a relayer starts processing transactions. The system looks at the time it takes for the first pending transaction to be sent and processed. A faster relayer is considered healthier and is given a higher priority.
+
+* **Number of Pending Transactions:** The system checks how many transactions are waiting in each relayer's queue. If a relayer has a lot of pending transactions, it might indicate that it's overloaded and could struggle to process new transactions quickly.
+
+* **Remaining Balance:** The relayer's available balance is also considered. A relayer needs enough balance to cover transaction fees. If a relayer's balance is low, it may have difficulty processing transactions, which affects its health score.
+
+Users can manually adjust the weight of individual relayers. For example, setting a weight of 0 would prevent a relayer from being used, offering precise control over which relayers are active.
+
 [[sending-transactions]]
 == Sending transactions
 
@@ -402,6 +436,27 @@ Key Points:
 - **Resumption of Operations**: After the completion of the delete operation, the relayer will automatically resume its standard activities. Users do not need to take any further action to reactivate the relayer.
 - **Notification**: Users will receive an email notification once the process is complete and the relayer has resumed its operations.
 
+[[intent-mechanism]]
+=== The Intent Mechanism
+
+An "intent" is a concept introduced to improve the efficiency and reliability of transaction submissions. Instead of immediately submitting a transaction, an intent is a placeholder that indicates a transaction is ready to be sent but is temporarily held back. This mechanism helps manage situations where the transaction queue becomes too large or when the network or relayer is processing transactions slowly.
+
+Intents are used to maintain the order of transactions and prevent overloading the system. There are two primary scenarios where intents come into play:
+
+* **High Transaction Volume:** When the number of pending transactions exceeds the maximum allowed in-flight, new transactions are stored as intents. This prevents the system from being overwhelmed and ensures that transactions are submitted in the correct order.
+* **Slow Processing:** If the network or relayer is processing transactions slowly (e.g., no transaction has been mined in the last 30 minutes), new transactions are stored as intents to avoid adding to the congestion.
+
+[[cancel-intents]]
+=== Cancel Intents
+
+Relayer transaction intents can be canceled and permanently removed from our end. This feature is particularly useful when you need to prevent a specific intent from being submitted or want to free up space in the queue for other, more urgent transactions.
+
+To do this, use the `cancelTransactionById` method of the `@openzeppelin/defender-sdk-relay-client`:
+
+[source,jsx]
+----
+tx = await relayer.cancelTransactionById('5fcb8a6d-8d3e-403a-b33d-ade27ce0f85a');
+----
 
 [[signing]]
 == Signing
@@ -414,6 +469,8 @@ const signResponse = await relayer.sign({ message });
 ----
 
 NOTE: As opposed to most libraries, Relayers use non-deterministic ECDSA signatures. This means that if you request a Relayer to sign the same message multiple times, you will get multiple different signatures, which may differ to the result you get by signing using ethersjs or web3js. All those different signatures are valid. See https://datatracker.ietf.org/doc/html/rfc6979#section-3[RFC6979, window=_blank] more information.
+
+NOTE: For relayers that are part of a relayer group this method is not available.
 
 [[signing-typed-data]]
 == Signing Typed Data
@@ -428,6 +485,8 @@ const signTypedDataResponse = await relayer.signTypedData({
   hashStructMessage
 });
 ----
+
+NOTE: For relayers that are part of a relayer group this method is not available.
 
 [[relayer-info]]
 == Relayer Info
@@ -456,6 +515,8 @@ export interface RelayerModel {
   pendingTxCost: string;
 }
 ----
+
+NOTE: For relayers that are part of a relayer group this method will return the relayer group information.
 
 [[relayer-status]]
 == Relayer Status
@@ -489,6 +550,8 @@ export interface RelayerStatus {
   };
 }
 ----
+
+NOTE: For relayers that are part of a relayer group this method will return an array of status responses for the group.
 
 [[network-calls]]
 == Network calls
@@ -537,6 +600,8 @@ An "insufficient funds" error will throw when: `txCost > predictedBalance`.
 
 [[transaction-throughput-and-load-balancing]]
 == Transaction Throughput and Load Balancing
+
+NOTE: We recommend using relayer groups for increased throughput and redundancy. However, if that is not an option, you could use the method below to optimize your setup.
 
 Relayers assign nonces atomically which allows them to handle many concurrent transactions. However, there do exist limits to optimize the infrastructure (all numbers below are cumulative of all Relayers in an account)
 
