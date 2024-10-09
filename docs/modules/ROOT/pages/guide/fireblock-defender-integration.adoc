@@ -45,7 +45,28 @@ NOTE: To submit a transaction to Fireblocks via Defender, ensure the correct per
 
 [[create-approval-process]]
 == 4. Create Approval Process
-. Once configured, you will be able to submit a transaction via a proposal. Select a Fireblocks approval process, the API key and the vault you wish to initiate the transaction from. Once submitted, Defender will track the status of the transaction. Note, Defender will not allow you to approve or reject a transaction from the UI. This is only possible via the Fireblocks mobile app or console.
-+
-image::guide-fireblocks-approval-process.png[Create Defender Approval Process]
-+
+
+[[create-approval-process-automatic]]
+=== Pick a Fireblocks Wallet from the List
+You can pick a Fireblocks wallet from the list of available wallets by just providing the Fireblocks API key. We will attempt to fetch the list of available vaults and wallets from Fireblocks.
+
+image::guide-fireblocks-approval-process-automatic.png[Create Defender Approval Process]
+
+[[create-approval-process-manual]]
+=== Manually Add a Fireblocks Wallet
+In some rare cases you might not see your wallets in the list that is automatically fetched from Fireblocks. In that case you can select the `Manual` option and type in the required information manually.
+
+image::guide-fireblocks-approval-process-manual.png[Create Defender Approval Process]
+
+To get your **Vault ID**, head to Fireblocks console, click on the vault you are interested in and copy the ID (last number) from the URL.
+
+image::guide-fireblocks-vault-id.png[Vault ID]
+
+To get your **Asset Wallet Address**, head to Fireblocks console, click on the asset you are interested in and copy the address (starts with 0x).
+
+image::guide-fireblocks-asset-wallet-address.png[Asset Wallet Address]
+
+
+[[approve-reject-transaction]]
+== 5. Approve or Reject a Transaction
+Note, Defender will not allow you to approve or reject a transaction from the UI. This is only possible via the Fireblocks mobile app or console.
