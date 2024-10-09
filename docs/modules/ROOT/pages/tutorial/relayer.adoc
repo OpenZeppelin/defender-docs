@@ -1,6 +1,6 @@
 # Using Relayer for Sending Transactions
 
-In this tutorial, we will explore how to use the xref::manage.adoc#relayers[Relayer] to send transactions. We will cover:
+In this tutorial, we will explore how to use the xref:module/relayers.adoc[Relayers] to send transactions. We will cover:
 
 * Checking relayer information.
 * Sending a transaction.
@@ -11,7 +11,7 @@ By the end of this tutorial, you will have a basic understanding of how to use t
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
 * https://nodejs.org/en[NodeJS and NPM, window=_blank]
 * https://www.npmjs.com/package/ts-node[Typescript for Node js, window=_blank]
 * Any IDE or text editor
@@ -21,7 +21,7 @@ By the end of this tutorial, you will have a basic understanding of how to use t
 
 Let's start by creating a Relayer:
 
-* Open https://defender.openzeppelin.com/v2/#/relayers[Defender Operate & Automate] in a web browser.
+* Open https://defender.openzeppelin.com/#/relayers[Defender Operate & Automate] in a web browser.
 +
 image::tutorial-relayer-step1.png[Manage Relayer]
 * Click on *Create Relayer* with the name ETH Sepolia Relayer and Sepolia network.
@@ -168,5 +168,5 @@ node storeObject.js
 == 5. Next Steps
 Congratulations! You have successfully used the Relayer to check information, send transactions, and verify the transaction status. By following this tutorial, you have gained a fundamental understanding of how to interact with smart contracts using the Relayer.
 
-* For more information on using Relayer, refer to the xref::manage.adoc#relayers[Relayer] documentation.
+* For more information on using Relayer, refer to the xref:/module/relayers.adoc[Relayers] documentation.
 * Explore the xref::tutorial/actions.adoc[Actions] to automate your smart contract operational tasks with easy integration with the rest of Defender.
