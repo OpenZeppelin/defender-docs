@@ -6,7 +6,7 @@
 * *General*
 ** Feature: Add Unichain-Sepolia support.
 ** Feature: Warn users when notification channels attached to monitors are paused.
-** Fix: Bugs fixes.
+** Fix: Bug fixes.
 ** UI/UX improvements.
 ** Feature: Add an option to submit fireblocks info manually.
 
