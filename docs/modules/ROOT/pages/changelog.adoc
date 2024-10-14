@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-10-14]]
+== October 14th, 2024
+
+* *General*
+** Feature: Integrate relayer groups with approval process and deploy.
+** Fix: Bug fixes.
+** UI optimisation.
+
 [[release-2024-10-10]]
 == October 10th, 2024
 
