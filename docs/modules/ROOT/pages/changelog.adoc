@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-10-16]]
+== October 16th, 2024
+
+* *General*
+** Feature: Enable high frequency actions.
+** Fix: Updating action filters on monitors.
+** UI improvements.
+
 [[release-2024-10-14]]
 == October 14th, 2024
 
