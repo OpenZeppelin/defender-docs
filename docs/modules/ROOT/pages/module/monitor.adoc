@@ -156,6 +156,19 @@ The request body will contain the following structure. The `MonitorConditionRequ
     "blockHash": "0xab..123",                     // block hash from where this transaction was seen
     "transaction": {                              // eth_getTransactionReceipt response body
       ...                                         // see https://eips.ethereum.org/EIPS/eip-1474
+      "cumulativeGasUsed": "0xc3614",
+      "effectiveGasPrice": "0x6e214d78",
+      "gasUsed": "0x6075",
+      "logs": [
+        { ... }
+      ],
+      "logsBloom": "0x4..0",
+      "status": "0x1",
+      "from": "0xab..123",
+      "to": "0xab..123",
+      "transactionHash": "0xab..123",
+      "transactionIndex": "0x9",
+      "type": "0x2"
     },
     "matchReasons": [                             // the reasons why monitor triggered
       {
@@ -467,6 +480,19 @@ You can access the following schema when using custom notification templates. Th
 {
   "transaction": {                     // eth_getTransactionReceipt response body
     ...                                // see https://eips.ethereum.org/EIPS/eip-1474
+    "cumulativeGasUsed": "0xc3614",
+    "effectiveGasPrice": "0x6e214d78",
+    "gasUsed": "0x6075",
+    "logs": [
+      { ... }
+    ],
+    "logsBloom": "0x4..0",
+    "status": "0x1",
+    "from": "0xab..123",
+    "to": "0xab..123",
+    "transactionHash": "0xab..123",
+    "transactionIndex": "0x9",
+    "type": "0x2"
   },
   "blockHash": "0xab..123",            // block hash from where this transaction was seen
   "matchReasons": [                    // the reasons why monitor triggered
