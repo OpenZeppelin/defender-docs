@@ -1,5 +1,15 @@
 = Changelog
 
+[[release-2024-10-21]]
+== October 21st, 2024
+
+* *General*
+** Feature: Display Fireblocks transaction ID in proposal page for cross-referencing.
+** Fix: Improve error messaging for wrong viaType.
+** Fix: Bug in Monitor filters.
+** Feature: Support unichain-sepolia network with defender-as-code.
+** UI/UX improvements.
+
 [[release-2024-10-16]]
 == October 16th, 2024
 
