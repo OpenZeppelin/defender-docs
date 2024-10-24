@@ -80,7 +80,6 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://fantom.foundation/what-is-fantom-opera/[*Fantom*,window=_blank] and *Fantom Testnet*.
 - https://fuse.io/[*Fuse*,window=_blank].
 - https://www.gnosis.io/[*Gnosis Chain*,window=_blank]
-- https://www.harmony.one/[*Harmony* Shard 0,window=_blank] and *Harmony Testnet Shard 0*.
 - https://hedera.com/[*Hedera*,window=_blank] and *Hedera Testnet*.
 - https://www.japanopenchain.org/en/docs/developer/mainnet[*Japan Open Chain*,window=_blank] and *Japan Open Chain Testnet*.
 - https://linea.build/[*Linea Mainnet*,window=_blank] and *Linea Sepolia*.
