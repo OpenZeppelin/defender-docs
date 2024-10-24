@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-10-24]]
+== October 24th, 2024
+
+* *General*
+** Feature: Create SDK API for the address book entries.
+** Fix: Bug fixes.
+** UI/UX improvements.
+
 [[release-2024-10-21]]
 == October 21st, 2024
 
