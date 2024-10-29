@@ -101,6 +101,7 @@ The signature is generated using HMAC with `SHA256` algorithm, so it can be veri
 [[python-example]]
 =====  Python example
 
+NOTE: This code example was tested in Python 3.12. For different versions, the code might be slightly different.
 
 ```py
 from datetime import datetime, timedelta, UTC
