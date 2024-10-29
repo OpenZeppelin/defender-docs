@@ -124,7 +124,7 @@ def verify_signature(body_object: dict, timestamp: str, signature: str secret: s
 
     # Merge timestamp with body_object
     payload_to_verify = {**body_object, 'timestamp': timestamp}
-    payload_to_verify_str = json.dumps(payload_to_verify)
+    payload_to_verify_str = json.dumps(payload_to_verify, separators=(',', ':'))
 
     # Create a new HMAC object using the secret and the SHA256 hash algorithm
     hmac_obj = hmac.new(secret.encode(), payload_to_verify_str.encode(), hashlib.sha256)
