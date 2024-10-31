@@ -4,11 +4,11 @@
 == October 30th, 2024
 
 * *General*
-- Feat: Integrate relayer groups with approval process and deploy.
+- Feature: Integrate relayer groups with approval process and deploy.
 - Fix: Ability to use EOA for upgrading a deployment
-- Feat: Support ABI updates for monitors.
+- Feature: Support ABI updates for monitors.
 - Fix: Notification template parsing and custom message subject.
-- Feat: Optimize monitor details page.
+- Feature: Optimize monitor details page.
 - Fix: Bug in approval process with EOA for contract addresses.
 - Minor bug fixes and UI performance optimizations.
 
