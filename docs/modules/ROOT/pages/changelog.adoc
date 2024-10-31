@@ -1,5 +1,17 @@
 = Changelog
 
+[[release-2024-30-10]]
+== October 30th, 2024
+
+* *General*
+- Fix: Ability to use EOA for upgrading a deployment
+- Feature: Support ABI updates for monitors.
+- Fix: Notification template parsing and custom message subject.
+- Feature: Optimize monitor details page.
+- Fix: Bug in approval process with EOA for contract addresses.
+- Minor bug fixes and UI performance optimizations.
+
+
 [[release-2024-10-24]]
 == October 24th, 2024
 
