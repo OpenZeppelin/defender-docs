@@ -1,5 +1,14 @@
 = Changelog
 
+[[release-2024-11-06]]
+== November 6th, 2024
+
+* *General*
+- Feature: Support API for updating deployments.
+- Feature: Improve transactions filtering from actions.
+- Feature: Use monitor ABI to find signature if contract is not found.
+- Fix: Bug fixes.
+
 [[release-2024-30-10]]
 == October 30th, 2024
 
