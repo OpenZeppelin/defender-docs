@@ -398,7 +398,8 @@ async function main() {
 
   const proposal = await defender.proposeUpgradeWithApproval('<PROXY ADDRESS>', BoxV2);
 
-  console.log(`Upgrade proposed with URL: ${proposal.url}`);
+  console.log("Proposal id:", proposal.proposalId);
+  console.log("Url", proposal.url);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
