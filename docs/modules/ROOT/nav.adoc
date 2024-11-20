@@ -36,6 +36,7 @@
 
 
 * xref:dac.adoc[Defender as Code]
+* xref:remix-plugin.adoc[Remix Plugin]
 * xref:sdk.adoc[SDK and API]
 * xref:integrations.adoc[Integrations]
 * xref:faq.adoc[FAQ]
