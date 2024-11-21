@@ -23,8 +23,6 @@ type Network =
   | 'optimism-sepolia'
   | 'celo'
   | 'alfajores'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
   | 'aurora'
   | 'auroratest'
   | 'hedera'
