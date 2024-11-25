@@ -388,6 +388,12 @@ const txs = await relayer.list({
 })
 ----
 
+Key Notes:
+
+- Pagination by Default: With the latest SDK clients, usePagination is set to true by default. The API always returns a paginated response, so you do not need to explicitly enable pagination unless working with older SDK versions.
+- Maximum Page Size: The maximum value for the limit parameter is 100. Requests with a higher limit will be automatically capped.
+- Restrictions on the since Filter: The since parameter can only be used in combination with the status parameter.
+
 [[delete-pending-txs]]
 === Delete Pending Transaction
 
