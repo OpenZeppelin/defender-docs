@@ -8,6 +8,10 @@ Defender seamlessly integrates with your existing tools and workflows, so you ca
 - https://hardhat.org/[*Hardhat*, window=_blank]: Code, deploy and upgrade your Hardhat projects through Defender.
 - https://getfoundry.sh/[*Foundry*, window=_blank]: Code your Foundry projects with support of Defender.
 
+[[ide]]
+== IDEs
+- https://remix.ethereum.org/[*Remix*, window=_blank]: Deploy your Remix contracts using Defender deployment environments through the Defender Remix Plugin.
+
 [[libraries]]
 == Libraries
 - https://www.openzeppelin.com/contracts[*OpenZeppelin Contracts*, window=_blank]: Speed up your smart contract development with security and performance baked in.
