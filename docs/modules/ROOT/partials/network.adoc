@@ -40,4 +40,7 @@ type Network =
   | 'meld-kanazawa'
   | 'japan'
   | 'japan-testnet'
-  | 'unichain-sepolia';
+  | 'unichain-sepolia'
+  | 'geist-mainnet'
+  | 'geist-polter';
+
