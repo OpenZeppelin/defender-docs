@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-28-11]]
+== November 28th, 2024
+
+* *General*
+- Feature: Introduce sync for the proposals list page.
+- Feature: Integrate relayer groups with Actions.
+- Feature: UI/UX improvement.
+
 [[release-2024-25-11]]
 == November 25th, 2024
 
