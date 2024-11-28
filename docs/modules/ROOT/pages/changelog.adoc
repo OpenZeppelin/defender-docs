@@ -5,7 +5,7 @@
 
 * *General*
 - Feature: Introduce sync for the proposals list page.
-- Feature: Integrate relayer groups with `Actions`.
+- Feature: Integrate relayer groups with Actions.
 - Fix: Bug fixes.
 - Feature: UI/UX improvement.
 
