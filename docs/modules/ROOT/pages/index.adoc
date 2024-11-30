@@ -91,7 +91,9 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://www.polygon.technology/[*Polygon* (POL),window=_blank], *Amoy*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *Polygon Cardona zkEVM testnet*
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.unichain.org/[*Unichain Sepolia*, window=_blank].
-- https://zksync.io/[*zkSync Era Mainnet*,window=_blank], *zkSync Era Sepolia*.
+- https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Sepolia*.
+- https://www.playongeist.com//[*Geist Mainnet*, window=_blank] and *Polter Testnet*.
+
 
 
 If there is any other network or layer-2 solution you would like to use from Defender, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
