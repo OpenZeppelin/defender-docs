@@ -1,0 +1,52 @@
+[[billing]]
+= Billing Role
+
+The Billing Role feature allows you to manage access to the Billing section of the platform, ensuring that only authorized users can view or modify financial data. Admin users can define custom billing permissions for each team member, limiting access to billing functionality based on specific roles such as "Manage Billing" or "Read Only."
+
+[[use-cases]]
+== Use Cases
+
+* Grant specific billing access to users, enabling role-based management of billing information.
+* Limit the ability to view or modify billing details to authorized personnel only.
+* Ensure secure and structured access to the platform’s financial data.
+* Provide team members with the necessary billing permissions according to their responsibilities.
+
+[[billing-roles-permissions]]
+== Billing Roles and Permissions
+
+The platform allows Admins to assign billing-related permissions to users. The available options are "Manage Billing," "Read Only," and "No Access." These permissions can be customized during role creation, ensuring that users have appropriate access to billing information.
+
+The Billing Role is structured as follows:
+
+* **Manage Billing**: Grants full control over billing settings, including the ability to modify payment methods, view transaction details, and manage subscriptions.
+* **Read Only**: Allows users to view billing details, invoices, and payment history without making any changes.
+* **No Access**: Users with this permission cannot view or interact with any billing-related information.
+
+To assign billing permissions, Admins can navigate to the Roles page and select the desired level of access for the user.
+
+image::billing-permissions.png[Billing Role Options]
+
+Once assigned, the billing role permissions will determine what actions users can perform within the Billing section of the platform.
+
+[[billing-ui]]
+== Billing UI
+
+Users with the Billing Role will have access to the Billing section of the platform. This section provides an overview of the account’s financial status, including upcoming charges, payment history, and subscription details.
+
+The Billing UI is divided into several sections:
+
+* **Account Overview**: Displays the account’s current billing status, recent transactions, and upcoming payments.
+* **Payment History**: Provides a detailed view of all previous transactions, including invoices and payment confirmations.
+* **Payment Methods**: Allows users with "Manage Billing" permission to add, remove, or update payment methods.
+
+image::billing-ui.png[Billing UI Overview]
+
+[[documentation-updates]]
+== Documentation Updates
+
+Documentation should be updated to reflect the addition of the Billing Role and its associated permissions. This includes modifying the Roles page in the user guide to explain the new billing permissions and updating the Billing section to indicate which actions are restricted based on user roles.
+
+[[conclusion]]
+== Conclusion
+
+The introduction of the Billing Role allows flexibility and control over who can access and modify billing information on the platform. By assigning permissions based on user roles, Admins can ensure that only authorized personnel manage financial data, while team members with limited access can still view the information they need to perform their duties.
