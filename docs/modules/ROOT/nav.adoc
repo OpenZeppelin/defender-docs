@@ -37,6 +37,7 @@
 
 * xref:dac.adoc[Defender as Code]
 * xref:remix-plugin.adoc[Remix Plugin]
+* xref:wizard-plugin.adoc[Contracts Wizard Plugin]
 * xref:sdk.adoc[SDK and API]
 * xref:integrations.adoc[Integrations]
 * xref:faq.adoc[FAQ]
