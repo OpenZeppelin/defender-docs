@@ -26,13 +26,14 @@ TODO add image here
 ==== Configure
 Set your *API Key* and *API Secret* and press "Authenticate". You should see a message below the button indicating that the credentials are valid.
 
-TODO: add image here
+image::wizard-plugin-configure.png[Defender Wizard Plugin Configure]
+image::wizard-plugin-configure-2.png[Defender Wizard Plugin API keys]
 
 [[network]]
 ==== Network
 Select any of the supported networks. This also includes private and fork networks configured in your tenant.
 
-TODO: add image here
+image::wizard-plugin-network-2.png[Defender Wizard Plugin Network]
 
 [[approval-process]]
 ==== Approval Process
@@ -48,7 +49,7 @@ NOTE: If the Approval Process to be created is a Relayer, the API Key must inclu
 
 - Additionally, you can use the *injected provider* from Remix (a browser wallet) to deploy the contract, this will create a Defender *Deployment Environment* under the hood after deploying the contract.
 
-TODO add picture here
+image::wizard-plugin-approval-process.png[Defender Wizard Plugin Approval Process]
 
 [[deploy]]
 ==== Deploy
@@ -58,7 +59,7 @@ NOTE: This step is reactive, if you modify the contract you will see the new con
 
 WARNING: Upgradable contracts are not yet fully supported. This action will only deploy the implementation contract without initializing. For safe upgrades, we strongly recommend usign https://github.com/OpenZeppelin/openzeppelin-upgrades[Upgrades Package, window=_blank].
 
-TODO add picture here
+image::wizard-plugin-deploy.png[Defender Wizard Plugin Deploy]
 
 [[deterministic-deployments]]
 ==== Deterministic Deployments
@@ -67,14 +68,14 @@ Defender Deploy supports a `salt` value to create deployments to deterministic a
 
 NOTE: If the approval process selected is a Multisig, the `salt` is required as Defender only support deterministic deployments when using Multisigs.
 
-TODO add picture here
+image::wizard-plugin-deterministic.png[Defender Wizard Plugin Deterministic Deployments]
 
 [[further-steps]]
 ==== Further Steps
 
 Once the contract deployment was submitted to Defender, in some cases you will need to complete the deployment from Defender Dashboard, you should see message indicating that the contract was submitted and a button that redirects to your Deployment in Defender.
 
-TODO: add picture here
+image::wizard-deploy-further-steps.png[Defender Wizard Plugin Further Steps, 440, 400]
 
 [[feedback]]
 == Feedback
