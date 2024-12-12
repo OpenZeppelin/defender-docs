@@ -1,5 +1,12 @@
 = Changelog
 
+[[release-2024-12-12]]
+== December 12th, 2024
+
+* *General*
+- Fix: Bug fixes.
+- Feature: Deployment page performance optimisation.
+
 [[release-2024-09-12]]
 == December 09th, 2024
 
