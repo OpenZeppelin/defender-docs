@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2024-17-12]]
+== December 17th, 2024
+
+* *General*
+- Fix: Bug fixes.
+- Feature: Transaction stats optimisation.
+- Feature: UI/UX improvement.
+
 [[release-2024-12-12]]
 == December 12th, 2024
 
