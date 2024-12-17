@@ -63,6 +63,8 @@ You should see the latest compiled contract along with the constructor inputs.
 
 NOTE: In case you don't see it, compile the target contract again, the Defender plug-in should detect the compilation and display the contructor inputs.
 
+WARNING: Upgradable contracts are not yet fully supported. This action will only deploy the implementation contract without initializing. For safe upgrades, we strongly recommend usign https://github.com/OpenZeppelin/openzeppelin-upgrades[Upgrades Package, window=_blank].
+
 image::remix-plugin-deploy.png[Defender Remix Plugin Deploy]
 
 
@@ -83,4 +85,4 @@ image::remix-plugin-deploy-completed.png[Defender Remix Plugin Deploy Completed]
 [[feedback]]
 == Feedback
 
-The Defender Remix Plugin is open source, for feedback related to the plugin, please submit an issue in the https://github.com/OpenZeppelin/defender-remix-plugin[Github Repository, window=_blank] or send an email to `defender-support@openzeppelin.com`.
+The Defender Remix Plugin is open source, for feedback related to the plugin, please submit an issue in the https://github.com/OpenZeppelin/defender-deploy-plugin[Github Repository, window=_blank] or send an email to `defender-support@openzeppelin.com`.
