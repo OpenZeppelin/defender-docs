@@ -73,7 +73,7 @@ image::wizard-plugin-deterministic.png[Defender Wizard Plugin Deterministic Depl
 [[further-steps]]
 ==== Further Steps
 
-Once the contract deployment was submitted to Defender, in some cases you will need to complete the deployment from Defender Dashboard, you should see message indicating that the contract was submitted and a button that redirects to your Deployment in Defender.
+Once the contract deployment is submitted to Defender, in some cases you may need to complete the deployment from Defender Dashboard. You will see message indicating that the contract was submitted and a button that redirects to your Deployment in Defender.
 
 image::wizard-deploy-further-steps.png[Defender Wizard Plugin Further Steps, 440, 400]
 
