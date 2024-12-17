@@ -20,7 +20,7 @@ image::remix-plugin-api-key.png[Defender Remix Plugin Api Key, 400, 400]
 
 Go to https://wizard.openzeppelin.com/[Contracts Wizard, window=_blank] site, and after editing your contract, click on "Deploy with Defender".
 
-TODO add image here
+image::wizard-plugin-start.png[Defender Wizard Plugin Getting Started, 500, 220]
 
 [[configure]]
 ==== Configure
