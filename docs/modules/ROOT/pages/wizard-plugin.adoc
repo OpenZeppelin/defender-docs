@@ -31,7 +31,7 @@ image::wizard-plugin-configure-2.png[Defender Wizard Plugin API keys]
 
 [[network]]
 ==== Network
-Select any of the supported networks. This also includes private and fork networks configured in your tenant.
+Select any of the supported networks. This also includes private and forked networks configured in your tenant.
 
 image::wizard-plugin-network-2.png[Defender Wizard Plugin Network]
 
