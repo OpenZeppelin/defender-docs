@@ -64,7 +64,7 @@ image::wizard-plugin-deploy.png[Defender Wizard Plugin Deploy]
 [[deterministic-deployments]]
 ==== Deterministic Deployments
 
-Defender Deploy supports a `salt` value to create deployments to deterministic addresses using `create2`. Click on `Deterministic` checkbox and set the salt field to any arbitrary value.
+Defender Deploy supports a `salt` value to create deployments to deterministic addresses using `CREATE2`. Click on `Deterministic` checkbox and set the salt field to any arbitrary value.
 
 NOTE: If the approval process selected is a Multisig, the `salt` is required as Defender only support deterministic deployments when using Multisigs.
 
