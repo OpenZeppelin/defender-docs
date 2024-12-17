@@ -53,7 +53,7 @@ image::wizard-plugin-approval-process.png[Defender Wizard Plugin Approval Proces
 
 [[deploy]]
 ==== Deploy
-In this step, you should see the constructor inputs of your configured contract (if any). And the option to create a deterministic deployment.
+In this step, you should see the constructor inputs of your configured contract (if any), and the option to create a deterministic deployment.
 
 NOTE: This step is reactive, if you modify the contract you will see the new constructor arguments updated right after.
 
