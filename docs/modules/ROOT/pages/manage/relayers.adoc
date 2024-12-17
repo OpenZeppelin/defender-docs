@@ -110,12 +110,12 @@ const client = new Defender({
   relayerApiSecret: 'YOUR_API_SECRET'
 });
 
-const tx = await client.relayerSigner.sendTransaction({
+const tx = await client.relaySigner.sendTransaction({
   to, value, data, gasLimit, speed: 'fast'
 });
-
-const mined = await tx.wait();
 ----
+
+NOTE:  There are a few options available for checking transaction status. You can set up a notification webhook channel for push-based notifications, or use a polling-based approach. In the polling-based method, you can either call the *getTransaction* method by passing the transactionId, or use the *getTransactionByNonce* method by passing the nonce.
 
 [CAUTION]
 ====
@@ -125,6 +125,23 @@ For better reliability of the relayers, we recommend sending no more than *50 tr
 NOTE: You don't need to enter a private key when initializing a Relayer client, since the private key is kept secure in the Defender vault.
 
 IMPORTANT: Currently, _zkSync_ doesn't have a way to precisely calculate `gasLimit` other than using the `eth_estimateGas` endpoint. Therefore, Defender can't do any gasLimit and overrides the user input with the RPC estimation. 
+
+Additionally, you can use the https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-signer-client[defender-sdk-relay-signer-client, window=_blank] package, which exclusively exposes relay signer methods, instead of the more comprehensive defender-sdk package.
+
+[source,jsx]
+----
+const { Relayer } = require('@openzeppelin/defender-sdk-relay-signer-client');
+
+const client = new Relayer({
+  apiKey: 'YOUR_RELAY_API_KEY',
+  apiSecret: 'YOUR_RELAY_API_SECRET'
+ });
+
+const tx = await client.sendTransaction({
+  to, value, data, gasLimit, speed: 'fast'
+});
+----
+
 
 [[using-ethers.js]]
 === Using ethers.js
@@ -259,14 +276,17 @@ NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a
 [[transaction-ids]]
 === Transaction IDs
 
-Since a Relayer may resubmit a transaction with an updated gas pricing if it does't get confirmed in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[query, window=_blank] it.
+Since a Relayer may resubmit a transaction with an updated gas pricing if it does't get confirmed in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-signer-client[query, window=_blank] it.
 
 [source,jsx]
 ----
-const tx = await relayer.query(tx.transactionId);
+const tx = await client.relaySigner.getTransaction(tx.transactionId);
+
+// or by nonce
+const txByNonce = await client.relaySigner.getTransactionByNonce(tx.nonce);
 ----
 
-NOTE: The `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every minute.
+NOTE: The `getTransaction` and `getTransactionByNonce` endpoints will return the latest view of the transaction from the Defender service, which gets updated every minute.
 
 [[replace-txs]]
 === Replace Transactions
@@ -287,10 +307,10 @@ replacement = {
 };
 
 // Replace a tx by nonce
-tx = await relayer.replaceTransactionByNonce(42, replacement);
+tx = await client.relaySigner.replaceTransactionByNonce(42, replacement);
   
 // Or by transactionId
-tx = await relayer.replaceTransactionById('5fcb8a6d-8d3e-403a-b33d-ade27ce0f85a', replacement);
+tx = await client.relaySigner.replaceTransactionById('5fcb8a6d-8d3e-403a-b33d-ade27ce0f85a', replacement);
 ----
 
 You can also replace a pending transaction by setting the `nonce` when sending a transaction using the `ethers` or `web3.js` adapters:
@@ -416,7 +436,7 @@ In addition to sending transactions, a Relayer can also sign arbitrary messages 
 
 [source,jsx]
 ----
-const signResponse = await relayer.sign({ message });
+const signResponse = await client.relaySigner.sign({ message });
 ----
 
 NOTE: As opposed to most libraries, Relayers use non-deterministic ECDSA signatures. This means that if you request a Relayer to sign the same message multiple times, you will get multiple different signatures, which may differ to the result you get by signing using ethersjs or web3js. All those different signatures are valid. See https://datatracker.ietf.org/doc/html/rfc6979#section-3[RFC6979, window=_blank] more information.
@@ -429,7 +449,7 @@ You can either provide the `domainSeparator` and `hashStruct(message)` or use th
 
 [source,jsx]
 ----
-const signTypedDataResponse = await relayer.signTypedData({
+const signTypedDataResponse = await client.relaySigner.signTypedData({
   domainSeparator,
   hashStructMessage
 });
@@ -442,14 +462,14 @@ A relayer's address can be retrieved using the `getAddress` method of the `Defen
 
 [source,jsx]
 ----
-const address = await signer.getAddress();
+const address = await client.relaySigner.getAddress();
 ----
 
 If you need more info about a Relayer then checkout the `getRelayer` method of the client. It returns the following data:
 
 [source,jsx]
 ----
-const info = await relayer.getRelayer();
+const info = await client.relaySigner.getRelayer();
 console.log('Relayer info', info);
 
 export interface RelayerModel {
@@ -469,7 +489,7 @@ export interface RelayerModel {
 To gain better insight into the current status of a relayer, one can use the `getRelayerStatus` method from the `DefenderRelaySigner` class. This method provides real-time information about a relayer, such as its nonce, transaction quota, and the number of pending transactions.
 [source,jsx]
 ----
-const address = await signer.getRelayerStatus();
+const address = await client.relaySigner.getRelayerStatus();
 ----
 
 If you need info about a Relayer then checkout the `getRelayer` method of the client. It returns the following data:
@@ -503,7 +523,7 @@ Defender also provides an easy way to make arbitrary JSON RPC calls to the netwo
 
 [source,jsx]
 ----
-const balance = await relayer.call('eth_getBalance', ['0x6b175474e89094c44da98b954eedeac495271d0f', 'latest']);
+const balance = await client.relaySigner.call('eth_getBalance', ['0x6b175474e89094c44da98b954eedeac495271d0f', 'latest']);
 ----
 
 If you are using ethers.js, this is supported via a custom `DefenderRelayProvider` https://docs.ethers.org/v6/api/providers/[provider, window=_blank] object:
