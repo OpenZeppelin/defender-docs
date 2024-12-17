@@ -55,7 +55,7 @@ image::wizard-plugin-approval-process.png[Defender Wizard Plugin Approval Proces
 ==== Deploy
 In this step, you should see the constructor inputs of your configured contract (if any). And the option to create a deterministic deployment.
 
-NOTE: This step is reactive, if you modify the contract you will see the new constructor arguments updated after a second.
+NOTE: This step is reactive, if you modify the contract you will see the new constructor arguments updated right after.
 
 WARNING: Upgradable contracts are not yet fully supported. This action will only deploy the implementation contract without initializing. For safe upgrades, we strongly recommend usign https://github.com/OpenZeppelin/openzeppelin-upgrades[Upgrades Package, window=_blank].
 
