@@ -1,6 +1,15 @@
 = Changelog
 
-[[release-2024-18-12]]
+[[release-2025-01-02]]
+== January 2nd, 2025
+
+* *General*
+- Fix: Error message when invalid network is accessed from sdk.
+- Fix: Fix Audit title alignment.
+- Feature: Allow Billing endpoint to return for all users.
+- Minor security & UI bug fixes and improvements.
+
+[[release-2024-12-18]]
 == December 18th, 2024
 
 * *General*
@@ -8,7 +17,7 @@
 - Fix: Bug fixes.
 - Feature: UI/UX improvement.
 
-[[release-2024-17-12]]
+[[release-2024-12-17]]
 == December 17th, 2024
 
 * *General*
@@ -23,21 +32,21 @@
 - Fix: Bug fixes.
 - Feature: Deployment page performance optimisation.
 
-[[release-2024-09-12]]
+[[release-2024-12-09]]
 == December 09th, 2024
 
 * *General*
 - Fix: Bug fixes.
 - Feature: UI/UX improvement.
 
-[[release-2024-04-12]]
+[[release-2024-12-04]]
 == December 04th, 2024
 
 * *General*
 - Fix: Bug fixes.
 - Feature: UI/UX improvement.
 
-[[release-2024-28-11]]
+[[release-2024-11-28]]
 == November 28th, 2024
 
 * *General*
@@ -45,7 +54,7 @@
 - Feature: Integrate relayer groups with Actions.
 - Feature: UI/UX improvement.
 
-[[release-2024-25-11]]
+[[release-2024-11-25]]
 == November 25th, 2024
 
 * *General*
@@ -53,14 +62,14 @@
 - Feature: UI/UX improvement.
 - Feature: Addressbook optimisation.
 
-[[release-2024-18-11]]
+[[release-2024-11-18]]
 == November 18th, 2024
 
 * *General*
 - Fix: Bug fixes.
 - Feature: UI/UX improvement.
 
-[[release-2024-13-11]]
+[[release-2024-11-13]]
 == November 13th, 2024
 
 * *General*
@@ -83,7 +92,7 @@
 - Feature: Use monitor ABI to find signature if contract is not found.
 - Fix: Bug fixes.
 
-[[release-2024-30-10]]
+[[release-2024-10-30]]
 == October 30th, 2024
 
 * *General*
