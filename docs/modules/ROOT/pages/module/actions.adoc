@@ -284,19 +284,19 @@ NOTE: While it's possible to use secrets to store private keys for signing messa
 
 The action key-value data store allows to persist simple data across action runs and between different actions. It can be used to store transaction identifiers, hashed user emails, or even small serialized objects.
 
-Access to the key value store is managed through the https://www.npmjs.com/package/@openzeppelin/defender-kvstore-client[`defender-kvstore-client`, window=_blank] package:
+You can interact with your key-value store through an instance of `Defender`, which is initialized with the payload injected in the your Action `handler` function. Once initialized, you can call `kvstore.get`, `kvstore.put`, or `kvstore.del`.
 
 [source,jsx]
 ----
-const { KeyValueStoreClient } = require('defender-kvstore-client');
+const { Defender } = require('@openzeppelin/defender-sdk');
 
-exports.handler =  async function(event) {
-  const store = new KeyValueStoreClient(event);
+exports.handler = async function (event) {
+  const client = new Defender(event);
 
-  await store.put('myKey', 'myValue');
-  const value = await store.get('myKey');
-  await store.del('myKey');
-}
+  await client.keyValueStore.put('myKey', 'myValue');
+  const value = await client.keyValueStore.get('myKey');
+  await client.keyValueStore.del('myKey');
+};
 ----
 
 The key-value store allows to get, put, and delete key-value pairs, which must be strings that are limited to 1 KB and values to 300 KB.
