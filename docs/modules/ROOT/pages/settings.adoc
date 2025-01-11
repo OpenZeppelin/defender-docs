@@ -283,7 +283,9 @@ Navigate through the "Private Networks" section to effectively manage and overse
 
 image::manage-private-networks-create.png[Manage Private Networks]
 
-To set up a private network, simply click the "Create Private Network" button. This action prompts you to define a name for the private network and select the currency symbol ("ETH") for your network. Additionally, provide the RPC URL, and optionally, an API key if access requires it.
+To set up a private network, simply click the "Create Private Network" button.  This action prompts you to define a name for the private network and select the currency symbol ("ETH") for your network. Additionally, provide the RPC URL, and optionally, an API key if access requires it.
+
+NOTE: The chain ID of a private network must not conflict with the chain ID of an xref:index.adoc#networks[officially supported Defender network].
 
 For an enhanced user experience, customize your setup by including the block explorer URL, Safe contract deployment addresses, and a subgraph URL.
 
