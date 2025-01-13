@@ -1,5 +1,12 @@
 = Changelog
 
+[[release-2025-01-13]]
+== January 13th, 2025
+
+* *General*
+- Bug fixes.
+- Minor UI improvements.
+
 [[release-2025-01-07]]
 == January 7th, 2025
 
