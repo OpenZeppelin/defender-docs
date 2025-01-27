@@ -93,6 +93,7 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://www.unichain.org/[*Unichain Sepolia*, window=_blank].
 - https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Sepolia*.
 - https://www.playongeist.com//[*Geist Mainnet*, window=_blank] and *Polter Testnet*.
+- https://docs.abs.xyz/overview[*Abstract Mainnet*,window=_blank] and *Abstract Sepolia*.
 
 
 
