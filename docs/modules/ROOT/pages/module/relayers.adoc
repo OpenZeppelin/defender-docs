@@ -285,7 +285,12 @@ If you're using `ethers.js`, you may set a `validForSeconds` option instead of `
 
 [source,jsx]
 ----
-const signer = new DefenderRelaySigner(credentials, provider, { validForSeconds: 120 });
+const { DefenderRelayProvider, DefenderRelaySigner } = require('@openzeppelin/defender-sdk-relay-signer-client/ethers');
+const { ethers } = require('ethers');
+
+const credentials = { apiKey: API_KEY, apiSecret: API_SECRET };
+const provider = new DefenderRelayProvider(credentials);
+const signer = new DefenderRelaySigner(credentials, provider, { speed: 'fast', validForSeconds: 120 });
 ----
 
 NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a local one.
@@ -293,14 +298,36 @@ NOTE: `validUntil` is a UTC timestamp. Make sure to use a UTC timezone and not a
 [[transaction-ids]]
 === Transaction IDs
 
-Since a Relayer may resubmit a transaction with an updated gas pricing if it does't get confirmed in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[query, window=_blank] it.
+Since a Relayer may resubmit a transaction with an updated gas pricing if it does't get confirmed in the expected time frame, the `hash` of a given transaction may change over time. To track the status of a given transaction, the Relayer API returns a `transactionId` identifier you can use to https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-signer-client[query, window=_blank] it.
 
 [source,jsx]
 ----
-const tx = await relayer.query(tx.transactionId);
+import { Relayer } from '@openzeppelin/defender-sdk-relay-signer-client';
+const relayer = new Relayer({ apiKey: API_KEY, apiSecret: API_SECRET });
+const latestTx = await relayer.getTransaction(tx.transactionId);
 ----
 
-NOTE: The `query` endpoint will return the latest view of the transaction from the Defender service, which gets updated every minute.
+The returned transaction object `latestTx` will have the following shape:
+
+[source,jsx]
+----
+interface RelayerTransactionBase {
+  transactionId: string; // Defender transaction identifier
+  hash: string; // Ethereum transaction hash
+  to: string;
+  from: string;
+  value?: string;
+  data?: string;
+  speed: 'safeLow' | 'average' | 'fast' | 'fastest';
+  gasLimit: number;
+  nonce: number;
+  status: 'pending' | 'sent' | 'submitted' | 'inmempool' | 'mined' | 'confirmed' | 'failed';
+  chainId: number;
+  validUntil: string;
+}
+----
+
+NOTE: The `getTransaction` function will return the latest view of the transaction from the Defender service, which gets updated every minute.
 
 [[replace-txs]]
 === Replace Transactions
