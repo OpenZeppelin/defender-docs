@@ -42,5 +42,6 @@ type Network =
   | 'japan-testnet'
   | 'unichain-sepolia'
   | 'geist-mainnet'
-  | 'geist-polter';
-
+  | 'geist-polter'
+  | 'peaq'
+  | 'peaq-agung';
