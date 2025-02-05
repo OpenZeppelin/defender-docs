@@ -27,6 +27,8 @@ The following triggers are supported:
 
 * *Webhook*: Defender will create a webhook URL for the action, which will be executed whenever an HTTP POST request is sent to that endpoint. The URL can be regenerated at any time. When invoked, the HTTP request information will be injected into the action, and the HTTP response will include the action run info along with any data returned from the action.
 
+IMPORTANT: When sending requests to the webhook, make sure to include the `Content-Type: application/json` header. We have a strict requirement for this header to be present in the request. Otherwise you will see `415 Unsupported Media Type` error.
+
 * *Monitor*: Triggered by a Defender xref:module/monitor.adoc[Monitor]. It will contain a body property with the details for the triggering event that you can use to run custom logic.
 
 [[environment]]
@@ -255,6 +257,8 @@ A sample response from the webhook endpoint looks like the following, where `sta
 NOTE: Actions that take longer than 25 seconds to complete will return a response with a pending state. Nevertheless, the action will continue to run in the background and eventually complete (in less than 5 minutes).
 
 NOTE: If `{"message":"Missing Authentication Token"}` is the response to a Webhook HTTP request, double check that the request was actually a POST. This response occurs when issuing a GET.
+
+NOTE: Webhook requests have strict content-type requirements. If the request does not have a `Content-Type: application/json` header, the action invocation will return a `415 Unsupported Media Type` error. Please make sure to include this header in your requests.
 
 ==== Secrets
 Defender secrets allow you to store sensitive information, such as API keys and secrets that can be accessed securely from actions. +
