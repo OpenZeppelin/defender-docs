@@ -491,6 +491,7 @@ Intent response is similar to the response of a normal transaction, but with the
 * `hash` is `null`
 * `isIntent` is `true` and indicates the transaction was sent as an intent, this will not be set for normal transactions. This field will not be removed or changed when the intent is processed.
 * `pendingIntentSince` is the timestamp when the intent was created and indicates the intent is still pending. This field will be removed once the intent is processed.
+* `relayerId` is the same ID of the relayer group upon creation. This will change to the ID of the relayer that will process the intent once the assignment is made.
 * No gas-related fields are set, the transaction will be priced when it is processed.
 
 [source,json]
