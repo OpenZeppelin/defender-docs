@@ -211,6 +211,16 @@ In the example above, the `transfer` transaction is signed and broadcasted by th
 
 You can read more about the web3 integration https://www.npmjs.com/package/@openzeppelin/defender-sdk-relay-client[here, window=_blank].
 
+[[intent-support]]
+=== Intents Support with Relay Signer
+
+When using the Defender SDK's relay signer to send transactions from the context of an ethers/web3 contract, it is important to note that transactions in <<intent-mechanism, intent mode>> are not supported. If the API returns an <<intent-response, intent response>>, an error will be thrown due to the current implementation expecting certain fields that are absent in the intent response.
+
+To avoid this issue, it is recommended to fallback to using the default SDK `sendTransaction` method for transaction submissions. This ensures that the transaction can be processed without errors.
+
+Additionally, the current implementation does not track transactions that are resubmitted, which can lead to complications when multiple hashes are generated due to retries. It is crucial to implement logic that can handle these scenarios effectively, ensuring that the process completes even when transaction hashes change in the background.
+
+
 [[eip1559]]
 === EIP1559 support
 
@@ -473,8 +483,38 @@ Intents are used to maintain the order of transactions and prevent overloading t
 * **High Transaction Volume:** When the number of pending transactions exceeds the maximum allowed in-flight, new transactions are stored as intents. This prevents the system from being overwhelmed and ensures that transactions are submitted in the correct order.
 * **Slow Processing:** If the network or relayer is processing transactions slowly (e.g., no transaction has been mined in the last 30 minutes), new transactions are stored as intents to avoid adding to the congestion.
 
+[[intent-response]]
+==== Intent Response
+
+Intent response is similar to the response of a normal transaction, but with the following differences:
+
+* `hash` is `null`
+* `isIntent` is `true` and indicates the transaction was sent as an intent, this will not be set for normal transactions. This field will not be removed or changed when the intent is processed.
+* `pendingIntentSince` is the timestamp when the intent was created and indicates the intent is still pending. This field will be removed once the intent is processed.
+* `relayerId` is the same ID of the relayer group upon creation. This will change to the ID of the relayer that will process the intent once the assignment is made.
+* No gas-related fields are set, the transaction will be priced when it is processed.
+
+[source,json]
+----
+{
+  "hash": null,
+  "transactionId": "transaction123",
+  "value": "0x1",
+  "gasLimit": 21000,
+  "to": "0x123...",
+  "data": "0x",
+  "status": "pending",
+  "speed": "fast",
+  "validUntil": "2000-01-01T20:00:00.000Z"
+  "isIntent": true,
+  "relayerId": "relayer123",
+  "tenantRelayerGroupId": "tenant123|relayerGroup123",
+  "createdAt": "2000-01-01T12:00:00.000Z"
+}
+----
+
 [[cancel-intents]]
-=== Cancel Intents
+==== Cancel Intents
 
 Relayer transaction intents can be canceled and permanently removed from our end. This feature is particularly useful when you need to prevent a specific intent from being submitted or want to free up space in the queue for other, more urgent transactions.
 
@@ -484,6 +524,7 @@ To do this, use the `cancelTransactionById` method of the `@openzeppelin/defende
 ----
 tx = await relayer.cancelTransactionById('5fcb8a6d-8d3e-403a-b33d-ade27ce0f85a');
 ----
+
 
 [[signing]]
 == Signing
