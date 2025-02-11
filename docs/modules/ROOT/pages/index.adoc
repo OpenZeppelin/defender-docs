@@ -90,7 +90,7 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia*.
 - https://www.polygon.technology/[*Polygon* (POL),window=_blank], *Amoy*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *Polygon Cardona zkEVM testnet*
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
-- https://www.unichain.org/[*Unichain Sepolia*, window=_blank].
+- https://www.unichain.org/[*Unichain*, window=_blank] and *Unichain Sepolia*.
 - https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Sepolia*.
 - https://www.playongeist.com//[*Geist Mainnet*, window=_blank] and *Polter Testnet*.
 - https://www.peaq.network/[*Peaq Mainnet*, window=_blank] and *Peaq Agung*.
