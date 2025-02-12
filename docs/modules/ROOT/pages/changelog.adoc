@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2025-02-12]]
+== February 12th, 2025
+
+* *General*
+- Add support for Unichain network.
+- Minor bug fixes.
+- Minor UI improvements.
+
 [[release-2025-02-05]]
 == February 5th, 2025
 
