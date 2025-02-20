@@ -67,6 +67,8 @@ After an environment is configured, you can use it for deployments and upgrades.
 
 Defender will use the default approve process for deployments and upgrades. However, the Hardhat and Foundry plugins allow you to specify a different approval process for upgrades. If a block explorer API key is not provided, Defender will try to verify the contracts with the default key. Otherwise, it will use the one provided. 
 
+Please note that upgrades count towards your Defender account's transaction proposal usage.
+
 NOTE: We provide a quickstart tutorial to deploy and upgrade a smart contract using Defender with Hardhat and Foundry. Check it out xref:tutorial/deploy.adoc[here]!
 
 WARNING: Using `CREATE2` may affect `msg.sender` behavior; see documentation for details xref:tutorial/deploy.adoc#deploy-caveat[here]!
