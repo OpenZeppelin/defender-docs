@@ -87,7 +87,7 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Sepolia*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
 - https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
-- https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia*.
+- https://optimism.io/[*OP Mainnet*,window=_blank], *OP Sepolia*.
 - https://www.polygon.technology/[*Polygon* (POL),window=_blank], *Amoy*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *Polygon Cardona zkEVM testnet*
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
 - https://www.unichain.org/[*Unichain*, window=_blank] and *Unichain Sepolia*.
