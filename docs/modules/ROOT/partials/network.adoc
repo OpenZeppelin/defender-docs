@@ -44,5 +44,5 @@ type Network =
   | 'unichain-sepolia'
   | 'geist-mainnet'
   | 'geist-polter'
-  | 'peaq'
+  | 'peaq-mainnet'
   | 'peaq-agung';
