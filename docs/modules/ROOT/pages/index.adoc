@@ -87,15 +87,14 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://www.mantle.xyz/[*Mantle Mainnet*, window=_blank] and *Mantle Sepolia*.
 - https://www.meld.com/[*Meld Mainnet*, window=_blank] and *Meld Testnet*.
 - https://moonbeam.network/[*Moonbeam*,window=_blank], *Moonriver*, and *Moonbase Alpha (Testnet)*.
-- https://optimism.io/[*Optimism*,window=_blank], *Optimism Sepolia*.
+- https://optimism.io/[*OP Mainnet*,window=_blank], *OP Sepolia*.
 - https://www.polygon.technology/[*Polygon* (POL),window=_blank], *Amoy*, https://polygon.technology/polygon-zkevm[*zkEVM*, window=_blank] and *Polygon Cardona zkEVM testnet*
 - https://scroll.io/[*Scroll Mainnet*, window=_blank] and *Scroll Sepolia*.
-- https://www.unichain.org/[*Unichain Sepolia*, window=_blank].
+- https://www.unichain.org/[*Unichain*, window=_blank] and *Unichain Sepolia*.
 - https://zksync.io/[*zkSync Era Mainnet*,window=_blank] and *zkSync Era Sepolia*.
 - https://www.playongeist.com//[*Geist Mainnet*, window=_blank] and *Polter Testnet*.
 - https://docs.abs.xyz/overview[*Abstract Mainnet*,window=_blank] and *Abstract Sepolia*.
-
-
+- https://www.peaq.network/[*Peaq Mainnet*, window=_blank] and *Peaq Agung*.
 
 If there is any other network or layer-2 solution you would like to use from Defender, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
 

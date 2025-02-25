@@ -258,8 +258,13 @@ Be sure to copy the secret key, it will be required for access and it will not b
 
 // NOTE: Defender integrates with Fireblocks! Check out our guide on how to use Fireblocks for approvals xref:guide/fireblocks.adoc[here].
 
+[[custom-networks]]
+== Custom Networks
+
+
 [[forked-networks]]
-== Forked Networks
+
+=== Forked Networks
 
 In the "Forked Networks" section, you can manage and oversee your forked networks. These networks let you test the efficiency of your security setup and offer a vital chance to identify and fix any problems before launching on testnets and mainnets.
 
@@ -275,9 +280,10 @@ image::manage-forked-networks-selection.png[Select Forked Network]
 
 NOTE: Once you have created a Forked Network you cannot edit its name or RPC URL. If you need to change these settings you will need to delete and recreate the Forked Network. When a forked network is deleted, *all* associated resources will also be deleted. This includes approval processes, relayers, contracts, address book entries, etc.
 
+
 [[private-networks]]
 
-== Private Networks
+=== Private Networks
 
 Navigate through the "Private Networks" section to effectively manage and oversee your private networks. These networks establish a restricted and controlled environment tailored for testing and validating network configurations. This controlled space empowers users to identify and resolve potential issues before deploying configurations to production environments, providing a secure venue to evaluate system functionality and security measures in isolation.
 
@@ -305,6 +311,16 @@ Once created, the network becomes accessible for utilization in any Defender mod
 image::manage-private-networks-selection.png[Select Private Network]
 
 NOTE: After creating a Private Network, you cannot edit its name, RPC URL, or symbol. To make changes, you must delete and recreate the Private Network. Deleting a private network will also delete *all* associated resources, including approval processes, relayers, contracts, address book entries, etc.
+
+=== Limitations
+
+While custom networks serve as a great way to integrate EVM compatible networks into Defender or to test unique network conditions, they come with a some notable drawbacks that set them apart from officially supported Defender networks:
+
+- **RPC Bottlenecks**: Custom networks can only have a single RPC provider which becomes a single point of failure during periods of high traffic. 
+- **Limited Reliability**: Custom networks may return non-standard or unexpected responses which will not be handled by Defender. Thus, some services may not behave as expected.
+- **Slower Transaction Processing**: Custom networks require more RPC calls with every transaction request leading to slower transaction processing.
+
+WARNING: High transaction volumes are only advised for custom networks with highly reliable RPC endpoints.
 
 [[advanced-settings]]
 == Advanced

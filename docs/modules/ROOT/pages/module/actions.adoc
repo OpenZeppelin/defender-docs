@@ -27,34 +27,30 @@ The following triggers are supported:
 
 * *Webhook*: Defender will create a webhook URL for the action, which will be executed whenever an HTTP POST request is sent to that endpoint. The URL can be regenerated at any time. When invoked, the HTTP request information will be injected into the action, and the HTTP response will include the action run info along with any data returned from the action.
 
+IMPORTANT: When sending requests to the webhook, make sure to include the `Content-Type: application/json` header. We have a strict requirement for this header to be present in the request. Otherwise you will see `415 Unsupported Media Type` error.
+
 * *Monitor*: Triggered by a Defender xref:module/monitor.adoc[Monitor]. It will contain a body property with the details for the triggering event that you can use to run custom logic.
 
 [[environment]]
 === Environment
 
-Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment:
+Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environment, window=_blank] with 256mb RAM and a 5-minute timeout. The code for each action must be smaller than 5mb in size. For ease-of-use, a set of common dependencies are pre-installed in the environment. The latest action dependenacy version `v2025-01-16` has the following dependencies:
 
 [source,jsx]
 ----
 "@datadog/datadog-api-client": "^1.0.0-beta.5",
+"@fireblocks/fireblocks-web3-provider": "^1.3.1",
 "@gnosis.pm/safe-core-sdk": "^0.3.1",
 "@gnosis.pm/safe-ethers-adapters": "^0.1.0-alpha.3",
-"@fireblocks/fireblocks-web3-provider": "^1.3.1",
-"@openzeppelin/defender-admin-client": "1.54.4",
-"@openzeppelin/defender-autotask-client": "1.54.4",
-"@openzeppelin/defender-autotask-utils": "1.54.4",
-"@openzeppelin/defender-kvstore-client": "1.54.5",
-"@openzeppelin/defender-relay-client": "1.54.4",
-"@openzeppelin/defender-sdk": "1.13.4",
-"@openzeppelin/defender-sentinel-client": "1.54.4",
-"axios": "^1.6.0",
+"@openzeppelin/defender-admin-client": "1.54.6",
+"@openzeppelin/defender-autotask-client": "1.54.6",
+"@openzeppelin/defender-autotask-utils": "1.54.6",
+"@openzeppelin/defender-kvstore-client": "1.54.6",
+"@openzeppelin/defender-relay-client": "1.54.6",
+"@openzeppelin/defender-sdk": "1.15.2",
+"@openzeppelin/defender-sentinel-client": "1.54.6",
+"axios": "^1.7.4",
 "axios-retry": "3.5.0",
-"defender-admin-client": "1.44.0",
-"defender-autotask-client": "1.44.0",
-"defender-autotask-utils": "1.44.0",
-"defender-kvstore-client": "1.44.4",
-"defender-relay-client": "1.44.3",
-"defender-sentinel-client": "1.44.0",
 "ethers": "5.5.3",
 "fireblocks-sdk": "^2.5.4",
 "graphql": "^15.5.1",
@@ -64,7 +60,7 @@ Actions run in a https://nodejs.org/dist/latest-v20.x/docs/api/[node 20 environm
 
 WARNING: Defender dependencies that are not under the `@openzeppelin` namespace are now deprecated. Impacted dependencies are defender-admin-client, defender-autotask-client, defender-autotask-utils, defender-kvstore-client, defender-relay-client, defender-sentinel-client
 
-NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-autotask-examples/tree/master/rollup[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful!
+NOTE: If other dependencies are needed, a JavaScript module bundler, such as rollup or webpack, can be used. Refer to https://github.com/OpenZeppelin/defender-sdk/tree/main/examples/custom-ethers-pkg[this sample project, window=_blank] to learn how. Contact us to add a dependacy you think other users would find useful!
 
 NOTE: We love https://www.typescriptlang.org/[Typescript, window=_blank] in the OpenZeppelin development team, and we hope you do too! If you want to write your actions in TypeScript, you'll need to first compile them using `tsc` or via your bundler of choice, and then upload the resulting JavaScript code. Unfortunately, we don't support coding directly in TypeScript in the user interface. All `defender-sdk` packages are coded in TypeScript and are packaged with their type declarations. You can also use the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[openzeppelin/defender-sdk-action-client, window=_blank] package for type definitions for the event payload.
 
@@ -261,6 +257,8 @@ A sample response from the webhook endpoint looks like the following, where `sta
 NOTE: Actions that take longer than 25 seconds to complete will return a response with a pending state. Nevertheless, the action will continue to run in the background and eventually complete (in less than 5 minutes).
 
 NOTE: If `{"message":"Missing Authentication Token"}` is the response to a Webhook HTTP request, double check that the request was actually a POST. This response occurs when issuing a GET.
+
+NOTE: Webhook requests have strict content-type requirements. If the request does not have a `Content-Type: application/json` header, the action invocation will return a `415 Unsupported Media Type` error. Please make sure to include this header in your requests.
 
 ==== Secrets
 Defender secrets allow you to store sensitive information, such as API keys and secrets that can be accessed securely from actions. +

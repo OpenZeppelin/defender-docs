@@ -12,6 +12,8 @@ To create a Transaction Proposal from Defender, you need to define a few paramet
 * Description(optional): A longer description of the proposal. This will be shown in the proposal details.
 * Target Contract: The smart contract that you want to run the transaction on.
 
+NOTE: If you have trouble connecting your wallet to Defender, there may be a conflict between wallet extensions if multiple are installed.
+
 [[function]]
 == Function
 Define the function that you want to call on the target contract. You can select from a list of functions that are available on the contract interface. If the function has parameters, you can define them here.
