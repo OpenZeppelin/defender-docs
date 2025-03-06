@@ -1,5 +1,13 @@
 = Changelog
 
+[[release-2025-03-06]]
+== March 06th, 2025
+
+* *General*
+- Minor bug fixes.
+- Minor UI improvements.
+- Stop Meld network support.
+
 [[release-2025-02-25]]
 == February 25th, 2025
 
