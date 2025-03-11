@@ -6,6 +6,7 @@
 * *General*
 - Minor bug fixes.
 - Minor UI improvements.
+- Fix deploy Block Explorer verification
 
 [[release-2025-03-06]]
 == March 06th, 2025
