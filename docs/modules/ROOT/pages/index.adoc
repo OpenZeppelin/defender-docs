@@ -95,6 +95,8 @@ Defender works with most mainnet and testnet networks, as well as local mainnet 
 - https://www.playongeist.com//[*Geist Mainnet*, window=_blank] and *Polter Testnet*.
 - https://docs.abs.xyz/overview[*Abstract Mainnet*,window=_blank] and *Abstract Sepolia*.
 - https://www.peaq.network/[*Peaq Mainnet*, window=_blank] and *Peaq Agung*.
+- https://docs.sophon.xyz/welcome/[*Sophon*, window=_blank] and *Sophon Testnet*.
+
 
 If there is any other network or layer-2 solution you would like to use from Defender, please xref:index.adoc#feedback[reach out to us via the form on Defender]!
 
