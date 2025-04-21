@@ -1,5 +1,14 @@
 = Changelog
 
+[[release-2025-04-10]]
+== April 10th, 2025
+
+* *General*
+- Bug Fix: Issue with ABI retrieval on Sophon network.
+- Bug Fix: Hide networks on wizard not available on deploy.
+- Deprecate flaky rpc endpoints on Fantom network.
+- Audit UI bug fixes.
+
 [[release-2025-03-27]]
 == March 27th, 2025
 
