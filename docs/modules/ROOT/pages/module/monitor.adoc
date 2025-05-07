@@ -286,6 +286,79 @@ $1 == "hello"
 
 // WARNING: There are some considerations unique to Hedera mainnet and testnet when configuring a monitor. Learn more xref:guide/hedera.adoc[here].
 
+// NOTE: Monitors can be configured to respond to alerts emitted from Forta bots. Check our guide xref:guide/forta-monitor.adoc[here]!
+
+
+[[configure-a-forta-monitor]]
+== Configuring a Forta Monitor
+
+A Forta Monitor watches Forta Alerts that come from a given Forta Bot or affect a given address, and notifies when one matches the parameters or conditions. 
+
+
+[[general-forta-info]]
+===  General Information
+* *Name*: The name assigned to the monitor.
+
+* *Risk Category*: The risk category of the monitor, useful for filtering or grouping.
+
+* *Contracts*: The smart contracts or EOAs to monitor.
+
+* *Forta Bot IDs*: The Forta Bots to monitor. Specify the Forta Bot IDs to monitor alerts from. These can be comma separated to specify multiple bots.
+
+NOTE: Forta Local Mode Monitors do not have the option to specify Bot IDs as scanner nodes running in local mode don't support Bot IDs 
+
+[[forta-matching-rules]]
+=== Matching Rules
+
+For a Forta Alert to trigger a notification, it must satisfy *ALL* of the following:
+
+* Forta Alert *MUST* come from one of the Bot IDs specified and/or one of the Addresses specified
+
+* If a *Alert IDs* are specified
+
+    ** The Alert ID from the alert *MUST* match one of the Alert IDs specified.
+
+* If *Minimum Severity* is specified
+
+    ** The Severity *MUST* match or be greater severity than the one specified
+
+* If *Minimum Scanner Confirmations* is specified
+
+    ** The Scanner Confirmations *MUST* match or be of greater value than the one specified
+
+[[forta-custom-filters]]
+
+=== Custom Filters
+
+Custom filters supports custom code for filtering Forta Alerts. If a custom filter is specified, it will be called with a list of Alerts found. This allows the monitor to use other datasources and custom logic to evaluate whether an Alert matches. For more info see the xref:module/monitor.adoc#request_schema[Request Schema].
+
+
+[[forta-alert-conditions]]
+=== Alert Conditions
+
+When configuring alert conditions, you can specify various criteria to ensure that only relevant alerts trigger notifications. Below are the key alert conditions you can set:
+
+*Minimum Severity*
+
+Severity indicates the impact level of an alert. By setting a minimum severity, you can filter alerts so that only those with a specified level of importance or higher will trigger notifications. Selecting a minimum severity acts as a threshold, ensuring that only alerts meeting or exceeding this level are monitored.
+
+*Minimum Scanner Confirmations*
+
+Scanner Confirmations refer to the number of scanner nodes that have verified a Forta Alert. By specifying a minimum number of confirmations, you ensure that an alert is validated by multiple nodes before triggering a notification
+
+*Alert IDs*
+
+An Alert ID is a unique string that identifies a specific class of findings. You can specify one or more Alert IDs to monitor for particular types of alerts. Multiple Alert IDs can be separated by a comma, allowing you to monitor various alert classes simultaneously
+
+NOTE: If no Severity, Scanner Confirmations, or Alert IDs are specified, the Sentinel will monitor all alerts that match your specified Bot IDs and/or Addresses.
+
+
+[[forta-local-mode]]
+== Forta Local Mode Monitor
+
+Forta offers the ability to run scanner nodes locally, this can be useful for running only specific detection bots and handling alerts internally instead of publishing to the network. You can monitor scanner nodes running in Local Mode with Defender by creating a new Forta Monitor with Local Mode selected and supplying the public key of your scanner node. After creation your new Monitor will have a Webhook URI, you can add this to your scanner node config file to forward alerts to Defender. You can find more information on Local Mode scanner nodes in the Forta Docs.
+
+
 [[alerts]]
 == Alerts
 

@@ -27,6 +27,7 @@
 ** xref:guide/forked-network.adoc[Deploy a smart contract on a forked network]
 ** xref:guide/private-network.adoc[Adding a complete private network]
 ** xref:guide/meta-tx.adoc[Relaying gasless meta-transactions]
+** xref:guide/balance-automation-forta.adoc[Automate balance maintenance using a Forta bot]
 ** xref:guide/factory-monitor.adoc[Automatic monitoring for factory clones]
 ** xref:guide/timelock-roles.adoc[Managing roles of a TimelockController]
 ** xref:guide/usage-notification.adoc[Managing usage notifications]
