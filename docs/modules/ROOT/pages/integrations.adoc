@@ -40,7 +40,6 @@ Defender seamlessly integrates with your existing tools and workflows, so you ca
 
 [[threat-detection-and-transaction-data]]
 == Threat Detection & Transaction Data
-- https://forta.org/[*Forta*, window=_blank]: Prevent malicious actors from interacting with your contracts by early and precise detection using the Forta network.
 - https://etherscan.io/[*Etherscan*, window=_blank]: Visualize transactions from Defender using Etherscan-based explorers.
 - https://www.blockscout.com/[*Blockscout*, window=_blank]: Visualize transactions from Defender using Blockscout-based explorers.
 
