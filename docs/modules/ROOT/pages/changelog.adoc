@@ -5,6 +5,7 @@
 
 * *General*
 - Remove Forta related documentation.
+- Minor bug fix.
 
 [[release-2025-04-10]]
 == April 10th, 2025
