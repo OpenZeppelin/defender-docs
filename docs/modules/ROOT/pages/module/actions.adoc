@@ -195,9 +195,8 @@ exports.handler = async function(event) {
 Actions triggered from a Monitor can have two types of body properties and scheme, depending what type of Monitor triggered the action:
 
 * In the case of a Defender monitor, the body will contain the xref:module/monitor.adoc#monitor_event_schema[monitor event schema].
-* In the case of a Forta monitor, the body will contain the Forta Alert details.
 
-If the action is written in TypeScript, `BlockTriggerEvent` or `FortaTriggerEvent` types from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used.
+If the action is written in TypeScript, `BlockTriggerEvent` type from the https://www.npmjs.com/package/@openzeppelin/defender-sdk-action-client[defender-sdk-action-client, window=_blank] package can be used.
 
 [source,jsx]
 ----
@@ -209,9 +208,6 @@ exports.handler = async function(params) {
   // if contract monitor
   const transaction  = payload.transaction;
   const abi = sentinel.abi;
-
-  // if Forta monitor
-  const alert  = payload.alert;
 
   // custom logic...
 }

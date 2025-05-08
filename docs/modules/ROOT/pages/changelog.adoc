@@ -1,5 +1,12 @@
 = Changelog
 
+[[release-2025-05-07]]
+== May 7th, 2025
+
+* *General*
+- Remove Forta related documentation.
+- Minor bug fix.
+
 [[release-2025-04-10]]
 == April 10th, 2025
 
