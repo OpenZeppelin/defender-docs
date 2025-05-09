@@ -48,3 +48,5 @@ type Network =
   | 'abstract-sepolia';
   | 'peaq'
   | 'peaq-agung';
+  | 'sophon'
+  | 'sophon-testnet'
