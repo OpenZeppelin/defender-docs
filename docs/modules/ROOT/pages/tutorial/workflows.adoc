@@ -5,7 +5,7 @@ Defender allows you to target and activate on-chain activity using Action Workfl
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account.
 
 [[action]]
 == 1. Action setup

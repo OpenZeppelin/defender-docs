@@ -13,7 +13,7 @@ In addition, Defender provides default system usage notifications triggered when
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender account. You can sign up for Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account.
 
 [[configure-usage-notification]]
 == 1. Configure a custom usage notification

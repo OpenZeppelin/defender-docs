@@ -11,7 +11,7 @@ By the end of this tutorial, you will have a basic understanding of how to use t
 [[pre-requisites]]
 == Pre-requisites
 
-* OpenZeppelin Defender account. You can sign up to Defender https://defender.openzeppelin.com/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+* OpenZeppelin Defender account.
 * https://nodejs.org/en[NodeJS and NPM, window=_blank]
 * https://www.npmjs.com/package/ts-node[Typescript for Node js, window=_blank]
 * Any IDE or text editor
