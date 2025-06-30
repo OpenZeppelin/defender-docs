@@ -1,5 +1,12 @@
 = Defender
 
+[IMPORTANT]
+====
+New sign-ups were disabled on June 30, 2025. Until the final shutdown on July 1, 2026, Defender will remain fully operational while we focus on the open source versions of tools like Relayers and Monitor. Detailed migration guides are coming soon to help you transition seamlessly to open source.
+
+https://blog.openzeppelin.com/doubling-down-on-open-source-and-phasing-out-defender[Read more, window=_blank]
+====
+
 OpenZeppelin Defender is a mission-critical developer security platform to *code*, *audit*, *deploy*, *monitor*, and *operate* blockchain applications with confidence.
 
 Integrating directly into the developer workflow, Defender makes it easy and fast for developers and operators to prevent and fix security issues pre and post-deployment.
