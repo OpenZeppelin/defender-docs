@@ -5,7 +5,9 @@ OpenZeppelin Defender is the evolution of Defender, with an improved user experi
 
 == How can I sign up to Defender?
 
-You can sign up to Defender https://defender.openzeppelin.com/v2/?utm_campaign=Defender_2.0_2023&utm_source=Docs#/auth/sign-up[here, window=_blank].
+New sign-ups were disabled on June 30, 2025. Until the final shutdown on July 1, 2026, Defender will remain fully operational while we focus on the open source versions of tools like Relayers and Monitor. Detailed migration guides are coming soon to help you transition seamlessly to open source.
+
+https://blog.openzeppelin.com/doubling-down-on-open-source-and-phasing-out-defender[Read more, window=_blank]
 
 == Once I migrate to Defender, can I continue using Defender legacy?
 
