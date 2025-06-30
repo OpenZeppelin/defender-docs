@@ -18,8 +18,6 @@ Defender offers flexible subscriptions to match your team’s needs and support 
 - *Professional* - For mature projects running on mainnets that need access to premium features, higher quotas and metered billing, as well as access to OpenZeppelin support and SLA.
 - *Enterprise* - For large projects with higher volumes that need a custom plan to meet their project needs, with higher quotas, access to all premium and security features, and a dedicated support channel.
 
-For more information, check out the Defender https://www.openzeppelin.com/pricing[pricing page]
-
 [[modules]]
 [.card-section.card-section-2col]
 == Modules
