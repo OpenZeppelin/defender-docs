@@ -45,6 +45,8 @@ type Network =
   | 'geist-mainnet'
   | 'geist-polter'
   | 'abstract'
-  | 'abstract-sepolia';
+  | 'abstract-sepolia'
   | 'peaq'
   | 'peaq-agung';
+  | 'sei'
+  | 'atlantic-2'
