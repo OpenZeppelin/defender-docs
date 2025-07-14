@@ -1,5 +1,12 @@
 = Changelog
 
+[[release-2025-07-14]]
+== July 14th, 2025
+
+* *General*
+- Sei network support.
+- Bug fixes.
+
 [[release-2025-06-18]]
 == June 18th, 2025
 
