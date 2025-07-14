@@ -114,7 +114,7 @@ npm i @openzeppelin/hardhat-upgrades @openzeppelin/contracts-upgradeable dotenv 
 Once everything has been installed, your initial directory structure should look something like this:
 
 +
-image::tutorial-deploy-directory.png[Deploy directory structure,185,300]
+image::tutorial-deploy-directory.png[Deploy directory structure,351,300]
 
 . You now need to edit your Hardhat configuration to add the Defender keys and Sepolia network. Open the `hardhat.config.ts` file, and replace its content with the following code:
 +
@@ -127,7 +127,7 @@ import "@openzeppelin/hardhat-upgrades";
 require("dotenv").config();
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.20",
+  solidity: "0.8.28",
   defender: {
     apiKey: process.env.DEFENDER_KEY as string,
     apiSecret: process.env.DEFENDER_SECRET as string,
@@ -159,7 +159,7 @@ DEFENDER_SECRET = "<<YOUR_SECRET>>"
 [source,jsx]
 ----
 // SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.28;
 
 import {Initializable} from  "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
@@ -212,7 +212,7 @@ This is a contract that replicates a box, with three functions:
 [source,jsx]
 ----
 // SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.28;
 
 import {Script} from "forge-std/Script.sol";
 import {console} from "forge-std/console.sol";
@@ -256,6 +256,13 @@ forge script script/Deploy.s.sol --force --rpc-url https://ethereum-sepolia.publ
 
 [[hardhat-deploy]]
 === Hardhat
+
+. Create a new directory called `scripts` and create a new file called `deploy.ts` in the new directory:
++
+```
+mkdir scripts && touch scripts/deploy.ts
+```
+
 
 . Open the file `deploy.ts` inside the `scripts` directory. This script will deploy the upgradeable Box contract through Defender with an initial amount of 5 objects inside and the owner as the multisig address configured in the environment setup. The `initializer` option is used to call the `initialize()` function after the contract is deployed. Copy and paste the code below into `deploy.ts`:
 +
@@ -318,7 +325,7 @@ Upgrading a smart contract allows changing its logic while maintaining the same 
 [source,jsx]
 ----
 // SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.28;
 
 import {Box} from "./Box.sol";
 
