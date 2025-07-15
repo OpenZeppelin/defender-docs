@@ -178,7 +178,7 @@ Every team member has an assigned role. You can manage authorization to access, 
 
 When you invite a new user to your team, you will assign a role to them, determining their access permissions.
 
-To create a new role, click on the _Create Role_ button. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each product. You can also specify which administrative powers the role will give access to: manage users and roles, manage team API keys, manage Fireblocks API keys, manage Address Book, and configure log forwarding. 
+To create a new role, click on the _Create Role_ button. You will be asked to enter a role name and description, and to specify the level of access users in that role will get for each product. You can also specify which administrative powers the role will give access to: manage users and roles, manage team API keys, manage Fireblocks API keys, manage billing, manage address book, and configure log forwarding.
 
 image::manage-role-create.png[Manage Role Creation]
 
