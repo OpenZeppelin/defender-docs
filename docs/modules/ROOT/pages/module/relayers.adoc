@@ -273,6 +273,8 @@ If speed is provided, the transaction would be priced according to the `EIP1559P
 
 NOTE: Mainnet gas prices and priority fees are calculated based on the values reported by https://ethgasstation.info/[EthGasStation, window=_blank], https://etherchain.org/tools/gasPriceOracle[EtherChain, window=_blank], https://www.gasnow.org/[GasNow, window=_blank], https://docs.blocknative.com/gas-platform[Blockative, window=_blank], and https://etherscan.io/gastracker[Etherscan, window=_blank]. In Polygon and its testnet, the https://gasstation-mainnet.matic.network/v2[gas station, window=_blank] is used. In other networks, gas prices are obtained from a call to `eth_gasPrice` or `eth_feeHistory` to the network.
 
+TIP: For a live comparison of gas oracle accuracy across providers, see the https://openchainbench.com/benchmarks/gas-estimation[OpenChainBench gas estimation benchmark, window=_blank], which continuously measures the gap between each oracle's estimate and the realized priority fee.
+
 [[fixed-gas-pricing]]
 === Fixed Gas Pricing
 
